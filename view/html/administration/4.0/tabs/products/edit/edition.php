@@ -32,7 +32,8 @@ $error = $_POST['error-message-products'];
         <input type="hidden" name="product_id" value="<?php echo $product->getId();?>">
         <input type="hidden" name="id_copy" value="<?php echo $product->getIdCopy();?>">
         <input type="hidden" name="image_name" value="<?php echo $product->getImage()->getName();?>">
-        <input class="hidden" type="file" id="uploadFile" name="uploadFile[]" required multiple/>
+        <div id='thumbnails-name' class="hidden">
+        </div>
         <div class="column-big vertical">
             <div class="product-title-description-container edition-window">
                 <div class="custom-id vertical">
@@ -74,6 +75,22 @@ $error = $_POST['error-message-products'];
                     </div>
                 </div>
                 <?php } ?>
+            </div>
+            <div class="product-images-container edition-window">
+                <div class="container-title horizontal between">
+                    <p class="section-title">Image du produit</p>
+                </div>
+                <div id="main-dropzone" class="dropzone" style="border: 1px dashed;border-radius: 3px;">
+
+                </div>
+            </div>
+            <div class="product-images-container edition-window">
+                <div class="container-title horizontal between">
+                    <p class="section-title">Miniatures du produit</p>
+                </div>
+                <div id="thumbnails-dropzone" class="dropzone" style="border: 1px dashed;border-radius: 3px;">
+
+                </div>
             </div>
             <div class="ceo-container edition-window">
                 <div class="container-title horizontal between">

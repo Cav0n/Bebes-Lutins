@@ -740,7 +740,7 @@ class AdminModel
             $ceo_name = str_replace("'", "’",ucfirst($_POST['ceo_name']));
             $description = nl2br(str_replace("'", "’",$_POST['description']));
             $ceo_description = nl2br(str_replace("'", "’",$_POST['ceo_description']));
-            $image_name = self::UploadMutlipleImages();
+            $image_name = $_POST['image_name'];
             $price = $_POST['price'];
             $stock = $_POST['stock'];
             $categories = $_POST['category'];
@@ -752,10 +752,6 @@ class AdminModel
             $tags = $_POST['tags'];
             $hide = $_POST['hide'];
             if($hide == null) $hide = 0;
-            if ($image_name == null){
-                $error_product_creation = true;
-                $error_message = "Erreur lors de l'upload des images." . $_POST['ErreurUpload'];
-            }
             else {
                 $creation_date = date('Y-m-d');
                 try{ProductGateway::AddProduct($id, $name, $ceo_name, $price, $stock, $description, $ceo_description, $categories_string, $creation_date, $image_name, $reference, $tags, $hide); }

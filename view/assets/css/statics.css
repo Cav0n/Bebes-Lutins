@@ -1,0 +1,187 @@
+
+
+#static-container{
+    width: 95%;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 4em;
+}
+
+#static-container h1{
+    width: fit-content;
+width: max-content;
+    margin: 0 auto;
+    font-size: 3em;
+    border-bottom: 1px solid #666666;
+    padding: 5px 0;
+}
+
+#static-container .static-bloc{
+    padding: 30px;
+    background: white;
+    margin-top: 20px;
+    border-radius: 10px;
+    margin-bottom: 2em;
+    border: 1px solid #BBBBBB;
+}
+
+#static-container .static-bloc .static-bloc-inner{
+    border-left: 2px dashed #a3c74b;
+    padding-left: 10px;
+}
+
+#static-container .static-bloc p{
+    margin-bottom: 20px;
+}
+
+#static-container .static-bloc ul li{
+    font-size: 1.2em;
+}
+
+
+/* Static page forms */
+#static-container .static-bloc .static-bloc-inner form{
+    width: 50%;
+}
+
+#static-container .static-bloc .static-bloc-inner form label{
+    width: fit-content;
+width: max-content;
+    margin-left: 10px;
+    margin-bottom: -10px;
+    z-index: 2;
+    background: white;
+    margin-top: 10px;
+}
+
+#static-container .static-bloc .static-bloc-inner form input, #static-container .static-bloc .static-bloc-inner form textarea, #static-container .static-bloc .static-bloc-inner form select{
+    font-size: 1em;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #CCCCCC;
+    background: white;
+    box-sizing: border-box;
+}
+
+#static-container .static-bloc .static-bloc-inner form button {
+    background: linear-gradient(180deg,#fff,#f9fafb);
+    border: 1px solid #c4cdd5;
+    box-shadow: 0 1px 0 0 rgba(22,29,37,.05);
+    border-radius: 3px;
+    color: #212b36;
+    text-align: center;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-decoration: none;
+    transition-property: background,border,box-shadow;
+    transition-duration: .2s;
+    transition-timing-function: cubic-bezier(.64,0,.35,1);
+    height: 100%;
+    font-size: 1rem;
+    margin: auto 0;
+    padding: 13px 20px;
+}
+
+#static-container .static-bloc .static-bloc-inner form textarea{
+    margin: 0;
+    height: 200px;
+    min-height: 200px;
+    max-height: 375px;
+    box-sizing: border-box;
+}
+/* ---- */
+
+/* Manual */
+#manual-tab p{
+    margin: 0 15px;
+    padding-bottom: 5px;
+    cursor: pointer;
+}
+#manual-tab .selected{
+    border-bottom: 1px solid #777777;
+}
+#manual-tab .non-selected{
+    border-bottom: 1px solid rgba(0,0,0, 0);
+}
+.display-manual{
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.display-manual.selected{
+    display: flex !important;
+}
+.display-manual.non-selected{
+    display: none;
+}
+.display-manual h2{
+    text-align: center;
+}
+.manual-image{
+    margin: 0 10px;
+}
+.manual-text{
+    margin: 10px 0;
+}
+.manual-text img{
+    width: 14vw;
+    height: 14vw;
+}
+
+.manual-text p{
+    height: fit-content;
+    margin: auto 20px !important;
+    padding: 20px;
+    border: 1px dashed #AAA;
+    background: #FAFAFA;
+    border-radius: 10px;
+    font-size: 1.2em;
+    width: 100%;
+}
+/* ---- */
+
+/* Divers */
+#main-quisommesnous{
+    padding-bottom: 2em;
+}
+#main-quisommesnous .static-bloc-images {
+    display: flex;
+    width: fit-content;
+width: max-content;
+    margin: 0 auto;
+}
+
+#main-quisommesnous .static-bloc-images #img1{
+    height: 400px;
+    width: 400px;
+    margin: 0 15px;
+}
+
+#main-quisommesnous .static-sous-bloc-vertical{
+    display: flex;
+    flex-direction: column;
+}
+
+#main-quisommesnous .static-bloc-images #img2{
+    height: 250px;
+    width: 187px;
+}
+
+#main-quisommesnous .static-bloc-images .sous-bloc-horizontal{
+    display: flex;
+}
+
+#main-quisommesnous .static-bloc-images #img3{
+    height: 67px;
+    width: 75px;
+    margin: auto;
+}
+#main-quisommesnous .static-bloc-images #img4{
+    height: 150px;
+    width: 112px;
+}
+
+/* ---- */

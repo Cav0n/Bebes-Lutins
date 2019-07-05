@@ -1,0 +1,182 @@
+#birthlist-visitor-container{
+    width: 900px;
+    background: white;
+    margin: 5em auto 2em;
+    box-shadow: 0 0 4px -2px;
+}
+
+#birthlist-visitor-container form label{
+    width: fit-content;
+    width: max-content;
+    margin-left: 10px;
+    margin-bottom: -10px;
+    z-index: 2;
+    background: white;
+    margin-top: 10px;
+}
+
+#birthlist-visitor-container form input {
+    font-size: 1em;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #CCCCCC;
+    background: white;
+}
+
+#birthlist-visitor-container form textarea{
+    font-size: 0.8em;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #CCCCCC;
+    background: white;
+    height: 150px;
+    max-width: 100%;
+    min-width: 100%;
+    min-height: 150px;
+    box-sizing: border-box;
+}
+
+#birthlist-visitor-container form button{
+    width: fit-content;
+    width: max-content;
+    margin: 0 auto;
+}
+
+#birthlist-visitor-container #birthlist-header{
+    padding: 3em;
+    border-bottom: 1px solid #BBBBBB;
+}
+
+#birthlist-visitor-container #birthlist-header h1{
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #57802f;
+}
+
+#birthlist-visitor-container #birthlist-header h2{
+    font-weight: 300;
+    font-size: 1em;
+}
+
+#birthlist-visitor-container #birthlist-inner{
+    padding: 1em 2em;
+}
+
+#birthlist-visitor-container #birthlist-inner #birthlist-explanation{
+    padding: 1em 0;
+}
+
+#birthlist-visitor-container #birthlist-inner #birthlist-items{
+
+}
+
+#birthlist-visitor-container #birthlist-inner #birthlist-items button{
+    margin: auto;
+    width: 40%;
+}
+
+/* ITEMS */
+#birthlist-visitor-container #birthlist-inner #birthlist-items .item{
+    border: 1px solid #BBBBBB;
+    border-radius: 3px;
+    width: 40%;
+    margin: 10px auto;
+    box-sizing: border-box;
+    height: fit-content;           /* Safari/WebKit uses a non-standard name */
+    height: -moz-max-content;    /* Firefox/Gecko */
+    height: -webkit-max-content; /* Chrome */
+}
+
+#birthlist-visitor-container #birthlist-inner #birthlist-items .payed{
+    color: grey;
+}
+
+#birthlist-visitor-container #birthlist-inner #birthlist-items .payed .payed-inner{
+    border-bottom: 1px solid #bbbbbb;
+}
+
+#birthlist-visitor-container #birthlist-inner #birthlist-items .payed .payed-by{
+    text-align: center;
+    padding: 4px 0;
+}
+
+#birthlist-visitor-container #birthlist-inner #birthlist-items .item img{
+    height: 4em;
+    width: 4em;
+}
+
+#birthlist-visitor-container #birthlist-inner #birthlist-items .category-item-texts-container{
+    width: 100%;
+    justify-content: space-between;
+    height: 4em;
+}
+
+#birthlist-visitor-container #birthlist-inner #birthlist-items .item .item-texts{
+    font-size: 0.8em;
+    width: 100%;
+    padding: 5px;
+    justify-content: space-between;
+}
+
+#birthlist-visitor-container #birthlist-inner #birthlist-items .item .quantity{
+    padding-left: 10px;
+}
+
+#birthlist-visitor-container #birthlist-inner #birthlist-items .item label{
+    width: fit-content;
+    width: max-content;
+    z-index: 2;
+    background: white;
+    height: 100%;
+    margin: 0;
+}
+/* ----- */
+
+/* ADDRESS FORM */
+#birthlist-visitor-container #birthlist-inner #billing-address-form .input-container{
+    justify-content: space-around;
+}
+
+#birthlist-visitor-container #birthlist-inner #billing-address-form .personnal-informations, #birthlist-visitor-container #birthlist-inner .address-informations{
+    width: 40%;
+}
+
+#birthlist-visitor-container #birthlist-inner #billing-address-form select{
+    height: 40px;
+}
+
+#birthlist-visitor-container #birthlist-inner #billing-address-form button{
+    margin-top: 1em;
+}
+
+#birthlist-visitor-container #birthlist-inner #selection-summary{
+    padding-top: 1em;
+    border-top: 1px solid #BBBBBB;
+    margin-top: 2em;
+}
+/* ----- */
+
+/* FINAL STEP */
+#birthlist-visitor-container #birthlist-inner .birthlist-final-summary-inner {
+    width: 50%;
+    box-sizing: border-box;
+    padding: 1em;
+}
+#birthlist-visitor-container #birthlist-inner #product-summary{
+    border-right: 1px solid #BBBBBB;
+}
+
+#birthlist-visitor-container #birthlist-inner #product-summary .item{
+    width: 100%;
+}
+
+#birthlist-visitor-container #birthlist-inner .birthlist-final-summary-inner h3 {
+    font-size: 1.3em;
+    margin: 0.4em 0;
+}
+
+#birthlist-visitor-container #birthlist-inner .birthlist-final-summary-inner #birthlist-paymentchoice-form select{
+    height: 40px;
+    width: 100%;
+}
+/* ----- */

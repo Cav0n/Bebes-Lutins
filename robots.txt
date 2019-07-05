@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /config/
+Disallow: /model/
+Disallow: /payment/
+
+Sitemap: http://www.bebes-lutins.fr/sitemap.xml

@@ -1,0 +1,55 @@
+#customer-area-mobile{
+    padding: 20px;
+}
+
+#customer-area-mobile .customer-area-bloc{
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+#customer-area-mobile .customer-area-bloc h2{
+    font-size: 1.8em;
+}
+
+#customer-area-mobile .customer-area-bloc button{
+    width: 80%;
+    margin: 10px auto;
+}
+
+#customer-area-mobile .customer-area-bloc .user-informations{
+    width: 71%;
+    margin: 10px auto;
+    padding: 4%;
+    border: 1px solid rgb(193, 193, 193);
+    border-radius: 5px;
+}
+
+/* --- ORDERS --- */
+#user-orders-mobile{
+    padding: 20px;
+}
+
+#user-orders-mobile .orders h2{
+    font-size: 1.8em;
+}
+
+#user-orders-mobile .orders .order{
+    border: 1px solid;
+    border-radius: 5px;
+    margin: 15px 0;
+}
+
+#user-orders-mobile .orders .order .head, #user-orders-mobile .orders .order .status{
+    padding: 10px;
+}
+
+#user-orders-mobile .orders .order .status{
+    text-align: center;
+    border-top: 1px solid;
+    border-radius: 0 0 4px 4px;
+}
+
+#user-orders-mobile .orders .order .head .date-and-price{
+    justify-content: space-between;
+}
+/* --- ---*/

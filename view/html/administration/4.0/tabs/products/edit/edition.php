@@ -3,6 +3,7 @@
 $product_id = $_REQUEST['product_id'];
 $product = ProductGateway::SearchProductByID2($product_id);
 $categories = CategoryGateway::GetCategories();
+$thumbnails = $product->getImage()->getThumbnails();
 
 $error = $_POST['error-message-products'];
 
@@ -31,9 +32,8 @@ $error = $_POST['error-message-products'];
     <form id="edition-wrapper" class="horizontal" method="post" action="https://www.bebes-lutins.fr/dashboard4/produits/sauvegarder/">
         <input type="hidden" name="product_id" value="<?php echo $product->getId();?>">
         <input type="hidden" name="id_copy" value="<?php echo $product->getIdCopy();?>">
-        <input type="hidden" name="image_name" value="<?php echo $product->getImage()->getName();?>">
-        <div id='thumbnails-name' class="hidden">
-        </div>
+        <input id="image-name" type="hidden" name="image_name" value="<?php echo $product->getImage()->getName();?>">
+        <input id="thumbnails-name" type="hidden" name="thumbnails_name" value="">
         <div class="column-big vertical">
             <div class="product-title-description-container edition-window">
                 <div class="custom-id vertical">
@@ -54,30 +54,6 @@ $error = $_POST['error-message-products'];
             </div>
             <div class="product-images-container edition-window">
                 <div class="container-title horizontal between">
-                    <p class="section-title">Images</p>
-                    <label for="uploadFile"><a >Télécharger une image</a></label>
-                </div>
-                <?php if($product->getImage()->getName() == null) { ?>
-                <div class="empty-product-images horizontal">
-                    <img class="image-example" src="https://www.bebes-lutins.fr/view/assets/images/utils/picture.svg" alt="image-sample">
-                </div>
-                <?php } else { ?>
-                <div class="product-images horizontal">
-                    <input class="ajout-categorie-field" type="hidden" name="MAX_FILE_SIZE" value="10485760">
-                    <input class="ajout-categorie-field" type="file" name="image" id="file-input" onchange="img_categorie(this);" style="display: none;">
-                    <label for="file-input" id="categort-image-container">
-                        <img class="product-image" src="https://www.bebes-lutins.fr/view/assets/images/products/<?php echo $product->getImage()->getName(); ?>" alt="Image du produit">
-                    </label>
-                    <div id="thumbnails-container" class="vertical wrap between">
-                        <?php foreach ($product->getImage()->getThumbnails() as $thumbnail) { ?>
-                            <img  class="thumbnail" src="https://www.bebes-lutins.fr/view/assets/images/thumbnails/<?php echo $thumbnail->getName(); ?>" alt="<?php echo $thumbnail->getName(); ?>">
-                        <?php } ?>
-                    </div>
-                </div>
-                <?php } ?>
-            </div>
-            <div class="product-images-container edition-window">
-                <div class="container-title horizontal between">
                     <p class="section-title">Image du produit</p>
                 </div>
                 <div id="main-dropzone" class="dropzone" style="border: 1px dashed;border-radius: 3px;">
@@ -89,7 +65,6 @@ $error = $_POST['error-message-products'];
                     <p class="section-title">Miniatures du produit</p>
                 </div>
                 <div id="thumbnails-dropzone" class="dropzone" style="border: 1px dashed;border-radius: 3px;">
-
                 </div>
             </div>
             <div class="ceo-container edition-window">
@@ -191,18 +166,104 @@ $error = $_POST['error-message-products'];
     </form>
 </main>
 </body>
+<script src="https://www.bebes-lutins.fr/view/assets/js/dropzone.js"></script>
 <script>
-    function img_categorie(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+    Dropzone.autoDiscover = false;
 
-            reader.onload = function (e) {
-                $('#category-image').attr('src', e.target.result);
-            };
+    var mainDropzone = new Dropzone("div#main-dropzone",
+        {
+            url: "https://www.bebes-lutins.fr/view/html/tests/test-upload.php",
+            addRemoveLinks: true,
+            maxFiles: 1,
+            dictDefaultMessage: "Choisissez l'image principale du produit.",
+            accept: function(file, done) {
+                namefile = file.name
+                namefile = namefile.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                $('#image-name').attr('value', namefile);
 
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
+                done();
+            },
+            init: function() {
+                this.on("addedfile", function() {
+                    if (this.files[1]!=null){
+                        this.removeFile(this.files[0]);
+                    }
+                });
+
+                this.on('removedfile', function (file) {
+                    alert(namefile);
+                    $.ajax({
+                        type: "POST",
+                        url: "https://www.bebes-lutins.fr/view/html/tests/test-upload.php",
+                        data: {
+                            target_file: namefile,
+                            delete_file: 1
+                        },
+                        dataType: 'json',
+                        success: function(d){
+                            $('#image-name').attr('value', '');
+                            alert(d.info); //will alert ok
+                        }
+                    });
+                });
+
+                var mockFile = { name: "<?php echo $product->getImage()->getName() ?>", type: 'image/jpeg' };
+                this.addFile.call(this, mockFile);
+                this.options.thumbnail.call(this, mockFile, "https://www.bebes-lutins.fr/view/assets/images/products/" + "<?php echo $product->getImage()->getName() ?>");
+            }
+        });
+
+    var thumbnailsDropzone = new Dropzone("div#thumbnails-dropzone",
+        {
+            url: "https://www.bebes-lutins.fr/view/html/tests/test-upload-thumbnails.php",
+            addRemoveLinks: true,
+            maxFiles: 4,
+            dictDefaultMessage: "Déposez ici les vignettes du produit.",
+            accept: function(file, done) {
+                namefile = file.name;
+                namefile = namefile.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                thumbnails_name = $('#thumbnails-name').val() + namefile + ";";
+                $('#thumbnails-name').attr('value', thumbnails_name);
+
+                done();
+            },
+            init: function() {
+                this.on("addedfile", function() {
+                    if (this.files[4]!=null){
+                        this.removeFile(this.files[0]);
+                    }
+                });
+
+                this.on('removedfile', function (file) {
+                    namefile = file.name;
+                    namefile = namefile.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                    alert(namefile);
+                    $.ajax({
+                        type: "POST",
+                        url: "https://www.bebes-lutins.fr/view/html/tests/test-upload-thumbnails.php",
+                        data: {
+                            target_file: namefile,
+                            delete_file: 1
+                        },
+                        dataType: 'json',
+                        success: function(d){
+                            thumbnails_name = $('#thumbnails-name').val();
+                            alert("Input avant suppression : " + thumbnails_name);
+                            thumbnails_name = thumbnails_name.replace(d.filename + ";", '');
+                            alert("Input après suppression : " + thumbnails_name);
+                            $('#thumbnails-name').attr('value', thumbnails_name);
+                            alert(d.info + " - " + d.filename); //will alert ok
+                        }
+                    });
+                });
+
+                <?php foreach ($product->getImage()->getThumbnails() as $thumbnail) { ?>
+                    var mockFile = { name: "<?php echo $thumbnail->getName(); ?>", type: 'image/jpeg' };
+                    this.addFile.call(this, mockFile);
+                    this.options.thumbnail.call(this, mockFile, "https://www.bebes-lutins.fr/view/assets/images/thumbnails/" + "<?php echo $thumbnail->getName(); ?>");
+                <?php } ?>
+            }
+        });
 </script>
 <script>
     $('#ceo-title').keyup(updateCountTitle);

@@ -175,17 +175,19 @@ class ProductGateway
             ':hide' => array($hide, PDO::PARAM_BOOL)
         ));
 
-        $thumbnails = $thumbnail_name.explode();
+        $thumbnails = explode(";",$thumbnails_name);
 
         foreach($thumbnails as $thumbnail){
-            $thumbnail_id = uniqid("thumbnails-".$id_product."-");
+            if(preg_replace('/\s+/', '', $thumbnail) != null && preg_replace('/\s+/', '', $thumbnail) != "") {
+                $thumbnail_id = uniqid("thumbnails-".$id_product."-");
 
-            $query = "INSERT INTO thumbnails VALUES(:id, :product_id, :image);";
-            $con->executeQuery($query, array(
-                ':id' => array($thumbnail_id, PDO::PARAM_STR),
-                ':product_id' => array($id, PDO::PARAM_STR),
-                ':image' => array($thumbnail, PDO::PARAM_STR),
-            ));
+                $query = "INSERT INTO thumbnails VALUES(:id, :product_id, :image);";
+                $con->executeQuery($query, array(
+                    ':id' => array($thumbnail_id, PDO::PARAM_STR),
+                    ':product_id' => array($id, PDO::PARAM_STR),
+                    ':image' => array($thumbnail, PDO::PARAM_STR),
+                ));
+            }
         }
     }
 
@@ -253,7 +255,7 @@ class ProductGateway
         ));
     }
 
-    public static function UpdateProduct2($id_copy, $id, $name, $categories, $ceo_name, $price, $stock, $description, $ceo_description, $creation_date, $image_name, $reference, $tags, $hide){
+    public static function UpdateProduct2($id_copy, $id, $name, $categories, $ceo_name, $price, $stock, $description, $ceo_description, $creation_date, $image_name, $reference, $tags, $hide, $thumbnails_name){
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);
 
@@ -273,6 +275,24 @@ class ProductGateway
             ':tags' => array($tags, PDO::PARAM_STR),
             ':hide' => array($hide, PDO::PARAM_BOOL)
         ));
+
+        $query = "DELETE FROM thumbnails WHERE product_id=:id";
+        $con->executeQuery($query, array('id' => array($id, PDO::PARAM_STR)));
+
+        $thumbnails = explode(";",$thumbnails_name);
+
+        foreach($thumbnails as $thumbnail){
+            if(preg_replace('/\s+/', '', $thumbnail) != null && preg_replace('/\s+/', '', $thumbnail) != "") {
+                $thumbnail_id = uniqid("thumbnails-".$id_product."-");
+
+                $query = "INSERT INTO thumbnails VALUES(:id, :product_id, :image);";
+                $con->executeQuery($query, array(
+                    ':id' => array($thumbnail_id, PDO::PARAM_STR),
+                    ':product_id' => array($id, PDO::PARAM_STR),
+                    ':image' => array($thumbnail, PDO::PARAM_STR),
+                ));
+            }
+        }
     }
 
     public static function CloneProduct(String $category, String $id_copy, String $id){
@@ -348,6 +368,9 @@ class ProductGateway
 
         $query = "DELETE FROM product WHERE id=:id";
         $con->executeQuery($query, array(':id' => array($id, PDO::PARAM_STR)));
+
+        $query = "DELETE FROM thumbnails WHERE product_id=:id";
+        $con->executeQuery($query, array('id' => array($id, PDO::PARAM_STR)));
     }
 
     public static function SearchProductByID(String $id)

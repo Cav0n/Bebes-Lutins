@@ -798,15 +798,15 @@ class AdminModel
             $stock = $_POST['stock'];
             $categories = $_POST['category'];
             $categories_string = "";
+            $thumbnails_name = $_POST['thumbnails_name'];
             foreach ($categories as $category){
-                echo $category;
                 $categories_string = $categories_string . $category . ";";
             }
             $tags = $_POST['tags'];
             $hide = $_POST['hide'];
 
             $creation_date = date('Y-m-d');
-            try{ProductGateway::UpdateProduct2($_POST['id_copy'], $id, $name, $categories_string, $ceo_name, $price, $stock, $description, $ceo_description, $creation_date, $image_name, $reference, $tags, $hide); }
+            try{ProductGateway::UpdateProduct2($_POST['id_copy'], $id, $name, $categories_string, $ceo_name, $price, $stock, $description, $ceo_description, $creation_date, $image_name, $reference, $tags, $hide, $thumbnails_name); }
             catch (PDOException $e){
                 $_POST['error-message-products'] = "Erreur BDD : " . $e;
                 ?>

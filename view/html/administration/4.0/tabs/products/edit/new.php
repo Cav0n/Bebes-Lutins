@@ -212,7 +212,7 @@ if($_REQUEST['product_id']!=null){
 
     var mainDropzone = new Dropzone("div#main-dropzone",
         {
-            url: "../../view/html/tests/test-upload.php",
+            url: "https://www.bebes-lutins.fr/view/html/tests/test-upload.php",
             addRemoveLinks: true,
             maxFiles: 1,
             dictDefaultMessage: "Choisissez l'image principale du produit.",
@@ -251,7 +251,7 @@ if($_REQUEST['product_id']!=null){
 
     var thumbnailsDropzone = new Dropzone("div#thumbnails-dropzone",
         {
-            url: "../../view/html/tests/test-upload-thumbnails.php",
+            url: "https://www.bebes-lutins.fr/view/html/tests/test-upload-thumbnails.php",
             addRemoveLinks: true,
             maxFiles: 4,
             dictDefaultMessage: "Déposez ici les vignettes du produit.",

@@ -218,7 +218,9 @@ if($_REQUEST['product_id']!=null){
             maxFiles: 1,
             dictDefaultMessage: "Choisissez l'image principale du produit.",
             accept: function(file, done) {
-                $('#image-name').attr('value', file.name);
+                namefile = file.name;
+                namefile = namefile.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                $('#image-name').attr('value', namefile);
                 done();
             },
             init: function() {
@@ -281,8 +283,8 @@ if($_REQUEST['product_id']!=null){
             },
             dataType: 'json',
             success: function(d){
-                alert(d.info + " - " + d.filename); //will alert ok
-                $('#'+d.filename).remove();
+                alert(d.info); //will alert ok
+                $('#'+namefile).remove();
             }
         });
     });

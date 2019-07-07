@@ -18,7 +18,7 @@ if(isset($_POST['delete_file'])){
 }
 
 //$targetPath = dirname( __FILE__ ) . '/uploads/';
-$targetPath = "../../assets/images/products/thumbnails/";
+$targetPath = "../../assets/images/thumbnails/";
 
 // Check if it's an upload or delete and if there is a file in the form
 if ( !empty($_FILES) && $delete_file == 0 ) {
@@ -119,7 +119,7 @@ if( $delete_file == 1 ){
         // Something weird happend and we lost the file
         $response = array (
             'status' => 'Erreur',
-            'info'   => 'Impossible de trouver l\'image :( - ' . strtr($file_name, $unwanted_array)
+            'info'   => 'Impossible de trouver l\'image :( - ' . strtr($file_path, $unwanted_array)
         );
     }
 

@@ -105,7 +105,7 @@ if( $delete_file == 1 ){
         if ( !file_exists($file_path) ) {
             $response = array (
                 'status' => 'success',
-                'info'   => 'Successfully Deleted.'
+                'info'   => 'Successfully Deleted - ' . strtr($file_path, $unwanted_array)
             );
         } else {
             // Check the directory's permissions

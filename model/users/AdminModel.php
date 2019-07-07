@@ -749,12 +749,13 @@ class AdminModel
                 echo $category;
                 $categories_string = $categories_string . $category . ";";
             }
+            $thumbnails = $_POST['thumbnails'];
             $tags = $_POST['tags'];
             $hide = $_POST['hide'];
             if($hide == null) $hide = 0;
             else {
                 $creation_date = date('Y-m-d');
-                try{ProductGateway::AddProduct($id, $name, $ceo_name, $price, $stock, $description, $ceo_description, $categories_string, $creation_date, $image_name, $reference, $tags, $hide); }
+                try{ProductGateway::AddProduct($id, $name, $ceo_name, $price, $stock, $description, $ceo_description, $categories_string, $creation_date, $image_name, $reference, $tags, $hide, $thumbnails); }
                 catch (PDOException $e){
                     $error_product_creation = true;
                     $error_message = "Erreur BDD : " . $e;

@@ -134,7 +134,7 @@ class ProductGateway
         return $results;
     }
 
-    public static function AddProduct(String $id, String $name, String $ceo_name, float $price, int $stock, String $description, String $ceo_description, String $category, String $creation_date, String $image, String $reference, $tags, bool $hide){
+    public static function AddProduct(String $id, String $name, String $ceo_name, float $price, int $stock, String $description, String $ceo_description, String $category, String $creation_date, String $image, String $reference, $tags, bool $hide, $thumbnails){
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);
 
@@ -174,6 +174,18 @@ class ProductGateway
             ':tags' => array($tags, PDO::PARAM_STR),
             ':hide' => array($hide, PDO::PARAM_BOOL)
         ));
+
+        foreach($thumbnails as $thumbnail){
+            $thumbnail_id = uniqid("thumbnails-".$id_product."-");
+            $thumbnail_name = $thumbnail, 'thumbnails');
+
+            $query = "INSERT INTO thumbnails VALUES(:id, :product_id, :image);";
+            $con->executeQuery($query, array(
+                ':id' => array($thumbnail_id, PDO::PARAM_STR),
+                ':product_id' => array($id, PDO::PARAM_STR),
+                ':image' => array($thumbnail_name, PDO::PARAM_STR),
+            ));
+        }
     }
 
     public static function AddHighlightProduct(String $product_id){

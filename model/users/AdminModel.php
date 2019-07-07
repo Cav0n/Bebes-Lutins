@@ -746,7 +746,6 @@ class AdminModel
             $categories = $_POST['category'];
             $categories_string = "";
             foreach ($categories as $category){
-                echo $category;
                 $categories_string = $categories_string . $category . ";";
             }
             $thumbnails = $_POST['thumbnails'];

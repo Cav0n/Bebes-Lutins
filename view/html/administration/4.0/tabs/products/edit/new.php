@@ -63,8 +63,7 @@ if($_REQUEST['product_id']!=null){
     <?php } ?>
     <form id="edition-wrapper" class="horizontal" method="post" action="https://www.bebes-lutins.fr/dashboard4/produits/sauvegarder/" enctype="multipart/form-data">
         <input id="image-name" type="hidden" name="image_name" value="<?php echo $image_name;?>">
-        <div id='thumbnails-name' class="hidden">
-        </div>
+        <input id="thumbnails-name" type="hidden" name="thumbnails_name" value="">
         <div class="column-big vertical">
             <div class="product-title-description-container edition-window">
                 <div class="custom-id vertical">
@@ -214,11 +213,14 @@ if($_REQUEST['product_id']!=null){
     var mainDropzone = new Dropzone("div#main-dropzone",
         {
             url: "../../view/html/tests/test-upload.php",
-            paramName: "image_name",
             addRemoveLinks: true,
             maxFiles: 1,
             dictDefaultMessage: "Choisissez l'image principale du produit.",
             accept: function(file, done) {
+                namefile = file.name
+                namefile = namefile.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                $('#image-name').attr('value', namefile);
+
                 done();
             },
             init: function() {
@@ -227,36 +229,38 @@ if($_REQUEST['product_id']!=null){
                         this.removeFile(this.files[0]);
                     }
                 });
-            }
-        });
 
-    mainDropzone.on('removedfile', function (file) {
-        namefile = file.name
-        namefile = namefile.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-        alert(namefile);
-        $.ajax({
-            type: "POST",
-            url: "../../view/html/tests/test-upload.php",
-            data: {
-                target_file: namefile,
-                delete_file: 1
-            },
-            dataType: 'json',
-            success: function(d){
-                alert(d.info); //will alert ok
+                this.on('removedfile', function (file) {
+                    alert(namefile);
+                    $.ajax({
+                        type: "POST",
+                        url: "../../view/html/tests/test-upload.php",
+                        data: {
+                            target_file: namefile,
+                            delete_file: 1
+                        },
+                        dataType: 'json',
+                        success: function(d){
+                            $('#image-name').attr('value', '');
+                            alert(d.info); //will alert ok
+                        }
+                    });
+                });
             }
         });
-    });
 
     var thumbnailsDropzone = new Dropzone("div#thumbnails-dropzone",
         {
             url: "../../view/html/tests/test-upload-thumbnails.php",
-            paramName: "thumbnails",
-            uploadMultiple: true,
             addRemoveLinks: true,
             maxFiles: 4,
             dictDefaultMessage: "Déposez ici les vignettes du produit.",
             accept: function(file, done) {
+                namefile = file.name;
+                namefile = namefile.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                thumbnails_name = $('#thumbnails-name').val() + namefile + ";";
+                $('#thumbnails-name').attr('value', thumbnails_name);
+
                 done();
             },
             init: function() {
@@ -265,27 +269,31 @@ if($_REQUEST['product_id']!=null){
                         this.removeFile(this.files[0]);
                     }
                 });
-            }
-        });
 
-    thumbnailsDropzone.on('removedfile', function (file) {
-        namefile = file.name;
-        namefile = namefile.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        alert(namefile);
-        $.ajax({
-            type: "POST",
-            url: "../../view/html/tests/test-upload-thumbnails.php",
-            data: {
-                target_file: namefile,
-                delete_file: 1
-            },
-            dataType: 'json',
-            success: function(d){
-                alert(d.info); //will alert ok
+                this.on('removedfile', function (file) {
+                    namefile = file.name;
+                    namefile = namefile.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                    alert(namefile);
+                    $.ajax({
+                        type: "POST",
+                        url: "../../view/html/tests/test-upload-thumbnails.php",
+                        data: {
+                            target_file: namefile,
+                            delete_file: 1
+                        },
+                        dataType: 'json',
+                        success: function(d){
+                            thumbnails_name = $('#thumbnails-name').val();
+                            alert("Input avant suppression : " + thumbnails_name);
+                            thumbnails_name = thumbnails_name.replace(d.filename + ";", '');
+                            alert("Input après suppression : " + thumbnails_name);
+                            $('#thumbnails-name').attr('value', thumbnails_name);
+                            alert(d.info + " - " + d.filename); //will alert ok
+                        }
+                    });
+                });
             }
         });
-    });
-    done();
 </script>
 <script>
     $('#ceo-title').keyup(updateCountTitle);

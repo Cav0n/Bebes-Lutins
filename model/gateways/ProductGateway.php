@@ -134,7 +134,7 @@ class ProductGateway
         return $results;
     }
 
-    public static function AddProduct(String $id, String $name, String $ceo_name, float $price, int $stock, String $description, String $ceo_description, String $category, String $creation_date, String $image, String $reference, $tags, bool $hide, $thumbnails){
+    public static function AddProduct(String $id, String $name, String $ceo_name, float $price, int $stock, String $description, String $ceo_description, String $category, String $creation_date, String $image, String $reference, $tags, bool $hide, string $thumbnails_name){
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);
 
@@ -174,6 +174,8 @@ class ProductGateway
             ':tags' => array($tags, PDO::PARAM_STR),
             ':hide' => array($hide, PDO::PARAM_BOOL)
         ));
+
+        $thumbnails = $thumbnail_name.explode();
 
         foreach($thumbnails as $thumbnail){
             $thumbnail_id = uniqid("thumbnails-".$id_product."-");

@@ -214,13 +214,11 @@ if($_REQUEST['product_id']!=null){
     var mainDropzone = new Dropzone("div#main-dropzone",
         {
             url: "../../view/html/tests/test-upload.php",
+            paramName: "image_name",
             addRemoveLinks: true,
             maxFiles: 1,
             dictDefaultMessage: "Choisissez l'image principale du produit.",
             accept: function(file, done) {
-                namefile = file.name;
-                namefile = namefile.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                $('#image-name').attr('value', namefile);
                 done();
             },
             init: function() {
@@ -253,13 +251,13 @@ if($_REQUEST['product_id']!=null){
     var thumbnailsDropzone = new Dropzone("div#thumbnails-dropzone",
         {
             url: "../../view/html/tests/test-upload-thumbnails.php",
+            paramName: "thumbnails",
+            uploadMultiple: true,
             addRemoveLinks: true,
             maxFiles: 4,
             dictDefaultMessage: "Déposez ici les vignettes du produit.",
             accept: function(file, done) {
-                namefile = file.name;
-                namefile = namefile.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-                $('#thumbnails-name').append("<input id='" + namefile + "' type='hidden' name='thumbnails[]' value='" + namefile + "'>");
+                done();
             },
             init: function() {
                 this.on("addedfile", function() {
@@ -284,7 +282,6 @@ if($_REQUEST['product_id']!=null){
             dataType: 'json',
             success: function(d){
                 alert(d.info); //will alert ok
-                $('#'+namefile).remove();
             }
         });
     });

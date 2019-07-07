@@ -177,13 +177,12 @@ class ProductGateway
 
         foreach($thumbnails as $thumbnail){
             $thumbnail_id = uniqid("thumbnails-".$id_product."-");
-            $thumbnail_name = $thumbnail, 'thumbnails');
 
             $query = "INSERT INTO thumbnails VALUES(:id, :product_id, :image);";
             $con->executeQuery($query, array(
                 ':id' => array($thumbnail_id, PDO::PARAM_STR),
                 ':product_id' => array($id, PDO::PARAM_STR),
-                ':image' => array($thumbnail_name, PDO::PARAM_STR),
+                ':image' => array($thumbnail, PDO::PARAM_STR),
             ));
         }
     }

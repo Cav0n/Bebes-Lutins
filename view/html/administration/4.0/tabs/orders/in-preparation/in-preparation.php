@@ -49,7 +49,7 @@ $orders = OrderGateway::GetOrdersFromGateway();
                             ?>
                             <tr onclick="load_bill('<?php echo $order->getId(); ?>')">
                                 <td class="date center"><?php echo $order->getDateString(); ?></td>
-                                <td class="customer"><a href="https://www.bebes-lutins.fr/dashboard/page-client/<?php echo $order->getCustomer()->getId(); ?>"><?php echo ucfirst($order->getCustomer()->getFirstname()) . " " . strtoupper($order->getCustomer()->getSurname()); ?></a></td>
+                                <td class="customer"><a><?php echo ucfirst($order->getCustomer()->getFirstname()) . " " . strtoupper($order->getCustomer()->getSurname()); ?></a></td>
                                 <td class="price right"><?php echo UtilsModel::FloatToPrice($order->getPriceAfterDiscount()); ?></td>
                                 <td class="shipping-price right"><?php echo UtilsModel::FloatToPrice($order->getShippingPrice()); ?></td>
                                 <td class="status right"><form method="post" action="https://www.bebes-lutins.fr/dashboard4/commandes/modifier-etat"><input type="hidden" name="id" value="<?php echo $order->getId(); ?>">

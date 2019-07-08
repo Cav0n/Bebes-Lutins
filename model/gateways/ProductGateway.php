@@ -179,7 +179,7 @@ class ProductGateway
 
         foreach($thumbnails as $thumbnail){
             if(preg_replace('/\s+/', '', $thumbnail) != null && preg_replace('/\s+/', '', $thumbnail) != "") {
-                $thumbnail_id = uniqid("thumbnails-".$id_product."-");
+                $thumbnail_id = uniqid("thumbnails-".$id."-");
 
                 $query = "INSERT INTO thumbnails VALUES(:id, :product_id, :image);";
                 $con->executeQuery($query, array(
@@ -283,7 +283,7 @@ class ProductGateway
 
         foreach($thumbnails as $thumbnail){
             if(preg_replace('/\s+/', '', $thumbnail) != null && preg_replace('/\s+/', '', $thumbnail) != "") {
-                $thumbnail_id = uniqid("thumbnails-".$id_product."-");
+                $thumbnail_id = uniqid("thumbnails-".$id."-");
 
                 $query = "INSERT INTO thumbnails VALUES(:id, :product_id, :image);";
                 $con->executeQuery($query, array(

@@ -234,7 +234,7 @@ class AdminModel
         }
         else {
             $creation_date = date('Y-m-d');
-            try{ProductGateway::AddProduct($id, $name, $name, $price, $stock, $description_big, $description_small, $category, $creation_date, $image_name, $custom_id, null, 0);}
+            try{ProductGateway::AddProduct($id, $name, $name, $price, $stock, $description_big, $description_small, $category, $creation_date, $image_name, $custom_id, null, false, "");}
             catch (PDOException $e){
                 $_POST['error-message-products'] = "Erreur BDD : " . $e;
                 self::load_page('dashboard');

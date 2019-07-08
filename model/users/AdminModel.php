@@ -465,12 +465,12 @@ class AdminModel
         self::load_page('add_voucher');
     }
 
-    public static function add_voucher(String $name, $discount, String $type, String $date_beginning, String $date_end, int $number_of_usage){
+    public static function add_voucher(String $name, $discount, String $type, String $date_beginning, String $time_beginning, String $date_end, string $time_end, int $number_per_user){
         $_SESSION['header_tab'] = "various";
 
         $id=uniqid("voucher-");
         try{
-            VoucherGateway::AddVoucher($id, strtoupper($name), $discount, $type, $date_beginning, $date_end, $number_of_usage);
+            VoucherGateway::AddVoucher($id, strtoupper($name), $discount, $type, $date_beginning, $time_beginning, $date_end, $time_end, $number_per_user);
         } catch (PDOException $e){
             $_POST['error-message-various'] = "Erreur BDD : " . $e;
             ?>
@@ -670,6 +670,7 @@ class AdminModel
     public static function load_page_dashboard($section, $page, $option)
     {
         global $view_rep;
+        echo $section . "  $ " . $page . " $ " . $option ;
         switch ($section){
             case "commandes":
                 if($page == "en-cours" || $page == null){
@@ -711,6 +712,7 @@ class AdminModel
                 break;
 
             case "reductions":
+            echo $page . " - " . $option;
                 if($page == "tous-les-codes" || $page == null){
                     if($option == "tous" || $option == null) require("$view_rep/html/administration/4.0/tabs/vouchers/codes/all.php");
                     if($option == "actifs") require("$view_rep/html/administration/4.0/tabs/vouchers/codes/active.php");
@@ -719,6 +721,9 @@ class AdminModel
                 }
                 if($page == "creation") {
                     if ($option == null) require("$view_rep/html/administration/4.0/tabs/vouchers/edit/new.php");
+                }
+                if($page == "sauvegarder") {
+                    echo "YES";
                 }
                 break;
 

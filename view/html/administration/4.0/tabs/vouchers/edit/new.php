@@ -18,7 +18,7 @@
     <div class="page-title-container horizontal between">
         <h2>Créer un code de réduction</h2>
     </div>
-    <form id="edition-wrapper" class="horizontal">
+    <form id="edition-wrapper" class="horizontal"  action="https://www.bebes-lutins.fr/dashboard4/reductions/sauvegarder/" method="post">
         <div class="column-big vertical">
             <div class="code-name-container edition-window">
                 <div class="container-title horizontal between">

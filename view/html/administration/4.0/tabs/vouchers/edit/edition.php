@@ -64,10 +64,6 @@ $voucher = VoucherGateway::GetVoucherByID($_REQUEST["voucher_id"]);
                         <input id="beginning-date-hour" type="time" name="time_beginning" value='<?php echo $voucher->getTimeBeginning();?>'>
                     </div>
                 </div>
-                <div class="horizontal" style="margin: 1rem 0 0.8rem 0;">
-                    <input id="define-end-date" type="checkbox" name="define-end-date" style="width: inherit;margin: auto 0;">
-                    <label for="define-end-date" style="margin: auto 0 auto 10px;">Fixer la date de fin</label>
-                </div>
                 <div id="end-date-container" class="horizontal">
                     <div class="end-date vertical" style="width: 100%;margin-right: 1rem;">
                         <label for="end-date">Date de fin</label>

@@ -48,7 +48,7 @@ $vouchers = VoucherGateway::GetAllVoucher();
                     <?php
                     foreach ($vouchers as $voucher) { $voucher = (new VoucherContainer($voucher))->getVoucher()
                         ?>
-                        <div class="voucher vertical">
+                        <div class="voucher vertical" onclick="load_voucher('<?php echo $voucher->getId(); ?>')">
                             <label class="container vertical centered"><?php echo $voucher->getName(); ?>
                                 <input type="checkbox">
                                 <span class="checkmark"></span>
@@ -63,4 +63,9 @@ $vouchers = VoucherGateway::GetAllVoucher();
     </div>
 </main>
 </body>
+<script>
+function load_voucher(id) {
+        document.location.href = "https://www.bebes-lutins.fr/dashboard4/reductions/edition/"+id;
+    }
+</script>
 </html>

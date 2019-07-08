@@ -12,7 +12,7 @@ class VoucherGateway
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);
 
-        $query = "INSERT INTO voucher VALUES(:id, :name, :discount, :type, :date_beginning, :time_beginning, :date_end, :time_end, :number_of_usage);";
+        $query = "INSERT INTO voucher VALUES(:id, :name, :discount, :type, :date_beginning, :time_beginning, :date_end, :time_end, :number_per_user);";
         $con->executeQuery($query, array(
             ':id'=>array($id, PDO::PARAM_STR),
             ':name'=>array($name, PDO::PARAM_STR),
@@ -22,7 +22,7 @@ class VoucherGateway
             ':time_beginning'=>array($time_beginning, PDO::PARAM_STR),
             ':date_end'=>array($date_end, PDO::PARAM_STR),
             ':time_end'=>array($time_end, PDO::PARAM_STR),
-            ':number_of_usage'=>array($usage_per_user, PDO::PARAM_STR)
+            ':number_per_user'=>array($usage_per_user, PDO::PARAM_STR)
         ));
     }
 
@@ -30,7 +30,7 @@ class VoucherGateway
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);
 
-        $query = 'UPDATE voucher SET name=:name, discount=:discount, type=:type, date_beginning:date_beginning, time_beginning:time_beginning, date_end:date_end, time_end:time_end, number_of_usage:number_of_usage WHERE id=:id';
+        $query = 'UPDATE voucher SET name=:name, discount=:discount, type=:type, date_beginning:date_beginning, time_beginning:time_beginning, date_end:date_end, time_end:time_end, number_per_user:number_per_user WHERE id=:id';
         $con->executeQuery($query, array(
             ':id'=>array($id, PDO::PARAM_STR),
             ':name'=>array($name, PDO::PARAM_STR),
@@ -40,7 +40,7 @@ class VoucherGateway
             ':time_beginning'=>array($time_beginning, PDO::PARAM_STR),
             ':date_end'=>array($date_end, PDO::PARAM_STR),
             ':time_end'=>array($time_end, PDO::PARAM_STR),
-            ':number_of_usage'=>array($usage_per_user, PDO::PARAM_STR)
+            ':number_per_user'=>array($usage_per_user, PDO::PARAM_STR)
         ));
     }
 
@@ -77,12 +77,12 @@ class VoucherGateway
 
         $voucher_list = array();
 
-        $query = "SELECT id, name, discount, type, date_beginning, time_beginning, date_end, time_end, number_of_usage FROM voucher WHERE date_end>=(SELECT SYSDATE()) AND date_beginning<=(SELECT SYSDATE());";
+        $query = "SELECT id, name, discount, type, date_beginning, time_beginning, date_end, time_end, number_per_user FROM voucher WHERE date_end>=(SELECT SYSDATE()) AND date_beginning<=(SELECT SYSDATE());";
         $con->executeQuery($query);
         $voucher_list_db = $con->getResults();
 
         foreach ($voucher_list_db as $voucher_db){
-            $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_of_usage']);
+            $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_per_user']);
             $voucher_list[] = $voucher;
         }
 
@@ -93,12 +93,12 @@ class VoucherGateway
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);
 
-        $query = "SELECT id, name, discount, type, date_beginning, time_beginning, date_end, time_end, number_of_usage FROM voucher WHERE name=:voucher_name;";
+        $query = "SELECT id, name, discount, type, date_beginning, time_beginning, date_end, time_end, number_per_user FROM voucher WHERE name=:voucher_name;";
         $con->executeQuery($query, array(':voucher_name' => array($voucher_name, PDO::PARAM_STR)));
         $voucher_db = $con->getResults()[0];
 
         if($voucher_db != null){
-            $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_of_usage']);
+            $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_per_user']);
             return $voucher;
         }
         else return null;
@@ -108,13 +108,13 @@ class VoucherGateway
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);
 
-        $query = "SELECT id, name, discount, type, date_beginning, time_beginning, date_end, time_end, number_of_usage FROM voucher WHERE id=:voucher_id;";
+        $query = "SELECT id, name, discount, type, date_beginning, time_beginning, date_end, time_end, number_per_user FROM voucher WHERE id=:voucher_id;";
         $con->executeQuery($query, array(':voucher_id' => array($voucher_id, PDO::PARAM_STR)));
         $voucher_db = $con->getResults()[0];
 
         if($voucher_db != null){
-            if($voucher_db['number_of_usage'] == null) $voucher_db['number_of_usage'] = 0;
-            $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_of_usage']);
+            if($voucher_db['number_per_user'] == null) $voucher_db['number_per_user'] = 0;
+            $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_per_user']);
             return $voucher;
         }
         else return null;

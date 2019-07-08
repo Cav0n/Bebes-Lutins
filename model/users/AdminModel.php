@@ -723,6 +723,9 @@ class AdminModel
                 if($page == "sauvegarder") {
                     self::saveVoucher($option);
                 }
+                if($page == "edition"){
+                    require("$view_rep/html/administration/4.0/tabs/vouchers/edit/edition.php");
+                }
                 break;
 
             case "analyses":

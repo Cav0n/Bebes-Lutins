@@ -712,7 +712,6 @@ class AdminModel
                 break;
 
             case "reductions":
-            echo $page . " - " . $option;
                 if($page == "tous-les-codes" || $page == null){
                     if($option == "tous" || $option == null) require("$view_rep/html/administration/4.0/tabs/vouchers/codes/all.php");
                     if($option == "actifs") require("$view_rep/html/administration/4.0/tabs/vouchers/codes/active.php");
@@ -723,7 +722,7 @@ class AdminModel
                     if ($option == null) require("$view_rep/html/administration/4.0/tabs/vouchers/edit/new.php");
                 }
                 if($page == "sauvegarder") {
-                    echo "YES";
+                    
                 }
                 break;
 
@@ -840,5 +839,52 @@ class AdminModel
             document.location.href='https://www.bebes-lutins.fr/dashboard4/produits/stocks';
         </script>
         <?php
+    }
+
+    public static function saveVoucher(string $voucherID){
+        if($voucherID == null){
+            $id = uniqid("voucher-");
+            $name = strtoupper($_POST['name']);
+            $discount = $_POST['discount'];
+            $type = $_POST['type'];
+            $date_beginning = $_POST['date_beginning'];
+            $time_beginning = $_POST['time_beginning'];
+            $date_end = $_POST['date_end'];
+            $time_end = $_POST['time_end'];
+            $number_per_user = $_POST['number_per_user'];
+
+            try { VoucherGateway::AddVoucher(
+                $id,
+                $name,
+                $discount,
+                $type,
+                $date_beginning,
+                $time_beginning,
+                $date_end,
+                $time_end,
+                $number_per_user
+            ); } catch (PDOException $e) { echo "Il y a une erreur lors de la création du coupon."; }
+        } else {
+            $name = strtoupper($_POST['name']);
+            $discount = $_POST['discount'];
+            $type = $_POST['type'];
+            $date_beginning = $_POST['date_beginning'];
+            $time_beginning = $_POST['time_beginning'];
+            $date_end = $_POST['date_end'];
+            $time_end = $_POST['time_end'];
+            $number_per_user = $_POST['number_per_user'];
+
+            try { VoucherGateway::UpdateVoucher(
+                $voucherID,
+                $name,
+                $discount,
+                $type,
+                $date_beginning,
+                $time_beginning,
+                $date_end,
+                $time_end,
+                $number_per_user);
+            } catch(PDOException $e) { echo "Il y a une erreur lors de la mise à jour du coupon."; } 
+        }
     }
 }

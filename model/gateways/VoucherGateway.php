@@ -26,6 +26,24 @@ class VoucherGateway
         ));
     }
 
+    public static function UpdateVoucher(String $id, String $name, float $discount, String $type, String $date_beginning, String $time_beginning, String $date_end, String $time_end, int $usage_per_user){
+        global $dblogin, $dbpassword, $dsn;
+        $con = new Connexion($dsn, $dblogin, $dbpassword);
+
+        $query = 'UPDATE voucher SET name=:name, discount=:discount, type=:type, date_beginning:date_beginning, time_beginning:time_beginning, date_end:date_end, time_end:time_end, number_of_usage:number_of_usage WHERE id=:id';
+        $con->executeQuery($query, array(
+            ':id'=>array($id, PDO::PARAM_STR),
+            ':name'=>array($name, PDO::PARAM_STR),
+            ':discount'=>array($discount, PDO::PARAM_STR),
+            ':type'=>array($type, PDO::PARAM_STR),
+            ':date_beginning'=>array($date_beginning, PDO::PARAM_STR),
+            ':time_beginning'=>array($time_beginning, PDO::PARAM_STR),
+            ':date_end'=>array($date_end, PDO::PARAM_STR),
+            ':time_end'=>array($time_end, PDO::PARAM_STR),
+            ':number_of_usage'=>array($usage_per_user, PDO::PARAM_STR)
+        ));
+    }
+
     public static function DeleteVoucher(String $id){
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);

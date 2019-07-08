@@ -26,7 +26,7 @@
                     <a onclick="makeid(10)">Générer un code</a>
                 </div>
                 <div class="code vertical">
-                    <input id="code" type="text" name="code" placeholder="par ex. SOLDESPRINTEMPS">
+                    <input id="code" type="text" name="name" placeholder="par ex. SOLDESPRINTEMPS">
                     <label class="help" for="code">Les clients saisiront ce code promotionnel lors de leur passage à la caisse.</label>
                 </div>
             </div>
@@ -45,7 +45,7 @@
                     </div>
                     <div class="value vertical" style="width: 100%;">
                         <label for="value">Valeur de la réduction</label>
-                        <input id="value" type="number" name="value">
+                        <input id="value" type="number" name="discount">
                     </div>
                 </div>
             </div>
@@ -56,11 +56,11 @@
                 <div id="beginning-date-container" class="horizontal">
                     <div class="beginning-date vertical" style="width: 100%;margin-right: 1rem;">
                         <label for="beginning-date">Date de début</label>
-                        <input id="beginning-date" type="date" name="beginning-date">
+                        <input id="beginning-date" type="date" name="date_beginning">
                     </div>
                     <div class="beginning-date-hour vertical" style="width: 100%;">
                         <label for="beginning-date-hour">Heure de début</label>
-                        <input id="beginning-date-hour" type="time" name="beginning-date-hour">
+                        <input id="beginning-date-hour" type="time" name="time_beginning">
                     </div>
                 </div>
                 <div class="horizontal" style="margin: 1rem 0 0.8rem 0;">
@@ -70,11 +70,11 @@
                 <div id="end-date-container" class="horizontal">
                     <div class="end-date vertical" style="width: 100%;margin-right: 1rem;">
                         <label for="end-date">Date de fin</label>
-                        <input id="end-date" type="date" name="end-date">
+                        <input id="end-date" type="date" name="date_end">
                     </div>
                     <div class="end-date-hour vertical" style="width: 100%;">
                         <label for="end-date-hour">Heure de fin</label>
-                        <input id="end-date-hour" type="time" name="end-date-hour">
+                        <input id="end-date-hour" type="time" name="time_end">
                     </div>
                 </div>
             </div>

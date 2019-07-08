@@ -670,7 +670,6 @@ class AdminModel
     public static function load_page_dashboard($section, $page, $option)
     {
         global $view_rep;
-        echo $section . "  $ " . $page . " $ " . $option ;
         switch ($section){
             case "commandes":
                 if($page == "en-cours" || $page == null){
@@ -722,7 +721,7 @@ class AdminModel
                     if ($option == null) require("$view_rep/html/administration/4.0/tabs/vouchers/edit/new.php");
                 }
                 if($page == "sauvegarder") {
-                    
+                    self::saveVoucher($option);
                 }
                 break;
 
@@ -852,8 +851,9 @@ class AdminModel
             $date_end = $_POST['date_end'];
             $time_end = $_POST['time_end'];
             $number_per_user = $_POST['number_per_user'];
+            if($number_per_user == null) $number_per_user = 0;
 
-            try { VoucherGateway::AddVoucher(
+            try { VoucherGateway::AddVoucher(
                 $id,
                 $name,
                 $discount,
@@ -863,7 +863,7 @@ class AdminModel
                 $date_end,
                 $time_end,
                 $number_per_user
-            ); } catch (PDOException $e) { echo "Il y a une erreur lors de la création du coupon."; }
+            ); } catch (PDOException $e) { echo "Il y a une erreur lors de la création du coupon."; $error = true; }
         } else {
             $name = strtoupper($_POST['name']);
             $discount = $_POST['discount'];
@@ -884,7 +884,9 @@ class AdminModel
                 $date_end,
                 $time_end,
                 $number_per_user);
-            } catch(PDOException $e) { echo "Il y a une erreur lors de la mise à jour du coupon."; } 
+            } catch(PDOException $e) { echo "Il y a une erreur lors de la mise à jour du coupon."; $error = true; } 
         }
+
+        if(!$error) echo "Le coupon a bien été crée / mis à jour.";
     }
 }

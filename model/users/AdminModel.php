@@ -752,13 +752,13 @@ class AdminModel
             $tags = $_POST['tags'];
             $hide = $_POST['hide'];
             if($hide == null) $hide = 0;
-            else {
+            else $hide = 1;
+            try{
                 $creation_date = date('Y-m-d');
-                try{ProductGateway::AddProduct($id, $name, $ceo_name, $price, $stock, $description, $ceo_description, $categories_string, $creation_date, $image_name, $reference, $tags, $hide, $thumbnails_name); }
-                catch (PDOException $e){
-                    $error_product_creation = true;
-                    $error_message = "Erreur BDD : " . $e;
-                }
+                ProductGateway::AddProduct($id, $name, $ceo_name, $price, $stock, $description, $ceo_description, $categories_string, $creation_date, $image_name, $reference, $tags, $hide, $thumbnails_name);
+            } catch (PDOException $e){
+                $error_product_creation = true;
+                $error_message = "Erreur BDD : " . $e;
             }
             if($error_product_creation){
                 $_SESSION['error_message'] = $error_message;
@@ -811,13 +811,13 @@ class AdminModel
                 $_POST['error-message-products'] = "Erreur BDD : " . $e;
                 ?>
                 <script type="text/javascript">
-                    document.location.href='<?php echo "https://www.bebes-lutins.fr/dashboard4/produits/edition/".$id; ?>';
+                    //document.location.href='<?php echo "https://www.bebes-lutins.fr/dashboard4/produits/edition/".$id; ?>';
                 </script>
                 <?php
             }
             ?>
             <script type="text/javascript">
-                document.location.href='<?php echo "https://www.bebes-lutins.fr/dashboard4/produits/edition/".$id; ?>';
+                //document.location.href='<?php echo "https://www.bebes-lutins.fr/dashboard4/produits/edition/".$id; ?>';
             </script>
             <?php
         }

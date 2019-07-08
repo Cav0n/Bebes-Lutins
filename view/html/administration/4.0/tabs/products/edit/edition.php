@@ -25,6 +25,9 @@ $error = $_POST['error-message-products'];
     <div class="page-title-container horizontal between">
         <h2><?php echo $product->getName(); ?></h2>
     </div>
+    <div class='product-page-link-container horizontal'>
+        <a></a>
+    </div>
     <div id="error-product" class="vertical <?php if($error == null) echo 'hidden';?>">
         <p>Il y a des erreurs avec la mise à jour du produit :</p>
         <p class="message"><?php echo $error;?>Une petite erreur gentille.</p>

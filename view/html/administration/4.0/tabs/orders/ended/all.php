@@ -48,11 +48,10 @@ $orders = OrderGateway::GetOrdersFromGateway();
                     <?php
                     foreach ($orders as $order) {
                         $cssOrderColor = "";
-                        if($order->getStatus() == -1) $cssOrderColor = 'red';
                         if($order->getStatus() == 2) $cssOrderColor = 'blue';
                         if($order->getStatus() == 3) $cssOrderColor = 'green';
 
-                        if($order->getStatus() >= 2 && $order->getStatus() <= 3 || $order->getStatus() == -1){
+                        if($order->getStatus() >= 2 && $order->getStatus() <= 3){
                             ?>
                             <tr onclick="load_bill('<?php echo $order->getId(); ?>')" class="<?php echo $cssOrderColor?>">
                                 <td class="date center"><?php echo $order->getDateString(); ?></td>

@@ -9,7 +9,7 @@ if($_GET['page'] == "nouveau" || $_GET['page'] == "edition" || $_GET['page'] == 
 ?>
 
 <header class="horizontal between<?php echo $extra; ?>">
-    <h1>BEBES LUTINS</h1>
+    <a href='https://www.bebes-lutins.fr'><h1>BEBES LUTINS</h1></a>
     <a id="administrator-name" href="https://www.bebes-lutins.fr">Retour sur le site ></a>
     <div id="extra" class="between <?php if($extra == null || $_GET['page'] == "importer") echo 'hidden';?>">
         <button class="cancel-button" onclick="cancel_creation('<?php echo $_GET['section']; ?>')">Annuler</button>

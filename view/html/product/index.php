@@ -207,8 +207,7 @@ width: max-content;
             </div>
         </div>
         <?php if($isAdmin){?>
-            <form id="admin-edit-product" method="post" action="https://www.bebes-lutins.fr/dashboard/modifier-produit-page" class="horizontal centered desktop">
-                <input type="hidden" name="id_product" value="<?php echo $product->getId();?>">
+            <form id="admin-edit-product" method="post" action="https://www.bebes-lutins.fr/dashboard4/produits/edition/<?php echo $product->getId();?>" class="horizontal centered desktop">
                 <button type="submit" class="transition-fast">Editer le produit</button>
             </form>
         <?php }?>

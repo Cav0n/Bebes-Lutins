@@ -50,7 +50,7 @@ $orders = OrderGateway::GetOrdersFromGateway();
                     foreach ($orders as $order) {
                         if($order->getStatus() == 3){
                             ?>
-                            <tr onclick="load_bill('<?php echo $order->getId(); ?>')">
+                            <tr onclick="load_bill('<?php echo $order->getId(); ?>')" class='green'>
                                 <td class="date center"><?php echo $order->getDateString(); ?></td>
                                 <td class="customer"><a href="https://www.bebes-lutins.fr/dashboard/page-client/<?php echo $order->getCustomer()->getId(); ?>"><?php echo ucfirst($order->getCustomer()->getFirstname()) . " " . strtoupper($order->getCustomer()->getSurname()); ?></a></td>
                                 <td class="price right"><?php echo UtilsModel::FloatToPrice($order->getPriceAfterDiscount()); ?></td>

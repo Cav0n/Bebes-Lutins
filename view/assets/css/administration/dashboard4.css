@@ -619,6 +619,23 @@
 /* ---- */
 
 /* EDITION */
+#dashboard4 main .product-page-link-container a{
+    margin: 10px 0;
+    color: #637381;
+    font-family: Roboto, sans-serif;
+    font-weight: 300;
+    font-size: 0.9rem;
+}
+
+#dashboard4 main .product-page-link-container a svg{
+    height: 1.5rem;
+    width: 1.5em;
+    fill: #637381;
+}
+#dashboard4 main .product-page-link-container a p{
+    margin: 0 auto;
+}
+
 #dashboard4 main #edition-wrapper{
     padding-top: 2rem;
 }

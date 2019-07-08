@@ -26,7 +26,10 @@ $error = $_POST['error-message-products'];
         <h2><?php echo $product->getName(); ?></h2>
     </div>
     <div class='product-page-link-container horizontal'>
-        <a></a>
+        <a href='https://www.bebes-lutins.fr/produit/<?php echo $product->getId(); ?>' class='horizontal'> 
+            <?php echo file_get_contents("view/assets/images/utils/icons/eye.svg"); ?>
+            <p>Voir la page du produit</p>
+        </a>
     </div>
     <div id="error-product" class="vertical <?php if($error == null) echo 'hidden';?>">
         <p>Il y a des erreurs avec la mise à jour du produit :</p>

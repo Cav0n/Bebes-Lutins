@@ -687,7 +687,7 @@ class AdminModel
                 break;
 
             case "produits":
-                if($page == "tous-les-produits" || $page == null) require("$view_rep/html/administration/4.0/tabs/products/all/all.php");
+                if(($page == "tous-les-produits") || ($page == null)) require("$view_rep/html/administration/4.0/tabs/products/all/all.php");
                 if($page == "stocks") require("$view_rep/html/administration/4.0/tabs/products/stocks/all.php");
                 if($page == "nouveau") require("$view_rep/html/administration/4.0/tabs/products/edit/new.php");
                 if($page == "edition") require("$view_rep/html/administration/4.0/tabs/products/edit/edition.php");

@@ -8,6 +8,11 @@
     border-bottom: 1px solid #26731c;
 }
 
+#dashboard4 header a:hover{
+    text-decoration: underline;
+    text-decoration-color: white;
+}
+
 #dashboard4 header h1{
     margin: auto 0;
     color: white;
@@ -138,6 +143,17 @@
     justify-content: center;
     margin: 0;
     font-family: Roboto, sans-serif;
+    height: 100%;
+}
+
+#dashboard4 header.nouveau a:hover{
+    text-decoration: none;
+    background: #c4c9ce;
+    color: rgb(101, 101, 101);
+}
+
+#dashboard4 header.nouveau a:hover h1{
+    color: rgb(101, 101, 101);
 }
 
 #dashboard4 header.nouveau #administrator-name{
@@ -633,7 +649,7 @@
     fill: #637381;
 }
 #dashboard4 main .product-page-link-container a p{
-    margin: 0 auto;
+    margin: auto 5px;
 }
 
 #dashboard4 main #edition-wrapper{

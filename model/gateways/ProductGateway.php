@@ -86,6 +86,51 @@ class ProductGateway
         return $products;
     }
 
+    public static function GetProductWithIndex(int $index, int $numberOfProducts){
+        global $dblogin, $dbpassword, $dsn;
+        $con = new Connexion($dsn, $dblogin, $dbpassword);
+
+        $products = array();
+
+        $query = "SELECT id, id_copy, name, ceo_name,price, stock, description, ceo_description, category, creation_date, image, number_of_review, number_of_stars, reference, tags, hide FROM product ORDER BY name LIMIT :indexProduct,:offset";
+        $con->executeQuery($query, array(
+            ':indexProduct' => array($index, PDO::PARAM_INT),
+            ':offset' => array($index + $numberOfProducts, PDO::PARAM_INT)
+        ));
+        $results = $con->getResults();
+
+        $query = "SELECT name, parent, image, description, rank FROM category";
+        $con->executeQuery($query);
+        $categories = $con->getResults();
+
+        $query = "SELECT image, product_id FROM thumbnails;";
+        $con->executeQuery($query);
+        $thumbnails_list_db = $con->getResults();
+
+        foreach ($results as $r){
+            $product_categories = explode(";",$r['category']);
+            $categ = [];
+            foreach ($categories as $category) {
+                foreach ($product_categories as $product_category) {
+                    if ($category['name'] == $product_category) {
+                        $categ[] = new Category($category['name'], $category['parent'], new ImageCategory($category['image']), $category['description'], $category['rank']);
+                    }
+                }
+            }
+            $product = new Product($r['id'], $r['id_copy'], $r['name'], $r['ceo_name'], $r['price'], $r['stock'], $r['description'], $r['ceo_description'], $categ, $r['creation_date'], new ImageProduct("null", $r['image']), $r['number_of_review'], $r['number_of_stars'], $r['reference'], $r['tags'], $r['hide']);
+            if ($thumbnails_list_db != null) {
+                foreach ($thumbnails_list_db as $t) {
+                    if ($product->getId() == $t['product_id']) {
+                        $product->getImage()->addThumbnail(new Image($t['image']));
+                    }
+                }
+            }
+            $products[] = $product;
+        }
+
+        return $products;
+    }
+
     public static function GetHighlightedProducts()
     {
         global $dblogin, $dbpassword, $dsn;

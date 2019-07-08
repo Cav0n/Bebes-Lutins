@@ -2,7 +2,6 @@
 
 $orders = OrderGateway::GetOrdersFromGateway();
 
-
 ?>
 
 <!DOCTYPE html>
@@ -48,16 +47,21 @@ $orders = OrderGateway::GetOrdersFromGateway();
                     </tr>
                     <?php
                     foreach ($orders as $order) {
+                        $cssOrderColor = "";
+                        if($order->getStatus() == -1) $cssOrderColor = 'red';
+                        if($order->getStatus() == 2) $cssOrderColor = 'blue';
+                        if($order->getStatus() == 3) $cssOrderColor = 'green';
+
                         if($order->getStatus() >= 2 && $order->getStatus() <= 3 || $order->getStatus() == -1){
                             ?>
-                            <tr onclick="load_bill('<?php echo $order->getId(); ?>')" class="<?php if($order->getStatus() == -1) echo 'red';?>">
+                            <tr onclick="load_bill('<?php echo $order->getId(); ?>')" class="<?php echo $cssOrderColor?>">
                                 <td class="date center"><?php echo $order->getDateString(); ?></td>
                                 <td class="customer"><a href="https://www.bebes-lutins.fr/dashboard/page-client/<?php echo $order->getCustomer()->getId(); ?>"><?php echo ucfirst($order->getCustomer()->getFirstname()) . " " . strtoupper($order->getCustomer()->getSurname()); ?></a></td>
                                 <td class="price right"><?php echo UtilsModel::FloatToPrice($order->getPriceAfterDiscount()); ?></td>
                                 <td class="shipping-price right"><?php echo UtilsModel::FloatToPrice($order->getShippingPrice()); ?></td>
                                 <td class="status right"><form method="post" action="https://www.bebes-lutins.fr/dashboard4/commandes/modifier-etat"><input type="hidden" name="id" value="<?php echo $order->getId(); ?>">
                                         <select name="new_status" onchange='if(this.value != <?php echo $order->getStatus(); ?>) { this.form.submit(); }'>
-                                            <option value='-1' <?php if($order->getStatus() == -1) echo "selected"; ?>>Annuler la commande</option>
+                                            <option value='-1' <?php if($order->getStatus() == -1) echo "selected"; ?>>Annulée</option>
                                             <option value='0' <?php if($order->getStatus() == 0) echo "selected"; ?>>En attente de paiement</option>
                                             <option value='1' <?php if($order->getStatus() == 1) echo "selected"; ?>>En cours de traitement</option>
                                             <option value='2' <?php if($order->getStatus() == 2) echo "selected"; ?>>En cours de livraison</option>

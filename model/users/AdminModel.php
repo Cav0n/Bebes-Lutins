@@ -811,13 +811,13 @@ class AdminModel
                 $_POST['error-message-products'] = "Erreur BDD : " . $e;
                 ?>
                 <script type="text/javascript">
-                    //document.location.href='<?php echo "https://www.bebes-lutins.fr/dashboard4/produits/edition/".$id; ?>';
+                    document.location.href='<?php echo "https://www.bebes-lutins.fr/dashboard4/produits/edition/".$id; ?>';
                 </script>
                 <?php
             }
             ?>
             <script type="text/javascript">
-                //document.location.href='<?php echo "https://www.bebes-lutins.fr/dashboard4/produits/edition/".$id; ?>';
+                document.location.href='<?php echo "https://www.bebes-lutins.fr/dashboard4/produits/edition/".$id; ?>';
             </script>
             <?php
         }

@@ -43,49 +43,51 @@ foreach ($categories_list as $sub_category) {
     }
 }
 
-$category_products_display = "";
-foreach ($product_list as $product) {
-    $product = (new ProductContainer($product))->getProduct();
-    $id = $product->getId();
-    $name = $product->getName();
-    $price = str_replace("EUR", "€", money_format("%.2i", $product->getPrice()));
-    $image = $product->getImage();
+if($category_subcategories_display == ""){
+    $category_products_display = "";
+    foreach ($product_list as $product) {
+        $product = (new ProductContainer($product))->getProduct();
+        $id = $product->getId();
+        $name = $product->getName();
+        $price = str_replace("EUR", "€", money_format("%.2i", $product->getPrice()));
+        $image = $product->getImage();
 
-    if($product->getStock() < 1) {$out_of_stock = 1; $class_out_of_stock = "out-of-stock"; $disabled = "disabled"; $link = "";}
-    else {$out_of_stock = 0; $class_out_of_stock = ""; $disabled = ""; $link = $product->getId();}
+        if($product->getStock() < 1) {$out_of_stock = 1; $class_out_of_stock = "out-of-stock"; $disabled = "disabled"; $link = "";}
+        else {$out_of_stock = 0; $class_out_of_stock = ""; $disabled = ""; $link = $product->getId();}
 
-    if(!$product->getHide()) {
-        $category_products_display = $category_products_display . "
-    <div class=\"product vertical $class_out_of_stock\" onclick=\"show_product_page('$link')\">
-        <img src=\"https://www.bebes-lutins.fr/view/assets/images/products/$image\" alt=\"$name\" title=\"$name\">
-        <div class=\"text horizontal centered\">
+        if(!$product->getHide()) {
+            $category_products_display = $category_products_display . "
+        <div class=\"product vertical $class_out_of_stock\" onclick=\"show_product_page('$link')\">
+            <img src=\"https://www.bebes-lutins.fr/view/assets/images/products/$image\" alt=\"$name\" title=\"$name\">
+            <div class=\"text horizontal centered\">
+                <p class=\"name vertical centered\">$name</p>
+                <p class=\"price vertical centered\">$price</p>
+            </div>
+            <button class=\"transition-fast\" $disabled>Ajouter au panier</button>
+        </div>
+        ";
+        }
+    }
+
+    $category_products_display_mobile = "";
+    foreach ($product_list as $product) {
+        $product = (new ProductContainer($product))->getProduct();
+        $id = $product->getId();
+        $name = $product->getName();
+        $price = str_replace("EUR", "€", money_format("%.2i", $product->getPrice()));
+        $image = $product->getImage();
+
+        if($product->getStock() < 1) {$out_of_stock = 1; $class_out_of_stock = "out-of-stock"; $disabled = "disabled"; $link = "";}
+        else {$out_of_stock = 0; $class_out_of_stock = ""; $disabled = ""; $link = $product->getId();}
+
+        $category_products_display_mobile = $category_products_display_mobile . "
+        <div class=\"product vertical $class_out_of_stock\" onclick=\"show_product_page('$link')\">
+            <img src=\"https://www.bebes-lutins.fr/view/assets/images/products/$image\" alt=\"$name\" title=\"$name\">
             <p class=\"name vertical centered\">$name</p>
             <p class=\"price vertical centered\">$price</p>
         </div>
-        <button class=\"transition-fast\" $disabled>Ajouter au panier</button>
-    </div>
-    ";
+        ";
     }
-}
-
-$category_products_display_mobile = "";
-foreach ($product_list as $product) {
-    $product = (new ProductContainer($product))->getProduct();
-    $id = $product->getId();
-    $name = $product->getName();
-    $price = str_replace("EUR", "€", money_format("%.2i", $product->getPrice()));
-    $image = $product->getImage();
-
-    if($product->getStock() < 1) {$out_of_stock = 1; $class_out_of_stock = "out-of-stock"; $disabled = "disabled"; $link = "";}
-    else {$out_of_stock = 0; $class_out_of_stock = ""; $disabled = ""; $link = $product->getId();}
-
-    $category_products_display_mobile = $category_products_display_mobile . "
-    <div class=\"product vertical $class_out_of_stock\" onclick=\"show_product_page('$link')\">
-        <img src=\"https://www.bebes-lutins.fr/view/assets/images/products/$image\" alt=\"$name\" title=\"$name\">
-         <p class=\"name vertical centered\">$name</p>
-         <p class=\"price vertical centered\">$price</p>
-    </div>
-    ";
 }
 ?>
 

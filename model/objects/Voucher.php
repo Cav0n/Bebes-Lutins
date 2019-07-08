@@ -13,27 +13,33 @@ class Voucher
     private $discount;
     private $type;
     private $date_beginning;
+    private $time_beginning;
     private $date_end;
-    private $number_of_usage;
+    private $time_end;
+    private $number_per_user;
 
     /**
      * Voucher constructor.
-     * @param $name
-     * @param $discount
-     * @param $type
-     * @param $date_beginning
-     * @param $date_end
-     * @param $number_of_usage
+     * @param $name Voucher code
+     * @param $discount Discount applied (if any)
+     * @param $type Type of discount (1:% - 2:€ - 3:Free Shipping)
+     * @param $date_beginning First day of usage
+     * @param $time_beginning First time of the day of usage
+     * @param $date_end Last day of usage
+     * @param $time_end Last time of the day of usage
+     * @param $number_per_user Number of usage for each user
      */
-    public function __construct(String $id, String $name, float $discount, String $type, String $date_beginning, String $date_end, int $number_of_usage)
+    public function __construct(String $id, String $name, float $discount, String $type, String $date_beginning, String $time_beginning,String $date_end, string $time_end,int $number_per_user)
     {
         $this->id = $id;
         $this->name = $name;
         $this->discount = $discount;
         $this->type = $type;
         $this->date_beginning = $date_beginning;
+        $this->time_beginning = $time_beginning;
         $this->date_end = $date_end;
-        $this->number_of_usage = $number_of_usage;
+        $this->time_end = $time_end;
+        $this->number_per_user = $number_per_user;
     }
 
     /**
@@ -166,17 +172,17 @@ class Voucher
     /**
      * @return int
      */
-    public function getNumberOfUsage(): int
+    public function getNumberPerUser(): int
     {
-        return $this->number_of_usage;
+        return $this->number_per_user;
     }
 
     /**
      * @param int $number_of_usage
      */
-    public function setNumberOfUsage(int $number_of_usage): void
+    public function setNumberPerUser(int $number_per_user): void
     {
-        $this->number_of_usage = $number_of_usage;
+        $this->number_per_user = $number_per_user;
     }
 
     public function getDiscountAndTypeString() : String{

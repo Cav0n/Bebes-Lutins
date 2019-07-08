@@ -1,6 +1,6 @@
 <?php
 
-$vouchers = VoucherGateway::GetAllVoucher();
+//$vouchers = VoucherGateway::GetAllVoucher();
 
 ?>
 

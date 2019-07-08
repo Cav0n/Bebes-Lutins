@@ -1,6 +1,6 @@
 <?php
 
-$voucher = VoucherGateway::SearchVoucherByName($_GET['voucher']);
+$voucher = VoucherGateway::GetVoucherByID($_REQUEST["voucher_id"]);
 
 ?>
 
@@ -20,15 +20,14 @@ $voucher = VoucherGateway::SearchVoucherByName($_GET['voucher']);
     <div class="page-title-container horizontal between">
         <h2>Créer un code de réduction</h2>
     </div>
-    <form id="edition-wrapper" class="horizontal">
+    <form id="edition-wrapper" class="horizontal"  action="https://www.bebes-lutins.fr/dashboard4/reductions/sauvegarder/" method="post">
         <div class="column-big vertical">
             <div class="code-name-container edition-window">
                 <div class="container-title horizontal between">
                     <p class="section-title">Code</p>
-                    <a>Générer un code</a>
                 </div>
                 <div class="code vertical">
-                    <input id="code" type="text" name="code" placeholder="par ex. SOLDESPRINTEMPS" value="<?php echo $voucher->getName(); ?>">
+                    <input id="code" type="text" name="name" placeholder="par ex. SOLDESPRINTEMPS" value='<?php echo $voucher->getName(); ?>' disabled>
                     <label class="help" for="code">Les clients saisiront ce code promotionnel lors de leur passage à la caisse.</label>
                 </div>
             </div>
@@ -47,7 +46,7 @@ $voucher = VoucherGateway::SearchVoucherByName($_GET['voucher']);
                     </div>
                     <div class="value vertical" style="width: 100%;">
                         <label for="value">Valeur de la réduction</label>
-                        <input id="value" type="number" name="value" value="<?php echo $voucher->getDiscount()?>">
+                        <input id="value" type="number" name="discount" value="<?php echo $voucher->getDiscount(); ?>">
                     </div>
                 </div>
             </div>
@@ -58,11 +57,11 @@ $voucher = VoucherGateway::SearchVoucherByName($_GET['voucher']);
                 <div id="beginning-date-container" class="horizontal">
                     <div class="beginning-date vertical" style="width: 100%;margin-right: 1rem;">
                         <label for="beginning-date">Date de début</label>
-                        <input id="beginning-date" type="date" name="beginning-date">
+                        <input id="beginning-date" type="date" name="date_beginning" value='<?php echo $voucher->getDateBeginning(); ?>'>
                     </div>
                     <div class="beginning-date-hour vertical" style="width: 100%;">
                         <label for="beginning-date-hour">Heure de début</label>
-                        <input id="beginning-date-hour" type="time" name="beginning-date-hour">
+                        <input id="beginning-date-hour" type="time" name="time_beginning" value='<?php echo $voucher->getTimeBeginning();?>'>
                     </div>
                 </div>
                 <div class="horizontal" style="margin: 1rem 0 0.8rem 0;">
@@ -72,11 +71,11 @@ $voucher = VoucherGateway::SearchVoucherByName($_GET['voucher']);
                 <div id="end-date-container" class="horizontal">
                     <div class="end-date vertical" style="width: 100%;margin-right: 1rem;">
                         <label for="end-date">Date de fin</label>
-                        <input id="end-date" type="date" name="end-date">
+                        <input id="end-date" type="date" name="date_end" value='<?php echo $voucher->getDateEnd(); ?>'>
                     </div>
                     <div class="end-date-hour vertical" style="width: 100%;">
                         <label for="end-date-hour">Heure de fin</label>
-                        <input id="end-date-hour" type="time" name="end-date-hour">
+                        <input id="end-date-hour" type="time" name="time_end" value='<?php echo $voucher->getTimeEnd(); ?>'>
                     </div>
                 </div>
             </div>

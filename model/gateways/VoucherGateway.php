@@ -63,6 +63,7 @@ class VoucherGateway
         $voucher_list_db = $con->getResults();
 
         foreach ($voucher_list_db as $voucher_db){
+            if($voucher_db['usage_per_user'] == null) $voucher_db['usage_per_user'] = 0; 
             $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['usage_per_user']);
             $voucher_list[] = $voucher;
         }
@@ -102,4 +103,20 @@ class VoucherGateway
         }
         else return null;
     }
+
+    public static function GetVoucherByID(String $voucher_id){
+        global $dblogin, $dbpassword, $dsn;
+        $con = new Connexion($dsn, $dblogin, $dbpassword);
+
+        $query = "SELECT id, name, discount, type, date_beginning, time_beginning, date_end, time_end, number_of_usage FROM voucher WHERE id=:voucher_id;";
+        $con->executeQuery($query, array(':voucher_id' => array($voucher_id, PDO::PARAM_STR)));
+        $voucher_db = $con->getResults()[0];
+
+        if($voucher_db != null){
+            if($voucher_db['number_of_usage'] == null) $voucher_db['number_of_usage'] = 0;
+            $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_of_usage']);
+            return $voucher;
+        }
+        else return null;
+    } 
 }

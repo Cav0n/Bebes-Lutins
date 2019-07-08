@@ -151,6 +151,22 @@ class Voucher
     /**
      * @return String
      */
+    public function getTimeBeginning(): String
+    {
+        return $this->time_beginning;
+    }
+
+    /**
+     * @param String $date_beginning
+     */
+    public function setTimeBeginning(String $time_beginning): void
+    {
+        $this->time_beginning = $time_beginning;
+    }
+
+    /**
+     * @return String
+     */
     public function getDateEnd(): String
     {
         return $this->date_end;
@@ -167,6 +183,22 @@ class Voucher
     public function setDateEnd(String $date_end): void
     {
         $this->date_end = $date_end;
+    }
+
+    /**
+     * @return String
+     */
+    public function getTimeEnd(): String
+    {
+        return $this->time_end;
+    }
+
+    /**
+     * @param String $date_end
+     */
+    public function setTimeEnd(String $time_end): void
+    {
+        $this->time_end = $time_end;
     }
 
     /**

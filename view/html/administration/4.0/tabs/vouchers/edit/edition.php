@@ -91,8 +91,14 @@ $voucher = VoucherGateway::GetVoucherByID($_REQUEST["voucher_id"]);
                     <label class="help">La réduction n'est pas active.</label>
                 </div>
             </div>
+            <span id='deleting-button' class='vertical centered' onclick="delete_voucher('<?php echo $voucher->getId(); ?>')">Supprimer</span>
         </div>
     </form>
 </main>
 </body>
+<script>
+function delete_voucher(id){
+    document.location.href='https://www.bebes-lutins.fr/dashboard4/reductions/supprimer/' + id;
+}
+</script>
 </html>

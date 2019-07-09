@@ -53,8 +53,8 @@ $vouchers = VoucherGateway::GetAllVoucher();
                                 <input type="checkbox">
                                 <span class="checkmark"></span>
                             </label>
-                            <p class="description">Du <?php echo $voucher->getDateBeginningString()?> au <?php echo $voucher->getDateEndString();?> - <?php echo $voucher->getDiscountAndTypeString();?></p>
-                            <p class="status"><?php if($voucher->getDateEnd())?></p>
+                            <p class="description padding-left">Du <?php echo $voucher->getDateBeginningString()?> au <?php echo $voucher->getDateEndString();?> - <?php echo $voucher->getDiscountAndTypeString();?></p>
+                            <p class="usage_per_user padding-left">Nombre d'utilisations par personne : <?php echo $voucher->getNumberPerUser(); ?></p>
                         </div>
                     <?php } ?>
                 </div>

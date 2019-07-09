@@ -717,15 +717,10 @@ class AdminModel
                     if($option == "programmes") require("$view_rep/html/administration/4.0/tabs/vouchers/codes/scheduled.php");
                     if($option == "expires") require("$view_rep/html/administration/4.0/tabs/vouchers/codes/expired.php");
                 }
-                if($page == "creation") {
-                    if ($option == null) require("$view_rep/html/administration/4.0/tabs/vouchers/edit/new.php");
-                }
-                if($page == "sauvegarder") {
-                    self::saveVoucher($option);
-                }
-                if($page == "edition"){
-                    require("$view_rep/html/administration/4.0/tabs/vouchers/edit/edition.php");
-                }
+                if($page == "creation") require("$view_rep/html/administration/4.0/tabs/vouchers/edit/new.php");
+                if($page == "sauvegarder") self::saveVoucher($option);
+                if($page == "edition") require("$view_rep/html/administration/4.0/tabs/vouchers/edit/edition.php");
+                if($page == "supprimer") self::deleteVoucher($_REQUEST['voucher_id']);
                 break;
 
             case "analyses":
@@ -891,6 +886,20 @@ class AdminModel
             } catch(PDOException $e) { echo "Il y a une erreur lors de la mise à jour du coupon."; $error = true; } 
         }
 
-        if(!$error) echo "Le coupon a bien été crée / mis à jour.";
+        ?>
+        <script type="text/javascript">
+            document.location.href='https://www.bebes-lutins.fr/dashboard4/reductions/';
+        </script>
+        <?php 
+    }
+
+    public static function deleteVoucher(string $id){
+        VoucherGateway::DeleteVoucher($id);
+
+        ?>
+        <script type="text/javascript">
+            document.location.href="https://www.bebes-lutins.fr/dashboard4/reductions/";
+        </script>
+        <?php
     }
 }

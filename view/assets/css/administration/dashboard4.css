@@ -578,8 +578,12 @@
     margin: 0;
 }
 
-#dashboard4 main .window .window-inner #voucher-list-container #voucher-list .voucher .description {
+#dashboard4 main .window .window-inner #voucher-list-container #voucher-list .voucher .padding-left{
     padding-left: 3rem;
+    height: 2rem;
+}
+
+#dashboard4 main .window .window-inner #voucher-list-container #voucher-list .voucher .description {
     height: 2rem;
 }
 

@@ -578,8 +578,34 @@
     margin: 0;
 }
 
-#dashboard4 main .window .window-inner #voucher-list-container #voucher-list .voucher .padding-left{
-    padding-left: 3rem;
+#dashboard4 main .window .window-inner #voucher-list-container #voucher-list .voucher .margin-left{
+    margin-left: 3rem;
+}
+
+#dashboard4 main .window .window-inner #voucher-list-container #voucher-list .voucher .status{
+    padding: 2px 12px;
+    width: fit-content;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    font-weight: 400;
+}
+
+#dashboard4 main .window .window-inner #voucher-list-container #voucher-list .voucher .expired{
+    background: rgb(235, 65, 43);
+    border: 1px solid rgb(207, 56, 36);
+    color: white;
+}
+
+#dashboard4 main .window .window-inner #voucher-list-container #voucher-list .voucher .programmed{
+    background: rgb(217, 221, 0);
+    border: 1px solid rgb(191, 194, 1);
+    color: white;
+}
+
+#dashboard4 main .window .window-inner #voucher-list-container #voucher-list .voucher .active{
+    background: rgb(26, 197, 0);
+    border: 1px solid rgb(0, 170, 0);
+    color: white;
 }
 
 #dashboard4 main #in-construction{

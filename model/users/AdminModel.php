@@ -718,7 +718,7 @@ class AdminModel
                     if($option == "expires") require("$view_rep/html/administration/4.0/tabs/vouchers/codes/expired.php");
                 }
                 if($page == "creation") require("$view_rep/html/administration/4.0/tabs/vouchers/edit/new.php");
-                if($page == "sauvegarder") self::saveVoucher($option);
+                if($page == "sauvegarder") self::saveVoucher($_REQUEST['voucher_id']);
                 if($page == "edition") require("$view_rep/html/administration/4.0/tabs/vouchers/edit/edition.php");
                 if($page == "supprimer") self::deleteVoucher($_REQUEST['voucher_id']);
                 break;
@@ -883,12 +883,12 @@ class AdminModel
                 $date_end,
                 $time_end,
                 $number_per_user);
-            } catch(PDOException $e) { echo "Il y a une erreur lors de la mise à jour du coupon."; $error = true; } 
+            } catch(PDOException $e) { echo "Il y a une erreur lors de la mise à jour du coupon. <BR>" . $e->getMessage(); $error = true; } 
         }
 
         ?>
         <script type="text/javascript">
-            document.location.href='https://www.bebes-lutins.fr/dashboard4/reductions/';
+            //document.location.href='https://www.bebes-lutins.fr/dashboard4/reductions/';
         </script>
         <?php 
     }

@@ -8,7 +8,7 @@
 
 class VoucherGateway
 {
-    public static function AddVoucher(String $id, String $name, float $discount, String $type, String $date_beginning, String $time_beginning, String $date_end, String $time_end, int $usage_per_user){
+    public static function AddVoucher(String $id, String $name, float $discount, String $type, String $date_beginning, String $time_beginning, String $date_end, String $time_end, int $number_per_user){
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);
 
@@ -22,11 +22,11 @@ class VoucherGateway
             ':time_beginning'=>array($time_beginning, PDO::PARAM_STR),
             ':date_end'=>array($date_end, PDO::PARAM_STR),
             ':time_end'=>array($time_end, PDO::PARAM_STR),
-            ':number_per_user'=>array($usage_per_user, PDO::PARAM_STR)
+            ':number_per_user'=>array($number_per_user, PDO::PARAM_STR)
         ));
     }
 
-    public static function UpdateVoucher(String $id, String $name, float $discount, String $type, String $date_beginning, String $time_beginning, String $date_end, String $time_end, int $usage_per_user){
+    public static function UpdateVoucher(String $id, String $name, float $discount, String $type, String $date_beginning, String $time_beginning, String $date_end, String $time_end, int $number_per_user){
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);
 
@@ -40,7 +40,7 @@ class VoucherGateway
             ':time_beginning'=>array($time_beginning, PDO::PARAM_STR),
             ':date_end'=>array($date_end, PDO::PARAM_STR),
             ':time_end'=>array($time_end, PDO::PARAM_STR),
-            ':number_per_user'=>array($usage_per_user, PDO::PARAM_STR)
+            ':number_per_user'=>array($number_per_user, PDO::PARAM_STR)
         ));
     }
 
@@ -63,7 +63,7 @@ class VoucherGateway
         $voucher_list_db = $con->getResults();
 
         foreach ($voucher_list_db as $voucher_db){
-            if($voucher_db['usage_per_user'] == null) $voucher_db['usage_per_user'] = 0; 
+            if($voucher_db['number_per_user'] == null) $voucher_db['number_per_user'] = 0; 
             $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_per_user']);
             $voucher_list[] = $voucher;
         }

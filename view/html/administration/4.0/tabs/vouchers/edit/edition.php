@@ -21,6 +21,7 @@ $voucher = VoucherGateway::GetVoucherByID($_REQUEST["voucher_id"]);
         <h2>Créer un code de réduction</h2>
     </div>
     <form id="edition-wrapper" class="horizontal"  action="https://www.bebes-lutins.fr/dashboard4/reductions/sauvegarder/" method="post">
+        <input type='hidden' name='voucher_id' value='<?php echo $voucher->getId();?>'>
         <div class="column-big vertical">
             <div class="code-name-container edition-window">
                 <div class="container-title horizontal between">
@@ -77,6 +78,14 @@ $voucher = VoucherGateway::GetVoucherByID($_REQUEST["voucher_id"]);
             </div>
         </div>
         <div class="column-tiny vertical">
+        <div class='number-per-user-container edition-window'>
+                <div class="container-title horizontal between">
+                    <p class="section-title">Nombre d'utilisation max</p>
+                </div>
+                <div class='number-per-user vertical'>
+                    <input id="number-per-user" type="number" name="number_per_user" value='<?php echo $voucher->getNumberPerUser(); ?>' placeholder='0'>
+                </div>
+            </div>
             <div class="code-summary-container edition-window">
                 <div class="container-title horizontal between">
                     <p class="section-title">Résumé</p>

@@ -47,20 +47,20 @@ $vouchers = VoucherGateway::GetAllVoucher();
                 <div id="voucher-list">
                     <?php
                     foreach ($vouchers as $voucher) { $voucher = (new VoucherContainer($voucher))->getVoucher();
-                        if($voucher->getDateBeginning() > date('Y-m-d')) {$status = "A venir";}
-                        else if($voucher->getDateEnd() < date('Y-m-d')) {$status = "Expiré";}
-                        else {$status = "Actif"; }
+                        if($voucher->getDateBeginning() > date('Y-m-d')) {$status = "Programmé"; $status_css = "programmed"; }
+                        else if($voucher->getDateEnd() < date('Y-m-d')) {$status = "Expiré"; $status_css = "expired"; }
+                        else {$status = "Actif"; $status_css = "active"; }
                         ?>
                         <div class="voucher vertical" onclick="load_voucher('<?php echo $voucher->getId(); ?>')">
                             <label class="container vertical centered"><?php echo $voucher->getName(); ?>
                                 <input type="checkbox">
                                 <span class="checkmark"></span>
                             </label>
-                            <p class="discount padding-left">Réduction : <?php echo $voucher->getDiscountAndTypeString();?></p>
-                            <p class="first-date padding-left">Du <?php echo $voucher->getDateBeginningString()?> à <?php echo $voucher->getTimeBeginning(); ?></p>
-                            <p class="last-date padding-left">Au <?php echo $voucher->getDateEndString();?> à <?php echo $voucher->getTimeEnd(); ?></p>
-                            <p class="usage_per_user padding-left">Nombre d'utilisations par personne : <?php echo $voucher->getNumberPerUser(); ?></p>
-                            <p class="padding-left"><?php echo $status; ?></p>
+                            <p class="discount margin-left">Réduction : <?php echo $voucher->getDiscountAndTypeString();?></p>
+                            <p class="usage_per_user margin-left" style='margin-bottom: 10px;'>Nombre d'utilisations par personne : <?php echo $voucher->getNumberPerUser(); ?></p>
+                            <p class="first-date margin-left">Du <?php echo $voucher->getDateBeginningString()?> à <?php echo $voucher->getTimeBeginning(); ?></p>
+                            <p class="last-date margin-left">Au <?php echo $voucher->getDateEndString();?> à <?php echo $voucher->getTimeEnd(); ?></p>
+                            <p class="margin-left status <?php echo $status_css; ?>"><?php echo $status; ?></p>
                         </div>
                     <?php } ?>
                 </div>

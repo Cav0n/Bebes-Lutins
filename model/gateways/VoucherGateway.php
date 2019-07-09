@@ -87,6 +87,42 @@ class VoucherGateway
 
         return $voucher_list;
     }
+    
+    public static function GetScheduledVoucher(){
+        global $dblogin, $dbpassword, $dsn;
+        $con = new Connexion($dsn, $dblogin, $dbpassword);
+
+        $voucher_list = array();
+
+        $query = "SELECT id, name, discount, type, date_beginning, time_beginning, date_end, time_end, number_per_user FROM voucher WHERE date_beginning>(SELECT SYSDATE());";
+        $con->executeQuery($query);
+        $voucher_list_db = $con->getResults();
+
+        foreach ($voucher_list_db as $voucher_db){
+            $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_per_user']);
+            $voucher_list[] = $voucher;
+        }
+
+        return $voucher_list;
+    }
+
+    public static function GetExpiredVoucher(){
+        global $dblogin, $dbpassword, $dsn;
+        $con = new Connexion($dsn, $dblogin, $dbpassword);
+
+        $voucher_list = array();
+
+        $query = "SELECT id, name, discount, type, date_beginning, time_beginning, date_end, time_end, number_per_user FROM voucher WHERE date_end<(SELECT SYSDATE());";
+        $con->executeQuery($query);
+        $voucher_list_db = $con->getResults();
+
+        foreach ($voucher_list_db as $voucher_db){
+            $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_per_user']);
+            $voucher_list[] = $voucher;
+        }
+
+        return $voucher_list;
+    }
 
     public static function SearchVoucherByName(String $voucher_name){
         global $dblogin, $dbpassword, $dsn;

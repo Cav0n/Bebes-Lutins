@@ -16,7 +16,7 @@ $vouchers = VoucherGateway::GetActiveVoucher();
 <main>
     <div class="page-title-container horizontal between">
         <h2>Code promotionnels</h2>
-        <form id="top-button-form" class="vertical centered" method="post" action="https://www.bebes-lutins.fr/dashboard4/produit/creation">
+        <form id="top-button-form" class="vertical centered" method="post" action="https://www.bebes-lutins.fr/dashboard4/reductions/creation">
             <button type="submit">Créer un code de réduction</button>
         </form>
     </div>
@@ -45,14 +45,21 @@ $vouchers = VoucherGateway::GetActiveVoucher();
                 </div>
                 <div id="voucher-list">
                     <?php
-                    foreach ($vouchers as $voucher) { $voucher = (new VoucherContainer($voucher))->getVoucher()
+                    foreach ($vouchers as $voucher) { $voucher = (new VoucherContainer($voucher))->getVoucher();
+                        if($voucher->getDateBeginning() > date('Y-m-d')) {$status = "Programmé"; $status_css = "programmed"; }
+                        else if($voucher->getDateEnd() < date('Y-m-d')) {$status = "Expiré"; $status_css = "expired"; }
+                        else {$status = "Actif"; $status_css = "active"; }
                         ?>
-                        <div class="voucher vertical">
+                        <div class="voucher vertical" onclick="load_voucher('<?php echo $voucher->getId(); ?>')">
                             <label class="container vertical centered"><?php echo $voucher->getName(); ?>
                                 <input type="checkbox">
                                 <span class="checkmark"></span>
                             </label>
-                            <p class="description">Du <?php echo $voucher->getDateBeginningString()?> au <?php echo $voucher->getDateEndString();?> - <?php echo $voucher->getDiscountAndTypeString();?></p>
+                            <p class="discount margin-left">Réduction : <?php echo $voucher->getDiscountAndTypeString();?></p>
+                            <p class="usage_per_user margin-left" style='margin-bottom: 10px;'>Nombre d'utilisations par personne : <?php echo $voucher->getNumberPerUser(); ?></p>
+                            <p class="first-date margin-left">Du <?php echo $voucher->getDateBeginningString()?> à <?php echo $voucher->getTimeBeginning(); ?></p>
+                            <p class="last-date margin-left">Au <?php echo $voucher->getDateEndString();?> à <?php echo $voucher->getTimeEnd(); ?></p>
+                            <p class="margin-left status <?php echo $status_css; ?>"><?php echo $status; ?></p>
                         </div>
                     <?php } ?>
                 </div>
@@ -61,4 +68,9 @@ $vouchers = VoucherGateway::GetActiveVoucher();
     </div>
 </main>
 </body>
+<script>
+function load_voucher(id) {
+        document.location.href = "https://www.bebes-lutins.fr/dashboard4/reductions/edition/"+id;
+    }
+</script>
 </html>

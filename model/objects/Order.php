@@ -384,16 +384,16 @@ class Order
 
     public function getPriceAfterDiscount() : float{
         if($this->getVoucher() != null){
-            $total_price = $this->getTotalPrice() + $this->getShippingPrice();
+            $total_price = $this->getTotalPrice();
             $new_price = $total_price;
 
             switch ($this->getVoucher()->getType()){
                 case 1: //%
-                    $new_price = $total_price - ($total_price * ($this->getVoucher()->getDiscount() / 100));
+                    $new_price = $total_price - ($total_price * ($this->getVoucher()->getDiscount() / 100)) + $this->getShippingPrice();
                     break;
 
                 case 2: //€
-                    $new_price = $total_price - $this->getVoucher()->getDiscount();
+                    $new_price = $total_price - $this->getVoucher()->getDiscount() + $this->getShippingPrice();
                     break;
 
                 case 3: //Free shipping price

@@ -50,11 +50,11 @@ $orders = OrderGateway::GetOrdersFromGateway();
                     foreach ($orders as $order) {
                         if($order->getStatus() == 3){
                             ?>
-                            <tr onclick="load_bill('<?php echo $order->getId(); ?>')" class='green'>
-                                <td class="date center"><?php echo $order->getDateString(); ?></td>
-                                <td class="customer"><a><?php echo ucfirst($order->getCustomer()->getFirstname()) . " " . strtoupper($order->getCustomer()->getSurname()); ?></a></td>
-                                <td class="price right"><?php echo UtilsModel::FloatToPrice($order->getPriceAfterDiscount()); ?></td>
-                                <td class="shipping-price right"><?php echo UtilsModel::FloatToPrice($order->getShippingPrice()); ?></td>
+                            <tr class='green'>
+                                <td onclick="load_bill('<?php echo $order->getId(); ?>')" class="date center"><?php echo $order->getDateString(); ?></td>
+                                <td onclick="load_bill('<?php echo $order->getId(); ?>')" class="customer"><a><?php echo ucfirst($order->getCustomer()->getFirstname()) . " " . strtoupper($order->getCustomer()->getSurname()); ?></a></td>
+                                <td onclick="load_bill('<?php echo $order->getId(); ?>')" class="price right"><?php echo UtilsModel::FloatToPrice($order->getPriceAfterDiscount()); ?></td>
+                                <td onclick="load_bill('<?php echo $order->getId(); ?>')" class="shipping-price right"><?php echo UtilsModel::FloatToPrice($order->getShippingPrice()); ?></td>
                                 <td class="status right"><form method="post" action="https://www.bebes-lutins.fr/dashboard4/commandes/modifier-etat"><input type="hidden" name="id" value="<?php echo $order->getId(); ?>">
                                         <select name="new_status" onchange='if(this.value != <?php echo $order->getStatus(); ?>) { this.form.submit(); }'>
                                             <option value='-1' <?php if($order->getStatus() == -1) echo "selected"; ?>>Annuler la commande</option>

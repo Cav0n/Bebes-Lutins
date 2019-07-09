@@ -29,7 +29,7 @@ class Voucher
      * @param $time_end Last time of the day of usage
      * @param $number_per_user Number of usage for each user
      */
-    public function __construct(String $id, String $name, float $discount, String $type, String $date_beginning, String $time_beginning,String $date_end, string $time_end,int $number_per_user)
+    public function __construct(String $id, String $name, float $discount, String $type, String $date_beginning, $time_beginning,String $date_end, $time_end,int $number_per_user)
     {
         $this->id = $id;
         $this->name = $name;

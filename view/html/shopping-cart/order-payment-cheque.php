@@ -187,6 +187,12 @@ if($new_price == 0){
                         <p id="products-number"><?php echo $total_quantity;?> produits</p>
                         <p><?php echo str_replace('EUR', '€', money_format('%.2i', $total_items_price));?></p>
                     </div>
+                    <?php if($voucher!=null){ ?>
+                    <div class="horizontal between">
+                        <p id="discount">Remise :</p>
+                        <p><?php echo "- " . $voucher->getDiscountAndTypeString(); ?> <?php if($discount_value != null) echo " (- " . UtilsModel::FloatToPrice($discount_value) . ")" ; ?></p>
+                    </div>
+                    <?php } ?>
                     <div class="horizontal between">
                         <p>Frais de ports</p>
                         <p <?php if(isset($voucher) && $voucher->getType() == 3) echo "class='crossed'";?>><?php echo str_replace('EUR', '€', money_format('%.2i', $shipping_price));?></p>
@@ -199,16 +205,18 @@ if($new_price == 0){
                         </div>
                         <?php
                     }?>
+                    
+                    <?php if($voucher == null) { ?>
                     <div class="horizontal between">
                         <p>Total TTC :</p>
-                        <p <?php if(isset($voucher)) echo "class='crossed'";?>><?php echo str_replace('EUR', '€', money_format('%.2i', $total_price));?></p>
+                        <p><b><?php echo str_replace('EUR', '€', money_format('%.2i', $total_price));?></b></p>
                     </div>
-                    <?php if(isset($voucher)){ ?>
-                        <div class="horizontal between">
-                            <p>Nouveau total TTC :</p>
-                            <p style="font-weight: 600;"><?php echo str_replace('EUR', '€', money_format('%.2i', $new_price));?></p>
-                        </div>
-                    <?php }?>
+                    <?php } else { ?>
+                    <div class="horizontal between">
+                        <p>Total TTC :</p>
+                        <p><b><?php echo str_replace('EUR', '€', money_format('%.2i', $new_price));?></b></p>
+                    </div>
+                    <?php } ?>
                 </div>
 
                 <div id="voucher" class="vertical <?php if(!isset($voucher)) echo 'hidden';?>">

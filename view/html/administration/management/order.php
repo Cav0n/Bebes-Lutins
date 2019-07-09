@@ -7,7 +7,7 @@
  */
 
 /* Order */
-$order = OrderGateway::GetOrderFromDBByID($_GET['order_id']);
+$order = OrderGateway::GetOrderFromDBByID2($_GET['order_id']);
 $order_price = $order->getTotalPrice();
 $order_shipping_price = $order->getShippingPrice();
 $order_total_price = str_replace("EUR","€",money_format("%.2i",$order_price + $order_shipping_price));
@@ -19,6 +19,7 @@ $order_birthlist_id = $order->getBirthlistID();
 
 /* Order items */
 $order_items = $order->getOrderItems();
+echo count($order_items);
 
 /* User */
 $user = $order->getCustomer();

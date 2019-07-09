@@ -294,7 +294,7 @@ class Order
     }
 
     /**
-     * @return BirthList
+     * @return string $birthlist_id
      */
     public function getBirthlistID()
     {
@@ -302,7 +302,7 @@ class Order
     }
 
     /**
-     * @param BirthList $birthlist
+     * @param string $birthlist_id
      */
     public function setBirthlistID(String $birthlist_id): void
     {

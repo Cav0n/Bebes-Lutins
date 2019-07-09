@@ -13,7 +13,7 @@
 <?php AdminModel::load_administration4_header(); ?>
 <main>
     <div class="pre-page-title horizontal between">
-        <a href="https://www.bebes-lutins.fr/dashboard4/reductions/"><i class="fas fa-angle-left"></i> Réduction</a>
+        <a href="https://www.bebes-lutins.fr/dashboard4/reductions/"><i class="fas fa-angle-left"></i> Réductions</a>
     </div>
     <div class="page-title-container horizontal between">
         <h2>Créer un code de réduction</h2>

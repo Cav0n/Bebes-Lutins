@@ -838,7 +838,7 @@ class AdminModel
         <?php
     }
 
-    public static function saveVoucher(string $voucherID){
+    public static function saveVoucher($voucherID){
         if($voucherID == null){
             $id = uniqid("voucher-");
             $name = strtoupper($_POST['name']);
@@ -864,9 +864,9 @@ class AdminModel
                 $number_per_user
             ); } catch (PDOException $e) { echo "Il y a une erreur lors de la création du coupon."; $error = true; }
         } else {
-            $name = strtoupper($_POST['name']);
             $discount = $_POST['discount'];
             $type = $_POST['type'];
+            if($type==3) $discount = 0;
             $date_beginning = $_POST['date_beginning'];
             $time_beginning = $_POST['time_beginning'];
             $date_end = $_POST['date_end'];
@@ -875,7 +875,6 @@ class AdminModel
 
             try { VoucherGateway::UpdateVoucher(
                 $voucherID,
-                $name,
                 $discount,
                 $type,
                 $date_beginning,
@@ -888,7 +887,7 @@ class AdminModel
 
         ?>
         <script type="text/javascript">
-            //document.location.href='https://www.bebes-lutins.fr/dashboard4/reductions/';
+            document.location.href='https://www.bebes-lutins.fr/dashboard4/reductions/';
         </script>
         <?php 
     }

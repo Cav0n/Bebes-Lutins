@@ -16,10 +16,10 @@ $order_shipping_price = str_replace("EUR","€",money_format("%.2i", $order_ship
 $order_payment_method = $order->getPaymentMethodString();
 $order_date = $order->getDateString();
 $order_birthlist_id = $order->getBirthlistID();
+$voucher = $order->getVoucher();
 
 /* Order items */
 $order_items = $order->getOrderItems();
-echo count($order_items);
 
 /* User */
 $user = $order->getCustomer();
@@ -108,7 +108,7 @@ else $customer_message = "";
     </div>
 </header>
 <main>
-    <H2><?php echo $order_date;?></H2>
+    <H2>Date de commande : <?php echo $order_date;?></H2>
     <p><?php echo $customer_message;?></p>
     <table class="order-items-table">
         <tr>
@@ -155,12 +155,14 @@ else $customer_message = "";
             <td class="table-price">Frais de port TTC : </td>
             <td class="table-price"><?php echo $order_shipping_price; ?></td>
         </tr>
+        <?php if($voucher != null){ ?>
         <tr class="empty">
             <td class="empty"></td>
             <td class="empty"></td>
             <td class="table-price">Réduction : </td>
             <td class="table-price"><?php echo "0,00 €";?></td>
         </tr>
+        <?php } ?>
         <tr class="empty">
             <td class="empty"></td>
             <td class="empty"></td>

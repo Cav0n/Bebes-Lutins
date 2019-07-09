@@ -866,6 +866,12 @@
     box-shadow: 0 2px 0 0 rgba(22,29,37,.05);
     padding: 0 15px;
 }
+
+#dashboard4 main #edition-wrapper #beginning-date-container{
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 1rem;
+}
 /* ---- */
 
 /* CUSTOM CHECKMARK */

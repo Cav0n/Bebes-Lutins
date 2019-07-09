@@ -2,6 +2,23 @@
     width: 900px;
     margin: 0 auto;
     background-color: white;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+#bill h1{
+    margin: 0;
+    font-weight: 400;
+    font-size: 2.5em;
+}
+
+#bill h2{
+    margin: 0;
+    font-weight: 400;
+    font-size: 2em;
+}
+
+#bill p{
+    margin: 0;
 }
 
 #bill header{
@@ -12,6 +29,8 @@
     box-sizing: border-box;
     position: relative;
     padding: 20px;
+    display: flex;
+    justify-content: space-between;
 }
 
 #bill header .address-container{

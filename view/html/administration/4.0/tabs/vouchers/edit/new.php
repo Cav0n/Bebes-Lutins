@@ -43,7 +43,7 @@
                             <option value="3">Livraison gratuite</option>
                         </select>
                     </div>
-                    <div class="value vertical" style="width: 100%;">
+                    <div id="value-container" class="value vertical" style="width: 100%;">
                         <label for="value">Valeur de la réduction</label>
                         <input id="value" type="number" name="discount">
                     </div>
@@ -109,3 +109,20 @@
     }
 </script>
 </html>
+
+<script>  
+$(document).ready(function(){
+    $('#type').on('change', function() {
+      if ( this.value == '3')
+      {
+        $("#value-container").hide();
+        $("#value").attr('required', false);
+      }
+      else
+      {
+        $("#value-container").show();
+        $("#value").attr('required', true);
+      }
+    });
+});
+</script>

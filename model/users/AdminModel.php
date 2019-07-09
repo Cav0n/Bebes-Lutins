@@ -849,6 +849,7 @@ class AdminModel
             $name = strtoupper($_POST['name']);
             $discount = $_POST['discount'];
             $type = $_POST['type'];
+            if($type == 3) $discount = 0;
             $date_beginning = $_POST['date_beginning'];
             $time_beginning = $_POST['time_beginning'];
             $date_end = $_POST['date_end'];

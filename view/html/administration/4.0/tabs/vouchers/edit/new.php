@@ -76,12 +76,25 @@
             </div>
         </div>
         <div class="column-tiny vertical">
+            <div class='number-per-user-container edition-window'>
+                <div class="container-title horizontal between">
+                    <p class="section-title">Nombre d'utilisation max</p>
+                </div>
+                <div class='number-per-user vertical'>
+                    <input id="number-per-user" type="number" name="number_per_user" value='0' placeholder='0'>
+                </div>
+            </div>
             <div class="code-summary-container edition-window">
                 <div class="container-title horizontal between">
                     <p class="section-title">Résumé</p>
                 </div>
                 <div class="summary vertical">
-                    <label class="help">Aucune information saisie.</label>
+                    <p id="code-summary"></p>
+                    <div class="horizontal">
+                        <p id="discount-value-summary"></p>
+                        <p id="discount-type-summary" style='padding-left:5px;'></p>
+                    </div>
+                    <label id="empty-summary-info" class="help">Aucune information saisie.</label>
                 </div>
                 <div class="container-title horizontal between" style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #cccccc;">
                     <p class="section-title">Performance</p>
@@ -104,12 +117,12 @@
         }
 
         $('#code').val(result.toUpperCase());
+        $('#code-summary').text(result.toUpperCase());
+        $("#empty-summary-info").hide();
 
         return result;
     }
 </script>
-</html>
-
 <script>  
 $(document).ready(function(){
     $('#type').on('change', function() {
@@ -117,6 +130,7 @@ $(document).ready(function(){
       {
         $("#value-container").hide();
         $("#value").attr('required', false);
+        $("#value").val('');
       }
       else
       {
@@ -124,5 +138,33 @@ $(document).ready(function(){
         $("#value").attr('required', true);
       }
     });
+    $("#code").keyup(function(){
+        $("#code-summary").text(this.value);
+        $("#empty-summary-info").hide();
+        if(this.value == "") $("#empty-summary-info").show();
+    });
+    $("#value").keyup(function(){
+        $("#discount-value-summary").text(this.value);
+        $("#discount-type-summary").text(intToSimpleDiscountType($("#type").val()));
+        $("#empty-summary-info").hide();
+    });
+    $('#beginning-date').change(function() {
+        var date = $(this).val();
+        console.log(date, 'change')
+    });
 });
+
+function intToSimpleDiscountType(type){
+    switch(type){
+        case '1':
+            return "%";
+        case '2':
+            return "€";
+        case '3':
+            return "Livraison gratuite";
+        default:
+            alert('ERREUR DE CONVERSION - ' + type);
+    }
+}
 </script>
+</html>

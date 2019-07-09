@@ -64,7 +64,7 @@ class VoucherGateway
 
         foreach ($voucher_list_db as $voucher_db){
             if($voucher_db['usage_per_user'] == null) $voucher_db['usage_per_user'] = 0; 
-            $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['usage_per_user']);
+            $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_per_user']);
             $voucher_list[] = $voucher;
         }
 

@@ -78,12 +78,20 @@ $voucher = VoucherGateway::GetVoucherByID($_REQUEST["voucher_id"]);
             </div>
         </div>
         <div class="column-tiny vertical">
-        <div class='number-per-user-container edition-window'>
+            <div class='minimal-purchase-container edition-window'>
+                <div class="container-title horizontal between">
+                    <p class="section-title">Montant minimal d'achat</p>
+                </div>
+                <div class='minimal-purchase vertical'>
+                    <input id="minimal-purchase" type="number" name="minimal-purchase" value='0' placeholder='0' min="0" step="0.01">
+                </div>
+            </div>
+            <div class='number-per-user-container edition-window'>
                 <div class="container-title horizontal between">
                     <p class="section-title">Nombre d'utilisation max</p>
                 </div>
                 <div class='number-per-user vertical'>
-                    <input id="number-per-user" type="number" name="number_per_user" value='<?php echo $voucher->getNumberPerUser(); ?>' placeholder='0'>
+                    <input id="number-per-user" type="number" name="number_per_user" value='<?php echo $voucher->getNumberPerUser(); ?>' placeholder='1' min="1" step="1">
                 </div>
             </div>
             <div class="code-summary-container edition-window">

@@ -36,12 +36,13 @@ $vouchers = VoucherGateway::GetAllVoucher();
                     <input id="search-text" type="text" name="search-text" placeholder="Rechercher une réduction">
                 </div>
             </div>
-            <div id="voucher-list-container">
-                <div id="voucher-list-header">
+            <form id="voucher-list-container">
+                <div id="voucher-list-header" class='horizontal'>
                     <label class="container vertical centered">Tout selectionner
-                        <input type="checkbox">
+                        <input type="checkbox" id='check-all'>
                         <span class="checkmark"></span>
                     </label>
+                    <button class='multiple-delete-button'>Supprimer 0 coupons</a>
                 </div>
                 <div id="voucher-list">
                     <?php
@@ -52,7 +53,7 @@ $vouchers = VoucherGateway::GetAllVoucher();
                         ?>
                         <div class="voucher vertical">
                             <label class="container vertical centered"><div class='horizontal'><p><?php echo $voucher->getName(); ?> - </p><a onclick="load_voucher('<?php echo $voucher->getId(); ?>')" class="edition-link">Editer</a></div>
-                                <input type="checkbox">
+                                <input type="checkbox" class='checkbox'>
                                 <span class="checkmark"></span>
                             </label>
                             <p class="discount margin-left">Réduction : <?php echo $voucher->getDiscountAndTypeString();?></p>
@@ -76,6 +77,12 @@ $vouchers = VoucherGateway::GetAllVoucher();
 <script>
 function load_voucher(id) {
         document.location.href = "https://www.bebes-lutins.fr/dashboard4/reductions/edition/"+id;
+}
+
+$(".check-all").change(function() {
+    if(this.checked) {
+        $("input:checkbox").attr('checked', true);
     }
+});
 </script>
 </html>

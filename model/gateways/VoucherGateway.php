@@ -78,7 +78,7 @@ class VoucherGateway
 
         $voucher_list = array();
 
-        $query = "SELECT id, name, discount, type, date_beginning, time_beginning, date_end, time_end, number_per_user, minimal_purchase FROM voucher WHERE date_end>=(SELECT SYSDATE()) AND date_beginning<=(SELECT SYSDATE());";
+        $query = "SELECT id, name, discount, type, date_beginning, time_beginning, date_end, time_end, number_per_user, minimal_purchase FROM voucher WHERE date_end>=(SELECT CURRENT_DATE()) AND date_beginning<=(SELECT CURRENT_DATE());";
         $con->executeQuery($query);
         $voucher_list_db = $con->getResults();
 
@@ -96,7 +96,7 @@ class VoucherGateway
 
         $voucher_list = array();
 
-        $query = "SELECT id, name, discount, type, date_beginning, time_beginning, date_end, time_end, number_per_user, minimal_purchase FROM voucher WHERE date_beginning>(SELECT SYSDATE());";
+        $query = "SELECT id, name, discount, type, date_beginning, time_beginning, date_end, time_end, number_per_user, minimal_purchase FROM voucher WHERE date_beginning>(SELECT CURRENT_DATE());";
         $con->executeQuery($query);
         $voucher_list_db = $con->getResults();
 
@@ -114,7 +114,7 @@ class VoucherGateway
 
         $voucher_list = array();
 
-        $query = "SELECT id, name, discount, type, date_beginning, time_beginning, date_end, time_end, number_per_user, minimal_purchase FROM voucher WHERE date_end<(SELECT SYSDATE());";
+        $query = "SELECT id, name, discount, type, date_beginning, time_beginning, date_end, time_end, number_per_user, minimal_purchase FROM voucher WHERE date_end<(SELECT CURRENT_DATE());";
         $con->executeQuery($query);
         $voucher_list_db = $con->getResults();
 

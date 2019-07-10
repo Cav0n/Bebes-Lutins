@@ -10,13 +10,18 @@
 $order = OrderGateway::GetOrderFromDBByID2($_GET['order_id']);
 $order_price = $order->getTotalPrice();
 $order_shipping_price = $order->getShippingPrice();
-$order_total_price = str_replace("EUR","€",money_format("%.2i",$order_price + $order_shipping_price));
-$order_price = str_replace("EUR","€",money_format("%.2i", $order_price));
-$order_shipping_price = str_replace("EUR","€",money_format("%.2i", $order_shipping_price));
+$order_total_price = UtilsModel::FloatToPrice($order_price + $order_shipping_price);
+$order_price = UtilsModel::FloatToPrice($order_price);
+$order_shipping_price = UtilsModel::FloatToPrice($order_shipping_price);
 $order_payment_method = $order->getPaymentMethodString();
 $order_date = $order->getDateString();
 $order_birthlist_id = $order->getBirthlistID();
+
+/* Voucher */
 $voucher = $order->getVoucher();
+if($voucher != null){
+    $order_total_price = UtilsModel::FloatToPrice($order->getPriceAfterDiscount());
+}
 
 /* Order items */
 $order_items = $order->getOrderItems();
@@ -122,8 +127,8 @@ else $customer_message = "";
             $item_name = $order_item->getProduct()->getName();
             $item_quantity = $order_item->getQuantity();
             $item_unitprice = $order_item->getUnitPrice();
-            $item_total_price = str_replace("EUR","€",money_format("%.2i",$item_unitprice * $item_quantity));
-            $item_unitprice = str_replace("EUR","€",money_format("%.2i",$order_item->getUnitPrice()));
+            $item_total_price = UtilsModel::FloatToPrice($item_unitprice * $item_quantity);
+            $item_unitprice = UtilsModel::FloatToPrice($order_item->getUnitPrice());
             if ($order_item->getProduct()->getReference() != null){
                 $item_custom_id = $order_item->getProduct()->getReference() . " -";
             } else $item_custom_id = "";
@@ -160,7 +165,7 @@ else $customer_message = "";
             <td class="empty"></td>
             <td class="empty"></td>
             <td class="table-price">Réduction : </td>
-            <td class="table-price"><?php echo "0,00 €";?></td>
+            <td class="table-price"><?php echo $voucher->getDiscountAndTypeString(); ?></td>
         </tr>
         <?php } ?>
         <tr class="empty">

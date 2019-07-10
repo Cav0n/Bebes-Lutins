@@ -1,6 +1,6 @@
 <?php
 
-$orders = OrderGateway::GetInPreparationOrderFromDB();
+$orders = OrderGateway::GetInPreparationOrderFromDB2();
 
 
 ?>

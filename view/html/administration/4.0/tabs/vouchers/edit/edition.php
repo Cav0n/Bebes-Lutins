@@ -85,7 +85,7 @@ $voucher = VoucherGateway::GetVoucherByID($_REQUEST["voucher_id"]);
                 <div class='minimal-purchase vertical'>
                     <div class="label-container horizontal">
                         <p class="euro-sign vertical">€</p>
-                        <input id="minimal-purchase" type="number" name="minimal-purchase" value='0' placeholder='0' min="0" step="0.01">
+                        <input id="minimal-purchase" type="number" name="minimal_purchase" value='<?php echo $voucher->getMinimalPurchase(); ?>' placeholder='0' min="0" step="0.01">
                     </div>
                 </div>
             </div>

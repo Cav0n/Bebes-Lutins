@@ -851,6 +851,8 @@ class AdminModel
             $time_end = $_POST['time_end'];
             $number_per_user = $_POST['number_per_user'];
             if($number_per_user == null) $number_per_user = 0;
+            $minimal_purchase = $_POST['minimal_purchase'];
+            if($minimal_purchase == null) $minimal_purchase = 0;
 
             try { VoucherGateway::AddVoucher(
                 $id,
@@ -861,7 +863,8 @@ class AdminModel
                 $time_beginning,
                 $date_end,
                 $time_end,
-                $number_per_user
+                $number_per_user,
+                $minimal_purchase
             ); } catch (PDOException $e) { echo "Il y a une erreur lors de la création du coupon."; $error = true; }
         } else {
             $discount = $_POST['discount'];
@@ -872,6 +875,9 @@ class AdminModel
             $date_end = $_POST['date_end'];
             $time_end = $_POST['time_end'];
             $number_per_user = $_POST['number_per_user'];
+            if($number_per_user == null) $number_per_user = 0;
+            $minimal_purchase = $_POST['minimal_purchase'];
+            if($minimal_purchase == null) $minimal_purchase = 0;
 
             try { VoucherGateway::UpdateVoucher(
                 $voucherID,
@@ -881,7 +887,8 @@ class AdminModel
                 $time_beginning,
                 $date_end,
                 $time_end,
-                $number_per_user);
+                $number_per_user,
+                $minimal_purchase);
             } catch(PDOException $e) { echo "Il y a une erreur lors de la mise à jour du coupon. <BR>" . $e->getMessage(); $error = true; } 
         }
 

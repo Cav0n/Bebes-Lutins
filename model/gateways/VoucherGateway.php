@@ -22,8 +22,8 @@ class VoucherGateway
             ':time_beginning'=>array($time_beginning, PDO::PARAM_STR),
             ':date_end'=>array($date_end, PDO::PARAM_STR),
             ':time_end'=>array($time_end, PDO::PARAM_STR),
-            ':number_per_user'=>array($number_per_user, PDO::PARAM_STR,
-            ':minimal_purchase'=>array($minimal_purchase, PDO::PARAM_STR))
+            ':number_per_user'=>array($number_per_user, PDO::PARAM_STR),
+            ':minimal_purchase'=>array($minimal_purchase, PDO::PARAM_STR)
         ));
     }
 

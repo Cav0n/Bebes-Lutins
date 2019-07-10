@@ -865,7 +865,7 @@ class AdminModel
                 $time_end,
                 $number_per_user,
                 $minimal_purchase
-            ); } catch (PDOException $e) { echo "Il y a une erreur lors de la création du coupon."; $error = true; }
+            ); } catch (PDOException $e) { echo "Il y a une erreur lors de la création du coupon. <BR>" . $e->getMessage(); $error = true; }
         } else {
             $discount = $_POST['discount'];
             $type = $_POST['type'];

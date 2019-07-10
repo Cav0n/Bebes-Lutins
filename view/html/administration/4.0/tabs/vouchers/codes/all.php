@@ -57,9 +57,13 @@ $vouchers = VoucherGateway::GetAllVoucher();
                             </label>
                             <p class="discount margin-left">Réduction : <?php echo $voucher->getDiscountAndTypeString();?></p>
                             <p class="usage_per_user margin-left" style='margin-bottom: 10px;'>Nombre d'utilisations par personne : <?php echo $voucher->getNumberPerUser(); ?></p>
-                            <p class="first-date margin-left">Du <?php echo $voucher->getDateBeginningString()?> à <?php echo $voucher->getTimeBeginning(); ?></p>
-                            <p class="last-date margin-left">Au <?php echo $voucher->getDateEndString();?> à <?php echo $voucher->getTimeEnd(); ?></p>
-                            <p class="margin-left status <?php echo $status_css; ?>"><?php echo $status; ?></p>
+                            <div class="horizontal">
+                                <div class="vertical">
+                                    <p class="first-date margin-left">Du <?php echo $voucher->getDateBeginningString()?> à <?php echo $voucher->getTimeBeginning(); ?></p>
+                                    <p class="last-date margin-left">Au <?php echo $voucher->getDateEndString();?> à <?php echo $voucher->getTimeEnd(); ?></p>
+                                </div>
+                                <p class="status <?php echo $status_css; ?>"><?php echo $status; ?></p>
+                            </div>
                         </div>
                     <?php } ?>
                 </div>

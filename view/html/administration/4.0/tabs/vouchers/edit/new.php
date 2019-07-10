@@ -81,7 +81,10 @@
                     <p class="section-title">Montant minimal d'achat</p>
                 </div>
                 <div class='minimal-purchase vertical'>
-                    <input id="minimal-purchase" type="number" name="minimal-purchase" value='0' placeholder='0' min="0" step="0.01">
+                    <div class="label-container horizontal">
+                        <p class="euro-sign vertical">€</p>
+                        <input id="minimal-purchase" type="number" name="minimal-purchase" value='0' placeholder='0' min="0" step="0.01">
+                    </div>
                 </div>
             </div>
             <div class='number-per-user-container edition-window'>

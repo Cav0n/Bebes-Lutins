@@ -66,7 +66,7 @@ class UserConnected extends User
     /**
      * @return String
      */
-    public function getSurname(): String
+    public function getSurname()
     {
         return $this->surname;
     }
@@ -82,7 +82,7 @@ class UserConnected extends User
     /**
      * @return String
      */
-    public function getFirstname(): String
+    public function getFirstname()
     {
         return $this->firstname;
     }

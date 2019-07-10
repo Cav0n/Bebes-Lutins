@@ -388,6 +388,11 @@ class UtilsModel
             if(!$voucher->isExpire()){
                 $shopping_cart = (new ShoppingCartContainer(unserialize($_SESSION['shopping_cart'])))->getShoppingCart();
                 $shopping_cart->setVoucher($voucher);
+
+                if($_POST['message'] != null){
+                    $shopping_cart->setMessage($_POST['message']);
+                }
+
                 $_SESSION['shopping_cart'] = serialize($shopping_cart);
                 $_SESSION['voucher_message'] = "<p style='color:green;font-size: 0.9em;'>Le code a bien été ajouté au panier.</p>";
             } else $_SESSION['voucher_message'] = "<p style='color:red;font-size: 0.9em;'>Ce code de réduction n'est plus valable.</p>";

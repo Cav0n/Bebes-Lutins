@@ -172,6 +172,8 @@ $message = $shopping_cart->getMessage();
                     </div>
                 </form>
                 <form method="post" action="https://www.bebes-lutins.fr/panier/ajout-coupon" id="voucher-add" class="vertical">
+                    <input id='hidden_post_message_coupon' type="hidden" name="message" value="<?php if(isset($message)) echo $message;?>">
+
                     <?php echo $_SESSION['voucher_message'];?>
                     <?php echo $voucher_description;?>
                     <label for="voucher-input">Code coupon : </label>
@@ -277,8 +279,11 @@ $message = $shopping_cart->getMessage();
 <script>
     var input_message = document.getElementById('message-input');
     var post_output = document.getElementById('hidden_post_message');
+    var post_output_coupon = document.getElementById('hidden_post_message_coupon');
+
     function link_message(){
         post_output.value = input_message.value;
+        post_output_coupon.value = input_message.value;
     }
 
     var change_quantity = function(id, quantityObject) {

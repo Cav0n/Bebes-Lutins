@@ -263,11 +263,11 @@ class OrderGateway
             $shipping_address = new Address($shipping_address_db['id'], $user, $shipping_address_db['civility'], $shipping_address_db['surname'], $shipping_address_db['firstname'], $shipping_address_db['street'], $shipping_address_db['city'], $shipping_address_db['postal_code'], $shipping_address_db['complement'], $shipping_address_db['company']);
 
             if($order_db['voucher_id'] != null){
-                $query = 'SELECT id, name, discount, type, date_beginning, date_end, number_per_user FROM voucher WHERE id=:voucher_id';
+                $query = 'SELECT id, name, discount, type, date_beginning, time_beginning, date_end, time_end, number_per_user, minimal_purchase FROM voucher WHERE id=:voucher_id';
                 $con->executeQuery($query, array(':voucher_id' => array($order_db['voucher_id'], PDO::PARAM_STR)));
                 $voucher_db = $con->getResults()[0];
     
-                $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_per_user']);
+                $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_per_user'], $voucher_db['minimal_purchase']);
             } else $voucher = null;
 
             $order = new Order($order_db['id'], $user, $shipping_address, $billing_address, $order_db['ordering_date'], $order_db['status'], $order_db['shipping_price'], $order_db['total_price'], $order_db['payment_method'], $voucher, $order_db['birthlist_id']);
@@ -353,11 +353,12 @@ class OrderGateway
         if($shipping_address_db['id'] == 'birthlist') $shipping_address = new Address('birthlist', $user, "none", "none", "none", "none", "none", 0, "none", "none");
         else $shipping_address = new Address($shipping_address_db['id'], $user, $shipping_address_db['civility'], $shipping_address_db['surname'], $shipping_address_db['firstname'], $shipping_address_db['street'], $shipping_address_db['city'], $shipping_address_db['postal_code'], $shipping_address_db['complement'], $shipping_address_db['company']);
 
-        $query = 'SELECT id, name, discount, type, date_beginning, date_end, number_per_user FROM voucher WHERE id=:voucher_id';
-        $con->executeQuery($query, array(':voucher_id' => array($order_db['voucher_id'], PDO::PARAM_STR)));
-        $voucher_db = $con->getResults()[0];
-        if($voucher_db != null) {
-            $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_per_user']);
+        if($order_db['voucher_id'] != null){
+            $query = 'SELECT id, name, discount, type, date_beginning, time_beginning, date_end, time_end, number_per_user, minimal_purchase FROM voucher WHERE id=:voucher_id';
+            $con->executeQuery($query, array(':voucher_id' => array($order_db['voucher_id'], PDO::PARAM_STR)));
+            $voucher_db = $con->getResults()[0];
+
+            $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_per_user'], $voucher_db['minimal_purchase']);
         } else $voucher = null;
 
         $order = new Order($order_db['id'], $user, $shipping_address, $billing_address, $order_db['ordering_date'], $order_db['status'], $order_db['shipping_price'], $order_db['total_price'], $order_db['payment_method'], $voucher, $order_db['birthlist_id']);
@@ -436,12 +437,12 @@ class OrderGateway
 
         /* Check if a voucher has been used for the order and get it from the database */
         if($order_db['voucher_id'] != null){
-            $query = 'SELECT id, name, discount, type, date_beginning, date_end, number_per_user FROM voucher WHERE id=:voucher_id';
+            $query = 'SELECT id, name, discount, type, date_beginning, time_beginning, date_end, time_end, number_per_user, minimal_purchase FROM voucher WHERE id=:voucher_id';
             $con->executeQuery($query, array(':voucher_id' => array($order_db['voucher_id'], PDO::PARAM_STR)));
             $voucher_db = $con->getResults()[0];
 
-            $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_per_user']);
-        }
+            $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_per_user'], $voucher_db['minimal_purchase']);
+        } else $voucher = null;
 
         /* Create order with all informations get previously (user, address, voucher) */
         $order = new Order($order_db['id'], $user, $shipping_address, $billing_address, $order_db['ordering_date'], $order_db['status'], $order_db['shipping_price'], $order_db['total_price'], $order_db['payment_method'], $voucher, $order_db['birthlist_id']);

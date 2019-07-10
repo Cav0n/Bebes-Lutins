@@ -31,7 +31,7 @@ class Voucher
      * @param $number_per_user Number of usage for each user
      * @param $minimal_purchase Minimal purchase price to get the voucher
      */
-    public function __construct(String $id, String $name, float $discount, String $type, String $date_beginning, $time_beginning,String $date_end, $time_end,int $number_per_user)
+    public function __construct(String $id, String $name, float $discount, String $type, String $date_beginning, $time_beginning,String $date_end, $time_end,int $number_per_user,$minimal_purchase)
     {
         $this->id = $id;
         $this->name = $name;
@@ -42,6 +42,8 @@ class Voucher
         $this->date_end = $date_end;
         $this->time_end = $time_end;
         $this->number_per_user = $number_per_user;
+        if($minimal_purchase == null) $this->minimal_purchase = 0;
+        else $this->minimal_purchase = $minimal_purchase;
     }
 
     /**

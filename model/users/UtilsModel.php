@@ -382,19 +382,20 @@ class UtilsModel
     }
 
     public static function shopping_cart_add_voucher(String $voucher_name){
-        $voucher_name = strtoupper($voucher_name);
-        $voucher = VoucherGateway::SearchVoucherByName($voucher_name);
+        $shopping_cart = (new ShoppingCartContainer(unserialize($_SESSION['shopping_cart'])))->getShoppingCart();
+        $voucher = VoucherGateway::SearchVoucherByName(strtoupper($voucher_name));
+
+        if($_POST['message'] != null){
+            $shopping_cart->setMessage($_POST['message']);
+        }
+
         if ($voucher != null){
             if(!$voucher->isExpire()){
-                $shopping_cart = (new ShoppingCartContainer(unserialize($_SESSION['shopping_cart'])))->getShoppingCart();
-                $shopping_cart->setVoucher($voucher);
-
-                if($_POST['message'] != null){
-                    $shopping_cart->setMessage($_POST['message']);
-                }
-
-                $_SESSION['shopping_cart'] = serialize($shopping_cart);
-                $_SESSION['voucher_message'] = "<p style='color:green;font-size: 0.9em;'>Le code a bien été ajouté au panier.</p>";
+                if($shopping_cart->getTotalPrice() >= $voucher->getMinimalPurchase()){
+                    $shopping_cart->setVoucher($voucher);
+                    $_SESSION['shopping_cart'] = serialize($shopping_cart);
+                    $_SESSION['voucher_message'] = "<p style='color:green;font-size: 0.9em;'>Le code a bien été ajouté au panier.</p>";
+                } else $_SESSION['voucher_message'] = "<p style='color:red;font-size: 0.9em;'>Vous devez avoir un minimum d'achat de " . UtilsModel::FloatToPrice($voucher->getMinimalPurchase()). ".</p>";
             } else $_SESSION['voucher_message'] = "<p style='color:red;font-size: 0.9em;'>Ce code de réduction n'est plus valable.</p>";
         } else $_SESSION['voucher_message'] = "<p style='color:red;font-size: 0.9em;'>Ce code de réduction n'existe pas.</p>";
         ?>

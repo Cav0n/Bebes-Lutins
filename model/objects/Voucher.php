@@ -17,6 +17,7 @@ class Voucher
     private $date_end;
     private $time_end;
     private $number_per_user;
+    private $minimal_purchase;
 
     /**
      * Voucher constructor.
@@ -28,6 +29,7 @@ class Voucher
      * @param $date_end Last day of usage
      * @param $time_end Last time of the day of usage
      * @param $number_per_user Number of usage for each user
+     * @param $minimal_purchase Minimal purchase price to get the voucher
      */
     public function __construct(String $id, String $name, float $discount, String $type, String $date_beginning, $time_beginning,String $date_end, $time_end,int $number_per_user)
     {
@@ -217,6 +219,17 @@ class Voucher
         $this->number_per_user = $number_per_user;
     }
 
+    public function getMinimalPurchase(): float
+    {
+        if($this->minimal_purchase == null) return 0;
+        return $this->minimal_purchase;
+    }
+
+    public function setMinimalPurchase(float $minimal_purchase)
+    {
+        $this->minimal_purchase = $minimal_purchase;
+    }
+
     public function getDiscountAndTypeString() : String{
         if($this->discount != null)
             return $this->discount ." ". $this->getTypeString();
@@ -225,13 +238,19 @@ class Voucher
         }
     }
 
-    public function isExpire() : bool{
-        $beginning_date = date_create($this->getDateBeginning());
-        $end_date = date_create($this->getDateEnd());
-        $today_date=date_create(date('Y-m-d'));
+    public function isExpire() : bool {
+        $today = date('Y-m-d');
 
-        if (intval(date_diff($end_date, $today_date)->format("%R%a")) > 0){
-            return true;
-        } else return false;
+        if($this->getDateBeginning() > $today) { return true; }
+        else if($this->getDateEnd() < $today) { return true; }
+        else { return false; }
+    }
+
+    public function getStatusString() : string {
+        $today = date('Y-m-d');
+
+        if($this->getDateBeginning() > $today) { return 'expiré'; }
+        else if($this->getDateEnd() < $today) { return 'non valide'; }
+        else { return 'valide'; }
     }
 }

@@ -465,12 +465,12 @@ class AdminModel
         self::load_page('add_voucher');
     }
 
-    public static function add_voucher(String $name, $discount, String $type, String $date_beginning, String $time_beginning, String $date_end, string $time_end, int $number_per_user){
+    public static function add_voucher(String $name, $discount, String $type, String $date_beginning, String $time_beginning, String $date_end, string $time_end, int $number_per_user, float $minimal_purchase){
         $_SESSION['header_tab'] = "various";
 
         $id=uniqid("voucher-");
         try{
-            VoucherGateway::AddVoucher($id, strtoupper($name), $discount, $type, $date_beginning, $time_beginning, $date_end, $time_end, $number_per_user);
+            VoucherGateway::AddVoucher($id, strtoupper($name), $discount, $type, $date_beginning, $time_beginning, $date_end, $time_end, $number_per_user, $minimal_purchase);
         } catch (PDOException $e){
             $_POST['error-message-various'] = "Erreur BDD : " . $e;
             ?>

@@ -525,7 +525,7 @@ class UtilsModel
 
             if($user==null){
                 $customer_id = "offline-" . $id_uniq;
-                $user_offline = new UserConnected($customer_id, $_POST['surname_billing'], $_POST['firstname_billing'], $_POST['mail'], $_POST['phone'], 0, date('Y-d-m'), 0);
+                $user_offline = new UserConnected($customer_id, $_POST['surname_billing'], $_POST['firstname_billing'], $_POST['mail'], $_POST['phone'], 0, date('Y-d-m'), true);
             } else $customer_id = $user->getId();
 
             switch ($address_type) {
@@ -582,7 +582,7 @@ class UtilsModel
                 case 'withdrawal-shop':
                     $order->setShippingPrice(0);
                     if($user==null) {
-                        $user_offline = new UserConnected($customer_id, $_POST['surname_billing'], $_POST['firstname_billing'], $_POST['mail'], $_POST['phone'], 0, date('Y-d-m'), 0);
+                        $user_offline = new UserConnected($customer_id, $_POST['surname_billing'], $_POST['firstname_billing'], $_POST['mail'], $_POST['phone'], 0, date('Y-d-m'), true);
                         $billing_address = new Address($billing_id, $user_offline, $_POST['civility_billing'], $_POST['surname_billing'], $_POST['firstname_billing'], $_POST['street_billing'], $_POST['city_billing'], $_POST['zip_code_billing'], $_POST['complement_billing'], $_POST['company_billing']);
                         $shipping_address = new Address("withdrawal-shop-" . $id_uniq, $user_offline, $billing_address->getCivility(), $billing_address->getSurname(), $billing_address->getFirstname(), $billing_address->getAddressLine(), $billing_address->getCity(), $billing_address->getPostalCode(), $billing_address->getComplement(), $billing_address->getCompany());
 

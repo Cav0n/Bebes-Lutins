@@ -50,16 +50,21 @@ $vouchers = VoucherGateway::GetExpiredVoucher();
                         else if($voucher->getDateEnd() < date('Y-m-d')) {$status = "Expiré"; $status_css = "expired"; }
                         else {$status = "Actif"; $status_css = "active"; }
                         ?>
-                        <div class="voucher vertical" onclick="load_voucher('<?php echo $voucher->getId(); ?>')">
-                            <label class="container vertical centered"><?php echo $voucher->getName(); ?>
+                        <div class="voucher vertical">
+                            <label class="container vertical centered"><div class='horizontal'><p><?php echo $voucher->getName(); ?> - </p><a onclick="load_voucher('<?php echo $voucher->getId(); ?>')" class="edition-link">Editer</a></div>
                                 <input type="checkbox">
                                 <span class="checkmark"></span>
                             </label>
                             <p class="discount margin-left">Réduction : <?php echo $voucher->getDiscountAndTypeString();?></p>
+                            <p class="minimal_purchase margin-left">Montant minimum d'achat :  <?php echo UtilsModel::FloatToPrice($voucher->getMinimalPurchase()); ?></p>
                             <p class="usage_per_user margin-left" style='margin-bottom: 10px;'>Nombre d'utilisations par personne : <?php echo $voucher->getNumberPerUser(); ?></p>
-                            <p class="first-date margin-left">Du <?php echo $voucher->getDateBeginningString()?> à <?php echo $voucher->getTimeBeginning(); ?></p>
-                            <p class="last-date margin-left">Au <?php echo $voucher->getDateEndString();?> à <?php echo $voucher->getTimeEnd(); ?></p>
-                            <p class="margin-left status <?php echo $status_css; ?>"><?php echo $status; ?></p>
+                            <div class="horizontal">
+                                <div class="vertical">
+                                    <p class="first-date margin-left">Du <?php echo $voucher->getDateBeginningString()?> à <?php echo $voucher->getTimeBeginning(); ?></p>
+                                    <p class="last-date margin-left">Au <?php echo $voucher->getDateEndString();?> à <?php echo $voucher->getTimeEnd(); ?></p>
+                                </div>
+                                <p class="status <?php echo $status_css; ?>"><?php echo $status; ?></p>
+                            </div>
                         </div>
                     <?php } ?>
                 </div>

@@ -578,6 +578,18 @@
     background: grey;
 }
 
+#dashboard4 main .window .window-inner #voucher-list-container #voucher-list .voucher .edition-link{
+    font-size: 0.9rem;
+    background: #f0f0f0;
+    border: 1px solid #c2c4c0;
+    border-radius: 3px;
+    padding: 0 10px;
+    cursor: pointer;
+    color: rgb(69, 69, 69);
+    box-shadow: inset 0 1px 0 0 #dbdbdb;
+    margin-left: 5px;
+}
+
 #dashboard4 main .window .window-inner #voucher-list-container #voucher-list .voucher .container{
     margin: 0;
 }

@@ -300,14 +300,17 @@ class OrderGateway
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);
 
+        /* Get order from the database with the order ID */
         $query = "SELECT id, user_id, shipping_address_id, billing_address_id, ordering_date, status, shipping_price,total_price, payment_method, voucher_id, birthlist_id, customer_message, admin_message, cancel FROM orders WHERE id=:order_id";
         $con->executeQuery($query, array(':order_id' => array($order_id, PDO::PARAM_STR)));
         $order_db = $con->getResults()[0];
 
+        /* Get order items from the database with the order ID */
         $query = 'SELECT id, order_id, product_id, quantity, unit_price FROM order_item WHERE order_id=:order_id;';
         $con->executeQuery($query, array(':order_id' => array($order_id, PDO::PARAM_STR)));
         $order_items_db = $con->getResults();
 
+        /* Get product for each order items */
         foreach($order_items_db as $order_item){
             $query = "SELECT id, id_copy, name, ceo_name,price, stock, description, ceo_description, category, creation_date, image, number_of_review, number_of_stars, reference, tags, hide FROM product_backup WHERE id=:product_id;";
             $con->executeQuery($query, array(':product_id' => array($order_item['product_id'], PDO::PARAM_STR)));
@@ -316,10 +319,12 @@ class OrderGateway
             $products[] = new Product($product_db['id'], $product_db['id_copy'], $product_db['name'], $product_db['ceo_name'], $product_db['price'], $product_db['stock'], $product_db['description'], $product_db['ceo_description'], $product_db['category'], $product_db['creation_date'], new ImageProduct("null", $product_db['image']), $product_db['number_of_review'], $product_db['number_of_stars'], $product_db['reference'], $product_db['tags'], $product_db['hide']);
         }
 
+        /* Get user who make the order from the database */
         $query = 'SELECT id, mail, surname, firstname, phone, privilege, registration_date, activated FROM user WHERE id=:user_id;';
         $con->executeQuery($query, array(':user_id' => array($order_db['user_id'], PDO::PARAM_STR)));
         $user_db = $con->getResults()[0];
 
+        /* DEPRECATED - Check if the customer has an account or not */
         if($user_db == null){
             $query = 'SELECT id, mail, surname, firstname, phone, registration_date FROM user_no_account WHERE id=:user_id;';
             $con->executeQuery($query, array(':user_id' => array($order_db['user_id'], PDO::PARAM_STR)));
@@ -329,28 +334,35 @@ class OrderGateway
 
         } else $user = new UserConnected($user_db['id'], $user_db['surname'], $user_db['firstname'], $user_db['mail'], $user_db['phone'], $user_db['privilege'], $user_db['registration_date'], $user_db['activated']);
 
+        /* Get billing address of the order from the database */
         $query = 'SELECT id, user_id, civility, surname, firstname, street, city, civility, postal_code, complement, company FROM address_backup WHERE id=:billing_address_id';
         $con->executeQuery($query, array(':billing_address_id' => array($order_db['billing_address_id'], PDO::PARAM_STR)));
         $billing_address_db = $con->getResults()[0];
 
+        /* Get shipping address of the order from the database */
         $query = 'SELECT id, user_id, civility, surname, firstname, street, city, civility, postal_code, complement, company FROM address_backup WHERE id=:shipping_address_id';
         $con->executeQuery($query, array(':shipping_address_id' => array($order_db['shipping_address_id'], PDO::PARAM_STR)));
         $shipping_address_db = $con->getResults()[0];
 
+        /* Create the billing and shipping adress with informations get from the database */
         $billing_address = new Address($billing_address_db['id'], $user, $billing_address_db['civility'], $billing_address_db['surname'], $billing_address_db['firstname'], $billing_address_db['street'], $billing_address_db['city'], $billing_address_db['postal_code'], $billing_address_db['complement'], $billing_address_db['company']);
         if($shipping_address_db['id'] == 'birthlist') $shipping_address = new Address('birthlist', $user, "none", "none", "none", "none", "none", 0, "none", "none");
         else $shipping_address = new Address($shipping_address_db['id'], $user, $shipping_address_db['civility'], $shipping_address_db['surname'], $shipping_address_db['firstname'], $shipping_address_db['street'], $shipping_address_db['city'], $shipping_address_db['postal_code'], $shipping_address_db['complement'], $shipping_address_db['company']);
 
-        $query = 'SELECT id, name, discount, type, date_beginning, date_end, number_per_user FROM voucher WHERE id=:voucher_id';
-        $con->executeQuery($query, array(':voucher_id' => array($order_db['voucher_id'], PDO::PARAM_STR)));
-        $voucher_db = $con->getResults()[0];
-        if($voucher_db != null) {
-            $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_per_user']);
-        } else $voucher = null;
+        /* Check if a voucher has been used for the order and get it from the database */
+        if($order_db['voucher_id'] != null){
+            $query = 'SELECT id, name, discount, type, date_beginning, date_end, number_per_user FROM voucher WHERE id=:voucher_id';
+            $con->executeQuery($query, array(':voucher_id' => array($order_db['voucher_id'], PDO::PARAM_STR)));
+            $voucher_db = $con->getResults()[0];
 
+            $voucher = new Voucher($voucher_db['id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_per_user']);
+        }
+
+        /* Create order with all informations get previously (user, address, voucher) */
         $order = new Order($order_db['id'], $user, $shipping_address, $billing_address, $order_db['ordering_date'], $order_db['status'], $order_db['shipping_price'], $order_db['total_price'], $order_db['payment_method'], $voucher, $order_db['birthlist_id']);
         $order->setCancel($order_db['cancel']);
 
+        /* Add order items to the order */
         foreach ($order_items_db as $order_item_db) {
             foreach ($products as $product) {
                 if($product->getID() == $order_item_db['product_id']){
@@ -359,6 +371,7 @@ class OrderGateway
             }
         }
 
+        /* Setting optional informations */
         if($order_db['customer_message'] != null) $order->setCustomerMessage($order_db['customer_message']);
         if($order_db['admin_message'] != null) $order->setAdminMessage($order_db['admin_message']);
         if($order_db['new'] != null) $order->setNew($order_db['new']);

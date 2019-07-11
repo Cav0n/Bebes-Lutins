@@ -1,5 +1,10 @@
 <?php 
 $product = ProductGateway::SearchProductByID2($_REQUEST['product_id']);
+$reviews_list = ReviewGateway::GetAllReviewForProduct($product->getId());
+
+/* Breadcrumb */
+$category = CategoryGateway::GetCategory($product->getCategory()[0]->getName());
+$category_parent = $category->getParent();
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +20,9 @@ $product = ProductGateway::SearchProductByID2($_REQUEST['product_id']);
     </header>
     <main>
         <div id='product-page-container'>
+            <div id='breadcrumb-container' class='horizontal centered'>
+                <p id='breadcrumb'>Accueil <b> / </b> <?php echo $category_parent; ?> <b> / </b> <?php echo $category->getName(); ?> <b> / </b> <?php echo $product->getName(); ?></p>
+            </div>
             <div id='product-presentation-container' class='horizontal'>
                 <div id='left-column' class='vertical'>
                     <div id='images-container' class='horizontal'>
@@ -27,15 +35,15 @@ $product = ProductGateway::SearchProductByID2($_REQUEST['product_id']);
                             <img id='big-image'  src='https://www.bebes-lutins.fr/view/assets/images/products/<?php echo $product->getImage()->getName(); ?>' alt='<?php echo $product->getName(); ?>'>
                         </div>
                     </div>
-
-                    <div id='price-container' class='horizontal centered'>
-                        <p id='price'><?php echo UtilsModel::FloatToPrice($product->getPrice()); ?></p>
+                    <div id='social-media-container' class='horizontal between'>
+                        <div id='facebook-link' class='horizontal'>
+                            <?php echo file_get_contents("view/assets/images/utils/icons/facebook.svg"); ?>
+                            <p class='vertical centered'>Partager sur FaceBook</p>
+                        </div>
+                        <div id='instagram-link' class='vertical centered'>
+                            <?php echo file_get_contents("view/assets/images/utils/icons/instagram.svg"); ?>
+                        </div>
                     </div>
-
-                    <form id='add-to-cart-container' class='horizontal'>
-                        <input id='quantity-input' type='number' value='1' placeholder='1' min='1' max='<?php echo $product->getStock(); ?>' step='1' required>
-                        <button id='add-to-cart-button' type='submit'>Ajouter au panier</button>
-                    </form>
                 </div>
                 <div id='right-column' class='vertical'>
                     <div id='title-container'>
@@ -45,6 +53,35 @@ $product = ProductGateway::SearchProductByID2($_REQUEST['product_id']);
                         <p><?php echo $product->getCeoDescription();  ?></p>
                     </div>
                 </div>
+                <div id='extra-column' class='vertical'>
+                    <div class="vertical">
+                        <div id='price-container' class='horizontal centered'>
+                            <p id='price'><?php echo UtilsModel::FloatToPrice($product->getPrice()); ?></p>
+                        </div>
+
+                        <form id='add-to-cart-container' class='horizontal'>
+                            <input id='quantity-input' type='number' value='1' placeholder='1' min='1' max='<?php echo $product->getStock(); ?>' step='1' required>
+                            <button id='add-to-cart-button' type='submit'>Ajouter au panier</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id='product-description-container' class='vertical'>
+                <h2>Description</h2>
+                <div id='description'>
+                    <?php echo $product->getDescription(); ?>
+                </div>
+            </div>
+
+            <div id='product-review-container' class='vertical'>
+                <h2 style='font-family: Roboto, sans-serif;margin-bottom: 1rem;'>Avis clients</h2>
+                <?php if($product->getNumberOfReview() == 0) { ?>
+                    <p>Il n'y a aucun avis sur le produit pour l'instant.</p>
+                <?php } ?>
+            </div>
+
+            <div id='certifications-container' class='vertical' style="margin-top: 2rem;border: 1px solid rgb(215, 215, 215);border-radius: 2px;">
+                <?php UtilsModel::load_certifications(); ?>
             </div>
         </div>
     </main>

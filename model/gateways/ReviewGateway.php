@@ -48,8 +48,6 @@ class  ReviewGateway
 
         $reviews_list = array();
 
-
-
         $query = "SELECT id, product_id, customer_id, customer_name, mark, text, has_response, posted_date, declined FROM review WHERE product_id=:product_id ORDER BY mark desc;";
         $con->executeQuery($query, array(
             ':product_id' => array($product_id, PDO::PARAM_STR)

@@ -2,12 +2,45 @@
     margin: 4rem 8rem;
 }
 
+#product-page-container #breadcrumb-container{
+    font-family: Roboto,sans-serif;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    font-size: 0.8rem;
+}
+
+#product-page-container #breadcrumb-container #breadcrumb b{
+    font-size: 1rem;
+    padding: 0 10px;
+}
+
 #product-page-container #product-presentation-container #left-column{
     margin-right: 10px;
+    box-sizing: border-box;
 }
 
 #product-page-container #product-presentation-container #right-column{
     margin-left: 10px;
+    padding: 1rem;
+    background: white;
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 3px;
+    height: fit-content;
+    box-sizing: border-box;
+    min-height: 200px;
+}
+
+#product-page-container #product-presentation-container #extra-column {
+    width: 200px;
+    padding: 1rem;
+    margin-left: 1rem;
+    border: 1px solid rgb(220,220,220);
+    background: white;
+    border-radius: 3px;
+    max-width: 200px;
+    min-width: 200px;
+    box-sizing: border-box;
+    min-height: 200px;
 }
 
 #product-page-container #product-presentation-container #images-container {
@@ -29,22 +62,69 @@
     width: 200px;
 }
 
+#product-page-container #social-media-container {
+    width: 200px;
+    margin-left: auto;
+    margin-top: 1rem;
+}
+
+#product-page-container #social-media-container svg{
+    height: 24px;
+}
+
+#product-page-container #social-media-container #facebook-link {
+    font-size: 0.8rem;
+    background: white;
+    border: 1px solid rgb(220,220,220);
+    border-radius: 3px;
+    padding-right: 5px;
+    height: 24px;
+}
+
+#product-page-container #facebook-link:hover, #instagram-link:hover { 
+ cursor: pointer;
+}
+
+#product-page-container #social-media-container #facebook-link p {
+    margin-left: 5px;
+}
+
+#product-page-container #product-presentation-container #title-container{
+    margin-bottom: 1rem;
+}
+
+#product-page-container #product-presentation-container #title-container h1 {
+    font-size: 2rem;
+    font-family: Roboto, sans-serif;
+}
+
 #product-page-container #product-presentation-container #price-container {
     height: 2rem;
-    margin: 10px 0;
-
-    background: rgb(236, 236, 236);
-    border-radius: 2px;
-    border: 1px solid rgb(208, 208, 207);
+    background: linear-gradient(to top, #fcfcfc, #fafbfc);
+    border: 1px solid #c4cdd5;
+    box-shadow: 0 1px 0 0 rgba(22,29,37,.05);
+    border-radius: 3px;
+    color: #3f4455;
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-decoration: none;
+    transition-property: background,border,box-shadow;
+    transition-duration: .2s;
+    transition-timing-function: cubic-bezier(.64,0,.35,1);
+    font-size: 1rem;
+    margin: 0.5rem 0;
 }
 
 #product-page-container #price-container #price {
     flex-direction: column;
     justify-content: center;
     display: flex;
+    font-weight: bold;
+    font-family: Roboto,sans-serif;
 }
-
-
 
 #product-page-container #product-presentation-container #add-to-cart-container {
     height: 2rem;
@@ -64,8 +144,6 @@
     transition-duration: .2s;
     transition-timing-function: cubic-bezier(.64,0,.35,1);
     font-size: 1rem;
-    margin-top: auto;
-    width: 100%;
 }
 
 #product-page-container #add-to-cart-container #quantity-input {
@@ -86,20 +164,47 @@
 #product-page-container #add-to-cart-container #add-to-cart-button {
     height: 100%;
     width: 100%;
-
     margin: 0;
     padding: 0;
-
     background: none;
     border-radius: 0;
-    font-size: 0.9rem;
-}
-
-#product-page-container #product-presentation-container #title-container h1 {
-    font-size: 2rem;
-    font-family: Roboto, sans-serif;
+    font-size: 0.75rem;
+    font-weight: bold;
+    font-family: Robot, sans-serif;
 }
 
 #product-page-container #ceo-description-container p{
     font-size: 1rem;
+}
+
+#product-page-container #product-description-container {
+    margin-top: 2rem;
+    padding: 1rem;
+    
+    border: 1px solid rgb(228, 228, 228);
+    border-radius: 2px;
+    background: white;
+}
+
+#product-page-container #product-description-container h2 {
+    font-family: Roboto, sans-serif;
+    margin-bottom: 1rem;
+}
+
+#product-page-container #product-review-container {
+    margin-top: 2rem;
+    padding: 1rem;
+    border: 1px solid rgb(228, 228, 228);
+    border-radius: 2px;
+    background: white;
+}
+
+#product-page-container #certifications-container {
+    margin-top: 2rem;
+    border: 1px solid rgb(215, 215, 215);
+    border-radius: 2px;
+}
+
+#product-page-container #certifications-container #certifications {
+    border-radius: 2px;
 }

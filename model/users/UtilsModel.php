@@ -98,7 +98,7 @@ class UtilsModel
                 break;
 
             case 'product_test':
-                require("$view_rep/html/tests/product_page.php");
+                require("$view_rep/html/tests/product-page.php");
                 break;
 
             case 'error':

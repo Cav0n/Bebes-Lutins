@@ -32,7 +32,7 @@ class Address
      * @param $complement
      * @param $company
      */
-    public function __construct(String $id, UserConnected $customer, String $civility, String $surname, String $firstname, String $adress_line, String $city, int $postal_code, $complement, $company)
+    public function __construct(String $id, UserConnected $customer, String $civility, String $surname, String $firstname, String $adress_line, String $city, string $postal_code, $complement, $company)
     {
         $this->id = $id;
         $this->customer = $customer;
@@ -181,17 +181,18 @@ class Address
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getPostalCode(): int
+    public function getPostalCode(): string
     {
+        if(strlen($this->postal_code) < 5) return '0' . $this->postal_code;
         return $this->postal_code;
     }
 
     /**
-     * @param int $postal_code
+     * @param string $postal_code
      */
-    public function setPostalCode(int $postal_code): void
+    public function setPostalCode(string $postal_code): void
     {
         $this->postal_code = $postal_code;
     }

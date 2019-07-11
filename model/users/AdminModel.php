@@ -790,8 +790,8 @@ class AdminModel
             $reference = strtoupper($_POST['reference']);
             $name = str_replace("'", "’",ucfirst($_POST['name']));
             $ceo_name = str_replace("'", "’",ucfirst($_POST['ceo_name']));
-            $description = nl2br(str_replace("'", "’",$_POST['description']));
-            $ceo_description = nl2br(str_replace("'", "’",$_POST['ceo_description']));
+            $description = str_replace("'", "’",$_POST['description']);
+            $ceo_description = str_replace("'", "’",$_POST['ceo_description']);
             if ($_FILES['uploadFile'] != null) {
                 $image_name = self::UploadMutlipleImages();
             } else $image_name = $_POST['image_name'];

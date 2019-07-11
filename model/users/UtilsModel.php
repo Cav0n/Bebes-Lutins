@@ -97,6 +97,10 @@ class UtilsModel
                 require("$view_rep/html/account/birthlist/visitor/index.php");
                 break;
 
+            case 'product_test':
+                require("$view_rep/html/tests/product_page.php");
+                break;
+
             case 'error':
                 require("$view_rep/html/main/error.php");
                 break;

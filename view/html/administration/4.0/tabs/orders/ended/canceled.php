@@ -25,7 +25,6 @@ $orders = OrderGateway::GetOrdersFromGateway();
         <div class="window-header">
             <div class="window-tabs">
                 <a href="https://www.bebes-lutins.fr/dashboard4/commandes/terminees" class="tab vertical centered">Toutes</a>
-                <a href="https://www.bebes-lutins.fr/dashboard4/commandes/terminees/en-cours-de-livraison" class="tab vertical centered">En cours de livraison</a>
                 <a href="https://www.bebes-lutins.fr/dashboard4/commandes/terminees/livree" class="tab vertical centered">Livrée</a>
                 <a href="https://www.bebes-lutins.fr/dashboard4/commandes/terminees/annulee" class="tab vertical centered selected">Annulée</a>
             </div>

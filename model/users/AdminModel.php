@@ -676,9 +676,9 @@ class AdminModel
                     if ($option == "toutes" || $option == null) require("$view_rep/html/administration/4.0/tabs/orders/in-preparation/all.php");
                     if ($option == "en-preparation") require("$view_rep/html/administration/4.0/tabs/orders/in-preparation/in-preparation.php");
                     if ($option == "en-attente-de-paiement") require("$view_rep/html/administration/4.0/tabs/orders/in-preparation/waiting-for-payment.php");
+                    if ($option == "en-cours-de-livraison") require("$view_rep/html/administration/4.0/tabs/orders/in-preparation/shipping.php");
                 } else if($page == "terminees"){
                     if ($option == "toutes" || $option == null) require("$view_rep/html/administration/4.0/tabs/orders/ended/all.php");
-                    if ($option == "en-cours-de-livraison") require("$view_rep/html/administration/4.0/tabs/orders/ended/shipping.php");
                     if ($option == "livree") require("$view_rep/html/administration/4.0/tabs/orders/ended/delivered.php");
                     if ($option == "annulee") require("$view_rep/html/administration/4.0/tabs/orders/ended/canceled.php");
                 } else if($page == "modifier-etat"){

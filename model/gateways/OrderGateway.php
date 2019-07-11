@@ -234,7 +234,7 @@ class OrderGateway
         $categories = array();
 
         /* Get all orders from the database */
-        $query = 'SELECT id, user_id, shipping_address_id, billing_address_id, ordering_date, status, shipping_price,total_price, payment_method, voucher_id, birthlist_id, customer_message, admin_message FROM orders WHERE status < 2 AND status > -1 ORDER BY ordering_date DESC ;';
+        $query = 'SELECT id, user_id, shipping_address_id, billing_address_id, ordering_date, status, shipping_price,total_price, payment_method, voucher_id, birthlist_id, customer_message, admin_message FROM orders WHERE status <= 2 AND status > -1 ORDER BY ordering_date DESC ;';
         $con->executeQuery($query);
         $orders_db = $con->getResults();
 

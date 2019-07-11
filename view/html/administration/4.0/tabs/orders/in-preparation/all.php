@@ -25,6 +25,7 @@ $orders = OrderGateway::GetInPreparationOrderFromDB2();
                 <a href="https://www.bebes-lutins.fr/dashboard4/commandes/en-cours" class="tab vertical centered selected">Toutes</a>
                 <a href="https://www.bebes-lutins.fr/dashboard4/commandes/en-cours/en-attente-de-paiement" class="tab vertical centered">En attente de paiement</a>
                 <a href="https://www.bebes-lutins.fr/dashboard4/commandes/en-cours/en-preparation" class="tab vertical centered">En préparation</a>
+                <a href="https://www.bebes-lutins.fr/dashboard4/commandes/en-cours/en-cours-de-livraison" class="tab vertical centered">En cours de livraison</a>
             </div>
         </div>
         <div class="window-inner">
@@ -46,9 +47,9 @@ $orders = OrderGateway::GetInPreparationOrderFromDB2();
                     <?php
                     foreach ($orders as $order) {
                         $order = (new OrderContainer($order))->getOrder();
-                        if($order->getStatus() >= 0 && $order->getStatus() <= 1){
+                        if(($order->getStatus() >= 0 && $order->getStatus() <= 2)){
                         ?>
-                        <tr class="<?php if($order->getStatus() == 0) echo "yellow"; ?>">
+                        <tr class="<?php if($order->getStatus() == 0) echo "yellow";elseif($order->getStatus() == 2) echo "blue"; ?>">
                             <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="date center"><?php echo $order->getDateString(); ?></td>
                             <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="customer"><a><?php echo ucfirst($order->getCustomer()->getFirstname()) . " " . strtoupper($order->getCustomer()->getSurname()); ?></a></td>
                             <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="price right"><?php echo UtilsModel::FloatToPrice($order->getPriceAfterDiscount()); ?></td>

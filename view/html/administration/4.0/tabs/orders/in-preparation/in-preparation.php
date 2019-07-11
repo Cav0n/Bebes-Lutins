@@ -79,7 +79,10 @@ $orders = OrderGateway::GetOrdersFromGateway();
 </body>
 <script>
     function load_bill(id) {
-        document.location.href = "https://www.bebes-lutins.fr/dashboard/facture-"+id;
+        window.open(
+            "https://www.bebes-lutins.fr/dashboard/facture-"+id,
+            '_blank' // <- This is what makes it open in a new window.
+        );
     }
 
     function search() {

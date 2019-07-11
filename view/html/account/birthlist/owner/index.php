@@ -16,6 +16,7 @@ $phone_number = $user->getPhone();
 $birthlist = BirthlistGateway::GetBirthlistByCustomerID($user->getId());
 $products = ProductGateway::GetProducts();
 $categories = CategoryGateway::GetCategories();
+
 if(isset($_SESSION['temp_step'])){
     $birthlist->setStep($_SESSION['temp_step']);
     unset($_SESSION['temp_step']);

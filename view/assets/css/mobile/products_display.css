@@ -29,8 +29,3 @@
 #products-display .product button{
     display: none;
 }
-
-.product-display-button-form button{
-    padding: 10px;
-    margin: 10px 20px 20px;
-}

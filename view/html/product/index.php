@@ -272,8 +272,6 @@ width: max-content;
     }
     $(document).ready(function(){
         $('#big-image')
-            .wrap('<span style="display:flex;border-radius: 9px 0 0 9px;"></span>')
-            .css('display', 'block')
             .parent()
             .zoom({magnify: 1.2});
     });

@@ -5,6 +5,9 @@ $reviews_list = ReviewGateway::GetAllReviewForProduct($product->getId());
 /* Breadcrumb */
 $category = CategoryGateway::GetCategory($product->getCategory()[0]->getName());
 $category_parent = $category->getParent();
+
+$category_name_url = str_replace("’", "_", str_replace(" ", "=",UtilsModel::replace_accent($category->getName())));
+$parent_category_name_url = str_replace("’", "_", str_replace(" ", "=",UtilsModel::replace_accent($category_parent)));
 ?>
 
 <!DOCTYPE html>
@@ -21,14 +24,15 @@ $category_parent = $category->getParent();
     <main>
         <div id='product-page-container'>
             <div id='breadcrumb-container' class='horizontal centered'>
-                <p id='breadcrumb'>Accueil <b> / </b> <?php echo $category_parent; ?> <b> / </b> <?php echo $category->getName(); ?> <b> / </b> <?php echo $product->getName(); ?></p>
+                <p id='breadcrumb'><a href='https://www.bebes-lutins.fr'> Accueil </a> <b> / </b> <a href='https://www.bebes-lutins.fr/categorie/<?php echo $parent_category_name_url; ?>'><?php echo $category_parent; ?></a> <b> / </b> <a href='https://www.bebes-lutins.fr/categorie/<?php echo $category_name_url; ?>'><?php echo $category->getName(); ?></a> <b> / </b> <i><?php echo $product->getName(); ?></i></p>
             </div>
             <div id='product-presentation-container' class='horizontal'>
                 <div id='left-column' class='vertical'>
                     <div id='images-container' class='horizontal'>
                         <div id='thumbnails-container' class='vertical'>
+                            <img class="thumbnail transition-fast" src="https://www.bebes-lutins.fr/view/assets/images/products/<?php echo $product->getImage()->getName(); ?>" onclick="update_image('https://www.bebes-lutins.fr/view/assets/images/products/<?php echo $product->getImage()->getName(); ?>')">
                             <?php foreach($product->getImage()->getThumbnails() as $thumbnail) { ?>
-                            <img class="thumbnail transition-fast" src="https://www.bebes-lutins.fr/view/assets/images/thumbnails/<?php echo $thumbnail->getName();?>">
+                            <img class="thumbnail transition-fast" src="https://www.bebes-lutins.fr/view/assets/images/thumbnails/<?php echo $thumbnail->getName();?>" onclick="update_image('https://www.bebes-lutins.fr/view/assets/images/thumbnails/<?php echo $thumbnail->getName(); ?>')">
                             <?php } ?>
                         </div>
                         <div id='main-image-container'>
@@ -91,4 +95,20 @@ $category_parent = $category->getParent();
 </body>
 <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.3"></script>
+<script>
+    $(document).ready(function(){
+        $('#big-image')
+            .css('border-radius', '2px')
+            .parent()
+            .zoom({magnify: 1.2});
+    });
+
+    function update_image(img) {
+        $("#big-image").attr("src", img).trigger('zoom.destroy');
+        $("#big-image")
+            .css('border-radius', '2px')
+            .parent()
+            .zoom({magnify: 1.2});
+    }
+</script>
 </html>

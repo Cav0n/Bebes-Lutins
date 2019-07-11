@@ -23,8 +23,13 @@ if(!isset($_SESSION['limit_product_display'])) $_SESSION['limit_product_display'
     </header>
     <main>
         <?php UtilsModel::load_swiper();?>
-        <div id="website-infos" class="horizontal center">
+        <div id="website-infos" class="horizontal center desktop">
             <h1>Bébés Lutins, le spécialiste de la couche lavable écologique et écocitoyenne pour bébé.</h1>
+            <p>Bébés Lutins vous propose sa gamme de couches lavables pour bébé et accessoires, confectionnés en France par nos couturières.<BR>
+                Nous sélectionnons soigneusement les tissus certifiés Oeko-Tex pour offrir une couche lavable écologique qui respecte la peau de bébé. Nos modèles sont conçus pour s'adapter à la morphologie de bébé, tout en lui offrant confort et bien-être.</p>
+        </div>
+        <div id='website-infos' class="vertical center mobile">
+        <h1>Bébés Lutins, le spécialiste de la couche lavable écologique et écocitoyenne pour bébé.</h1>
             <p>Bébés Lutins vous propose sa gamme de couches lavables pour bébé et accessoires, confectionnés en France par nos couturières.<BR>
                 Nous sélectionnons soigneusement les tissus certifiés Oeko-Tex pour offrir une couche lavable écologique qui respecte la peau de bébé. Nos modèles sont conçus pour s'adapter à la morphologie de bébé, tout en lui offrant confort et bien-être.</p>
         </div>

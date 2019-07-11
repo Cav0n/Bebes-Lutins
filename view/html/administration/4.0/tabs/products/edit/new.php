@@ -128,7 +128,7 @@ if($_REQUEST['product_id']!=null){
                                 <p>&nbsp;sur 320 caractères utilisés</p>
                             </div>
                         </div>
-                        <textarea id="ceo-description" name="ceo_description" maxlength="320"><?php echo $ceo_description; ?></textarea>
+                        <textarea id="ceo-description" name="ceo_description"><?php echo $ceo_description; ?></textarea>
                     </div>
                 </div>
             </div>

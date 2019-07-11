@@ -102,7 +102,7 @@ $error = $_POST['error-message-products'];
                                 <p>&nbsp;sur 320 caractères utilisés</p>
                             </div>
                         </div>
-                        <textarea id="ceo-description" name="ceo_description" maxlength="320"><?php echo $product->getCeoDescription(); ?></textarea>
+                        <textarea id="ceo-description" name="ceo_description"><?php echo $product->getCeoDescription(); ?></textarea>
                     </div>
                 </div>
             </div>

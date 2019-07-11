@@ -148,17 +148,16 @@
 
 #product-page-container #add-to-cart-container #quantity-input {
     border: none;
-    box-shadow: none;
-    background: none;
 
     height: 2rem;
     width: 3rem;
-
     margin: 0;
     padding: 0 0 0 10px;
-
     background: none;
     border-right: 1px solid rgb(200, 200, 200);
+    background: white;
+    border-radius: 2px;
+    box-shadow: inset 0 0px 10px 1px rgba(220,220,220,0.6);
 }
 
 #product-page-container #add-to-cart-container #add-to-cart-button {

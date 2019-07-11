@@ -36,13 +36,13 @@ $category_parent = $category->getParent();
                         </div>
                     </div>
                     <div id='social-media-container' class='horizontal between'>
-                        <div id='facebook-link' class='horizontal'>
+                        <a id='facebook-link' class='horizontal' target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.bebes-lutins.fr%2Fproduct-test%2Fproduct-5ce7f760c4eaf&amp;src=sdkpreparse">
                             <?php echo file_get_contents("view/assets/images/utils/icons/facebook.svg"); ?>
                             <p class='vertical centered'>Partager sur FaceBook</p>
-                        </div>
-                        <div id='instagram-link' class='vertical centered'>
+                        </a>
+                        <a id='instagram-link' class='vertical centered' target="_blank" href="https://www.instagram.com/bebeslutins/">
                             <?php echo file_get_contents("view/assets/images/utils/icons/instagram.svg"); ?>
-                        </div>
+                        </a>
                     </div>
                 </div>
                 <div id='right-column' class='vertical'>
@@ -89,4 +89,6 @@ $category_parent = $category->getParent();
         <?php UtilsModel::load_footer();?>
     </footer>
 </body>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v3.3"></script>
 </html>

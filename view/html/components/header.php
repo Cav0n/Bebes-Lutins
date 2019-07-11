@@ -161,9 +161,9 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
 
 <div id="top-mobile" class="mobile horizontal">
     <div id="header-container" class="between">
-        <i class="fas fa-bars fa-2x" onclick="display_menu_mobile()"></i>
-        <a id="link-logo" href="https://www.bebes-lutins.fr"><img src="https://www.bebes-lutins.fr/view/assets/images/logo.png" id="img-logo" class="transition-fast not-shrink-logo"></a>
-        <a id="shopping-cart-logo" href="https://www.bebes-lutins.fr/panier"><i class="fas fa-shopping-cart fa-2x"></i></a>
+        <a class="vertical centered" onclick="display_menu_mobile()"><?php echo file_get_contents("view/assets/images/utils/icons/menu.svg"); ?></a>
+        <a id="link-logo" href="https://www.bebes-lutins.fr" class='vertical centered'><img src="https://www.bebes-lutins.fr/view/assets/images/logo.png" id="img-logo" class="transition-fast not-shrink-logo"></a>
+        <a id="shopping-cart-logo" href="https://www.bebes-lutins.fr/panier" class='vertical centered'><?php echo file_get_contents("view/assets/images/utils/icons/shopping-bag.svg"); ?></a>
     </div>
     <?php UtilsModel::load_menu_mobile();?>
 </div>

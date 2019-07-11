@@ -210,6 +210,18 @@ width: max-content;
 }
 /* ---- */
 
+/* Website infos */
+#website-infos h1{
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+    text-align: left;
+}
+
+#website-infos p{
+    text-align: left;
+}
+/* ---- */
+
 /* Popup */
 .popup{
     position: fixed;

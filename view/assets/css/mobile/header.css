@@ -11,9 +11,13 @@ header{
 
 header #header-container{
     width: 100%;
-    padding: 25px;
+    padding: 20px;
     height: 5em;
     box-sizing: border-box;
+}
+
+header #header-container svg{
+    height: 2.5rem;
 }
 
 header #link-logo {

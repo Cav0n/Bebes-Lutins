@@ -176,6 +176,7 @@ $error = $_POST['error-message-products'];
 <script>
     Dropzone.autoDiscover = false;
 
+
     var mainDropzone = new Dropzone("div#main-dropzone",
         {
             url: "https://www.bebes-lutins.fr/view/html/tests/test-upload.php",
@@ -191,6 +192,7 @@ $error = $_POST['error-message-products'];
             },
             init: function() {
                 this.on("addedfile", function() {
+                    $('#image-name').attr('value', this.files[0].name);
                     if (this.files[1]!=null){
                         this.removeFile(this.files[0]);
                     }
@@ -200,7 +202,7 @@ $error = $_POST['error-message-products'];
                     alert(namefile);
                     $.ajax({
                         type: "POST",
-                        url: "https://www.bebes-lutins.fr/view/html/tests/test-upload.php",
+                        url: "../../view/html/tests/test-upload.php",
                         data: {
                             target_file: namefile,
                             delete_file: 1
@@ -212,7 +214,6 @@ $error = $_POST['error-message-products'];
                         }
                     });
                 });
-
                 var mockFile = { name: "<?php echo $product->getImage()->getName() ?>", type: 'image/jpeg' };
                 this.addFile.call(this, mockFile);
                 this.options.thumbnail.call(this, mockFile, "https://www.bebes-lutins.fr/view/assets/images/products/" + "<?php echo $product->getImage()->getName() ?>");

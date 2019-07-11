@@ -225,6 +225,7 @@ if($_REQUEST['product_id']!=null){
             },
             init: function() {
                 this.on("addedfile", function() {
+                    $('#image-name').attr('value', this.files[0].name);
                     if (this.files[1]!=null){
                         this.removeFile(this.files[0]);
                     }

@@ -114,6 +114,7 @@ width: max-content;
     display: flex;
     flex-direction: row !important;
     margin: 0.5rem 0;
+    overflow-x: auto;
 }
 
 #product-page-container #product-informations #thumbnails-container .thumbnail{

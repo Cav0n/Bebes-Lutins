@@ -40,9 +40,9 @@ else $message = null;
                 <input id="phone" type="tel" name="phone" placeholder="Votre numéro de téléphone">
                 <label for="password">Mot de passe :</label>
                 <input id="password" type="password" name="password" placeholder="Votre mot de passe" required>
-                <lable for="confirm_password">Confirmer le mot de passe :</lable>
+                <label for="confirm_password">Confirmer le mot de passe :</label>
                 <input id="confirm_password" type="password" name="confirm_password" placeholder="Retapez le mot de passe" required>
-                <div class="horizontal centered">
+                <div id="newsletter-container" class="horizontal centered">
                     <label style="all:unset;" for="newsletter-checkbox">Je souhaite recevoir la newsletter de Bébés Lutins :</label>
                     <input id="newsletter-checkbox" type="checkbox" name="newsletter" value="yes" checked>
                 </div>

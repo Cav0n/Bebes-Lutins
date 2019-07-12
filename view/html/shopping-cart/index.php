@@ -111,8 +111,8 @@ $message = $shopping_cart->getMessage();
 <main id="shopping-cart-main">
     <div id="shopping-cart-wrapper">
         <?php if(!$empty) UtilsModel::load_shopping_cart_stepper();?>
-        <div id='alert-container' class='horizontal' style="width: 820px;margin: 2rem auto;padding: 1rem;background: white;border: 2px dashed red;font-family: Roboto, sans-serif;color: red;border-radius: 3px;box-sizing: border-box;">
-            <div class='vertical centered' style='height: 4rem;width: 4rem;margin-right: 1rem;'>
+        <div id='alert-container' class='horizontal'>
+            <div class='vertical centered'>
                 <?php echo file_get_contents("view/assets/images/utils/icons/warning.svg"); ?>
             </div>
             <div class='vertical'>

@@ -27,34 +27,36 @@ $parent_category_name_url = str_replace("’", "_", str_replace(" ", "=",UtilsMo
                 <p id='breadcrumb'><a href='https://www.bebes-lutins.fr'> Accueil </a> <b> / </b> <a href='https://www.bebes-lutins.fr/categorie/<?php echo $parent_category_name_url; ?>'><?php echo $category_parent; ?></a> <b> / </b> <a href='https://www.bebes-lutins.fr/categorie/<?php echo $category_name_url; ?>'><?php echo $category->getName(); ?></a> <b> / </b> <i><?php echo $product->getName(); ?></i></p>
             </div>
             <div id='product-presentation-container' class='horizontal'>
-                <div id='left-column' class='vertical'>
-                    <div id='images-container' class='horizontal'>
-                        <div id='thumbnails-container' class='vertical'>
-                            <img class="thumbnail transition-fast" src="https://www.bebes-lutins.fr/view/assets/images/products/<?php echo $product->getImage()->getName(); ?>" onclick="update_image('https://www.bebes-lutins.fr/view/assets/images/products/<?php echo $product->getImage()->getName(); ?>')">
-                            <?php foreach($product->getImage()->getThumbnails() as $thumbnail) { ?>
-                            <img class="thumbnail transition-fast" src="https://www.bebes-lutins.fr/view/assets/images/thumbnails/<?php echo $thumbnail->getName();?>" onclick="update_image('https://www.bebes-lutins.fr/view/assets/images/thumbnails/<?php echo $thumbnail->getName(); ?>')">
-                            <?php } ?>
+                <div id='product-informations' class='horizontal'>
+                    <div id='left-column' class='vertical'>
+                        <div id='images-container' class='horizontal'>
+                            <div id='thumbnails-container' class='vertical'>
+                                <img class="thumbnail transition-fast" src="https://www.bebes-lutins.fr/view/assets/images/products/<?php echo $product->getImage()->getName(); ?>" onclick="update_image('https://www.bebes-lutins.fr/view/assets/images/products/<?php echo $product->getImage()->getName(); ?>')">
+                                <?php foreach($product->getImage()->getThumbnails() as $thumbnail) { ?>
+                                <img class="thumbnail transition-fast" src="https://www.bebes-lutins.fr/view/assets/images/thumbnails/<?php echo $thumbnail->getName();?>" onclick="update_image('https://www.bebes-lutins.fr/view/assets/images/thumbnails/<?php echo $thumbnail->getName(); ?>')">
+                                <?php } ?>
+                            </div>
+                            <div id='main-image-container'>
+                                <img id='big-image'  src='https://www.bebes-lutins.fr/view/assets/images/products/<?php echo $product->getImage()->getName(); ?>' alt='<?php echo $product->getName(); ?>'>
+                            </div>
                         </div>
-                        <div id='main-image-container'>
-                            <img id='big-image'  src='https://www.bebes-lutins.fr/view/assets/images/products/<?php echo $product->getImage()->getName(); ?>' alt='<?php echo $product->getName(); ?>'>
+                        <div id='social-media-container' class='horizontal between'>
+                            <a id='facebook-link' class='horizontal' target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.bebes-lutins.fr%2Fproduct-test%2Fproduct-5ce7f760c4eaf&amp;src=sdkpreparse">
+                                <?php echo file_get_contents("view/assets/images/utils/icons/facebook.svg"); ?>
+                                <p class='vertical centered'>Partager sur FaceBook</p>
+                            </a>
+                            <a id='instagram-link' class='vertical centered' target="_blank" href="https://www.instagram.com/bebeslutins/">
+                                <?php echo file_get_contents("view/assets/images/utils/icons/instagram.svg"); ?>
+                            </a>
                         </div>
                     </div>
-                    <div id='social-media-container' class='horizontal between'>
-                        <a id='facebook-link' class='horizontal' target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.bebes-lutins.fr%2Fproduct-test%2Fproduct-5ce7f760c4eaf&amp;src=sdkpreparse">
-                            <?php echo file_get_contents("view/assets/images/utils/icons/facebook.svg"); ?>
-                            <p class='vertical centered'>Partager sur FaceBook</p>
-                        </a>
-                        <a id='instagram-link' class='vertical centered' target="_blank" href="https://www.instagram.com/bebeslutins/">
-                            <?php echo file_get_contents("view/assets/images/utils/icons/instagram.svg"); ?>
-                        </a>
-                    </div>
-                </div>
-                <div id='right-column' class='vertical'>
-                    <div id='title-container'>
-                        <h1><?php echo $product->getName(); ?></h1>
-                    </div>
-                    <div id='ceo-description-container'>
-                        <p><?php echo $product->getCeoDescription();  ?></p>
+                    <div id='right-column' class='vertical'>
+                        <div id='title-container'>
+                            <h1><?php echo $product->getName(); ?></h1>
+                        </div>
+                        <div id='ceo-description-container'>
+                            <p><?php echo $product->getCeoDescription();  ?></p>
+                        </div>
                     </div>
                 </div>
                 <div id='extra-column' class='vertical'>

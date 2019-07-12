@@ -1,12 +1,20 @@
 header{
     width: 100%;
-    height: 8em;
+    height: 9em;
     display: flex;
     flex-direction: column;
     position: fixed;
     background-color: #f9f9f9;
     z-index: 100;
     /*box-shadow: 0 13px 21px -17px rgb(0, 0, 0);*/
+}
+
+header #extra {
+    z-index: 100;
+    height: 2rem;
+    color: white;
+    background: rgb(229, 89, 84);
+    font-family: Roboto, sans-serif;
 }
 
 header .tab{
@@ -34,7 +42,7 @@ header #img-logo{
     width: 250px;
     height: 250px;
     position: fixed;
-    top: -6em;
+    top: -4em;
     left: calc(50% - 125px);
 }
 header #img-logo:hover{
@@ -97,6 +105,8 @@ header #navbar{
     background: #9fe460;
     border-top: 1px solid green;
     border-bottom: 1px solid green;
+    font-family: Roboto, sans-serif;
+    font-size: 1.1rem;
 
     /*width: 100%;
     height: 2em;
@@ -153,7 +163,7 @@ header #navbar #left #categories #categories-popup{
     position: fixed;
     left: 0;
     display: none;
-    top: calc(6em + 2px);
+    top: calc(8em + 2px);
     width: 100%;
     background: #F3F3F3;
     z-index: 1;

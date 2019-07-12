@@ -72,7 +72,7 @@ foreach ($categories as $category){
             <p onclick="hide_menu_mobile()">X</p>
         </div>
         <div class="links vertical">
-            <a href="https://www.bebes-lutins.fr/">A propos</a>
+            <a href="https://www.bebes-lutins.fr/en-savoir-plus/qui-sommes-nous">A propos</a>
             <a id='categories-button' onclick="display_categories()" class="horizontal"><p>Catégories</p><i id="arrow-button" class="fas fa-angle-down"></i></a>
             <div id="categories-mobile" class="transition-fast" style="display: none">
             <?php echo $category_popup_content;?>

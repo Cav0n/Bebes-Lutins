@@ -21,6 +21,7 @@
 @import "shopping_cart/delivery.css";
 @import "shopping_cart/payment.css";
 @import "shopping_cart/login_while_ordering.css";
+@import "account/wishlist.css";
 @import "account/birthlist.css";
 @import "account/birthlist_visitor.css";
 

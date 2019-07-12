@@ -60,6 +60,7 @@ foreach ($address_list as $address){
                 <a href="https://www.bebes-lutins.fr/espace-client">Mon profil</a>
                 <a href="https://www.bebes-lutins.fr/espace-client/commandes">Mes commandes</a>
                 <a href="#" class="selected">Mes adresses</a>
+                <a href="https://www.bebes-lutins.fr/espace-client/liste-envie">Liste d'envie</a>
             </div>
         </div>
         <div id="customer-area-inner" class="vertical">

@@ -26,6 +26,10 @@ class ConnectedModel
                         require("$view_rep/html/account/account-address.php");
                         break;
 
+                    case 'customer-whishlist':
+                        require("$view_rep/html/account/wishlist/main.php");
+                        break;
+
                     case 'customer-birthlist':
                         require("$view_rep/html/account/birthlist/owner/index.php");
                         break;

@@ -39,6 +39,7 @@ $orders_list = OrderGateway::GetOrdersOfCustomer($user->getId());
                 <a href="https://www.bebes-lutins.fr/espace-client">Mon profil</a>
                 <a href="#" class="selected">Mes commandes</a>
                 <a href="https://www.bebes-lutins.fr/espace-client/adresses">Mes adresses</a>
+                <a href="https://www.bebes-lutins.fr/espace-client/liste-envie">Liste d'envie</a>
             </div>
         </div>
         <div id="customer-area-inner" class="vertical">

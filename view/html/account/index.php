@@ -55,7 +55,7 @@ foreach ($user->getOrderList() as $order) $number_of_orders = $number_of_orders 
                 <a href="#" class="selected">Mon profil</a>
                 <a href="https://www.bebes-lutins.fr/espace-client/commandes">Mes commandes</a>
                 <a href="https://www.bebes-lutins.fr/espace-client/adresses">Mes adresses</a>
-                <a href="https://www.bebes-lutins.fr/espace-client/liste-de-naissance">Liste de naissance</a>
+                <a href="https://www.bebes-lutins.fr/espace-client/liste-envie">Liste d'envie</a>
             </div>
         </div>
         <div id="customer-area-inner" class="vertical">

@@ -94,8 +94,8 @@ foreach ($categories as $category){
     </div>
     <div class="social-media-container vertical">
         <div class="horizontal social-media-icons">
-            <a href="https://www.facebook.com/bebes.lutins/" class="facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com/bebeslutins/" class="instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com/bebes.lutins/" class="facebook"><?php echo file_get_contents("view/assets/images/utils/icons/facebook.svg"); ?></a>
+            <a href="https://www.instagram.com/bebeslutins/" class="instagram"><?php echo file_get_contents("view/assets/images/utils/icons/instagram.svg"); ?></a>
         </div>
     </div>
 </div>

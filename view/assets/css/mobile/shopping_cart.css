@@ -10,6 +10,7 @@
 #checkout-stepper-wrapper{
     text-align: center;
     padding-top: 30px;
+    display:none;
 }
 
 #checkout-stepper-wrapper .checkout-stepper{
@@ -46,23 +47,28 @@ width: max-content;
 }
 
 #shopping-cart-wrapper #shopping-cart-empty form{
-    font-size: 1em;
+    margin-top: 1rem;
+    background: white;
+    border: 1px solid rgb(220,220,220);
 }
 
 #shopping-cart-wrapper #shopping-cart-empty h1{
     font-weight: 600;
     font-size: 2em;
+    text-align: left;
 }
 
 #shopping-cart-wrapper #shopping-cart-empty p{
     font-size: 1.1em;
-    margin: 8% 0 4% 0;
+    margin: 1rem 0 0.5rem 0;
+    text-align: left;
 }
 
 #shopping-cart-wrapper #shopping-cart-empty button{
-    width: 80%;
-    margin: auto;
-    background: white;
+    margin: 0;
+    width: 100%;
+    height: 3rem;
+    font-size: 1.1rem;
 }
 
 #shopping-cart-wrapper #shopping-cart-content{

@@ -36,3 +36,44 @@ width: max-content;
 #connection a{
     text-align: center;
 }
+
+/* Connection during shopping cart */
+#connection-or-register-wrapper #connection-or-register{
+    display: flex;
+    flex-direction: column !important;
+    margin-top: 1rem;
+}
+
+#connection-or-register .choice{
+    padding: 1rem;
+    background: white;
+    border: 1px solid rgb(220,220,220);
+    margin-bottom: 1rem;
+}
+
+#connection-or-register .choice h2{
+    font-family: Roboto,sans-serif;
+    font-size: 1.5rem;
+}
+
+#connection-or-register .choice form{
+    padding: 1rem 0;
+}
+
+#connection-or-register .choice form button{
+    margin-top: 1rem;
+    height: 3rem;
+    font-size: 1rem;
+}
+
+#connection-or-register .choice form button p{
+    margin: auto 0;
+    font-family: Roboto,sans-serif;
+    font-size: 1.1rem;
+}
+
+#connection-or-register .choice form button svg{
+    height: 2rem;
+    width: 2rem;
+    margin-left: auto;
+}

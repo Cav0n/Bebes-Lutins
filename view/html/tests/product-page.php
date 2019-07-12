@@ -65,8 +65,9 @@ $parent_category_name_url = str_replace("’", "_", str_replace(" ", "=",UtilsMo
                             <p id='price' class='vertical centered'><?php echo UtilsModel::FloatToPrice($product->getPrice()); ?></p>
                         </div>
 
-                        <form id='add-to-cart-container' class='horizontal'>
-                            <input id='quantity-input' type='number' value='1' placeholder='1' min='1' max='<?php echo $product->getStock(); ?>' step='1' required>
+                        <form id='add-to-cart-container' class='horizontal' method="post" action="https://www.bebes-lutins.fr/panier/ajout-produit">
+                            <input type="hidden" name="product_id" value="<?php echo $product->getId();?>">
+                            <input id='quantity-input' name='quantity' type='number' value='1' placeholder='1' min='1' max='<?php echo $product->getStock(); ?>' step='1' required>
                             <button id='add-to-cart-button' type='submit'>Ajouter au panier</button>
                         </form>
                     </div>

@@ -36,7 +36,7 @@ if (isset($_POST['message'])){
                         <label for="password">Mot de passe :</label>
                         <input id="password" type="password" name="password" placeholder="Votre mot de passe">
                         <?php echo $message?>
-                        <button type="submit" class="horizontal"><img src="https://www.bebes-lutins.fr/view/assets/images/utils/user.png" alt="" class="vertical centered"><p>S'identifier</p></button>
+                        <button type="submit" class="horizontal"><p>S'identifier</p><?php echo file_get_contents("view/assets/images/utils/icons/avatar.svg"); ?></button>
                     </form>
                 </div>
             </div>
@@ -46,7 +46,7 @@ if (isset($_POST['message'])){
                 <div class="choice-inner vertical">
                     <p class="information-text">Pour continuer votre commande vous devez créer un compte, cela prend moins d'une minute.</p>
                     <form id="register-form" class="vertical" method="post" action="https://www.bebes-lutins.fr/espace-client/enregistrement">
-                        <button type="submit" class="horizontal"><img src="https://www.bebes-lutins.fr/view/assets/images/utils/security.png" alt="" class="vertical centered"><p>Créer votre compte</p></button>
+                        <button type="submit" class="horizontal"><p>Créer votre compte</p><?php echo file_get_contents("view/assets/images/utils/icons/security.svg"); ?></button>
                     </form>
                 </div>
             </div>

@@ -22,10 +22,6 @@
     border-radius: 3px;
 }
 
-#product-page-mobile .product-texts{
-
-}
-
 #product-page-mobile .product-texts #product-summary{
     padding: 20px;
     background: #F4F4F4;
@@ -61,4 +57,156 @@
     width: fit-content;
 width: max-content;
     margin-bottom: 10px;
+}
+
+/* NEW PRODUCT PAGE */
+#product-page-container{
+    padding: 1rem;
+}
+
+#product-page-container h1{
+    font-family: Roboto,sans-serif;
+    font-size: 1.6rem;
+}
+
+#product-page-container h2{
+    font-family: Roboto,sans-serif;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+#product-page-container #breadcrumb-container {
+    display: none;
+}
+
+#product-page-container #product-presentation-container{
+    display: flex;
+    flex-direction: column !important;
+}
+
+#product-page-container #product-presentation-container #product-informations{
+    display: flex;
+    flex-direction: column-reverse !important;
+}
+
+#product-page-container #product-informations #title-container{
+    margin-bottom: 1rem;
+}
+
+#product-page-container #product-informations #ceo-description-container{
+    display: none;
+}
+
+#product-page-container #product-informations #images-container{
+    display: flex;
+    flex-direction: column-reverse !important;
+}
+
+#product-page-container #product-informations #images-container #main-image-container{
+    width: 100%;
+}
+
+#product-page-container #product-informations #main-image-container img{
+    width: 100%;
+}
+
+#product-page-container #product-informations #images-container #thumbnails-container{
+    display: flex;
+    flex-direction: row !important;
+    margin: 0.5rem 0;
+}
+
+#product-page-container #product-informations #thumbnails-container .thumbnail{
+    width: 4rem;
+    height: 4rem;
+    margin-right: 1rem;
+}
+
+#product-page-container #product-informations #social-media-container{
+    display: none !important;
+}
+
+#product-page-container #price-container{
+    height: 3rem;
+    background: linear-gradient(to top, #fcfcfc, #fafbfc);
+    border: 1px solid #c4cdd5;
+    box-shadow: 0 1px 0 0 rgba(22,29,37,.05);
+    border-radius: 3px;
+    color: #3f4455;
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-decoration: none;
+    transition-property: background,border,box-shadow;
+    transition-duration: .2s;
+    transition-timing-function: cubic-bezier(.64,0,.35,1);
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+
+#product-page-container #add-to-cart-container {
+    background: linear-gradient(180deg,#fff,#f9fafb);
+    border: 1px solid #c4cdd5;
+    box-shadow: 0 1px 0 0 rgba(22,29,37,.05);
+    border-radius: 3px;
+    color: #212b36;
+    text-align: center;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-decoration: none;
+    transition-property: background,border,box-shadow;
+    transition-duration: .2s;
+    transition-timing-function: cubic-bezier(.64,0,.35,1);
+    height: 3rem;
+    font-size: 0.8rem;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 1rem 0;
+    padding: 0;
+}
+
+#product-page-container #add-to-cart-container #quantity-input{
+    font-size: 1em;
+    padding: 8px;
+    border-radius: 3px;
+    border: none;
+    background: none;
+    border-right: 1px solid rgb(220,220,220);
+    text-align: center;
+    box-shadow: inset 0px 0px 3px 0px rgba(100,100,100,0.4)
+}
+
+#product-page-container #add-to-cart-container #add-to-cart-button{
+    background: none;
+    border: none;
+    box-shadow: none;
+    font-size: 1.1rem;
+    font-family: Roboto, sans-serif;
+    font-weight: 400;
+}
+
+#product-page-container #price-container #price{
+    font-family: Roboto,sans-serif;
+    font-size: 1.4rem;
+}
+
+#product-page-container #product-description-container{
+    padding: 1rem;
+    border: 1px solid rgb(220,220,220);
+    border-radius: 3px;
+    margin-bottom: 1rem;
+    background: white;
+}
+
+#product-page-container #product-review-container{
+    padding: 1rem;
+    border: 1px solid rgb(220,220,220);
+    border-radius: 3px;
+    margin-bottom: 1rem;
+    background: white;
 }

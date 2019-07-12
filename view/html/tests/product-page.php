@@ -21,7 +21,7 @@ $parent_category_name_url = str_replace("’", "_", str_replace(" ", "=",UtilsMo
     <header>
         <?php UtilsModel::load_header();?>
     </header>
-    <main>
+    <main id='product-page-main'>
         <div id='product-page-container'>
             <div id='breadcrumb-container' class='horizontal centered'>
                 <p id='breadcrumb'><a href='https://www.bebes-lutins.fr'> Accueil </a> <b> / </b> <a href='https://www.bebes-lutins.fr/categorie/<?php echo $parent_category_name_url; ?>'><?php echo $category_parent; ?></a> <b> / </b> <a href='https://www.bebes-lutins.fr/categorie/<?php echo $category_name_url; ?>'><?php echo $category->getName(); ?></a> <b> / </b> <i><?php echo $product->getName(); ?></i></p>
@@ -62,7 +62,7 @@ $parent_category_name_url = str_replace("’", "_", str_replace(" ", "=",UtilsMo
                 <div id='extra-column' class='vertical'>
                     <div class="vertical">
                         <div id='price-container' class='horizontal centered'>
-                            <p id='price'><?php echo UtilsModel::FloatToPrice($product->getPrice()); ?></p>
+                            <p id='price' class='vertical centered'><?php echo UtilsModel::FloatToPrice($product->getPrice()); ?></p>
                         </div>
 
                         <form id='add-to-cart-container' class='horizontal'>

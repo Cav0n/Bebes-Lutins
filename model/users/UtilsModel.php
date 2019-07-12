@@ -353,13 +353,15 @@ class UtilsModel
             // should return JSON with success as true
             if ($responseKeys["success"]) {
                 if(!BannedWords::StringContainsBannedWords($message)) {
-                    UtilsModel::EnvoieMail("contact@bebes-lutins.fr", $name, $mail, $subject, "$name ($mail) vous a envoyé un message à partir du site Bébés Lutins : <BR>------<BR><BR><u>$subject</u><BR>$message");
-                    UtilsModel::EnvoieNoReply($mail, "Message recu !", "Bonjour $name, nous vous envoyons ce mail pour vous confirmer que nous avons bien recu votre message : $subject 
-            $message 
+                    $error = UtilsModel::EnvoieMail("contact@bebes-lutins.fr", $name, $mail, $subject, "$name ($mail) vous a envoyé un message à partir du site Bébés Lutins : <BR>------<BR><BR><u>$subject</u><BR>$message");
+                    $error2 = UtilsModel::EnvoieNoReply($mail, "Message recu !", "Bonjour $name, nous vous envoyons ce mail pour vous confirmer que nous avons bien recu votre message : $subject 
+            $message
         Ceci est une réponse automatique, veuillez ne pas y répondre. 
         Cordialement,
         l'équipe Bébés Lutins.");
-                    $_SESSION['contact-message'] = "<p style='color: #33b40f; text-align: center;'>Message envoyé !</p>";
+                    if($error != null) $_SESSION['contact-message'] = "<p style='color: #b41620; text-align: center;'>$error</p>";
+                    elseif($error2 != null) $_SESSION['contact-message'] = "<p style='color: #b41620; text-align: center;'>$error2</p>";
+                    else $_SESSION['contact-message'] = "<p style='color: #33b40f; text-align: center;'>Message envoyé !</p>";
                 } else{
                     $_SESSION['contact-message'] = "<p style='color: #b41620; text-align: center;'>Vous avez entré un terme interdit.</p>";
                 }
@@ -480,7 +482,7 @@ class UtilsModel
             $total_price = $shopping_cart->getTotalPrice();
             if($shopping_cart->getTotalPrice() >= $free_shipping_price) $shipping_price = 0;
 
-            $order = new Order(uniqid( "$user_id-"), $user, new Address("", $user, "", "", "", "", "",0, "", ""), new Address("", $user, "", "", "", "", "", 0, "", ""), date('Y-m-d'), 0, $shipping_price, $total_price, 0, null, null);
+            $order = new Order(uniqid( "$user_id-"), $user, new Address("", $user, "", "", "", "", "","", "", ""), new Address("", $user, "", "", "", "", "", "", "", ""), date('Y-m-d'), 0, $shipping_price, $total_price, 0, null, null);
 
             if($shopping_cart->getMessage() != null)
             {
@@ -867,9 +869,12 @@ class UtilsModel
             $mail->send();
         } catch (Exception $e){
             echo $e->getMessage();
+            return "Une erreur s'est produite, veuillez vérifier votre adresse mail.";
         } catch (\PHPMailer\PHPMailer\Exception $e){
             echo $e->getMessage();
+            return "Une erreur s'est produite, veuillez vérifier votre adresse mail.";
         }
+        return;
     }
 
     public static function EnvoieNoReply(String $destinataire, String $sujet_mail, $message){
@@ -904,9 +909,12 @@ class UtilsModel
             $mail->send();
         } catch (Exception $e){
             echo $e->getMessage();
+            return "Une erreur s'est produite, veuillez vérifier votre adresse mail.";
         } catch (\PHPMailer\PHPMailer\Exception $e){
             echo $e->getMessage();
+            return "Une erreur s'est produite, veuillez vérifier votre adresse mail.";
         }
+        return;
     }
 
     public static function TestMail(){

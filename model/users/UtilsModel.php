@@ -825,7 +825,7 @@ class UtilsModel
             $subject = "Merci pour votre commande!";
             $customer_message = "$customer_firstname $customer_surname,
             Bébés Lutins vous remercie pour cette commande de $order_price.
-            Notre équipe la traitera dans les meilleurs délais.
+            Notre équipe la traitera dans les meilleurs délais, veuillez notez toutefois que les commandes passées après le 13 juillet seront expédiées à partir du 29 juillet puisque l'équipe de Bébés Lutins sera en congé.
             Vous pouvez suivre à tout moment l'avancement du traitement de votre commande dans votre espace client.
             
             Cordialement,

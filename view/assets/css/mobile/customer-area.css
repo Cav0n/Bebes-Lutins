@@ -1,42 +1,59 @@
-#customer-area-mobile{
-    padding: 20px;
-}
-
 #customer-area-mobile .customer-area-bloc{
     padding-bottom: 10px;
     margin-bottom: 10px;
 }
 
+#customer-area-mobile h1{
+    font-size: 2.5rem;
+    font-family: Roboto,sans-serif;
+}
+
+#customer-area-mobile .customer-area-bloc{
+    padding: 1rem;
+    background: white;
+    border: 1px solid rgb(220,220,220);
+    border-radius: 2px;
+    margin: 0.5rem 0;
+}
+
 #customer-area-mobile .customer-area-bloc h2{
-    font-size: 1.8em;
+    font-size: 1.5rem;
+    font-family: Roboto,sans-serif;
 }
 
 #customer-area-mobile .customer-area-bloc button{
-    width: 80%;
-    margin: 10px auto;
+    margin: 1rem 0 0 0;
+    width: 100%;
 }
 
 #customer-area-mobile .customer-area-bloc .user-informations{
-    width: 71%;
-    margin: 10px auto;
-    padding: 4%;
-    border: 1px solid rgb(193, 193, 193);
-    border-radius: 5px;
+    margin: 0.5rem 0;
 }
 
 /* --- ORDERS --- */
-#user-orders-mobile{
-    padding: 20px;
+#user-orders-mobile h1{
+    font-family: Roboto,sans-serif;
+    font-size: 2rem;
+    color: #545454;
+}
+
+#user-orders-mobile .orders{
+    padding: 1rem;
+    background: white;
+    border: 1px solid rgb(220,220,220);
+    margin-bottom: 1rem;
+    margin-top: 1rem;
 }
 
 #user-orders-mobile .orders h2{
-    font-size: 1.8em;
+    font-size: 1.5rem;
+    font-family: Roboto,sans-serif;
 }
 
 #user-orders-mobile .orders .order{
-    border: 1px solid;
-    border-radius: 5px;
-    margin: 15px 0;
+    margin: 1rem 0;
+    border: 1px solid rgb(220,220,220);
+    border-radius: 2px;
 }
 
 #user-orders-mobile .orders .order .head, #user-orders-mobile .orders .order .status{
@@ -44,9 +61,10 @@
 }
 
 #user-orders-mobile .orders .order .status{
-    text-align: center;
-    border-top: 1px solid;
-    border-radius: 0 0 4px 4px;
+    color: white;
+    font-family: Roboto,sans-serif;
+    font-size: 1.1rem;
+    text-align: left;
 }
 
 #user-orders-mobile .orders .order .head .date-and-price{

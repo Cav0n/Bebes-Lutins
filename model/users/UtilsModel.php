@@ -1041,27 +1041,27 @@ class UtilsModel
     public static function StatusToColor(int $status){
         switch ($status){
             case 0 :
-                $color = "yellow";
+                $color = "#b1b1b1"; //grey
                 break;
 
             case 1 :
-                $color = "blue";
+                $color = "#5c8dfd"; //blue
                 break;
 
             case 2 :
-                $color = "#ee8900";
+                $color = "#ee8900"; //brown
                 break;
 
             case 3 :
-                $color = "green";
+                $color = "#4ac34a"; //green
                 break;
 
             case -1 :
-                $color = "red";
+                $color = "#ff4d4d"; //red
                 break;
 
             default :
-                $color = "white";
+                $color = "black";
                 break;
         }
         return $color;

@@ -23,7 +23,7 @@ $orders_list = UserGateway::GetOrders($user)
 </header>
 <main>
     <div id="user-orders-mobile" class="mobile vertical">
-        <a href="https://www.bebes-lutins.fr/espace-client"><H1><i class="fas fa-arrow-left"></i> Mon compte</H1></a>
+        <a href="https://www.bebes-lutins.fr/espace-client"><H1>< Mon compte</H1></a>
         <div class="orders">
             <H2>Mes commandes</H2>
             <?php foreach ($orders_list as $order){

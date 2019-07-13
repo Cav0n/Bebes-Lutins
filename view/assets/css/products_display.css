@@ -80,32 +80,10 @@
 
 /* Show more / Show less products buttons*/
 .product-display-button-form{
-    width: 85%;
-    margin: 30px auto;
-    max-width: 1240px;
+    width: 271px;
+    margin: 0 auto 2rem auto;
 }
 
-.product-display-button-form button{
-    background: linear-gradient(180deg,#fff,#f9fafb);
-    border: 1px solid #c4cdd5;
-    box-shadow: 0 1px 0 0 rgba(22,29,37,.05);
-    border-radius: 3px;
-    color: #212b36;
-    text-align: center;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    text-decoration: none;
-    transition-property: background,border,box-shadow;
-    transition-duration: .2s;
-    transition-timing-function: cubic-bezier(.64,0,.35,1);
-    margin-top: auto;
-    padding: 10px 20px;
-    font-size: 0.9rem;
-    top: auto;
-}
 .product-display-button-form button:hover{
     background-color: #ececec;
 }

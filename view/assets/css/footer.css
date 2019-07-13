@@ -1,5 +1,5 @@
 footer {
-    padding: 20px 0;
+    padding: 1rem 0;
     background: #efefef;
     box-shadow: inset 0 7px 9px -7px rgba(0,0,0,0.4);
 }
@@ -17,4 +17,21 @@ footer #links{
 
 footer #links div{
     margin: 0 10px;
+}
+
+footer .social-link{
+    margin:0 0 0.5rem 0;
+    background: white;
+    border-radius: 2px;
+    border: 1px solid rgb(220,220,220);
+    padding: 0 4px 0 0;
+}
+
+footer .social-link svg{
+    height: 1.5rem;
+    width: 1.5rem;
+}
+
+footer .social-link .social-media-name{
+    margin-left: 5px;
 }

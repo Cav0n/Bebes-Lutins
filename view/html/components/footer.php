@@ -37,8 +37,8 @@ if(isset($_SESSION['connected_user'])){
     </div>
     <div class="vertical top">
         <p class="big">Nous suivre</p>
-        <a href='https://www.instagram.com/bebeslutins/' class="centered no-decoration"><i class="fab fa-instagram fa-2x"></i></a>
-        <a href='https://www.facebook.com/bebes.lutins/' class="centered no-decoration"><i class="fab fa-facebook-square fa-2x"></i></a>
+        <a href='https://www.instagram.com/bebeslutins/' class="no-decoration social-link horizontal"><?php echo file_get_contents("view/assets/images/utils/icons/instagram.svg"); ?> <p class='social-media-name vertical centered'> - Instagram</p></a>
+        <a href='https://www.facebook.com/bebes.lutins/' class="no-decoration social-link horizontal"><?php echo file_get_contents("view/assets/images/utils/icons/facebook.svg"); ?> <p class='social-media-name vertical centered'> - Facebook</p></a>
         <?php echo $admin_button;?>
     </div>
     <div class="vertical top">

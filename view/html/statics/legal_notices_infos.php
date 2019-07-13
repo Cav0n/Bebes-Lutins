@@ -68,10 +68,10 @@
                     Bébés Lutins/Actypoles<BR>
                     Rue du 19 mars 1962<BR>
                     63300 THIERS<BR>
-                    Tel : 04.73.80.26.60<BR>
-                    <a href="mailto:contact@bebes-lutins.fr">contact@bebes-lutins.fr</a><BR>
-
-                    <a href="https://www.bebes-lutins.fr">www.bebes-lutins.fr</a></p><BR>
+                    <BR>
+                    <i>Tel : 04.73.80.26.60</i><BR>
+                    Adresse mail : <i><a href="mailto:contact@bebes-lutins.fr">contact@bebes-lutins.fr</a></i><BR>
+                    Site web : <i><a href="https://www.bebes-lutins.fr">www.bebes-lutins.fr</a></i></p><BR>
             </div>
         </div>
     </div>

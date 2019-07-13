@@ -26,26 +26,27 @@
         <h1>Contactez-nous</h1>
         <div class="static-bloc vertical centered">
             <div class="static-bloc-inner horizontal between">
-                <div class="vertical centered">
-                    <div class="vertical">
-                        <p>⌨️️ <b>Par mail</b><BR>
+                <div id='contact-informations' class="vertical centered">
+                    <div class="vertical contact-information">
+                        <p><b>Par mail</b><BR>
                         Vous pouvez nous contacter par mail à l'adresse :<BR>
                         <a href="mailto:contact@bebes-lutins.fr">contact@bebes-lutins.fr</a></p>
                     </div>
-                    <div class="vertical">
-                        <p>✉️ <b>Par courrier</b><BR>
+                    <div class="vertical contact-information">
+                        <p><b>Par courrier</b><BR>
                         Bébés Lutins - Actypoles<BR>
                         Rue du 19 Mars 1962<BR>
                         63550 THIERS<BR>
                         <em>Nous vous recevons avec plaisir sur rendez-vous.</em></p>
                     </div>
-                    <div class="vertical">
-                        <p>📞 <b>Par téléphone au service client</b><BR>
+                    <div class="vertical contact-information">
+                        <p><b>Par téléphone au service client</b><BR>
                             06 41 56 91 65<BR>
                             <em>Katia répondra avec plaisir à vos questions.</em></p>
                     </div>
                 </div>
                 <form id="comment_form" action="https://www.bebes-lutins.fr/envoyer-message" class="vertical" method="post">
+                    <h2>Formulaire de contact</h2>
                     <?php if(isset($_SESSION['contact-message'])) {echo $_SESSION['contact-message']; unset($_SESSION['contact-message']);}?>
                     <label for="name">Votre nom :</label>
                     <input id='name' name='name' type="text" placeholder="Votre nom et prénom" required>
@@ -57,8 +58,10 @@
                     <textarea id='message' name='message' placeholder="Votre message" required></textarea>
                     <div class="horizontal between" style="margin-top: 10px;">
                         <div class="g-recaptcha" data-sitekey="6Ldj9p4UAAAAAAY_KU7zSzFiAIvfLagBc4WXHaEt"></div>
-                        <button type="submit" form="back-form">Retour</button>
-                        <button type="submit">Envoyer</button>
+                        <div id='submit-buttons' class='vertical between'>
+                            <button type="submit">Envoyer</button>
+                            <button type="submit" form="back-form">Retour</button>
+                        </div>
                     </div>
                 </form>
                 <form id="back-form" action="https://www.bebes-lutins.fr" method="post" class="hidden"></form>
@@ -103,8 +106,8 @@
                     <textarea id='message' name='message' placeholder="Votre message" required></textarea>
                     <div class="horizontal between">
                         <div class="g-recaptcha" data-sitekey="6Ldj9p4UAAAAAAY_KU7zSzFiAIvfLagBc4WXHaEt"></div>
-                        <button type="submit" form="back-form">Retour</button>
-                        <button type="submit">Envoyer</button>
+                            <button type="submit" form="back-form">Retour</button>
+                            <button type="submit">Envoyer</button>
                     </div>
                 </form>
             </div>

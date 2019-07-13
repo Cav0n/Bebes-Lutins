@@ -103,7 +103,8 @@
                     La commande ne sera prise en compte qu’après confirmation.<br>
                 </p>
                 <p>
-                    <b style="font-size: 1.4em;">Dans le cas d’une commande en ligne :</b><br>
+                    <BR>
+                    <b>Dans le cas d’une commande en ligne :</b><br>
                     Au préalable et avant de passer une commande, le Client doit s'inscrire auprès de BEBES LUTINS sur le
                     site www.bebes-lutins.fr afin de créer un compte client et ainsi de renseigner les informations qui lui
                     seront demandées.<br>
@@ -122,7 +123,8 @@
                     de produits s'entendent dans la limite des stocks disponibles.<br>
                 </p>
                 <p>
-                    <b style="font-size: 1.4em;">Processus de commande sur le Site :</b><br>
+                    <BR>
+                    <b>Processus de commande sur le Site :</b><br>
                     Le processus de commande sur le site www.bebes-lutins.fr comprend les étapes suivantes :<br>
                 </p>
                 <ul style="margin-left: 20px;list-style: initial;">
@@ -146,7 +148,8 @@
                             de conclure un contrat de vente avec lui.</p></li>
                 </ul>
                 <p>
-                    <b style="font-size: 1.4em;">Confirmation de commande :</b><br>
+                    <BR>
+                    <b>Confirmation de commande :</b><br>
                     Une fois la commande confirmée, vous pouvez observer dans votre compte-client l'évolution de l'état de
                     votre commande.<br>
                     La commande sera définitivement validée après réception de votre paiement, un email de validation de commande

@@ -74,11 +74,18 @@ header #top .contact:hover {
 
 header #top .contact p{
     margin-bottom: 10px;
-    font-size: 1.2rem
+    font-size: 1.2rem;
+    font-family: Roboto, sans-serif;
 }
 
-header #top .contact i{
-    padding: 5px;
+header #top .contact .icons{
+    height: 1.5rem;
+}
+
+header #top .contact svg{
+    height: 1.5rem;
+    width: 1.5rem;
+    margin: 0 0.5rem;
 }
 
 header #top .account, header #top .shoppingcart{

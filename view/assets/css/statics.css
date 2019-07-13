@@ -205,3 +205,11 @@ width: max-content;
     padding: 3px 1rem;
 }
 /* ---- */
+
+/* CONTACT */
+#comment_form button{
+    margin: auto 0 auto 1rem !important;
+    height: 2rem !important;
+    padding: 0 !important;
+    font-size: 0.9rem !important;
+}

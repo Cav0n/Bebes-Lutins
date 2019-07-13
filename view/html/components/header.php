@@ -118,10 +118,10 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
     <div id="left">
         <a href="https://www.bebes-lutins.fr/contact" class="contact transition-fast">
             <p>CONTACTEZ-NOUS</p>
-            <div class="horizontal centered">
-                <i class="fas fa-phone"></i>
-                <i class="fas fa-envelope"></i>
-                <i class="fas fa-map-marker-alt"></i>
+            <div class="horizontal centered icons">
+            <?php echo file_get_contents("view/assets/images/utils/icons/call.svg"); ?>
+            <?php echo file_get_contents("view/assets/images/utils/icons/email.svg"); ?>
+            <?php echo file_get_contents("view/assets/images/utils/icons/location.svg"); ?>
             </div>
         </a>
     </div>

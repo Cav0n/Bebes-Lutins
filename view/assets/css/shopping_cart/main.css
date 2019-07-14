@@ -38,7 +38,8 @@
     margin: 0 auto;
     height: 200px;
     background: #fefefe;
-    border-radius: 10px;
+    border: 1px solid rgb(220,220,220);
+    border-radius: 2px;
 }
 
 #shopping-cart-wrapper #shopping-cart-empty #empty-infos h1{

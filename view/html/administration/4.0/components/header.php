@@ -35,7 +35,7 @@ if($_GET['page'] == "nouveau" || $_GET['page'] == "edition" || $_GET['page'] == 
         <li class="<?php if($_GET['section'] == "analyses") echo 'selected'; ?>"><a href="https://www.bebes-lutins.fr/dashboard4/analyses/tableau-de-bord/tous"><div class="horizontal"><?php echo file_get_contents("view/assets/images/utils/icons/analysis.svg"); ?></div><p>Analyses</p></a></li>
     </ul>
     <ul id="version-container">
-        <li>Version : 4.2.1</li>
+        <li>Version : 4.3.0</li>
     </ul>
 </div>
 

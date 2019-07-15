@@ -188,7 +188,7 @@ class AdminModel
             }
         } else $image_name = $old_image_name;
 
-        try{ CategoryGateway::EditCategory($name, $image_name, $description, $old_name, $rank);}
+        try{ CategoryGateway::EditCategory($name, "", $image_name, $description, $old_name, $rank);}
         catch (PDOException $e){
             $_POST['error-message-products'] = "Erreur BDD : " . $e;
             self::load_page('dashboard');
@@ -692,6 +692,7 @@ class AdminModel
                     if($option == null) require("$view_rep/html/administration/4.0/tabs/products/categories/categories.php");
                     if($option == 'edition') require("$view_rep/html/administration/4.0/tabs/products/categories/new.php");}
                     if($option == 'sauvegarder') self::saveCategory($_POST['name']);
+                    if($option == 'supprimer') self::deleteCategory($_POST['name']);
                 if($page == "stocks") require("$view_rep/html/administration/4.0/tabs/products/stocks/all.php");
                 if($page == "nouveau") require("$view_rep/html/administration/4.0/tabs/products/edit/new.php");
                 if($page == "edition") require("$view_rep/html/administration/4.0/tabs/products/edit/edition.php");
@@ -850,6 +851,7 @@ class AdminModel
         $tags = $_POST['tags'];
         $hide = $_POST['hide'];
         $image = $_POST['image'];
+        $category_name_url = str_replace("’", "_", str_replace(" ", "=",UtilsModel::replace_accent($category_name)));
 
         if($_POST['new_category']){
             try{ 
@@ -861,6 +863,15 @@ class AdminModel
             } catch(PDOException $e){ echo $e; }
         }
 
+        ?>
+        <script type="text/javascript">
+            document.location.href='https://www.bebes-lutins.fr/dashboard4/produits/categories/edition/' + <?php echo $category_name_url; ?>;
+        </script>
+        <?php
+    }
+
+    public static function deleteCategory($category_name){
+        CategoryGateway::DeleteCategory($category_name);
         ?>
         <script type="text/javascript">
             document.location.href='https://www.bebes-lutins.fr/dashboard4/produits/categories';

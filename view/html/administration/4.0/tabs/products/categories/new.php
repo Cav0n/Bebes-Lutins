@@ -10,6 +10,7 @@ if($category_name != null){
 
     $old_name = $category->getName();
     $name = $old_name;
+    $url_name = 
     $image = $category->getImage();
     $description = $category->getDescription();
     $parent = $category->getParent();
@@ -180,7 +181,7 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
         document.location.href = "https://www.bebes-lutins.fr/dashboard4/produits/importer";
     }
 
-    function delete_product(name){
+    function delete_category(name){
         document.location.href='https://www.bebes-lutins.fr/dashboard4/categories/supprimer/' + name;
     }
 </script>

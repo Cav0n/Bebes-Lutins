@@ -26,6 +26,7 @@ if($_GET['page'] == "nouveau" || $_GET['page'] == "edition" || $_GET['page'] == 
         <li class="<?php if($_GET['section'] == "produits") echo 'selected'; ?>"><a href="https://www.bebes-lutins.fr/dashboard4/produits/tous-les-produits"><div class="horizontal"><?php echo file_get_contents("view/assets/images/utils/icons/price-tag.svg"); ?></div><p>Produits</p></a></li>
         <li class="sub-selection-container">
             <div class="sub-selection <?php if($_GET['page'] == "tous-les-produits" || ($_GET['page'] == null && $_GET['section'] == "produits")) echo 'selected'; ?>"><a href="https://www.bebes-lutins.fr/dashboard4/produits/tous-les-produits">Tous les produits</a></div>
+            <div class="sub-selection <?php if($_GET['page'] == "categories") echo 'selected'; ?>"><a href="https://www.bebes-lutins.fr/dashboard4/produits/categories">Catégories</a></div>
             <div class="sub-selection <?php if($_GET['page'] == "stocks") echo 'selected'; ?>"><a href="https://www.bebes-lutins.fr/dashboard4/produits/stocks">Stocks</a></div>
         </li>
         <li class="<?php if($_GET['section'] == "clients") echo 'selected'; ?>"><a href="https://www.bebes-lutins.fr/dashboard4/clients/tous-les-clients"><div class="horizontal"><?php echo file_get_contents("view/assets/images/utils/icons/team.svg"); ?></div><p>Clients</p></a></li>

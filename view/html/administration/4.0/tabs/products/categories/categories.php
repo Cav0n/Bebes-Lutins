@@ -17,7 +17,7 @@ $categories = CategoryGateway::GetCategories();
 <main>
     <div class="page-title-container horizontal between">
         <h2>Catégories</h2>
-        <form id="top-button-form" class="vertical centered" method="post" action="https://www.bebes-lutins.fr/dashboard4/catégorie/nouveau">
+        <form id="top-button-form" class="vertical centered" method="post" action="https://www.bebes-lutins.fr/dashboard4/produits/categorie/nouveau/">
             <button type="submit">Ajouter une catégorie</button>
         </form>
     </div>
@@ -46,11 +46,10 @@ $categories = CategoryGateway::GetCategories();
                     foreach ($categories as $category) { 
                         $category = (new CategoryContainer($category))->getCategory(); ?>
                             <tr onclick="load_product('<?php echo $category->getNameForURL(); ?>')">
-                                <td class="image center"><img src="https://www.bebes-lutins.fr/view/assets/images/categories/<?php echo $category->getImage; ?>" alt="<?php echo $category->getName; s?>"></td>
+                                <td class="image center"><img src="https://www.bebes-lutins.fr/view/assets/images/categories/<?php echo $category->getImage(); ?>" alt="<?php echo $category->getName(); ?>"></td>
                                 <td class="rank center"><?php echo $category->getRank(); ?></td>
                                 <td class="name left"><a href="https://www.bebes-lutins.fr/dashboard4/produits/categories/edition/<?php echo $category->getNameForURL(); ?>"><?php echo $category->getName(); ?></a></td>
-                                <td class="name left"><?php echo $category->getParent(); ?></td>
-                            </tr>
+                                <td class="name left"><?php if($category->getParent() != "none") {?><?php echo $category->getParent(); ?><?php } ?></td></tr>
                         <?php } ?>
                 </table>
             </div>

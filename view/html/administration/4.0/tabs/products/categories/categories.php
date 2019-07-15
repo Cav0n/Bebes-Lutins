@@ -17,7 +17,7 @@ $categories = CategoryGateway::GetCategories();
 <main>
     <div class="page-title-container horizontal between">
         <h2>Catégories</h2>
-        <form id="top-button-form" class="vertical centered" method="post" action="https://www.bebes-lutins.fr/dashboard4/produits/categorie/nouveau/">
+        <form id="top-button-form" class="vertical centered" method="post" action="https://www.bebes-lutins.fr/dashboard4/produits/categorie/edition/">
             <button type="submit">Ajouter une catégorie</button>
         </form>
     </div>
@@ -45,10 +45,10 @@ $categories = CategoryGateway::GetCategories();
                     <?php
                     foreach ($categories as $category) { 
                         $category = (new CategoryContainer($category))->getCategory(); ?>
-                            <tr onclick="load_product('<?php echo $category->getNameForURL(); ?>')">
+                            <tr onclick="load_category('<?php echo $category->getNameForURL(); ?>')">
                                 <td class="image center"><img src="https://www.bebes-lutins.fr/view/assets/images/categories/<?php echo $category->getImage(); ?>" alt="<?php echo $category->getName(); ?>"></td>
                                 <td class="rank center"><?php echo $category->getRank(); ?></td>
-                                <td class="name left"><a href="https://www.bebes-lutins.fr/dashboard4/produits/categories/edition/<?php echo $category->getNameForURL(); ?>"><?php echo $category->getName(); ?></a></td>
+                                <td class="name left"><a href="https://www.bebes-lutins.fr/dashboard4/produits/categorie/edition/<?php echo $category->getNameForURL(); ?>"><?php echo $category->getName(); ?></a></td>
                                 <td class="name left"><?php if($category->getParent() != "none") {?><?php echo $category->getParent(); ?><?php } ?></td></tr>
                         <?php } ?>
                 </table>
@@ -58,8 +58,8 @@ $categories = CategoryGateway::GetCategories();
 </main>
 </body>
 <script>
-    function load_product(id){
-        document.location.href = "https://www.bebes-lutins.fr/dashboard4/produits/edition/"+id;
+    function load_category(id){
+        document.location.href = "https://www.bebes-lutins.fr/dashboard4/produits/categorie/edition/"+id;
     }
 
     function search() {

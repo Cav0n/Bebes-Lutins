@@ -690,7 +690,8 @@ class AdminModel
                 if(($page == "tous-les-produits") || ($page == null)) require("$view_rep/html/administration/4.0/tabs/products/all/all.php");
                 if($page == "categories") {
                     if($option == null) require("$view_rep/html/administration/4.0/tabs/products/categories/categories.php");
-                    if($option == 'nouveau') require("$view_rep/html/administration/4.0/tabs/products/categories/new.php");}
+                    if($option == 'edition') require("$view_rep/html/administration/4.0/tabs/products/categories/new.php");}
+                    if($option == 'sauvegarder') self::saveCategory($_POST['name']);
                 if($page == "stocks") require("$view_rep/html/administration/4.0/tabs/products/stocks/all.php");
                 if($page == "nouveau") require("$view_rep/html/administration/4.0/tabs/products/edit/new.php");
                 if($page == "edition") require("$view_rep/html/administration/4.0/tabs/products/edit/edition.php");
@@ -837,6 +838,32 @@ class AdminModel
         ?>
         <script type="text/javascript">
             document.location.href='https://www.bebes-lutins.fr/dashboard4/produits/stocks';
+        </script>
+        <?php
+    }
+
+    public static function saveCategory($category_name){
+        $old_name = $_POST['old_name'];
+        $rank = $_POST['rank'];
+        $description = $_POST['description'];
+        $parent = $_POST['parent'];
+        $tags = $_POST['tags'];
+        $hide = $_POST['hide'];
+        $image = $_POST['image'];
+
+        if($_POST['new_category']){
+            try{ 
+                CategoryGateway::AddCategory($category_name, $parent, $image, $description, $rank);
+            } catch(PDOException $e){ echo $e;}
+        } else {
+            try{ 
+                CategoryGateway::EditCategory($category_name, $parent, $image, $description, $old_name, $rank);
+            } catch(PDOException $e){ echo $e; }
+        }
+
+        ?>
+        <script type="text/javascript">
+            document.location.href='https://www.bebes-lutins.fr/dashboard4/produits/categories';
         </script>
         <?php
     }

@@ -2,11 +2,14 @@
 
 $categories_list = CategoryGateway::GetCategories();
 
+$new_category = true;
 $category_name = str_replace("_", "’", str_replace( "="," ", $_REQUEST['category']));
 if($category_name != null){
-    $category = CategoryGateway::GetCategory($category_name);
+    $new_category = false;
+    $category = CategoryGateway::SearchCategoryByName($category_name);
 
-    $name = $category->getName();
+    $old_name = $category->getName();
+    $name = $old_name;
     $image = $category->getImage();
     $description = $category->getDescription();
     $parent = $category->getParent();
@@ -17,6 +20,8 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
     $error_message = $_SESSION['error_message'];
 
     $name = $_SESSION['name'];
+    $old_name = $_SESSION['old_name'];
+    $new_category = $_SESSION['new_category'];
     $image = $_SESSION['image'];
     $description = $_SESSION['description'];
     $parent = $_SESSION['parent'];
@@ -52,8 +57,10 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
         <p id="error-message"><?php echo $error_message; ?></p>
     </div>
     <?php } ?>
-    <form id="edition-wrapper" class="horizontal" method="post" action="https://www.bebes-lutins.fr/dashboard4/categorie/sauvegarder/" enctype="multipart/form-data">
-        <input id="image-name" type="hidden" name="image_name" value="<?php echo $image;?>">
+    <form id="edition-wrapper" class="horizontal" method="post" action="https://www.bebes-lutins.fr/dashboard4/produits/categorie/sauvegarder/" enctype="multipart/form-data">
+        <input id="image-name" type="hidden" name="image" value="<?php echo $image;?>">
+        <input id='new-category' type="hidden" name='new_category' value="<?php echo $new_category;?>">
+        <input id='old-name' type="hidden" name="old_name" value="<?php echo $old_name;?>">
         <div class="column-big vertical">
             <div class="category-title-description-container edition-window">
                 <div class="custom-id vertical">
@@ -92,11 +99,12 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
                     </div>
                     <div id="category-selector" class="category-selector horizontal">
                         <select id="category-select" name="parent">
-                            <?php foreach ($categories_list as $category) { if($category->getParent() != "none") {?>
-                                <optgroup label="<?php echo $category->getParent();?>">
-                                    <option value="<?php echo $category->getName(); ?>" ><?php echo $category->getName();?></option>
+                            <option value="none">Aucune</option>
+                            <?php foreach ($categories_list as $category_search) { ?>
+                                <optgroup label="<?php echo $category_search->getParent();?>">
+                                    <option value="<?php echo $category_search->getName(); ?>" <?php if($category->getParent() == $category_search->getName()) echo 'selected'; ?>><?php echo $category_search->getName();?></option>
                                 </optgroup>
-                            <?php } } ?>
+                            <?php } ?>
                         </select>
                     </div>
                 </div>

@@ -102,7 +102,7 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
                             <option value="none">Aucune</option>
                             <?php foreach ($categories_list as $category_search) { ?>
                                 <optgroup label="<?php echo $category_search->getParent();?>">
-                                    <option value="<?php echo $category_search->getName(); ?>" <?php if($category->getParent() == $category_search->getName()) echo 'selected'; ?>><?php echo $category_search->getName();?></option>
+                                    <option value="<?php echo $category_search->getName(); ?>" <?php if($parent == $category_search->getName()) echo 'selected'; ?>><?php echo $category_search->getName();?></option>
                                 </optgroup>
                             <?php } ?>
                         </select>
@@ -119,6 +119,9 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
                     </label>
                 </div>
             </div>
+            <span id="deleting-button" class="vertical centered" onclick="delete_category('<?php echo $name; ?>')">
+                Supprimer la catégorie
+            </span>
         </div>
     </form>
 </main>
@@ -164,12 +167,21 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
                         }
                     });
                 });
+            <?php if($image!= null) {?>
+            var mockFile = { name: "<?php echo $image ?>", type: 'image/jpeg' };
+            this.addFile.call(this, mockFile);
+            this.options.thumbnail.call(this, mockFile, "https://www.bebes-lutins.fr/view/assets/images/categories/" + "<?php echo $image; ?>");
+            <?php } ?>
             }
         });
 </script>
 <script>
     function goToImportPage(){
         document.location.href = "https://www.bebes-lutins.fr/dashboard4/produits/importer";
+    }
+
+    function delete_product(name){
+        document.location.href='https://www.bebes-lutins.fr/dashboard4/categories/supprimer/' + name;
     }
 </script>
 </html>

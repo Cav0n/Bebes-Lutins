@@ -30,7 +30,15 @@ class Category
     }
 
     /**
-     * @return String
+     * @return String nameForURL
+     */
+    public function getNameForURL(): String
+    {
+        return str_replace("’", "_", str_replace(" ", "=",UtilsModel::replace_accent($this->getName())));
+    }
+
+    /**
+     * @return String name
      */
     public function getName(): String
     {
@@ -46,7 +54,7 @@ class Category
     }
 
     /**
-     * @return mixed
+     * @return string parent
      */
     public function getParent()
     {
@@ -54,7 +62,7 @@ class Category
     }
 
     /**
-     * @param mixed $parent
+     * @param string $parent
      */
     public function setParent($parent): void
     {

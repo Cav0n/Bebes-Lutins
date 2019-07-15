@@ -25,7 +25,7 @@ foreach ($products as $product){
     </div>
     <div class="page-title-container horizontal between">
         <h2>Stocks</h2>
-        <form id="top-button-form" class="vertical centered" method="post" action="https://www.bebes-lutins.fr/dashboard4/produit/nouveau">
+        <form id="top-button-form" class="vertical centered" method="post" action="https://www.bebes-lutins.fr/dashboard4/produits/nouveau">
             <button type="submit">Ajouter un produit</button>
         </form>
     </div>

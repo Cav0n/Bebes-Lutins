@@ -2,7 +2,12 @@
 
 $extra = null;
 
-if($_GET['page'] == "nouveau" || $_GET['page'] == "edition" || $_GET['page'] == "creation" || $_GET['page'] == "importer"){
+if($_GET['page'] == "nouveau" ||
+     $_GET['page'] == "edition" || 
+     $_GET['page'] == "creation" || 
+     $_GET['page'] == "importer" ||
+     $_GET['option'] == "nouveau" ||
+     $_GET['option'] == "edition"){
     $extra = " nouveau";
 }
 

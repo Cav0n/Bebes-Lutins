@@ -29,8 +29,9 @@
 }
 
 #dashboard4 header #extra {
-    margin-right: calc(3% + 1rem);
-    width: 12rem;
+    width: 13rem;
+    background: none;
+    margin: auto calc(3% + 1rem) auto 0;
 }
 
 #dashboard4 header #extra button{
@@ -53,6 +54,7 @@
     font-size: 0.8rem;
     margin: auto 0;
     padding: 0 15px;
+    width: 6rem;
 }
 
 #dashboard4 header #extra button.save-button{

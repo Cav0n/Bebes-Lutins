@@ -10,7 +10,7 @@ if(isset($_SESSION['connected_user'])){
     $user_container = new UserContainer(unserialize($_SESSION['connected_user']));
     $user = $user_container->getUser();
     if($user->getPrivilege() >= 3){
-        $admin_button = "<a href='https://www.bebes-lutins.fr/dashboard4' class='centered no-decoration'><i class=\"fas fa-tools fa-2x\"></i></a>";
+        $admin_button = "<a href='https://www.bebes-lutins.fr/dashboard4' class='no-decoration social-link horizontal'> " . file_get_contents('https://www.bebes-lutins.fr/view/assets/images/utils/icons/edit.svg') . "<p class='social-media-name vertical centered'> - Dashboard</p></a>";
     }
     else $admin_button = "";
 } else $admin_button = "";

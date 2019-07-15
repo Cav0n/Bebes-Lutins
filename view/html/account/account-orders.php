@@ -32,7 +32,7 @@ $orders_list = OrderGateway::GetOrdersOfCustomer($user->getId());
     <div id="customer-area2" class="vertical">
         <div id="customer-area-header" class="vertical">
             <div id="hello" class="vertical">
-                <h2>Bonjour <?php echo $firstname;?></h2>
+                <h2>Bonjour <?php echo $user->getFirstname() . " " . $user->getSurname(); ?></h2>
                 <p>Bienvenue dans votre espace</p>
             </div>
             <div id="customer-area-tabs" class="horizontal">

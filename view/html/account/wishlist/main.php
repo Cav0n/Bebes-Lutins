@@ -29,10 +29,10 @@ $whishlist = '';
                 <p>Bienvenue dans votre espace</p>
             </div>
             <div id="customer-area-tabs" class="horizontal">
-                <a href="#" class="selected">Mon profil</a>
+                <a href="https://www.bebes-lutins.fr/espace-client">Mon profil</a>
                 <a href="https://www.bebes-lutins.fr/espace-client/commandes">Mes commandes</a>
                 <a href="https://www.bebes-lutins.fr/espace-client/adresses">Mes adresses</a>
-                <a href="https://www.bebes-lutins.fr/espace-client/liste-envie">Liste d'envie</a>
+                <a href="https://www.bebes-lutins.fr/espace-client/liste-envie" class='selected'>Liste d'envie</a>
             </div>
         </div>
         <div id="customer-area-inner" class="vertical">

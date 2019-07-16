@@ -122,7 +122,6 @@
     transition-duration: .2s;
     transition-timing-function: cubic-bezier(.64,0,.35,1);
     font-size: 1rem;
-    margin: 0.5rem 0;
 }
 
 #product-page-container #price-container #price {
@@ -173,10 +172,16 @@
     margin: 0;
     padding: 0;
     background: none;
+    border: none;
     border-radius: 0;
     font-size: 0.75rem;
     font-weight: bold;
     font-family: Robot, sans-serif;
+}
+
+#product-page-container #add-to-cart-container #add-to-cart-button svg{
+    height:1.4rem;
+    width: 1.4rem;
 }
 
 #product-page-container #ceo-description-container p{

@@ -133,7 +133,7 @@ main{
     padding-top: 8em;
     min-height: 90vh;
     box-sizing: border-box;
-    background: #F8F8F8;
+    background: white;
 }
 
 .vertical{
@@ -306,6 +306,9 @@ width: max-content;
     font-size: 2em;
     text-align: right;
     margin-right: 15px;
+    color: rgb(69, 69, 69);
+    font-family: Roboto,sans-serif;
+    font-weight: 400;
 }
 
 #website-infos p{

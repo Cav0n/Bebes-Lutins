@@ -2,6 +2,10 @@
     width: 100%;
 }
 
+#shopping-cart-main{
+    background: #f7f7f7;
+}
+
 #shopping-cart-wrapper{
     padding-top: 4em;
 }
@@ -152,10 +156,10 @@ width: max-content;
 }
 
 #shopping-cart-wrapper #shopping-cart-content .numbers #start-checkout button{
-    padding: 10px;
-    font-size: 1em;
+    font-size: 0.9rem;
     width: 100%;
     margin: auto 0 0 0;
+    font-family: Roboto,sans-serif;
 }
 
 #shopping-cart-wrapper #shopping-cart-content .numbers #start-checkout button:hover{

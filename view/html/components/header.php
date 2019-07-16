@@ -147,7 +147,6 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
                     </div>
                     <div id='child-categories'>
                         <?php foreach($sub_categories_list as $sub_category) { ?>
-                            
                         <?php } ?>
                     </div>
                 </div>

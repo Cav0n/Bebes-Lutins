@@ -173,7 +173,7 @@ header #navbar #left #categories #categories-popup{
     position: fixed;
     left: 0;
     display: none;
-    top: 9em;
+    top: calc(9em - 2px);
     width: 100%;
     background: #F3F3F3;
     z-index: 1;
@@ -239,10 +239,10 @@ header #navbar #left #categories:hover #categories-popup .category .category_pro
 /* Shopping cart popup*/
 header #shopping-cart-popup{
     display: none;
-    top: 7rem;
+    top: 6.5rem;
     right: 0;
     width: 12em;
-    background-color: #fafafa;
+    background-color: white;
     box-sizing: border-box;
     padding: 5px;
     border: 1px solid #888888;
@@ -270,6 +270,7 @@ header #top #shopping-cart-popup button{
     color: white;
     border: 1px solid #111111;
     border-radius: 5px;
+    margin-top: 1rem;
 }
 
 header #top #shopping-cart-popup button:hover{

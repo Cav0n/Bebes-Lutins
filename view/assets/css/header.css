@@ -194,7 +194,13 @@ header #navbar #left #categories:hover #categories-popup{
     border-bottom: 1px solid green;
     border-top: 1px solid green;
     padding-top: 3rem;
+    background: green;
 }
+
+header #navbar #left #categories #categories-popup a{
+    color:white;
+}
+
 header #navbar #left #categories:hover #categories-popup .category{
     font-size: 0.8em;
     font-weight: 300;

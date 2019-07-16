@@ -63,20 +63,6 @@ foreach ($categories as $category){
 
     }
 
-    /*$products_display = "";
-    $i = 0;
-    foreach ($products as $product){
-        $product = (new ProductContainer($product))->getProduct();
-        if($product->getCategory()->getName() == $category->getName()){
-            $i++;
-            $name = $product->getName();
-            $id = $product->getId();
-            $products_display = $products_display . "
-                <a href='produit/$id'>$name</a>
-            ";
-        }
-    }*/
-
     if(!in_array($category, $sub_categories_list)) {
         $category_popup_content = $category_popup_content . "
         <div class='vertical category'>
@@ -152,6 +138,18 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
             <div id="categories-popup" class="popup centered">
                 <div class="horizontal overflow-x">
                     <?php echo $category_popup_content;?>
+                </div>
+                <div class="horizontal hidden">
+                    <div id='parent-categories' class='vertical'>
+                        <?php foreach($categories as $category) { if($category->getParent() == 'none') { ?>
+                            <p><?php echo $category->getName();?></p>
+                        <?php } } ?>
+                    </div>
+                    <div id='child-categories'>
+                        <?php foreach($sub_categories_list as $sub_category) { ?>
+                            
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
         </div>

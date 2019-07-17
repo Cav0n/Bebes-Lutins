@@ -9,9 +9,9 @@ class WishList
 
     public function __construct(string $id, string $user_id, string $message)
     {
-        $this->$id = $id;
-        $this->$user_id = $user_id;
-        $this->$message = $message;
+        $this->id = $id;
+        $this->user_id = $user_id;
+        $this->message = $message;
     }
 
     /**
@@ -67,7 +67,8 @@ class WishList
      */
     public function getItems(): array
     {
-        return $this->items;
+        if($this->items != null) return $this->items;
+        else return array();
     }
 
     /**

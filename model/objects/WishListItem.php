@@ -7,7 +7,7 @@ class WishListItem
     private $product_id;
     private $message;
 
-    public function __construct($id, $wishlist_id, $product_id,$message)
+    public function __construct(string $id, string $wishlist_id, string $product_id,string $message)
     {
         $this->id = $id;
         $this->wishlist_id = $wishlist_id;

@@ -16,14 +16,17 @@ class WishListGateway
 
         if($wishlist != null){
             $query = "SELECT id, wishlist_id, product_id, message FROM wishlist_items WHERE wishlist_id=:wishlist_id;";
-            $con->executeQuery($query, array(':wishlist_id'=>array($wishlist['id'], PDO::PARAM_STR)));
+            $con->executeQuery($query, array(':wishlist_id'=>array($wishlist->getId(), PDO::PARAM_STR)));
             $results = $con->getResults();
 
-            foreach ($results as $result) {
-                $wishlist_items[] = new WishListItem($result['id'], $result['wishlist_id'], $result['product_id'], $result['message']);
+            if($results != null){
+                foreach ($results as $result) {
+                    $wishlist_item = new WishListItem($result['id'], $result['wishlist_id'], $result['product_id'], $result['message']);
+                    $wishlist_items[] = $wishlist_item;
+                }
+    
+                $wishlist->setItems($wishlist_items);
             }
-
-            $wishlist->setItems($wishlist_items);
         }
 
         return $wishlist;

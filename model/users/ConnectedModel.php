@@ -87,7 +87,7 @@ class ConnectedModel
                 unset($_SESSION['shopping_cart']);
                 ?>
                 <script type="text/javascript">
-                document.location.href='http://www.bebes-lutins.fr';
+                    document.location.href='http://www.bebes-lutins.fr';
                 </script>
                 <?php
             } else throw new Exception("Vous devez être connecté pour accéder à cette page.");

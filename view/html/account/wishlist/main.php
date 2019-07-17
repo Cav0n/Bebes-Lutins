@@ -7,7 +7,7 @@
  */
 
 $user = (new UserContainer(unserialize($_SESSION['connected_user'])))->getUser();
-$whishlist = '';
+$whishlist = WishListGateway::GetWishListOfUser($user->getId());
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +48,11 @@ $whishlist = '';
                     </div>
                 </div>
                 <div class="customer-area-bloc horizontal">
-                    
+                    <?php if(!empty($whishlist->getItems())) { foreach($whishlist->getItems() as $item) { ?>
+                        <p><?php echo $item->getProductID();?></p>
+                    <?php } } else { ?>
+                        <p>Votre liste d'envie est vide.</p>
+                    <?php }?>
                 </div>
             </div>
         </div>

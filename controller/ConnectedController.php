@@ -16,6 +16,10 @@ class ConnectedController
     {
         try{
             switch ($action){
+                case 'add_product_to_wishlist':
+                    ConnectedModel::add_product_to_wishlist($_REQUEST['wishlist_id'], $_REQUEST['product_id']);
+                    break;
+
                 case "load_page_connected":
                     ConnectedModel::load_page($_REQUEST['page']);
                     break;

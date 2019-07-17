@@ -37,7 +37,7 @@ class WishListGateway
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);
 
-        $query = "INSERT INTO whishlist_items VALUES(:id, :wishlist_id, :product_id, 1);";
+        $query = "INSERT INTO wishlist_items VALUES(:id, :wishlist_id, :product_id, 1);";
         $con->executeQuery($query, array(
             ':id' => array(uniqid('item_'), PDO::PARAM_STR),
             ':wishlist_id' => array($wishlist_id, PDO::PARAM_STR),

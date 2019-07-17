@@ -283,7 +283,7 @@ class UserConnected extends User
     /**
      * @return string wishlist_id L'identifiant de la liste d'envie de l'utilisateur
      */
-    public function getWishListID(): WishList
+    public function getWishListID(): string
     {
         return $this->wishlist_id;
     }

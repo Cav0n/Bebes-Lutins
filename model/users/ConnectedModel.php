@@ -97,6 +97,16 @@ class ConnectedModel
         }
     }
 
+    public static function add_product_to_wishlist($wishlist_id, $product_id){
+        WishListGateway::AddItemToWishlist($wishlist_id, $product_id);
+
+        ?>
+        <script type="text/javascript">
+            document.location.href='http://www.bebes-lutins.fr/produit/'.$product_id;
+        </script>
+        <?php
+    }
+
     public static function change_informations(String $id, String $surname, String $firstname, String $phone, String $mail){
         try{
             if(isset($_SESSION['connected_user'])){

@@ -8,6 +8,15 @@ $category_parent = $category->getParent();
 
 $category_name_url = str_replace("’", "_", str_replace(" ", "=",UtilsModel::replace_accent($category->getName())));
 $parent_category_name_url = str_replace("’", "_", str_replace(" ", "=",UtilsModel::replace_accent($category_parent)));
+
+if(isset($_SESSION['connected_user'])){
+    $user_container = new UserContainer(unserialize($_SESSION['connected_user']));
+    $user = $user_container->getUser();
+
+    $whishlistID = $user->getWishListID();
+} else {
+    $whishlistID = '';
+}
 ?>
 
 <!DOCTYPE html>
@@ -71,6 +80,8 @@ $parent_category_name_url = str_replace("’", "_", str_replace(" ", "=",UtilsMo
                             <button id='add-to-cart-button' type='submit' style='padding:0 0.5rem;'>Ajouter au panier</button>
                         </form>
                         <form id='add-to-cart-container' class='horizontal' method="post" action="https://www.bebes-lutins.fr/liste-envie/ajout-produit">
+                            <input type="hidden" name="product_id" value="<?php echo $product->getId();?>">
+                            <input type="hidden" name="wishlist_id" value="<?php echo $whishlistID; ?>">
                             <button id='add-to-cart-button' type='submit' class='horizontal between' <?php if(! isset($_SESSION['connected_user'])) echo 'disabled=\'disabled\''?>><?php echo file_get_contents("view/assets/images/utils/icons/heart.svg"); ?><p class='vertical centered'>Ajouter a ma liste</p></button>
                         </form>
                         <?php if(! isset($_SESSION['connected_user'])) echo '<p id="infos-buttons" style="font-size:0.8rem;">Vous devez être connecté pour ajouter un produit à votre liste d\'envie.</p>'?>

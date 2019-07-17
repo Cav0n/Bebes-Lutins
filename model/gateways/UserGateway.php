@@ -18,7 +18,9 @@ class UserGateway
             return "mail";
         }
         else {
-            $query = 'INSERT INTO user VALUES (:id, :mail, :hashed_password, :surname, :firstname, :phone, :privilege, :registration_date, :shopping_cart_id, :birthlist_id, :verification_key, true, :newsletter);';
+            $wishlist_id = uniqid("wishlist_");
+
+            $query = 'INSERT INTO user VALUES (:id, :mail, :hashed_password, :surname, :firstname, :phone, :privilege, :registration_date, :shopping_cart_id, :birthlist_id, :verification_key, true, :newsletter, :wishlist_id);';
             $con->executeQuery($query, array(
                 ':id' => array(strtoupper($id), PDO::PARAM_STR),
                 ':mail' => array(strtoupper($mail), PDO::PARAM_STR),
@@ -31,13 +33,20 @@ class UserGateway
                 ':shopping_cart_id' => array(strtoupper($shopping_cart_id), PDO::PARAM_STR),
                 ':birthlist_id' => array(strtoupper($birthlist_id), PDO::PARAM_STR),
                 ':verification_key' => array(strtoupper($verification_key), PDO::PARAM_STR),
-                ':newsletter' => array($newsletter, PDO::PARAM_STR)
+                ':newsletter' => array($newsletter, PDO::PARAM_STR),
+                ':wishlist_id' => array($wishlist_id, PDO::PARAM_STR)
             ));
 
             $query = 'INSERT INTO shopping_cart VALUES (:id, :user_id, NULL, 0);';
             $con->executeQuery($query, array(
                 ':id' => array(strtoupper($shopping_cart_id), PDO::PARAM_STR),
                 ':user_id' => array(strtoupper($id), PDO::PARAM_STR)
+            ));
+
+            $query = "INSERT INTO wishlist VALUES (:id, :user_id, '');";
+            $con->executeQuery($query, array(
+                'id' => array($wishlist_id, PDO::PARAM_STR),
+                ':user_id' => array($id, PDO::PARAM_STR)
             ));
         }
 
@@ -214,6 +223,28 @@ class UserGateway
                             $user->setShoppingCart($shopping_cart);
                         }
                         $user->setNewsletter($user_db['newsletter']);
+
+                        /* IF NO WISHLIST FOR THE USER, SET A NEW WISHLIST */
+                        $query = "SELECT id FROM wishlist WHERE user_id=:user_id";
+                        $con->executeQuery($query, array(':user_id' => array($user->getId(), PDO::PARAM_STR)));
+                        $wishlist = $con->getResults()[0];
+
+                        if($wishlist == null) {
+                            $wishlist_id = uniqid('wishlist_');
+                            $query = "INSERT INTO wishlist VALUES(:id, :user_id, :message);";
+                            $con->executeQuery($query, array(
+                                ':id' => array($wishlist_id, PDO::PARAM_STR),
+                                ':user_id' => array($user->getId(), PDO::PARAM_STR),
+                                ':message' => array('', PDO::PARAM_STR)
+                            ));
+
+                            $query = "UPDATE user SET wishlist_id=:wishlist_id;";
+                            $con->executeQuery($query, array(':wishlist_id' => array($wishlist_id, PDO::PARAM_STR)));
+                            $user->setWishListID($wishlist_id);
+                        } else {
+                            $user->setWishListID($wishlist['id']);
+                        }
+
                         return $user;
                     //}
                 }

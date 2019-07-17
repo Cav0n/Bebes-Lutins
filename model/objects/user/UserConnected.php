@@ -19,6 +19,7 @@ class UserConnected extends User
     private $newsletter;
     private $order_list = array();
     private $address_list = array();
+    private $wishlist_id;
 
     /**
      * UserConnected constructor.
@@ -279,4 +280,19 @@ class UserConnected extends User
         $this->address_list[] = $address;
     }
 
+    /**
+     * @return string wishlist_id L'identifiant de la liste d'envie de l'utilisateur
+     */
+    public function getWishListID(): WishList
+    {
+        return $this->wishlist_id;
+    }
+
+    /**
+     * @param string wishlist_id L'identifiant de la liste d'envie de l'utilisateur
+     */
+    public function setWishListID(string $wishlist_id): void
+    {
+        $this->wishlist_id = $wishlist_id;
+    }
 }

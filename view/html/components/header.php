@@ -136,19 +136,24 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
         <div id="categories">
             <a href="https://www.bebes-lutins.fr/nos-produits" class="tab vertical centered transition-fast" id="categories-tab">Nos produits</a>
             <div id="categories-popup" class="popup centered">
-                <div class="horizontal overflow-x">
+                <div class="horizontal hidden">
                     <?php echo $category_popup_content;?>
                 </div>
-                <div class="horizontal hidden">
+                <div class="horizontal">
                     <div id='parent-categories' class='vertical'>
-                        <?php foreach($categories as $category) { if($category->getParent() == 'none') { ?>
-                            <p><?php echo $category->getName();?></p>
-                        <?php } } ?>
+                        <?php $index_parent = 0; foreach($categories as $category) { if($category->getParent() == 'none') {?>
+                            <p id='<?php echo $category->getNameForURL(); ?>-selector' class='category <?php if ($index_parent == 0) echo 'selected-category'; ?>'><?php echo $category->getName();?></p>
+                        <?php } $index_parent++; } ?>
                     </div>
                     <div id='child-categories'>
-                        <?php foreach($sub_categories_list as $sub_category) { ?>
-                            <p>Bonsoir<p>
-                        <?php } ?>
+                        <?php $index_child = 0; foreach($categories as $category) { if($category->getParent() == 'none') { ?>
+                            <div id='<?php echo $category->getNameForURL(); ?>-container' class="category-child <?php if ($index_child != 0) echo "hidden"; ?>">
+                                <?php foreach($sub_categories_list as $sub_category) {
+                                    if($sub_category->getParent() == $category->getName()) { ?>
+                                    <p><?php echo $sub_category->getName();?></p>
+                                <?php } $index_child ++; } ?>
+                            </div>
+                        <?php } } ?>
                     </div>
                 </div>
             </div>
@@ -179,4 +184,15 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
         document.getElementById("menu-mobile").style.marginLeft = 0;
         document.getElementsByTagName("body")[0].style.overflow = 'hidden';
     }
+
+    $(document).ready(function() {
+        $('.category').click(function() {
+            $('.category').removeClass('selected-category');
+            $(this).addClass('selected-category');
+            category = $(this).attr('id').replace('-selector', '');
+            console.log(category);
+            $('.category-child').addClass('hidden');
+            $('#' + category + "-container").removeClass('hidden');
+        });
+    });
 </script>

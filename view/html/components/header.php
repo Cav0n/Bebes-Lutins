@@ -144,10 +144,13 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
                     </div>
                     <div id='child-categories'>
                         <?php $index_child = 0; foreach($categories as $category) { if($category->getParent() == 'none') { ?>
-                            <div id='<?php echo $category->getNameForURL(); ?>-container' class="category-child <?php if ($index_child != 0) echo "hidden"; ?>">
+                            <div id='<?php echo $category->getNameForURL(); ?>-container' class="category-child horizontal wrap <?php if ($index_child != 0) echo "hidden"; ?>">
                                 <?php foreach($sub_categories_list as $sub_category) {
                                     if($sub_category->getParent() == $category->getName()) { ?>
-                                    <p><?php echo $sub_category->getName();?></p>
+                                    <div class='vertical between category-child-container' onclick="load_category('<?php echo $sub_category->getNameForURL();?>')">
+                                        <a class='child-name'><?php echo $sub_category->getName();?></p>
+                                        <img class='child-image' src='https://www.bebes-lutins.fr/view/assets/images/categories/<?php echo $sub_category->getImage();?>'>
+                                    </div>
                                 <?php } $index_child ++; } ?>
                             </div>
                         <?php } } ?>
@@ -173,6 +176,10 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
 
 
 <script>
+    function load_category(category) {
+        document.location.href = "https://www.bebes-lutins.fr/categorie/" + category;
+    }
+
     function load_shopping_cart(){
         document.location.href="panier";
     }

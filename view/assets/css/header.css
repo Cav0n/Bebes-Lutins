@@ -150,6 +150,7 @@ header #navbar #left #categories {
 
 header #navbar #left #categories #categories-tab {
     height: 100%;
+    width: 12rem;
 }
 
 header #navbar #left a {
@@ -226,10 +227,33 @@ header #navbar #left #categories #categories-popup a {
 
 header #navbar #left #categories:hover #categories-popup .category {
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 600;
     font-family: Roboto, sans-serif;
     padding: 0.5rem 1rem;
     box-sizing: border-box;
+    cursor: pointer;
+}
+
+header #navbar #left #categories:hover #categories-popup #child-categories .category-child-container {
+    padding: 1rem;
+    width: 10rem;
+    cursor: pointer;
+}
+
+header #navbar #left #categories:hover #categories-popup #child-categories .category-child-container:hover {
+    background: darkgreen;
+}
+
+header #navbar #left #categories:hover #categories-popup #child-categories .category-child-container img {
+    height: 10rem;
+    width: 10rem;
+}
+
+header #navbar #left #categories:hover #categories-popup #child-categories .category-child-container header #navbar #left #categories:hover #categories-popup #child-categories .category-child-container .child-image {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 2px;
+    margin-top: 0.5rem;
 }
 
 

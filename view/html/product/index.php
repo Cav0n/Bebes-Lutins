@@ -79,10 +79,10 @@ if(isset($_SESSION['connected_user'])){
                             <input id='quantity-input' name='quantity' type='number' value='1' placeholder='1' min='1' max='<?php echo $product->getStock(); ?>' step='1' required>
                             <button id='add-to-cart-button' type='submit' style='padding:0 0.5rem;'>Ajouter au panier</button>
                         </form>
-                        <form id='add-to-cart-container' class='horizontal' method="post" action="https://www.bebes-lutins.fr/liste-envie/ajout-produit">
+                        <form id='add-to-cart-container' class='horizontal' method="post" action="https://www.bebes-lutins.fr/espace-client/liste-envie/ajout-produit">
                             <input type="hidden" name="product_id" value="<?php echo $product->getId();?>">
                             <input type="hidden" name="wishlist_id" value="<?php echo $whishlistID; ?>">
-                            <button id='add-to-cart-button' type='submit' class='horizontal between' <?php if(! isset($_SESSION['connected_user'])) echo 'disabled=\'disabled\''?>><?php echo file_get_contents("view/assets/images/utils/icons/heart.svg"); ?><p class='vertical centered'>Ajouter a ma liste</p></button>
+                            <button id='add-to-cart-button' type='submit' class='horizontal between' <?php if(! isset($_SESSION['connected_user'])) echo 'disabled=\'disabled\''?>><?php echo file_get_contents("view/assets/images/utils/icons/heart.svg"); ?><p class='vertical centered' style='margin:auto 0;'>Ajouter a ma liste</p></button>
                         </form>
                         <?php if(! isset($_SESSION['connected_user'])) echo '<p id="infos-buttons" style="font-size:0.8rem;">Vous devez être connecté pour ajouter un produit à votre liste d\'envie.</p>'?>
                     </div>

@@ -70,7 +70,7 @@ class ConnectedModel
                 $_SESSION['redirect_url'] = 'https://www.bebes-lutins.fr/'.$_SERVER['REQUEST_URI'];
                 ?>
                 <script type="text/javascript">
-                    document.location.href='http://www.bebes-lutins.fr/espace-client/connexion';
+                    document.location.href='https://www.bebes-lutins.fr/espace-client/connexion';
                 </script>
                 <?php
             }
@@ -87,7 +87,7 @@ class ConnectedModel
                 unset($_SESSION['shopping_cart']);
                 ?>
                 <script type="text/javascript">
-                    document.location.href='http://www.bebes-lutins.fr';
+                    document.location.href='https://www.bebes-lutins.fr';
                 </script>
                 <?php
             } else throw new Exception("Vous devez être connecté pour accéder à cette page.");
@@ -98,13 +98,23 @@ class ConnectedModel
     }
 
     public static function add_product_to_wishlist($wishlist_id, $product_id){
-        WishListGateway::AddItemToWishlist($wishlist_id, $product_id);
+        $result_code = WishListGateway::AddItemToWishlist($wishlist_id, $product_id);
+        if($result_code < 0) {
+            $_SESSION['error-message'] = '<p>Le produit est déjà dans votre liste d\'envie.</p>';
 
-        ?>
-        <script type="text/javascript">
-            document.location.href='http://www.bebes-lutins.fr/produit/'.$product_id;
-        </script>
-        <?php
+            ?>
+            <script type="text/javascript">
+                document.location.href='https://www.bebes-lutins.fr/produit/' + <?php echo $product_id; ?>;
+            </script>
+            <?php
+
+        } else {
+            ?>
+            <script type="text/javascript">
+                document.location.href='https://www.bebes-lutins.fr/espace-client/liste-envie';
+            </script>
+            <?php
+        }
     }
 
     public static function change_informations(String $id, String $surname, String $firstname, String $phone, String $mail){

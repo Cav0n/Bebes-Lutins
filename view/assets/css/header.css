@@ -196,18 +196,17 @@ header #navbar #left #categories:hover .tab {
 header #navbar #left #categories:hover #categories-popup {
     display: flex;
     text-align: left;
-    border-bottom: 1px solid green;
-    border-top: 1px solid green;
-    padding-top: 3rem;
+    border-bottom: 3px solid darkgreen;
+    border-top: 0 solid darkgreen;
     background: green;
     color: white;
 }
 
 header #navbar #left #categories #categories-popup #parent-categories {
-    width: 15rem;
+    width: calc(15rem + 1px);
     box-sizing: border-box;
     padding: 0.5rem 1rem;
-    border-right: 1px solid darkgreen;
+    border-right: 2px dashed darkgreen;
 }
 
 header #navbar #left #categories #categories-popup #parent-categories .selected-category {
@@ -216,7 +215,7 @@ header #navbar #left #categories #categories-popup #parent-categories .selected-
 
 header #navbar #left #categories #categories-popup #child-categories {
     padding: 1rem;
-    width: 100%;
+    width: auto;
     box-sizing: border-box;
 }
 
@@ -255,6 +254,26 @@ header #navbar #left #categories:hover #categories-popup #child-categories .cate
     width: 10rem;
     height: 10rem;
     border-radius: 2px;
+}
+
+header #navbar #left #categories:hover #categories-popup #image-parent-container {
+    width: 18rem;
+    height: 100%;
+    box-sizing: border-box;
+    margin-left: auto
+}
+
+header #navbar #left #categories:hover #categories-popup #image-parent-container img {
+    width: 18rem;
+    height: 100%;
+    object-fit: cover;
+    box-sizing: border-box;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+header #navbar #left #categories:hover #categories-popup #image-parent-container img:hover {
+    background: darkgreen;
 }
 
 

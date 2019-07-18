@@ -155,6 +155,11 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
                             </div>
                         <?php } } ?>
                     </div>
+                    <div id='image-parent-container'>
+                        <?php $index_child = 0; foreach($categories as $category) { if($category->getParent() == 'none') { ?>
+                            <img id='<?php echo $category->getNameForURL(); ?>-image' class='category-image <?php if ($index_child != 0) echo "hidden"; ?>' src='https://www.bebes-lutins.fr/view/assets/images/categories/<?php echo $category->getImage(); ?>' onclick='load_category("<?php echo $category->getNameForURL(); ?>")'>
+                        <?php } $index_child ++; } ?>
+                    </div>
                 </div>
             </div>
         </div>
@@ -196,7 +201,9 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
             category = $(this).attr('id').replace('-selector', '');
             console.log(category);
             $('.category-child').addClass('hidden');
+            $('.category-image').addClass('hidden');
             $('#' + category + "-container").removeClass('hidden');
+            $('#' + category + "-image").removeClass('hidden');
         });
     });
 </script>

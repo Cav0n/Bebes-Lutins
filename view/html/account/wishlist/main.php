@@ -43,7 +43,6 @@ $whishlist = WishListGateway::GetWishListOfUser($user->getId());
                         <div class='horizontal'>
                             <a class='title-button'>Partager ma liste</a>
                             <a class='title-button'>Tout ajouter au panier</a>
-                            <a class='title-button'>Sauvegarder</a>
                         </div>
                     </div>
                 </div>

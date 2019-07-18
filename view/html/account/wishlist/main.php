@@ -47,7 +47,7 @@ $whishlist = WishListGateway::GetWishListOfUser($user->getId());
                         </div>
                     </div>
                 </div>
-                <div class="customer-area-bloc horizontal">
+                <div class="customer-area-bloc horizontal wrap">
                     <?php if(!empty($whishlist->getItems())) { foreach($whishlist->getItems() as $item) { $product = $item->getProduct(); ?>
                         <div class='wishlist-item vertical'>
                             <img src='https://www.bebes-lutins.fr/view/assets/images/produits/<?php echo $product->getImage(); ?>' >

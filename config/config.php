@@ -66,5 +66,6 @@ $actions_connected = array(
     'load_birthlist_payment',
     'init_birthlist_payment',
     'birthlist_order_cancel',
-    'add_product_to_wishlist'
+    'add_product_to_wishlist',
+    'delete_item_from_wishlist'
 );

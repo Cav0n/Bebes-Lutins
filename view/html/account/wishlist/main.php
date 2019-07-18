@@ -53,7 +53,7 @@ $whishlist = WishListGateway::GetWishListOfUser($user->getId());
                             <img src='https://www.bebes-lutins.fr/view/assets/images/produits/<?php echo $product->getImage(); ?>' >
                             <p class='title'><?php echo $product->getName();?></p>
                             <textarea class='wishlist-item-textarea' placeholder='Ce texte est facultatif et vous permet de préciser des choses par rapport au produit.'></textarea>
-                            <button class="remove-button">Enlever de la liste</button>
+                            <button class="remove-button" onclick='delete_item_from_wishlist("<?php echo $item->getId(); ?>")'>Enlever de la liste</button>
                             <button class="add-to-cart-button">Ajouter au panier</button>
                         </div>
                     <?php } } else { ?>
@@ -72,4 +72,9 @@ $whishlist = WishListGateway::GetWishListOfUser($user->getId());
     <?php UtilsModel::load_footer();?>
 </footer>
 </body>
+<script>
+    function delete_item_from_wishlist(id){
+        document.location.href='https://www.bebes-lutins.fr/espace-client/liste-envie/supprimer-item/' + id;
+    }
+</script>
 </html>

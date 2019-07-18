@@ -20,6 +20,10 @@ class ConnectedController
                     ConnectedModel::add_product_to_wishlist($_REQUEST['wishlist_id'], $_REQUEST['product_id']);
                     break;
 
+                case 'delete_item_from_wishlist':
+                    ConnectedModel::delete_item_from_wishlist($_REQUEST['item_id']);
+                    break;
+
                 case "load_page_connected":
                     ConnectedModel::load_page($_REQUEST['page']);
                     break;

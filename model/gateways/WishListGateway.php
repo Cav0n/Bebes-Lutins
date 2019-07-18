@@ -91,13 +91,13 @@ class WishListGateway
     /**
      * @param string id Identifiant de la liste d'envie
      */
-    public static function DeleteItemToWishlist(string $id){
+    public static function DeleteItemFromWishlist(string $id){
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);
 
-        $query = "DELETE FROM whishlist_items WHERE id=:id;";
+        $query = "DELETE FROM wishlist_items WHERE id=:id;";
         $con->executeQuery($query, array(
-            ':id' => array($id)
+            ':id' => array($id, PDO::PARAM_STR)
         ));
     }
 }

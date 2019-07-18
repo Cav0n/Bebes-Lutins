@@ -117,6 +117,20 @@ class ConnectedModel
         }
     }
 
+    public static function delete_item_from_wishlist($item_id){
+        try{ 
+            WishListGateway::DeleteItemFromWishlist($item_id);
+        } catch(PDOException $e){
+            echo $e;
+        }
+
+        ?>
+            <script type="text/javascript">
+                document.location.href='https://www.bebes-lutins.fr/espace-client/liste-envie';
+            </script>
+            <?php
+    }
+
     public static function change_informations(String $id, String $surname, String $firstname, String $phone, String $mail){
         try{
             if(isset($_SESSION['connected_user'])){

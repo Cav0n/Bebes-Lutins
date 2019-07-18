@@ -48,8 +48,14 @@ $whishlist = WishListGateway::GetWishListOfUser($user->getId());
                     </div>
                 </div>
                 <div class="customer-area-bloc horizontal">
-                    <?php if(!empty($whishlist->getItems())) { foreach($whishlist->getItems() as $item) { ?>
-                        <p><?php echo $item->getProductID();?></p>
+                    <?php if(!empty($whishlist->getItems())) { foreach($whishlist->getItems() as $item) { $product = $item->getProduct(); ?>
+                        <div class='wishlist-item vertical'>
+                            <img src='https://www.bebes-lutins.fr/view/assets/images/produits/<?php echo $product->getImage(); ?>' >
+                            <p class='title'><?php echo $product->getName();?></p>
+                            <textarea class='wishlist-item-textarea' placeholder='Ce texte est facultatif et vous permet de préciser des choses par rapport au produit.'></textarea>
+                            <button class="remove-button">Enlever de la liste</button>
+                            <button class="add-to-cart-button">Ajouter au panier</button>
+                        </div>
                     <?php } } else { ?>
                         <p>Votre liste d'envie est vide.</p>
                     <?php }?>

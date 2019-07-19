@@ -27,7 +27,7 @@ $users = UserGateway::getAllUsers();
             <div class="search-container">
                 <div class="search-input-container">
                     <label for="search-text" class="hidden">Rechercher : </label>
-                    <input id="search-text" type="text" name="search-text" placeholder="Rechercher un client">
+                    <input onkeyup="search()" id="search-text" type="text" name="search-text" placeholder="Rechercher un client">
                 </div>
             </div>
             <div class="table-container">

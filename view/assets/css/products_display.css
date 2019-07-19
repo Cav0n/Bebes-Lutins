@@ -5,7 +5,7 @@
 #products-display {
     width: 100%;
     max-width: 1240px;
-    margin: 0 auto;
+    margin: 1rem auto;
 }
 
 #products-display .product {
@@ -89,7 +89,7 @@
 
 .product-display-button-form {
     width: 271px;
-    margin: 2rem auto;
+    margin: 0 auto;
 }
 
 .product-display-button-form button:hover {

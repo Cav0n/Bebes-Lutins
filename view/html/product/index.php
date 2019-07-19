@@ -107,9 +107,7 @@ if(isset($_SESSION['connected_user'])){
                 <?php } ?>
             </div>
 
-            <div id='certifications-container' class='vertical' style="margin-top: 2rem;border: 1px solid rgb(215, 215, 215);border-radius: 2px;">
-                <?php UtilsModel::load_certifications(); ?>
-            </div>
+            <?php UtilsModel::load_certifications(); ?>
         </div>
     </main>
     <footer>

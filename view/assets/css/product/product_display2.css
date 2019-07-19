@@ -229,13 +229,3 @@
     border-radius: 2px;
     background: white;
 }
-
-#product-page-container #certifications-container {
-    margin-top: 2rem;
-    border: 1px solid rgb(215, 215, 215);
-    border-radius: 2px;
-}
-
-#product-page-container #certifications-container #certifications {
-    border-radius: 2px;
-}

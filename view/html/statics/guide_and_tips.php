@@ -54,7 +54,6 @@
                 </div>
 
                 <div id="display-couche-culotte" class="display-manual vertical non-selected">
-                    <h2>Couche + culotte</h2>
                     <div class="manual-text horizontal centered">
                         <img src="https://www.bebes-lutins.fr/view/assets/images/utils/manual/Couche_culotte/1.png" title="" alt="">
                         <p>Positionner le voile de protection jetable au fond de la couche.</p>
@@ -75,7 +74,6 @@
                 </div>
 
                 <div id="display-taille-papillon" class="display-manual vertical non-selected">
-                    <H2>Taille de la Papillon</H2>
                     <div class="manual-text horizontal centered">
                         <img src="https://www.bebes-lutins.fr/view/assets/images/utils/manual/Taille_papillon/1.png" title="" alt="">
                         <p>Placer la doublure au fond de la couche si besoin (nuit par exemple).<BR>Puis positionner le voile de protection jetable au fond de la couche.</p>

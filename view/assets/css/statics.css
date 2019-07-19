@@ -151,8 +151,11 @@
 }
 
 .manual-text img {
-    width: 14vw;
-    height: 14vw;
+    width: 12rem;
+    height: 12rem;
+    border-radius: 2px;
+    border: 1px solid rgb(220, 220, 220);
+    box-sizing: border-box;
 }
 
 .manual-text p {

@@ -46,7 +46,12 @@ if(isset($_SESSION['connected_user'])){
                                 <?php } ?>
                             </div>
                             <div id='main-image-container'>
-                                <img id='big-image'  src='https://www.bebes-lutins.fr/view/assets/images/products/<?php echo $product->getImage()->getName(); ?>' alt='<?php echo $product->getName(); ?>'>
+                                <div>
+                                    <img id='big-image' class='desktop' src='https://www.bebes-lutins.fr/view/assets/images/products/<?php echo $product->getImage()->getName(); ?>' alt='<?php echo $product->getName(); ?>'>
+                                </div>
+                                <div>
+                                    <img id='mobile-image' class='mobile' src='https://www.bebes-lutins.fr/view/assets/images/products/<?php echo $product->getImage()->getName(); ?>' alt='<?php echo $product->getName(); ?>'>
+                                </div>
                             </div>
                         </div>
                         <div id='social-media-container' class='horizontal between'>

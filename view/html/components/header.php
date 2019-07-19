@@ -172,7 +172,11 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
 
 <div id="top-mobile" class="mobile horizontal">
     <div id="header-container" class="between">
-        <a class="vertical centered" onclick="display_menu_mobile()"><?php echo file_get_contents("view/assets/images/utils/icons/menu.svg"); ?></a>
+        <div id="nav-icon4" onclick="display_menu_mobile()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <a id="link-logo" href="https://www.bebes-lutins.fr" class='vertical centered'><img src="https://www.bebes-lutins.fr/view/assets/images/logo.png" id="img-logo" class="transition-fast not-shrink-logo"></a>
         <a id="shopping-cart-logo" href="https://www.bebes-lutins.fr/panier" class='vertical centered'><?php echo file_get_contents("view/assets/images/utils/icons/shopping-bag.svg"); ?></a>
     </div>
@@ -192,6 +196,17 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
     function display_menu_mobile(){
         document.getElementById("menu-mobile").style.marginLeft = 0;
         document.getElementsByTagName("body")[0].style.overflow = 'hidden';
+
+        $('#nav-icon4').attr('onclick', 'hide_menu_mobile()');
+    }
+    
+    function hide_menu_mobile(){
+        document.getElementById("menu-mobile").style.marginLeft = "-100%";
+        document.getElementsByTagName("body")[0].style.overflow = 'auto';
+        document.getElementsByTagName("html")[0].style.overflow = 'auto';
+
+        $('#nav-icon4').attr('onclick', 'display_menu_mobile()');
+
     }
 
     $(document).ready(function() {
@@ -205,5 +220,9 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
             $('#' + category + "-container").removeClass('hidden');
             $('#' + category + "-image").removeClass('hidden');
         });
+
+        $('#nav-icon4').click(function(){
+		    $(this).toggleClass('open');
+	    });
     });
 </script>

@@ -67,10 +67,6 @@ foreach ($categories as $category){
 ?>
 <div id="menu-mobile" class="menu-mobile vertical transition-fast">
     <div class="links-container vertical">
-        <div class="home-and-cross horizontal">
-            <a href="https://www.bebes-lutins.fr/">Accueil</a>
-            <p onclick="hide_menu_mobile()">X</p>
-        </div>
         <div class="links vertical">
             <a href="https://www.bebes-lutins.fr/en-savoir-plus/qui-sommes-nous">A propos</a>
             <a id='categories-button' onclick="display_categories()" class="horizontal"><p>Catégories</p><i id="arrow-button" class="fas fa-angle-down"></i></a>
@@ -101,13 +97,6 @@ foreach ($categories as $category){
 </div>
 
 <script>
-    function hide_menu_mobile(){
-        document.getElementById("menu-mobile").style.marginLeft = "-100%";
-        document.getElementsByTagName("body")[0].style.overflow = 'auto';
-        document.getElementsByTagName("html")[0].style.overflow = 'auto';
-
-    }
-
     function display_categories(){
         document.getElementById("categories-button").setAttribute('onClick', "close_categories()");
         document.getElementById("arrow-button").setAttribute("class", "fas fa-angle-up");

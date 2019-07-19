@@ -179,6 +179,67 @@ class ProductGateway
         return $results;
     }
 
+    public static function GetHighlightedProducts2()
+    {
+        global $dblogin, $dbpassword, $dsn;
+        $con = new Connexion($dsn, $dblogin, $dbpassword);
+        
+        $highlighted_products = array();
+
+        $query = "SELECT id, product_id, position FROM highlighted_products ORDER BY position";
+        $con->executeQuery($query);
+        $results = $con->getResults();
+
+        foreach ($results as $r) {
+            $product_id = $r['product_id'];
+            $categ = array();
+
+            $query = "SELECT id, id_copy, name, ceo_name,price, stock, description, ceo_description, category, creation_date, image, number_of_review, number_of_stars, reference, tags, hide FROM product WHERE id=:product_id;";
+            $con->executeQuery($query, array(':product_id' => array($product_id, PDO::PARAM_STR)));
+            $product_db = $con->getResults()[0];
+
+            $product_categories = explode(';', $product_db['category']);
+            foreach($product_categories as $product_category) {
+                if($product_category != ''){ // Security because explode function can get empty string after ';'
+                $query = "SELECT name, parent, image, description, rank FROM category WHERE name=:category_name;";
+                $con->executeQuery($query, array(':category_name' => array($product_category, PDO::PARAM_STR)));
+                $category = $con->getResults()[0];
+                $categ[] = new Category($category['name'], $category['parent'], new ImageCategory($category['image']), $category['description'], $category['rank']);}
+            }
+
+            $product = new Product(
+                $product_db['id'], 
+                $product_db['id_copy'], 
+                $product_db['name'], 
+                $product_db['ceo_name'],
+                $product_db['price'], 
+                $product_db['stock'], 
+                $product_db['description'], 
+                $product_db['ceo_description'], 
+                $categ, 
+                $product_db['creation_date'], 
+                new ImageProduct("null", $product_db['image']), 
+                $product_db['number_of_review'], 
+                $product_db['number_of_stars'], 
+                $product_db['reference'], 
+                $product_db['tags'], 
+                $product_db['hide']
+            );
+
+            $query = "SELECT image, product_id FROM thumbnails WHERE product_id=:product_id;";
+            $con->executeQuery($query, array(':product_id' => array($product_id, PDO::PARAM_STR)));
+            $thumbnails_list_db = $con->getResults();
+
+            foreach ($thumbnails_list_db as $t) {
+                $product->getImage()->addThumbnail(new Image($t['image']));
+            }
+
+            $highlighted_products[] = $product;
+        }
+
+        return $highlighted_products;
+    }
+
     public static function AddProduct(String $id, String $name, String $ceo_name, float $price, int $stock, String $description, String $ceo_description, String $category, String $creation_date, String $image, String $reference, $tags, bool $hide, string $thumbnails_name){
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);

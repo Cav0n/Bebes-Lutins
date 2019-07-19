@@ -7,7 +7,7 @@
  */
 
 $products = ProductGateway::GetProducts2();
-$highlighted_products = ProductGateway::GetHighlightedProducts();
+$highlighted_products = ProductGateway::GetHighlightedProducts2();
 if(isset($_SESSION['limit_product_display']))
     $limit_product_display = $_SESSION['limit_product_display'];
 else $limit_product_display = -1;

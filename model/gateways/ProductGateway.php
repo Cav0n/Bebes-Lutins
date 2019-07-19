@@ -86,6 +86,32 @@ class ProductGateway
         return $products;
     }
 
+    public static function GetProductsSortedBy(string $sorting_type){
+        global $dblogin, $dbpassword, $dsn;
+        $con = new Connexion($dsn, $dblogin, $dbpassword);
+
+        $products = array();
+
+        switch($sorting_type){
+            case 'name':
+                $query = "SELECT id, id_copy, name, ceo_name,price, stock, description, ceo_description, category, creation_date, image, number_of_review, number_of_stars, reference, tags, hide FROM product ORDER BY name";
+                $con->executeQuery($query);
+                $results = $con->getResults();
+                break;
+
+            case 'price':
+                $query = "SELECT id, id_copy, name, ceo_name,price, stock, description, ceo_description, category, creation_date, image, number_of_review, number_of_stars, reference, tags, hide FROM product ORDER BY price";
+                $con->executeQuery($query);
+                $results = $con->getResults();
+                break;
+
+            default:
+                break;
+        }
+
+
+    }
+
     public static function GetProductWithIndex(int $index, int $numberOfProducts){
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);

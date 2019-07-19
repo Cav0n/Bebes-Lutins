@@ -201,7 +201,11 @@
     margin: auto 0;
 }
 
-#product-page-container #ceo-description-container p {
+#product-page-container #add-to-cart-container #add-to-cart-button.add-to-wishlist {
+    margin: auto 0;
+}
+
+#prod0uct-page-container #ceo-description-container p {
     font-size: 1rem;
 }
 

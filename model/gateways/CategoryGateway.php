@@ -13,12 +13,12 @@ class CategoryGateway
         $con = new Connexion($dsn, $dblogin, $dbpassword);
         $results = array();
 
-        $query ="SELECT name, parent, image, description, rank FROM category ORDER BY rank";
+        $query ="SELECT name, parent, image, description, rank, tags, private FROM category ORDER BY rank";
         $con->executeQuery($query);
         $categories = $con->getResults();
 
         foreach ($categories as $category){
-            $categ = new Category($category['name'], $category['parent'], new ImageCategory($category['image']), $category['description'], $category['rank']);
+            $categ = new Category($category['name'], $category['parent'], new ImageCategory($category['image']), $category['description'], $category['rank'], $category['tags'], $category['private']);
             $results[] = $categ;
         }
 
@@ -105,11 +105,11 @@ class CategoryGateway
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);
 
-        $query = 'SELECT name, parent, image, description, rank FROM category WHERE name=:name';
+        $query = 'SELECT name, parent, image, description, rank, tags, private FROM category WHERE name=:name';
         $con->executeQuery($query, array(':name' => array($name, PDO::PARAM_STR)));
         $category_db = $con->getResults()[0];
 
-        return new Category($category_db['name'], $category_db['parent'], new ImageCategory($category_db['image']), $category_db['description'], $category_db['rank']);
+        return new Category($category_db['name'], $category_db['parent'], new ImageCategory($category_db['image']), $category_db['description'], $category_db['rank'], $category_db['tags'], $category_db['private']);
     }
 
     public static function SearchCategoryByName(String $category_name) : Category{
@@ -118,13 +118,13 @@ class CategoryGateway
 
         $category_name = UtilsModel::replace_accent($category_name);
 
-        $query = 'SELECT name, parent, image, description, rank FROM category';
+        $query = 'SELECT name, parent, image, description, rank, tags, private FROM category';
         $con->executeQuery($query);
         $categories_db = $con->getResults();
 
         foreach ($categories_db as $category_db){
             if(UtilsModel::replace_accent($category_db['name']) == $category_name){
-                $category = new Category($category_db['name'], $category_db['parent'], new ImageCategory($category_db['image']), $category_db['description'], $category_db['rank']);
+                $category = new Category($category_db['name'], $category_db['parent'], new ImageCategory($category_db['image']), $category_db['description'], $category_db['rank'], $category_db['tags'], $category_db['private']);
             }
         }
 

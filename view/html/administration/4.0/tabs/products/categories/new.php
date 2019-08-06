@@ -137,7 +137,7 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
 
     var mainDropzone = new Dropzone("div#main-dropzone",
         {
-            url: "https://www.bebes-lutins.fr/view/html/tests/test-upload.php",
+            url: "https://www.bebes-lutins.fr/view/html/tests/test-upload-category.php",
             addRemoveLinks: true,
             maxFiles: 1,
             dictDefaultMessage: "Choisissez l'image de la catégorie.",
@@ -160,7 +160,7 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
                     alert(namefile);
                     $.ajax({
                         type: "POST",
-                        url: "../../view/html/tests/test-upload.php",
+                        url: "../../view/html/tests/test-upload-category.php",
                         data: {
                             target_file: namefile,
                             delete_file: 1

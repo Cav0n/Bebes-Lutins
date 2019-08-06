@@ -186,7 +186,7 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
     }
 
     function delete_category(name){
-        document.location.href='https://www.bebes-lutins.fr/dashboard4/categories/supprimer/' + name;
+        document.location.href='https://www.bebes-lutins.fr/dashboard4/produits/categorie/supprimer/' + name;
     }
 </script>
 </html>

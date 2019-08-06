@@ -146,61 +146,6 @@ class AdminModel
         require("$view_rep/html/administration/components/order_display.php");
     }
 
-    public static function add_category(String $nom, $parent, String $description){
-        $_SESSION['header_tab'] = "products";
-
-        $nom = str_replace("'", "’",ucfirst($nom));
-        $description = nl2br(str_replace("'", "’",$description));
-
-        $nomImage = self::UploadImage(str_replace(" ","_",$nom), 'categories');
-        if($parent == null){
-            $parent = 'null';
-        }
-
-        if ($nomImage == null){
-            $_POST['error-message-products'] = "Erreur lors de l'Upload de l'image." . $_POST['ErreurUpload'];
-            self::load_page('dashboard');
-        }
-        try{
-            CategoryGateway::AddCategory($nom, $parent,$nomImage, $description, 0);
-        }catch (PDOException $e) {
-            $_POST['error-message-products'] = "Erreur BDD : " . $e;
-            self::load_page('dashboard');
-        }
-        ?>
-        <script type="text/javascript">
-            document.location.href='<?php echo "https://www.bebes-lutins.fr/dashboard/tab-products"?>';
-        </script>
-        <?php
-    }
-
-    public static function edit_category(String $name, String $old_image_name, String $description, String $old_name, $rank){
-        $_SESSION['header_tab'] = "products";
-
-        $name = str_replace("'", "’",ucfirst($name));
-        $description = nl2br(str_replace("'", "’",$description));
-
-        if( !empty($_FILES['image']['name']) ) {
-            $image_name = self::UploadImage(str_replace(" ", "_", $name), 'categories');
-            if ($image_name == null) {
-                $_POST['error-message-products'] = "Erreur lors de l'Upload de l'image." . $_POST['ErreurUpload'];
-                self::load_page('dashboard');
-            }
-        } else $image_name = $old_image_name;
-
-        try{ CategoryGateway::EditCategory($name, "", $image_name, $description, $old_name, $rank);}
-        catch (PDOException $e){
-            $_POST['error-message-products'] = "Erreur BDD : " . $e;
-            self::load_page('dashboard');
-        }
-        ?>
-        <script type="text/javascript">
-            document.location.href='<?php echo "https://www.bebes-lutins.fr/dashboard/tab-products"?>';
-        </script>
-        <?php
-
-    }
-
     public static function delete_category(String $name){
         $_SESSION['header_tab'] = "products";
 
@@ -692,7 +637,7 @@ class AdminModel
                     if($option == null) require("$view_rep/html/administration/4.0/tabs/products/categories/categories.php");
                     if($option == 'edition') require("$view_rep/html/administration/4.0/tabs/products/categories/new.php");}
                     if($option == 'sauvegarder') self::saveCategory($_POST['name']);
-                    if($option == 'supprimer') self::deleteCategory($_POST['name']);
+                    if($option == 'supprimer') self::deleteCategory($_REQUEST['category']);
                 if($page == "stocks") require("$view_rep/html/administration/4.0/tabs/products/stocks/all.php");
                 if($page == "nouveau") require("$view_rep/html/administration/4.0/tabs/products/edit/new.php");
                 if($page == "edition") require("$view_rep/html/administration/4.0/tabs/products/edit/edition.php");

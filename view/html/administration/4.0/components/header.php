@@ -17,7 +17,7 @@ if($_GET['page'] == "nouveau" ||
     <a href='https://www.bebes-lutins.fr' class='vertical centered'><h1>BEBES LUTINS</h1></a>
     <a id="administrator-name" href="https://www.bebes-lutins.fr">Retour sur le site ></a>
     <div id="extra" class="between <?php if($extra == null || $_GET['page'] == "importer") echo 'hidden';?>">
-        <button class="cancel-button" onclick="cancel_creation('<?php echo $_GET['section']; ?>')">Annuler</button>
+        <button class="remove-button" form='deletion-wrapper'>Supprimer</button>
         <button class="save-button" form="edition-wrapper">Enregistrer</button>
     </div>
 </header>
@@ -40,7 +40,7 @@ if($_GET['page'] == "nouveau" ||
         <li class="<?php if($_GET['section'] == "analyses") echo 'selected'; ?>"><a href="https://www.bebes-lutins.fr/dashboard4/analyses/tableau-de-bord/tous"><div class="horizontal"><?php echo file_get_contents("view/assets/images/utils/icons/analysis.svg"); ?></div><p>Analyses</p></a></li>
     </ul>
     <ul id="version-container">
-        <li>Version : 4.3.2</li>
+        <li>Version : 4.3.3</li>
     </ul>
 </div>
 

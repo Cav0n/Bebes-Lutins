@@ -62,6 +62,7 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
         <p id="error-message"><?php echo $error_message; ?></p>
     </div>
     <?php } ?>
+    <form id='deletion-wrapper' class='hidden' method="post" action="https://www.bebes-lutins.fr/dashboard4/produits/categorie/supprimer"><input type="hidden" name='category' value="<?php echo $old_name; ?>"></form>
     <form id="edition-wrapper" class="horizontal" method="post" action="https://www.bebes-lutins.fr/dashboard4/produits/categorie/sauvegarder/" enctype="multipart/form-data">
         <input id="image-name" type="hidden" name="image" value="<?php echo $image;?>">
         <input id='new-category' type="hidden" name='new_category' value="<?php echo $new_category;?>">

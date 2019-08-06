@@ -97,9 +97,9 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
     $total_elements += $quantity;
 }
 ?>
-<div id='extra' class='desktop horizontal centered' style="z-index: 100;height: 2rem;color: white;background: rgb(229, 89, 84);font-family: Roboto, sans-serif;">
+<!-- <div id='extra' class='desktop horizontal centered' style="z-index: 100;height: 2rem;color: white;background: rgb(229, 89, 84);font-family: Roboto, sans-serif;">
     <p class='vertical centered'>"CONGES ANNUELS" Les commandes passées à partir du 13 juillet seront expédiées à partir du 29 juillet.</p>
-</div>
+</div> -->
 <div id="top" class="desktop horizontal">
     <div id="left">
         <a href="https://www.bebes-lutins.fr/contact" class="contact transition-fast">

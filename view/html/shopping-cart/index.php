@@ -111,15 +111,15 @@ $message = $shopping_cart->getMessage();
 <main id="shopping-cart-main">
     <div id="shopping-cart-wrapper">
         <?php if(!$empty) UtilsModel::load_shopping_cart_stepper();?>
-        <div id='alert-container' class='horizontal'>
+        <!-- <div id='alert-container' class='horizontal'>
             <div class='vertical centered'>
-                <?php echo file_get_contents("view/assets/images/utils/icons/warning.svg"); ?>
+                <?php //echo file_get_contents("view/assets/images/utils/icons/warning.svg"); ?>
             </div>
             <div class='vertical'>
                 <h1 style="font-size:1.5rem;">CONGÉS ANNUELS</h1>
                 <p>Chers clients, nous vous informons que les commandes passées à partir du 13 juillet seront expédiées à partir du 29 juillet. <BR>Merci pour votre compréhension.</p>
             </div>
-        </div>
+        </div> -->
         <div id="shopping-cart-empty" class="vertical <?php if(! $empty) echo 'hidden';?>">
             <form action="https://www.bebes-lutins.fr/" id="empty-infos" class="vertical centered">
                 <h1>VOTRE PANIER EST TOTALEMENT VIDE 😢</h1>

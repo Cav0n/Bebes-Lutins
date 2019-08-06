@@ -15,6 +15,8 @@ if($category_name != null){
     $description = $category->getDescription();
     $parent = $category->getParent();
     $rank = $category->getRank();
+    $tags = $category->getTags();
+    $private = $category->getPrivate();
 }
 
 if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
@@ -27,6 +29,8 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
     $description = $_SESSION['description'];
     $parent = $_SESSION['parent'];
     $rank = $_SESSION['rank'];
+    $tags = $_SESSION['tags'];
+    $private = $_SESSION['private'];
     
     unset($_SESSION['error_message']);
 } else $error_message = null;
@@ -114,8 +118,8 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
                     <input id="tags" type="text" name="tags" placeholder="Couches, bébés..." value="<?php echo $tags; ?>">
                 </div>
                 <div class="hide vertical">
-                    <label class="container vertical centered">Cacher la catégorie
-                        <input type="checkbox" name="hide" <?php if($hide) echo 'checked'; ?>>
+                    <label class="container vertical centered">Catégorie privée
+                        <input type="checkbox" name="private" <?php if($private) echo 'checked'; ?>>
                         <span class="checkmark"></span>
                     </label>
                 </div>

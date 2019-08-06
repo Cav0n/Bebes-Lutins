@@ -865,7 +865,7 @@ class AdminModel
 
         ?>
         <script type="text/javascript">
-            document.location.href='https://www.bebes-lutins.fr/dashboard4/produits/categories/edition/' + <?php echo $category_name_url; ?>;
+            document.location.href='<?php echo 'https://www.bebes-lutins.fr/dashboard4/produits/categorie/edition/' . $category_name_url; ?>';
         </script>
         <?php
     }

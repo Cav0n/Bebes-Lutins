@@ -138,20 +138,20 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
             <div id="categories-popup" class="popup centered">
                 <div class="horizontal" style='width:100%;'>
                     <div id='parent-categories' class='vertical'>
-                        <?php $index_parent = 0; foreach($categories as $category) { if($category->getParent() == 'none') {?>
+                        <?php $index_parent = 0; foreach($categories as $category) { if($category->getParent() == 'none' && !$category->getPrivate()) {?>
                             <p id='<?php echo $category->getNameForURL(); ?>-selector' class='category <?php if ($index_parent == 0) echo 'selected-category'; ?>'><?php echo $category->getName();?></p>
                         <?php } $index_parent++; } ?>
                     </div>
                     <div id='child-categories'>
-                        <?php $index_child = 0; foreach($categories as $category) { if($category->getParent() == 'none') { ?>
+                        <?php $index_child = 0; foreach($categories as $category) { if($category->getParent() == 'none' && !$category->getPrivate()) { ?>
                             <div id='<?php echo $category->getNameForURL(); ?>-container' class="category-child horizontal wrap <?php if ($index_child != 0) echo "hidden"; ?>">
-                                <?php foreach($sub_categories_list as $sub_category) {
+                                <?php foreach($sub_categories_list as $sub_category) { if(!$sub_category->getPrivate()) {
                                     if($sub_category->getParent() == $category->getName()) { ?>
                                     <div class='vertical between category-child-container' onclick="load_category('<?php echo $sub_category->getNameForURL(); ?>')">
                                         <p class='child-name'><?php echo $sub_category->getName();?></p>
                                         <img class='child-image' src='https://www.bebes-lutins.fr/view/assets/images/categories/<?php echo $sub_category->getImage();?>'>
                                     </div>
-                                <?php } $index_child ++; } ?>
+                                <?php } $index_child ++; } } ?>
                             </div>
                         <?php } } ?>
                     </div>

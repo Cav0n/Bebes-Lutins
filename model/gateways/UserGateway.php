@@ -125,14 +125,14 @@ class UserGateway
             $con->executeQuery($query);
             $results = $con->getResults();
 
-            $query ="SELECT name, parent, image, description, rank FROM category";
+            $query ="SELECT name, parent, image, description, rank, tags, private FROM category";
             $con->executeQuery($query);
             $categories = $con->getResults();
 
             foreach ($results as $r){
                 foreach ($categories as $category) {
                     if($category['name'] == $r['category']){
-                        $categ = new Category($category['name'], $category['parent'], new ImageCategory($category['image']), $category['description'], $category['rank']);
+                        $categ = new Category($category['name'], $category['parent'], new ImageCategory($category['image']), $category['description'], $category['rank'], $category['tags'], $category['private']);
                         $product = new Product($r['id'], $r['id_copy'], $r['name'], $r['ceo_name'], $r['price'], $r['stock'], $r['description'], $r['ceo_description'], $categ, $r['creation_date'], new ImageProduct("null", $r['image']), $r['number_of_review'], $r['number_of_stars'], $r['reference'], $r['tags'], $r['hide']);
                         $products[] = $product;
                     }
@@ -424,7 +424,7 @@ class UserGateway
         $con->executeQuery($query);
         $products_db = $con->getResults();
 
-        $query = 'SELECT name, parent, image, description, rank FROM category_backup';
+        $query = 'SELECT name, parent, image, description, rank, tags, private FROM category_backup';
         $con->executeQuery($query);
         $categories_db = $con->getResults();
 
@@ -433,7 +433,7 @@ class UserGateway
         $address_list_db = $con->getResults();
 
         foreach ($categories_db as $category_db){
-            $categories[] = new Category($category_db['name'], $category_db['parent'], new ImageCategory($category_db['image']), $category_db['description'], $category_db['rank']);
+            $categories[] = new Category($category_db['name'], $category_db['parent'], new ImageCategory($category_db['image']), $category_db['description'], $category_db['rank'], $category_db['tags'], $category_db['private']);
         }
 
         foreach ($products_db as $product_db){

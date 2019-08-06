@@ -844,30 +844,35 @@ class AdminModel
     }
 
     public static function saveCategory($category_name){
+        $error = false;
+
         $old_name = $_POST['old_name'];
         $rank = $_POST['rank'];
         $description = $_POST['description'];
         $parent = $_POST['parent'];
         $tags = $_POST['tags'];
         $private = $_POST['private'];
+        if ($private == null) $private = false;
         $image = $_POST['image'];
         $category_name_url = str_replace("’", "_", str_replace(" ", "=",UtilsModel::replace_accent($category_name)));
 
         if($_POST['new_category']){
             try{ 
                 CategoryGateway::AddCategory($category_name, $parent, $image, $description, $rank, $tags, $private);
-            } catch(PDOException $e){ echo $e;}
+            } catch(PDOException $e){ echo $e; $error = true;}
         } else {
             try{ 
                 CategoryGateway::EditCategory($category_name, $parent, $image, $description, $old_name, $rank, $tags, $private);
-            } catch(PDOException $e){ echo $e; }
+            } catch(PDOException $e){ echo $e; $error = true;}
         }
 
+        if(!$error){
         ?>
         <script type="text/javascript">
             document.location.href='<?php echo 'https://www.bebes-lutins.fr/dashboard4/produits/categorie/edition/' . $category_name_url; ?>';
         </script>
         <?php
+        }
     }
 
     public static function deleteCategory($category_name){

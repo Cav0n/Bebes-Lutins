@@ -849,17 +849,17 @@ class AdminModel
         $description = $_POST['description'];
         $parent = $_POST['parent'];
         $tags = $_POST['tags'];
-        $hide = $_POST['hide'];
+        $private = $_POST['private'];
         $image = $_POST['image'];
         $category_name_url = str_replace("’", "_", str_replace(" ", "=",UtilsModel::replace_accent($category_name)));
 
         if($_POST['new_category']){
             try{ 
-                CategoryGateway::AddCategory($category_name, $parent, $image, $description, $rank);
+                CategoryGateway::AddCategory($category_name, $parent, $image, $description, $rank, $tags, $private);
             } catch(PDOException $e){ echo $e;}
         } else {
             try{ 
-                CategoryGateway::EditCategory($category_name, $parent, $image, $description, $old_name, $rank);
+                CategoryGateway::EditCategory($category_name, $parent, $image, $description, $old_name, $rank, $tags, $private);
             } catch(PDOException $e){ echo $e; }
         }
 

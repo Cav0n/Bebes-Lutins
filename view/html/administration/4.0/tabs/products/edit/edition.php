@@ -165,9 +165,9 @@ $error = $_POST['error-message-products'];
                 </div>
             </div>
 
-            <span id="deleting-button" class="vertical centered" onclick="delete_product('<?php echo $product->getId(); ?>')">
-                Supprimer le produit
-            </span>
+            <button style='margin:0;' id="saving-button" class="vertical centered" type='submit'>
+                Enregistrer le produit
+            </button>
         </div>
     </form>
 </main>

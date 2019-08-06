@@ -27,7 +27,7 @@ class WishListGateway
                     $con->executeQuery($query, array(':product_id' => array($wishlist_item->getProductID(), PDO::PARAM_STR)));
                     $r = $con->getResults()[0];
             
-                    $query = "SELECT name, parent, image, description, rank FROM category";
+                    $query = "SELECT name, parent, image, description, rank, tags, private FROM category";
                     $con->executeQuery($query);
                     $categories = $con->getResults();
             
@@ -40,7 +40,7 @@ class WishListGateway
                     foreach ($categories as $category) {
                         foreach ($product_categories as $product_category) {
                             if ($category['name'] == $product_category) {
-                                $categ[] = new Category($category['name'], $category['parent'], new ImageCategory($category['image']), $category['description'], $category['rank']);
+                                $categ[] = new Category($category['name'], $category['parent'], new ImageCategory($category['image']), $category['description'], $category['rank'], $category['tags'], $category['private']);
                             }
                         }
                     }

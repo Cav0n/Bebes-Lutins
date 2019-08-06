@@ -126,7 +126,8 @@ class Category
      */
     public function getTags(): string
     {
-        return $this->tags;
+        if($this->tags == null) return '';
+        else return $this->tags;
     }
 
     /**

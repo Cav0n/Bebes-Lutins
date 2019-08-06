@@ -132,6 +132,8 @@ if(isset($_SESSION['connected_user'])){
             .css('border-radius', '2px')
             .parent()
             .zoom({magnify: 1.2});
+        
+        $("#mobile-image").attr("src", img)
     }
 </script>
 </html>

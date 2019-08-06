@@ -196,21 +196,23 @@ header #navbar #left #categories:hover .tab {
 header #navbar #left #categories:hover #categories-popup {
     display: flex;
     text-align: left;
-    border-bottom: 3px solid darkgreen;
-    border-top: 0 solid darkgreen;
-    background: #b5e639;
+    border-bottom: 1px solid gray;
+    border-top: 0 solid gray;
+    background: #fbfbfb;
     color: black;
+    box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
 }
 
 header #navbar #left #categories #categories-popup #parent-categories {
     width: calc(15rem + 1px);
+    min-width: 15rem;
     box-sizing: border-box;
     padding: 0.5rem 1rem;
-    border-right: 2px dashed darkgreen;
+    border-right: 2px dashed #b5e639;
 }
 
 header #navbar #left #categories #categories-popup #parent-categories .selected-category {
-    background: #a8bd62;
+    background: #b5e639;
 }
 
 header #navbar #left #categories #categories-popup #child-categories {
@@ -233,7 +235,7 @@ header #navbar #left #categories:hover #categories-popup .category {
 }
 
 header #navbar #left #categories:hover #categories-popup .category:hover {
-    background: #a8bd62;
+    background: #b5e639;
     ;
 }
 
@@ -244,7 +246,7 @@ header #navbar #left #categories:hover #categories-popup #child-categories .cate
 }
 
 header #navbar #left #categories:hover #categories-popup #child-categories .category-child-container:hover {
-    background: #a8bd62;
+    background: #b5e639;
 }
 
 header #navbar #left #categories:hover #categories-popup #child-categories .category-child-container .child-name {
@@ -274,7 +276,7 @@ header #navbar #left #categories:hover #categories-popup #image-parent-container
 }
 
 header #navbar #left #categories:hover #categories-popup #image-parent-container img:hover {
-    background: darkgreen;
+    background: #b5e639;
 }
 
 

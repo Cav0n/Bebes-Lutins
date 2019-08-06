@@ -37,8 +37,8 @@ if(isset($_SESSION['connected_user'])){
     </div>
     <div class="vertical top">
         <p class="big">Nous suivre</p>
-        <a href='https://www.instagram.com/bebeslutins/' class="no-decoration social-link horizontal"><?php echo file_get_contents("https://www.bebes-lutins.fr/view/assets/images/utils/icons/instagram.svg"); ?> <p class='social-media-name vertical centered'> - Instagram</p></a>
-        <a href='https://www.facebook.com/bebes.lutins/' class="no-decoration social-link horizontal"><?php echo file_get_contents("https://www.bebes-lutins.fr/view/assets/images/utils/icons/facebook.svg"); ?> <p class='social-media-name vertical centered'> - Facebook</p></a>
+        <a href='https://www.instagram.com/bebeslutins/' class="no-decoration social-link horizontal"><?php echo file_get_contents("https://www.bebes-lutins.fr/view/assets/images/utils/icons/instagram-black.svg"); ?> <p class='social-media-name vertical centered'> - Instagram</p></a>
+        <a href='https://www.facebook.com/bebes.lutins/' class="no-decoration social-link horizontal"><?php echo file_get_contents("https://www.bebes-lutins.fr/view/assets/images/utils/icons/facebook-black.svg"); ?> <p class='social-media-name vertical centered'> - Facebook</p></a>
         <?php echo $admin_button;?>
     </div>
     <div class="vertical top">

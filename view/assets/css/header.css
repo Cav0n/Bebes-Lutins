@@ -177,7 +177,7 @@ header #navbar #left #categories #categories-popup {
     position: fixed;
     left: 0;
     display: none;
-    top: 8rem;
+    top: calc(8rem - 2px);
     width: 100%;
     background: #F3F3F3;
     z-index: 1;

@@ -165,7 +165,7 @@ $error = $_POST['error-message-products'];
                 </div>
             </div>
 
-            <button style='margin:0;' id="saving-button" class="vertical centered" type='submit'>
+            <button style='margin:0;' class="save-button" class="vertical centered" type='submit'>
                 Enregistrer le produit
             </button>
         </div>

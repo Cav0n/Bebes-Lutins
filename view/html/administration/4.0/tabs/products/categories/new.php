@@ -125,7 +125,7 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
                     </label>
                 </div>
             </div>
-            <button style='margin:0;' id="saving-button" class="vertical centered" type='submit'>
+            <button style='margin:0;' class="save-button" class="vertical centered" type='submit'>
                 Enregistrer la catégorie
             </span>
         </div>

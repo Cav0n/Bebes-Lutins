@@ -51,7 +51,7 @@ $orders = OrderGateway::GetOrdersFromGateway();
                             ?>
                             <tr class="red">
                                 <td onclick="load_bill('<?php echo $order->getId(); ?>')" class="date center"><?php echo $order->getDateString(); ?></td>
-                                <td onclick="load_bill('<?php echo $order->getId(); ?>')" class="customer"><a><?php echo ucfirst($order->getCustomer()->getFirstname()) . " " . strtoupper($order->getCustomer()->getSurname()); ?></a></td>
+                                <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="customer"><a><?php echo ucfirst($order->getCustomer()->getFirstname()) . " " . strtoupper($order->getCustomer()->getSurname()); ?><BR><b style="font-weight:300; font-size:0.9rem;"><?php echo $order->getId(); ?></b></a></td>
                                 <td onclick="load_bill('<?php echo $order->getId(); ?>')" class="price right"><?php echo UtilsModel::FloatToPrice($order->getPriceAfterDiscount()); ?></td>
                                 <td onclick="load_bill('<?php echo $order->getId(); ?>')" class="shipping-price right"><?php echo UtilsModel::FloatToPrice($order->getShippingPrice()); ?></td>
                                 <td class="status right"><form method="post" action="https://www.bebes-lutins.fr/dashboard4/commandes/modifier-etat"><input type="hidden" name="id" value="<?php echo $order->getId(); ?>">

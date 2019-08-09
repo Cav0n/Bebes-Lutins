@@ -13,43 +13,47 @@ class CategoryGateway
         $con = new Connexion($dsn, $dblogin, $dbpassword);
         $results = array();
 
-        $query ="SELECT name, parent, image, description, rank FROM category ORDER BY rank";
+        $query ="SELECT name, parent, image, description, rank, tags, private FROM category ORDER BY rank";
         $con->executeQuery($query);
         $categories = $con->getResults();
 
         foreach ($categories as $category){
-            $categ = new Category($category['name'], $category['parent'], new ImageCategory($category['image']), $category['description'], $category['rank']);
+            $categ = new Category($category['name'], $category['parent'], new ImageCategory($category['image']), $category['description'], $category['rank'], $category['tags'], $category['private']);
             $results[] = $categ;
         }
 
         return $results;
     }
 
-    public static function AddCategory(String $name, $parent, String $image, String $description, int $rank){
+    public static function AddCategory(String $name, $parent, String $image, String $description, int $rank, $tags, $private ){
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);
 
-        $query = "INSERT INTO category VALUES (:name, :parent, :image, :description, :rank)";
+        $query = "INSERT INTO category VALUES (:name, :parent, :image, :description, :rank, :tags, :private)";
         $con->executeQuery($query, array(
             ':name' => array($name, PDO::PARAM_STR),
             ':parent' =>array($parent, PDO::PARAM_STR),
             ':image' => array($image, PDO::PARAM_STR),
             ':description' => array($description, PDO::PARAM_STR),
-            ':rank' => array($rank, PDO::PARAM_STR)
+            ':rank' => array($rank, PDO::PARAM_STR),
+            ':tags' => array($tags, PDO::PARAM_STR),
+            ':private' => array($private, PDO::PARAM_BOOL)
         ));
 
-        $query = "INSERT INTO category_backup VALUES (:id, :name, :parent, :image, :description, :rank)";
+        $query = "INSERT INTO category_backup VALUES (:id, :name, :parent, :image, :description, :rank, :tags, :private)";
         $con->executeQuery($query, array(
             ':id' => array(uniqid('backup-category-'), PDO::PARAM_STR),
             ':name' => array($name, PDO::PARAM_STR),
             ':parent' =>array($parent, PDO::PARAM_STR),
             ':image' => array($image, PDO::PARAM_STR),
             ':description' => array($description, PDO::PARAM_STR),
-            ':rank' => array($rank, PDO::PARAM_STR)
+            ':rank' => array($rank, PDO::PARAM_STR),
+            ':tags' => array($tags, PDO::PARAM_STR),
+            ':private' => array($private, PDO::PARAM_BOOL)
         ));
     }
 
-    public static function EditCategory(String $name, string $parent, String $image, String $description, String $old_name, int $rank){
+    public static function EditCategory(String $name, string $parent, String $image, String $description, String $old_name, int $rank, $tags, $private){
         global $dblogin, $dbpassword,$dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);
 
@@ -59,14 +63,16 @@ class CategoryGateway
             ':old_name' => array($old_name, PDO::PARAM_STR)
         ));
 
-        $query = "UPDATE category SET name=:name, parent=:parent, image=:image, description=:description, rank=:rank WHERE name=:old_name";
+        $query = "UPDATE category SET name=:name, parent=:parent, image=:image, description=:description, rank=:rank, tags=:tags, private=:private WHERE name=:old_name";
         $con->executeQuery($query, array(
             ':name' => array($name, PDO::PARAM_STR),
             ':parent' => array($parent, PDO::PARAM_STR),
             ':image' => array($image, PDO::PARAM_STR),
             ':description' => array($description, PDO::PARAM_STR),
             ':old_name' => array($old_name, PDO::PARAM_STR),
-            ':rank' => array($rank, PDO::PARAM_STR)
+            ':rank' => array($rank, PDO::PARAM_STR),
+            ':tags' => array($tags, PDO::PARAM_STR),
+            ':private' => array($private, PDO::PARAM_BOOL)
         ));
     }
 
@@ -99,11 +105,11 @@ class CategoryGateway
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);
 
-        $query = 'SELECT name, parent, image, description, rank FROM category WHERE name=:name';
+        $query = 'SELECT name, parent, image, description, rank, tags, private FROM category WHERE name=:name';
         $con->executeQuery($query, array(':name' => array($name, PDO::PARAM_STR)));
         $category_db = $con->getResults()[0];
 
-        return new Category($category_db['name'], $category_db['parent'], new ImageCategory($category_db['image']), $category_db['description'], $category_db['rank']);
+        return new Category($category_db['name'], $category_db['parent'], new ImageCategory($category_db['image']), $category_db['description'], $category_db['rank'], $category_db['tags'], $category_db['private']);
     }
 
     public static function SearchCategoryByName(String $category_name) : Category{
@@ -112,13 +118,13 @@ class CategoryGateway
 
         $category_name = UtilsModel::replace_accent($category_name);
 
-        $query = 'SELECT name, parent, image, description, rank FROM category';
+        $query = 'SELECT name, parent, image, description, rank, tags, private FROM category';
         $con->executeQuery($query);
         $categories_db = $con->getResults();
 
         foreach ($categories_db as $category_db){
             if(UtilsModel::replace_accent($category_db['name']) == $category_name){
-                $category = new Category($category_db['name'], $category_db['parent'], new ImageCategory($category_db['image']), $category_db['description'], $category_db['rank']);
+                $category = new Category($category_db['name'], $category_db['parent'], new ImageCategory($category_db['image']), $category_db['description'], $category_db['rank'], $category_db['tags'], $category_db['private']);
             }
         }
 

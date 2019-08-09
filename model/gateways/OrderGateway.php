@@ -27,7 +27,7 @@ class OrderGateway
         $con->executeQuery($query);
         $products_db = $con->getResults();
 
-        $query = 'SELECT name, parent, image, description, rank FROM category_backup';
+        $query = 'SELECT name, parent, image, description, rank, tags, private FROM category_backup';
         $con->executeQuery($query);
         $categories_db = $con->getResults();
 
@@ -53,7 +53,7 @@ class OrderGateway
         }
 
         foreach ($categories_db as $category_db){
-            $categories[] = new Category($category_db['name'], $category_db['parent'], new ImageCategory($category_db['image']), $category_db['description'], $category_db['rank']);
+            $categories[] = new Category($category_db['name'], $category_db['parent'], new ImageCategory($category_db['image']), $category_db['description'], $category_db['rank'], $category_db['tags'], $category_db['private']);
         }
 
         foreach ($products_db as $product_db){
@@ -73,7 +73,7 @@ class OrderGateway
                     $address_ok = 0;
                     foreach ($address_list_db as $address_db) {
                         if ($address_db['id'] == $order_db['shipping_address_id']) {
-                            if($address_db['id'] == 'birthlist') $shipping_address = new Address('birthlist', $user, "none", "none", "none", "none", "none", 0, "none", "none");
+                            if($address_db['id'] == 'birthlist') $shipping_address = new Address('birthlist', $user, "none", "none", "none", "none", "none", '0', "none", "none");
                             else $shipping_address = new Address($address_db['id'], $user, $address_db['civility'], $address_db['surname'], $address_db['firstname'], $address_db['street'], $address_db['city'], $address_db['postal_code'], $address_db['complement'], $address_db['company']);
                             $address_ok++;
                         }
@@ -134,7 +134,7 @@ class OrderGateway
         $products_db = $con->getResults();
 
         /* Get all category from the database */
-        $query = 'SELECT name, parent, image, description, rank FROM category_backup';
+        $query = 'SELECT name, parent, image, description, rank, tags, private FROM category_backup';
         $con->executeQuery($query);
         $categories_db = $con->getResults();
 
@@ -166,7 +166,7 @@ class OrderGateway
 
         /* Create all categories */
         foreach ($categories_db as $category_db){
-            $categories[] = new Category($category_db['name'], $category_db['parent'], new ImageCategory($category_db['image']), $category_db['description'], $category_db['rank']);
+            $categories[] = new Category($category_db['name'], $category_db['parent'], new ImageCategory($category_db['image']), $category_db['description'], $category_db['rank'], $category_db['tags'], $category_db['private']);
         }
 
         /* Create all products */
@@ -187,7 +187,7 @@ class OrderGateway
                     $address_ok = 0;
                     foreach ($address_list_db as $address_db) {
                         if ($address_db['id'] == $order_db['shipping_address_id']) {
-                            if($address_db['id'] == 'birthlist') $shipping_address = new Address('birthlist', $user, "none", "none", "none", "none", "none", 0, "none", "none");
+                            if($address_db['id'] == 'birthlist') $shipping_address = new Address('birthlist', $user, "none", "none", "none", "none", "none", '0', "none", "none");
                             else $shipping_address = new Address($address_db['id'], $user, $address_db['civility'], $address_db['surname'], $address_db['firstname'], $address_db['street'], $address_db['city'], $address_db['postal_code'], $address_db['complement'], $address_db['company']);
                             $address_ok++;
                         }
@@ -309,11 +309,11 @@ class OrderGateway
         $con->executeQuery($query, array(':order_id' => array($order_id, PDO::PARAM_STR)));
         $order_items_db = $con->getResults();
 
-        $query = 'SELECT name, parent, image, description, rank FROM category_backup';
+        $query = 'SELECT name, parent, image, description, rank, tags, private FROM category_backup';
         $con->executeQuery($query);
         $categories_db = $con->getResults();
         foreach ($categories_db as $category_db){
-            $categories[] = new Category($category_db['name'], $category_db['parent'], new ImageCategory($category_db['image']), $category_db['description'], $category_db['rank']);
+            $categories[] = new Category($category_db['name'], $category_db['parent'], new ImageCategory($category_db['image']), $category_db['description'], $category_db['rank'], $category_db['tags'], $category_db['private']);
         }
 
         $query = "SELECT id, id_copy, name, ceo_name,price, stock, description, ceo_description, category, creation_date, image, number_of_review, number_of_stars, reference, tags, hide FROM product_backup ORDER BY name;";
@@ -350,7 +350,7 @@ class OrderGateway
         $shipping_address_db = $con->getResults()[0];
 
         $billing_address = new Address($billing_address_db['id'], $user, $billing_address_db['civility'], $billing_address_db['surname'], $billing_address_db['firstname'], $billing_address_db['street'], $billing_address_db['city'], $billing_address_db['postal_code'], $billing_address_db['complement'], $billing_address_db['company']);
-        if($shipping_address_db['id'] == 'birthlist') $shipping_address = new Address('birthlist', $user, "none", "none", "none", "none", "none", 0, "none", "none");
+        if($shipping_address_db['id'] == 'birthlist') $shipping_address = new Address('birthlist', $user, "none", "none", "none", "none", "none", '0', "none", "none");
         else $shipping_address = new Address($shipping_address_db['id'], $user, $shipping_address_db['civility'], $shipping_address_db['surname'], $shipping_address_db['firstname'], $shipping_address_db['street'], $shipping_address_db['city'], $shipping_address_db['postal_code'], $shipping_address_db['complement'], $shipping_address_db['company']);
 
         if($order_db['voucher_id'] != null){
@@ -432,7 +432,7 @@ class OrderGateway
 
         /* Create the billing and shipping adress with informations get from the database */
         $billing_address = new Address($billing_address_db['id'], $user, $billing_address_db['civility'], $billing_address_db['surname'], $billing_address_db['firstname'], $billing_address_db['street'], $billing_address_db['city'], $billing_address_db['postal_code'], $billing_address_db['complement'], $billing_address_db['company']);
-        if($shipping_address_db['id'] == 'birthlist') $shipping_address = new Address('birthlist', $user, "none", "none", "none", "none", "none", 0, "none", "none");
+        if($shipping_address_db['id'] == 'birthlist') $shipping_address = new Address('birthlist', $user, "none", "none", "none", "none", "none", '0', "none", "none");
         else $shipping_address = new Address($shipping_address_db['id'], $user, $shipping_address_db['civility'], $shipping_address_db['surname'], $shipping_address_db['firstname'], $shipping_address_db['street'], $shipping_address_db['city'], $shipping_address_db['postal_code'], $shipping_address_db['complement'], $shipping_address_db['company']);
 
         /* Check if a voucher has been used for the order and get it from the database */
@@ -484,7 +484,7 @@ class OrderGateway
         $con->executeQuery($query);
         $products_db = $con->getResults();
 
-        $query = 'SELECT name, parent, image, description, rank FROM category_backup';
+        $query = 'SELECT name, parent, image, description, rank, tags, private FROM category_backup';
         $con->executeQuery($query);
         $categories_db = $con->getResults();
 
@@ -499,7 +499,7 @@ class OrderGateway
         $user = new UserConnected($user_db['id'], $user_db['surname'], $user_db['firstname'], $user_db['mail'], $user_db['phone'], $user_db['privilege'], $user_db['registration_date'], $user_db['activated']);
 
         foreach ($categories_db as $category_db){
-            $categories[] = new Category($category_db['name'], $category_db['parent'], new ImageCategory($category_db['image']), $category_db['description'], $category_db['rank']);
+            $categories[] = new Category($category_db['name'], $category_db['parent'], new ImageCategory($category_db['image']), $category_db['description'], $category_db['rank'], $category_db['tags'], $category_db['private']);
         }
 
         foreach ($products_db as $product_db){

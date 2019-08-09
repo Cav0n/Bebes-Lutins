@@ -31,7 +31,7 @@ $users = UserGateway::getAllUsers();
                 </div>
             </div>
             <div class="table-container">
-                <table>
+                <table id="customer-table">
                     <tr class="first-row">
                         <th class="date center">Date d'inscription</th>
                         <th class="name left">Nom</th>
@@ -65,17 +65,15 @@ $users = UserGateway::getAllUsers();
         var input, filter, table, tr, td, i, txtValue;
         input = document.getElementById("search-text");
         filter = input.value.toUpperCase();
-        table = document.getElementById("order-table");
+        table = document.getElementById("customer-table");
         tr = table.getElementsByTagName("tr");
 
         // Loop through all table rows, and hide those who don't match the search query
         for (i = 0; i < tr.length; i++) {
-            td_name = tr[i].getElementsByTagName("td")[1];
-            td_mail = tr[i].getElementsByTagName("td")[2];
-            td_phone = tr[i].getElementsByTagName("td")[3];
-
+            td = tr[i].getElementsByTagName("td")[1];
+            phone = tr[i].getElementsByTagName('td')[3]
             if (td) {
-                txtValue = td_name.textContent + td_mail.textContent + td_phone.textContent || td_name.innerText + td_mail.innerText + td_phone.innerText;
+                txtValue = td.textContent + phone.textContent || td.innerText + phone.innerText;
                 if (txtValue.toUpperCase().indexOf(filter) > -1) {
                     tr[i].style.display = "";
                 } else {

@@ -13,6 +13,8 @@ class Category
     private $image;
     private $description;
     private $rank;
+    private $tags;
+    private $private;
 
     /**
      * Category constructor.
@@ -20,13 +22,15 @@ class Category
      * @param $parent
      * @param $image
      */
-    public function __construct(String $name, $parent, ImageCategory $image, $description, int $rank)
+    public function __construct(String $name, $parent, ImageCategory $image, $description, int $rank, $tags, bool $private)
     {
         $this->name = $name;
         $this->parent = $parent;
         $this->image = $image;
         $this->description = $description;
         $this->rank = $rank;
+        $this->tags = $tags;
+        $this->private = $private;
     }
 
     /**
@@ -115,6 +119,39 @@ class Category
     public function setRank(int $rank): void
     {
         $this->rank = $rank;
+    }
+
+    /**
+     * @return string Category's tags.
+     */
+    public function getTags(): string
+    {
+        if($this->tags == null) return '';
+        else return $this->tags;
+    }
+
+    /**
+     * @param string $tags New category's tags.
+     */
+    public function setTags(string $tags): void
+    {
+        $this->tags = $tags;
+    }
+
+    /**
+     * @return bool If the category is private return true, else return false.
+     */
+    public function getPrivate(): bool
+    {
+        return $this->private;
+    }
+
+    /**
+     * @param bool Set if category is private or not (true or false).
+     */
+    public function setPrivate(bool $private): void
+    {
+        $this->private = $private;
     }
 
     public function toString(): String {

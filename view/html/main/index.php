@@ -22,12 +22,12 @@ if(!isset($_SESSION['limit_product_display'])) $_SESSION['limit_product_display'
         <?php UtilsModel::load_header();?>
     </header>
     <main>
-        <div id='alert-container' class='horizontal mobile'>
+        <!-- <div id='alert-container' class='horizontal mobile'>
             <div class='vertical'>
                 <p id='title'>CONGÉS ANNUELS</h1>
                 <p>Chers clients, nous vous informons que les commandes passées à partir du 13 juillet seront expédiées à partir du 29 juillet. <BR>Merci pour votre compréhension.</p>
             </div>
-        </div>
+        </div> -->
         <?php UtilsModel::load_swiper();?>
         <div id='homepage-container' class='vertical'>
             <div id="website-infos" class="horizontal center desktop">

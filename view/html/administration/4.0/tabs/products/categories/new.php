@@ -15,6 +15,8 @@ if($category_name != null){
     $description = $category->getDescription();
     $parent = $category->getParent();
     $rank = $category->getRank();
+    $tags = $category->getTags();
+    $private = $category->getPrivate();
 }
 
 if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
@@ -27,6 +29,8 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
     $description = $_SESSION['description'];
     $parent = $_SESSION['parent'];
     $rank = $_SESSION['rank'];
+    $tags = $_SESSION['tags'];
+    $private = $_SESSION['private'];
     
     unset($_SESSION['error_message']);
 } else $error_message = null;
@@ -58,6 +62,7 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
         <p id="error-message"><?php echo $error_message; ?></p>
     </div>
     <?php } ?>
+    <form id='deletion-wrapper' class='hidden' method="post" action="https://www.bebes-lutins.fr/dashboard4/produits/categorie/supprimer/<?php echo $old_name; ?>"></form>
     <form id="edition-wrapper" class="horizontal" method="post" action="https://www.bebes-lutins.fr/dashboard4/produits/categorie/sauvegarder/" enctype="multipart/form-data">
         <input id="image-name" type="hidden" name="image" value="<?php echo $image;?>">
         <input id='new-category' type="hidden" name='new_category' value="<?php echo $new_category;?>">
@@ -114,14 +119,14 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
                     <input id="tags" type="text" name="tags" placeholder="Couches, bébés..." value="<?php echo $tags; ?>">
                 </div>
                 <div class="hide vertical">
-                    <label class="container vertical centered">Cacher la catégorie
-                        <input type="checkbox" name="hide" <?php if($hide) echo 'checked'; ?>>
+                    <label class="container vertical centered">Catégorie privée
+                        <input type="checkbox" name="private" <?php if($private) echo 'checked'; ?>>
                         <span class="checkmark"></span>
                     </label>
                 </div>
             </div>
-            <span id="deleting-button" class="vertical centered" onclick="delete_category('<?php echo $name; ?>')">
-                Supprimer la catégorie
+            <button style='margin:0;' class="save-button" class="vertical centered" type='submit'>
+                Enregistrer la catégorie
             </span>
         </div>
     </form>
@@ -133,7 +138,7 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
 
     var mainDropzone = new Dropzone("div#main-dropzone",
         {
-            url: "https://www.bebes-lutins.fr/view/html/tests/test-upload.php",
+            url: "https://www.bebes-lutins.fr/view/html/tests/test-upload-category.php",
             addRemoveLinks: true,
             maxFiles: 1,
             dictDefaultMessage: "Choisissez l'image de la catégorie.",
@@ -156,7 +161,7 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
                     alert(namefile);
                     $.ajax({
                         type: "POST",
-                        url: "../../view/html/tests/test-upload.php",
+                        url: "../../view/html/tests/test-upload-category.php",
                         data: {
                             target_file: namefile,
                             delete_file: 1
@@ -182,7 +187,7 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
     }
 
     function delete_category(name){
-        document.location.href='https://www.bebes-lutins.fr/dashboard4/categories/supprimer/' + name;
+        document.location.href='https://www.bebes-lutins.fr/dashboard4/produits/categorie/supprimer/' + name;
     }
 </script>
 </html>

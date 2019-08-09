@@ -97,9 +97,9 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
     $total_elements += $quantity;
 }
 ?>
-<div id='extra' class='desktop horizontal centered' style="z-index: 100;height: 2rem;color: white;background: rgb(229, 89, 84);font-family: Roboto, sans-serif;">
+<!-- <div id='extra' class='desktop horizontal centered' style="z-index: 100;height: 2rem;color: white;background: rgb(229, 89, 84);font-family: Roboto, sans-serif;">
     <p class='vertical centered'>"CONGES ANNUELS" Les commandes passées à partir du 13 juillet seront expédiées à partir du 29 juillet.</p>
-</div>
+</div> -->
 <div id="top" class="desktop horizontal">
     <div id="left">
         <a href="https://www.bebes-lutins.fr/contact" class="contact transition-fast">
@@ -107,7 +107,7 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
             <div class="horizontal centered icons">
             <?php echo file_get_contents("view/assets/images/utils/icons/call.svg"); ?>
             <?php echo file_get_contents("view/assets/images/utils/icons/email.svg"); ?>
-            <?php echo file_get_contents("view/assets/images/utils/icons/location.svg"); ?>
+            <?php echo file_get_contents("view/assets/images/utils/icons/map-location.svg"); ?>
             </div>
         </a>
     </div>
@@ -138,27 +138,30 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
             <div id="categories-popup" class="popup centered">
                 <div class="horizontal" style='width:100%;'>
                     <div id='parent-categories' class='vertical'>
-                        <?php $index_parent = 0; foreach($categories as $category) { if($category->getParent() == 'none') {?>
-                            <p id='<?php echo $category->getNameForURL(); ?>-selector' class='category <?php if ($index_parent == 0) echo 'selected-category'; ?>'><?php echo $category->getName();?></p>
-                        <?php } $index_parent++; } ?>
+                        <?php foreach($categories as $category) { if($category->getParent() == 'none' && !$category->getPrivate()) {?>
+                            <p id='<?php echo $category->getNameForURL(); ?>-selector' class='category'><?php echo $category->getName();?></p>
+                        <?php } } ?>
                     </div>
                     <div id='child-categories'>
-                        <?php $index_child = 0; foreach($categories as $category) { if($category->getParent() == 'none') { ?>
-                            <div id='<?php echo $category->getNameForURL(); ?>-container' class="category-child horizontal wrap <?php if ($index_child != 0) echo "hidden"; ?>">
-                                <?php foreach($sub_categories_list as $sub_category) {
+                        <div id='categories-presentation' class='category-child horizontal wrap'>
+
+                        </div>
+                        <?php foreach($categories as $category) { if($category->getParent() == 'none' && !$category->getPrivate()) { ?>
+                            <div id='<?php echo $category->getNameForURL(); ?>-container' class="category-child horizontal wrap hidden">
+                                <?php foreach($sub_categories_list as $sub_category) { if(!$sub_category->getPrivate()) {
                                     if($sub_category->getParent() == $category->getName()) { ?>
                                     <div class='vertical between category-child-container' onclick="load_category('<?php echo $sub_category->getNameForURL(); ?>')">
                                         <p class='child-name'><?php echo $sub_category->getName();?></p>
                                         <img class='child-image' src='https://www.bebes-lutins.fr/view/assets/images/categories/<?php echo $sub_category->getImage();?>'>
                                     </div>
-                                <?php } $index_child ++; } ?>
+                                <?php } } } ?>
                             </div>
                         <?php } } ?>
                     </div>
                     <div id='image-parent-container'>
-                        <?php $index_child = 0; foreach($categories as $category) { if($category->getParent() == 'none') { ?>
-                            <img id='<?php echo $category->getNameForURL(); ?>-image' class='category-image <?php if ($index_child != 0) echo "hidden"; ?>' src='https://www.bebes-lutins.fr/view/assets/images/categories/<?php echo $category->getImage(); ?>' onclick='load_category("<?php echo $category->getNameForURL(); ?>")'>
-                        <?php } $index_child ++; } ?>
+                        <?php foreach($categories as $category) { if($category->getParent() == 'none') { ?>
+                            <img id='<?php echo $category->getNameForURL(); ?>-image' class='category-image hidden' src='https://www.bebes-lutins.fr/view/assets/images/categories/<?php echo $category->getImage(); ?>' onclick='load_category("<?php echo $category->getNameForURL(); ?>")'>
+                        <?php } } ?>
                     </div>
                 </div>
             </div>

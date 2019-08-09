@@ -54,7 +54,7 @@ class VisitorController
 
                 case "shopping_cart_add_product":
                     if(isset($_SESSION['product']) && $_SESSION['product'] != null) $product = (new ProductContainer(unserialize($_SESSION['product'])))->getProduct();
-                    else $product = ProductGateway::SearchProductByID($_POST['product_id']);
+                    else $product = ProductGateway::SearchProductByID2($_POST['product_id']);
                     UtilsModel::shopping_cart_add_product($product, $_POST['quantity']);
                     break;
 

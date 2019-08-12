@@ -1,5 +1,5 @@
 #homepage-container {
-    margin: auto 7%;
+    margin: 0 7% 4rem 7%;
 }
 
 #products-display {
@@ -89,7 +89,7 @@
 
 .product-display-button-form {
     width: 271px;
-    margin: 0 auto;
+    margin: 0 auto 2rem auto;
 }
 
 .product-display-button-form button:hover {

@@ -53,15 +53,19 @@ $orders = OrderGateway::GetOrdersFromGateway();
                                 <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="customer"><a><?php echo ucfirst($order->getCustomer()->getFirstname()) . " " . strtoupper($order->getCustomer()->getSurname()); ?><BR><b style="font-weight:300; font-size:0.9rem;"><?php echo $order->getId(); ?></b></a></td>
                                 <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="price right"><?php echo UtilsModel::FloatToPrice($order->getPriceAfterDiscount()); ?></td>
                                 <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="shipping-price right"><?php echo UtilsModel::FloatToPrice($order->getShippingPrice()); ?></td>
-                                <td class="status right"><form method="post" action="https://www.bebes-lutins.fr/dashboard4/commandes/modifier-etat"><input type="hidden" name="id" value="<?php echo $order->getId(); ?>">
-                                        <select name="new_status" onchange='if(this.value != <?php echo $order->getStatus(); ?>) { this.form.submit(); }'>
-                                            <option value='-1' <?php if($order->getStatus() == -1) echo "selected"; ?>>Annuler la commande</option>
-                                            <option value='0' <?php if($order->getStatus() == 0) echo "selected"; ?>>En attente de paiement</option>
-                                            <option value='1' <?php if($order->getStatus() == 1) echo "selected"; ?>>En cours de traitement</option>
-                                            <option value='2' <?php if($order->getStatus() == 2) echo "selected"; ?>>En cours de livraison</option>
-                                            <option value='3' <?php if($order->getStatus() == 3) echo "selected"; ?>>Livrée</option>
-                                        </select>
-                                    </form></td>
+                                <td class="status right">
+                                    <select name="new_status" onchange='if(this.value != <?php echo $order->getStatus(); ?>) { 
+                                        change_order_status("<?php echo $order->getId();?>", 
+                                        this.value, 
+                                        "<?php echo $order->getCustomer()->getFirstname()?>",
+                                        "<?php echo UtilsModel::FloatToPrice($order->getPriceAfterDiscount()); ?>"); }'>
+                                        <option value='-1' <?php if($order->getStatus() == -1) echo "selected"; ?>>Annuler la commande</option>
+                                        <option value='0' <?php if($order->getStatus() == 0) echo "selected"; ?>>En attente de paiement</option>
+                                        <option value='1' <?php if($order->getStatus() == 1) echo "selected"; ?>>En cours de traitement</option>
+                                        <option value='2' <?php if($order->getStatus() == 2) echo "selected"; ?>>En cours de livraison</option>
+                                        <option value='3' <?php if($order->getStatus() == 3) echo "selected"; ?>>Livrée</option>
+                                    </select>
+                                </td>
                             </tr>
                         <?php } }
                     ?>
@@ -79,6 +83,17 @@ $orders = OrderGateway::GetOrdersFromGateway();
 </main>
 </body>
 <script>
+    function change_order_status(id, status, nom, prix){
+        if(confirm('Etes vous sur de vouloir changer l\'état de la commande de ' + nom + ' ( ' + prix+ ') ?')){$.ajax({
+            url: 'https://www.bebes-lutins.fr',
+            type: 'POST',
+            data: {id:id, new_status:status, section:'commandes', page:'modifier-etat', action:"load_page_dashboard"},
+            success: function(){
+                document.location.href="https://www.bebes-lutins.fr/dashboard4";
+            }
+        }); }
+    }
+
     function load_bill(id) {
         window.open(
             "https://www.bebes-lutins.fr/dashboard/facture-"+id,

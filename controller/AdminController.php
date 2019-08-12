@@ -32,7 +32,7 @@ class AdminController
                         break;
 
                     case "load_page_dashboard":
-                        AdminModel::load_page_dashboard($_GET['section'], $_GET['page'], $_GET['option']);
+                        AdminModel::load_page_dashboard($_REQUEST['section'], $_REQUEST['page'], $_REQUEST['option']);
                         break;
 
                     case "dashboard_load_tab":

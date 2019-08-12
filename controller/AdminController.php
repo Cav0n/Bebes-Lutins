@@ -112,7 +112,7 @@ class AdminController
                         break;
 
                     case "add_voucher":
-                        AdminModel::add_voucher($_POST['name'], $_POST['discount'], $_POST['type'], $_POST['date_beginning'], $_POST['date_end'], $_POST['number_of_usage']);
+                        AdminModel::add_voucher($_POST['name'], $_POST['discount'], $_POST['type'], $_POST['date_beginning'], $_POST['date_end'], $_POST['number_of_usage'], $_POST['time_end'], $_POST['number_per_user'], $_POST['minimal_purchase'], $_POST['deleted']);
                         break;
 
                     case "delete_voucher":

@@ -18,6 +18,7 @@ class Voucher
     private $time_end;
     private $number_per_user;
     private $minimal_purchase;
+    private $deleted;
 
     /**
      * Voucher constructor.
@@ -31,7 +32,7 @@ class Voucher
      * @param $number_per_user Number of usage for each user
      * @param $minimal_purchase Minimal purchase price to get the voucher
      */
-    public function __construct(String $id, String $name, float $discount, String $type, String $date_beginning, $time_beginning,String $date_end, $time_end,int $number_per_user,$minimal_purchase)
+    public function __construct(String $id, String $name, float $discount, String $type, String $date_beginning, $time_beginning,String $date_end, $time_end,int $number_per_user,$minimal_purchase, bool $deleted)
     {
         $this->id = $id;
         $this->name = $name;
@@ -44,6 +45,7 @@ class Voucher
         $this->number_per_user = $number_per_user;
         if($minimal_purchase == null) $this->minimal_purchase = 0;
         else $this->minimal_purchase = $minimal_purchase;
+        $this->deleted = $deleted;
     }
 
     /**
@@ -203,6 +205,20 @@ class Voucher
     public function setTimeEnd(String $time_end): void
     {
         $this->time_end = $time_end;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getDeleted(): bool{
+        return $this->deleted;
+    }
+
+    /**
+     * @param bool $deleted
+     */
+    public function setDeleted(bool $deleted){
+        $this->deleted = $deleted;
     }
 
     /**

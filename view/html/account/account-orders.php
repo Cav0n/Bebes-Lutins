@@ -50,12 +50,14 @@ $orders_list = OrderGateway::GetOrdersOfCustomer($user->getId());
                 <?php foreach ($orders_list as $order){
                     $order = (new OrderContainer($order))->getOrder();
 
+                    $no_shipping_price = false;
                     $order_id = $order->getId();
                     $order_date = date_format(DateTime::createFromFormat('Y-m-d H:i:s', $order->getDate()), 'd - m - Y à H:i');
                     $order_status = $order->statusToString();
-                    $order_total_price = UtilsModel::FloatToPrice($order->getTotalPrice() + $order->getShippingPrice());
+                    $order_total_price = UtilsModel::FloatToPrice($order->getPriceAfterDiscount());
                     $order_admin_message = $order->getAdminMessage();
-                    if($order->getShippingPrice() > 0) $order_total_price = $order_total_price . " (Dont " . UtilsModel::FloatToPrice($order->getShippingPrice()) . " de frais de livraison)";
+                    if($order->getVoucher() != null){ if ($order->getVoucher()->getType() == 3) $no_shipping_price = true; }
+                    if($order->getShippingPrice() > 0 && !$no_shipping_price) $order_total_price = $order_total_price . " (Dont " . UtilsModel::FloatToPrice($order->getShippingPrice()) . " de frais de livraison)";
                     ?>
                     <div class="order horizontal">
                         <div class="order-summary">

@@ -410,12 +410,12 @@ class AdminModel
         self::load_page('add_voucher');
     }
 
-    public static function add_voucher(String $name, $discount, String $type, String $date_beginning, String $time_beginning, String $date_end, string $time_end, int $number_per_user, float $minimal_purchase){
+    public static function add_voucher(String $name, $discount, String $type, String $date_beginning, String $time_beginning, String $date_end, string $time_end, int $number_per_user, float $minimal_purchase, bool $deleted){
         $_SESSION['header_tab'] = "various";
 
         $id=uniqid("voucher-");
         try{
-            VoucherGateway::AddVoucher($id, strtoupper($name), $discount, $type, $date_beginning, $time_beginning, $date_end, $time_end, $number_per_user, $minimal_purchase);
+            VoucherGateway::AddVoucher($id, strtoupper($name), $discount, $type, $date_beginning, $time_beginning, $date_end, $time_end, $number_per_user, $minimal_purchase, $deleted);
         } catch (PDOException $e){
             $_POST['error-message-various'] = "Erreur BDD : " . $e;
             ?>
@@ -844,6 +844,7 @@ class AdminModel
             if($number_per_user == null) $number_per_user = 0;
             $minimal_purchase = $_POST['minimal_purchase'];
             if($minimal_purchase == null) $minimal_purchase = 0;
+            $deleted = false;
 
             try { VoucherGateway::AddVoucher(
                 $id,
@@ -855,7 +856,8 @@ class AdminModel
                 $date_end,
                 $time_end,
                 $number_per_user,
-                $minimal_purchase
+                $minimal_purchase,
+                $deleted
             ); } catch (PDOException $e) { echo "Il y a une erreur lors de la création du coupon. <BR>" . $e->getMessage(); $error = true; }
         } else {
             $discount = $_POST['discount'];
@@ -869,6 +871,7 @@ class AdminModel
             if($number_per_user == null) $number_per_user = 0;
             $minimal_purchase = $_POST['minimal_purchase'];
             if($minimal_purchase == null) $minimal_purchase = 0;
+            $deleted = false;
 
             try { VoucherGateway::UpdateVoucher(
                 $voucherID,
@@ -879,7 +882,8 @@ class AdminModel
                 $date_end,
                 $time_end,
                 $number_per_user,
-                $minimal_purchase);
+                $minimal_purchase,
+                $deleted);
             } catch(PDOException $e) { echo "Il y a une erreur lors de la mise à jour du coupon. <BR>" . $e->getMessage(); $error = true; } 
         }
 

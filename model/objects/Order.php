@@ -200,6 +200,9 @@ class Order
      */
     public function getShippingPrice(): float
     {
+        if($this->getVoucher() != null){
+            if($this->getVoucher()->getType() == 3) return 0;
+        }
         return $this->shipping_price;
     }
 

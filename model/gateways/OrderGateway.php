@@ -67,6 +67,16 @@ class OrderGateway
 
 
         foreach ($orders_db as $order_db){
+            if($order_db['voucher_id'] != ''){
+                $query = 'SELECT id, name, discount, type, date_beginning, time_beginning, date_end, time_end, number_per_user, minimal_purchase, deleted FROM voucher WHERE id=:voucher_id';
+                $con->executeQuery($query, array(':voucher_id' => array($order_db['voucher_id'], PDO::PARAM_STR)));
+                $voucher_db = $con->getResults()[0];
+    
+                if($voucher_db != null){
+                    $voucher = new Voucher($order_db['voucher_id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_per_user'], $voucher_db['minimal_purchase'], $voucher_db['deleted']);
+                } else $voucher = null;
+            } else $voucher = null;
+
             foreach ($users as $user) {
                 $user = (new UserContainer($user))->getUser();
                 if ($user->getId() == $order_db['user_id']) {
@@ -85,6 +95,7 @@ class OrderGateway
                             $order = new Order($order_db['id'], $user, $shipping_address, $billing_address, $order_db['ordering_date'], $order_db['status'], $order_db['shipping_price'], $order_db['total_price'], $order_db['payment_method'], null, $order_db['birthlist_id']);
                             if ($order_db['customer_message'] != null) $order->setCustomerMessage($order_db['customer_message']);
                             if ($order_db['admin_message'] != null) $order->setAdminMessage($order_db['admin_message']);
+                            if($voucher!=null){ $order->setVoucher($voucher); }
                             if ($order_db['new'] != null) $order->setNew($order_db['new']);
                             $orders[] = $order;
                             break;
@@ -181,6 +192,16 @@ class OrderGateway
 
         /* Create all orders */
         foreach ($orders_db as $order_db){
+            if($order_db['voucher_id'] != ''){
+                $query = 'SELECT id, name, discount, type, date_beginning, time_beginning, date_end, time_end, number_per_user, minimal_purchase, deleted FROM voucher WHERE id=:voucher_id';
+                $con->executeQuery($query, array(':voucher_id' => array($order_db['voucher_id'], PDO::PARAM_STR)));
+                $voucher_db = $con->getResults()[0];
+    
+                if($voucher_db != null){
+                    $voucher = new Voucher($order_db['voucher_id'], $voucher_db['name'], $voucher_db['discount'], $voucher_db['type'], $voucher_db['date_beginning'], $voucher_db['time_beginning'], $voucher_db['date_end'], $voucher_db['time_end'], $voucher_db['number_per_user'], $voucher_db['minimal_purchase'], $voucher_db['deleted']);
+                } else $voucher = null;
+            } else $voucher = null;
+
             foreach ($users as $user) {
                 $user = (new UserContainer($user))->getUser();
                 if ($user->getId() == $order_db['user_id']) {
@@ -199,6 +220,7 @@ class OrderGateway
                             $order = new Order($order_db['id'], $user, $shipping_address, $billing_address, $order_db['ordering_date'], $order_db['status'], $order_db['shipping_price'], $order_db['total_price'], $order_db['payment_method'], null, $order_db['birthlist_id']);
                             if ($order_db['customer_message'] != null) $order->setCustomerMessage($order_db['customer_message']);
                             if ($order_db['admin_message'] != null) $order->setAdminMessage($order_db['admin_message']);
+                            if($voucher!=null){ $order->setVoucher($voucher); }
                             if ($order_db['new'] != null) $order->setNew($order_db['new']);
                             $orders[] = $order;
                             break;

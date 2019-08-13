@@ -4,6 +4,7 @@ $product_id = $_REQUEST['product_id'];
 $product = ProductGateway::SearchProductByID2($product_id);
 $categories = CategoryGateway::GetCategories();
 $thumbnails = $product->getImage()->getThumbnails();
+echo $product->getImage()->getName();
 
 $error = $_POST['error-message-products'];
 
@@ -37,8 +38,8 @@ $error = $_POST['error-message-products'];
     </div>
     <form id="edition-wrapper" class="horizontal" method="post" action="https://www.bebes-lutins.fr/dashboard4/produits/sauvegarder/">
         <input type="hidden" name="product_id" value="<?php echo $product->getId();?>">
-        <input type="hidden" name="id_copy" value="<?php echo $product->getIdCopy();?>">
-        <input id="image-name" type="hidden" name="image_name" value="<?php echo $product->getImage()->getName();?>">
+        <input type="hidden" name="id_copy" value="<?php echo $product->getName();?>">
+        <input id="image-name" type="hidden" name="image_name" value="<?php echo $product->getImage()->getName(); ?>">
         <input id="thumbnails-name" type="hidden" name="thumbnails_name" value="">
         <div class="column-big vertical">
             <div class="product-title-description-container edition-window">
@@ -185,7 +186,6 @@ $error = $_POST['error-message-products'];
             dictDefaultMessage: "Choisissez l'image principale du produit.",
             accept: function(file, done) {
                 namefile = file.name
-                namefile = namefile.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
                 $('#image-name').attr('value', namefile);
 
                 done();

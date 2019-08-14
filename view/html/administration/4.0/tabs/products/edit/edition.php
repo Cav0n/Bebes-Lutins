@@ -4,7 +4,6 @@ $product_id = $_REQUEST['product_id'];
 $product = ProductGateway::SearchProductByID2($product_id);
 $categories = CategoryGateway::GetCategories();
 $thumbnails = $product->getImage()->getThumbnails();
-echo $product->getImage()->getName();
 
 $error = $_POST['error-message-products'];
 

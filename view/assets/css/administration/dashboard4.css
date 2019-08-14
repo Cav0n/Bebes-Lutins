@@ -25,7 +25,7 @@
 }
 
 #dashboard4 header #administrator-name {
-    margin: auto 10px auto 0;
+    margin: auto 2rem auto 0;
     color: white;
 }
 
@@ -132,7 +132,7 @@
 }
 
 #dashboard4 #left-header #version-container {
-    margin: auto auto 15px;
+    margin: auto auto 2rem;
 }
 
 

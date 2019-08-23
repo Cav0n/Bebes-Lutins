@@ -793,12 +793,14 @@ class AdminModel
 
         $old_name = $_POST['old_name'];
         $rank = $_POST['rank'];
+        if ($rank == null) $rank = 0;
         $description = $_POST['description'];
         $parent = $_POST['parent'];
         $tags = $_POST['tags'];
         $private = $_POST['private'];
         if ($private == null) $private = false;
         $image = $_POST['image'];
+        if($image == null) $image = "question_mark.png";
         $category_name_url = str_replace("’", "_", str_replace(" ", "=",UtilsModel::replace_accent($category_name)));
 
         if($_POST['new_category']){

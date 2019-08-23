@@ -34,6 +34,11 @@ if($_REQUEST['product_id']!=null){
     $hide = $product->getHide();
 }
 
+if(isset($_SESSION['success'])){
+    $success = $_SESSION['success'];
+    unset($_SESSION['success']);
+} else $success = null;
+
 ?>
 
 <!DOCTYPE html>
@@ -55,6 +60,11 @@ if($_REQUEST['product_id']!=null){
     <div id="extra-buttons" class="horizontal">
         <button onclick="goToImportPage()">Importer un produit</button>
     </div>
+    <?php if($success != null) { ?>
+    <div id='success' class="vertical">
+        <p>Le produit a bien été sauvegardé.</p>
+    </div>
+    <?php } ?>
     <?php if($error_message != null){ ?>
     <div id="error-message-container">
         <p id="error-title">Une erreur s'est produite</p>

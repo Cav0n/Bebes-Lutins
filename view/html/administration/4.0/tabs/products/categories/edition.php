@@ -28,6 +28,11 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
     unset($_SESSION['error_message']);
 } else $error_message = null;
 
+if(isset($_SESSION['success'])){
+    $success = $_SESSION['success'];
+    unset($_SESSION['success']);
+} else $success = null;
+
 ?>
 
 <!DOCTYPE html>
@@ -41,7 +46,7 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
 <?php AdminModel::load_administration4_header(); ?>
 <main>
     <div class="pre-page-title horizontal between">
-        <a href="https://www.bebes-lutins.fr/dashboard4/produits/categories"><i class="fas fa-angle-left"></i> Produits</a>
+        <a href="https://www.bebes-lutins.fr/dashboard4/produits/categories"><i class="fas fa-angle-left"></i> Catégories</a>
     </div>
     <div class="page-title-container horizontal between">
         <h2>Ajouter une catégorie</h2>
@@ -49,6 +54,11 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
     <div id="extra-buttons" class="horizontal">
         <button onclick="goToImportPage()">Importer une catégorie</button>
     </div>
+    <?php if($success != null) { ?>
+    <div id='success' class="vertical">
+        <p>La catégorie a bien été sauvegardée.</p>
+    </div>
+    <?php } ?>
     <?php if($error_message != null){ ?>
     <div id="error-message-container">
         <p id="error-title">Une erreur s'est produite</p>

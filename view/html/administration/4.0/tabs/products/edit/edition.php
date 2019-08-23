@@ -7,6 +7,11 @@ $thumbnails = $product->getImage()->getThumbnails();
 
 $error = $_POST['error-message-products'];
 
+if(isset($_SESSION['success'])){
+    $success = $_SESSION['success'];
+    unset($_SESSION['success']);
+} else $success = null;
+
 ?>
 
 <!DOCTYPE html>
@@ -31,10 +36,16 @@ $error = $_POST['error-message-products'];
             <p>Voir la page du produit</p>
         </a>
     </div>
+    <?php if($success != null) { ?>
+    <div id='success' class="vertical">
+        <p>Le produit a bien été sauvegardé.</p>
+    </div>
+    <?php } ?>
     <div id="error-product" class="vertical <?php if($error == null) echo 'hidden';?>">
         <p>Il y a des erreurs avec la mise à jour du produit :</p>
         <p class="message"><?php echo $error;?>Une petite erreur gentille.</p>
     </div>
+    <form id='deletion-wrapper' class='hidden' method="post" action="https://www.bebes-lutins.fr/dashboard4/produits/supprimer/<?php echo $product->getId(); ?>"></form>
     <form id="edition-wrapper" class="horizontal" method="post" action="https://www.bebes-lutins.fr/dashboard4/produits/sauvegarder/">
         <input type="hidden" name="product_id" value="<?php echo $product->getId();?>">
         <input type="hidden" name="id_copy" value="<?php echo $product->getName();?>">

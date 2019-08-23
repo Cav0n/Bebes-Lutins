@@ -12,7 +12,7 @@ class VoucherGateway
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);
 
-        $query = "INSERT INTO voucher VALUES(:id, :name, :discount, :type, :date_beginning, :time_beginning, :date_end, :time_end, :number_per_user, :minimal_purchase);";
+        $query = "INSERT INTO voucher VALUES(:id, :name, :discount, :type, :date_beginning, :time_beginning, :date_end, :time_end, :number_per_user, :minimal_purchase, :deleted);";
         $con->executeQuery($query, array(
             ':id'=>array($id, PDO::PARAM_STR),
             ':name'=>array($name, PDO::PARAM_STR),
@@ -32,7 +32,7 @@ class VoucherGateway
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);
 
-        $query = 'UPDATE voucher SET discount=:discount, type=:type_discount, date_beginning=:date_beginning, time_beginning=:time_beginning, date_end=:date_end, time_end=:time_end, number_per_user=:number_per_user, minimal_purchase=:minimal_purchase WHERE id=:id';
+        $query = 'UPDATE voucher SET discount=:discount, type=:type_discount, date_beginning=:date_beginning, time_beginning=:time_beginning, date_end=:date_end, time_end=:time_end, number_per_user=:number_per_user, minimal_purchase=:minimal_purchase, deleted=:deleted WHERE id=:id';
         $con->executeQuery($query, array(
             ':id'=>array($id, PDO::PARAM_STR),
             ':discount'=>array($discount, PDO::PARAM_STR),

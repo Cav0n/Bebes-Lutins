@@ -248,6 +248,16 @@
     width: 13rem;
 }
 
+#dashboard4 main #success {
+    padding: 1rem;
+    margin-top: 1rem;
+    background: #60b360;
+    border-radius: 2px;
+    color: white;
+    border: 1px solid #549254;
+    box-sizing: border-box;
+}
+
 #dashboard4 main #error-message-container {
     display: table;
     max-width: 100%;

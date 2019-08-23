@@ -692,6 +692,7 @@ class AdminModel
             $description = nl2br(str_replace("'", "’",$_POST['description']));
             $ceo_description = nl2br(str_replace("'", "’",$_POST['ceo_description']));
             $image_name = $_POST['image_name'];
+            if($image_name == null) $image_name = "question_mark.png";
             $price = $_POST['price'];
             $stock = $_POST['stock'];
             $categories = $_POST['category'];
@@ -730,6 +731,7 @@ class AdminModel
                 <?php
             }
             else {
+                $_SESSION['success'] = true;
                 ?>
                 <script type="text/javascript">
                     document.location.href='<?php echo "https://www.bebes-lutins.fr/dashboard4/produits/edition/".$id; ?>';
@@ -745,6 +747,7 @@ class AdminModel
             if ($_FILES['uploadFile'] != null) {
                 $image_name = self::UploadMutlipleImages();
             } else $image_name = $_POST['image_name'];
+            if($image_name == null) $image_name = "question_mark.png";
             $price = $_POST['price'];
             $stock = $_POST['stock'];
             $categories = $_POST['category'];
@@ -766,6 +769,7 @@ class AdminModel
                 </script>
                 <?php
             }
+            $_SESSION['success'] = true;
             ?>
             <script type="text/javascript">
                 document.location.href='<?php echo "https://www.bebes-lutins.fr/dashboard4/produits/edition/".$id; ?>';
@@ -814,6 +818,7 @@ class AdminModel
         }
 
         if(!$error){
+            $_SESSION['success'] = true;
         ?>
         <script type="text/javascript">
             document.location.href='<?php echo 'https://www.bebes-lutins.fr/dashboard4/produits/categorie/edition/' . $category_name_url; ?>';

@@ -143,7 +143,7 @@ $error = $_POST['error-message-products'];
                         <div id="category-selector" class="category-selector horizontal">
                             <select id="category-select" name="category[]">
                                 <?php foreach ($categories as $category) { if($category->getParent() != "none") {?>
-                                    <optgroup label="<?php echo $category->getParent();?>">
+                                    <optgroup label="<?php if($category->getParent() == 'none') echo '------'; else  echo $category->getParent();?>">
                                         <option value="<?php echo $category->getName(); ?>" <?php if($category->getName() == $product_category->getName()){echo 'selected';}?>><?php echo $category->getName();?></option>
                                     </optgroup>
                                 <?php } } ?>

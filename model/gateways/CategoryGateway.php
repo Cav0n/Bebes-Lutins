@@ -13,7 +13,7 @@ class CategoryGateway
         $con = new Connexion($dsn, $dblogin, $dbpassword);
         $results = array();
 
-        $query ="SELECT name, parent, image, description, rank, tags, private FROM category ORDER BY rank";
+        $query ="SELECT name, parent, image, description, rank, tags, private FROM category ORDER BY parent, name";
         $con->executeQuery($query);
         $categories = $con->getResults();
 

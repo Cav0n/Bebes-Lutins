@@ -107,7 +107,7 @@ if(isset($_SESSION['error_message']) && $_SESSION['error_message'] != null){
                         <select id="category-select" name="parent">
                             <option value="none">Aucune</option>
                             <?php foreach ($categories_list as $category_search) { ?>
-                                <optgroup label="<?php echo $category_search->getParent();?>">
+                                <optgroup label="<?php if ($category_search->getParent() == "none") echo "-----"; else echo $category_search->getParent();?>">
                                     <option value="<?php echo $category_search->getName(); ?>" <?php if($parent == $category_search->getName()) echo 'selected'; ?>><?php echo $category_search->getName();?></option>
                                 </optgroup>
                             <?php } ?>

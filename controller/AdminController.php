@@ -15,9 +15,9 @@ class AdminController
     public function __construct(String $action)
     {
         if(isset($_SESSION['connected_user'])){
-            $usercontainer = new UserContainer(unserialize($_SESSION['connected_user']));
-            $user = $usercontainer->getUser();
-            if($user->getPrivilege()) {
+            $usercontainer = new UserContainer(unserialize($_SESSION['connected_user'])); //Get the user
+            $user = $usercontainer->getUser(); //Containers is used for autocompletion with PHPStorm
+            if($user->getPrivilege()) { //If the user has privilege more than 0 he is an administrator
                 switch ($action) {
                     case "load_tests":
                         AdminModel::load_page($_GET['test']);

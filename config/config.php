@@ -4,18 +4,21 @@
  * User: florian
  * Date: 16/11/2018
  * Time: 22:17
+ * 
+ * Here you can set admins actions and connected user actions
  */
 
-//Repertoire courant
+//Current folder
 $rep=__DIR__.'/../';
 $view_rep = "$rep/view";
 
-//Base de données
+//Database
 $base="db734087973";
 $dblogin="dbo734087973";
 $dbpassword="Acty-63300";
 $dsn = "mysql:host=db734087973.db.1and1.com;dbname=db734087973";
 
+//Admins actions
 $actions_admin = array(
     'dashboard',
     'dashboard4',
@@ -47,6 +50,8 @@ $actions_admin = array(
     'dashboard_load_tab',
     'admin_delete_review'
 );
+
+//Connected users actions
 $actions_connected = array(
     'load_page_connected',
     'logout',

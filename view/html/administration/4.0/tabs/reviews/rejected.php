@@ -47,7 +47,7 @@ $declined_reviews = ReviewGateway::GetAllDeclinedReview();
                         ?>
                         <tr>
                             <td class="customer center"><a href="https://www.bebes-lutins.fr/dashboard/page-client/<?php echo $order->getCustomer()->getId(); ?>"><?php echo ucfirst($order->getCustomer()->getFirstname()) . " " . strtoupper($order->getCustomer()->getSurname()); ?></a></td>
-                            <td class="product left"><a href="https://www.bebes-lutins.fr/dashboard4/produit/edition/<?php echo $product->getId(); ?>"><?php echo $product->getName(); ?></a></td>
+                            <td class="product left"><a href="https://www.bebes-lutins.fr/dashboard4/produits/edition/<?php echo $product->getId(); ?>"><?php echo $product->getName(); ?></a></td>
                             <td class="review left"><?php echo $review->getText(); ?></td>
                             <td class="mark right"><?php echo $review->getMark(); ?></td>
                         </tr>

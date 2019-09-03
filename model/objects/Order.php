@@ -132,6 +132,10 @@ class Order
         return date_format(date_create($this->date), 'd-m-Y');
     }
 
+    public function getDateHoursString(): String{
+        return date_format(date_create($this->date), 'G:i');
+    }
+
     /**
      * @param String $date
      */

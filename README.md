@@ -9,4 +9,4 @@ French washable diaper workshop's website.
 BACKEND | FRONTEND
 ------------ | -------------
 PHP | HTML5
- | CSS3
+    | CSS3

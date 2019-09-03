@@ -254,15 +254,30 @@ class UtilsModel
     }
 
     public static function load_thanks(){
-        unset($_SESSION['shopping_cart']);
-        unset($_SESSION['order']);
 
-        $_SESSION['shopping_cart'] = serialize(new ShoppingCart("local", 0, array()));
-        ?>
-        <script type="text/javascript">
-            document.location.href="https://www.bebes-lutins.fr/merci"
-        </script>
-        <?php
+        global $MERCHANT_ID;
+        $token = $_REQUEST['token'];
+        //echo $token;
+        try{
+            $paylineSDK = new paylineSDK(MERCHANT_ID, ACCESS_KEY, PROXY_HOST, PROXY_PORT, PROXY_LOGIN, PROXY_PASSWORD, ENVIRONMENT, null);
+            $result_code = $paylineSDK->getWebPaymentDetails(['token'=>$token])['result']['code'];
+            $result_message = $paylineSDK->getWebPaymentDetails(['token'=>$token])['result']['longMessage'];
+        } catch(Exception $e){
+            echo 'EXCEPTION : '. $e;
+        }
+
+        if($result_code == "00000"){
+            unset($_SESSION['shopping_cart']);
+            unset($_SESSION['order']);
+    
+            $_SESSION['shopping_cart'] = serialize(new ShoppingCart("local", 0, array()));
+            ?>
+            <script type="text/javascript">
+                document.location.href="https://www.bebes-lutins.fr/merci"
+            </script>
+            <?php
+        } else echo 'Un problème est survenu lors du paiement de votre commande.<BR>Code de retour : ' . $result_code . $result_message;
+    
     }
 
     public static function show_all_products(){
@@ -743,11 +758,26 @@ class UtilsModel
         $order->setStatus(-1);
         $_SESSION['order'] = serialize($order);
 
+        $usercontainer = new UserContainer(unserialize($_SESSION['connected_user'])); //Get the user
+        $user = $usercontainer->getUser(); //Containers is used for autocompletion with PHPStorm
+        if(! $user->getPrivilege()) { //If the user has privilege more than 0 he is an administrator
+
         ?>
         <script type="text/javascript">
             document.location.href="https://www.bebes-lutins.fr/panier";
         </script>
         <?php
+
+        } else {
+            $token = $_REQUEST['token'];
+            //echo $token;
+            try{
+                $paylineSDK = new paylineSDK(MERCHANT_ID, ACCESS_KEY, PROXY_HOST, PROXY_PORT, PROXY_LOGIN, PROXY_PASSWORD, ENVIRONMENT, null);
+                echo $paylineSDK->getWebPaymentDetails($token)['result']['code'];
+            } catch(Exception $e){
+                echo 'EXCEPTION : '. $e;
+            }
+        }
     }
 
     public static function init_bankcheque_payment(Order $order){

@@ -74,3 +74,19 @@ $actions_connected = array(
     'add_product_to_wishlist',
     'delete_item_from_wishlist'
 );
+
+$payment_actions = array(
+    'payment_notification',
+    'payment_cancel',
+    'payment_verification'
+);
+
+// connection settings
+DEFINE('MERCHANT_ID', '55014688529519');
+DEFINE('ACCESS_KEY', 'c9NO9GpRWqosIUhpM76A');
+DEFINE('ACCESS_KEY_REF', '');
+DEFINE('PROXY_HOST', '');
+DEFINE('PROXY_PORT', '');
+DEFINE('PROXY_LOGIN', '');
+DEFINE('PROXY_PASSWORD', '');
+DEFINE('ENVIRONMENT', 'PROD');

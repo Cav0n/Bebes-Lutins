@@ -472,7 +472,7 @@ class paylineSDK{
 	
 	// trace log
 	var $logger;
-	var $flagLog; // 0 : pas de log / 1 : log par défaut / 2 : chemin personnalisé (pathLog)
+	var $flagLog; // 0 : pas de log / 1 : log par dï¿½faut / 2 : chemin personnalisï¿½ (pathLog)
 	var $pathLog;
 	
 	// environement flags
@@ -579,6 +579,7 @@ class paylineSDK{
 		}elseif(strcmp($environment,paylineSDK::ENV_PROD)==0){
 			$this->webServicesEndpoint = paylineSDK::PROD_ENDPOINT;
 		}
+
 		$this->header_soap['style'] = SOAP_DOCUMENT;
 		$this->header_soap['use'] = SOAP_LITERAL;
 		$this->items = array();
@@ -953,10 +954,10 @@ class paylineSDK{
 			return;
 		}else{
 			if(!isset($this->logger)){
-				if($this->flagLog == 1){ // log dans le répertoire par défaut
+				if($this->flagLog == 1){ // log dans le rï¿½pertoire par dï¿½faut
 					$this->logger = new paylineLog(date('Y-m-d',time()).'.log');
 				}
-				if($this->flagLog == 2){ // log dans un répertoire spécifié
+				if($this->flagLog == 2){ // log dans un rï¿½pertoire spï¿½cifiï¿½
 					$this->logger = new paylineLog(date('Y-m-d',time()).'.log',$this->pathLog);
 				}
 			}
@@ -1126,7 +1127,6 @@ class paylineSDK{
 		try{
 			$client = new SoapClient(dirname(__FILE__).'/'.paylineSDK::WSDL, $this->header_soap);
 			$client->__setLocation ($this->webServicesEndpoint.$PaylineAPI);
-			
 			
 			if(isset($array['version'])&& strlen($array['version']))
 				$WSRequest['version'] = $array['version'];

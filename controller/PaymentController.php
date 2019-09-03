@@ -5,21 +5,21 @@ class PaymentController{
     {
         try{
             switch($action){
-                case 'payment_verification':
+                case 'payment_endpoint':
                     $token = $_REQUEST['token'];
                     $order_id = $_REQUEST['order_id'];
-                    PaymentModel::verification($token, $order_id);
+                    PaymentModel::EndPayment($token, $order_id);
                     break;
 
                 case 'payment_notification':
                     $token = $_REQUEST['token'];
                     $order_id = $_REQUEST['order_id'];
-                    PaymentModel::notification($token, $order_id);
+                    PaymentModel::Notification($token, $order_id);
                     break;
 
                 case 'payment_cancel':
                     $order_id = $_REQUEST['order_id'];
-                    PaymentModel::cancel($order_id);
+                    PaymentModel::Cancel($order_id);
                     break;
 
                 default:

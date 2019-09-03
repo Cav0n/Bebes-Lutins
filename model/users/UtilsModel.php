@@ -89,8 +89,15 @@ class UtilsModel
                 break;
 
             case 'thanks':
-                $_SESSION['step_shopping_cart'] = 4;
-                require("$view_rep/html/shopping-cart/thanks.php");
+                require("$view_rep/html/main/thanks.php");
+                break;
+
+            case 'payment-error':
+                require("$view_rep/html/main/payment-error.php");
+                break;
+
+            case 'payment-canceled':
+                require("$view_rep/html/main/payment-canceled.php");
                 break;
 
             case 'birthlist':
@@ -693,9 +700,9 @@ class UtilsModel
         $order_id = $order->getId();
 
         $payline = new paylineSDK(MERCHANT_ID, ACCESS_KEY, PROXY_HOST, PROXY_PORT, PROXY_LOGIN, PROXY_PASSWORD, ENVIRONMENT);
-        $payline->returnURL = RETURN_URL."&idcommande=". $order_id;
-        $payline->cancelURL = CANCEL_URL . "&idcommande=". $order_id;
-        $payline->notificationURL = NOTIFICATION_URL."&idcommande=". $order_id;
+        $payline->returnURL = RETURN_URL. "&order_id=". $order_id;
+        $payline->cancelURL = CANCEL_URL . "&order_id=". $order_id;
+        $payline->notificationURL = NOTIFICATION_URL. "&order_id=". $order_id;
         $payline->customPaymentPageCode = CUSTOM_PAYMENT_PAGE_CODE;
 
 //VERSION

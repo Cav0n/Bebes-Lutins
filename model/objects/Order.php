@@ -178,6 +178,14 @@ class Order
                 return "annulée";
                 break;
 
+            case -2:
+                return "paiement en cours de validation";
+                break;
+
+            case -3:
+                return "paiement refusé";
+                break;
+
             case 10:
                 return "LISTE DE NAISSANCE : En attente de paiement";
                 break;

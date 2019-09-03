@@ -124,7 +124,7 @@ class Voucher
                 break;
 
             case 3:
-                return 'frais de port offert';
+                return 'frais de port offerts';
                 break;
 
             default :

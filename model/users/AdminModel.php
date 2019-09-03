@@ -626,6 +626,8 @@ class AdminModel
                     if ($option == "toutes" || $option == null) require("$view_rep/html/administration/4.0/tabs/orders/ended/all.php");
                     if ($option == "livree") require("$view_rep/html/administration/4.0/tabs/orders/ended/delivered.php");
                     if ($option == "annulee") require("$view_rep/html/administration/4.0/tabs/orders/ended/canceled.php");
+                } else if($page == "refusees"){
+                    if($option == "toutes" || $option == null) require("$view_rep/html/administration/4.0/tabs/orders/declined/all.php");
                 } else if($page == "modifier-etat"){
                     self::change_status_order($_POST['id'], $_POST['new_status'], null);
                 }

@@ -20,7 +20,7 @@ DEFINE( 'PAYMENT_MODE', 'CPT');
 
 DEFINE( 'CANCEL_URL', 'https://www.bebes-lutins.fr/?action=payment_cancel');
 DEFINE( 'NOTIFICATION_URL','https://www.bebes-lutins.fr/?action=payment_notification');
-DEFINE( 'RETURN_URL', 'https://www.bebes-lutins.fr/?action=payment_verification');
+DEFINE( 'RETURN_URL', 'https://www.bebes-lutins.fr/?action=payment_endpoint');
 
 DEFINE( 'CANCEL_URL_BIRTHLIST', 'https://www.bebes-lutins.fr/?action=birthlist_order_cancel');
 DEFINE( 'NOTIFICATION_URL_BIRTHLIST', 'https://www.bebes-lutins.fr/?action=notification_birthlist_order');

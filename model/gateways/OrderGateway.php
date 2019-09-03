@@ -968,7 +968,7 @@ class OrderGateway
         }
     }
 
-    public static function UpdateOrderStatusWithOrderID(String $order_id, int $status, $admin_message){
+    public static function UpdateOrderStatusWithOrderID(String $order_id, int $status, $admin_message = null){
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);
 

@@ -27,6 +27,7 @@ if($_GET['page'] == "nouveau" ||
         <li class="sub-selection-container">
             <div class="sub-selection <?php if($_GET['page'] == "en-cours" || ($_GET['page'] == null && ($_GET['section'] == null || $_GET['section'] == 'commandes'))) echo 'selected'; ?>"><a href="https://www.bebes-lutins.fr/dashboard4/commandes/en-cours">En cours</a></div>
             <div class="sub-selection <?php if($_GET['page'] == "terminees") echo 'selected'; ?>"><a href="https://www.bebes-lutins.fr/dashboard4/commandes/terminees">Terminées</a></div>
+            <div class="sub-selection <?php if($_GET['page'] == "refusees") echo 'selected'; ?>"><a href="https://www.bebes-lutins.fr/dashboard4/commandes/refusees">Refusées</a></div>
         </li>
         <li class="<?php if($_GET['section'] == "produits") echo 'selected'; ?>"><a href="https://www.bebes-lutins.fr/dashboard4/produits/tous-les-produits"><div class="horizontal"><?php echo file_get_contents("view/assets/images/utils/icons/price-tag.svg"); ?></div><p>Produits</p></a></li>
         <li class="sub-selection-container">

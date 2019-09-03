@@ -78,7 +78,7 @@ $actions_connected = array(
 $payment_actions = array(
     'payment_notification',
     'payment_cancel',
-    'payment_verification'
+    'payment_endpoint'
 );
 
 // connection settings
@@ -90,3 +90,12 @@ DEFINE('PROXY_PORT', '');
 DEFINE('PROXY_LOGIN', '');
 DEFINE('PROXY_PASSWORD', '');
 DEFINE('ENVIRONMENT', 'PROD');
+
+// CONSTANT
+DEFINE('STATUS_WAITING_FOR_PAYMENT', 0);
+DEFINE('STATUS_PAYMENT_BEING_PROCESSED', -2);
+DEFINE('STATUS_ORDER_BEING_PROCESSED', 1);
+DEFINE('STATUS_IN_DELIVERING', 2);
+DEFINE('STATUS_DELIVERED', 3);
+DEFINE('STATUS_CANCEL', -1);
+DEFINE('STATUS_PAYMENT_DECLINED', -3);

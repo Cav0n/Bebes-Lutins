@@ -81,6 +81,11 @@ $payment_actions = array(
     'payment_endpoint'
 );
 
+$mail_actions = array(
+    'mail_show',
+    'mail_send'
+);
+
 // connection settings
 DEFINE('MERCHANT_ID', '55014688529519');
 DEFINE('ACCESS_KEY', 'c9NO9GpRWqosIUhpM76A');

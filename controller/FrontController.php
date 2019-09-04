@@ -15,7 +15,7 @@ class FrontController
      */
     function __construct()
     {
-        global $actions_admin, $actions_connected, $payment_actions;
+        global $actions_admin, $actions_connected, $payment_actions, $mail_actions;
         session_start();
         setlocale(LC_MONETARY, 'fr_FR');
 
@@ -37,6 +37,9 @@ class FrontController
             }
             elseif(in_array($action, $payment_actions)){ //If the action is a payment action
                 new PaymentController($action);
+            }
+            elseif(in_array($action, $mail_actions)){
+                new MailController($action);
             }
             else new VisitorController($action); //If it's another action then give it to the VisitorController
         } catch(PDOException $e){

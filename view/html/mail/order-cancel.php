@@ -15,7 +15,7 @@
     <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel="stylesheet">
     <!-- <![endif]-->
 
-    <title>Erreur de paiement</title>
+    <title>Commande annulée</title>
 
     <style type="text/css">
         body {
@@ -149,7 +149,7 @@
         <tr>
             <td>
                 <div style="overflow:hidden;display:none;font-size:1px;color:#ffffff;line-height:1px;font-family:Arial;maxheight:0px;max-width:0px;opacity:0;">
-                    Erreur de paiement pour votre commande
+                    Votre commande $$$order_id a été annulée.
                 </div>
             </td>
         </tr>
@@ -189,23 +189,14 @@
             <td align="center">
                 <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590">
                     <tr>
-
-                        <td align="center" class="section-img">
-                            <img src="https://www.bebes-lutins.fr/view/assets/images/utils/baby-hide.jpg" style="display: block; width: 590px;" width="590" border="0" alt="" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td>
-                    </tr>
-                    <tr>
                         <td align="center" style="color: #343434; font-size: 24px; font-family: Quicksand, Calibri, sans-serif; font-weight:700;letter-spacing: 3px; line-height: 35px;" class="main-header">
 
 
-                            <div style="line-height: 35px">
+                        <div style="line-height: 35px">
 
-                                Votre commande n'a pas pu aboutir 😢
+                            Votre commande a été <span style="color: #5bd383;">annulée 😳</span>
 
-                            </div>
+                        </div>
                         </td>
                     </tr>
 
@@ -235,10 +226,11 @@
 
 
                                         <div style="line-height: 24px">
-                                            En raison d'un problème lors du paiement votre commande n'a pas été achevé.<BR>
-                                            Il peut s'agir d'un problème de notre côté, si vous pensez que tel est le cas vous pouvez nous contacter à l'adresse <a href='mailto:contact@bebes-lutins.fr'>contact@bebes-lutins.fr</a>.<BR>
+                                            Il semblerait que vous ayez annulé votre commande $$$order_id passé le $$$date sur notre site, vous n'avez donc pas été prélevé.<BR>
+                                            Toutefois si vous pensez qu'il s'agit d'une erreur, veuillez nous contacter au plus vite.<BR>
                                             <BR>
-                                            Nous espérons vous revoir vite sur notre site.💚
+                                            Vous pouvez nous contacter par téléphone au <a href='tel:0641569165'>06 41 56 91 65</a> ou par mail 
+                                            à l'adresse <a href='mailto:contact@bebes-lutins.fr'>contact@bebes-lutins.fr</a>.
                                         </div>
                                     </td>
                                 </tr>

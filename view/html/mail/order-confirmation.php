@@ -15,7 +15,7 @@
     <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel="stylesheet">
     <!-- <![endif]-->
 
-    <title>Votre commande - Bébés Lutins</title>
+    <title>Merci</title>
 
     <style type="text/css">
         body {
@@ -149,22 +149,18 @@
         <tr>
             <td>
                 <div style="overflow:hidden;display:none;font-size:1px;color:#ffffff;line-height:1px;font-family:Arial;maxheight:0px;max-width:0px;opacity:0;">
-                    Merci d'avoir passé commande chez Bébés Lutins
+                    Votre commande passée chez Bébés Lutins
                 </div>
             </td>
         </tr>
     </table>
     <!-- pre-header end -->
     <!-- header -->
-    <table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="ffffff">
+    <table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="ffffff" style="padding-top:1rem;">
 
         <tr>
             <td align="center">
                 <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590">
-
-                    <tr>
-                        <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
-                    </tr>
 
                     <tr>
                         <td align="center">
@@ -173,15 +169,11 @@
 
                                 <tr>
                                     <td align="center" height="70" style="height:70px;">
-                                        <a href="https://www.bebes-lutins.fr" style="display: block; border-style: none !important; border: 0 !important;margin-top:-2rem;"><img width="150" border="0" style="display: block; width: 150px;" src="https://www.bebes-lutins.fr/view/assets/images/logo.png" alt="bebes-lutins.fr" /></a>
+                                        <a href="https://www.bebes-lutins.fr" style="display: block; border-style: none !important; border: 0 !important;margin-top:-2rem;"><img width="150" border="0" style="display: block; width: 150px;" src="https://www.bebes-lutins.fr/view/assets/images/utils/small-logo.png" alt="bebes-lutins.fr" /></a>
                                     </td>
                                 </tr>
                             </table>
                         </td>
-                    </tr>
-
-                    <tr>
-                        <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
                     </tr>
 
                 </table>
@@ -209,11 +201,11 @@
                         <td align="center" style="color: #343434; font-size: 24px; font-family: Quicksand, Calibri, sans-serif; font-weight:700;letter-spacing: 3px; line-height: 35px;" class="main-header">
 
 
-                            <div style="line-height: 35px">
+                        <div style="line-height: 35px">
 
-                                Merci de votre <span style="color: #5bd383;">commande 🥰</span>
+                            Merci de votre <span style="color: #5bd383;">commande 🥰</span>
 
-                            </div>
+                        </div>
                         </td>
                     </tr>
 
@@ -316,8 +308,8 @@
 
                                 <tr>
                                     <!-- logo -->
-                                    <td align="left">
-                                        <a href="https://www.bebes-lutins.fr" style="display: block; border-style: none !important; border: 0 !important;"><img width="150" border="0" style="display: block; width: 150px;" src="https://www.bebes-lutins.fr/view/assets/images/utils/small-logo.png" alt="bebes-lutins.fr" /></a>
+                                    <td align="center">
+                                        <a href="https://www.bebes-lutins.fr" style="display: block; border-style: none !important; border: 0 !important;"><img width="150" border="0" style="display: block; width: 150px;" src="https://www.bebes-lutins.fr/view/assets/images/logo.png" alt="bebes-lutins.fr" /></a>
                                     </td>
                                 </tr>
 
@@ -326,7 +318,7 @@
                                 </tr>
 
                                 <tr>
-                                    <td align="left" style="color: #888888; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 23px;" class="text_color">
+                                    <td align="center" style="color: #888888; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 23px;" class="text_color">
                                         <div style="color: #333333; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; font-weight: 600; mso-line-height-rule: exactly; line-height: 23px;">
 
                                             Contactez nous par mail: <br/> <a href="mailto:contact@bebes-lutins.fr" style="color: #888888; font-size: 14px; font-family: 'Hind Siliguri', Calibri, Sans-serif; font-weight: 400;">contact@bebes-lutins.fr</a>
@@ -354,17 +346,17 @@
                                 <tr>
                                     <td height="15" style="font-size: 15px; line-height: 15px;">&nbsp;</td>
                                 </tr>
-
                                 <tr>
                                     <td>
                                         <table border="0" align="center" cellpadding="0" cellspacing="0">
                                             <tr>
+                                                <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                 <td>
-                                                    <a href="https://fr-fr.facebook.com/bebes.lutins" style="display: block; border-style: none !important; border: 0 !important;"><img width="24" border="0" style="display: block;" src="https://www.bebes-lutins.fr/view/assets/images/utils/facebook.png" alt=""></a>
+                                                    <a href="https://fr-fr.facebook.com/bebes.lutins" style="display: block; border-style: none !important; border: 0 !important;"><img width="40" border="0" style="display: block;" src="https://www.bebes-lutins.fr/view/assets/images/utils/facebook.png" alt=""></a>
                                                 </td>
                                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                 <td>
-                                                    <a href="https://www.instagram.com/bebeslutins" style="display: block; border-style: none !important; border: 0 !important;"><img width="24" border="0" style="display: block;" src="https://www.bebes-lutins.fr/view/assets/images/utils/instagram.png" alt=""></a>
+                                                    <a href="https://www.instagram.com/bebeslutins" style="display: block; border-style: none !important; border: 0 !important;"><img width="40" border="0" style="display: block;" src="https://www.bebes-lutins.fr/view/assets/images/utils/instagram.png" alt=""></a>
                                                 </td>
                                             </tr>
                                         </table>

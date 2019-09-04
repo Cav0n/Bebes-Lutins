@@ -363,34 +363,9 @@ class AdminModel
     public static function change_status_order(String $order_id, int $status, $admin_message){
         try{
             $order = OrderGateway::GetOrderFromDBByID($order_id);
-            OrderGateway::UpdateOrderStatusWithOrderID($order_id, $status, $admin_message);
             $order->setStatus($status);
-
-            $firstname = $order->getCustomer()->getFirstname();
-            $surname = $order->getCustomer()->getSurname();
-            $price = str_replace("EUR", "€", money_format("%.2i", $order->getTotalPrice() + $order->getShippingPrice()));
-            $string_status = $order->statusToString();
-            ?>
-
-            <script type="text/javascript">
-                console.log(<?php echo $string_status; ?>);
-            </script>
-
-            <?php
-            if($admin_message != null) {
-                $admin_message = "
-                Vous avez un message de notre part avec votre commande :
-            $admin_message";
-            }
-
-            $message = "Bonjour $firstname $surname, 
-    Nous vous informons que votre commande de $price a changé d'état !
-    Elle est maintenant \"$string_status\".
-    $admin_message
-    
-    Cordialement,
-    Toute l'équipe Bébés Lutins.";
-            UtilsModel::EnvoieNoReply($order->getCustomer()->getMail(), "Mise a jour de votre commande", $message);
+            OrderGateway::UpdateOrderStatusWithOrderID($order_id, $status, $admin_message);
+            MailModel::send_order_update_for($order);
         } catch (PDOException $e){
             $_POST['error-message-orders'] = "Erreur BDD : " . $e;
             ?>

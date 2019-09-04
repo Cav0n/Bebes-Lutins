@@ -14,7 +14,7 @@ class PaymentModel{
 
                 if($order->getStatus() < STATUS_ORDER_BEING_PROCESSED){
                     OrderGateway::UpdateOrderStatusWithOrderID($order_id, STATUS_ORDER_BEING_PROCESSED);
-                    MailModel::send_order_mail_to($order->getCustomer()->getMail());
+                    MailModel::send_order_mail_for($order);
                 }
                 ?>
                 <script type="text/javascript">
@@ -24,9 +24,7 @@ class PaymentModel{
             } else {  
                 if($order->getStatus() > STATUS_PAYMENT_DECLINED){
                     OrderGateway::UpdateOrderStatusWithOrderID($order_id, STATUS_PAYMENT_DECLINED);
-                    /**
-                     * TODO : MAIL CONTROLLER
-                     */
+                    MailModel::send_payment_fail_mail_for($order);
                 }
 
                 ?>
@@ -51,25 +49,19 @@ class PaymentModel{
                 if($payment_details['code'] == '00000') {
                     if( $order->getStatus() < STATUS_ORDER_BEING_PROCESSED){
                         OrderGateway::UpdateOrderStatusWithOrderID($order_id, STATUS_ORDER_BEING_PROCESSED);
-                        /**
-                         * TODO : MAIL CONTROLLER
-                         */
+                        MailModel::send_order_update_for($order);
                     }
                 }
                 if($payment_details['code'] == '01001') {
                     if($order->getStatus() < STATUS_PAYMENT_BEING_PROCESSED){
                         OrderGateway::UpdateOrderStatusWithOrderID($order_id, STATUS_PAYMENT_BEING_PROCESSED);
-                        /**
-                         * TODO : MAIL CONTROLLER
-                         */
+                        MailModel::send_order_update_for($order);
                     }
                 }
             } else {
                 if($order->getStatus() > STATUS_PAYMENT_DECLINED){
                     OrderGateway::UpdateOrderStatusWithOrderID($order_id, STATUS_PAYMENT_DECLINED);
-                    /**
-                     * TODO : MAIL CONTROLLER
-                     */
+                    MailModel::send_payment_fail_mail_for($order);
                 }
             }
         } else {
@@ -110,9 +102,7 @@ class PaymentModel{
 
             if($order->getStatus() > STATUS_CANCEL){
                 OrderGateway::UpdateOrderStatusWithOrderID($order->getId(), STATUS_CANCEL);
-                /**
-                 * TODO : MAIL CONTROLLER 
-                 */
+                MailModel::send_order_cancel_for($order);
             } 
 
             ?>

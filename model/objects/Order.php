@@ -129,7 +129,7 @@ class Order
     }
 
     public function getDateString(): String{
-        return date_format(date_create($this->date), 'd-m-Y');
+        return date_format(date_create($this->date), 'd / m / Y');
     }
 
     public function getDateHoursString(): String{
@@ -158,6 +158,117 @@ class Order
     public function setStatus(int $status): void
     {
         $this->status = $status;
+    }
+
+    public function getFriendlyStatus() : String{
+        switch($this->getStatus()){
+            case 0: 
+                return 'en attente de paiement';
+                break;
+
+            case 1:
+                return 'en cours de traitement ✌️';
+                break;
+
+            case 2:
+                return 'en cours de livraison 🚚';
+                break;
+
+            case 3:
+                return 'livrée ✅';
+                break;
+
+            case -1:
+                return 'annulée 😥';
+                break;
+
+            case -2:
+                return 'en cours de validation 😬';
+                break;
+
+            case -3:
+                return 'non débitée';
+                break;
+        }
+    }
+
+    public function getStatusDescription() : String{
+        switch($this->getStatus()){
+            case 0:
+                return 'Cela signifique que nous attendons de recevoir le paiement de votre commande
+                pour passer à la préparation de celle ci.';
+                break;
+
+            case 1: 
+                return 'Nous sommes en train de préparer votre commande à l\'atelier,
+                encore un petit peu de patience et nous devrions expédier votre précieux ! 😉';
+                break;
+
+            case 2: 
+                return 'Ça y est ! Votre précieuse commande a quitter notre atelier. Elle est en chemin
+                jusqu\'à sa destination, vous devriez la recevoir dans quelques jours.';
+                break;
+
+            case 3:
+                return 'Nous avons le plaisir de vous annoncer que votre commande est livré ! Toute l\'équipe
+                espère que vous serez satisfait de votre achat. <BR>
+                Pour toute question ou conseil vous pouvez nous contacter par email à l\'adresse
+                <a href="mailto:contact@bebes-lutins.fr">contact@bebes-lutins.fr</a>.<BR>
+                <BR>
+                À très bientôt sur le site <a href="https://www.bebes-lutins.fr">bebes-lutins.fr</a> 💚';
+                break;
+
+            case -1:
+                return 'Votre commande à été annulée. Si vous aviez effectué un paiement il vous sera entièrement remboursée.';
+                break;
+
+            case -2:
+                return 'Nous devons vérifier le paiement de votre commande, cela ne devrait pas prendre longtemps.<BR>
+                Pour toute question ou conseil vous pouvez nous contacter par email à l\'adresse
+                <a href="mailto:contact@bebes-lutins.fr">contact@bebes-lutins.fr</a>.';
+                break;
+
+            case -3:
+                return 'Le paiement de votre commande n\'a pas abouti, nous en sommes désolé.<BR>
+                Si vous le souhaitez vous pouvez retenter de passer commande sur le site.<BR>
+                <BR>
+                Vous pouvez nous contacter par email à l\'adresse
+                <a href="mailto:contact@bebes-lutins.fr">contact@bebes-lutins.fr</a>, ou par téléphone au
+                <a href="tel:0641569165">06 41 56 91 65</a>.';
+                break;
+
+            default:
+                return "[IL Y A UN PROBLEME AVEC LA DESCRIPTION DE LA COMMANDE]";
+                break;
+        }
+    }
+
+    public function getStatusImage(): String{
+        switch ($this->getStatus()){
+            case 0:
+                return '';
+                break;
+
+            case 1: 
+                return '<img src="https://www.bebes-lutins.fr/view/assets/images/utils/preparation.jpg" style="display: block; width: 590px;" width="590" border="0" alt="" />';
+                break;
+
+            case 2:
+                return '<img src="https://www.bebes-lutins.fr/view/assets/images/utils/delivering.jpg" style="display: block; width: 590px;" width="590" border="0" alt="" />';
+                break;
+
+            case 3:
+                return '<img src="https://www.bebes-lutins.fr/view/assets/images/utils/delivered.jpg" style="display: block; width: 590px;" width="590" border="0" alt="" />';
+                break;
+
+            case -1:
+                return '<img src="https://www.bebes-lutins.fr/view/assets/images/utils/baby-hide.jpg" style="display: block; width: 590px;" width="590" border="0" alt="" />';
+                break;
+
+            default:
+                return '';
+                break;
+        }
     }
 
     public function statusToString(): String{

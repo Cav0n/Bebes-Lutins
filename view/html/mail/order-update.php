@@ -15,7 +15,7 @@
     <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel="stylesheet">
     <!-- <![endif]-->
 
-    <title>Erreur de paiement</title>
+    <title>Mise à jour de votre commande</title>
 
     <style type="text/css">
         body {
@@ -149,7 +149,7 @@
         <tr>
             <td>
                 <div style="overflow:hidden;display:none;font-size:1px;color:#ffffff;line-height:1px;font-family:Arial;maxheight:0px;max-width:0px;opacity:0;">
-                    Erreur de paiement pour votre commande
+                    Votre commande $$$order_id vient d'être mise à jour.
                 </div>
             </td>
         </tr>
@@ -189,9 +189,8 @@
             <td align="center">
                 <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590">
                     <tr>
-
                         <td align="center" class="section-img">
-                            <img src="https://www.bebes-lutins.fr/view/assets/images/utils/baby-hide.jpg" style="display: block; width: 590px;" width="590" border="0" alt="" />
+                            $$$image
                         </td>
                     </tr>
                     <tr>
@@ -201,11 +200,11 @@
                         <td align="center" style="color: #343434; font-size: 24px; font-family: Quicksand, Calibri, sans-serif; font-weight:700;letter-spacing: 3px; line-height: 35px;" class="main-header">
 
 
-                            <div style="line-height: 35px">
+                        <div style="line-height: 35px">
 
-                                Votre commande n'a pas pu aboutir 😢
+                            Votre commande est <span style="color: #5bd383;">$$$order_s_friendly</span>
 
-                            </div>
+                        </div>
                         </td>
                     </tr>
 
@@ -235,10 +234,10 @@
 
 
                                         <div style="line-height: 24px">
-                                            En raison d'un problème lors du paiement votre commande n'a pas été achevé.<BR>
-                                            Il peut s'agir d'un problème de notre côté, si vous pensez que tel est le cas vous pouvez nous contacter à l'adresse <a href='mailto:contact@bebes-lutins.fr'>contact@bebes-lutins.fr</a>.<BR>
+                                            Bonjour $$$customer, <BR>
+                                            Votre commande <b>$$$order_id</b> a été mis à jour.<BR>
                                             <BR>
-                                            Nous espérons vous revoir vite sur notre site.💚
+                                            $$$order_s_description
                                         </div>
                                     </td>
                                 </tr>
@@ -263,7 +262,7 @@
 
 
                                         <div style="line-height: 26px;">
-                                            <a href="https://www.bebes-lutins.fr/contact" style="color: #ffffff; text-decoration: none;">Nous contacter</a>
+                                            <a href="https://www.bebes-lutins.fr/espace-client/facture/$$$order_id" style="color: #ffffff; text-decoration: none;">Voir les détails de ma commande</a>
                                         </div>
                                     </td>
                                 </tr>

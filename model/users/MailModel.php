@@ -6,7 +6,6 @@ class MailModel
 {
     public static function send_mail($recipient, $subject, $text){
         require 'vendor/autoload.php';
-        $order_id = 'FLOBER1312105003-5d6e788065d19';
 
         $mail = new PHPMailer(true);
         try{
@@ -31,7 +30,7 @@ class MailModel
             // SET MESSAGE
             $mail->isHTML(true);
             $mail->Subject = "$subject";
-            $mail->Body = (str_replace('$$$order_id', $order_id, file_get_contents('view/html/mail/template.php')));
+            $mail->Body = $text;
 
             $mail->send();
         } catch (Exception $e){
@@ -42,5 +41,17 @@ class MailModel
             return "Une erreur s'est produite, veuillez vérifier votre adresse mail.";
         }
         return;
-    }   
+    }
+
+    public static function send_order_mail_to($recipient, $order_id)
+    {
+        $message = (str_replace('$$$order_id', $order_id, file_get_contents('view/html/mail/order-confirmation.php')));
+
+        self::send_mail($recipient, "Votre commande ". $order_id, $message);
+    }
+
+    public static function send_payment_fail_mail_to($recipient, $order_id)
+    {
+        
+    }
 }

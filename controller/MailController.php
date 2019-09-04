@@ -8,7 +8,7 @@ class MailController
         try{
             switch($action){
                 case 'mail_send':
-                    MailModel::send_mail('cav0n@hotmail.fr', 'Merci pour votre commande', 'Votre commande a été effectué avec succés. Nous la traitons aussi rapidement que possible');
+                    MailModel::send_mail('cav0n@hotmail.fr', 'Votre commande', file_get_contents('view/html/mail/payment-declined.php'));
                     break;
 
                 case 'mail_order_send':

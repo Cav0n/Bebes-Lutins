@@ -15,7 +15,7 @@
     <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel="stylesheet">
     <!-- <![endif]-->
 
-    <title>Votre commande - Bébés Lutins</title>
+    <title>Erreur de paiement - Bébés Lutins</title>
 
     <style type="text/css">
         body {
@@ -149,7 +149,7 @@
         <tr>
             <td>
                 <div style="overflow:hidden;display:none;font-size:1px;color:#ffffff;line-height:1px;font-family:Arial;maxheight:0px;max-width:0px;opacity:0;">
-                    Merci d'avoir passé commande chez Bébés Lutins
+                    Erreur de paiement pour votre commande
                 </div>
             </td>
         </tr>
@@ -199,7 +199,7 @@
                     <tr>
 
                         <td align="center" class="section-img">
-                            <img src="https://www.bebes-lutins.fr/view/assets/images/utils/baby.jpg" style="display: block; width: 590px;" width="590" border="0" alt="" />
+                            <img src="https://www.bebes-lutins.fr/view/assets/images/utils/baby-hide.jpg" style="display: block; width: 590px;" width="590" border="0" alt="" />
                         </td>
                     </tr>
                     <tr>
@@ -211,7 +211,7 @@
 
                             <div style="line-height: 35px">
 
-                                Merci de votre <span style="color: #5bd383;">commande 🥰</span>
+                                Votre commande n'a pas pu aboutir 😢
 
                             </div>
                         </td>
@@ -243,9 +243,9 @@
 
 
                                         <div style="line-height: 24px">
-                                            Nous vous remercions d'avoir passé commande sur notre site !
-                                            Nous nous occupons de celle ci dans les plus brefs délais.<BR>
-                                            Vous pouvez vérifier son état dans votre espace client.
+                                            En raison d'un problème lors du paiement votre commande n'a pas été achevé.<BR>
+                                            Il peut s'agir d'un problème de notre côté, si vous pensez que tel est le cas vous pouvez nous contacter à l'adresse <a href='mailto:contact@bebes-lutins.fr'>contact@bebes-lutins.fr</a>.
+                                            Nous espérons vous revoir vite sur notre site.
                                         </div>
                                     </td>
                                 </tr>
@@ -270,7 +270,7 @@
 
 
                                         <div style="line-height: 26px;">
-                                            <a href="https://www.bebes-lutins.fr/espace-client/facture/$$$order_id" style="color: #ffffff; text-decoration: none;">Voir les détails de ma commande</a>
+                                            <a href="https://www.bebes-lutins.fr/contact" style="color: #ffffff; text-decoration: none;">Nous contacter</a>
                                         </div>
                                     </td>
                                 </tr>

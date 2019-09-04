@@ -14,9 +14,7 @@ class PaymentModel{
 
                 if($order->getStatus() < STATUS_ORDER_BEING_PROCESSED){
                     OrderGateway::UpdateOrderStatusWithOrderID($order_id, STATUS_ORDER_BEING_PROCESSED);
-                    /**
-                     * TODO : MAIL CONTROLLER
-                     */
+                    MailModel::send_order_mail_to($order->getCustomer()->getMail());
                 }
                 ?>
                 <script type="text/javascript">

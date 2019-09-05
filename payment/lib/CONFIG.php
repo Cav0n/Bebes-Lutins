@@ -22,10 +22,6 @@ DEFINE( 'CANCEL_URL', 'https://www.bebes-lutins.fr/?action=payment_cancel');
 DEFINE( 'NOTIFICATION_URL','https://www.bebes-lutins.fr/?action=payment_notification');
 DEFINE( 'RETURN_URL', 'https://www.bebes-lutins.fr/?action=payment_endpoint');
 
-DEFINE( 'CANCEL_URL_BIRTHLIST', 'https://www.bebes-lutins.fr/?action=birthlist_order_cancel');
-DEFINE( 'NOTIFICATION_URL_BIRTHLIST', 'https://www.bebes-lutins.fr/?action=notification_birthlist_order');
-DEFINE( 'RETURN_URL_BIRTHLIST', 'https://www.bebes-lutins.fr/?action=load_page_connected&page=thanks_birthlist_payment');
-
 DEFINE( 'CUSTOM_PAYMENT_TEMPLATE_URL', '');
 DEFINE( 'CUSTOM_PAYMENT_PAGE_CODE', 'UVxJNmK2iRpbjPUgDoTj');
 DEFINE( 'CONTRACT_NUMBER', '1104366');

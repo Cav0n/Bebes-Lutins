@@ -85,7 +85,9 @@ $payment_actions = array(
 
 $mail_actions = array(
     'mail_show',
-    'mail_send'
+    'mail_send',
+    'send_newsletter_async',
+    'newsletter_unsubscribe'
 );
 
 // connection settings

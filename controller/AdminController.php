@@ -19,10 +19,6 @@ class AdminController
             $user = $usercontainer->getUser(); //Containers is used for autocompletion with PHPStorm
             if($user->getPrivilege()) { //If the user has privilege more than 0 he is an administrator
                 switch ($action) {
-                    case "newsletter_form":
-                        require('view/html/administration/4.0/tabs/mails/newsletter/new.php');
-                        break;
-
                     case "load_tests":
                         AdminModel::load_page($_GET['test']);
                         break;

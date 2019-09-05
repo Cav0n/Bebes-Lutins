@@ -13,7 +13,7 @@ $firstname = $user->getFirstname();
 $surname = $user->getSurname();
 $mail = $user->getMail();
 $phone_number_original = $user->getPhone();
-$newsletter = $user->isNewsletter();
+$newsletter = UserGateway::VerifyNewsletterFor($mail);
 $registration_date = $user->getRegistrationDateString();
 
 /* TRANSFORMATIONS */

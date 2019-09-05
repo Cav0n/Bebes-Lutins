@@ -499,4 +499,40 @@ class UserGateway
             ':id' => array($user_id, PDO::PARAM_STR)
         ));
     }
+
+    public static function GetNewsletterMailList(){
+        global $dblogin, $dbpassword, $dsn;
+        $con = new Connexion($dsn, $dblogin, $dbpassword);
+
+        $query = 'SELECT mail FROM user WHERE newsletter=true;';
+        $con->executeQuery($query);
+        $mails_db = $con->getResults();
+
+        foreach($mails_db as $mail_db){
+            $mails[] = $mail_db['mail'];
+        }
+
+        return $mails;
+    }
+
+    public static function UnsubscribeMailFromNewsletter(string $mail){
+        global $dblogin, $dbpassword, $dsn;
+        $con = new Connexion($dsn, $dblogin, $dbpassword);
+
+        $query = 'UPDATE user SET newsletter=false WHERE mail=:mail';
+        $con->executeQuery($query, array(
+            ':mail' => array($mail, PDO::PARAM_STR)
+        ));
+    }
+
+    public static function VerifyNewsletterFor(string $mail){
+        global $dblogin, $dbpassword, $dsn;
+        $con = new Connexion($dsn, $dblogin, $dbpassword);
+
+        $query = 'SELECT newsletter FROM user WHERE mail=:mail;';
+        $con->executeQuery($query, array(
+            'mail' => array($mail, PDO::PARAM_STR)
+        ));
+        return $con->getResults()[0]['newsletter'];
+    }
 }

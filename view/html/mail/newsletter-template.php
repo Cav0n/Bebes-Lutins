@@ -365,26 +365,21 @@
                         <td>
                             <table border="0" align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="container590">
                                 <tr>
-                                    <td align="left" style="color: #aaaaaa; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
+                                    <td align="center" style="color: #aaaaaa; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
                                         <div style="line-height: 24px;">
 
                                             <span style="color: #333333;">© Bébés Lutins 2018</span>
 
                                         </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <table border="0" align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="container590">
-                                <tr>
-                                    <td align="left" style="color: #aaaaaa; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
                                         <div style="line-height: 24px;">
 
-                                            <span style="color: #333333;">Se désinscrire</span>
+                                            <span style="color: #333333;font-size:0.85rem;"><BR>Ceci est un email automatique, merci de ne pas y répondre.</span>
 
                                         </div>
                                     </td>
                                 </tr>
                             </table>
+                            $$$unsubscribe_link
                         </td>
                     </tr>
 

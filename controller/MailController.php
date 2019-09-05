@@ -15,6 +15,14 @@ class MailController
                     require("$view_rep/html/mail/order-update.php");
                     break;
 
+                case 'send_newsletter_async':
+                    MailModel::send_newsletter($_REQUEST['title'], $_REQUEST['text'], $_REQUEST['image_name'], $_REQUEST['has_button'], $_REQUEST['button_title'], $_REQUEST['button_link'], $_REQUEST['mail']);
+                    break;
+
+                case 'newsletter_unsubscribe':
+                    MailModel::newsletter_unsubscribe($_REQUEST['mail']);
+                    break;
+
                 default:
                     break;
             }

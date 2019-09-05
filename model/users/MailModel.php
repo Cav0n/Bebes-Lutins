@@ -77,19 +77,32 @@ class MailModel
         self::send_mail($order->getCustomer()->getMail(), "Votre commande " . $order->getID() . " est ". $order->statusToString(), $message);
     }
 
-    public static function send_newsletter(string $title, string $text, $image_name = null, bool $has_button, $button_title = null, $button_link = null){
+    public static function send_newsletter(string $title, string $text, $image_name = null, bool $has_button, $button_title = null, $button_link = null, string $customer_mail = null){
         echo "Envoi en cours<BR>";
         $message = file_get_contents('view/html/mail/newsletter-template.php');
 
         $message = (str_replace('$$$title', $title, $message));
         $message = (str_replace('$$$text', $text, $message));
+        $message = (str_replace('$$$unsubscribe_link', self::create_unsubscribe_link($customer_mail), $message));
         $message = (str_replace('$$$image', self::create_image($image_name), $message));
         if($has_button){ 
             $message = (str_replace('$$$button', self::create_button($button_title, $button_link), $message)); 
         } else $message = (str_replace('$$$button', '', $message));
 
-        self::send_mail('cav0n@hotmail.fr', 'Newsletter Bébés Lutins', $message);
-        echo 'Newsletter envoyé à cav0n@hotmail.fr 🤟🏻<BR>';
+        self::send_mail($customer_mail, 'Newsletter Bébés Lutins', $message);
+        echo "Newsletter envoyé à $customer_mail 🤟🏻<BR>";
+    }
+
+    public static function newsletter_unsubscribe(string $mail){
+        try{
+        UserGateway::UnsubscribeMailFromNewsletter($mail);
+        } catch(Exception $e){echo $e;}
+        $mail = strtolower($mail);
+
+        echo "Votre adresse <b>$mail</b> a bien été désincrite de notre newsletter. <BR>
+        Vous pouvez toutefois vous inscrire de nouveau dans votre espace client.<BR>
+        <BR>
+        <a href='https://www.bebes-lutins.fr>Retour sur le site</a>";
     }
 
     private static function create_image($image){
@@ -130,5 +143,22 @@ class MailModel
                 </table>
             </td>
         </tr>";
+    }
+
+    private static function create_unsubscribe_link($customer_mail){
+        if($customer_mail != null){
+            return "
+            <table border='0' align='center' cellpadding='0' cellspacing='0' style='border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;' class='container590'>
+                <tr>
+                    <td align='left' style='color: #aaaaaa; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;'>
+                        <div style='line-height: 24px;'>
+
+                            <span><a style='font-size:0.85rem;' href='https://www.bebes-lutins.fr/description-newsletter/$customer_mail'>Se désinscrire</a></span>
+
+                        </div>
+                    </td>
+                </tr>
+            </table>";
+        } else return "";
     }
 }

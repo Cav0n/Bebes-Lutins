@@ -17,9 +17,12 @@ if($_GET['page'] == "nouveau" ||
 <header class="horizontal between<?php echo $extra; ?>">
     <a href='https://www.bebes-lutins.fr' class='vertical centered'><h1>BEBES LUTINS</h1></a>
     <a id="administrator-name" href="https://www.bebes-lutins.fr">Retour sur le site ></a>
-    <div id="extra" class="between <?php if($extra == null || $_GET['page'] == "importer") echo 'hidden';?>">
+    <div id="extra" class="between <?php if($extra == null || $_GET['page'] == "importer" || $_GET['section'] = 'newsletters') echo 'hidden';?>">
         <button class="remove-button" form='deletion-wrapper'>Supprimer</button>
         <button class="save-button" form="edition-wrapper">Enregistrer</button>
+    </div>
+    <div id="extra" class="between <?php if(!($_GET['section'] = 'newsletters' && $_GET['page'] == 'creation')) echo 'hidden';?>">
+        <button class="save-button" form="edition-wrapper" style='margin-left:auto;'>Envoyer</button>
     </div>
 </header>
 <div id="left-header">
@@ -39,6 +42,7 @@ if($_GET['page'] == "nouveau" ||
         <li class="<?php if($_GET['section'] == "clients") echo 'selected'; ?>"><a href="https://www.bebes-lutins.fr/dashboard4/clients/tous-les-clients"><div class="horizontal"><?php echo file_get_contents("view/assets/images/utils/icons/team.svg"); ?></div><p>Clients</p></a></li>
         <li class="<?php if($_GET['section'] == "avis") echo 'selected'; ?>"><a href="https://www.bebes-lutins.fr/dashboard4/avis/tous-les-avis"><div class="horizontal"><?php echo file_get_contents("view/assets/images/utils/icons/testimonial.svg"); ?></div><p>Avis clients</p></a></li>
         <li class="<?php if($_GET['section'] == "reductions") echo 'selected'; ?>"><a href="https://www.bebes-lutins.fr/dashboard4/reductions/tous-les-codes"><div class="horizontal"><?php echo file_get_contents("view/assets/images/utils/icons/coupon.svg"); ?></div><p>Réductions</p></a></li>
+        <li class="<?php if($_GET['section'] == "newsletters") echo 'selected'; ?>"><a href="https://www.bebes-lutins.fr/dashboard4/newsletters/creation"><div class="horizontal"><?php echo file_get_contents("view/assets/images/utils/icons/newsletter.svg"); ?></div><p>Newsletters</p></a></li>
         <li class="<?php if($_GET['section'] == "analyses") echo 'selected'; ?>"><a href="https://www.bebes-lutins.fr/dashboard4/analyses/tableau-de-bord/tous"><div class="horizontal"><?php echo file_get_contents("view/assets/images/utils/icons/analysis.svg"); ?></div><p>Analyses</p></a></li>
     </ul>
     <ul id="version-container">

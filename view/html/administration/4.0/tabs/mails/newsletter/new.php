@@ -151,13 +151,8 @@ if(isset($_SESSION['success'])){
     });
 
     bkLib.onDomLoaded(function() {
-        var myNicEditor = new nicEditor({
-            fullPanel : true,
-            iconsPath: 'https://www.bebes-lutins.fr/view/assets/js/nicEditorIcons.gif',
-            nicURI:"https://www.bebes-lutins.fr/image.php",
-            });
-        myNicEditor.setPanel('myNicPanel');
-        myNicEditor.addInstance('big-text-instance');
+        var myNicEditor = new nicEditor({fullPanel : true, iconsPath: 'https://www.bebes-lutins.fr/view/assets/js/nicEditorIcons.gif'});
+        myNicEditor.panelInstance('text-instance');
     });
 
     function validate()

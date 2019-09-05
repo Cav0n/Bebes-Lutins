@@ -129,7 +129,9 @@ class Order
     }
 
     public function getDateString(): String{
-        return date_format(date_create($this->date), 'd / m / Y');
+        setlocale(LC_TIME, "fr_FR");
+        return utf8_encode(strftime("%A %d %B %G", strtotime($this->date)));
+        //return date_format(date_create($this->date), 'd / m / Y');
     }
 
     public function getDateHoursString(): String{

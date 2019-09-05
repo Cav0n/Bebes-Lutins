@@ -63,7 +63,9 @@ class PaymentModel{
                     }
                 }
             } else {
-                if($order->getStatus() > STATUS_PAYMENT_DECLINED){
+                if($order->getStatus() == STATUS_CANCEL || $order->getStatus() == STATUS_PAYMENT_DECLINED){
+                    echo 'Commande déjà annulé';
+                } else {
                     OrderGateway::UpdateOrderStatusWithOrderID($order_id, STATUS_PAYMENT_DECLINED);
                     MailModel::send_payment_fail_mail_for($order);
                 }
@@ -99,7 +101,6 @@ class PaymentModel{
 
     public static function Cancel($order_id){
         if($order_id != null){
-            unset($_SESSION['shopping_cart']);
             unset($_SESSION['order']);
 
             $order = OrderGateway::GetOrderFromDBByID2($order_id);

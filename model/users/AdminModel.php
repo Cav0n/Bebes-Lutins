@@ -650,6 +650,12 @@ class AdminModel
                 if($page == "supprimer") self::deleteVoucher($_REQUEST['voucher_id']);
                 break;
 
+            case 'newsletters':
+                if($page == "toutes-les-newsletters"|| $page == null){
+                    
+                }
+                if($page == "creation") require('view/html/administration/4.0/tabs/mails/newsletter/new.php');
+
             case "analyses":
                 if($page == "tableau-de-bord"){
                     if($option == "tous" || $option == null) require("$view_rep/html/administration/4.0/tabs/analysis/dashboard/dashboard.php");
@@ -891,8 +897,30 @@ class AdminModel
     public static function send_newsletter(string $title, string $text, $image_name = null, bool $has_button = null, $button_title = null, $button_link = null){
         echo 'Préparation de l\'envoi<BR>';
         if($has_button == null) $has_button = false;
-        echo "<BR>Titre : $title<BR>Texte : $text<BR>Image : $image_name<BR>";
-        if($has_button) echo "Il y a un bouton '$button_title' qui mène vers '$button_link'";
-        MailModel::send_newsletter($title, $text, $image_name, $has_button, $button_title, $button_link);
+        echo "<BR>Titre : $title<BR>Texte : $text<BR>Image : <img style='height:100px; width:100px; object-fit:cover;' src='https://www.bebes-lutins.fr/view/assets/images/utils/newsletters/$image_name'><BR>";
+        if($has_button) echo "Il y a un bouton '$button_title' qui mène vers 'https://$button_link'<BR><BR>";
+
+        //$mails = UserGateway::GetNewsletterMailList();
+        $mails = array('cav0n@hotmAIL.fr', 'super_craftman@hotmail.fr');
+        $number_of_emails = count($mails);
+
+        $index = 1;
+        foreach ($mails as $mail){
+            $mail = strtolower($mail);
+            ?>
+            <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+            <script>
+            $.ajax({
+                url: 'https://www.bebes-lutins.fr/',
+                type: 'POST',
+                data: {title:`<?php echo $title?>`, text:`<?php echo $text?>`, image_name:`<?php echo $image_name?>`, has_button:`<?php echo $has_button?>`, button_title:`<?php echo $button_title?>`, button_link:`<?php echo $button_link?>`, mail:`<?php echo $mail?>`, action:"send_newsletter_async"},
+                success: function(){
+                    $("body").append('✅ Envoie effectué à <b><?php echo $mail; ?></b> (<?php echo "$index / $number_of_emails";?>)<BR>');
+                }
+            }); 
+            </script>
+            <?php
+            $index++;
+        }
     }
 }

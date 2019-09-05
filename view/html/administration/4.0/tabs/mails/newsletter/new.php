@@ -34,6 +34,10 @@ if(isset($_SESSION['success'])){
         <p id="error-message"><?php echo $error_message; ?></p>
     </div>
     <?php } ?>
+    <div id="warning-message-container" class="horizontal" style="margin-top:1rem;padding: 1rem 5px;background: rgb(245, 243, 130);">
+        <div style="width: 2rem;margin: 0 5px;"><?php echo file_get_contents("view/assets/images/utils/icons/warning.svg"); ?></div>
+        <p style="margin: auto 0;">Cet outil vous permet de créer une newsletter qui sera envoyé à <b>TOUS</b> les clients abonnés aux newsletters.</p>
+    </div>
     <form id="edition-wrapper" class="horizontal" method="post" action="https://www.bebes-lutins.fr/newsletter/envoyer" enctype="multipart/form-data">
         <input id="image-name" type="hidden" name="image_name">
         <div class="column-big vertical">

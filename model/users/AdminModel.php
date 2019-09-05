@@ -900,8 +900,8 @@ class AdminModel
         echo "<BR>Titre : $title<BR>Texte : $text<BR>Image : <img style='height:100px; width:100px; object-fit:cover;' src='https://www.bebes-lutins.fr/view/assets/images/utils/newsletters/$image_name'><BR>";
         if($has_button) echo "Il y a un bouton '$button_title' qui mène vers 'https://$button_link'<BR><BR>";
 
-        //$mails = UserGateway::GetNewsletterMailList();
-        $mails = array('cav0n@hotmAIL.fr', 'super_craftman@hotmail.fr');
+        $mails = UserGateway::GetNewsletterMailList();
+        //$mails = array('cav0n@hotmAIL.fr', 'super_craftman@hotmail.fr');
         $number_of_emails = count($mails);
 
         $index = 1;

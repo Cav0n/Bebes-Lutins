@@ -82,6 +82,13 @@ if(isset($_SESSION['success'])){
                         <input id="button-title" name="button-title" type="text">
                     </div>
                 </div>
+                <div class="button-link vertical">
+                    <label for="button-link">Lien</label>
+                    <div class="label-container horizontal">
+                        <p class="link-header vertical" style='margin: auto 0;padding: 0 5px;color: grey;'>https://</p>
+                        <input id="button-link" name="button-link" type="text">
+                    </div>
+                </div>
             </div>
         </div>
     </form>
@@ -93,10 +100,10 @@ if(isset($_SESSION['success'])){
 
     var mainDropzone = new Dropzone("div#main-dropzone",
         {
-            url: "https://www.bebes-lutins.fr/view/html/tests/test-upload.php",
+            url: "https://www.bebes-lutins.fr/view/html/administration/4.0/tabs/mails/newsletter/upload-image-newsletter.php",
             addRemoveLinks: true,
             maxFiles: 1,
-            dictDefaultMessage: "Choisissez l'image principale du produit.",
+            dictDefaultMessage: "Vous pouvez cliquer ici pour ajouter une image.",
             accept: function(file, done) {
                 namefile = file.name
                 $('#image-name').attr('value', namefile);
@@ -115,7 +122,7 @@ if(isset($_SESSION['success'])){
                     alert(namefile);
                     $.ajax({
                         type: "POST",
-                        url: "../../view/html/tests/test-upload.php",
+                        url: "https://www.bebes-lutins.fr/view/html/administration/4.0/tabs/mails/newsletter/upload-image-newsletter.php",
                         data: {
                             target_file: namefile,
                             delete_file: 1
@@ -132,10 +139,15 @@ if(isset($_SESSION['success'])){
 </script>
 <script>
     $(".button-title").hide();
+    $(".button-link").hide();
     $(".button-checkbox").change(function() {
         if(this.checked) {
             $(".button-title").show();
-        } else $(".button-title").hide();
+            $(".button-link").show();
+        } else {
+            $(".button-title").hide();
+            $(".button-link").hide();
+        }
     });
 
     bkLib.onDomLoaded(function() {

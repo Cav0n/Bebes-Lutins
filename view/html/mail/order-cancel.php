@@ -29,6 +29,10 @@
             mso-padding-alt: 0px 0px 0px 0px;
         }
         
+        a{
+            color: #5bd383;
+        }
+
         p,
         h1,
         h2,
@@ -149,7 +153,7 @@
         <tr>
             <td>
                 <div style="overflow:hidden;display:none;font-size:1px;color:#ffffff;line-height:1px;font-family:Arial;maxheight:0px;max-width:0px;opacity:0;">
-                    Votre commande $$$order_id a été annulée.
+                    Votre commande $$$order_id.
                 </div>
             </td>
         </tr>
@@ -226,11 +230,9 @@
 
 
                                         <div style="line-height: 24px">
-                                            Il semblerait que vous ayez annulé votre commande $$$order_id passé le $$$date sur notre site, vous n'avez donc pas été prélevé.<BR>
-                                            Toutefois si vous pensez qu'il s'agit d'une erreur, veuillez nous contacter au plus vite.<BR>
-                                            <BR>
-                                            Vous pouvez nous contacter par téléphone au <a href='tel:0641569165'>06 41 56 91 65</a> ou par mail 
-                                            à l'adresse <a href='mailto:contact@bebes-lutins.fr'>contact@bebes-lutins.fr</a>.
+                                            Il semblerait que vous ayez annulé votre commande <b>$$$order_id</b> passée le $$$date sur notre site, vous n'avez donc pas été prélevé.<BR>
+                                            Toutefois si vous pensez qu'il s'agit d'une erreur, vous pouvez nous contacter par téléphone au 
+                                            <a href='tel:0641569165'>06 41 56 91 65</a> ou par mail à l'adresse <a href='mailto:contact@bebes-lutins.fr'>contact@bebes-lutins.fr</a>.
                                         </div>
                                     </td>
                                 </tr>

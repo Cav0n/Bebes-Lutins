@@ -28,6 +28,10 @@
             mso-margin-bottom-alt: 0px;
             mso-padding-alt: 0px 0px 0px 0px;
         }
+
+        a{
+            color: #5bd383;
+        }
         
         p,
         h1,
@@ -149,7 +153,7 @@
         <tr>
             <td>
                 <div style="overflow:hidden;display:none;font-size:1px;color:#ffffff;line-height:1px;font-family:Arial;maxheight:0px;max-width:0px;opacity:0;">
-                    Votre commande passée chez Bébés Lutins
+                    Votre commande $$$order_id.
                 </div>
             </td>
         </tr>
@@ -237,7 +241,8 @@
                                         <div style="line-height: 24px">
                                             Nous vous remercions d'avoir passé commande sur notre site !
                                             Nous nous occupons de celle ci dans les plus brefs délais.<BR>
-                                            Vous pouvez vérifier son état dans votre espace client.
+                                            Vous pouvez vérifier son état dans votre espace client.<BR>
+                                            L'identifiant de votre commande est : <b>#$$$order_id</b>
                                         </div>
                                     </td>
                                 </tr>

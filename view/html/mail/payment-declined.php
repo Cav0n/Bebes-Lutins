@@ -28,7 +28,11 @@
             mso-margin-bottom-alt: 0px;
             mso-padding-alt: 0px 0px 0px 0px;
         }
-        
+
+        a{
+            color: #5bd383;
+        }
+
         p,
         h1,
         h2,
@@ -149,7 +153,7 @@
         <tr>
             <td>
                 <div style="overflow:hidden;display:none;font-size:1px;color:#ffffff;line-height:1px;font-family:Arial;maxheight:0px;max-width:0px;opacity:0;">
-                    Erreur de paiement pour votre commande
+                    Votre commande $$$order_id.
                 </div>
             </td>
         </tr>
@@ -235,8 +239,9 @@
 
 
                                         <div style="line-height: 24px">
-                                            En raison d'un problème lors du paiement votre commande n'a pas été achevé.<BR>
-                                            Il peut s'agir d'un problème de notre côté, si vous pensez que tel est le cas vous pouvez nous contacter à l'adresse <a href='mailto:contact@bebes-lutins.fr'>contact@bebes-lutins.fr</a>.<BR>
+                                            Bonjour $$$customer, 
+                                            En raison d'un problème lors du paiement, votre commande <b>$$$order_id</b> n'a pas abouti.<BR>
+                                            Il peut s'agir d'un problème de notre côté, si vous pensez que tel est le cas, vous pouvez nous contacter à l'adresse <a href='mailto:contact@bebes-lutins.fr'>contact@bebes-lutins.fr</a>.<BR>
                                             <BR>
                                             Nous espérons vous revoir vite sur notre site.💚
                                         </div>

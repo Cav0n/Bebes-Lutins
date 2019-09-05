@@ -61,8 +61,8 @@ if($_REQUEST['order_id'] != null) {
                     <i class="far fa-times-circle fa-3x"></i>
                 </div>
                 <div class="thanks-message">
-                    <h2>Votre commande a été annulé. </h2>
-                    <p>Vous avez annulez le paiement de votre commande, de ce fait vous ne serez pas débité.</p>
+                    <h2>Votre commande a été annulée. </h2>
+                    <p>Vous avez annulé le paiement de votre commande, de ce fait vous ne serez pas débité.</p>
                 </div>
             </div>
         </div>
@@ -73,8 +73,8 @@ if($_REQUEST['order_id'] != null) {
                     <i class="far fa-times-circle fa-3x"></i>
                 </div>
                 <div class="thanks-message">
-                    <h2>Votre commande a été annulé. </h2>
-                    <p>Vous avez annulez le paiement de votre commande, de ce fait vous ne serez pas débité.</p>
+                    <h2>Votre commande a été annulée. </h2>
+                    <p>Vous avez annulé le paiement de votre commande, de ce fait vous ne serez pas débité.</p>
                 </div>
             </div>
         </div>

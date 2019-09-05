@@ -29,6 +29,10 @@
             mso-padding-alt: 0px 0px 0px 0px;
         }
         
+        a{
+            color: #5bd383;
+        }
+
         p,
         h1,
         h2,
@@ -149,7 +153,7 @@
         <tr>
             <td>
                 <div style="overflow:hidden;display:none;font-size:1px;color:#ffffff;line-height:1px;font-family:Arial;maxheight:0px;max-width:0px;opacity:0;">
-                    Votre commande passée chez Bébés Lutins
+                    Votre commande $$$order_id.
                 </div>
             </td>
         </tr>

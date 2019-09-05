@@ -195,18 +195,16 @@ class Order
     public function getStatusDescription() : String{
         switch($this->getStatus()){
             case 0:
-                return 'Cela signifique que nous attendons de recevoir le paiement de votre commande
-                pour passer à la préparation de celle ci.';
+                return 'Dès la réception du paiement de votre commande, nous passerons à la préparation de celle-ci.';
                 break;
 
             case 1: 
                 return 'Nous sommes en train de préparer votre commande à l\'atelier,
-                encore un petit peu de patience et nous devrions expédier votre précieux ! 😉';
+                encore un petit peu de patience et nous devrions expédier votre colis ! 😉';
                 break;
 
             case 2: 
-                return 'Ça y est ! Votre précieuse commande a quitter notre atelier. Elle est en chemin
-                jusqu\'à sa destination, vous devriez la recevoir dans quelques jours.';
+                return 'Votre commande a quitté notre atelier. Elle est en route, vous devriez la recevoir d\'ici quelques jours.';
                 break;
 
             case 3:

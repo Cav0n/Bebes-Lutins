@@ -140,7 +140,7 @@ class AdminController
                         break;
 
                     case "send_newsletter":
-                        AdminModel::send_newsletter($_REQUEST['title'], $_REQUEST['text'], $_REQUEST['image_name'], $_REQUEST['has-button'], $_REQUEST['button-title']);
+                        AdminModel::send_newsletter($_REQUEST['title'], $_REQUEST['text'], $_REQUEST['image_name'], $_REQUEST['has-button'], $_REQUEST['button-title'], $_REQUEST['button-link']);
                         break;
 
                     default :

@@ -888,8 +888,11 @@ class AdminModel
         <?php
     }
 
-    public static function send_newsletter(string $title, string $text, $image_name = null, bool $has_button, $button_title = null){
-        echo 'Préparation de l\'envoie<BR>';
-        MailModel::send_newsletter($title, $text, $image_name, $has_button, $button_title);
+    public static function send_newsletter(string $title, string $text, $image_name = null, bool $has_button = null, $button_title = null, $button_link = null){
+        echo 'Préparation de l\'envoi<BR>';
+        if($has_button == null) $has_button = false;
+        echo "<BR>Titre : $title<BR>Texte : $text<BR>Image : $image_name<BR>";
+        if($has_button) echo "Il y a un bouton '$button_title' qui mène vers '$button_link'";
+        MailModel::send_newsletter($title, $text, $image_name, $has_button, $button_title, $button_link);
     }
 }

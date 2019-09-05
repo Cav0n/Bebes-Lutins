@@ -2,6 +2,8 @@
 
 class PaymentModel{
     public static function EndPayment($token, $order_id){
+        unset($_SESSION['order']);
+
         if($order_id != null){
             /**
              * TODO : VERIFICATION SUPPLEMENTAIRE TOKEN + ORDER_ID
@@ -13,6 +15,8 @@ class PaymentModel{
                 $_POST['order_id'] = $order_id;
 
                 if($order->getStatus() < STATUS_ORDER_BEING_PROCESSED){
+                    unset($_SESSION['shopping_cart']);
+
                     OrderGateway::UpdateOrderStatusWithOrderID($order_id, STATUS_ORDER_BEING_PROCESSED);
                     MailModel::send_order_mail_for($order);
                 }

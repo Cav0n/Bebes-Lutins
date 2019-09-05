@@ -29,6 +29,10 @@
             mso-padding-alt: 0px 0px 0px 0px;
         }
         
+        a{
+            color: #5bd383;
+        }
+
         p,
         h1,
         h2,
@@ -188,12 +192,7 @@
         <tr>
             <td align="center">
                 <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590">
-                    <tr>
-
-                        <td align="center" class="section-img">
-                            <img src="https://www.bebes-lutins.fr/view/assets/images/newsletter/$$$image" style="display: block; width: 590px;" width="590" border="0" alt="" />
-                        </td>
-                    </tr>
+                    $$$image
                     <tr>
                         <td height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td>
                     </tr>
@@ -247,34 +246,7 @@
                         <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
                     </tr>
 
-                    <tr>
-                        <td align="center">
-                            <table border="0" align="center" width="200" cellpadding="0" cellspacing="0" bgcolor="5bd383" style="">
-
-                                <tr>
-                                    <td height="10" style="font-size: 10px; line-height: 10px;">&nbsp;</td>
-                                </tr>
-
-                                <tr>
-                                    <td align="center" style="color: #ffffff; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 26px;">
-
-
-                                        <div style="line-height: 26px;">
-                                            <a href="https://www.bebes-lutins.fr/espace-client/facture/$$$order_id" style="color: #ffffff; text-decoration: none;">Voir les détails de ma commande</a>
-                                        </div>
-
-                                        $$$button
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td height="10" style="font-size: 10px; line-height: 10px;">&nbsp;</td>
-                                </tr>
-
-                            </table>
-                        </td>
-                    </tr>
-
+                    $$$button
 
                 </table>
 
@@ -397,6 +369,17 @@
                                         <div style="line-height: 24px;">
 
                                             <span style="color: #333333;">© Bébés Lutins 2018</span>
+
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <table border="0" align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="container590">
+                                <tr>
+                                    <td align="left" style="color: #aaaaaa; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
+                                        <div style="line-height: 24px;">
+
+                                            <span style="color: #333333;">Se désinscrire</span>
 
                                         </div>
                                     </td>

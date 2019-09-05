@@ -48,7 +48,9 @@ $actions_admin = array(
     'testmail',
     'load_tests',
     'dashboard_load_tab',
-    'admin_delete_review'
+    'admin_delete_review',
+    'newsletter_form',
+    'send_newsletter'
 );
 
 //Connected users actions

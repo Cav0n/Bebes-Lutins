@@ -7,6 +7,7 @@ if($_GET['page'] == "nouveau" ||
      $_GET['page'] == "creation" || 
      $_GET['page'] == "importer" ||
      $_GET['option'] == "nouveau" ||
+     
      $_GET['option'] == "edition"){
     $extra = " nouveau";
 }

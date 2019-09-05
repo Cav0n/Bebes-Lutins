@@ -40,7 +40,6 @@ class MailModel
             echo $e->getMessage();
             return "Une erreur s'est produite, veuillez vérifier votre adresse mail.";
         }
-        return;
     }
 
     public static function send_order_mail_for(Order $order)
@@ -76,5 +75,18 @@ class MailModel
         $message = (str_replace('$$$image', $order->getStatusImage(), $message));
 
         self::send_mail($order->getCustomer()->getMail(), "Votre commande " . $order->getID() . " est ". $order->statusToString(), $message);
+    }
+
+    public static function send_newsletter(string $title, string $text, $image_name = null, bool $has_button, $button_title = null){
+        echo 'Envoi en cours<BR>';
+        $message = file_get_contents('view/html/mail/newsletter-template.php');
+
+        $message = (str_replace('$$$title', $title, $message));
+        $message = (str_replace('$$$text', $text, $message));
+        $message = (str_replace('$$$image', $image_name, $message));
+        if($has_button){ $message = (str_replace('$$$button', $button_title, $message)); }
+
+        self::send_mail('cav0n@hotmail.fr', 'Newsletter Bébés Lutins', $message);
+        echo 'Newsletter envoyé à cav0n@hotmail.fr 🤟🏻<BR>';
     }
 }

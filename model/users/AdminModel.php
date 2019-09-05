@@ -887,4 +887,9 @@ class AdminModel
         </script>
         <?php
     }
+
+    public static function send_newsletter(string $title, string $text, $image_name = null, bool $has_button, $button_title = null){
+        echo 'Préparation de l\'envoie<BR>';
+        MailModel::send_newsletter($title, $text, $image_name, $has_button, $button_title);
+    }
 }

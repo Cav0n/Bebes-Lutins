@@ -47,7 +47,7 @@ if ( !empty($_FILES) && $delete_file == 0 ) {
                 if ( file_exists($targetFile) ) {
                     $response = array (
                         'status'    => 'success',
-                        'file_link' => $targetFile
+                        'file_link' => 'Image uploadé : ' . $file_name
                     );
                 } else {
                     $response = array (
@@ -61,7 +61,7 @@ if ( !empty($_FILES) && $delete_file == 0 ) {
                 $response = array (
                     'status'    => 'Erreur',
                     'info'      => 'Une image avec un nom identique existe déjà !.',
-                    'file_link' => $targetFile
+                    'file_link' => 'Une image avec un nom identique existe déjà. [' . $file_name . ']'
                 );
             }
 
@@ -95,17 +95,17 @@ if( $delete_file == 1 ){
     $file_name = strtr( $_POST['target_file'], $unwanted_array );
     $file_path = $targetPath . $file_name;
 
-    // Check if file is exists
-    if ( file_exists($file_path) ) {
+    // Check if file is exists //// ON NE SUPPRIME PLUS
+    /*if ( file_exists($file_path) ) {
 
-        // Delete the file
-        unlink($file_path);
+        // Delete the file ///// PAS BESOIN DE SUPPRIMER
+        //unlink($file_path); 
 
         // Be sure we deleted the file
         if ( !file_exists($file_path) ) {
             $response = array (
                 'status' => 'Réussite',
-                'info'   => 'Image supprimée - ' . strtr($file_path, $unwanted_array)
+                'info'   => 'Image supprimée - ' . strtr($file_name, $unwanted_array)
             );
         } else {
             // Check the directory's permissions
@@ -120,7 +120,12 @@ if( $delete_file == 1 ){
             'status' => 'Erreur',
             'info'   => 'Impossible de trouver l\'image - ' . strtr($file_name, $unwanted_array)
         );
-    }
+    } */
+
+    $response = array (
+        'status' => 'Réussite',
+        'info'   => 'Image supprimée - ' . strtr($file_name, $unwanted_array)
+    );
 
     // Return the response
     echo json_encode($response);

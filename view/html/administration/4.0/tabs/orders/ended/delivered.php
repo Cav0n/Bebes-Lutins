@@ -50,7 +50,7 @@ $orders = OrderGateway::GetOrdersFromGateway();
                         if($order->getStatus() == 3){
                             ?>
                             <tr class='green'>
-                                <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="date center"><?php echo $order->getDateString() . "<BR>" . $order->getDateHoursString(); ?></td>                                <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="customer"><a><?php echo ucfirst($order->getCustomer()->getFirstname()) . " " . strtoupper($order->getCustomer()->getSurname()); ?><BR><b style="font-weight:300; font-size:0.9rem;"><?php echo $order->getId(); ?></b></a></td>
+                                <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="date center"><?php echo $order->getSimpleDateString() . "<BR>" . $order->getDateHoursString(); ?></td>                                <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="customer"><a><?php echo ucfirst($order->getCustomer()->getFirstname()) . " " . strtoupper($order->getCustomer()->getSurname()); ?><BR><b style="font-weight:300; font-size:0.9rem;"><?php echo $order->getId(); ?></b></a></td>
                                 <td onclick="load_bill('<?php echo $order->getId(); ?>')" class="price right"><?php echo UtilsModel::FloatToPrice($order->getPriceAfterDiscount()); ?></td>
                                 <td onclick="load_bill('<?php echo $order->getId(); ?>')" class="shipping-price right"><?php echo UtilsModel::FloatToPrice($order->getShippingPrice()); ?></td>
                                 <td class="status right">

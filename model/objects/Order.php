@@ -128,10 +128,22 @@ class Order
         return $this->date;
     }
 
+    /**
+     * @return String
+     * Exemple : vendredi 06 septembre 2019
+     */
     public function getDateString(): String{
         setlocale(LC_TIME, "fr_FR");
         return utf8_encode(strftime("%A %d %B %G", strtotime($this->date)));
         //return date_format(date_create($this->date), 'd / m / Y');
+    }
+
+    /**
+     * @return String
+     * Exemple : 06 / 09 / 2019
+     */
+    public function getSimpleDateString(): String{
+        return date_format(date_create($this->date), 'd / m / Y');
     }
 
     public function getDateHoursString(): String{

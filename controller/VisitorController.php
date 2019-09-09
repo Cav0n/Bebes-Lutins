@@ -62,6 +62,10 @@ class VisitorController
                     UtilsModel::shopping_cart_add_voucher($_POST['voucher']);
                     break;
 
+                case "shopping_cart_remove_voucher":
+                    UtilsModel::shopping_cart_remove_voucher();
+                    break;
+
                 case "shopping_cart_add_message":
                     UtilsModel::shopping_cart_add_message($_POST['message']);
                     break;

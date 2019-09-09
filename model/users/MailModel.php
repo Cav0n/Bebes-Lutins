@@ -42,11 +42,39 @@ class MailModel
         }
     }
 
+    public static function send_order_notification_for_administration(Order $order){
+        $admin_message = file_get_contents('view/html/mail/notification-administration.php');
+
+        $admin_message = (str_replace(
+            '$$$title', 
+            "Une commande a été effectuée 😎", 
+            $admin_message
+        ));
+
+        $admin_message = (str_replace(
+            '$$$text', 
+            $order->getCustomer()->getFirstname() . ' ' . $order->getCustomer()->getSurname() . 'a passé une commande sur le site d\'une valeur de ' . UtilsModel::FloatToPrice($order->getPriceAfterDiscount()) . ' €.',
+            $admin_message
+        ));
+
+        $admin_message = (str_replace(
+            '$$$button', 
+            self::create_button('Voir la facture', 'www.bebes-lutins.fr/dashboard/' . $order->getId()),
+            $admin_message
+        ));
+
+        self::send_mail('contact@bebes-lutins.fr', 'Nouvelle commande !', $admin_message);
+    }
+
     public static function send_order_mail_for(Order $order)
     {
-        $message = (str_replace('$$$order_id', $order->getID(), file_get_contents('view/html/mail/order-confirmation.php')));
+        /**
+         * Mail for customer
+         */
+        $customer_message = (str_replace('$$$order_id', $order->getID(), file_get_contents('view/html/mail/order-confirmation.php')));
+        self::send_mail($order->getCustomer()->getMail(), "Votre commande ". $order_id, $customer_message);
 
-        self::send_mail($order->getCustomer()->getMail(), "Votre commande ". $order_id, $message);
+        self::send_order_notification_for_administration($order);
     }
 
     public static function send_payment_fail_mail_for(Order $order)
@@ -62,6 +90,8 @@ class MailModel
         $message = (str_replace('$$$date', $order->getDateString() . ' à ' . $order->getDateHoursString(), $message));
 
         self::send_mail($order->getCustomer()->getMail(), "Commande annulée", $message);
+
+        self::send_order_notification_for_administration($order);
     }
 
     public static function send_order_update_for(Order $order)

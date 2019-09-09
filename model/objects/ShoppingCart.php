@@ -88,7 +88,7 @@ class ShoppingCart
     /**
      * @param Voucher $voucher
      */
-    public function setVoucher(Voucher $voucher): void
+    public function setVoucher($voucher): void
     {
         $this->voucher = $voucher;
     }

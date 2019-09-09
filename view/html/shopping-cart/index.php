@@ -188,6 +188,9 @@ $message = $shopping_cart->getMessage();
                     <label for="voucher-input">Code coupon : </label>
                     <input id="voucher-input" type="text" name="voucher" value="<?php if(isset($voucher)) echo $voucher->getName();?>" placeholder="Code de réduction">
                     <button type="submit">Ajouter</button>
+                    <button type='submit' form='voucher-delete'>Supprimer</button>
+                </form>
+                <form method='post' action='https://www.bebes-lutins.fr/panier/retirer-coupon' id='voucher-delete' class='vertical'>
                 </form>
                 <div id="infos-free-shipping" class="<?php if($shipping_price == 0.0) echo 'hidden';?>">
                     <p>Plus que <?php echo str_replace('EUR', '€', money_format('%.2i',$free_shipping_price - $total_items_price));?> pour profiter de le livraison gratuite !</p>

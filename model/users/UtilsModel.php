@@ -433,6 +433,18 @@ class UtilsModel
         <?php
     }
 
+    public static function shopping_cart_remove_voucher(){
+        $shopping_cart = (new ShoppingCartContainer(unserialize($_SESSION['shopping_cart'])))->getShoppingCart();
+        $shopping_cart->setVoucher(null);
+        $_SESSION['shopping_cart'] = serialize($shopping_cart);
+        
+        ?>
+        <script type="text/javascript">
+            document.location.href='<?php echo "https://www.bebes-lutins.fr/panier"?>';
+        </script>
+        <?php
+    }
+
     public static function shopping_cart_add_message(String $message){
         $shopping_cart = (new ShoppingCartContainer(unserialize($_SESSION['shopping_cart'])))->getShoppingCart();
         $shopping_cart->setMessage($message);
@@ -459,6 +471,8 @@ class UtilsModel
             }
             $i++;
         }
+
+        if(count($item_list) == 0) $shopping_cart->setVoucher(null);
 
         $_SESSION['shopping_cart'] = serialize($shopping_cart);
         self::load_page('shopping_cart');

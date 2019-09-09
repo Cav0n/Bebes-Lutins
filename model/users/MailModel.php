@@ -45,23 +45,15 @@ class MailModel
     public static function send_order_notification_for_administration(Order $order){
         $admin_message = file_get_contents('view/html/mail/notification-administration.php');
 
-        $admin_message = (str_replace(
-            '$$$title', 
-            "Une commande a été effectuée 😎", 
-            $admin_message
-        ));
+        $admin_message = (str_replace('$$$title', "Une commande a été effectuée 😎", $admin_message));
 
-        $admin_message = (str_replace(
-            '$$$text', 
-            $order->getCustomer()->getFirstname() . ' ' . $order->getCustomer()->getSurname() . ' a passé une commande sur le site d\'une valeur de ' . UtilsModel::FloatToPrice($order->getPriceAfterDiscount()) . ' €.',
-            $admin_message
-        ));
+        $admin_message = (str_replace('$$$text', 
+            $order->getCustomer()->getFirstname() . ' ' . $order->getCustomer()->getSurname() . ' a passé une commande sur le site d\'une valeur de ' . UtilsModel::FloatToPrice($order->getPriceAfterDiscount()) . '.',
+            $admin_message));
 
-        $admin_message = (str_replace(
-            '$$$button', 
-            self::create_button('Voir la facture', 'www.bebes-lutins.fr/dashboard/' . $order->getId()),
-            $admin_message
-        ));
+        $admin_message = (str_replace('$$$button', 
+            self::create_button('Voir la facture', 'www.bebes-lutins.fr/dashboard/facture-' . $order->getId()),
+            $admin_message));
 
         self::send_mail('contact@bebes-lutins.fr', 'Nouvelle commande !', $admin_message);
     }
@@ -90,6 +82,7 @@ class MailModel
         $message = (str_replace('$$$date', $order->getDateString() . ' à ' . $order->getDateHoursString(), $message));
 
         self::send_mail($order->getCustomer()->getMail(), "Commande annulée", $message);
+        self::send_order_notification_for_administration($order);
     }
 
     public static function send_order_update_for(Order $order)
@@ -148,7 +141,7 @@ class MailModel
         return "
         <tr>
             <td align='center'>
-                <table border='0' align='center' width='200' cellpadding='0' cellspacing='0' bgcolor='5bd383' style=''>
+                <table border='0' align='center' width='200' cellpadding='0' cellspacing='0' style='background-color:#5bd383;'>
 
                     <tr>
                         <td height='10' style='font-size: 10px; line-height: 10px;'>&nbsp;</td>

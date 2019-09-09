@@ -90,7 +90,7 @@ else $customer_message = "";
                 <p class='zip-code'><?php echo $shipping_address_zipcode; ?></p>
                 <p class='city'><?php echo $shipping_address_city; ?></p>
             <?php } else if($withdrawal_shop) {
-                echo "<p>Retrait à l'atelier</p>";
+                echo "<p style='font-size:1.2rem'><b>". strtoupper("Retrait a l'atelier") . "</b></p>";
             } else if($is_from_birthlist){
                 echo "<a href='https://www.bebes-lutins.fr/liste-de-naissance/partage/$order_birthlist_id'>Fait partie d'une liste de naissance.</a>";
             } ?>

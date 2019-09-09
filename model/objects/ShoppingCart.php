@@ -98,7 +98,7 @@ class ShoppingCart
         return $this->shopping_cart_items;
     }
 
-    public function setMessage(String $message){
+    public function setMessage($message){
         $this->customer_message = $message;
     }
 

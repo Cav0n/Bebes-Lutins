@@ -472,7 +472,10 @@ class UtilsModel
             $i++;
         }
 
-        if(count($item_list) == 0) $shopping_cart->setVoucher(null);
+        if(count($item_list) == 0) {
+            $shopping_cart->setVoucher(null);
+            $shopping_cart->setMessage(null);
+        }
 
         $_SESSION['shopping_cart'] = serialize($shopping_cart);
         self::load_page('shopping_cart');

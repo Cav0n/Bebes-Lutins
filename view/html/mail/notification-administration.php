@@ -254,50 +254,6 @@
 
     </table>
 
-    <!-- footer ====== -->
-    <table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="f4f4f4">
-
-        <tr>
-            <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
-        </tr>
-
-        <tr>
-            <td align="center">
-
-                <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590">
-
-                    <tr>
-                        <td>
-                            <table border="0" align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;" class="container590">
-                                <tr>
-                                    <td align="center" style="color: #aaaaaa; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
-                                        <div style="line-height: 24px;">
-
-                                            <span style="color: #333333;">© Bébés Lutins 2018</span>
-
-                                        </div>
-                                        <div style="line-height: 24px;">
-
-                                            <span style="color: #333333;font-size:0.85rem;"><BR>Ceci est un email automatique, merci de ne pas y répondre.</span>
-
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-
-                </table>
-            </td>
-        </tr>
-
-        <tr>
-            <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
-        </tr>
-
-    </table>
-    <!-- end footer ====== -->
-
 </body>
 
 </html>

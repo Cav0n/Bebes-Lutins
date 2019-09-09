@@ -53,7 +53,7 @@ class MailModel
 
         $admin_message = (str_replace(
             '$$$text', 
-            $order->getCustomer()->getFirstname() . ' ' . $order->getCustomer()->getSurname() . 'a passé une commande sur le site d\'une valeur de ' . UtilsModel::FloatToPrice($order->getPriceAfterDiscount()) . ' €.',
+            $order->getCustomer()->getFirstname() . ' ' . $order->getCustomer()->getSurname() . ' a passé une commande sur le site d\'une valeur de ' . UtilsModel::FloatToPrice($order->getPriceAfterDiscount()) . ' €.',
             $admin_message
         ));
 
@@ -90,8 +90,6 @@ class MailModel
         $message = (str_replace('$$$date', $order->getDateString() . ' à ' . $order->getDateHoursString(), $message));
 
         self::send_mail($order->getCustomer()->getMail(), "Commande annulée", $message);
-
-        self::send_order_notification_for_administration($order);
     }
 
     public static function send_order_update_for(Order $order)

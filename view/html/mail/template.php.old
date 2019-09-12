@@ -15,7 +15,7 @@
     <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel="stylesheet">
     <!-- <![endif]-->
 
-    <title>$$$title - Bébés Lutins</title>
+    <title>Merci - Bébés Lutins</title>
 
     <style type="text/css">
         body {
@@ -153,7 +153,7 @@
         <tr>
             <td>
                 <div style="overflow:hidden;display:none;font-size:1px;color:#ffffff;line-height:1px;font-family:Arial;maxheight:0px;max-width:0px;opacity:0;">
-                    $$$text
+                    Votre commande $$$order_id.
                 </div>
             </td>
         </tr>
@@ -193,12 +193,21 @@
             <td align="center">
                 <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590">
                     <tr>
+
+                        <td align="center" class="section-img">
+                            <img src="https://www.bebes-lutins.fr/view/assets/images/utils/baby.jpg" style="display: block; width: 590px;" width="590" border="0" alt="" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td height="20" style="font-size: 20px; line-height: 20px;">&nbsp;</td>
+                    </tr>
+                    <tr>
                         <td align="center" style="color: #343434; font-size: 24px; font-family: Quicksand, Calibri, sans-serif; font-weight:700;letter-spacing: 3px; line-height: 35px;" class="main-header">
 
 
                         <div style="line-height: 35px">
 
-                            $$$title
+                            Merci de votre <span style="color: #5bd383;">commande 🥰</span>
 
                         </div>
                         </td>
@@ -230,7 +239,9 @@
 
 
                                         <div style="line-height: 24px">
-                                            $$$text
+                                            Nous vous remercions d'avoir passé commande sur notre site !
+                                            Nous nous occupons de celle ci dans les plus brefs délais.<BR>
+                                            Vous pouvez vérifier son état dans votre espace client.
                                         </div>
                                     </td>
                                 </tr>
@@ -241,6 +252,33 @@
                     <tr>
                         <td height="25" style="font-size: 25px; line-height: 25px;">&nbsp;</td>
                     </tr>
+
+                    <tr>
+                        <td align="center">
+                            <table border="0" align="center" width="200" cellpadding="0" cellspacing="0" bgcolor="5bd383" style="">
+
+                                <tr>
+                                    <td height="10" style="font-size: 10px; line-height: 10px;">&nbsp;</td>
+                                </tr>
+
+                                <tr>
+                                    <td align="center" style="color: #ffffff; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 26px;">
+
+
+                                        <div style="line-height: 26px;">
+                                            <a href="https://www.bebes-lutins.fr/espace-client/facture/$$$order_id" style="color: #ffffff; text-decoration: none;">Voir les détails de ma commande</a>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td height="10" style="font-size: 10px; line-height: 10px;">&nbsp;</td>
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+
 
                 </table>
 

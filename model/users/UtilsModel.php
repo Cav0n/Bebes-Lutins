@@ -374,19 +374,47 @@ class UtilsModel
             $responseKeys = json_decode($response, true);
             // should return JSON with success as true
             if ($responseKeys["success"]) {
-                //if(!BannedWords::StringContainsBannedWords($message)) {
+                MailModel::send_mail_personnalized(
+                    $mail, 
+                    'Message reçu !',
+                    'Message reçu !',
+                    "Bonjour $name, <BR>
+                    Nous avons bien reçu le message que vous nous avez envoyé à partir du site.<BR>
+                    Nous vous répondrons dès que possible.<BR>
+                    <BR>
+                    Votre message : <BR>
+                    [$subject]<BR>
+                    <BR>
+                    '$message'");
+
+                MailModel::send_mail_personnalized_for_administration(
+                    "$mail",
+                    "$name",
+                    "Message de $name",
+                    "Message de $name",
+                    "Hello ! <BR>
+                    Nous avons reçu un nouveau message à partir du site, de la part de $name [$mail].<BR>
+                    Voici le message en question : <BR>
+                    <BR>
+                    [$subject]<BR>
+                    <BR>
+                    '$message'");
+
+                    $_SESSION['contact-message'] = "<p style='color: #33b40f; text-align: center;'>Message envoyé !</p>";
+
+                /*if(!BannedWords::StringContainsBannedWords($message)) {
                     $error = UtilsModel::EnvoieMail("contact@bebes-lutins.fr", $name, $mail, $subject, "$name ($mail) vous a envoyé un message à partir du site Bébés Lutins : <BR>------<BR><BR><u>$subject</u><BR>$message");
                     $error2 = UtilsModel::EnvoieNoReply($mail, "Message recu !", "Bonjour $name, nous vous envoyons ce mail pour vous confirmer que nous avons bien recu votre message : $subject 
-            $message
-        Ceci est une réponse automatique, veuillez ne pas y répondre. 
-        Cordialement,
-        l'équipe Bébés Lutins.");
+                    $message
+                    Ceci est une réponse automatique, veuillez ne pas y répondre. 
+                    Cordialement,
+                    l'équipe Bébés Lutins.");
                     if($error != null) $_SESSION['contact-message'] = "<p style='color: #b41620; text-align: center;'>$error</p>";
                     elseif($error2 != null) $_SESSION['contact-message'] = "<p style='color: #b41620; text-align: center;'>$error2</p>";
                     else $_SESSION['contact-message'] = "<p style='color: #33b40f; text-align: center;'>Message envoyé !</p>";
-                //} else{
-                    //$_SESSION['contact-message'] = "<p style='color: #b41620; text-align: center;'>Vous avez entré un terme interdit.</p>";
-                //}
+                } else{
+                    $_SESSION['contact-message'] = "<p style='color: #b41620; text-align: center;'>Vous avez entré un terme interdit.</p>";
+                } */
             }
         }
 

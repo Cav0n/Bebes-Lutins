@@ -3,12 +3,14 @@ $product = ProductGateway::SearchProductByID2($_REQUEST['id']);
 $reviews_list = ReviewGateway::GetAllReviewForProduct($product->getId());
 
 /* Breadcrumb */
-$category = CategoryGateway::GetCategory($product->getCategory()[0]->getName());
-$category_parent = $category->getParent();
+if($product->getCategory() != null){
+    $category = CategoryGateway::GetCategory($product->getCategory()[0]->getName());
+    $category_parent = $category->getParent();
 
-$category_name_url = str_replace("’", "_", str_replace(" ", "=",UtilsModel::replace_accent($category->getName())));
-$parent_category_name_url = str_replace("’", "_", str_replace(" ", "=",UtilsModel::replace_accent($category_parent)));
+    $category_name_url = str_replace("’", "_", str_replace(" ", "=",UtilsModel::replace_accent($category->getName())));
+    $parent_category_name_url = str_replace("’", "_", str_replace(" ", "=",UtilsModel::replace_accent($category_parent)));
 
+}
 if(isset($_SESSION['connected_user'])){
     $user_container = new UserContainer(unserialize($_SESSION['connected_user']));
     $user = $user_container->getUser();
@@ -33,7 +35,7 @@ if(isset($_SESSION['connected_user'])){
     <main id='product-page-main'>
         <div id='product-page-container'>
             <div id='breadcrumb-container' class='horizontal centered'>
-                <p id='breadcrumb'><a href='https://www.bebes-lutins.fr'> Accueil </a> <b> / </b> <a href='https://www.bebes-lutins.fr/categorie/<?php echo $parent_category_name_url; ?>'><?php echo $category_parent; ?></a> <b> / </b> <a href='https://www.bebes-lutins.fr/categorie/<?php echo $category_name_url; ?>'><?php echo $category->getName(); ?></a> <b> / </b> <i><?php echo $product->getName(); ?></i></p>
+            <?php if($product->getCategory() != null) { ?><p id='breadcrumb'><a href='https://www.bebes-lutins.fr'> Accueil </a> <b> / </b> <a href='https://www.bebes-lutins.fr/categorie/<?php echo $parent_category_name_url; ?>'><?php echo $category_parent; ?></a> <b> / </b> <a href='https://www.bebes-lutins.fr/categorie/<?php echo $category_name_url; ?>'><?php echo $category->getName(); ?></a> <b> / </b> <i><?php echo $product->getName(); ?></i></p><?php } ?>
             </div>
             <div id='product-presentation-container' class='horizontal'>
                 <div id='product-informations' class='horizontal'>

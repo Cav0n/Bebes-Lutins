@@ -11,7 +11,7 @@ class ImageCategory extends Image
     /**
      * ImageCategory constructor.
      */
-    public function __construct(String $name)
+    public function __construct($name)
     {
         parent::__construct($name);
     }

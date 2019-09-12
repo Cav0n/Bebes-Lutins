@@ -554,9 +554,12 @@ class ProductGateway
         $product_categories = explode(';', $product_db['category']);
 
         foreach ($product_categories as $product_category){
-            foreach ($categories as $category) {
-                if($category['name'] == $product_category){
-                    $categ[] = new Category($category['name'], $category['parent'], new ImageCategory($category['image']), $category['description'], $category['rank'], $category['tags'], $category['private']);
+            if($product_category != ''){
+                foreach ($categories as $category) {
+                    if($category['name'] == $product_category){
+                        echo $product_category;
+                        $categ[] = new Category($category['name'], $category['parent'], new ImageCategory($category['image']), $category['description'], $category['rank'], $category['tags'], $category['private']);
+                    }
                 }
             }
         }

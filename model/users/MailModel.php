@@ -4,7 +4,7 @@ use \PHPMailer\PHPMailer\PHPMailer;
 
 class MailModel
 {
-    public static function send_mail($recipient, $subject, $text){
+    private static function send_mail($recipient, $subject, $text){
         require 'vendor/autoload.php';
 
         $mail = new PHPMailer(true);
@@ -41,6 +41,60 @@ class MailModel
             return "Une erreur s'est produite, veuillez vérifier votre adresse mail.";
         }
     }
+
+    private static function send_mail_for_administration($from, $name,$subject, $text){
+        require 'vendor/autoload.php';
+
+        $mail = new PHPMailer(true);
+        try{
+            $mail->CharSet = 'UTF-8';
+
+            // SET SMTP
+            $mail->isSMTP();
+            $mail->SMTPDebug = 0;
+
+            // SET SERVER
+            $mail->Host = "smtp.1and1.com";
+            $mail->Port = 25;
+            $mail->SMTPAuth = true;
+            $mail->SMTPSecure = "tls";
+            $mail->Username = 'no-reply@bebes-lutins.fr';
+            $mail->Password = 'Acty-63300';
+
+            // SET RECIPIENTS
+            $mail->setFrom("$from", "$name");
+            $mail->addAddress("contact@bebes-lutins.fr");
+
+            // SET MESSAGE
+            $mail->isHTML(true);
+            $mail->Subject = "$subject";
+            $mail->Body = $text;
+
+            $mail->send();
+        } catch (Exception $e){
+            echo $e->getMessage();
+            return "Une erreur s'est produite, veuillez vérifier votre adresse mail.";
+        } catch (\PHPMailer\PHPMailer\Exception $e){
+            echo $e->getMessage();
+            return "Une erreur s'est produite, veuillez vérifier votre adresse mail.";
+        }
+    }
+
+    public static function send_mail_personnalized($recipient, $subject, $title, $text){
+        $message = file_get_contents('view/html/mail/template.php');
+
+        $message = (str_replace('$$$title', $title, $message));
+        $message = (str_replace('$$$text', $text, $message));
+        self::send_mail($recipient, $subject, $message);
+    } 
+
+    public static function send_mail_personnalized_for_administration($from, $name, $subject, $title, $text){
+        $message = file_get_contents('view/html/mail/template.php');
+
+        $message = (str_replace('$$$title', $title, $message));
+        $message = (str_replace('$$$text', $text, $message));
+        self::send_mail_for_administration($from, $name, $subject, $message);
+    } 
 
     public static function send_order_notification_for_administration(Order $order){
         $admin_message = file_get_contents('view/html/mail/notification-administration.php');

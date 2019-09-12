@@ -22,7 +22,7 @@ class Category
      * @param $parent
      * @param $image
      */
-    public function __construct(String $name, $parent, ImageCategory $image, $description, int $rank, $tags, bool $private)
+    public function __construct($name, $parent, ImageCategory $image, $description, $rank, $tags, $private)
     {
         $this->name = $name;
         $this->parent = $parent;

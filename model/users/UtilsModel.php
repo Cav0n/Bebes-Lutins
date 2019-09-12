@@ -374,7 +374,7 @@ class UtilsModel
             $responseKeys = json_decode($response, true);
             // should return JSON with success as true
             if ($responseKeys["success"]) {
-                if(!BannedWords::StringContainsBannedWords($message)) {
+                //if(!BannedWords::StringContainsBannedWords($message)) {
                     $error = UtilsModel::EnvoieMail("contact@bebes-lutins.fr", $name, $mail, $subject, "$name ($mail) vous a envoyé un message à partir du site Bébés Lutins : <BR>------<BR><BR><u>$subject</u><BR>$message");
                     $error2 = UtilsModel::EnvoieNoReply($mail, "Message recu !", "Bonjour $name, nous vous envoyons ce mail pour vous confirmer que nous avons bien recu votre message : $subject 
             $message
@@ -384,9 +384,9 @@ class UtilsModel
                     if($error != null) $_SESSION['contact-message'] = "<p style='color: #b41620; text-align: center;'>$error</p>";
                     elseif($error2 != null) $_SESSION['contact-message'] = "<p style='color: #b41620; text-align: center;'>$error2</p>";
                     else $_SESSION['contact-message'] = "<p style='color: #33b40f; text-align: center;'>Message envoyé !</p>";
-                } else{
-                    $_SESSION['contact-message'] = "<p style='color: #b41620; text-align: center;'>Vous avez entré un terme interdit.</p>";
-                }
+                //} else{
+                    //$_SESSION['contact-message'] = "<p style='color: #b41620; text-align: center;'>Vous avez entré un terme interdit.</p>";
+                //}
             }
         }
 

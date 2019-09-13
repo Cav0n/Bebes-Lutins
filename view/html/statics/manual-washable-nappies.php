@@ -23,32 +23,36 @@
     <div id="static-container">
         <h1>Mode d'emploi des couches lavables</h1>
         <div class="desktop static-bloc vertical">
+            <div id='manual-header' class='horizontal centered'>
+                <h2 style='border-bottom: 1px solid rgb(183, 183, 183);margin-bottom: 1rem;width: 100%;text-align: center;padding-bottom: 1rem;'>Modes d'emploi de nos couches lavables</h2>
+            </div>
             <div id='manual-tab' class="horizontal centered">
-                <p id='colombine' class="selected" onclick="tab_selection_changed_orders('colombine')">Système "TE1-TE2" Colombine</p>
+                <p id='colombine' class="selected" onclick="tab_selection_changed_orders('colombine')">Système "TE2" Colombine</p>
                 <p id='couche-culotte' class="non-selected" onclick="tab_selection_changed_orders('couche-culotte')">Système couche + culotte</p>
                 <p id='taille-papillon' class="non-selected" onclick="tab_selection_changed_orders('taille-papillon')">Réglage de la taille de la Papillon</p>
             </div>
             <div id="manual-display" class="vertical">
                 <div id="display-colombine" class="display-manual vertical selected">
                     <div class="manual-text horizontal centered">
-                        <img src="https://www.bebes-lutins.fr/view/assets/images/utils/manual/Colombine/1.png" title="Réglage de la taille" alt="Ajustement de la taille">
-                        <p>Réglage de la taille suivant le poids de bébé</p>
+                        <img src="https://www.bebes-lutins.fr/view/assets/images/utils/manual/Colombine/1.jpg" title="Réglage de la taille" alt="Ajustement de la taille">
+                        <p>Réglage des pressions à l'avant suivant le poids de bébé.</p>
                     </div>
                     <div class="manual-text horizontal centered">
-                        <img src="https://www.bebes-lutins.fr/view/assets/images/utils/manual/Colombine/2.png" title="Grand pan absorbant" alt="Fixation du grand pan absorbant">
-                        <p>Fixer le grand pan absorbant à l'aide des deux pressions à l'avant de la couche. Ajouter le petit pan si besoin.</p>
-                        <img src="https://www.bebes-lutins.fr/view/assets/images/utils/manual/Colombine/3-1.png" title="Points de fixation" alt="Points de fixation du voile de protection jetable">
+                        <img src="https://www.bebes-lutins.fr/view/assets/images/utils/manual/Colombine/2.jpg" title="Grand pan absorbant" alt="Fixation du grand pan absorbant">
+                        <p>Fixer le grand pan / insert absorbant à l'aide des 2 pressions à l'avant de la couche.
+                        Ajouter le petit pan / insert si besoin, en le glissant en dessous et bien à l'avant de la couche.</p>
+                        <img src="https://www.bebes-lutins.fr/view/assets/images/utils/manual/Colombine/3-1.jpg" title="Points de fixation" alt="Points de fixation du voile de protection jetable">
                     </div>
                     <div class="manual-text horizontal centered">
-                        <img src="https://www.bebes-lutins.fr/view/assets/images/utils/manual/Colombine/3.png" title="Voile de protection jetable" alt="Voile de protection jetable">
-                        <p>Placer le voile de protection jetable au fond de la couche</p>
+                        <img src="https://www.bebes-lutins.fr/view/assets/images/utils/manual/Colombine/3.jpg" title="Voile de protection jetable" alt="Voile de protection jetable">
+                        <p>Placer le voile de protection jetable au fond de la couche.</p>
                     </div>
                     <div class="manual-text horizontal centered">
-                        <img src="https://www.bebes-lutins.fr/view/assets/images/utils/manual/Colombine/4.png" title="Colombine bleue a refermer" alt="Colombine bleue">
+                        <img src="https://www.bebes-lutins.fr/view/assets/images/utils/manual/Colombine/4.jpg" title="Colombine bleue a refermer" alt="Colombine bleue">
                         <p>On installe la couche sur bébé, on referme, c'est aussi simple que ça !</p>
                     </div>
                     <div class="manual-text horizontal centered">
-                        <img src="https://www.bebes-lutins.fr/view/assets/images/utils/manual/Colombine/5.png" title="Colombine bleue fermée" alt="Colombine bleue fermée">
+                        <img src="https://www.bebes-lutins.fr/view/assets/images/utils/manual/Colombine/5.jpg" title="Colombine bleue fermée" alt="Colombine bleue fermée">
                         <p>On vérifie autour des cuisses et dans le dos, le voile de protection et le tissu absorbant ne doivent pas dépasser.</p>
                     </div>
                 </div>

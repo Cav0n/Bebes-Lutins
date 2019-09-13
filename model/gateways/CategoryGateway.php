@@ -63,6 +63,12 @@ class CategoryGateway
             ':old_name' => array($old_name, PDO::PARAM_STR)
         ));
 
+        $query = "UPDATE category SET parent=:name WHERE parent=:old_name;";
+        $con->executeQuery($query, array(
+            ':name' => array($name, PDO::PARAM_STR),
+            ':old_name' => array($old_name, PDO::PARAM_STR)
+        ));
+
         $query = "UPDATE category SET name=:name, parent=:parent, image=:image, description=:description, rank=:rank, tags=:tags, private=:private WHERE name=:old_name";
         $con->executeQuery($query, array(
             ':name' => array($name, PDO::PARAM_STR),

@@ -90,7 +90,7 @@ if(isset($_SESSION['success'])){
                 <div class="container-title horizontal between">
                     <p class="section-title">Image de la catégorie</p>
                 </div>
-                <div id="main-dropzone" class="dropzone" style="border: 1px dashed;border-radius: 3px;">
+                <div id="dropzone" class="dropzone" style="border: 1px dashed grey;border-radius: 3px;color: grey;">
 
                 </div>
             </div>
@@ -131,49 +131,65 @@ if(isset($_SESSION['success'])){
 </main>
 </body>
 <script src="https://www.bebes-lutins.fr/view/assets/js/dropzone.js"></script>
-<script>
-    Dropzone.autoDiscover = false;
+    <!-- Dropzone | Main Image -->
+    <script>
+        Dropzone.autoDiscover = false;
 
-    var mainDropzone = new Dropzone("div#main-dropzone",
-        {
-            url: "https://www.bebes-lutins.fr/view/html/tests/test-upload.php",
+        $("#dropzone").dropzone({ 
+            url: "https://www.bebes-lutins.fr/view/html/tests/test-upload-category.php",
             addRemoveLinks: true,
             maxFiles: 1,
-            dictDefaultMessage: "Choisissez l'image de la catégorie.",
-            accept: function(file, done) {
-                namefile = file.name
-                namefile = namefile.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-                $('#image-name').attr('value', namefile);
+            dictDefaultMessage: 'Cliquez ici pour ajouter une image.',
 
+            accept: function(file, done){
+                //alert(file.name);
+                $('#image_name').val(file.name);
                 done();
             },
-            init: function() {
-                this.on("addedfile", function() {
-                    $('#image-name').attr('value', this.files[0].name);
-                    if (this.files[1]!=null){
-                        this.removeFile(this.files[0]);
-                    }
-                });
+            removedfile: function(file){
+                $('#image_name').val('');
+                var _ref;
+                return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+            },
+            sending: function(file, xhr, formData) {
+                formData.append("_token", "{{ csrf_token() }}");
+            },
 
-                this.on('removedfile', function (file) {
-                    alert(namefile);
-                    $.ajax({
-                        type: "POST",
-                        url: "../../view/html/tests/test-upload.php",
-                        data: {
-                            target_file: namefile,
-                            delete_file: 1
-                        },
-                        dataType: 'json',
-                        success: function(d){
-                            $('#image-name').attr('value', '');
-                            alert(d.info); //will alert ok
-                        }
-                    });
+            init: function () {
+                var myDropzone = this;
+
+                image = $('#image_name').val();
+
+                //Populate any existing thumbnails
+                if (image) {
+                    var mockFile = { 
+                        name: image, 
+                        size: 12345, 
+                        type: 'image/jpeg', 
+                        status: Dropzone.ADDED, 
+                        url: 'https://www.bebes-lutins.fr/views/assets/images/categories/'+image
+                    };
+
+                    // Call the default addedfile event handler
+                    myDropzone.emit("addedfile", mockFile);
+
+                    // And optionally show the thumbnail of the file:
+                    myDropzone.emit("thumbnail", mockFile, 'ttps://www.bebes-lutins.fr/views/assets/images/categories/'+image);
+
+                    myDropzone.emit("complete", mockFile);
+
+                    myDropzone.files.push(mockFile);
+                }
+
+                this.on("removedfile", function (file) {
+                    // Only files that have been programmatically added should
+                    // have a url property.
+                    $('#image_name').val('');
                 });
             }
         });
-</script>
+        
+    </script>
 <script>
     function goToImportPage(){
         document.location.href = "https://www.bebes-lutins.fr/dashboard4/produits/importer";

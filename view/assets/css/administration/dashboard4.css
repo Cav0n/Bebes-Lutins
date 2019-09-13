@@ -179,7 +179,7 @@
 /* MAIN */
 
 #dashboard4 main {
-    width: calc(99vw - 15rem);
+    width: calc(100vw - 15rem);
     min-height: calc(100vh - 3.4rem);
     margin-top: 3.4rem;
     background: #f4f6f8;

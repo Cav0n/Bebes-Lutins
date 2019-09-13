@@ -82,7 +82,6 @@ $orders = OrderGateway::GetInPreparationOrderFromDB2();
     </div>
     <? } ?>
 </main>
-</body>
 <script>
     function change_order_status(id, status, nom, prix){
         if(confirm('Etes vous sur de vouloir changer l\'état de la commande de ' + nom + ' ( ' + prix+ ') ?')){$.ajax({
@@ -138,4 +137,5 @@ $orders = OrderGateway::GetInPreparationOrderFromDB2();
             .forEach(tr => table.appendChild(tr) );
     })));
 </script>
+</body>
 </html>

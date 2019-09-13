@@ -18,7 +18,7 @@
 <link rel="stylesheet" media="(min-width: 768px) and (max-width: 1024px)" type="text/css" href="https://www.bebes-lutins.fr/view/assets/css/mobile.css"/>
 <link rel="stylesheet" media="(min-width: 768px) and (max-width: 1024px) and (orientation: landscape)" type="text/css" href="https://www.bebes-lutins.fr/view/assets/css/mobile.css"/>
 <link rel="stylesheet" media="(min-width: 1025px)" type="text/css" href="https://www.bebes-lutins.fr/view/assets/css/main.css">
-<link rel="stylesheet" href="https://www.bebes-lutins.fr/view/assets/js/dropzone.css">
+<link rel="stylesheet" href="https://www.bebes-lutins.fr/view/assets/css/dropzone.css">
 <link rel="stylesheet" href="https://www.bebes-lutins.fr/view/assets/css/starability/starability-minified/starability-all.min.css">
 <link rel="stylesheet" href="https://www.bebes-lutins.fr/view/assets/css/print.css">
 

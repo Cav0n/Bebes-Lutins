@@ -665,6 +665,13 @@ class AdminModel
     }
 
     public static function save_product($id){
+    // Listing unwanted character (accent) to remove them
+    $unwanted_array = array(    'Š'=>'S', 'š'=>'s', 'Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E',
+        'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I', 'Ï'=>'I', 'Ñ'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U',
+        'Ú'=>'U', 'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss', 'à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a', 'å'=>'a', 'æ'=>'a', 'ç'=>'c',
+        'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i', 'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o',
+        'ö'=>'o', 'ø'=>'o', 'ù'=>'u', 'ú'=>'u', 'û'=>'u', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y' );
+
         if($id == null) {
             $error_product_creation = false;
 
@@ -684,6 +691,7 @@ class AdminModel
                 $categories_string = $categories_string . $category . ";";
             }
             $thumbnails_name = $_POST['thumbnails_name'];
+            strtr($thumbnails_name, $unwanted_array );
             $tags = $_POST['tags'];
             $hide = $_POST['hide'];
             if($hide == null) $hide = 0;
@@ -736,6 +744,7 @@ class AdminModel
             $categories = $_POST['category'];
             $categories_string = "";
             $thumbnails_name = $_POST['thumbnails_name'];
+            strtr( $thumbnails_name, $unwanted_array );
             foreach ($categories as $category){
                 $categories_string = $categories_string . $category . ";";
             }

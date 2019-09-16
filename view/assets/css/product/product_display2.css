@@ -217,13 +217,17 @@
     background: white;
 }
 
+#product-page-container #product-description-container a{
+    color: rgb(140, 193, 63);
+}
+
 #product-page-container #product-description-container h2 {
     font-family: Roboto, sans-serif;
     margin-bottom: 1rem;
 }
 
 #product-page-container #product-review-container {
-    margin-top: 2rem;
+    margin: 2rem 0;
     padding: 1rem;
     border: 1px solid rgb(228, 228, 228);
     border-radius: 2px;

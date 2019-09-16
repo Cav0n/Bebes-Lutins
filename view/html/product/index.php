@@ -27,6 +27,7 @@ if(isset($_SESSION['connected_user'])){
     <title><?php echo $product->getName();?> - Bebes Lutins</title>
     <meta name="description" content="<?php echo $product->getCeoDescription();?>"/>
     <?php UtilsModel::load_head();?>
+    
 </head>
 <body>
     <header>

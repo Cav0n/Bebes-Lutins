@@ -36,7 +36,7 @@
                         <p><b>Par courrier</b><BR>
                         Bébés Lutins - Actypoles<BR>
                         Rue du 19 Mars 1962<BR>
-                        63550 THIERS<BR>
+                        63300 THIERS<BR>
                         <em>Nous vous recevons avec plaisir sur rendez-vous.</em></p>
                     </div>
                     <div class="vertical contact-information">

@@ -241,13 +241,13 @@ $total_price_string = UtilsModel::FloatToPrice($order->getPriceAfterDiscount());
                     <!-- un dernier div pour pouvoir venir chercher la commande directement chez Bébés Lutins -->
                     <div id='disp-withdrawal-shop' class="non-selected">
                         <form id="withdrawal-shop-form" method="post" action="https://www.bebes-lutins.fr/panier/paiement">
-                            <p>Dès que votre commande sera prète nous vous enverrons un mail (et un SMS si vous indiquez votre numéro de téléphone). Vous pourrez venir la chercher à notre atelier de 9h à 16h.</p>
+                            <p>Une fois votre commande prête, nous vous envoyons un mail (et un SMS si vous indiquez votre numéro de téléphone) pour vous prévenir. Vous pourrez venir retirer votre commande à notre atelier de 9h00 à 12h00 et de 13h30 à 17h00, du lundi au vendredi.</p>
                             <div class="shop-address">
                                 <p>Adresse de l'atelier : </p>
                                 <p>
-                                    <em>Bébés Lutins - Actypoles<BR>
+                                    <em>ACTYPOLES (Bébés Lutins)<BR>
                                         Rue du 19 Mars 1962<BR>
-                                        63550 THIERS</em>
+                                        63300 THIERS</em>
                                 </p>
                             </div>
                             <div id="infos" class="horizontal centered">

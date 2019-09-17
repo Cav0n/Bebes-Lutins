@@ -200,8 +200,10 @@ if(isset($_SESSION['success'])){
 
         accept: function(file, done){
             //alert(file.name);
-            $('#image_name').val(file.name);
-            done();
+            if($('#image_name').val = ''){
+                $('#image_name').val(file.name);
+                done();
+            } else done('Impossible d\'ajouter l\'image. Une seule image est autorisée pour l\'image principale.');
         },
         removedfile: function(file){
             $('#image_name').val('');

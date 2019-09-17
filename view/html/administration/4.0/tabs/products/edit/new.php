@@ -212,6 +212,9 @@ if(isset($_SESSION['success'])){
                     </label>
                 </div>
             </div>
+            <button style='margin:0;' class="save-button" class="vertical centered" type='submit'>
+                Enregistrer le produit
+            </button>
         </div>
     </form>
 </main>

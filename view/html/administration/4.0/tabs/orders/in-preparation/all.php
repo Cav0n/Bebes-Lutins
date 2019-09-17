@@ -60,11 +60,17 @@ $orders = OrderGateway::GetInPreparationOrderFromDB2();
                                     this.value, 
                                     "<?php echo $order->getCustomer()->getFirstname()?>",
                                     "<?php echo UtilsModel::FloatToPrice($order->getPriceAfterDiscount()); ?>"); }'>
-                                    <option value='-1' <?php if($order->getStatus() == -1) echo "selected"; ?>>Annuler la commande</option>
-                                    <option value='0' <?php if($order->getStatus() == 0) echo "selected"; ?>>En attente de paiement</option>
-                                    <option value='1' <?php if($order->getStatus() == 1) echo "selected"; ?>>En cours de traitement</option>
-                                    <option value='2' <?php if($order->getStatus() == 2) echo "selected"; ?>>En cours de livraison</option>
-                                    <option value='3' <?php if($order->getStatus() == 3) echo "selected"; ?>>Livrée</option>
+                                    <optgroup>
+                                        <option value='-1' <?php if($order->getStatus() == -1) echo "selected"; ?>>Annuler la commande</option>
+                                        <option value='0' <?php if($order->getStatus() == 0) echo "selected"; ?>>En attente de paiement</option>
+                                        <option value='1' <?php if($order->getStatus() == 1) echo "selected"; ?>>En cours de traitement</option>
+                                        <option value='2' <?php if($order->getStatus() == 2) echo "selected"; ?>>En cours de livraison</option>
+                                        <option value='3' <?php if($order->getStatus() == 3) echo "selected"; ?>>Livrée</option>
+                                    </optgroup>
+                                    <optgroup label='_____________'>
+                                        <option value='33' <?php if($order->getStatus() == -1) echo "selected"; ?>>Participation enregistrée</option>
+                                        <option value='22' <?php if($order->getStatus() == -1) echo "selected"; ?>>A retirer à l'atelier</option>
+                                    </optgroup>
                                 </select>
                             </td>
                         </tr>
@@ -80,7 +86,7 @@ $orders = OrderGateway::GetInPreparationOrderFromDB2();
         <p class="empty-title">Aucune commande en cours</p>
         <p class="empty-description">Patience, patience... un client ne devrait pas tarder à commander</p>
     </div>
-    <? } ?>
+    <?php } ?>
 </main>
 <script>
     function change_order_status(id, status, nom, prix){
@@ -129,7 +135,6 @@ $orders = OrderGateway::GetInPreparationOrderFromDB2();
             v1 !== '' && v2 !== '' && !isNaN(v1) && !isNaN(v2) ? v1 - v2 : v1.toString().localeCompare(v2)
     )(getCellValue(asc ? a : b, idx), getCellValue(asc ? b : a, idx));
 
-    // do the work...
     document.querySelectorAll('th').forEach(th => th.addEventListener('click', (() => {
         const table = th.closest('table');
         Array.from(table.querySelectorAll('tr:nth-child(n+2)'))

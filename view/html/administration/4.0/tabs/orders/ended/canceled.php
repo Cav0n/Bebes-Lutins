@@ -60,11 +60,17 @@ $orders = OrderGateway::GetOrdersFromGateway();
                                         this.value, 
                                         "<?php echo $order->getCustomer()->getFirstname()?>",
                                         "<?php echo UtilsModel::FloatToPrice($order->getPriceAfterDiscount()); ?>"); }'>
-                                        <option value='-1' <?php if($order->getStatus() == -1) echo "selected"; ?>>Annuler la commande</option>
-                                        <option value='0' <?php if($order->getStatus() == 0) echo "selected"; ?>>En attente de paiement</option>
-                                        <option value='1' <?php if($order->getStatus() == 1) echo "selected"; ?>>En cours de traitement</option>
-                                        <option value='2' <?php if($order->getStatus() == 2) echo "selected"; ?>>En cours de livraison</option>
-                                        <option value='3' <?php if($order->getStatus() == 3) echo "selected"; ?>>Livrée</option>
+                                        <optgroup>
+                                            <option value='-1' <?php if($order->getStatus() == -1) echo "selected"; ?>>Annuler la commande</option>
+                                            <option value='0' <?php if($order->getStatus() == 0) echo "selected"; ?>>En attente de paiement</option>
+                                            <option value='1' <?php if($order->getStatus() == 1) echo "selected"; ?>>En cours de traitement</option>
+                                            <option value='2' <?php if($order->getStatus() == 2) echo "selected"; ?>>En cours de livraison</option>
+                                            <option value='3' <?php if($order->getStatus() == 3) echo "selected"; ?>>Livrée</option>
+                                        </optgroup>
+                                        <optgroup label='_____________'>
+                                            <option value='33' <?php if($order->getStatus() == -1) echo "selected"; ?>>Participation enregistrée</option>
+                                            <option value='22' <?php if($order->getStatus() == -1) echo "selected"; ?>>A retirer à l'atelier</option>
+                                        </optgroup>
                                     </select>
                                 </td>
                             </tr>

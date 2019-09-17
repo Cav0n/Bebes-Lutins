@@ -141,15 +141,51 @@ class MailModel
 
     public static function send_order_update_for(Order $order)
     {
-        $message = file_get_contents('view/html/mail/order-update.php');
-        $message = (str_replace('$$$customer', ucfirst($order->getCustomer()->getFirstname()) . " " . ucfirst($order->getCustomer()->getSurname()), $message));
-        $message = (str_replace('$$$order_id', $order->getID(), $message));
-        $message = (str_replace('$$$order_s_friendly', $order->getFriendlyStatus(), $message));
-        $message = (str_replace('$$$order_status', $order->statusToString(), $message));
-        $message = (str_replace('$$$order_s_description', $order->getStatusDescription(), $message));
-        $message = (str_replace('$$$image', $order->getStatusImage(), $message));
+        if(($order->getStatus() == 22) || ($order->getStatus() == 33)){
+            switch($order->getStatus()){
+                case '22':
+                    self::send_mail_personnalized(
+                        $order->getCustomer()->getMail(),
+                        'Votre commande est prête',
+                        'Votre commande est prête',
+                        'Bonjour ' . $order->getCustomer()->getFirstname() . " " . $order->getCustomer()->getSurname() .',<BR>
+                        Votre commande '. $order->getId() .' est prête à être retiré à l\'atelier.<BR>
+                        <BR>
+                        Nous sommes ouvert du lundi au vendredi, de 9h à 12h puis de 13h30 à 17h.<BR>
+                        L\'adresse de l\'atelier: <BR>
+                        ACTYPOLES (Bébés Lutins)<BR>
+                        Rue du 19 Mars 1962<BR>
+                        63300 THIERS');
+                    break;
 
-        self::send_mail($order->getCustomer()->getMail(), "Votre commande " . $order->getID() . " est ". $order->statusToString(), $message);
+                case '33':
+                    self::send_mail_personnalized(
+                        $order->getCustomer()->getMail(),
+                        'Votre participation à une liste de naissance',
+                        'Votre participation à bien été prise en compte !',
+                        'Bonjour ' . $order->getCustomer()->getFirstname() . " " . $order->getCustomer()->getSurname() .',<BR>
+                        Nous avons bien enregistré votre participation à la liste de naissance '. $order->getId() .', merci.<BR>
+                        Les parents seront informés de votre participation.<BR>
+                        <BR>
+                        Belle journée,
+                        L\'équipe Bébés Lutins 💚<BR>
+                        ');
+                    break;
+
+                default:
+                    break;
+            }
+        } else {
+            $message = file_get_contents('view/html/mail/order-update.php');
+            $message = (str_replace('$$$customer', ucfirst($order->getCustomer()->getFirstname()) . " " . ucfirst($order->getCustomer()->getSurname()), $message));
+            $message = (str_replace('$$$order_id', $order->getID(), $message));
+            $message = (str_replace('$$$order_s_friendly', $order->getFriendlyStatus(), $message));
+            $message = (str_replace('$$$order_status', $order->statusToString(), $message));
+            $message = (str_replace('$$$order_s_description', $order->getStatusDescription(), $message));
+            $message = (str_replace('$$$image', $order->getStatusImage(), $message));
+
+            self::send_mail($order->getCustomer()->getMail(), "Votre commande" . $order->getID() . " est ". $order->statusToString(), $message);
+        }
     }
 
     public static function send_newsletter(string $title, string $text, $image_name = null, bool $has_button, $button_title = null, $button_link = null, string $customer_mail = null){

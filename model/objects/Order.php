@@ -188,8 +188,16 @@ class Order
                 return 'en cours de livraison 🚚';
                 break;
 
+            case 22:
+                return "a retirer à l'atelier";
+                break;
+
             case 3:
                 return 'livrée ✅';
+                break;
+
+            case 33:
+                return "participation enregistrée";
                 break;
 
             case -1:
@@ -221,6 +229,15 @@ class Order
                 return 'Votre commande a quitté notre atelier. Elle est en route, vous devriez la recevoir d\'ici quelques jours.';
                 break;
 
+            case 22:
+                return "Votre commande est prête. Vous pouvez la récupérer à notre atelier.<BR>
+                <BR>
+                L'adresse de l'atelier : <BR>
+                ACTYPOLES (Bébés Lutins)<BR>
+                Rue du 19 Mars 1962<BR>
+                63300 THIERS";
+                break;
+
             case 3:
                 return 'Nous avons le plaisir de vous annoncer que votre commande est livré ! Toute l\'équipe
                 espère que vous serez satisfait de votre achat. <BR>
@@ -228,6 +245,15 @@ class Order
                 <a href="mailto:contact@bebes-lutins.fr">contact@bebes-lutins.fr</a>.<BR>
                 <BR>
                 À très bientôt sur le site <a href="https://www.bebes-lutins.fr">bebes-lutins.fr</a> 💚';
+                break;
+
+            case 33:
+                return "Bonjour,<BR>
+                Nous avons bien enregistré votre participation à la liste de naissance, merci.<BR>
+                Les parents seront informés de votre participation.<BR>
+                Belle journée.<BR>
+                <BR>
+                L'équipe Bébés Lutins";
                 break;
 
             case -1:
@@ -297,8 +323,16 @@ class Order
                 return "en cours de livraison";
                 break;
 
+            case 22:
+                return "a retirer à l'atelier";
+                break;
+
             case 3:
                 return "livrée";
+                break;
+
+            case 33:
+                return "participation enregistrée";
                 break;
 
             case -1:

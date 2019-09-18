@@ -2,7 +2,6 @@
 
 $orders = OrderGateway::GetOrdersFromGateway();
 
-
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +25,7 @@ $orders = OrderGateway::GetOrdersFromGateway();
             <div class="window-tabs">
                 <a href="https://www.bebes-lutins.fr/dashboard4/commandes/terminees" class="tab vertical centered">Toutes</a>
                 <a href="https://www.bebes-lutins.fr/dashboard4/commandes/terminees/livree" class="tab vertical centered">Livrées</a>
-                <a href='https://www.bebes-lutins.fr/dashboard4/commandes/terminees/participations' class="tab vertical centered">Participations enregistrées</a>
+                <a href='https://www.bebes-lutins.fr/dashboard4/commandes/terminees/participations' class="tab vertical centered selected">Participations enregistrées</a>
                 <a href="https://www.bebes-lutins.fr/dashboard4/commandes/terminees/annulee" class="tab vertical centered">Annulées</a>
             </div>
         </div>
@@ -48,10 +47,14 @@ $orders = OrderGateway::GetOrdersFromGateway();
                     </tr>
                     <?php
                     foreach ($orders as $order) {
-                        if($order->getStatus() == 2){
+                        $cssOrderColor = "";
+                        if($order->getStatus() == 33) $cssOrderColor = 'green';
+
+                        if($order->getStatus() == 33){
                             ?>
-                            <tr class='blue'>
-                                <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="date center"><?php echo $order->getSimpleDateString() . "<BR>" . $order->getDateHoursString(); ?></td>                                <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="customer"><a><?php echo ucfirst($order->getCustomer()->getFirstname()) . " " . strtoupper($order->getCustomer()->getSurname()); ?><BR><b style="font-weight:300; font-size:0.9rem;"><?php echo $order->getId(); ?></b></a></td>
+                            <tr class="<?php echo $cssOrderColor?>">
+                                <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="date center"><?php echo $order->getSimpleDateString() . "<BR>" . $order->getDateHoursString(); ?></td>
+                                <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="customer"><a><?php echo ucfirst($order->getCustomer()->getFirstname()) . " " . strtoupper($order->getCustomer()->getSurname()); ?><BR><b style="font-weight:300; font-size:0.9rem;"><?php echo $order->getId(); ?></b></a></td>
                                 <td onclick="load_bill('<?php echo $order->getId(); ?>')" class="price right"><?php echo UtilsModel::FloatToPrice($order->getPriceAfterDiscount()); ?></td>
                                 <td onclick="load_bill('<?php echo $order->getId(); ?>')" class="shipping-price right"><?php echo UtilsModel::FloatToPrice($order->getShippingPrice()); ?></td>
                                 <td class="status right">

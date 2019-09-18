@@ -15,19 +15,18 @@ $orders = OrderGateway::GetOrdersFromGateway();
 <body id="dashboard4">
 <?php AdminModel::load_administration4_header(); ?>
 <main>
-    <div class="pre-page-title horizontal between">
-        <a href="https://www.bebes-lutins.fr/dashboard4/commandes/"><i class="fas fa-angle-left"></i> Commandes en cours</a>
-    </div>
     <div class="page-title-container horizontal between">
-        <h2>Commandes terminées</h2>
+        <h2>Commandes en cours</h2>
     </div>
+    <?php if(!empty($orders)) { ?>
     <div class="window">
         <div class="window-header">
             <div class="window-tabs">
-                <a href="https://www.bebes-lutins.fr/dashboard4/commandes/terminees" class="tab vertical centered">Toutes</a>
-                <a href="https://www.bebes-lutins.fr/dashboard4/commandes/terminees/livree" class="tab vertical centered">Livrées</a>
-                <a href='https://www.bebes-lutins.fr/dashboard4/commandes/terminees/participations' class="tab vertical centered">Participations enregistrées</a>
-                <a href="https://www.bebes-lutins.fr/dashboard4/commandes/terminees/annulee" class="tab vertical centered">Annulées</a>
+                <a href="https://www.bebes-lutins.fr/dashboard4/commandes/en-cours" class="tab vertical centered">Toutes</a>
+                <a href="https://www.bebes-lutins.fr/dashboard4/commandes/en-cours/en-attente-de-paiement" class="tab vertical centered">En attente de paiement</a>
+                <a href="https://www.bebes-lutins.fr/dashboard4/commandes/en-cours/en-preparation" class="tab vertical centered">En préparation</a>
+                <a href="https://www.bebes-lutins.fr/dashboard4/commandes/en-cours/en-cours-de-livraison" class="tab vertical centered">En cours de livraison</a>
+                <a href="https://www.bebes-lutins.fr/dashboard4/commandes/en-cours/a-retirer" class="tab vertical centered selected">A retirer à l'atelier</a>
             </div>
         </div>
         <div class="window-inner">
@@ -37,7 +36,7 @@ $orders = OrderGateway::GetOrdersFromGateway();
                     <input onkeyup="search()" id="search-text" type="text" name="search-text" placeholder="Rechercher un nom">
                 </div>
             </div>
-            <div class="table-container">
+            <div class="orders-list-container">
                 <table id="order-table">
                     <tr class="first-row">
                         <th class="date center">Date</th>
@@ -48,12 +47,13 @@ $orders = OrderGateway::GetOrdersFromGateway();
                     </tr>
                     <?php
                     foreach ($orders as $order) {
-                        if($order->getStatus() == 2){
+                        if($order->getStatus() == 22){
                             ?>
-                            <tr class='blue'>
-                                <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="date center"><?php echo $order->getSimpleDateString() . "<BR>" . $order->getDateHoursString(); ?></td>                                <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="customer"><a><?php echo ucfirst($order->getCustomer()->getFirstname()) . " " . strtoupper($order->getCustomer()->getSurname()); ?><BR><b style="font-weight:300; font-size:0.9rem;"><?php echo $order->getId(); ?></b></a></td>
-                                <td onclick="load_bill('<?php echo $order->getId(); ?>')" class="price right"><?php echo UtilsModel::FloatToPrice($order->getPriceAfterDiscount()); ?></td>
-                                <td onclick="load_bill('<?php echo $order->getId(); ?>')" class="shipping-price right"><?php echo UtilsModel::FloatToPrice($order->getShippingPrice()); ?></td>
+                            <tr class="yellow">
+                                <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="date center"><?php echo $order->getSimpleDateString() . "<BR>" . $order->getDateHoursString(); ?></td>
+                                <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="customer"><a><?php echo ucfirst($order->getCustomer()->getFirstname()) . " " . strtoupper($order->getCustomer()->getSurname()); ?><BR><b style="font-weight:300; font-size:0.9rem;"><?php echo $order->getId(); ?></b></a></td>
+                                <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="price right"><?php echo UtilsModel::FloatToPrice($order->getPriceAfterDiscount()); ?></td>
+                                <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="shipping-price right"><?php echo UtilsModel::FloatToPrice($order->getShippingPrice()); ?></td>
                                 <td class="status right">
                                     <select name="new_status" onchange='if(this.value != <?php echo $order->getStatus(); ?>) { 
                                         change_order_status("<?php echo $order->getId();?>", 
@@ -68,8 +68,8 @@ $orders = OrderGateway::GetOrdersFromGateway();
                                             <option value='3' <?php if($order->getStatus() == 3) echo "selected"; ?>>Livrée</option>
                                         </optgroup>
                                         <optgroup label='_____________'>
-                                            <option value='33' <?php if($order->getStatus() == -1) echo "selected"; ?>>Participation enregistrée</option>
-                                            <option value='22' <?php if($order->getStatus() == -1) echo "selected"; ?>>A retirer à l'atelier</option>
+                                            <option value='33' <?php if($order->getStatus() == 33) echo "selected"; ?>>Participation enregistrée</option>
+                                            <option value='22' <?php if($order->getStatus() == 22) echo "selected"; ?>>A retirer à l'atelier</option>
                                         </optgroup>
                                     </select>
                                 </td>
@@ -80,6 +80,13 @@ $orders = OrderGateway::GetOrdersFromGateway();
             </div>
         </div>
     </div>
+    <?php } else { ?>
+    <img id="empty-image" src="https://www.bebes-lutins.fr/view/assets/images/utils/customer.svg">
+    <div id="empty" style="position: relative; z-index: 100;">
+        <p class="empty-title">Aucune commande en cours</p>
+        <p class="empty-description">Patience, patience... un client ne devrait pas tarder à commander</p>
+    </div>
+    <?php } ?>
 </main>
 </body>
 <script>

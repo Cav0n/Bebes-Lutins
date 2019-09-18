@@ -24,8 +24,9 @@ $orders = OrderGateway::GetOrdersFromGateway();
         <div class="window-header">
             <div class="window-tabs">
                 <a href="https://www.bebes-lutins.fr/dashboard4/commandes/terminees" class="tab vertical centered selected">Toutes</a>
-                <a href="https://www.bebes-lutins.fr/dashboard4/commandes/terminees/livree" class="tab vertical centered">Livrée</a>
-                <a href="https://www.bebes-lutins.fr/dashboard4/commandes/terminees/annulee" class="tab vertical centered">Annulée</a>
+                <a href="https://www.bebes-lutins.fr/dashboard4/commandes/terminees/livree" class="tab vertical centered">Livrées</a>
+                <a href='https://www.bebes-lutins.fr/dashboard4/commandes/terminees/participations' class="tab vertical centered">Participations enregistrées</a>
+                <a href="https://www.bebes-lutins.fr/dashboard4/commandes/terminees/annulee" class="tab vertical centered">Annulées</a>
             </div>
         </div>
         <div class="window-inner">
@@ -47,9 +48,9 @@ $orders = OrderGateway::GetOrdersFromGateway();
                     <?php
                     foreach ($orders as $order) {
                         $cssOrderColor = "";
-                        if($order->getStatus() == 3) $cssOrderColor = 'green';
+                        if($order->getStatus() == 3 || $order->getStatus() == 33) $cssOrderColor = 'green';
 
-                        if($order->getStatus() == 3){
+                        if($order->getStatus() == 3 || $order->getStatus() == 33){
                             ?>
                             <tr class="<?php echo $cssOrderColor?>">
                                 <td onclick="load_bill('<?php echo $order->getId(); ?>')"  class="date center"><?php echo $order->getSimpleDateString() . "<BR>" . $order->getDateHoursString(); ?></td>
@@ -70,8 +71,8 @@ $orders = OrderGateway::GetOrdersFromGateway();
                                             <option value='3' <?php if($order->getStatus() == 3) echo "selected"; ?>>Livrée</option>
                                         </optgroup>
                                         <optgroup label='_____________'>
-                                            <option value='33' <?php if($order->getStatus() == -1) echo "selected"; ?>>Participation enregistrée</option>
-                                            <option value='22' <?php if($order->getStatus() == -1) echo "selected"; ?>>A retirer à l'atelier</option>
+                                            <option value='33' <?php if($order->getStatus() == 33) echo "selected"; ?>>Participation enregistrée</option>
+                                            <option value='22' <?php if($order->getStatus() == 22) echo "selected"; ?>>A retirer à l'atelier</option>
                                         </optgroup>
                                     </select>
                                 </td>

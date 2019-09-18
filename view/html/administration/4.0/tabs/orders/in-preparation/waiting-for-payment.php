@@ -26,6 +26,7 @@ $orders = OrderGateway::GetOrdersFromGateway();
                 <a href="https://www.bebes-lutins.fr/dashboard4/commandes/en-cours/en-attente-de-paiement" class="tab vertical centered selected">En attente de paiement</a>
                 <a href="https://www.bebes-lutins.fr/dashboard4/commandes/en-cours/en-preparation" class="tab vertical centered">En préparation</a>
                 <a href="https://www.bebes-lutins.fr/dashboard4/commandes/en-cours/en-cours-de-livraison" class="tab vertical centered">En cours de livraison</a>
+                <a href="https://www.bebes-lutins.fr/dashboard4/commandes/en-cours/a-retirer" class="tab vertical centered">A retirer à l'atelier</a>
             </div>
         </div>
         <div class="window-inner">
@@ -67,8 +68,8 @@ $orders = OrderGateway::GetOrdersFromGateway();
                                             <option value='3' <?php if($order->getStatus() == 3) echo "selected"; ?>>Livrée</option>
                                         </optgroup>
                                         <optgroup label='_____________'>
-                                            <option value='33' <?php if($order->getStatus() == -1) echo "selected"; ?>>Participation enregistrée</option>
-                                            <option value='22' <?php if($order->getStatus() == -1) echo "selected"; ?>>A retirer à l'atelier</option>
+                                            <option value='33' <?php if($order->getStatus() == 33) echo "selected"; ?>>Participation enregistrée</option>
+                                            <option value='22' <?php if($order->getStatus() == 22) echo "selected"; ?>>A retirer à l'atelier</option>
                                         </optgroup>
                                     </select>
                                 </td>

@@ -150,6 +150,7 @@ header #navbar #left #categories {
 
 header #navbar #left #categories #categories-tab {
     height: 100%;
+    cursor:pointer;
 }
 
 header #navbar #left a {
@@ -193,7 +194,7 @@ header #navbar #left #categories:hover .tab {
     color: black;
 }
 
-header #navbar #left #categories:hover #categories-popup {
+header #navbar #left #categories #categories-popup {
     display: flex;
     text-align: left;
     border-bottom: 1px solid gray;
@@ -225,7 +226,7 @@ header #navbar #left #categories #categories-popup a {
     color: white;
 }
 
-header #navbar #left #categories:hover #categories-popup .category {
+header #navbar #left #categories #categories-popup .category {
     font-size: 1rem;
     font-weight: 400;
     font-family: Roboto, sans-serif;
@@ -239,34 +240,34 @@ header #navbar #left #categories:hover #categories-popup .category:hover {
     ;
 }
 
-header #navbar #left #categories:hover #categories-popup #child-categories .category-child-container {
+header #navbar #left #categories #categories-popup #child-categories .category-child-container {
     padding: 1rem;
     width: 10rem;
     cursor: pointer;
 }
 
-header #navbar #left #categories:hover #categories-popup #child-categories .category-child-container:hover {
+header #navbar #left #categories #categories-popup #child-categories .category-child-container:hover {
     background: #b5e639;
 }
 
-header #navbar #left #categories:hover #categories-popup #child-categories .category-child-container .child-name {
+header #navbar #left #categories #categories-popup #child-categories .category-child-container .child-name {
     padding-bottom: 0.5rem;
 }
 
-header #navbar #left #categories:hover #categories-popup #child-categories .category-child-container .child-image {
+header #navbar #left #categories #categories-popup #child-categories .category-child-container .child-image {
     width: 10rem;
     height: 10rem;
     border-radius: 2px;
 }
 
-header #navbar #left #categories:hover #categories-popup #image-parent-container {
+header #navbar #left #categories #categories-popup #image-parent-container {
     width: 18rem;
     height: 100%;
     box-sizing: border-box;
     margin-left: auto
 }
 
-header #navbar #left #categories:hover #categories-popup #image-parent-container img {
+header #navbar #left #categories #categories-popup #image-parent-container img {
     width: 18rem;
     height: 100%;
     object-fit: cover;
@@ -275,7 +276,7 @@ header #navbar #left #categories:hover #categories-popup #image-parent-container
     cursor: pointer;
 }
 
-header #navbar #left #categories:hover #categories-popup #image-parent-container img:hover {
+header #navbar #left #categories #categories-popup #image-parent-container img:hover {
     background: #b5e639;
 }
 

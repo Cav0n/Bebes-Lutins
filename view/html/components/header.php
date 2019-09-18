@@ -134,7 +134,7 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
     <div id="left" class="horizontal">
         <a href="https://www.bebes-lutins.fr" class="home-link vertical centered transition-fast"><i class="tab fas fa-home vertical centered transition-fast"></i></a>
         <div id="categories">
-            <a href="https://www.bebes-lutins.fr/nos-produits" class="tab vertical centered transition-fast" id="categories-tab">Nos produits</a>
+            <p class="tab vertical centered transition-fast" id="categories-tab" onclick='display_categories_popup()'>Nos produits</p>
             <div id="categories-popup" class="popup centered">
                 <div class="horizontal" style='width:100%;'>
                     <div id='parent-categories' class='vertical'>
@@ -212,7 +212,19 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
 
     }
 
+    function display_categories_popup(){
+        categories_popup = $('#categories-popup');
+        if ( categories_popup.is(':visible') ){
+            categories_popup.hide();
+        } else {
+            categories_popup.show();
+        }
+        
+    }
+
     $(document).ready(function() {
+        $('#categories-popup').hide();
+
         $('.category').click(function() {
             $('.category').removeClass('selected-category');
             $(this).addClass('selected-category');

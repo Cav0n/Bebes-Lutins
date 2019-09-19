@@ -89,16 +89,35 @@ $orders = OrderGateway::GetInPreparationOrderFromDB2();
     </div>
     <?php } ?>
 </main>
+<div id='loading-background'>
+    <div id='heart-container'>
+        <div class="lds-heart"><div></div></div>
+    </div>
+</div>
 <script>
+    $(document).ready(function(){
+        $('#loading-background').hide();
+    });
+
+    function start_loading(url){
+        $('#loading-background').show();
+        if(url != null && url != ''){
+            document.location.href=url;
+        }
+    }
+
     function change_order_status(id, status, nom, prix){
-        if(confirm('Etes vous sur de vouloir changer l\'état de la commande de ' + nom + ' ( ' + prix+ ') ?')){$.ajax({
-            url: 'https://www.bebes-lutins.fr',
-            type: 'POST',
-            data: {id:id, new_status:status, section:'commandes', page:'modifier-etat', action:"load_page_dashboard"},
-            success: function(){
-                document.location.href="https://www.bebes-lutins.fr/dashboard4";
-            }
-        }); }
+        if(confirm('Etes vous sur de vouloir changer l\'état de la commande de ' + nom + ' ( ' + prix+ ') ?')){
+            start_loading(null);
+            $.ajax({
+                url: 'https://www.bebes-lutins.fr',
+                type: 'POST',
+                data: {id:id, new_status:status, section:'commandes', page:'modifier-etat', action:"load_page_dashboard"},
+                success: function(){
+                    document.location.href="https://www.bebes-lutins.fr/dashboard4";
+                }
+            }); 
+        }
     }
 
     function load_bill(id) {

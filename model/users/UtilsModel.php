@@ -201,6 +201,12 @@ class UtilsModel
         }
     }
 
+    public static function load_loading_heart(){
+        global $view_rep;
+
+        require("../../view/html/components/loading-heart.php");
+    }
+
     public static function load_head()
     {
         global $view_rep;

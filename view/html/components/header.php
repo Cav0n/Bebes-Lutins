@@ -133,38 +133,34 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
 <div id="navbar" class="desktop horizontal">
     <div id="left" class="horizontal">
         <a href="https://www.bebes-lutins.fr" class="home-link vertical centered transition-fast"><i class="tab fas fa-home vertical centered transition-fast"></i></a>
-        <div id="categories">
+        <div id="categories" onmouseover='show_categories_popup()' onmouseleave='hide_categories_popup()'>
             <p class="tab vertical centered transition-fast" id="categories-tab" onclick='display_categories_popup()'>Nos produits</p>
-            <div id="categories-popup" class="popup centered">
-                <div class="horizontal" style='width:100%;'>
-                    <div id='parent-categories' class='vertical'>
-                        <?php foreach($categories as $category) { if($category->getParent() == 'none' && !$category->getPrivate()) {?>
-                            <p id='<?php echo $category->getNameForURL(); ?>-selector' class='category'><?php echo $category->getName();?></p>
-                        <?php } } ?>
-                    </div>
-                    <div id='child-categories'>
-                        <div id='categories-presentation' class='category-child horizontal wrap'>
 
+            <div id='categories-popup2' class='popup horizontal' style='top: calc(8rem - 1px);left: 0;background: white;position: fixed;max-width:100vw;box-sizing:border-box;border-top:1px solid;box-shadow:black 0px 1px 10px -5px;padding:1rem 0;'>
+                <div id='parent-categories' class='vertical' style='max-width:15rem;min-width:15rem;'>
+                    
+                    <?php foreach($categories as $category) { if($category->getParent() == 'none' && !$category->getPrivate()) {?>
+                        <div class='category-container' onclick='select_category($(this))' style='padding: 0.5rem;border: 1px solid rgb(202, 202, 202);margin:0.3rem 0.5rem;  -webkit-touch-callout: none; /* iOS Safari */-webkit-user-select: none; /* Safari */-khtml-user-select: none; /* Konqueror HTML */-moz-user-select: none; /* Firefox */-ms-user-select: none; /* Internet Explorer/Edge */user-select: none; /* Non-prefixed version, currentlysupported by Chrome and Opera */cursor:pointer;font-weight: 400;font-size: 0.95rem;border-radius: 2px;'>
+                            <?php echo $category->getName(); ?>
                         </div>
-                        <?php foreach($categories as $category) { if($category->getParent() == 'none' && !$category->getPrivate()) { ?>
-                            <div id='<?php echo $category->getNameForURL(); ?>-container' class="category-child horizontal wrap hidden">
-                                <?php foreach($sub_categories_list as $sub_category) { if(!$sub_category->getPrivate()) {
-                                    if($sub_category->getParent() == $category->getName()) { ?>
-                                    <div class='vertical between category-child-container' onclick="load_category('<?php echo $sub_category->getNameForURL(); ?>')">
-                                        <p class='child-name'><?php echo $sub_category->getName();?></p>
-                                        <img class='child-image' src='https://www.bebes-lutins.fr/view/assets/images/categories/<?php echo $sub_category->getImage();?>'>
-                                    </div>
-                                <?php } } } ?>
-                            </div>
-                        <?php } } ?>
-                    </div>
-                    <div id='image-parent-container'>
-                        <?php foreach($categories as $category) { if($category->getParent() == 'none') { ?>
-                            <img id='<?php echo $category->getNameForURL(); ?>-image' class='category-image hidden' src='https://www.bebes-lutins.fr/view/assets/images/categories/<?php echo $category->getImage(); ?>' onclick='load_category("<?php echo $category->getNameForURL(); ?>")'>
-                        <?php } } ?>
-                    </div>
+                    <?php } } ?>
+
+                </div>
+                <div id='child-categories' class='horizontal' style='width:calc(100vw - 14rem);'>
+                    <?php foreach($categories as $category) { if($category->getParent() == 'none' && !$category->getPrivate()) { ?>
+                        <div id='<?php echo $category->getNameForURL(); ?>-container' class="category-child horizontal wrap hidden" >
+                            <?php foreach($sub_categories_list as $sub_category) { if(!$sub_category->getPrivate()) {
+                                if($sub_category->getParent() == $category->getName()) { ?>
+                                <div class='vertical category-child-container' onclick="load_category('<?php echo $sub_category->getNameForURL(); ?>')" style='margin: 0.5rem;border: 1px solid rgb(202, 202, 202);height:max-content;cursor:pointer;'>
+                                    <p class='child-name' style='width:13rem;box-sizing:border-box;padding:0.3rem;border-bottom:1px solid rgb(202, 202, 202);'><?php echo $sub_category->getName();?></p>
+                                    <img class='child-image' src='https://www.bebes-lutins.fr/view/assets/images/categories/<?php echo $sub_category->getImage();?>' style='width:13rem;'>
+                                </div>
+                            <?php } } } ?>
+                        </div>
+                    <?php } } ?>
                 </div>
             </div>
+
         </div>
     </div>
     <div id="right" class="horizontal">
@@ -188,6 +184,11 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
 
 
 <script>
+    $(document).ready(function(){
+        $("#child-categories").hide();
+        $('#categories-popup2').hide();
+    });
+
     function load_category(category) {
         document.location.href = "https://www.bebes-lutins.fr/categorie/" + category;
     }
@@ -222,22 +223,29 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
         
     }
 
-    $(document).ready(function() {
-        $('#categories-popup').hide();
+    function select_category(category_selected){
+        $('.category-container').removeClass('category-selected');
+        $('.category-container').css('background', 'white');
 
-        $('.category').click(function() {
-            $('.category').removeClass('selected-category');
-            $(this).addClass('selected-category');
-            category = $(this).attr('id').replace('-selector', '');
-            console.log(category);
-            $('.category-child').addClass('hidden');
-            $('.category-image').addClass('hidden');
-            $('#' + category + "-container").removeClass('hidden');
-            $('#' + category + "-image").removeClass('hidden');
-        });
+        category_selected.addClass('category-selected');
+        console.log(category_selected);
+        category = category_selected.text().trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s/g,'');
 
-        $('#nav-icon4').click(function(){
-		    $(this).toggleClass('open');
-	    });
-    });
+        console.log("#" + category + '-container');
+
+        $("#child-categories").show();
+
+        $('.category-child').addClass('hidden')
+        $('#' + category + '-container').removeClass('hidden');
+
+        $('.category-selected').css('background','#b5e639');
+    }
+
+    function show_categories_popup(){
+        $('#categories-popup2').slideDown(75);
+    }
+    
+    function hide_categories_popup(){
+        $('#categories-popup2').slideUp(75);
+    }
 </script>

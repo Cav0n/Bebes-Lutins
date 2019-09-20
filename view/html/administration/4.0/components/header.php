@@ -16,11 +16,11 @@ if($_GET['page'] == "nouveau" ||
 <header class="horizontal between<?php echo $extra; ?>">
     <a href='https://www.bebes-lutins.fr' class='vertical centered'><h1>BEBES LUTINS</h1></a>
     <a id="administrator-name" href="https://www.bebes-lutins.fr">Retour sur le site ></a>
-    <div id="extra" class="between <?php if($extra == null || $_GET['page'] == "importer" || $_GET['section'] = 'newsletters') echo 'hidden';?>">
+    <div id="extra" class="between <?php if($extra == null || $_GET['page'] == "importer" || $_GET['section'] == 'newsletters') echo 'hidden';?>">
         <button class="remove-button" form='deletion-wrapper'>Supprimer</button>
         <button class="save-button" form="edition-wrapper">Enregistrer</button>
     </div>
-    <div id="extra" class="between <?php if(!($_GET['section'] = 'newsletters' && $_GET['page'] == 'creation')) echo 'hidden';?>">
+    <div id="extra" class="between <?php if(!($_GET['section'] == 'newsletters' && $_GET['page'] == 'creation')) echo 'hidden';?>">
         <button class="save-button" form="edition-wrapper" style='margin-left:auto;'>Envoyer</button>
     </div>
 </header>

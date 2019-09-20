@@ -630,4 +630,19 @@ class ProductGateway
             ':stock' => array($stock, PDO::PARAM_INT)
         ));
     }
+
+    public static function HideProduct(string $id){
+        global $dblogin, $dbpassword, $dsn;
+        $con = new Connexion($dsn, $dblogin, $dbpassword);
+
+        $query = 'SELECT hide FROM product WHERE id=:id;';
+        $con->executeQuery($query, array(':id' => array($id, PDO::PARAM_STR)));
+        $hide = !$con->getResults()[0]['hide'];
+
+        $query = "UPDATE product SET hide=:hide WHERE id=:id;";
+        $con->executeQuery($query, array(
+            ':id' => array($id, PDO::PARAM_STR),
+            ':hide' => array($hide, PDO::PARAM_STR),
+        ));
+    }
 }

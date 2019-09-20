@@ -32,6 +32,7 @@ $actions_admin = array(
     'add_product',
     'edit_product_page',
     'edit_product',
+    'hide_product',
     'clone_product',
     'copy_product',
     'move_product',

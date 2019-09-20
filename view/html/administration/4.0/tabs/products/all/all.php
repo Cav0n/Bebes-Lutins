@@ -43,16 +43,18 @@ $products = ProductGateway::GetProducts2();
                         <th class="category left">Catégorie</th>
                         <th class="stock center">Stock</th>
                         <th class="price right">Prix</th>
+                        <th class='hide right'>Caché</th>
                     </tr>
                     <?php
                     foreach ($products as $product) { ?>
-                            <tr onclick="load_product('<?php echo $product->getId(); ?>')">
-                                <td class="image center"><img src="https://www.bebes-lutins.fr/view/assets/images/products/<?php echo $product->getImage();?>" alt="<?php echo $product->getName();?>"></td>
-                                <td class="custom-id center"><?php echo $product->getReference(); ?></td>
-                                <td class="name left"><a href="https://www.bebes-lutins.fr/dashboard4/produits/edition/<?php echo $product->getId(); ?>"><?php echo $product->getName(); ?></a></td>
-                                <td class="category left"><?php foreach ($product->getCategory() as $category) echo $category->getName() . '<BR>'; ?></td>
-                                <td class="stock center"><?php echo $product->getStock(); ?></td>
-                                <td class="price right"><?php echo UtilsModel::FloatToPrice($product->getPrice()); ?></td>
+                            <tr class='<?php if($product->getHide())  echo 'hidden-product'; ?>'>
+                                <td class="image center" onclick="load_product('<?php echo $product->getId(); ?>')"><img src="https://www.bebes-lutins.fr/view/assets/images/products/<?php echo $product->getImage();?>" alt="<?php echo $product->getName();?>"></td>
+                                <td class="custom-id center" onclick="load_product('<?php echo $product->getId(); ?>')"><?php echo $product->getReference(); ?></td>
+                                <td class="name left" onclick="load_product('<?php echo $product->getId(); ?>')"><a href="https://www.bebes-lutins.fr/dashboard4/produits/edition/<?php echo $product->getId(); ?>"><?php echo $product->getName(); ?></a></td>
+                                <td class="category left" onclick="load_product('<?php echo $product->getId(); ?>')"><?php foreach ($product->getCategory() as $category) echo $category->getName() . '<BR>'; ?></td>
+                                <td class="stock center" onclick="load_product('<?php echo $product->getId(); ?>')"><?php echo $product->getStock(); ?></td>
+                                <td class="price right" onclick="load_product('<?php echo $product->getId(); ?>')"><?php echo UtilsModel::FloatToPrice($product->getPrice()); ?></td>
+                                <td class='hide right'><input type='checkbox' name='hide' class='checkbox-hide-product' onclick="hide_product($(this), '<?php echo $product->getID();?>')" <?php if($product->getHide()) echo "checked='checked'";?>></td>
                             </tr>
                         <?php } ?>
                 </table>
@@ -60,8 +62,42 @@ $products = ProductGateway::GetProducts2();
         </div>
     </div>
 </main>
+<div id='loading-background'>
+    <div id='heart-container'>
+        <div class="lds-heart"><div></div></div>
+    </div>
+</div>
 </body>
 <script>
+    $(document).ready(function(){
+        $('#loading-background').hide();
+    });
+
+    function start_loading(){
+        $('#loading-background').show();
+    }
+
+    function stop_loading(){
+        $('#loading-background').hide();
+    }
+
+    function hide_product(checkbox, product_id){
+        start_loading();
+        $.ajax({
+            url: 'https://www.bebes-lutins.fr',
+            type: 'POST',
+            data: {id:product_id, action:"hide_product"},
+            success: function(){
+                if(checkbox.prop('checked') == true){
+                    checkbox.parent().parent().addClass('hidden-product');
+                } else {
+                    checkbox.parent().parent().removeClass('hidden-product');
+                }
+                stop_loading();
+            }
+        }); 
+    }
+
     function load_product(id){
         document.location.href = "https://www.bebes-lutins.fr/dashboard4/produits/edition/"+id;
     }

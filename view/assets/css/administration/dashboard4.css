@@ -722,7 +722,9 @@
     font-weight: 300;
 }
 
-
+#dashboard4 main #product-table .hidden-product{
+    opacity: 0.4;
+}
 /* ---- */
 
 

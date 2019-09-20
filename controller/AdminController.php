@@ -83,6 +83,10 @@ class AdminController
                         AdminModel::edit_product($_POST['id_copy'],$_POST['id'], $_POST['name'], $_POST['price'], $_POST['stock'], $_POST['description_big'], $_POST['description_small'], $_POST['old_image_name'], $_POST['custom_id']);
                         break;
 
+                    case "hide_product":
+                        AdminModel::hide_product($_POST['id']);
+                        break;
+
                     case "clone_product":
                         AdminModel::clone_product($_POST['clone_category'], $_POST['product_id_copy']);
                         break;

@@ -226,6 +226,10 @@ class AdminModel
         <?php
     }
 
+    public static function hide_product(string $id){
+        ProductGateway::HideProduct($id);
+    }
+
     public static function clone_product(String $category_clone, String $product_id){
         try{
             $id = uniqid("product-");

@@ -199,8 +199,8 @@ if(isset($_SESSION['success'])){
         dictDefaultMessage: 'Cliquez ici pour ajouter une image.',
 
         accept: function(file, done){
-            //alert(file.name);
-            if($('#image_name').val = ''){
+            //alert("Valeur :" + $('#image_name').val());
+            if($('#image_name').val() == '' || $('#image_name').val() == null){
                 $('#image_name').val(file.name);
                 done();
             } else done('Impossible d\'ajouter l\'image. Une seule image est autorisée pour l\'image principale.');

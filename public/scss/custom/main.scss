@@ -1,0 +1,52 @@
+$primary:       #9ce849 !default;
+$secondary:     #7aac46 !default;
+$success:       rgb(42, 212, 42) !default;
+$info:          rgb(59, 243, 243) !default;
+$warning:       yellow !default;
+$danger:        rgb(243, 60, 60) !default;
+$light:         #ebebeb !default;
+$dark:          #242424 !default;
+
+html{
+    background: $dark;
+}
+
+#logo{
+    height:12rem;
+    top:-2rem;
+    left:calc(50vw - 6rem);
+    cursor: pointer;
+}
+
+#logo:hover{
+    top:-1rem;
+}
+
+.transition{
+    transition: all 0.4s ease-out;
+}
+
+.transition-fast{
+    transition: all 0.3s ease-out;
+}
+
+#top-navbar .nav-item:hover{
+    box-shadow:0 0 7px 2px rgba(150,150,150,0.6);
+}
+
+#bottom-navbar .nav-item.hover-green:hover{
+    background: $primary;
+}
+
+#bottom-navbar .nav-item.hover-green.show{
+    background: $primary;
+}
+
+#categories-dropdown{
+    position: fixed;
+    width: 100%;
+    left: 0;
+    top: 8rem;
+}
+
+@import "../bootstrap/bootstrap";

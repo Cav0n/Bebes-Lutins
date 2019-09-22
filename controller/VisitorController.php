@@ -14,8 +14,13 @@ class VisitorController
      */
     public function __construct($action)
     {
+        global $view_rep;
         try{
             switch ($action){
+                case 'test_categories':
+                    require("$view_rep/html/tests/categories.php");
+                    break;
+
                 case null:
                     UtilsModel::load_page("accueil");
                     break;

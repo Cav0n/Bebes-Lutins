@@ -1,13 +1,90 @@
 <?php
-$products = ProductGateway::GetProducts2();
-foreach ($products as $product) {
-    $product = (new ProductContainer($product))->getProduct();
-    $hide = $product->getHide();
-    if ($hide == null) $hide = 0;
-    echo "<p style='margin:1rem 0';>INSERT INTO products (name, description, mainImage, stock, isHidden, isDeleted, creationDate, reviewsCount, reviewsStars) VALUES (\"" . $product->getName() . "\",\"" . strip_tags($product->getDescription()) . "\",\"" . $product->getImage()->getName() . "\",\"" . $product->getStock() . "\",". $hide .",0, NOW(), 0, 0);</p>";
+$categories = CategoryGateway::GetCategories();
+foreach ($categories as $category) {
+    $category = (new CategoryContainer($category))->getCategory();
+    $private = $category->getPrivate();
+    if ($private == null) $private = 0;
+    echo "<p style='margin:1rem 0';>INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES (\"" . $category->getName() . "\",\"" . $category->getDescription() . "\",\"" . $category->getImage()->getName() . "\",\"" . $category->getRank() . "\",". $private .",0);</p>";
 }
 
-/*
+
+/* CATEGORIES
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Inserts et doublures","Inserts et doublures pour booster l’absorption de vos couches lavables. Voiles polaire pour isoler de l’humidité si besoin pour bébé à la peau sensible.","inserts_et_doublures.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Lingettes lavables","En passant à la couche lavable, vous agissez pour l’environnement en réduisant vos déchets. Dans la même démarche, optez pour les lingettes lavables bébé. Fabriquées dans un tissu souple et doux (80% coton 20% polyester), elles vous offrent un véritable confort d’utilisation. Bébés Lutins vous propose sa sélection de lingettes lavables pour bébé et autres accessoires, confectionnés en France dans notre atelier.","lingettes_lavables.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Spray déo couche","Vous souhaitez purifier vos couches lavables ou votre linge ? N’hésitez pas à adopter le spray déo couche !","spray_deo_couche.jpg","27",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Tapis à langer","En balade, en vacances, notre tapis à langer vous suit. Doux, absorbant et imperméable, il trouvera sa place dans vos déplacements avec bébé.","tapis_a_langer.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Voiles de protection","Découvrez nos boites de voiles fins et nos rouleaux de voiles épais !","voiles_de_protection.jpg","26",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Coussinets d’allaitement lavables","Adoptez une démarche zéro déchet avec nos coussinets d’allaitement lavables. Sains et confortables vous apprécierez leur douceur.","coussinets_d’allaitement_lavables.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Démaquillage zéro déchet","Adoptez une démarche zéro déchet en nettoyant votre visage et vos yeux tout en douceur avec nos disques et carrés à démaquiller lavables.","demaquillage_zero_dechet.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Serviettes hygiéniques lavables","Doux pour l’environnement et votre peau, adoptez une démarche zéro déchet avec nos serviettes hygiéniques lavables en coton biologique.","serviettes_hygieniques_lavables.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Toilette des enfants","Gants d’apprentissage et autres accessoires pour favoriser l’autonomie de vos enfants. ","toilettes_des_enfants.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Couches lavables classiques","Vous souhaitez passer aux couches lavables ? Découvrez nos couches lavables fabriquée en France à partir de tissus certifiés Oeko-Tex pour le bien-être de bébé !","couches_lavables_classiques.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Couches lavables TE2 (Tout en 2)","Vous aimez le côté pratique des couches intégrales ? Le modèle « Colombine » de Bébés Lutins allie l’atout pratique de la couche lavable intégrale, qui combine couche absorbante et culotte de protection, tout en offrant les avantages de la couche lavable TE2, sur laquelle on vient fixer les pans absorbants et le voile de protection jetable : le faible encombrement et la rapidité de séchage. Simples et pratiques à utiliser, nos couches lavables équivalentes à des TE2 sont également économiques. Seuls les pans absorbants doivent être lavés à chaque change ! La couche lavable TE2 de Bébés Lutins est disponible en taille naissance ou en version évolutive. Fabriquée en France dans un tissu certifié Oeko-Tex, cette couche lavable intégrale garantit confort et bien-être à bébé !","couches_lavables_te1_et_te2.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Culottes de protection pour couches lavables classiques","Bébés Lutins vous propose différents modèles de culottes de protection, indispensables avec la couche lavable classique. Imperméable et repirante, la culotte de protection pour couche lavable est efficace, la nuit comme le jour. Grâce à son système de pressions, elle permet une utilisation pratique et évite tout risque de fuites. Son élastique au niveau de la taille et des cuisses permet de s’adapter parfaitement à la morphologie de bébé. Confectionnée dans un tissu certifié Oeko-Tex, à la fois souple et doux, elle garantit le plus grand confort à bébé. Les culottes de protection pour couches lavables sont fabriquées en France, dans l’atelier de Thiers. Elles sont disponibles dans différents coloris (bleu, vert anis, orange, …) et dans différentes tailles : taille S (3,5kg – 6kg), taille M (5,5kg – 9kg) et taille L (8,5kg – 16kg). Faites confiance à Bébés Lutins, le spécialiste de la couche lavable écocitoyenne, durable, efficace et saine pour votre enfant. Adoptez un système efficace de couche lavable pour la nuit !","culottes_de_protection_pour_couches_lavables_classiques.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Couche lavable classique taille évolutive","Couche lavable classique taille évolutive","couche_lavable_classique_evolutive.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Couche lavable classique taille naissance","Couche lavable classique taille naissance","couche_lavable_classique_taille_naissance.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("TE2 (Tout en deux) évolutive","Couches lavables intégrales TE2 évolutives. Agréables, souples et confortables, elles s’ajustent à la morphologie de bébé avec leurs élastiques à la taille et aux cuisses. Évolutives elles grandissent avec bébé de 4 kg à 16 kg.","te1_-_te2_evolutive.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("TE2 (Tout en deux) naissance","Couches lavables intégrales TE2 taille naissance. Agréables, souples et confortables, elles s’ajustent à la morphologie de bébé avec leurs élastiques à la taille et aux cuisses. Elles conviennent de 3 kg à 5.5 kg.","te1_-_te2_naissance.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Mobiles et attrapes rêves","Vous souhaitez purifier vos couches lavables ou votre linge ? N’hésitez pas à adopter le spray déo couche !","mobiles_et_attrapes_reves.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Panières en tissu","Panières tissus issues du recyclage. Création unique en jeans, coton imprimé, coton fleuri ... Idéal pour stocker vos petites lingettes lavables. ","panieres_en_tissu.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Liste de naissance Karine et Cyril","Vous pouvez ici participer à la liste de naissance de Karine et Cyril selon vos envies. Choisissez-le (les) bon(s) d'achat que vous souhaitez, ajoutez-le(les) à votre panier et laissez vous guider. Il n'est pas nécessaire de nous rappeler les coordonnées des parents, il vous suffit juste de commander en créant votre compte. Nous transmettrons directement aux parents les articles dès la liste de naissance clôturée. Vous pouvez si vous le souhaitez, ajouter un commentaire pour les parents lorsque vous validez votre commande, nous leur transmettrons également.","liste-de-naissance-couches-lavables-categorie-bis.jpg","1",1,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Liste de naissance Magali et Samuel","Vous pouvez ici participer à la liste de naissance de Magali et Samuel selon vos envies. Choisissez-le (les) bon(s) d'achat que vous souhaitez, ajoutez-le(les) à votre panier, ajouter le 'code coupon' mentionné dans le bon d'achat pour supprimer les frais de port et laissez vous guider. Il n'est pas nécessaire de nous rappeler les coordonnées des parents, il vous suffit juste de commander en créant votre compte. Nous transmettrons directement aux parents les articles dès la liste de naissance clôturée. Vous pouvez si vous le souhaitez, ajouter un commentaire pour les parents lorsque vous validez votre commande, nous leur transmettrons également.","liste magali et samuel pour categorie.jpg","0",1,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Lots personnalisés couches lavables et accessoires","Lots personnalisé de couches lavables et accessoires vu par téléphone ou courriel.","lots_personnalises_couches_lavables_et_accessoires.jpg","15",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Accessoires pour couches lavables","En passant à la couche lavable, vous agissez pour l’environnement en réduisant vos déchets. Dans la même démarche, optez pour les lingettes lavables bébé. Fabriquées dans un tissu souple et doux (80% coton 20% polyester), elles vous offrent un véritable confort d’utilisation. Bébés Lutins vous propose sa sélection de lingettes lavables pour bébé et autres accessoires, confectionnés en France dans notre atelier.","accessoires_pour_couches_lavables.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Allaitement","Le coussinet d’allaitement lavable s’intègre parfaitement dans une démarche écologique et économique. Bébés Lutins vous propose des coussinets d’allaitement lavables en bambou pour une bonne absorption et un réel confort d’utilisation. Optez pour un coussinet d’allaitement écologique, français et écocitoyen !","allaitement.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Beauté et bien être","Adoptez une démarche éco-citoyenne avec nos accessoires zéro déchet. Sains et économiques retrouvez nos disques à démaquiller lavables, serviettes hygiéniques lavables (SHL), gants de toilette enfants ...","beaute_et_bien_etre.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Couches lavables","Vous avez décidé d’acheter des couches lavables pour bébé ? Deux alternatives s’offrent à vous : les couches lavables classiques associées à une culotte de protection ou les couches lavables tout-en-un. Quelle que soit la formule choisie, Bébés Lutins vous propose une gamme complète qui couvre tous les besoins. A la fois modernes et pratiques, nos couches lavables sont extrêmement simples d’utilisation et vous garantissent une réelle efficacité. Confectionnées en tissu certifié Oeko-Tex sans substances nocives, nos couches lavables respectent la peau de bébé. Nos modèles sont conçus pour s’adaptez à sa morphologie et lui offrir bien-être et confort.","couches_lavables.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Créations uniques et décorations upcyclées","Création unique, panière tissu recyclé ... duo panière et lingettes lavables, déco issu du recyclage.","creations_uniques_et_decorations_upcyclees.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Listes de naissances","Ici vous pouvez participer à la liste de naissance créée par vos proches.","39539440_2117849991806306_7098382129016340480_n.jpg","1",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Lots personnalisés","Ici vous pouvez régler vos lots personnalisés vus par téléphone ou courriel.","lots_personnalises.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Packs et kits de couches lavables","Idéal pour réaliser des économies, découvrez le pack de couches lavables et accessoires, en différents formats. Ce pack comprend 6, 10 ou 15 couches lavables TE2 ainsi que des pans absorbants et voiles de protection.
+
+Si vous voulez faire un essai avant de vous lancer, Bébés Lutins a également ce qu’il vous faut ! Le kit de couches lavables intégrales comprend 3 couches TE2, des pans absorbants et voiles de protection. Ces kits et packs de couches lavables s’adaptent à vos besoins et vous permettent de (re)découvrir au quotidien leurs atouts.","packs_et_kits_de_couches_lavables.png","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Sacs a couches lavables","Découvrez notre modèle de sac à couches lavables, décliné dans différents motifs. Pratique, il permet d’emporter avec vous 5 à 6 couches lavables. En coton à l’extérieur et en polyester enduit pour un intérieur imperméable, il est confectionné en France, dans notre atelier. Adoptez le sac à couches lavables, votre accessoire indispensable pour la balade ! ","sacs_a_couches_lavables.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Kits d’essai","Découvrez nos kits d’essai pour vous familiariser avec les couches lavables.","kits_d’essai.jpg","11",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Lots complets","Avec ces packs complets vous pouvez passer sereinement aux couches lavables.","lots_complets.jpg","13",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Packs journée","Découvrez les couches lavables le temps d’une journée pour vous aider à passer aux couches lavables.","packs_journee.jpg","18",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Sacs à couches lavables imprimés","Vous souhaitez purifier vos couches lavables ou votre linge ? N’hésitez pas à adopter le spray déo couche !","sacs_a_couches_lavables_imprimes.jpg","0",0,0);
+
+INSERT INTO categories (name, description, mainImage, rank, isHidden, isDeleted) VALUES ("Sacs à couches lavables unis","Vous souhaitez purifier vos couches lavables ou votre linge ? N’hésitez pas à adopter le spray déo couche !","sacs_a_couches_lavables_unis.jpg","0",1,0);
+
+*/
+
+/* PRODUCTS 
 INSERT INTO products (name, description, mainImage, stock, isHidden, isDeleted, creationDate, reviewsCount, reviewsStars) VALUES ("Attrape rêve création unique carré noir fil pailleté","Création unique Attrape rêve issu du recyclage.Modèle carré, laine noire pailletée.Cet 'attrape rêve' est réaliséprincipalement avec des objets et matériaux issus du recyclage. Créé et confectionné en France dans notre atelier.","attrapereve.jpg","0",1,0, NOW(), 0, 0);
 
 INSERT INTO products (name, description, mainImage, stock, isHidden, isDeleted, creationDate, reviewsCount, reviewsStars) VALUES ("Attrape rêve création unique cercle blanc perles et plumes","Création unique Attrape rêve issu du recyclage. Modèle rond, laine blanche, accompagné de perles et plumes. Cet 'attrape rêve' est réalisé en partie avec des objets et matériaux issus du recyclage.  Créé et confectionné dans notre atelier.","attrape-reve-blanc-dentelle.jpg","1",0,0, NOW(), 0, 0);

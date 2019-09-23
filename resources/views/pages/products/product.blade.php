@@ -1,7 +1,7 @@
 @extends('templates.template')
 
 @section('content')
-<main id='product-main' class='container-fluid my-4 px-4' style='min-height:90vh;'>
+<main id='product-main' class='container-fluid my-4 px-4'>
     <div class="row">
         <div class="col-12">
             <span>

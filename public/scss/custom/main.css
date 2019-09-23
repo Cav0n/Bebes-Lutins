@@ -23,6 +23,36 @@ html {
   transition: all 0.3s ease-out;
 }
 
+.swiper-container {
+  width: 100%;
+  height: calc((100vw)/4.2 - 1px);
+}
+
+.swiper-pagination-bullet {
+  background-color: white !important;
+  opacity: 0.5 !important;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1 !important;
+}
+
+.swiper-button-prev, .swiper-button-next {
+  color: white !important;
+  background: rgba(20, 20, 20, 0.6);
+  top: 1.4rem !important;
+  width: 3rem !important;
+  height: 100% !important;
+}
+
+.swiper-button-prev {
+  left: 0 !important;
+}
+
+.swiper-button-next {
+  right: 0 !important;
+}
+
 #top-navbar .nav-item:hover {
   -webkit-box-shadow: 0 0 7px 2px rgba(150, 150, 150, 0.6);
           box-shadow: 0 0 7px 2px rgba(150, 150, 150, 0.6);

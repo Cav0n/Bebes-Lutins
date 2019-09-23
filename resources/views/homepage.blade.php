@@ -1,8 +1,15 @@
 @extends('templates.template')
 
-@section('content')
+@section('head-options')
+    {{-- Swiper JS --}}
+    <script src="{{asset('js/swiper/swiper.min.js')}}"></script>
+    <link media="all" type="text/css" rel="stylesheet" href="{{asset('scss/swiper/swiper.css')}}">
+@endsection
 
-<main class='container-fluid' style='min-height:90vh;'>
-    HomePage
+@section('content')
+<main class='container-fluid'>
+    <div class="row">
+        @include('layouts.public.main-swiper')
+    </div>
 </main>
 @endsection

@@ -1,8 +1,27 @@
+<?php $parent = $category->parent;?>
+<?php $breadcrumb = array($category->name); ?>
+@while ($parent!=null)
+    <?php $breadcrumb[] = $parent->name?>
+    <?php $parent = $parent->parent;?>
+@endwhile
+<?php $breadcrumb = array_reverse($breadcrumb); ?>
+
 @extends('templates.template')
 
 @section('content')
 
 <main id='category-main' class='container-fluid my-4 px-4' style='min-height:90vh;'>
+    <div class="row">
+        <div class="col-12">
+            <p>
+                Accueil
+                @foreach ($breadcrumb as $item)
+                    / {{$item}}
+                @endforeach
+            </p>
+        </div>
+
+    </div>
     <div class="row">
         <div class="col-12">
             <h1 class='w-75'>{{$category->name}}</h1>

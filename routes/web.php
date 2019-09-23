@@ -20,4 +20,11 @@ Route::get('/', function () {
  */
 Route::get('/categories', 'CategoryController@index');
 Route::get('/categories/{category}', 'CategoryController@show');
- /* ----------------*/
+/* ----------------*/
+
+ /**
+  * Products
+  */
+Route::get('/produits', 'ProductController@index');
+Route::get('/produits/{product}', 'ProductController@show');
+/* ----------------*/

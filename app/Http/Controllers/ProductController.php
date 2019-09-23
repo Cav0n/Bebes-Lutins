@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -41,12 +42,13 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
+     * @param  \App\Category $category
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(Category $category, Product $product)
     {
-        return view('pages.products.product')->withProduct($product);
+        return view('pages.products.product')->withProduct($product)->withCategory($category);
     }
 
     /**

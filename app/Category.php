@@ -17,6 +17,24 @@ class Category extends Model
         return $this->belongsToMany('App\Product');
     }
 
+    /**
+     * Generate the breadcrumb of all parent categories of the category
+     */
+    public function generateBreadcrumb()
+    {
+        $parent = $this->parent;
+        $breadcrumb = array($this);
+
+        while($parent != null){
+            $breadcrumb[] = $parent;
+            $parent = $parent->parent;
+        }
+
+        $breadcrumb = array_reverse($breadcrumb);
+
+        return $breadcrumb;
+    }
+
     ////////////////////////////////////////////////////////////////////////////
 
     //

@@ -1,11 +1,3 @@
-<?php $parent = $category->parent;?>
-<?php $breadcrumb = array($category->name); ?>
-@while ($parent!=null)
-    <?php $breadcrumb[] = $parent->name?>
-    <?php $parent = $parent->parent;?>
-@endwhile
-<?php $breadcrumb = array_reverse($breadcrumb); ?>
-
 @extends('templates.template')
 
 @section('content')
@@ -14,13 +6,12 @@
     <div class="row">
         <div class="col-12">
             <p>
-                Accueil
-                @foreach ($breadcrumb as $item)
-                    / {{$item}}
+                <a href='/'>Accueil</a>
+                @foreach ($category->generateBreadcrumb() as $item)
+                    / <a href='/categories/{{$item->id}}'>{{$item->name}}</a>
                 @endforeach
             </p>
         </div>
-
     </div>
     <div class="row">
         <div class="col-12">
@@ -45,10 +36,10 @@
     @if ($category->products != null)
         <div id='products' class='row'>
         @foreach ($category->products as $product)
-        <div class="card m-2" style="width:12rem;cursor:pointer" onclick='load_url("/produits/{{$product->id}}")'>
+        <div class="card m-2" style="width:12rem;cursor:pointer" onclick='load_url("/produits/{{$category->id}}/{{$product->id}}")'>
             <img src="{{asset('images/utils/question-mark.png')}}" class="card-img-top" alt="catégorie">
             <div class="card-body p-3">
-                <a class="card-title text-dark" href='/produits/{{$product->id}}'>{{$product->name}}</a>
+                <a class="card-title text-dark" href='/produits/{{$category->id}}/{{$product->id}}'>{{$product->name}}</a>
                 <p class="card-text">{{$product->price}}€</p>
             </div>
         </div>

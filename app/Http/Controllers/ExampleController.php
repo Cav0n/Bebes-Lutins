@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\example;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class ExampleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        dd(Category::all());
+        //
     }
 
     /**
@@ -24,7 +24,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        echo 'Page de création de catégorie';
+        //
     }
 
     /**
@@ -35,51 +35,51 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\example  $example
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(example $example)
     {
-        return view('pages.categories.category')->withCategory($category);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Category  $category
+     * @param  \App\example  $example
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(example $example)
     {
-        echo 'Page d\'édition de la catégorie';
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
+     * @param  \App\example  $example
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, example $example)
     {
-        dd($request);
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $category
+     * @param  \App\example  $example
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(example $example)
     {
-        echo "TODO";
+        //
     }
 }

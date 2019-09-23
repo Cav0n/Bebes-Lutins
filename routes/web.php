@@ -14,3 +14,10 @@
 Route::get('/', function () {
     return view('homepage');
 });
+
+/**
+ * Categories
+ */
+Route::get('/categories', 'CategoryController@index');
+Route::get('/categories/{category}', 'CategoryController@show');
+ /* ----------------*/

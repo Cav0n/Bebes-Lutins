@@ -44,35 +44,46 @@
                             <div class="col-md-2 mb-3">
                                 <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
                                     <li class="nav-item ">
-                                        <a class="nav-link active" id="category1-tab" data-toggle="tab" href="#category1" role="tab" aria-controls="category1" aria-selected="true">Catégorie 1</a>
+                                        <a class="nav-link active" id="{{App\Category::where('parent_id', null)->orderBy('name', 'asc')->first()->id}}-tab" data-toggle="tab" href="#{{App\Category::where('parent_id', null)->orderBy('name', 'asc')->first()->id}}" role="tab" aria-controls="{{App\Category::where('parent_id', null)->orderBy('name', 'asc')->first()->id}}" aria-selected="true">{{App\Category::where('parent_id', null)->orderBy('name', 'asc')->first()->name}}</a>
                                     </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link" id="category2-tab" data-toggle="tab" href="#category2" role="tab" aria-controls="category2" aria-selected="false">Catégorie 2</a>
-                                    </li>
-                                    <li class="nav-item ">
-                                        <a class="nav-link" id="category3-tab" data-toggle="tab" href="#category3" role="tab" aria-controls="category3" aria-selected="false">Catégorie 3</a>
-                                    </li>
+                                    @foreach (App\Category::where('parent_id', null)->orderBy('name', 'asc')->get()->slice(1) as $category)
+                                        <li class="nav-item ">
+                                            <a class="nav-link" id="{{$category->id}}-tab" data-toggle="tab" href="#{{$category->id}}" role="tab" aria-controls="{{$category->id}}" aria-selected="true">{{$category->name}}</a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <div class="col-md-10">
                                 <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="category1" role="tabpanel" aria-labelledby="category1-tab">
-                                        <h2>Catégorie 1</h2>
-                                        <div class="card" style="width: 11rem;">
-                                            <img src="{{asset('images/utils/question-mark.png')}}" class="card-img-top" alt="catégorie">
-                                            <div class="card-body p-3">
-                                                <p class="card-text">Une belle catégorie</p>
+                                    <div class="tab-pane fade show active" id="{{App\Category::where('parent_id', null)->orderBy('name', 'asc')->first()->id}}" role="tabpanel" aria-labelledby="{{App\Category::where('parent_id', null)->first()->id}}-tab">
+                                        <h2>{{App\Category::where('parent_id', null)->first()->name}}</h2>
+                                        <div class='row'>
+                                            @foreach (App\Category::where('parent_id', App\Category::where('parent_id', null)->first()->id)->orderBy('name', 'asc')->get() as $category)
+                                            <div class="card m-2" style="width:12rem;cursor:pointer">
+                                                <img src="{{asset('images/utils/question-mark.png')}}" class="card-img-top" alt="catégorie">
+                                                <div class="card-body p-3">
+                                                    <p class="card-text">{{$category->name}}</p>
+                                                </div>
                                             </div>
+                                            @endforeach
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="category2" role="tabpanel" aria-labelledby="category2-tab">
-                                        <h2>Catégorie 2</h2>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, eveniet earum. Sed accusantium eligendi molestiae quo hic velit nobis et, tempora placeat ratione rem blanditiis voluptates vel ipsam? Facilis, earum!</p>
+
+                                    @foreach (App\Category::where('parent_id', null)->orderBy('name', 'asc')->get()->slice(1) as $parent)
+                                    <div class="tab-pane fade" id="{{$parent->id}}" role="tabpanel" aria-labelledby="{{$parent->id}}-tab">
+                                        <h2>{{$parent->name}}</h2>
+                                        <div class='row'>
+                                            @foreach (App\Category::where('parent_id', $parent->id)->orderBy('name', 'asc')->get() as $category)
+                                            <div class="card m-2" style="width:12rem;cursor:pointer">
+                                                <img src="{{asset('images/utils/question-mark.png')}}" class="card-img-top" alt="catégorie">
+                                                <div class="card-body p-3">
+                                                    <p class="card-text">{{$category->name}}</p>
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                        </div>
                                     </div>
-                                    <div class="tab-pane fade" id="category3" role="tabpanel" aria-labelledby="category3-tab">
-                                        <h2>Catégorie 3</h2>
-                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque, eveniet earum. Sed accusantium eligendi molestiae quo hic velit nobis et, tempora placeat ratione rem blanditiis voluptates vel ipsam? Facilis, earum!</p>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

@@ -1,7 +1,7 @@
 @import "./footer/footer";
 
 $primary:       #9ce849 !default;
-$secondary:     #7aac46 !default;
+$secondary:     #9d1cda !default;
 $success:       rgb(42, 212, 42) !default;
 $info:          rgb(59, 243, 243) !default;
 $warning:       yellow !default;
@@ -61,7 +61,7 @@ html{
     right:0 !important;
 }
 
-#top-navbar .nav-item:hover{
+#top-navbar .nav-item.desktop:hover{
     box-shadow:0 0 7px 2px rgba(150,150,150,0.6);
 }
 

@@ -1,14 +1,15 @@
-<header class='sticky-top p-0 container-fluid'>
-    <img id='logo' src="{{asset('images/logo.png')}}" class='fixed-top zindex-tooltip transition-fast' alt="Logo Bébés Lutins" style='height:12rem;' onclick='load_url("/")'>
+<header class='sticky-top p-0 container-fluid border-bottom'>
+    <img id='logo' src="{{asset('images/logo.png')}}" class='fixed-top zindex-tooltip transition-fast d-none d-lg-flex' alt="Logo Bébés Lutins" style='height:12rem;' onclick='load_url("/")'>
     <nav id='top-navbar' class="navbar navbar-expand-lg navbar-dark bg-white sticky-top p-0">
-        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        <a class="navbar-brand text-secondary font-weight-bold ml-3 d-flex d-lg-none" href="/" style='font-size:2rem;'>Bébés Lutins</a>
+        <button class="navbar-toggler d-lg-none m-3 bg-secondary" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="collapsibleNavId">
-            <ul class="navbar-nav mt-2 mt-lg-0 w-100">
-                <li class="nav-item px-2 transition" style='cursor:pointer;width:18rem;'>
+        <div class='collapse navbar-collapse' id="collapsibleNavId">
+            <ul class="navbar-nav mt-2 mt-lg-0 w-100 d-none d-lg-flex">
+                <li class="nav-item desktop px-2 transition" style='cursor:pointer;width:18rem;'>
                     <a class="h4 nav-link text-dark text-center mb-0 pb-1 font-weight-bold" href="/contact">Contactez-nous</a>
                     <div class='row justify-content-center mt-1'>
                         <img src="{{asset('images/icons/call-bw.svg')}}" class='mx-2' alt="Téléphone" style='width:1.6rem;'>
@@ -17,20 +18,29 @@
                     </div>
                 </li>
 
-                <li class="nav-item ml-auto px-3 transition" style='cursor:pointer;width:12rem;'>
+                <li class="nav-item desktop ml-auto px-3 transition" style='cursor:pointer;width:12rem;'>
                     <a class="h4 nav-link text-dark text-center mb-0 pb-1 font-weight-bold" href="/espace-client">Mon compte</a>
                     <a class="nav-link text-dark text-center py-0" href="/espace-client/connexion">Se connecter</a>
                     <a class="nav-link text-dark text-center py-0" href="/espace-client/enregistrement">Créer mon compte</a>
                 </li>
-                <li class="nav-item px-4 transition" style="cursor:pointer;width:12rem">
+                <li class="nav-item desktop px-4 transition" style="cursor:pointer;width:12rem">
                     <a class="h4 nav-link text-dark text-center mb-0 pb-1 font-weight-bold" href="/panier">Mon panier</a>
                     <p class='text-center py-0 my-0'>0,00€</p>
                     <p class='text-center py-0 my-0'>0 articles</p>
                 </li>
             </ul>
+            
+            <ul class="navbar-nav mt-2 mx-2 mt-lg-0 w-100 d-flex d-lg-none">
+                <li class="nav-item px-2 transition">
+                    <a class="nav-link text-dark" href="/espace-client">Mon compte</a>
+                </li>
+                <li class="nav-item px-2 transition">
+                    <a class="nav-link text-dark" href="/panier">Mon panier</a>
+                </li>
+            </ul>
         </div>
     </nav>
-    <nav id='bottom-navbar' class="navbar navbar-expand-lg navbar-light bg-white sticky-top border-top border-bottom p-0">
+    <nav id='bottom-navbar' class="navbar navbar-expand-lg navbar-light bg-white sticky-top border-top border-bottom p-0 d-none d-lg-flex">
         <div class="collapse navbar-collapse" id="collapsibleNavId">
             <ul class="navbar-nav mt-2 mt-lg-0 w-100">
                 <li class="nav-item hover-green p-2 transition-fast border-right" style='width:8rem;'>

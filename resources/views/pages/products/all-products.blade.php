@@ -15,7 +15,7 @@
             <div class="row">
                 <div class="col-12 d-inline-flex flex-wrap">
                     @foreach (App\Category::where('isHidden', 0)->where('parent_id', null)->get() as $category)
-                        <p class='category-selector transition-fast px-3 py-1 bg-light my-1 mr-2 ml-0 rounded'>{{$category->name}}</p>
+                        <p class='category-selector transition-fast px-3 py-1 bg-light my-1 mr-2 ml-0 rounded' onclick='switch_category($(this),"{{$category->id}}")'>{{$category->name}}</p>
                     @endforeach
                 </div>
             </div>
@@ -37,4 +37,10 @@
         </div>
     </div>
 </main>
+
+<script>
+function switch_category(selector, category){
+    selector.toggleClass('selected');
+}
+</script>
 @endsection

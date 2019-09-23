@@ -12,9 +12,9 @@
         @include('layouts.public.main-swiper')
     </div>
 
-    <div class='row justify-content-center m-5'>
+    <div class='row justify-content-center mt-5'>
         <div class="col-lg-10 mt-5 mt-md-0">
-            <div class="row">
+            <div class="row justify-content-lg-center">
                 <div class='col-12'>
                     <h4>Bébés Lutins, le spécialiste de la couche lavable écologique et écocitoyenne pour bébé.</h4>
                 </div>
@@ -24,7 +24,7 @@
                         bébé. Nos modèles sont conçus pour s'adapter à la morphologie de bébé, tout en lui offrant confort et bien-être.</p>
                 </div>
                 @foreach (App\Product::all()->take(8) as $product)
-                    <div class="col-6 col-md-4 col-lg-3">
+                    <div class="col-6 col-md-4 col-lg-3" onclick='load_url("/produits/{{$product->id}}")'>
                         <div class="card my-2">
                             <img class="card-img-top" src="{{asset('images/utils/question-mark.png')}}" alt="question-mark">
                             <div class="card-body">
@@ -36,6 +36,13 @@
                         </div> 
                     </div>
                 @endforeach
+                <div class="col-12 my-4">
+                    <div class="row justify-content-center">
+                        <div class="col col-md-3">
+                            <a name="all-products-button" id="all-products-button" class="btn btn-light w-100" href="/produits" role="button">Tous nos produits</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -4,13 +4,7 @@
 <main id='product-main' class='container-fluid my-4 px-4'>
     <div class="row">
         <div class="col-12">
-            <span>
-                <a href='/'>Accueil</a>
-                @foreach ($category->generateBreadcrumb() as $item)
-                    / <a href='/categories/{{$item->id}}'>{{$item->name}}</a>
-                @endforeach
-                / <a href='/produits/{{$category->id}}/{{$product->id}}'>{{$product->name}}</a>
-            </span>
+            @include('layouts.public.breadcrumb-product')
         </div>
     </div>
     <div class='row'>

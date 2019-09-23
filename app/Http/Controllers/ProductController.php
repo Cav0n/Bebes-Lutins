@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        dd(Product::all());
+        return view('pages.products.all-products')->withProducts(Product::where('isHidden', 0)->get());
     }
 
     /**

@@ -26,8 +26,14 @@
     <div class="col-2">
       <p class="h5 font-weight-bold">Nous suivre</p>
       <ul class="list-unstyled">
-        <li><a href='https://www.instagram.com/bebes.lutins' class='text-light'> - Instagram</a></li>
-        <li><a href='https://www.facebook.com/bebes.lutins' class='text-light'> - Facebook</a></li>
+        <li class='social-link-container'>
+          <a href='https://www.instagram.com/bebes.lutins' class='text-dark'>
+          <img src='{{asset('images/icons/instagram.svg')}}'> - Instagram</a>
+        </li>
+        <li class='social-link-container'>
+          <a href='https://www.facebook.com/bebes.lutins' class='text-dark'>
+          <img src='{{asset('images/icons/facebook.svg')}}'s> - Facebook</a>
+        </li>
       </ul>
     </div>
     <div class="col-3">

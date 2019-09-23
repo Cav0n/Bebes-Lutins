@@ -1,5 +1,5 @@
 <header class='sticky-top p-0 container-fluid'>
-    <img id='logo' src="{{asset('images/logo.png')}}" class='fixed-top zindex-tooltip transition-fast' alt="Logo Bébés Lutins" style='height:12rem;'>
+    <img id='logo' src="{{asset('images/logo.png')}}" class='fixed-top zindex-tooltip transition-fast' alt="Logo Bébés Lutins" style='height:12rem;' onclick='load_url("/")'>
     <nav id='top-navbar' class="navbar navbar-expand-lg navbar-dark bg-white sticky-top p-0">
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -59,10 +59,10 @@
                                         <h2>{{App\Category::where('parent_id', null)->first()->name}}</h2>
                                         <div class='row'>
                                             @foreach (App\Category::where('parent_id', App\Category::where('parent_id', null)->first()->id)->orderBy('name', 'asc')->get() as $category)
-                                            <div class="card m-2" style="width:12rem;cursor:pointer">
+                                            <div class="card m-2" style="width:12rem;cursor:pointer" onclick='load_url("/categories/{{$category->id}}")'>
                                                 <img src="{{asset('images/utils/question-mark.png')}}" class="card-img-top" alt="catégorie">
                                                 <div class="card-body p-3">
-                                                    <p class="card-text">{{$category->name}}</p>
+                                                    <a class="card-text text-dark" href='/categories/{{$category->id}}'>{{$category->name}}</a>
                                                 </div>
                                             </div>
                                             @endforeach
@@ -74,10 +74,10 @@
                                         <h2>{{$parent->name}}</h2>
                                         <div class='row'>
                                             @foreach (App\Category::where('parent_id', $parent->id)->orderBy('name', 'asc')->get() as $category)
-                                            <div class="card m-2" style="width:12rem;cursor:pointer">
+                                            <div class="card m-2" style="width:12rem;cursor:pointer" onclick='load_url("/categories/{{$category->id}}")'>
                                                 <img src="{{asset('images/utils/question-mark.png')}}" class="card-img-top" alt="catégorie">
                                                 <div class="card-body p-3">
-                                                    <p class="card-text">{{$category->name}}</p>
+                                                    <a class="card-text text-dark" href='/categories/{{$category->id}}'>{{$category->name}}</a>
                                                 </div>
                                             </div>
                                             @endforeach
@@ -117,5 +117,9 @@
             $('.dropdown-menu').removeClass('show');
         }
     });
+
+    function load_url(url){
+        document.location.href=url;
+    }
     </script>
 </header>

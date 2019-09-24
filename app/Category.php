@@ -18,6 +18,22 @@ class Category extends Model
     }
 
     /**
+     * The categories that belongs to the product.
+     */
+    public function images()
+    {
+        return $this->belongsToMany('App\Image');
+    }
+
+    /**
+     * The products that belongs to the category.
+     */
+    public function tags()
+    {
+        return $this->belongsToMany('App\Tag');
+    }
+
+    /**
      * Generate the breadcrumb of all parent categories of the category
      */
     public function generateBreadcrumb()

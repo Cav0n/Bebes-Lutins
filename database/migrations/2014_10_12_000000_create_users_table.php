@@ -21,9 +21,9 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone', 10);
             $table->string('password');
-            $table->boolean('wantNewsletter');
-            $table->boolean('isAdmin');
-            $table->integer('privileges', 10)->unsigned();
+            $table->boolean('wantNewsletter')->default(1);
+            $table->boolean('isAdmin')->default(0);
+            $table->integer('privileges')->unsigned();
             $table->rememberToken();
             
             $table->timestamps();

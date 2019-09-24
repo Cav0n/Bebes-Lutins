@@ -4,21 +4,21 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OrderItem extends Model
+class Image extends Model
 {
     /**
      * The categories that belongs to the product.
      */
-    public function order()
+    public function products()
     {
-        return $this->belongsTo('App\Order');
+        return $this->belongsToMany('App\Products');
     }
 
     /**
      * The categories that belongs to the product.
      */
-    public function product()
+    public function categories()
     {
-        return $this->belongsTo('App\Product');
+        return $this->belongsToMany('App\Categories');
     }
 }

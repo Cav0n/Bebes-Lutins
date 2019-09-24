@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\OrderItem;
+use App\Voucher;
 use Illuminate\Http\Request;
 
-class OrderItemController extends Controller
+class VoucherController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class OrderItemController extends Controller
      */
     public function index()
     {
-        dd(OrderItem::all());
+        dd(Voucher::all());
     }
 
     /**
@@ -24,7 +24,7 @@ class OrderItemController extends Controller
      */
     public function create()
     {
-        dd('A DESACTIVER - Page de création');
+        dd('/dashboard/voucher/nouveau');
     }
 
     /**
@@ -41,45 +41,45 @@ class OrderItemController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\OrderItem  $orderItem
+     * @param  \App\Voucher  $voucher
      * @return \Illuminate\Http\Response
      */
-    public function show(OrderItem $orderItem)
+    public function show(Voucher $voucher)
     {
-        dd($orderItem);
+        dd($voucher);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\OrderItem  $orderItem
+     * @param  \App\Voucher  $voucher
      * @return \Illuminate\Http\Response
      */
-    public function edit(OrderItem $orderItem)
+    public function edit(Voucher $voucher)
     {
-        dd('A DESACTIVER - Page d\'édition');
+        dd('CREER LA VUE D EDITION');
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\OrderItem  $orderItem
+     * @param  \App\Voucher  $voucher
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrderItem $orderItem)
+    public function update(Request $request, Voucher $voucher)
     {
-        dd("Requête : $request <BR>OrderItem : $orderItem");
+        dd($request . "<BR>" . $voucher);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\OrderItem  $orderItem
+     * @param  \App\Voucher  $voucher
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OrderItem $orderItem)
+    public function destroy(Voucher $voucher)
     {
-        dd($orderItem);
+        dd($voucher);
     }
 }

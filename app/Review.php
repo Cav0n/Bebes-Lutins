@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OrderItem extends Model
+class Review extends Model
 {
     /**
      * The categories that belongs to the product.
      */
-    public function order()
+    public function user()
     {
-        return $this->belongsTo('App\Order');
+        return $this->belongsTo('App\User');
     }
 
     /**

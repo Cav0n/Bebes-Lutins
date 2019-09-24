@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\OrderItem;
+use App\Image;
 use Illuminate\Http\Request;
 
-class OrderItemController extends Controller
+class ImageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class OrderItemController extends Controller
      */
     public function index()
     {
-        dd(OrderItem::all());
+        //
     }
 
     /**
@@ -24,7 +24,7 @@ class OrderItemController extends Controller
      */
     public function create()
     {
-        dd('A DESACTIVER - Page de création');
+        //
     }
 
     /**
@@ -35,51 +35,51 @@ class OrderItemController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\OrderItem  $orderItem
+     * @param  \App\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function show(OrderItem $orderItem)
+    public function show(Image $image)
     {
-        dd($orderItem);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\OrderItem  $orderItem
+     * @param  \App\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function edit(OrderItem $orderItem)
+    public function edit(Image $image)
     {
-        dd('A DESACTIVER - Page d\'édition');
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\OrderItem  $orderItem
+     * @param  \App\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, OrderItem $orderItem)
+    public function update(Request $request, Image $image)
     {
-        dd("Requête : $request <BR>OrderItem : $orderItem");
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\OrderItem  $orderItem
+     * @param  \App\Image  $image
      * @return \Illuminate\Http\Response
      */
-    public function destroy(OrderItem $orderItem)
+    public function destroy(Image $image)
     {
-        dd($orderItem);
+        //
     }
 }

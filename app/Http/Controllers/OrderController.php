@@ -14,7 +14,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        dd(Order::all());
     }
 
     /**
@@ -24,7 +24,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        dd('A DESACTIVER - PAS BESOIN DE PAGE DE CREATION');
     }
 
     /**
@@ -35,7 +35,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
@@ -46,7 +46,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        dd($order);
     }
 
     /**
@@ -57,7 +57,7 @@ class OrderController extends Controller
      */
     public function edit(Order $order)
     {
-        //
+        dd('A DESACTIVER - PAS BESOIN DE PAGE D\'ÉDITION');
     }
 
     /**
@@ -69,7 +69,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        dd("Requête : $request <BR>Order : $order");
     }
 
     /**
@@ -80,6 +80,6 @@ class OrderController extends Controller
      */
     public function destroy(Order $order)
     {
-        //
+        dd($order);
     }
 }

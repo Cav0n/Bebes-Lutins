@@ -1,0 +1,14 @@
+html {
+  background: #edf1f3;
+}
+
+body {
+  background: #edf1f3;
+}
+
+.card {
+  -webkit-box-shadow: 0 2px 3px #cdd8df;
+          box-shadow: 0 2px 3px #cdd8df;
+  border: none;
+}
+/*# sourceMappingURL=dashboard.css.map */

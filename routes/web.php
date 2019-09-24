@@ -38,10 +38,10 @@ Route::get('/espace-client/connexion', 'CustomerAreaController@loginPage'); //TO
 Route::post('/espace-client/connexion', 'CustomerAreaController@login'); //TODO
 Route::get('/espace-client/enregistrement', 'CustomerAreaController@registerPage'); //TODO
 Route::post('/espace-client/enregistrement', 'CustomerAreaController@register'); //TODO
-Route::get('/espace-client/profil', 'CustomerAreaController@profil'); //TODO
-Route::get('/espace-client/commandes', 'CustomerAreaController@orders'); //TODO
+Route::get('/espace-client/profil', 'CustomerAreaController@profilPage'); //TODO
+Route::get('/espace-client/commandes', 'CustomerAreaController@ordersPage'); //TODO
 Route::get('/espace-client/commandes/{order}', 'OrderController@show'); //TODO
-Route::get('/espace-client/adresses', 'CustomerAreaController@address'); //TODO
+Route::get('/espace-client/adresses', 'CustomerAreaController@addressPage'); //TODO
 /* ----------------*/
 
 /**

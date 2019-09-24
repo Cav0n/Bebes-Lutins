@@ -2,8 +2,8 @@
   <div class='footer-copyright text-center py-3'>
     © Bébés Lutins 2019
   </div>
-  <div class='row justify-content-center'>
-    <div class="col-3">
+  <div class='row'>
+    <div class="col-12 col-md-6 col-lg-3 order-0">
       <p class="h5 font-weight-bold">Infos pratiques</p>
       <ul class='list-unstyled'>
         <li><a href='/livraison-et-frais-de-ports' class='text-light'>Livraison et frais de ports</a></li>
@@ -14,7 +14,7 @@
         <li><a href='/plan-du-site' class='text-light'>Plan du site</a></li>
       </ul>
     </div>
-    <div class="col-3">
+    <div class="col-12 col-md-6 col-lg-3 order-1">
       <p class="h5 font-weight-bold">Nous contacter</p>
       <ul class="list-unstyled">
         <li><a href='tel:+33641569165' class='text-light'>06 41 56 91 65</a></li>
@@ -23,20 +23,20 @@
         <li class="mt-3">Katia répondra avec plaisir à vos questions.</li>
       </ul>
     </div>
-    <div class="col-2">
+    <div class="col-12 col-md-6 col-lg-3 order-3 order-lg-2">
       <p class="h5 font-weight-bold">Nous suivre</p>
       <ul class="list-unstyled">
-        <li class='social-link-container bg-light border'>
+        <li class='social-link-container bg-light border col-6 col-md-6 col-lg-8'>
           <a href='https://www.instagram.com/bebes.lutins' class='text-dark' style='text-decoration:none;'>
           <img src='{{asset('images/icons/instagram.svg')}}'> - Instagram</a>
         </li>
-        <li class='social-link-container bg-light border'>
+        <li class='social-link-container bg-light border col-6 col-md-6 col-lg-8'>
           <a href='https://www.facebook.com/bebes.lutins' class='text-dark' style='text-decoration:none;'>
           <img src='{{asset('images/icons/facebook.svg')}}'s> - Facebook</a>
         </li>
       </ul>
     </div>
-    <div class="col-3">
+    <div class="col-12 col-md-6 col-lg-3 order-2 order-lg-3">
       <p class="h5 font-weight-bold">En savoir plus</p>
       <ul class="list-unstyled">
         <li><a href='' class='text-light'>Qui sommes-nous ?</a></li>

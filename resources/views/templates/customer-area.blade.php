@@ -10,13 +10,14 @@
                     <p class='font-weight-light text-muted'>Bienvenue dans votre espace client</p>
                     <ul class="nav nav-tabs card-header-tabs">
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Mon profil</a>
+                            <a class="nav-link @if(Request::is('*/profil')) active @endif text-dark" href="/espace-client/profil">Mon profil</a>
+                        </li>
+                        
+                        <li class="nav-item">
+                            <a class="nav-link @if(Request::is('*/commandes')) active @endif text-dark" href="/espace-client/commandes">Mes commandes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" href="#">Mes commandes</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" href="#">Mes adresses</a>
+                            <a class="nav-link @if(Request::is('*/adresses')) active @endif text-dark" href="/espace-client/adresses">Mes adresses</a>
                         </li>
                     </ul>
                 </div>

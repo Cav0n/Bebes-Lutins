@@ -34,8 +34,8 @@ Route::get('/produits/{category}/{product}', 'ProductController@show');
  * Customer Area
  */
 Route::get('/espace-client', 'CustomerAreaController@index'); //TODO
-Route::get('/espace-client/connexion', 'CustomerAreaController@loginPage'); //TODO
-Route::post('/espace-client/connexion', 'CustomerAreaController@login'); //TODO
+Route::get('/espace-client/connexion', 'CustomerAreaController@loginPage')->name('connexion'); //TODO
+Route::post('/espace-client/connexion', 'CustomerAreaController@login')->name('connexion'); //TODO
 Route::get('/espace-client/enregistrement', 'CustomerAreaController@registerPage'); //TODO
 Route::post('/espace-client/enregistrement', 'CustomerAreaController@register'); //TODO
 Route::get('/espace-client/profil', 'CustomerAreaController@profilPage'); //TODO

@@ -9,24 +9,44 @@ use Illuminate\Support\Facades\Auth;
 
 class CustomerAreaController extends Controller
 {
-    public function index(){
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->only('index', 'profilPage', 'ordersPage', 'addressPage');
+    }
 
+    public function index(){
+        if (Auth::check()) {
+            return redirect('/espace-client/profil');
+        } else return redirect('/espace-client/connexion');
     }
 
     public function loginPage(){
-        return view('pages.customer-area.login');
+        if (Auth::check()) {
+            return redirect('/espace-client/profil');
+        } else return view('pages.customer-area.login');
     }
 
     public function login(Login $request){
-        return redirect('/login');
+        if (Auth::check()) {
+            return redirect('/espace-client/profil');
+        } else return redirect('/login');
     }
 
     public function registerPage(){
-        return view('pages.customer-area.register');
+        if (Auth::check()) {
+            return redirect('/espace-client/profil');
+        } else return view('pages.customer-area.register');
     }
 
     public function register(Request $request){
-        dd($request);
+        if (Auth::check()) {
+            return redirect('/espace-client/profil');
+        } else return redirect('/register');
     }
 
     public function profilPage(){

@@ -19,9 +19,16 @@
                 </li>
 
                 <li class="nav-item desktop ml-auto px-3 transition" style='cursor:pointer;width:12rem;'>
-                    <a class="h4 nav-link text-dark text-center mb-0 pb-1 font-weight-bold" href="/espace-client">Mon compte</a>
-                    <a class="nav-link text-dark text-center py-0" href="/espace-client/connexion">Se connecter</a>
-                    <a class="nav-link text-dark text-center py-0" href="/espace-client/enregistrement">Créer mon compte</a>
+                    @guest
+                        <a class="h4 nav-link text-dark text-center mb-0 pb-1 font-weight-bold" href="/espace-client">Mon compte</a>
+                        <a class="nav-link text-dark text-center py-0" href="/espace-client/connexion">Se connecter</a>
+                        <a class="nav-link text-dark text-center py-0" href="/espace-client/enregistrement">Créer mon compte</a>
+                    @else
+                        <a class="h5 nav-link text-dark text-center mb-0 pb-1 font-weight-bold" href="/espace-client">{{ Auth::user()->firstname }} {{ substr(Auth::user()->lastname, 0, 1) . "." }}</a>
+                        <a class="nav-link text-dark text-center py-0" href="/espace-client/connexion">Mon compte</a>
+                        <form method="POST" action="/logout">@csrf<button type='submit' class="nav-link text-dark text-center py-0 mx-auto btn btn-link" href="/espace-client/enregistrement">Se déconnecter</button></form>
+                    @endguest
+                    
                 </li>
                 <li class="nav-item desktop px-4 transition" style="cursor:pointer;width:12rem">
                     <a class="h4 nav-link text-dark text-center mb-0 pb-1 font-weight-bold" href="/panier">Mon panier</a>

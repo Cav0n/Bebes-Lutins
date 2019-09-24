@@ -1,9 +1,8 @@
 footer .social-link-container {
-  background: black;
   padding: 0.3rem;
   margin: 5px 0;
   border-radius: 2px;
-  border: 1px solid #242424;
+  text-decoration: none;
 }
 
 footer .social-link-container img {
@@ -79,11 +78,11 @@ html {
   background: #9ce849;
 }
 
-#categories-dropdown {
-  position: fixed;
-  width: 100%;
-  left: 0;
-  top: 8rem;
+header #categories-dropdown {
+  margin: 0;
+  border-left: none;
+  border-right: none;
+  border-radius: 0;
 }
 
 /*!

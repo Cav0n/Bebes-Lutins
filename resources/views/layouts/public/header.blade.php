@@ -56,21 +56,21 @@
                 <li class="nav-item hover-green p-2 transition-fast" style='width:10rem;'>
                     <a class="nav-link dropdown-toggle text-dark p-0 text-center" href="#" id="dropdown-open" aria-haspopup="true" aria-expanded="false">Nos produits</a>
                     
-                    <div class="bg-white p-3 dropdown-menu w-100">
+                    <div id="categories-dropdown" class="bg-white dropdown-menu w-100">
                         <div class="row">
-                            <div class="col-md-2 mb-3">
+                            <div class="col-md-2">
                                 <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
                                     <li class="nav-item ">
-                                        <a class="nav-link active" id="{{App\Category::where('parent_id', null)->orderBy('name', 'asc')->first()->id}}-tab" data-toggle="tab" href="#{{App\Category::where('parent_id', null)->orderBy('name', 'asc')->first()->id}}" role="tab" aria-controls="{{App\Category::where('parent_id', null)->orderBy('name', 'asc')->first()->id}}" aria-selected="true">{{App\Category::where('parent_id', null)->orderBy('name', 'asc')->first()->name}}</a>
+                                        <a class="nav-link active rounded-0" id="{{App\Category::where('parent_id', null)->orderBy('name', 'asc')->first()->id}}-tab" data-toggle="tab" href="#{{App\Category::where('parent_id', null)->orderBy('name', 'asc')->first()->id}}" role="tab" aria-controls="{{App\Category::where('parent_id', null)->orderBy('name', 'asc')->first()->id}}" aria-selected="true">{{App\Category::where('parent_id', null)->orderBy('name', 'asc')->first()->name}}</a>
                                     </li>
                                     @foreach (App\Category::where('parent_id', null)->orderBy('name', 'asc')->get()->slice(1) as $category)
                                         <li class="nav-item ">
-                                            <a class="nav-link" id="{{$category->id}}-tab" data-toggle="tab" href="#{{$category->id}}" role="tab" aria-controls="{{$category->id}}" aria-selected="true">{{$category->name}}</a>
+                                            <a class="nav-link rounded-0" id="{{$category->id}}-tab" data-toggle="tab" href="#{{$category->id}}" role="tab" aria-controls="{{$category->id}}" aria-selected="true">{{$category->name}}</a>
                                         </li>
                                     @endforeach
                                 </ul>
                             </div>
-                            <div class="col-md-10">
+                            <div class="col-md-10 mt-2">
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="{{App\Category::where('parent_id', null)->orderBy('name', 'asc')->first()->id}}" role="tabpanel" aria-labelledby="{{App\Category::where('parent_id', null)->first()->id}}-tab">
                                         <h2>{{App\Category::where('parent_id', null)->first()->name}}</h2>

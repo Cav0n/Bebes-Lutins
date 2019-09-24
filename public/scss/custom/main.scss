@@ -61,23 +61,5 @@ html{
     right:0 !important;
 }
 
-#top-navbar .nav-item.desktop:hover{
-    box-shadow:0 0 7px 2px rgba(150,150,150,0.6);
-}
-
-#bottom-navbar .nav-item.hover-green:hover{
-    background: $primary;
-}
-
-#bottom-navbar .nav-item.hover-green.show{
-    background: $primary;
-}
-
-#categories-dropdown{
-    position: fixed;
-    width: 100%;
-    left: 0;
-    top: 8rem;
-}
-
+@import "./header/header.scss";
 @import "../bootstrap/bootstrap";

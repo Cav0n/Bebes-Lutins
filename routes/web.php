@@ -58,3 +58,7 @@ Route::get('/dashboard/clients/avis', 'DashboardController@reviews'); //TODO
 Route::get('/dashboard/reductions', 'DashboardController@vouchers'); //TODO
 Route::get('/dashboard/newsletter', 'DashboardController@newsletters'); //TODO
 /* ----------------*/
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

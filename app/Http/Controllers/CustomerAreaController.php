@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Http\Requests\Login; 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerAreaController extends Controller
 {
@@ -14,8 +17,8 @@ class CustomerAreaController extends Controller
         return view('pages.customer-area.login');
     }
 
-    public function login(Request $request){
-        dd($request);
+    public function login(Login $request){
+        return redirect('/login');
     }
 
     public function registerPage(){

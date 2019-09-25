@@ -50,7 +50,6 @@ class CustomerAreaController extends Controller
     }
 
     public function profilPage(){
-        dd(Auth::user()->id);
         return view('pages.customer-area.profil');
     }
 

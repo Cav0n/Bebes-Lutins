@@ -12,9 +12,9 @@
                 <li class="nav-item desktop px-2 transition" style='cursor:pointer;width:18rem;'>
                     <a class="h4 nav-link text-dark text-center mb-0 pb-1 font-weight-bold" href="/contact">Contactez-nous</a>
                     <div class='row justify-content-center mt-1'>
-                        <img src="{{asset('images/icons/call-bw.svg')}}" class='mx-2' alt="Téléphone" style='width:1.6rem;'>
-                        <img src="{{asset('images/icons/email-bw.svg')}}" class='mx-2' alt="E-mail" style='width:1.6rem;'>
-                        <img src="{{asset('images/icons/map-bw.svg')}}" class='mx-2' alt="Adresse" style='width:1.6rem;'>
+                        <img src="{{asset('images/icons/call-bw.svg')}}" class='mx-2' alt="Téléphone" style='width:1.6rem;height:1.6rem;'>
+                        <img src="{{asset('images/icons/email-bw.svg')}}" class='mx-2' alt="E-mail" style='width:1.6rem;height:1.6rem;'>
+                        <img src="{{asset('images/icons/map-bw.svg')}}" class='mx-2' alt="Adresse" style='width:1.6rem;height:1.6rem;'>
                     </div>
                 </li>
 

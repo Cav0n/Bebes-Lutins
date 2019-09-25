@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     protected $primaryKey = 'id';
+    public $incrementing = false;
 
     use Notifiable;
 

@@ -15,6 +15,6 @@ class Address extends Model
     }
 
     public function orders(){
-        return $this->belongsToMany('App\Order');
+        return $this->hasMany('App\Order');
     }
 }

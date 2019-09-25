@@ -21,7 +21,7 @@ class CreateReviewsTable extends Migration
             $table->boolean('isDeclined')->default(0);
 
             $table->integer('product_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
+            $table->string('user_id');
 
             $table->foreign('product_id')->references('id')->on('products');
             $table->foreign('user_id')->references('id')->on('users');

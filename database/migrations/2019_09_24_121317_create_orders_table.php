@@ -14,7 +14,7 @@ class CreateOrdersTable extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->string('id')->primary('id');
             $table->decimal('shippingPrice',10,2)->unsigned();
             $table->decimal('productsPrice', 10,2)->unsigned();
             $table->integer('paymentMethod')->unsigned();
@@ -22,11 +22,15 @@ class CreateOrdersTable extends Migration
             $table->integer('status')->default(0);
             $table->boolean('isCanceled')->default(0);
 
-            $table->bigInteger('user_id')->unsigned();
-            $table->bigInteger('voucher_id')->unsigned();
+            $table->string('user_id');
+            $table->string('voucher_id')->nullable();
+            $table->string('shipping_address_id');
+            $table->string('billing_address_id')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('voucher_id')->references('id')->on('vouchers');
+            $table->foreign('shipping_address_id')->references('id')->on('addresses');
+            $table->foreign('billing_address_id')->references('id')->on('addresses');
 
             $table->timestamps();
         });

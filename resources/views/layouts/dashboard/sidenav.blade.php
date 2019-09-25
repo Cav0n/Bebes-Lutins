@@ -1,4 +1,4 @@
-<div id='sidenav' class="col-3 d-flex flex-column">
+<div id='sidenav' class="col-3 d-none d-lg-flex flex-column">
     <a href='/dashboard/commandes/en-cours' class='text-dark @if(Request::is('*/commandes*')) active @endif'><img src='{{asset('images/icons/orders.svg')}}' style='width:2.4rem;'> - Commandes</a>
         <a href="/dashboard/commandes/en-cours" class='sublink text-dark @if(Request::is('*/commandes/en-cours')) active @endif'> En cours</a>
         <a href="/dashboard/commandes/terminees" class='sublink text-dark @if(Request::is('*/commandes/terminees')) active @endif'> Terminées</a>

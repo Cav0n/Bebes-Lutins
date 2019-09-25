@@ -38,7 +38,7 @@
                 
                 @include('layouts.dashboard.sidenav')
                 
-                <div class="col-9">
+                <div class="col-12 col-lg-9">
                     @yield('content')
                 </div>
             </div>

@@ -1,5 +1,5 @@
-<header class='mb-3 pb-2 border-bottom sticky-top'>
-    <nav class="navbar navbar-expand-sm navbar-light px-0 px-lg-2">
+<header class='pb-2 border-bottom sticky-top'>
+    <nav class="navbar navbar-expand-md navbar-light px-0 px-lg-2">
             <a class="navbar-brand text-secondary font-weight-bold mb-0" href="/" style='font-size:2rem;'>Bébés Lutins</a>
             <button class="navbar-toggler d-lg-none m-3 bg-secondary" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

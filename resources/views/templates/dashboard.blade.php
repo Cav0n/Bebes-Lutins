@@ -29,7 +29,7 @@
     <title>@yield('title', 'DASHBOARD - Bébés Lutins')</title>
 </head>
 <body>
-    <main class='container-fluid' style="height:2000px;">
+    <main class='container-fluid'>
         <div class="row justify-content-md-center">
             <div class="col-lg-10 col-xl-8">
             @include('layouts.dashboard.header')

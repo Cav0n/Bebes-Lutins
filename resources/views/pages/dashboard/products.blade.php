@@ -1,0 +1,54 @@
+@extends('templates.dashboard')
+
+@section('content')
+<div class="card bg-white my-3">
+    <div class="card-header bg-white">
+        <h1 class='h4 m-0 font-weight-normal'>
+            Produits
+        </h1>
+    </div>
+    <div class="card-body">
+        <form action="/dashboard/produits/recherche" method="POST">
+            <div class="row">
+                <div class="col-9">
+                    <div class="form-group">
+                        <input type="text" name="search" id="search-bar" class="form-control" placeholder="Rechercher un produit" aria-describedby="helpSearch">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <button type="submit" class="btn btn-secondary w-100 border-light">Rechercher</button>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-12 d-flex flex-row flex-wrap">
+                @foreach (App\Category::where('parent_id', null)->get() as $category)
+                    <p class="py-1 px-3 mr-2 bg-light border rounded">{{$category->name}}</p>
+                @endforeach
+            </div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class='border-top-0'>Nom</th>
+                    <th class='border-top-0'>Prix</th>
+                    <th class='border-top-0 align-right'>Caché</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (App\Product::all() as $product)
+                <tr class='@if($product->isHidden){{'hidden'}}@endif'>
+                    <td scope="row">{{$product->name}}<BR> 
+                        @foreach ($product->categories as $category)
+                            {{$category->name}}
+                        @endforeach
+                    </td>
+                    <td>{{$product->price}}€</td>
+                    <td><input type="checkbox" class="form-check-input ml-auto" name="" id="" @if($product->isHidden) {{'checked'}} @endif></td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
+@endsection

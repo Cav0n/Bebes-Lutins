@@ -1,7 +1,7 @@
 @extends('templates.dashboard')
 
 @section('content')
-<div class="card bg-white">
+<div class="card bg-white my-3">
     <div class="card-header bg-white">
         <h1 class='h4 m-0 font-weight-normal'>
             Commandes @if($status != null) {{$status}} @endif
@@ -12,16 +12,16 @@
             <div class="row">
                 <div class="col-9">
                     <div class="form-group">
-                        <input type="text" name="search" id="search-bar" class="form-control" placeholder="Rechercher un produit" aria-describedby="helpSearch">
+                        <input type="text" name="search" id="search-bar" class="form-control" placeholder="Rechercher une commande" aria-describedby="helpSearch">
                     </div>
                 </div>
                 <div class="col-3">
-                    <button type="submit" class="btn btn-secondary w-100">Rechercher</button>
+                    <button type="submit" class="btn btn-secondary w-100 border-light">Rechercher</button>
                 </div>
             </div>
         </form>
         <div class="row">
-            <div class="col-12 d-flex flex-row">
+            <div class="col-12 d-flex flex-row flex-wrap">
                 <p class="py-1 px-3 mr-2 bg-light border rounded">En attente de paiement</p>
                 <p class="py-1 px-3 mr-2 bg-light border rounded">En cours de préparation</p>
                 <p class="py-1 px-3 mr-2 bg-light border rounded">En cours de livraison</p>

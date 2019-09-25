@@ -38,15 +38,15 @@ class DashboardController extends Controller
     }
 
     public function products(){
-
+        return view('pages.dashboard.products');
     }
 
     public function stocks(){
-
+        return view('pages.dashboard.stocks');
     }
 
     public function categories(){
-
+        return view('pages.dashboard.categories');
     }
 
     public function customers(){

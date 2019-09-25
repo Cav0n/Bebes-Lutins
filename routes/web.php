@@ -52,7 +52,7 @@ Route::get('/dashboard/commandes', 'DashboardController@orders'); //TODO
 Route::get('/dashboard/commandes/{status}', 'DashboardController@orders'); //TODO
 Route::get('/dashboard/produits', 'DashboardController@products'); //TODO
 Route::get('/dashboard/produits/stocks', 'DashboardController@stocks'); //TODO
-Route::get('/dashboard/categories', 'DashboardController@categories'); //TODO
+Route::get('/dashboard/produits/categories', 'DashboardController@categories'); //TODO
 Route::get('/dashboard/clients', 'DashboardController@customers'); //TODO
 Route::get('/dashboard/clients/avis', 'DashboardController@reviews'); //TODO
 Route::get('/dashboard/reductions', 'DashboardController@vouchers'); //TODO

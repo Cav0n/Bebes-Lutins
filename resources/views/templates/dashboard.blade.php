@@ -35,9 +35,9 @@
             @include('layouts.dashboard.header')
             
             <div class="row">
-                <div class="col-3 sticky-top">
-                    @include('layouts.dashboard.sidenav')
-                </div>
+                
+                @include('layouts.dashboard.sidenav')
+                
                 <div class="col-9">
                     @yield('content')
                 </div>

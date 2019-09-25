@@ -20,8 +20,21 @@ class DashboardController extends Controller
         return redirect('/dashboard/commandes');
     }
 
-    public function orders(){
-        return view('pages.dashboard.orders');
+    public function orders(string $status = null){
+        switch($status){
+            case 'en-cours':
+                $status = "en cours";
+                break;
+
+            case 'terminees':
+                $status = "terminées";
+                break;
+
+            case 'refusees':
+                $status = "refusées";
+                break;
+        }
+        return view('pages.dashboard.orders')->withStatus($status);
     }
 
     public function products(){

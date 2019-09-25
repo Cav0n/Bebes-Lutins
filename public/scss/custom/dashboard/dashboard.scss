@@ -1,4 +1,5 @@
 $background-color: #edf1f3;
+$secondary:     #9d1cda !default;
 
 html{
     background: $background-color;
@@ -11,4 +12,14 @@ body{
 .card{
     box-shadow: 0 2px 3px #cdd8df;
     border: none;
+}
+
+#sidenav .sublink{
+    margin-left:2.6rem;
+    font-size: 0.9rem;
+}
+
+#sidenav .active{
+    color: $secondary !important;
+    font-weight: 600;
 }

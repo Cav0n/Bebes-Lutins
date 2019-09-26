@@ -50,11 +50,11 @@ class DashboardController extends Controller
     }
 
     public function customers(){
-
+        return view('pages.dashboard.customers');
     }
 
     public function reviews(){
-
+        return view('pages.dashboard.reviews');
     }
 
     public function vouchers(){

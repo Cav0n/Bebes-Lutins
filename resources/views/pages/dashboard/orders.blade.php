@@ -20,34 +20,17 @@
                 </div>
             </div>
         </form>
-        <div class="row">
-            <div class="col-12 d-flex flex-row flex-wrap">
-                <p class="py-1 px-3 mr-2 bg-light border rounded">En attente de paiement</p>
-                <p class="py-1 px-3 mr-2 bg-light border rounded">En cours de préparation</p>
-                <p class="py-1 px-3 mr-2 bg-light border rounded">En cours de livraison</p>
-            </div>
-        </div>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th class='border-top-0'>Date</th>
-                    <th class='border-top-0'>Client</th>
-                    <th class='border-top-0'>Prix</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td scope="row">02/12/2016<BR>21:00</td>
-                    <td>Florian BERNARD</td>
-                    <td>13,99 €</td>
-                </tr>
-                <tr>
-                    <td scope="row">13/10/2019<BR>13:54</td>
-                    <td>Justine MARTHON</td>
-                    <td>25,99 €</td>
-                </tr>
-            </tbody>
-        </table>
+        @switch($status)
+            @case('en cours')
+                @include('pages.dashboard.orders.being-processed')
+                @break
+            @case('terminées')
+                @include('pages.dashboard.orders.ended')
+                @break
+            @case('refusées')
+                @include('pages.dashboard.orders.refused')
+                @break
+        @endswitch
     </div>
 </div>
 @endsection

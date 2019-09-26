@@ -9,7 +9,7 @@
         <a href="/dashboard/produits/stocks" class='sublink text-dark @if(Request::is('*/produits/stocks')) active @endif'> Stocks</a>
     <a href='/dashboard/clients' class='text-dark mt-3 @if(Request::is('*/clients*')) active @endif'><img src='{{asset('images/icons/customers.svg')}}' style='width:2.4rem;'> - Clients</a>
         <a href='/dashboard/clients' class='sublink text-dark @if(Request::is('*/clients')) active @endif'> Tous les clients</a>
-        <a href='/dashbaord/clients/avis' class='sublink text-dark @if(Request::is('*/clients/avis')) active @endif'> Avis clients</a>
+        <a href='/dashboard/clients/avis' class='sublink text-dark @if(Request::is('*/clients/avis')) active @endif'> Avis clients</a>
     <a href='/dashboard/reductions' class='text-dark mt-3 @if(Request::is('*/reductions*')) active @endif'><img src='{{asset('images/icons/vouchers.svg')}}' style='width:2.4rem;'> - Réductions</a>
-    <a href='/dashboad/newsletters' class='text-dark mt-3 @if(Request::is('*/newsletters*')) active @endif'><img src='{{asset('images/icons/newsletters.svg')}}' style='width:2.4rem;'> - Newsletters</a>
+    <a href='/dashboard/newsletters' class='text-dark mt-3 @if(Request::is('*/newsletters*')) active @endif'><img src='{{asset('images/icons/newsletters.svg')}}' style='width:2.4rem;'> - Newsletters</a>
 </div>

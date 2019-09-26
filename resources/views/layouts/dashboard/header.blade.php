@@ -30,10 +30,10 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/commandes/reductions">Réductions</a>
+                        <a class="nav-link" href="/dashboard/reductions">Réductions</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/commandes/newsletters">Newsletters</a>
+                        <a class="nav-link" href="/dashboard/newsletters">Newsletters</a>
                     </li>
                 </ul>
             </div>

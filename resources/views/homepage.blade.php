@@ -23,8 +23,9 @@
                 </div>
                 @foreach (App\Product::all()->take(8) as $product)
                     <div class="col-6 col-sm-4 col-md-4 col-lg-3" onclick='load_url("/produits/{{$product->id}}")'>
-                        <div class="card my-2">
-                            <img class="card-img-top" src="https://www.bebes-lutins.fr/view/assets/images/products/{{$product->mainImage}}" alt="question-mark">
+                        <div class="card product my-2">
+                            <img class="card-img-top main-image" src="{{asset('images/products/'.$product->mainImage)}}" alt="{{$product->name}}" title="{{$product->name}}">
+                            <img class='card-img-top thumbnail' src="{{asset('images/utils/question-mark.png')}}">
                             <div class="card-body">
                                 <p class="card-text">{{$product->name}}</p>
                             </div>
@@ -45,4 +46,21 @@
         </div>
     </div>
 </main>
+
+<script>
+    $(document).ready(function(){
+        card_product = $('.card.product');
+
+        card_product.children('.main-image').show();
+        card_product.children('.thumbnail').hide();
+
+        card_product.hover(function(){
+            $(this).children('.main-image').hide();
+            $(this).children('.thumbnail').show();
+        }).mouseleave(function(){
+            $(this).children('.thumbnail').hide();
+            $(this).children('.main-image').show();
+        });
+    });
+</script>
 @endsection

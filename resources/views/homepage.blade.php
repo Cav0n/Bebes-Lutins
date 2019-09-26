@@ -24,8 +24,10 @@
                 @foreach (App\Product::all()->take(8) as $product)
                     <div class="col-6 col-sm-4 col-md-4 col-lg-3" onclick='load_url("/produits/{{$product->id}}")'>
                         <div class="card product my-2">
-                            <img class="card-img-top main-image" src="{{asset('images/products/'.$product->mainImage)}}" alt="{{$product->name}}" title="{{$product->name}}">
-                            <img class='card-img-top thumbnail' src="{{asset('images/utils/question-mark.png')}}">
+                            <div class='images-container' style='height: calc(100vh / 4.2);'>
+                                <img class="card-img-top main-image h-100" src="{{asset('images/products/'.$product->mainImage)}}" alt="{{$product->name}}" title="{{$product->name}}">
+                                <img class='card-img-top thumbnail d-none h-100' src="{{asset('images/utils/question-mark.png')}}">
+                            </div>
                             <div class="card-body">
                                 <p class="card-text">{{$product->name}}</p>
                             </div>
@@ -49,17 +51,19 @@
 
 <script>
     $(document).ready(function(){
-        card_product = $('.card.product');
+        card_product = $('.images-container');
 
         card_product.children('.main-image').show();
         card_product.children('.thumbnail').hide();
 
-        card_product.hover(function(){
+        card_product.mouseenter(function(){
             $(this).children('.main-image').hide();
-            $(this).children('.thumbnail').show();
+            $(this).children('.thumbnail').removeClass('d-none');
+            $(this).children('.thumbnail').fadeIn(100);
         }).mouseleave(function(){
             $(this).children('.thumbnail').hide();
-            $(this).children('.main-image').show();
+            $(this).children('.thumbnail').addClass('d-none');
+            $(this).children('.main-image').fadeIn(200);
         });
     });
 </script>

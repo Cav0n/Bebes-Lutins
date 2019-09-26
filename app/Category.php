@@ -34,6 +34,14 @@ class Category extends Model
     }
 
     /**
+     * The products that belongs to the category.
+     */
+    public function childs()
+    {
+        return $this->hasMany('App\Category', 'parent_id');
+    }
+
+    /**
      * Generate the breadcrumb of all parent categories of the category
      */
     public function generateBreadcrumb()

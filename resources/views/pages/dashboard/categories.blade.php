@@ -29,11 +29,21 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (App\Category::all() as $category)
-                <tr class='@if($category->isHidden){{'hidden'}}@endif'>
-                    <td scope="row">{{$category->name}}</td>
-                    <td class='text-center'><input type="checkbox" class="form-check-input ml-auto" name="" id="" onclick='switch_isHidden($(this), "{{$category->id}}")' @if($category->isHidden) {{'checked'}} @endif></td>
-                </tr>
+                @foreach (App\Category::where('parent_id', null)->get() as $category)
+                    <tr class='clickable @if($category->isHidden){{'hidden'}}@endif' data-toggle="collapse" data-target=".accordion-{{$category->id}}" class="clickable">
+                        <td scope="row">{{$category->name}}</td>
+                        <td class='text-center'><input type="checkbox" class="form-check-input ml-auto" name="" id="" onclick='switch_isHidden($(this), "{{$category->id}}")' @if($category->isHidden) {{'checked'}} @endif></td>
+                    </tr>
+                    
+                    @foreach ($category->childs as $child)
+                    <tr class='accordion-{{$category->id}} collapse'>
+                        <td>
+                            <div class="pl-4">{{$child->name}}</div>
+                            <td class='text-center'><input type="checkbox" class="form-check-input ml-auto" name="" id="" onclick='switch_isHidden($(this), "{{$child->id}}")' @if($child->isHidden) {{'checked'}} @endif></td>
+                        </td>
+                    </tr>
+                    @endforeach
+                
                 @endforeach
             </tbody>
         </table>
@@ -52,6 +62,7 @@
                 stop_loading();
                 checkbox.parent().parent().toggleClass('hidden');
             });
+            
         }
         </script>
 @endsection

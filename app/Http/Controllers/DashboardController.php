@@ -17,7 +17,7 @@ class DashboardController extends Controller
     }
 
     public function index(){
-        return redirect('/dashboard/commandes');
+        return redirect('/dashboard/commandes/en-cours');
     }
 
     public function orders(string $status = null){
@@ -32,6 +32,10 @@ class DashboardController extends Controller
 
             case 'refusees':
                 $status = "refusées";
+                break;
+
+            default:
+                return redirect('/dashboard/commandes/en-cours');
                 break;
         }
         return view('pages.dashboard.orders')->withStatus($status);

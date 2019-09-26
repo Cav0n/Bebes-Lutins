@@ -45,7 +45,7 @@
                         @endforeach
                     </td>
                     <td>{{$product->price}}€</td>
-                    <td><input type="checkbox" class="form-check-input ml-auto" name="" id="" onclick='switch_isHidden($(this), "{{$product->id}}")' @if($product->isHidden) {{'checked'}} @endif></td>
+                    <td><div class="form-group"><input type="checkbox" class="form-check-input ml-auto" name="" id="" onclick='switch_isHidden($(this), "{{$product->id}}")' @if($product->isHidden) {{'checked'}} @endif></div></td>
                 </tr>
                 @endforeach
             </tbody>

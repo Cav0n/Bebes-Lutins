@@ -61,9 +61,9 @@
                             <div class="col-md-2">
                                 <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
                                     <li class="nav-item ">
-                                        <a class="nav-link active rounded-0" id="{{App\Category::where('parent_id', null)->orderBy('name', 'asc')->first()->id}}-tab" data-toggle="tab" href="#{{App\Category::where('parent_id', null)->orderBy('name', 'asc')->first()->id}}" role="tab" aria-controls="{{App\Category::where('parent_id', null)->orderBy('name', 'asc')->first()->id}}" aria-selected="true">{{App\Category::where('parent_id', null)->orderBy('name', 'asc')->first()->name}}</a>
+                                        <a class="nav-link active rounded-0" id="{{App\Category::where('parent_id', null)->where('isHidden', false)->orderBy('rank', 'asc')->first()->id}}-tab" data-toggle="tab" href="#{{App\Category::where('parent_id', null)->where('isHidden', false)->orderBy('rank', 'asc')->first()->id}}" role="tab" aria-controls="{{App\Category::where('parent_id', null)->where('isHidden', false)->orderBy('rank', 'asc')->first()->id}}" aria-selected="true">{{App\Category::where('parent_id', null)->where('isHidden', false)->orderBy('rank', 'asc')->first()->name}}</a>
                                     </li>
-                                    @foreach (App\Category::where('parent_id', null)->orderBy('name', 'asc')->get()->slice(1) as $category)
+                                    @foreach (App\Category::where('parent_id', null)->orderBy('rank', 'asc')->where('isHidden', false)->get()->slice(1) as $category)
                                         <li class="nav-item ">
                                             <a class="nav-link rounded-0" id="{{$category->id}}-tab" data-toggle="tab" href="#{{$category->id}}" role="tab" aria-controls="{{$category->id}}" aria-selected="true">{{$category->name}}</a>
                                         </li>
@@ -72,10 +72,10 @@
                             </div>
                             <div class="col-md-10 mt-2">
                                 <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="{{App\Category::where('parent_id', null)->orderBy('name', 'asc')->first()->id}}" role="tabpanel" aria-labelledby="{{App\Category::where('parent_id', null)->first()->id}}-tab">
-                                        <h2>{{App\Category::where('parent_id', null)->first()->name}}</h2>
+                                    <div class="tab-pane fade show active" id="{{App\Category::where('parent_id', null)->where('isHidden', false)->orderBy('rank', 'asc')->first()->id}}" role="tabpanel" aria-labelledby="{{App\Category::where('parent_id', null)->where('isHidden', false)->first()->id}}-tab">
+                                        <h2>{{App\Category::where('parent_id', null)->where('isHidden', false)->orderBy('rank', 'asc')->first()->name}}</h2>
                                         <div class='row'>
-                                            @foreach (App\Category::where('parent_id', App\Category::where('parent_id', null)->first()->id)->orderBy('name', 'asc')->get() as $category)
+                                            @foreach (App\Category::where('parent_id', App\Category::where('parent_id', null)->orderBy('rank','asc')->first()->id)->orderBy('rank', 'asc')->get() as $category)
                                             <div class="card m-2" style="width:12rem;cursor:pointer" onclick='load_url("/categories/{{$category->id}}")'>
                                                 <img src="{{asset('images/utils/question-mark.png')}}" class="card-img-top" alt="catégorie">
                                                 <div class="card-body p-3">
@@ -86,11 +86,11 @@
                                         </div>
                                     </div>
 
-                                    @foreach (App\Category::where('parent_id', null)->orderBy('name', 'asc')->get()->slice(1) as $parent)
+                                    @foreach (App\Category::where('parent_id', null)->where('isHidden', false)->orderBy('rank', 'asc')->get()->slice(1) as $parent)
                                     <div class="tab-pane fade" id="{{$parent->id}}" role="tabpanel" aria-labelledby="{{$parent->id}}-tab">
                                         <h2>{{$parent->name}}</h2>
                                         <div class='row'>
-                                            @foreach (App\Category::where('parent_id', $parent->id)->orderBy('name', 'asc')->get() as $category)
+                                            @foreach (App\Category::where('parent_id', $parent->id)->orderBy('rank', 'asc')->get() as $category)
                                             <div class="card m-2" style="width:12rem;cursor:pointer" onclick='load_url("/categories/{{$category->id}}")'>
                                                 <img src="{{asset('images/utils/question-mark.png')}}" class="card-img-top" alt="catégorie">
                                                 <div class="card-body p-3">

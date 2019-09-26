@@ -53,6 +53,7 @@ Route::get('/dashboard/commandes/{status}', 'DashboardController@orders'); //TOD
 Route::get('/dashboard/produits', 'DashboardController@products'); //TODO
 Route::get('/dashboard/produits/stocks', 'DashboardController@stocks'); //TODO
 Route::get('/dashboard/produits/categories', 'DashboardController@categories'); //TODO
+Route::get('/dashboard/produits/categories/rang/{category}/{rank}', 'CategoryController@updateRank');
 Route::get('/dashboard/clients', 'DashboardController@customers'); //TODO
 Route::get('/dashboard/clients/avis', 'DashboardController@reviews'); //TODO
 Route::get('/dashboard/reductions', 'DashboardController@vouchers'); //TODO

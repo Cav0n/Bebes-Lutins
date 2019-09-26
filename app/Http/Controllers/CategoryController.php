@@ -8,11 +8,23 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     /**
+     * @param  \App\Category  $category
      * Switch 'IsHidden' attribute to hide or not category.
      */
     public function switchIsHidden(Category $category)
     {
         $category->isHidden = !$category->isHidden;
+        $category->save();
+    }
+
+    /**
+     * @param \App\Category $category
+     * @param int $rank
+     * Update rank for a category
+     */
+    public function updateRank(Category $category, int $rank)
+    {
+        $category->rank = $rank;
         $category->save();
     }
 

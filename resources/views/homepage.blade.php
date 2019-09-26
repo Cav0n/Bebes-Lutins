@@ -7,14 +7,14 @@
 @endsection
 
 @section('content')
-<main class='container-fluid mt-5 mt-md-0'>
+<main class='container-fluid mt-3 mt-md-0'>
     @include('layouts.public.main-swiper')
 
     <div class='row justify-content-center mx-md-5 mt-lg-4'>
         <div class="col-lg-10 mt-md-0">
             <div class="row justify-content-lg-center">
                 <div class='col-12'>
-                    <h4>Bébés Lutins, le spécialiste de la couche lavable écologique et écocitoyenne pour bébé.</h4>
+                    <h2 class='h3 font-weight-bold'>Bébés Lutins, le spécialiste de la couche lavable écologique et écocitoyenne pour bébé.</h4>
                 </div>
                 <div class="col-12">
                     <p class='text-justify'>Bébés Lutins vous propose sa gamme de couches lavables pour bébé et accessoires, confectionnés en France par nos couturières.
@@ -24,7 +24,7 @@
                 @foreach (App\Product::all()->take(8) as $product)
                     <div class="col-6 col-sm-4 col-md-4 col-lg-3" onclick='load_url("/produits/{{$product->id}}")'>
                         <div class="card my-2">
-                            <img class="card-img-top" src="{{asset('images/utils/question-mark.png')}}" alt="question-mark">
+                            <img class="card-img-top" src="https://www.bebes-lutins.fr/view/assets/images/products/{{$product->mainImage}}" alt="question-mark">
                             <div class="card-body">
                                 <p class="card-text">{{$product->name}}</p>
                             </div>

@@ -61,4 +61,18 @@ table tr .btn {
   color: #9d1cda !important;
   font-weight: 600;
 }
+
+#sidenav img {
+  height: 2rem;
+  width: 2rem;
+}
+
+#sidenav svg {
+  height: 2rem;
+  width: 2rem;
+}
+
+#sidenav .active svg {
+  fill: #9d1cda;
+}
 /*# sourceMappingURL=dashboard.css.map */

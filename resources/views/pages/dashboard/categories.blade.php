@@ -71,7 +71,6 @@ function update_rank(new_rank, category_id){
         }
     })
     .done(function( data ) {
-        stop_loading();
         window.location.href='/dashboard/produits/categories'
     });
 }
@@ -87,7 +86,7 @@ function switch_isHidden(checkbox, category_id){
     })
     .done(function( data ) {
         stop_loading();
-        checkbox.parent().parent().toggleClass('hidden');
+        checkbox.parent().parent().parent().toggleClass('hidden');
     });
 }
 </script>

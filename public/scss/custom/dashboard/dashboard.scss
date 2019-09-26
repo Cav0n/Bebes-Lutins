@@ -63,3 +63,17 @@ table tr .btn{
     color: $secondary !important;
     font-weight: 600;
 }
+
+#sidenav img{
+    height:2rem;
+    width:2rem;
+}
+
+#sidenav svg{
+    height:2rem;
+    width:2rem;
+}
+
+#sidenav .active svg{
+    fill:$secondary;
+}

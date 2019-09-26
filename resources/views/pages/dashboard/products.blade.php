@@ -63,7 +63,7 @@ function switch_isHidden(checkbox, product_id){
     })
     .done(function( data ) {
         stop_loading();
-        checkbox.parent().parent().toggleClass('hidden');
+        checkbox.parent().parent().parent().toggleClass('hidden');
     });
 }
 </script>

@@ -8,6 +8,15 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     /**
+     * Switch 'IsHidden' attribute to hide or not category.
+     */
+    public function switchIsHidden(Category $category)
+    {
+        $category->isHidden = !$category->isHidden;
+        $category->save();
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

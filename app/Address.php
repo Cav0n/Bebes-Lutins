@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Address extends Model
 {
+    protected $primaryKey = 'id';
+    public $incrementing = false;
+
     /**
      * The categories that belongs to the product.
      */

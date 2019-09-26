@@ -47,5 +47,6 @@
             </div>
         </div>
     </main>
+    @include('components.dashboard.loader')
 </body>
 </html>

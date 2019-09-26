@@ -1,4 +1,4 @@
-<div class="form-group">
+<div class="form-group mb-0">
     <select class='custom-select'>
         <option value='0' @if($order->status == 0) selected @endif>En attente de paiement</option>
         <option value='1' @if($order->status == 1) selected @endif>En cours de traitement</option>

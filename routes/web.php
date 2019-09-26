@@ -57,6 +57,9 @@ Route::get('/dashboard/clients', 'DashboardController@customers'); //TODO
 Route::get('/dashboard/clients/avis', 'DashboardController@reviews'); //TODO
 Route::get('/dashboard/reductions', 'DashboardController@vouchers'); //TODO
 Route::get('/dashboard/newsletter', 'DashboardController@newsletters'); //TODO
+
+Route::get('/dashboard/switch_is_hidden_product/{product}', 'ProductController@switchIsHidden');
+Route::get('/dashboard/switch_is_hidden_category/{category}', 'CategoryController@switchIsHidden');
 /* ----------------*/
 
 Auth::routes();

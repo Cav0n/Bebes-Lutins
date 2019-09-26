@@ -8,7 +8,16 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-        /**
+    /**
+     * Switch 'IsHidden' attribute to hide or not product.
+     */
+    public function switchIsHidden(Product $product)
+    {
+        $product->isHidden = !$product->isHidden;
+        $product->save();
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

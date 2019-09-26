@@ -45,11 +45,26 @@
                         @endforeach
                     </td>
                     <td>{{$product->price}}€</td>
-                    <td><input type="checkbox" class="form-check-input ml-auto" name="" id="" @if($product->isHidden) {{'checked'}} @endif></td>
+                    <td><input type="checkbox" class="form-check-input ml-auto" name="" id="" onclick='switch_isHidden($(this), "{{$product->id}}")' @if($product->isHidden) {{'checked'}} @endif></td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
 </div>
+
+<script>
+function switch_isHidden(checkbox, product_id){
+    $.ajax({
+        url: "/dashboard/switch_is_hidden_product/"+product_id,
+        beforeSend: function() {
+            init_loading();
+        }
+    })
+    .done(function( data ) {
+        stop_loading();
+        checkbox.parent().parent().toggleClass('hidden');
+    });
+}
+</script>
 @endsection

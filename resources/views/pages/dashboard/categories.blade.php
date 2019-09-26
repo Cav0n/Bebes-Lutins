@@ -32,11 +32,26 @@
                 @foreach (App\Category::all() as $category)
                 <tr class='@if($category->isHidden){{'hidden'}}@endif'>
                     <td scope="row">{{$category->name}}</td>
-                    <td class='text-center'><input type="checkbox" class="form-check-input ml-auto" name="" id="" @if($category->isHidden) {{'checked'}} @endif></td>
+                    <td class='text-center'><input type="checkbox" class="form-check-input ml-auto" name="" id="" onclick='switch_isHidden($(this), "{{$category->id}}")' @if($category->isHidden) {{'checked'}} @endif></td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
 </div>
+
+<script>
+        function switch_isHidden(checkbox, category_id){
+            $.ajax({
+                url: "/dashboard/switch_is_hidden_category/"+category_id,
+                beforeSend: function() {
+                    init_loading();
+                }
+            })
+            .done(function( data ) {
+                stop_loading();
+                checkbox.parent().parent().toggleClass('hidden');
+            });
+        }
+        </script>
 @endsection

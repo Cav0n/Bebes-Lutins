@@ -20,22 +20,22 @@
                 </div>
             </div>
         </form>
-        <table class="table" style='table-layout:fixed'>
+        <table class="table" style=''>
             <thead>
-                <tr>
-                    <th class='border-top-0'>Inscription</th>
-                    <th class='border-top-0'>Nom</th>
-                    <th class='border-top-0'>Email</th>
-                    <th class='border-top-0'>Téléphone</th>
+                <tr class='d-flex'>
+                    <th class='border-top-0 col-3'>Nom</th>
+                    <th class='border-top-0 col-5'>Email</th>
+                    <th class='border-top-0 col-3'>Téléphone</th>
+                    <th class='border-top-0 col-1' ></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (App\User::all() as $user)
-                <tr>
-                    <td scope="row">{{$user->created_at}}</td>
-                    <td>{{$user->firstname}} {{$user->lastname}}</td>
-                    <td>{{$user->email}}</td>
-                    <td>{{$user->phone}}</td>
+                <tr class='d-flex'>
+                    <td class='col-3'>{{$user->firstname}} {{$user->lastname}}</td>
+                    <td class='col-5'>{{$user->email}}</td>
+                    <td class='col-3'>{{$user->phone}}</td>
+                    <td class='col-1'><img src='{{asset('images/icons/eye.svg')}}' style='height:1.4rem;width:1.4rem;'></td>
                 </tr>
                 @endforeach
             </tbody>

@@ -46,23 +46,26 @@ class ShoppingCartController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(ShoppingCart $shoppingCart = null, Request $request)
-    {
+    {   
         $user_id = null;
-
-        //dd(session('shopping_cart'));
-
         if($shoppingCart == null){
 
-            if(session('shopping_cart') != null){
-                $shoppingCart = session('shopping_cart');
-            }
-            else if(Auth::check()){
+            if(Auth::check()){
                 $user = Auth::user();
                 $user_id = $user->id;
-                $shoppingCart = $user->shopping_cart_active;
-            }
 
-            if($shoppingCart == null){
+                if(session('shopping_cart') != null){ // Verify if user was connected and update session if so
+                    $shoppingCart = session('shopping_cart');
+                    $shoppingCart->user_id = $user_id;
+                    $shoppingCart->save();
+                } else if($user->shopping_cart_active->first() != null){ // Else verify if user had shopping cart active
+                    $shoppingCart = $user->shopping_cart_active;
+                }
+            } else if(session('shopping_cart') != null){ // If user not connected verify shopping cart in session
+                $shoppingCart = session('shopping_cart');
+            }
+            
+            if($shoppingCart == null){ // If shopping cart is null create a new one
                 $shoppingCart = new ShoppingCart();
                 $shoppingCart->id = uniqid();
                 $shoppingCart->user_id = $user_id;
@@ -72,8 +75,6 @@ class ShoppingCartController extends Controller
 
             session(['shopping_cart' => $shoppingCart]);
         }
-
-        //dd(session('shopping_cart'));
 
         return view('pages.shopping-cart.index')->withShoppingCart($shoppingCart);
     }

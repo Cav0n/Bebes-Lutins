@@ -11,7 +11,7 @@
         <div class='card-footer text-muted d-flex px-0 py-1 border'>
             <p class='mb-0 w-100 text-center'>{{$product->price}}€</p>
         </div>
-        <div class="card-footer text-muted d-flex p-0 rounded-0 border-0">
+        <div class="card-footer text-muted d-none d-sm-flex p-0 rounded-0 border-0">
             <button type="button" class="btn btn-secondary h-100 w-100 px-0 py-2 rounded-0" onclick='add_to_cart("{{$product->id}}", "{{$product->name}}")' style='font-size:0.9rem !important;'>Ajouter au panier</button> 
         </div>
     </div> 

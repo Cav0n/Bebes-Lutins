@@ -65,6 +65,10 @@ html {
   right: 0 !important;
 }
 
+.pagination {
+  margin: 1rem auto !important;
+}
+
 .popup-container {
   height: 100vh !important;
   width: 102vw !important;

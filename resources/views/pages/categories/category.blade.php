@@ -25,7 +25,7 @@
     <div class='row'>
         @foreach (App\Category::where('parent_id', $category->id)->get() as $child)
         <div class="card m-2" style="width:12rem;cursor:pointer" onclick='load_url("/categories/{{$child->id}}")'>
-            <img src="{{asset('images/utils/question-mark.png')}}" class="card-img-top" alt="catégorie">
+            <img src="{{asset('images/categories/'. $child->mainImage)}}" class="card-img-top" alt="catégorie">
             <div class="card-body p-3">
                 <a class="card-text text-dark" href='/categories/{{$child->id}}'>{{$child->name}}</a>
             </div>
@@ -36,13 +36,7 @@
     @if ($category->products != null)
         <div id='products' class='row'>
         @foreach ($category->products as $product)
-        <div class="card m-2" style="width:12rem;cursor:pointer" onclick='load_url("/produits/{{$category->id}}/{{$product->id}}")'>
-            <img src="{{asset('images/utils/question-mark.png')}}" class="card-img-top" alt="catégorie">
-            <div class="card-body p-3">
-                <a class="card-title text-dark" href='/produits/{{$category->id}}/{{$product->id}}'>{{$product->name}}</a>
-                <p class="card-text">{{$product->price}}€</p>
-            </div>
-        </div>
+        @include('components.public.product-display')
         @endforeach
         </div>
     @endif

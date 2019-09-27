@@ -77,7 +77,7 @@
                                         <div class='row'>
                                             @foreach (App\Category::where('parent_id', App\Category::where('parent_id', null)->orderBy('rank','asc')->first()->id)->orderBy('rank', 'asc')->get() as $category)
                                             <div class="card m-2" style="width:12rem;cursor:pointer" onclick='load_url("/categories/{{$category->id}}")'>
-                                                <img src="{{asset('images/utils/question-mark.png')}}" class="card-img-top" alt="catégorie">
+                                                <img src="{{asset('images/categories/'. $category->mainImage)}}" class="card-img-top" alt="catégorie">
                                                 <div class="card-body p-3">
                                                     <a class="card-text text-dark" href='/categories/{{$category->id}}'>{{$category->name}}</a>
                                                 </div>
@@ -92,7 +92,7 @@
                                         <div class='row'>
                                             @foreach (App\Category::where('parent_id', $parent->id)->orderBy('rank', 'asc')->get() as $category)
                                             <div class="card m-2" style="width:12rem;cursor:pointer" onclick='load_url("/categories/{{$category->id}}")'>
-                                                <img src="{{asset('images/utils/question-mark.png')}}" class="card-img-top" alt="catégorie">
+                                                <img src="{{asset('images/categories/'. $category->mainImage)}}" class="card-img-top" alt="catégorie">
                                                 <div class="card-body p-3">
                                                     <a class="card-text text-dark" href='/categories/{{$category->id}}'>{{$category->name}}</a>
                                                 </div>

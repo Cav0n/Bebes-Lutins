@@ -19,6 +19,7 @@
                     @endforeach
                 </div>
             </div>
+            {{ $products->links() }}
             <div id='products' class="row">
                 @foreach ($products as $product)
                     @include('components.public.product-display')

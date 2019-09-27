@@ -1,8 +1,5 @@
-
 <?php $firstThumbnail = $product->images->first(); ?>
-<?php echo public_path() . '/images/products/' . $product->mainImage; ?>
-@if (File::exists(public_path() . '/images/products/' . $product->mainImage))
-    <div class="col-6 col-sm-4 col-md-4 col-lg-3">
+<div class="col-6 col-sm-4 col-md-4 col-lg-3">
     <div class="card product my-2 transition-fast">
         <div class='images-container @if($firstThumbnail == null) no-thumbnails @endif' onclick='load_url("/produits/{{$product->id}}")'>
             <img class="card-img-top main-image h-100" src="{{asset('images/products/'.$product->mainImage)}}" alt="{{$product->name}}" title="{{$product->name}}">
@@ -17,4 +14,3 @@
         </div>
     </div> 
 </div>
-@endif

@@ -24,7 +24,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('pages.products.all-products')->withProducts(Product::where('isHidden', 0)->get());
+        return view('pages.products.all-products')->withProducts(Product::where('isHidden', 0)->paginate(16));
     }
 
     /**

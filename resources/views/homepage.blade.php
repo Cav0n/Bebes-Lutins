@@ -10,7 +10,7 @@
 <main class='container-fluid mt-3 mt-md-0'>
     @include('layouts.public.main-swiper')
 
-    <div class='row justify-content-center mx-md-5 mt-lg-4'>
+    <div class='row justify-content-center mx-md-5 mt-md-4'>
         <div class="col-lg-10 mt-md-0">
             <div class="row justify-content-lg-center">
                 <div class='col-12'>
@@ -22,20 +22,7 @@
                         bébé. Nos modèles sont conçus pour s'adapter à la morphologie de bébé, tout en lui offrant confort et bien-être.</p>
                 </div>
                 @foreach (App\Product::all()->take(8) as $product)
-                    <div class="col-6 col-sm-4 col-md-4 col-lg-3" onclick='load_url("/produits/{{$product->id}}")'>
-                        <div class="card product my-2">
-                            <div class='images-container' style='height: calc(100vh / 4.2);'>
-                                <img class="card-img-top main-image h-100" src="{{asset('images/products/'.$product->mainImage)}}" alt="{{$product->name}}" title="{{$product->name}}">
-                                <img class='card-img-top thumbnail d-none h-100' src="{{asset('images/utils/question-mark.png')}}">
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">{{$product->name}}</p>
-                            </div>
-                            <div class="card-footer text-muted">
-                                {{$product->price}}
-                            </div>
-                        </div> 
-                    </div>
+                    @include('components.public.product-display')
                 @endforeach
                 <div class="col-12 my-4">
                     <div class="row justify-content-center">
@@ -49,6 +36,37 @@
     </div>
 </main>
 
+<div id='add_to_cart_popup_container' class='popup-container row justify-content-center fixed-top d-none'>
+    <div id='add_to_cart_popup' class='popup m-auto p-3 bg-light col-6 h-25'>
+        <p class='popup_title h3'>.. a été ajouté à votre panier</p>
+        <p class='popup_description'>Vous avez ajouté .. à votre panier, souhaitez vous poursuivre vos achats ou accéder à votre panier ?</p>
+        <div class='button-container d-flex'>
+            <button type="button" class="btn btn-primary rounded-0 ml-auto" onclick='dissmiss_popup()'>Poursuivre mes achats</button>
+            <button type="button" class="btn btn-secondary rounded-0">Accéder a mon panier</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function add_to_cart(product_id, product_name)
+{
+    popup_container = $('#add_to_cart_popup_container');
+    popup_container.removeClass('d-none');
+    popup_container.children('#add_to_cart_popup').children('.popup_title').text(
+        product_name + ' a été ajouté à votre panier'
+    );
+    popup_container.children('#add_to_cart_popup').children('.popup_description').text(
+        'Vous avez ajouté '+ product_name +' à votre panier, souhaitez vous poursuivre vos achats ou accéder à votre panier ?'
+    );
+}
+
+function dissmiss_popup()
+{
+    popup_container = $('#add_to_cart_popup_container');
+    popup_container.addClass('d-none');
+}
+</script>
+
 <script>
     $(document).ready(function(){
         card_product = $('.images-container');
@@ -57,13 +75,17 @@
         card_product.children('.thumbnail').hide();
 
         card_product.mouseenter(function(){
-            $(this).children('.main-image').hide();
-            $(this).children('.thumbnail').removeClass('d-none');
-            $(this).children('.thumbnail').fadeIn(100);
+            if(!$(this).hasClass('no-thumbnails')){
+                $(this).children('.main-image').hide();
+                $(this).children('.thumbnail').removeClass('d-none');
+                $(this).children('.thumbnail').show();
+            }
         }).mouseleave(function(){
-            $(this).children('.thumbnail').hide();
-            $(this).children('.thumbnail').addClass('d-none');
-            $(this).children('.main-image').fadeIn(200);
+            if(!$(this).hasClass('no-thumbnails')){
+                $(this).children('.thumbnail').hide();
+                $(this).children('.thumbnail').addClass('d-none');
+                $(this).children('.main-image').show();
+            }
         });
     });
 </script>

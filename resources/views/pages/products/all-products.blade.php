@@ -21,17 +21,7 @@
             </div>
             <div id='products' class="row">
                 @foreach ($products as $product)
-                    <div class="col-6 col-md-4 col-lg-3">
-                        <div class="card my-2" onclick='load_url("/produits/{{$product->id}}")'>
-                            <img class="card-img-top" src="{{asset('images/utils/question-mark.png')}}" alt="question-mark">
-                            <div class="card-body">
-                                <p class="card-text">{{$product->name}}</p>
-                            </div>
-                            <div class="card-footer text-muted">
-                                {{$product->price}}
-                            </div>
-                        </div> 
-                    </div>
+                    @include('components.public.product-display')
                 @endforeach
             </div>
         </div>

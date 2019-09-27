@@ -103,5 +103,12 @@ html{
     object-position: center;
 }
 
+button .svg{
+    height:1.4rem;
+    width: 1.4rem;
+    fill:white;
+    margin: auto;
+}
+
 @import "./header/header.scss";
 @import "../bootstrap/bootstrap";

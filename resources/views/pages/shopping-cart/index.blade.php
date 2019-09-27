@@ -3,7 +3,7 @@
 @section('content')
 <main id='main-shopping-cart' class='container-fluid'>
     <div class="row justify-content-center py-5 bg-light">
-        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4">
+        <div class="col-12 col-sm-10 col-md-8 col-xl-6">
             @if (count($shoppingCart->items) <= 0)
                 <div class="card my-5 p-0 border rounded-0">
                     <div class="card-body border-0 row justify-content-center">

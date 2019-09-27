@@ -15,8 +15,9 @@ class CreateShoppingCartsTable extends Migration
     {
         Schema::create('shopping_carts', function (Blueprint $table) {
             $table->string('id')->primary('id');
+            $table->boolean('isActive')->default(0);
             
-            $table->string('user_id');
+            $table->string('user_id')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users');
 

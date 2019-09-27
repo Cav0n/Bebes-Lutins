@@ -20,7 +20,7 @@ Route::get('/', function () {
  */
 Route::get('/categories', 'CategoryController@index');
 Route::get('/categories/{category}', 'CategoryController@show');
-/* ----------------*/
+/* ---------------- */
 
 /**
 * Products
@@ -28,11 +28,19 @@ Route::get('/categories/{category}', 'CategoryController@show');
 Route::get('/produits', 'ProductController@index');
 Route::get('/produits/{product}', 'ProductController@show');
 Route::get('/produits/{category}/{product}', 'ProductController@show');
-/* ----------------*/
+/* ---------------- */
+
+/**
+ * Panier
+ */
+Route::get('/panier', 'ShoppingCartController@show');
+ /* ---------------- */
 
 /**
  * Customer Area
  */
+Auth::routes();
+
 Route::get('/espace-client', 'CustomerAreaController@index'); //TODO
 Route::get('/espace-client/connexion', 'CustomerAreaController@loginPage')->name('connexion'); //TODO
 Route::post('/espace-client/connexion', 'CustomerAreaController@login')->name('connexion'); //TODO
@@ -42,7 +50,7 @@ Route::get('/espace-client/profil', 'CustomerAreaController@profilPage'); //TODO
 Route::get('/espace-client/commandes', 'CustomerAreaController@ordersPage'); //TODO
 Route::get('/espace-client/commandes/{order}', 'OrderController@show'); //TODO
 Route::get('/espace-client/adresses', 'CustomerAreaController@addressPage'); //TODO
-/* ----------------*/
+/* ---------------- */
 
 /**
 * Dashboard
@@ -61,8 +69,4 @@ Route::get('/dashboard/newsletter', 'DashboardController@newsletters'); //TODO
 
 Route::get('/dashboard/switch_is_hidden_product/{product}', 'ProductController@switchIsHidden');
 Route::get('/dashboard/switch_is_hidden_category/{category}', 'CategoryController@switchIsHidden');
-/* ----------------*/
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+/* ---------------- */

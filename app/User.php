@@ -40,6 +40,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function shopping_carts()
+    {
+        return $this->hasMany('App\ShoppingCart');
+    }
+
+    public function shopping_cart_active()
+    {
+        return $this->hasMany('App\ShoppingCart')->where('isActive', 1)->take(1);
+    }
+
     /**
      * The categories that belongs to the product.
      */

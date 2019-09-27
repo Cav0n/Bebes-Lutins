@@ -10,7 +10,7 @@
 <main id='all-products-container' class='container-fluid mt-5 mt-md-0'>
     <div class='row justify-content-center m-5'>
         <div class="col-lg-10 mt-5 mt-md-0">
-            <span id='breadcrumb'>/ <a href='/' class='text-dark'>Accueil</a> / <a href='/produits' class='text-dark'>Tous nos produits</a></span>
+            <span id='breadcrumb' class='small'>/ <a href='/' class='text-dark'>Accueil</a> / <a href='/produits' class='text-dark'>Tous nos produits</a></span>
             <h1>Tous nos produits</h1>
             <div class="row">
                 <div class="col-12 d-inline-flex flex-wrap">

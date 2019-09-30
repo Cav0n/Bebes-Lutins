@@ -8,6 +8,8 @@
 @section('head-options')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('scss/custom/shopping-cart/index.css')}}">
+    <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/loading/loading.css')}}">
+    <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/loading/loading-btn.css')}}">
 @endsection
 
 @section('content')
@@ -37,7 +39,13 @@
                                     <td><img class='product-image' src='{{asset('images/products/' . $item->product->mainImage)}}' alt='Image du produit'></td>
                                     <td scope="row">{{$item->product->name}}</td>
                                     <td>{{$item->quantity}}</td>
-                                    <td onclick='remove_item_from_shopping_cart("{{$item->id}}")'><img class='delete-icon svg' src="{{asset('images/icons/delete.svg')}}" alt="Supprimer"></td>
+
+                                    <td>
+                                        <button type="button" class="btn btn-primary ld-ext-right" onclick='remove_item_from_shopping_cart($(this), "{{$item->id}}")'>
+                                            Supprimer
+                                            <div class="ld ld-ring ld-spin"></div>
+                                        </button>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -56,16 +64,17 @@ $.ajaxSetup({
     }
 });
 
-function remove_item_from_shopping_cart(item_id){
+function remove_item_from_shopping_cart(btn, item_id){
     $.ajax({
         url: "/panier/remove_item/" + item_id,
         type: 'DELETE',
         data: { },
         success: function(data){
             console.log('Produit bien retiré du panier.');
+            document.location.href = '/panier'
         },
         beforeSend: function() {
-
+            btn.addClass('running');
         }
     })
     .done(function( data ) {

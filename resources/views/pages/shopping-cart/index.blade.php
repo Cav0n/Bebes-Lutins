@@ -15,7 +15,16 @@
                     </div>
                 </div>
             @else
-                no
+                <div class="card my-5 p-0 border rounded-0">
+                    c
+                    <div class="card-body border-0 row justify-content-center">
+                        <h4 class="col-12 card-title text-center font-weight-bold">Votre panier est vide 😢</h4>
+                        <p class="col-12 card-text text-center">Découvrez nos superbes articles !</p>
+                        <div class='button-container d-flex justify-content-center col-6'>
+                            <a name="discover-button" id="discover-button" class="btn btn-secondary text-center w-100" href="/" role="button">Découvrir</a>
+                        </div>
+                    </div>
+                </div>
             @endif
         </div>
     </div>

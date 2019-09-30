@@ -45,7 +45,12 @@ class User extends Authenticatable
         return $this->hasMany('App\ShoppingCart');
     }
 
-    public function shopping_cart_active()
+    public function hasActiveShoppingCarts()
+    {
+        return $this->hasMany('App\ShoppingCart')->where('isActive', 1)->exists();
+    }
+
+    public function active_shopping_cart()
     {
         return $this->hasMany('App\ShoppingCart')->where('isActive', 1)->take(1);
     }

@@ -52,6 +52,10 @@ class ShoppingCartItemController extends Controller
         $item->shopping_cart_id = $shopping_cart_id;
         $item->product_id = $request['product_id'];
         $item->save();
+
+        $shopping_cart = session('shopping_cart');
+        $shopping_cart->items[] = $item;
+        session(['shopping_cart' => $shopping_cart]);
         
         echo json_encode($response);
     }
@@ -99,5 +103,11 @@ class ShoppingCartItemController extends Controller
     public function destroy(ShoppingCartItem $shoppingCartItem)
     {
         $shoppingCartItem->delete();
+
+        $shopping_cart = session('shopping_cart');
+
+        $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
+        
+        session(['shopping_cart' => $shopping_cart]);
     }
 }

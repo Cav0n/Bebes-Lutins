@@ -47,36 +47,7 @@ class ShoppingCartController extends Controller
      */
     public function show(ShoppingCart $shoppingCart = null, Request $request)
     {   
-        $user_id = null;
-        if($shoppingCart == null){
-
-            if(Auth::check()){
-                $user = Auth::user();
-                $user_id = $user->id;
-
-                if(session('shopping_cart') != null){ // Verify if user was connected and update session if so
-                    $shoppingCart = session('shopping_cart');
-                    $shoppingCart->user_id = $user_id;
-                    $shoppingCart->save();
-                } else if($user->shopping_cart_active->first() != null){ // Else verify if user had shopping cart active
-                    $shoppingCart = $user->shopping_cart_active;
-                }
-            } else if(session('shopping_cart') != null){ // If user not connected verify shopping cart in session
-                $shoppingCart = session('shopping_cart');
-            }
-            
-            if($shoppingCart == null){ // If shopping cart is null create a new one
-                $shoppingCart = new ShoppingCart();
-                $shoppingCart->id = uniqid();
-                $shoppingCart->user_id = $user_id;
-                $shoppingCart->isActive = true;
-                $shoppingCart->save();
-            }
-
-            session(['shopping_cart' => $shoppingCart]);
-        }
-
-        return view('pages.shopping-cart.index')->withShoppingCart($shoppingCart);
+        return view('pages.shopping-cart.index');
     }
 
     /**
@@ -113,14 +84,5 @@ class ShoppingCartController extends Controller
         //
     }
 
-    public static function createNew()
-    {
-        $shoppingCart = new ShoppingCart();
-        $shoppingCart->id = uniqid();
-        if(Auth::check()) { $shoppingCart->user_id = Auth::user()->id; }
-        $shoppingCart->isActive = true;
-        $shoppingCart->save();
-
-        session(['shopping_cart' => $shoppingCart]);
-    }
+    
 }

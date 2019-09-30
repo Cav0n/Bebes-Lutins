@@ -1,3 +1,7 @@
+<?php $shopping_cart = session('shopping_cart'); 
+//session()->forget('shopping_cart');
+?>
+
 @extends('templates.template')
 
 @section('head-options')
@@ -10,7 +14,7 @@
 <main id='main-shopping-cart' class='container-fluid'>
     <div class="row justify-content-center py-5 bg-light">
         <div class="col-12 col-sm-10 col-md-8 col-xl-6">
-            @if (count($shoppingCart->items) <= 0)
+            @if (count($shopping_cart->items) <= 0)
                 <div class="card my-5 p-0 border rounded-0">
                     <div class="card-body border-0 row justify-content-center">
                         <h4 class="col-12 card-title text-center font-weight-bold">Votre panier est vide 😢</h4>
@@ -28,7 +32,7 @@
                     <div class="card-body border-0">
                         <table class="table">
                             <tbody>
-                                @foreach ($shoppingCart->items as $item)
+                                @foreach ($shopping_cart->items as $item)
                                 <tr>
                                     <td><img class='product-image' src='{{asset('images/products/' . $item->product->mainImage)}}' alt='Image du produit'></td>
                                     <td scope="row">{{$item->product->name}}</td>

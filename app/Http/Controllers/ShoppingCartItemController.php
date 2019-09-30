@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ShoppingCartItem;
+use App\ShoppingCart;
 use Illuminate\Http\Request;
 
 class ShoppingCartItemController extends Controller
@@ -35,7 +36,24 @@ class ShoppingCartItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $response = array();
+        
+        $shopping_cart_id = $request['shopping_cart_id'];
+        
+        if(ShoppingCart::where('id', $shopping_cart_id)->exists() == 0){
+            $response['message'] = $shopping_cart_id . " ";
+            ShoppingCartController::createNew();
+            $shopping_cart_id = session('shopping_cart')->id;
+            $response['message'] = $response['message'] . $shopping_cart_id;
+        }
+
+        $item = new ShoppingCartItem();
+        $item->quantity = $request['quantity'];
+        $item->shopping_cart_id = $shopping_cart_id;
+        $item->product_id = $request['product_id'];
+        $item->save();
+        
+        echo json_encode($response);
     }
 
     /**

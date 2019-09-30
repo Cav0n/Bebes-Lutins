@@ -99,7 +99,7 @@ class ShoppingCartController extends Controller
      */
     public function update(Request $request, ShoppingCart $shoppingCart)
     {
-        //
+        
     }
 
     /**
@@ -111,5 +111,16 @@ class ShoppingCartController extends Controller
     public function destroy(ShoppingCart $shoppingCart)
     {
         //
+    }
+
+    public static function createNew()
+    {
+        $shoppingCart = new ShoppingCart();
+        $shoppingCart->id = uniqid();
+        if(Auth::check()) { $shoppingCart->user_id = Auth::user()->id; }
+        $shoppingCart->isActive = true;
+        $shoppingCart->save();
+
+        session(['shopping_cart' => $shoppingCart]);
     }
 }

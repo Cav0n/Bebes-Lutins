@@ -3,7 +3,8 @@
 @section('head-options')
     {{-- Swiper JS --}}
     <script src="{{asset('js/swiper/swiper.min.js')}}"></script>
-    <link media="all" type="text/css" rel="stylesheet" href="{{asset('scss/swiper/swiper.css')}}">
+    <link media="all" type="text/css" rel="stylesheet" href="{{asset('scss/swiper/swiper.min.css')}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
 @section('content')
@@ -42,22 +43,43 @@
         <p class='popup_description'>Vous avez ajouté .. à votre panier, souhaitez vous poursuivre vos achats ou accéder à votre panier ?</p>
         <div class='button-container d-flex'>
             <button type="button" class="btn btn-primary rounded-0 ml-auto" onclick='dissmiss_popup()'>Poursuivre mes achats</button>
-            <button type="button" class="btn btn-secondary rounded-0">Accéder a mon panier</button>
+            <button type="button" class="btn btn-secondary rounded-0" onclick='load_url("/panier")'>Accéder a mon panier</button>
         </div>
     </div>
 </div>
 
 <script>
-function add_to_cart(product_id, product_name)
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+function add_to_cart(product_id, product_name, shopping_cart_id)
 {
-    popup_container = $('#add_to_cart_popup_container');
-    popup_container.removeClass('d-none');
-    popup_container.children('#add_to_cart_popup').children('.popup_title').text(
-        product_name + ' a été ajouté à votre panier'
-    );
-    popup_container.children('#add_to_cart_popup').children('.popup_description').text(
-        'Vous avez ajouté '+ product_name +' à votre panier, souhaitez vous poursuivre vos achats ou accéder à votre panier ?'
-    );
+    $.ajax({
+        url: "/panier/add_item",
+        type: 'POST',
+        data: { product_id: product_id, shopping_cart_id : shopping_cart_id, quantity: 1, },
+        success: function(data){
+            data =  $.parseJSON(data);
+            console.log(data.message);
+            popup_container = $('#add_to_cart_popup_container');
+            popup_container.removeClass('d-none');
+            popup_container.children('#add_to_cart_popup').children('.popup_title').text(
+                product_name + ' a été ajouté à votre panier'
+            );
+            popup_container.children('#add_to_cart_popup').children('.popup_description').text(
+                'Vous avez ajouté '+ product_name +' à votre panier, souhaitez vous poursuivre vos achats ou accéder à votre panier ?'
+            );
+        },
+        beforeSend: function() {
+
+        }
+    })
+    .done(function( data ) {
+        
+    });    
 }
 
 function dissmiss_popup()

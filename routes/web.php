@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('homepage');
-});
+Route::get('/', 'PageController@index');
 
 /**
  * Categories
@@ -34,6 +32,7 @@ Route::get('/produits/{category}/{product}', 'ProductController@show');
  * Panier
  */
 Route::get('/panier', 'ShoppingCartController@show');
+Route::post('/panier/add_item', 'ShoppingCartItemController@store');
  /* ---------------- */
 
 /**

@@ -38,4 +38,12 @@ class Product extends Model
     {
         return $this->belongsToMany('App\Tag');
     }
+
+    /**
+     * 
+     */
+    public function shoppingCartItems()
+    {
+        return $this->hasMany('App\ShoppingCartItem');
+    }
 }

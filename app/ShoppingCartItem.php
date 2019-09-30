@@ -13,4 +13,12 @@ class ShoppingCartItem extends Model
     {
         return $this->belongsTo('App\ShoppingCart');
     }
+
+    /**
+     * 
+     */
+    public function product()
+    {
+        return $this->belongsTo('App\Product');
+    }
 }

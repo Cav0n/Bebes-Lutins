@@ -98,6 +98,6 @@ class ShoppingCartItemController extends Controller
      */
     public function destroy(ShoppingCartItem $shoppingCartItem)
     {
-        //
+        $shoppingCartItem->delete();
     }
 }

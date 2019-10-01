@@ -1,7 +1,7 @@
 @extends('templates.template')
 
 @section('content')
-<main class='container-fluid mt-md-0'>
+<main class='container-fluid mt-md-0 dim-background'>
     <div class="row justify-content-center">
         <div class="col-12 col-sm-10 col-md-8 col-xl-6">
             <div class="card my-5">

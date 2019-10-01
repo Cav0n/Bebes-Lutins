@@ -1,11 +1,11 @@
 @extends('templates.template')
 
 @section('content')
-<main class='container-fluid mt-md-0'>
+<main class='container-fluid mt-md-0 dim-background'>
     <div class="row justify-content-center">
         <div class="col-12 col-sm-10 col-md-8 col-lg-6">
-            <div class="card my-5">
-                <div class="card-header">
+            <div class="card my-5 border-0 rounded-0">
+                <div class="card-header bg-white">
                     Connexion
                 </div>
                 <div class="card-body">
@@ -32,7 +32,7 @@
                         <button type="submit" class="btn btn-primary">Connexion</button>
                     </form>
                 </div>
-                <div class="card-footer text-muted">
+                <div class="card-footer bg-white text-muted">
                     <a href='/espace-client/enregistrement' class="text-muted">Créer mon compte</a>
                 </div>
             </div>

@@ -1,9 +1,12 @@
 <?php 
 $shopping_cart = session('shopping_cart'); 
 $total_price = 0.00;
+$total_quantity = 0;
+
 if(count($shopping_cart->items) > 0){
     foreach ($shopping_cart->items as $item) {
-        $total_price += $item->product->price;
+        $total_quantity += $item->quantity;
+        $total_price += $item->product->price * $item->quantity;
     }
 }
 ?>
@@ -44,7 +47,7 @@ if(count($shopping_cart->items) > 0){
                 <li class="nav-item desktop px-4 transition" style="cursor:pointer;width:12rem">
                     <a class="h4 nav-link text-dark text-center mb-0 pb-1 font-weight-bold" href="/panier">Mon panier</a>
                     <p id='shopping_cart_price' class='text-center py-0 my-0'>{{number_format($total_price, 2)}} €</p>
-                    <p class='text-center py-0 my-0'>{{count($shopping_cart->items)}} articles</p>
+                    <p class='text-center py-0 my-0'>{{$total_quantity}} articles</p>
                 </li>
             </ul>
             

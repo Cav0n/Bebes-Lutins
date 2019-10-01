@@ -56,6 +56,9 @@ class ShoppingCartItemController extends Controller
 
         $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
         session(['shopping_cart' => $shopping_cart]);
+
+        $response = ['item_id' => $item->id];
+        echo json_encode($response);
     }
 
     /**
@@ -93,7 +96,12 @@ class ShoppingCartItemController extends Controller
             'quantity' => 'numeric|max:100|required',
         ]);
         
-        $shoppingCartItem->quantity = $request['quantity'];
+        if(isset($request['add'])){
+            $shoppingCartItem->quantity = $shoppingCartItem->quantity + $request['quantity'];
+        } else {
+            $shoppingCartItem->quantity = $request['quantity'];
+        }
+
         $shoppingCartItem->save();
 
         $shopping_cart = session('shopping_cart');

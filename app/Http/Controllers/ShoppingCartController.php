@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ShoppingCart;
+use App\Voucher;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -70,7 +71,12 @@ class ShoppingCartController extends Controller
      */
     public function update(Request $request, ShoppingCart $shoppingCart)
     {
-        
+        if(isset($request['add_voucher'])){
+            $voucher_code = $request['voucher_code'];
+            $request->validate([
+                'voucher_code' => 'required|exists:voucher',
+            ]);
+        }
     }
 
     /**

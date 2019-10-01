@@ -43,7 +43,7 @@ if(count($shopping_cart->items) > 0){
                 </li>
                 <li class="nav-item desktop px-4 transition" style="cursor:pointer;width:12rem">
                     <a class="h4 nav-link text-dark text-center mb-0 pb-1 font-weight-bold" href="/panier">Mon panier</a>
-                    <p class='text-center py-0 my-0'>{{number_format($total_price, 2)}} €</p>
+                    <p id='shopping_cart_price' class='text-center py-0 my-0'>{{number_format($total_price, 2)}} €</p>
                     <p class='text-center py-0 my-0'>{{count($shopping_cart->items)}} articles</p>
                 </li>
             </ul>

@@ -25,4 +25,9 @@ class ShoppingCart extends Model
     {
         return $this->hasMany('App\ShoppingCartItem');
     }
+
+    public function voucher()
+    {
+        return $this->belongsTo('App\Voucher');
+    }
 }

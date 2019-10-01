@@ -16,4 +16,8 @@ class Voucher extends Model
     {
         return $this->hasMany('App\Order');
     }
+
+    public function shopping_carts(){
+        return $this->hasMany('App\ShoppingCart');
+    }
 }

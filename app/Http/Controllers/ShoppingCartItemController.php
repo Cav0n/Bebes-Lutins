@@ -36,28 +36,26 @@ class ShoppingCartItemController extends Controller
      */
     public function store(Request $request)
     {
-        $response = array();
-        
+        $shopping_cart = session('shopping_cart');
+
         $shopping_cart_id = $request['shopping_cart_id'];
-        
-        if(ShoppingCart::where('id', $shopping_cart_id)->exists() == 0){
-            $response['message'] = $shopping_cart_id . " ";
-            ShoppingCartController::createNew();
-            $shopping_cart_id = session('shopping_cart')->id;
-            $response['message'] = $response['message'] . $shopping_cart_id;
+        $product_id = $request['product_id'];
+        $quantity = $request['quantity'];
+
+        if(ShoppingCartItem::where('shopping_cart_id', $shopping_cart_id)->where('product_id', $product_id)->exists()){
+            $item = ShoppingCartItem::where('shopping_cart_id', $shopping_cart_id)->where('product_id', $product_id)->first();
+            $item->quantity = $item->quantity + $quantity;
+            $item->save();
+        } else {
+            $item = new ShoppingCartItem();
+            $item->quantity = $quantity;
+            $item->shopping_cart_id = $shopping_cart_id;
+            $item->product_id = $product_id;
+            $item->save();
         }
 
-        $item = new ShoppingCartItem();
-        $item->quantity = $request['quantity'];
-        $item->shopping_cart_id = $shopping_cart_id;
-        $item->product_id = $request['product_id'];
-        $item->save();
-
-        $shopping_cart = session('shopping_cart');
-        $shopping_cart->items[] = $item;
+        $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
         session(['shopping_cart' => $shopping_cart]);
-        
-        echo json_encode($response);
     }
 
     /**

@@ -42,7 +42,7 @@
         <p class='popup_title h3'>.. a été ajouté à votre panier</p>
         <p class='popup_description'>Vous avez ajouté .. à votre panier, souhaitez vous poursuivre vos achats ou accéder à votre panier ?</p>
         <div class='button-container d-flex'>
-            <button type="button" class="btn btn-primary rounded-0 ml-auto" onclick='dissmiss_popup()'>Poursuivre mes achats</button>
+            <button type="button" class="btn btn-primary rounded-0 ml-auto" onclick='refresh_page()'>Poursuivre mes achats</button>
             <button type="button" class="btn btn-secondary rounded-0" onclick='load_url("/panier")'>Accéder a mon panier</button>
         </div>
     </div>
@@ -55,15 +55,13 @@ $.ajaxSetup({
     }
 });
 
-function add_to_cart(product_id, product_name, shopping_cart_id)
+function add_to_cart(product_id, product_name, product_price, shopping_cart_id)
 {
     $.ajax({
         url: "/panier/add_item",
         type: 'POST',
         data: { product_id: product_id, shopping_cart_id : shopping_cart_id, quantity: 1, },
         success: function(data){
-            data =  $.parseJSON(data);
-            console.log(data.message);
             popup_container = $('#add_to_cart_popup_container');
             popup_container.removeClass('d-none');
             popup_container.children('#add_to_cart_popup').children('.popup_title').text(
@@ -82,10 +80,8 @@ function add_to_cart(product_id, product_name, shopping_cart_id)
     });    
 }
 
-function dissmiss_popup()
-{
-    popup_container = $('#add_to_cart_popup_container');
-    popup_container.addClass('d-none');
+function refresh_page(){
+    location.reload();
 }
 </script>
 

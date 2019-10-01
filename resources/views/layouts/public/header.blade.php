@@ -9,6 +9,9 @@ if(count($shopping_cart->items) > 0){
         $total_price += $item->product->price * $item->quantity;
     }
 }
+
+$parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'asc')->where('isHidden', false)->get();
+
 ?>
 
 
@@ -51,12 +54,23 @@ if(count($shopping_cart->items) > 0){
                 </li>
             </ul>
             
-            <ul class="navbar-nav mt-2 mx-2 mt-lg-0 w-100 d-flex d-lg-none">
-                <li class="nav-item px-2 transition">
+            <ul class="navbar-nav mt-2 px-3 mt-lg-0 d-flex d-lg-none">
+                <li class="nav-item transition">
                     <a class="nav-link text-dark" href="/espace-client">Mon compte</a>
                 </li>
-                <li class="nav-item px-2 transition">
+                <li class="nav-item transition">
                     <a class="nav-link text-dark" href="/panier">Mon panier</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Nos produits</a>
+                    <div class="dropdown-menu">
+                        @foreach ($parent_categories as $category)
+                            <a class="dropdown-item text-dark px-1 py-2" href="/categories/{{$category->id}}">{{$category->name}}</a>
+                        @endforeach
+                    </div>
+                </li>
+                <li class="nav-item transition">
+                    <a class="nav-link text-dark" href="/panier">A propos</a>
                 </li>
             </ul>
         </div>

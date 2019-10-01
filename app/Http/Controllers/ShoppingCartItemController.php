@@ -89,7 +89,16 @@ class ShoppingCartItemController extends Controller
      */
     public function update(Request $request, ShoppingCartItem $shoppingCartItem)
     {
-        //
+        $request->validate([
+            'quantity' => 'numeric|max:100|required',
+        ]);
+        
+        $shoppingCartItem->quantity = $request['quantity'];
+        $shoppingCartItem->save();
+
+        $shopping_cart = session('shopping_cart');
+        $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
+        session(['shopping_cart' => $shopping_cart]);
     }
 
     /**

@@ -60,67 +60,51 @@ $total = $total_price + $shipping_price;
                 {{--  ITEMS  --}}
                 <div class="col-12 col-sm-10 col-lg-5 my-md-2 my-lg-0">
 
-                    {{--  Shopping Cart Items for desktops and tablets  --}}
-                    <div class="card p-0 border-0 rounded-0 d-none d-sm-flex">
-                        <div class="card-header bg-white">
-                            <h1 class='h5 mb-0'>Votre panier</h1>
-                        </div>
-                        <div class="card-body border-0">
-                            @foreach ($shopping_cart->items as $item)
-                            <div class="row m-0 my-3">
-                                <div class="col-2 p-0">
-                                    <img class='product-image w-100' src='{{asset('images/products/' . $item->product->mainImage)}}' alt='Image du produit' style='object-fit:cover;'>                            
-                                </div>
-                                <div class="col-5 d-flex flex-column justify-content-center">
-                                    <p class='mb-0'>{{$item->product->name}}</p>
-                                </div>
-                                <div class="col-1 d-flex flex-column justify-content-center">
-                                    <p class='mb-0'>{{$item->quantity}}</p>
-                                </div>
-                                <div class="col-2 d-flex flex-column justify-content-center">
-                                    <p class='mb-0'>{{number_format($item->product->price, 2)}} €</p>
-                                </div>
-                                <div class="col-2 d-flex flex-column justify-content-center p-0">
-                                    <button type="button" class="btn btn-danger ld-over-inverse" onclick='remove_item_from_shopping_cart($(this), "{{$item->id}}")' style='font-size:0.8rem;'>
-                                        Supprimer
-                                        <div class="ld ld-ring ld-spin"></div>
-                                    </button>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-
                     {{--  Shopping Cart Items for mobiles and tiny tablets  --}}
                     @foreach ($shopping_cart->items as $item)
-                    <div class="card p-0 m-0 border-0 rounded-0 d-sm-none mb-2" style="height:7rem;">
+                    <div class="card p-0 m-0 border-0 rounded-0 mb-2">
                         <div class="row m-0 p-0">
-                            <div class="col-4 p-0">
+                            <div class="col-4 p-0" style='min-height:8rem; max-height:10rem;'>
                                 <img class='product-image w-100 h-100' src='{{asset('images/products/' . $item->product->mainImage)}}' alt='Image du produit' style='object-fit:cover;'>                        
                             </div>
-                            <div class="col-8 p-2">
-                                <div class="col-12 p-0 d-flex">
-                                    <div class="col-10 p-0 pr-2" style='line-height:0'>
-                                        <a href='/produits/{{$item->product->id}}' class='mb-0 font-weight-bold text-dark' style='font-size:0.7rem;line-height:0.9rem;'>{{$item->product->name}}</a> 
-                                    </div>
-                                    <div class="col-2 p-1 d-flex flex-column justify-content-center">
-                                        <button type="button" class="btn btn-danger p-0 w-100" style="font-size:0.7rem;">X</button>
+                            <div class="col-8 p-2 d-flex flex-column">
+                                <div class="row m-0">
+                                    <div class="col-12 p-0">
+                                        <a href='/produits/{{$item->product->id}}' class='mb-0 font-weight-bold text-dark d-flex d-md-none item-name-cropped'>{{$item->product->name}}</a> 
+                                        <a href='/produits/{{$item->product->id}}' class='mb-0 font-weight-bold text-dark d-none d-md-flex item-name-full'>{{$item->product->name}}</a> 
                                     </div>
                                 </div>
-                                <div class="col-12 p-0">
-                                    <p class='mb-0 small'>{{number_format($item->product->price, 2)}} €</p>                                       
+                                <div class="row m-0 mb-auto">
+                                    <div class="col-12 p-0">
+                                        <p class='mb-0 small'>Prix unitaire : {{number_format($item->product->price, 2)}} €</p>                                       
+                                    </div>
                                 </div>
-                                <div class="col-12 p-0">
-                                    <div class="form-group row m-0">
-                                        <div class="col-4 p-0 d-flex flex-column justify-content-center">
-                                            <label for="quantity" class='small mb-0'>Quantité :</label>
-                                        </div>
-                                        <div class="col-8">
-                                            <select class="form-control" name="quantity" id="quantity" style='font-size:0.7rem;height:1.4rem;'>
-                                            <option selected>1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            </select>
+                                <div class="row m-0">
+                                    <div class="col-12 p-0">
+                                        <div class="form-group row m-0">
+                                            <div class="col-12 col-sm-6 col-lg-7 d-flex p-0 order-1 order-lg-1">
+                                                <div class='d-flex flex-column justify-content-center'>
+                                                    <label for="quantity" class='small mb-0 pr-2'>Quantité :</label>
+                                                </div>
+                                                <div class='d-flex flex-column justify-content-center ld-over'>
+                                                    <select class="form-control" name="quantity" id="quantity" style='font-size:0.7rem;height:1.4rem;max-width:3rem;' onchange="change_quantity($(this), '{{$item->id}}')">
+                                                        <option value='0'>Supprimer</option>
+                                                        @for ($quantity = 1; ($quantity < $item->product->stock) && ($quantity <= 10); $quantity++)
+                                                            <option value='{{$quantity}}' @if($item->quantity == $quantity) selected @endif>{{$quantity}}</option>
+                                                        @endfor
+                                                    </select>
+                                                    <div class="ld ld-ring ld-spin"></div>
+                                                </div>
+                                                <div class='svg-container ld-over d-flex flex-column justify-content-center ml-2' style='width:1rem;' onclick='remove_item_from_shopping_cart($(this), "{{$item->id}}")'>
+                                                    <img class='svg' src='{{asset('images/icons/trash.svg')}}' style='height:1rem;'>
+                                                    <div class="ld ld-ring ld-spin"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-sm-6 col-lg-5 d-flex justify-content-end p-0 pt-2 pt-lg-0 order-3 order-lg-3">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    <p class='mb-0 small font-weight-bold'>Total : {{number_format($item->product->price * $item->quantity, 2)}} €</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -246,29 +230,75 @@ $total = $total_price + $shipping_price;
 </main>
 
 <script>
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-});
-
-function remove_item_from_shopping_cart(btn, item_id){
-    $.ajax({
-        url: "/panier/remove_item/aaa" + item_id,
-        type: 'DELETE',
-        data: { },
-        success: function(data){
-            console.log('Produit bien retiré du panier.');
-            //document.location.href = '/panier'
-        },
-        beforeSend: function() {
-            btn.addClass('running');
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
-    })
-    .done(function( data ) {
-        
-    }); 
+    });
+
+    function remove_item_from_shopping_cart(btn, item_id){
+        $.ajax({
+            url: "/panier/remove_item/" + item_id,
+            type: 'DELETE',
+            data: { },
+            success: function(data){
+                console.log('Produit bien retiré du panier.');
+                document.location.href = '/panier'
+            },
+            beforeSend: function() {
+                btn.addClass('running');
+            }
+        })
+        .done(function( data ) {
+            
+        }); 
+    }
+</script>
+
+<script>
+    function change_quantity(select, item_id){
+        quantity = select.val();
+
+        if(quantity == 0){
+            remove_item_from_shopping_cart(select, item_id);
+        }
+
+        $.ajax({
+            url: "/panier/change_quantity/" + item_id,
+            type: 'POST',
+            data: { quantity:quantity },
+            success: function(data){
+                console.log('Quantité modifié avec succés.');
+                document.location.href = '/panier'
+            },
+            beforeSend: function() {
+                select.parent().addClass('running');
+            }
+        })
+    }
+</script>
+
+<script>
+function textAbstract(el, maxlength = 20, delimiter = " ") {
+    let txt = $(el).text();
+    if (el == null) {
+        return "";
+    }
+    if (txt.length <= maxlength) {
+        return txt;
+    }
+    let t = txt.substring(0, maxlength);
+    let re = /\s+\S*$/;
+    let m = re.exec(t);
+    t = t.substring(0, m.index);
+    return t + "...";
 }
+
+var maxlengthwanted = 50;
+
+$('.item-name-cropped').each(function(index, element) {
+    $(element).text(textAbstract(element, maxlengthwanted, " "));
+});
 </script>
 
 @endsection

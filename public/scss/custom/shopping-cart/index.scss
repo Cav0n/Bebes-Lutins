@@ -13,3 +13,10 @@
     height:2rem;
     width:2rem;
 }
+
+#main-shopping-cart .svg-container{
+    cursor: pointer;
+}
+#main-shopping-cart .svg-container:hover{
+    opacity: 0.6;
+}

@@ -14,6 +14,7 @@
     {{-- Bootstrap --}}
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('scss/bootstrap/bootstrap.css')}}">
     <script src="{{asset('js/bootstrap/bootstrap.min.js')}}"></script>
+    <script src="{{asset('js/input-spinner/input-spinner.js')}}"></script>
 
     {{-- Custom CSS --}}
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('scss/custom/main.css')}}">

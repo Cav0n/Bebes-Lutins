@@ -33,6 +33,7 @@ Route::get('/produits/{category}/{product}', 'ProductController@show');
  */
 Route::get('/panier', 'ShoppingCartController@show');
 Route::post('/panier/add_item', 'ShoppingCartItemController@store');
+Route::post('/panier/change_quantity/{shoppingCartItem}', 'ShoppingCartItemController@update');
 Route::delete('/panier/remove_item/{shoppingCartItem}', 'ShoppingCartItemController@destroy');
  /* ---------------- */
 

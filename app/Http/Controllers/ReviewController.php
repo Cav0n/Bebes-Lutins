@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Review;
+use App\Product;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -33,9 +34,16 @@ class ReviewController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Product $product)
     {
-        //
+        $validated_data = $request->validate([
+            'firstname' => 'required|alpha',
+            'lastname' => 'required|alpha',
+            'email' => 'required|email:filter',
+            'text' => 'required|min:10',
+        ]);
+
+        dd($validated_data);
     }
 
     /**

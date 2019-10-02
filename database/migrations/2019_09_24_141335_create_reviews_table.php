@@ -15,6 +15,7 @@ class CreateReviewsTable extends Migration
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('customerPublicName');
             $table->integer('mark');
             $table->text('text')->nullable();
             $table->text('adminResponse')->nullable();

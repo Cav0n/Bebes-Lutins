@@ -29,7 +29,13 @@ Route::get('/produits/{category}/{product}', 'ProductController@show');
 /* ---------------- */
 
 /**
- * Panier
+ * Reviews
+ */
+Route::post('/nouveau_commentaire/{product}', 'ReviewController@store');
+/* ---------------- */
+
+/**
+ * Shopping cart
  */
 Route::get('/panier', 'ShoppingCartController@show');
 Route::post('/panier/add_item', 'ShoppingCartItemController@store');
@@ -38,7 +44,7 @@ Route::delete('/panier/remove_item/{shoppingCartItem}', 'ShoppingCartItemControl
  /* ---------------- */
 
 /**
- * Customer Area
+ * Customer area
  */
 Auth::routes();
 

@@ -84,6 +84,10 @@ body {
   z-index: 2000;
 }
 
+.thumbnail-container img:hover {
+  border: 1px solid #9ce849 !important;
+}
+
 .card.product {
   cursor: pointer;
 }

@@ -18,14 +18,6 @@ class Product extends Model
     /**
      * The categories that belongs to the product.
      */
-    public function product()
-    {
-        return $this->hasMany('App\OrderItem');
-    }
-
-    /**
-     * The categories that belongs to the product.
-     */
     public function images()
     {
         return $this->belongsToMany('App\Image');
@@ -42,8 +34,24 @@ class Product extends Model
     /**
      * 
      */
+    public function reviews()
+    {
+        return $this->hasMany('App\Review');
+    }
+
+    /**
+     * 
+     */
     public function shoppingCartItems()
     {
         return $this->hasMany('App\ShoppingCartItem');
+    }
+
+    /**
+     * The categories that belongs to the product.
+     */
+    public function orderItems()
+    {
+        return $this->hasMany('App\OrderItem');
     }
 }

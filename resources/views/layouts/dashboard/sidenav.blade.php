@@ -9,7 +9,7 @@
         <a href="/dashboard/produits/stocks" class='sublink text-dark @if(Request::is('*/produits/stocks')) active @endif'><p class='mb-0'>Stocks</p></a>
     <a href='/dashboard/clients' class='text-dark d-flex mt-3 @if(Request::is('*/clients*')) active @endif'><img src='{{asset('images/icons/customer5.svg')}}' class='svg'><p class='ml-2 my-auto'>- Clients</p></a>
         <a href='/dashboard/clients' class='sublink text-dark @if(Request::is('*/clients')) active @endif'><p class='mb-0'>Tous les clients</p></a>
-        <a href='/dashboard/clients/avis' class='sublink text-dark @if(Request::is('*/clients/avis')) active @endif'><p class='mb-0'>Avis clients</p></a>
+        <a href='/dashboard/clients/avis' class='sublink text-dark @if(Request::is('*/clients/avis*')) active @endif'><p class='mb-0'>Avis clients</p></a>
     <a href='/dashboard/reductions' class='text-dark d-flex mt-3 @if(Request::is('*/reductions*')) active @endif'><img src='{{asset('images/icons/coupon4.svg')}}' class='svg'><p class='ml-2 my-auto'>- Réductions</p></a>
     <a href='/dashboard/newsletters' class='text-dark d-flex mt-3 @if(Request::is('*/newsletters*')) active @endif'><img src='{{asset('images/icons/newsletters2.svg')}}' class='svg'><p class='ml-2 my-auto'>- Newsletters</p></a>
 </div>

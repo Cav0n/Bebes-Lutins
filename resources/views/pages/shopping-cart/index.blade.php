@@ -261,8 +261,7 @@ $total = $total_price + $shipping_price;
 
         if(quantity == 0){
             remove_item_from_shopping_cart(select, item_id);
-        }
-
+        } else {
         $.ajax({
             url: "/panier/change_quantity/" + item_id,
             type: 'POST',
@@ -274,7 +273,7 @@ $total = $total_price + $shipping_price;
             beforeSend: function() {
                 select.parent().addClass('running');
             }
-        })
+        }) }
     }
 </script>
 

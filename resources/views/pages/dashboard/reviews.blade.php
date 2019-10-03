@@ -4,7 +4,7 @@
 <div class="card bg-white my-3">
     <div class="card-header bg-white">
         <h1 class='h4 m-0 font-weight-normal'>
-            Clients
+            Clients - Avis
         </h1>
     </div>
     <div class="card-body">
@@ -26,16 +26,16 @@
                     <th class='border-top-0'>Date</th>
                     <th class='border-top-0'>Client</th>
                     <th class='border-top-0'>Produit</th>
-                    <th class='border-top-0'>Note</th>
+                    <th class='border-top-0 text-center'>Note</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (App\Review::all() as $review)
-                <tr>
-                    <td scope="row">{{$review->created_at}}</td>
-                    <td>{{$review->user->firstname}} {{$review->user->lastname}}</td>
-                    <td>{{$review->product->name}}</td>
-                    <td>{{$review->mark}}</td>
+                <tr onclick='load_url("/dashboard/clients/avis/{{$review->id}}")'>
+                    <td scope="row" class='small'>{{$review->created_at->formatLocalized('%e %B %Y')}}<BR>à {{$review->created_at->formatLocalized('%R')}}</td>
+                    <td>{{$review->customerPublicName}}</td>
+                    <td class='small'>{{$review->product->name}}</td>
+                    <td class='text-center'>{{$review->mark}} / 5</td>
                 </tr>
                 @endforeach
             </tbody>

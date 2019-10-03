@@ -162,9 +162,5 @@ $parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'as
             $('.dropdown-menu').removeClass('show');
         }
     });
-
-    function load_url(url){
-        document.location.href=url;
-    }
     </script>
 </header>

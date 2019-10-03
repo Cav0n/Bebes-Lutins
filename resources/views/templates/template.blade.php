@@ -70,4 +70,9 @@
 
 });
 </script>
+<script>
+function load_url(url){
+    document.location.href=url;
+}
+</script>
 </html>

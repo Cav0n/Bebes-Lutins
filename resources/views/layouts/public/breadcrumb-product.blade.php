@@ -1,7 +1,7 @@
 <span id='breadcrumb'>
     / <a href='/' class='text-dark'>Accueil</a>
     
-    @if($category->name != null)
+    @if(isset($category->name))
         @foreach ($category->generateBreadcrumb() as $item)
             / <a href='/categories/{{$item->id}}' class='text-dark'>{{$item->name}}</a>
         @endforeach

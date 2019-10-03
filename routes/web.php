@@ -32,6 +32,7 @@ Route::get('/produits/{category}/{product}', 'ProductController@show');
  * Reviews
  */
 Route::post('/nouveau_commentaire/{product}', 'ReviewController@store');
+Route::delete('/commentaires/supprimer/{review}', 'ReviewController@destroy');
 /* ---------------- */
 
 /**
@@ -70,7 +71,10 @@ Route::get('/dashboard/produits/stocks', 'DashboardController@stocks'); //TODO
 Route::get('/dashboard/produits/categories', 'DashboardController@categories'); //TODO
 Route::get('/dashboard/produits/categories/rang/{category}/{rank}', 'CategoryController@updateRank');
 Route::get('/dashboard/clients', 'DashboardController@customers'); //TODO
-Route::get('/dashboard/clients/avis', 'DashboardController@reviews'); //TODO
+Route::get('/dashboard/clients/avis', 'DashboardController@reviews');
+Route::get('/dashboard/clients/avis/{review}', 'ReviewController@show');
+Route::post('/dashboard/clients/avis/repondre/{review}', 'ReviewController@update');
+Route::post('/dashboard/clients/avis/supprimer-reponse/{review}','ReviewController@update');
 Route::get('/dashboard/reductions', 'DashboardController@vouchers'); //TODO
 Route::get('/dashboard/newsletter', 'DashboardController@newsletters'); //TODO
 

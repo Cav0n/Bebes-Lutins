@@ -16,13 +16,14 @@ class CreateReviewsTable extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('customerPublicName');
-            $table->integer('mark');
+            $table->string('customerEmail');
+            $table->double('mark')->unsigned();
             $table->text('text')->nullable();
             $table->text('adminResponse')->nullable();
             $table->boolean('isDeclined')->default(0);
 
             $table->integer('product_id')->unsigned();
-            $table->string('user_id');
+            $table->string('user_id')->nullable();
 
             $table->foreign('product_id')->references('id')->on('products');
             $table->foreign('user_id')->references('id')->on('users');

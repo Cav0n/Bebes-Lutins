@@ -24,6 +24,10 @@
     <!-- FontAwesome icons -->
     <script src="{{asset('js/fontawesome/fontawesome.js')}}"></script>
 
+    {{-- Loading CSS --}}
+    <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/loading/loading.css')}}">
+    <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/loading/loading-btn.css')}}">
+
     @yield('head-options')
 
     <title>@yield('title', 'DASHBOARD - Bébés Lutins')</title>
@@ -86,5 +90,10 @@
     }, 'xml');
 
 });
+</script>
+<script>
+function load_url(url){
+    document.location.href=url;
+}
 </script>
 </html>

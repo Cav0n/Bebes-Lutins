@@ -37,28 +37,33 @@
 </main>
 
 <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    
+    function logout()
+    {
+        $.ajax({
+            url: "/logout",
+            type: 'POST',
+            success: function(data){
+                refresh_page();
+            },
+            beforeSend: function() {
+    
             }
-        });
-        
-        function logout()
-        {
-            $.ajax({
-                url: "/logout",
-                type: 'POST',
-                success: function(data){
-                    refresh_page();
-                },
-                beforeSend: function() {
-        
-                }
-            })   
-        }
-        
-        function refresh_page(){
-            location.reload();
-        }
-        </script>
+        })   
+    }
+    
+    function refresh_page(){
+        location.reload();
+    }
+</script>
+<script>
+    function load_url(url){
+        document.location.href=url;
+    }
+</script>
 @endsection

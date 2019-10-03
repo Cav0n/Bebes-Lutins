@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Review;
 use App\Product;
+use Auth;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -41,9 +42,23 @@ class ReviewController extends Controller
             'lastname' => 'required|alpha',
             'email' => 'required|email:filter',
             'text' => 'required|min:10',
+            'mark' => 'required|min:0|max:5|numeric',
         ]);
 
-        dd($validated_data);
+        $review = new Review();
+        $review->customerPublicName = $validated_data['firstname'] . ' ' . substr($validated_data['lastname'], 0, 1 . '.');
+        $review->customerEmail = $validated_data['email'];
+        $review->text = $validated_data['text'];
+        $review->mark = $validated_data['mark'];
+        $review->product_id = $product->id;
+
+        if(Auth::check()) $review->user_id = Auth::user()->id;
+        else $review->user_id = null;
+
+        $review->save();
+
+        $request->session()->flash('review-feedback', 'Votre commentaire a été envoyé.');
+        return redirect('/produits/' . $product->id)->withProduct($product);
     }
 
     /**
@@ -54,7 +69,7 @@ class ReviewController extends Controller
      */
     public function show(Review $review)
     {
-        //
+        return view('pages/dashboard/reviews/review')->withReview($review);
     }
 
     /**
@@ -77,7 +92,20 @@ class ReviewController extends Controller
      */
     public function update(Request $request, Review $review)
     {
-        //
+        if($request['options'] == 'delete_response'){
+            $review->adminResponse = null;
+            $review->save();
+            $request->session()->flash('success-message', 'La réponse à bien été supprimée.');
+        } else {
+            $validated_data = $request->validate([
+                'admin-response' => 'required',
+            ]);
+
+            $review->adminResponse = $validated_data['admin-response'];
+            $review->save();
+            $request->session()->flash('success-message', 'La réponse à bien été mis à jour.');
+        }
+        return redirect("/dashboard/clients/avis/" . $review->id);
     }
 
     /**
@@ -88,6 +116,7 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
-        //
+        $review->delete();
+        return redirect("/produits/".$review->product_id);
     }
 }

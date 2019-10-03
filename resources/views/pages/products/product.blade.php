@@ -11,7 +11,7 @@ if (count($product->reviews) > 0){
         $total_mark += $review->mark;
         $number_of_reviews++;
     }
-    $global_mark = number_format($total_mark / $number_of_reviews, 2);
+    $global_mark = number_format($total_mark / $number_of_reviews, 1);
 }
 ?>
 
@@ -25,7 +25,7 @@ if (count($product->reviews) > 0){
 @endsection
 
 @section('content')
-<main id='product-main' class='container-fluid my-0 py-3 dim-background'>
+<main id='product-main' class='container-fluid my-0 py-0 py-lg-3 dim-background'>
     <div class="row justify-content-center">
         <div class="col-12 col-lg-8 px-0 px-lg-3">
             <div class="row m-0">
@@ -105,7 +105,7 @@ if (count($product->reviews) > 0){
                 </div>
                 
                 {{-- Description --}}
-                <div class="col-lg-12 p-3 p-lg-0 border mt-0 mt-lg-4">
+                <div class="col-lg-12 p-3 p-lg-0 mt-0 mt-lg-4 border bg-white">
                     <div class="card rounded-0 border-0">
                         <div class="card-body p-0 p-lg-3">
                             <h4 class="card-title px-0 px-lg-2 d-none d-lg-flex">Description</h4>
@@ -115,7 +115,7 @@ if (count($product->reviews) > 0){
                 </div>
 
                 {{-- Avis clients --}}
-                <div class="col-lg-12 p-3 p-lg-0 border mt-0 mt-lg-4">
+                <div class="col-lg-12 p-3 p-lg-0 mt-0 mt-lg-4 border bg-white">
                     <div class="card rounded-0 border-0">
                         <div class="card-body p-0 p-lg-3">
                             <h4 class="card-title px-0 px-lg-2">{{count($product->reviews)}} avis clients</h4>
@@ -126,9 +126,11 @@ if (count($product->reviews) > 0){
                                 <div class="row m-0">
                                     <div class="col-12 col-lg-4 p-0 px-lg-2">
                                         @if (count($product->reviews) > 0)
-                                        <span class='d-flex'>
-                                            <p class="h3 mb-0">{{$global_mark}}</p> <p class='d-flex flex-column justify-content-end mb-0'>sur 5</p>
-                                        </span>
+                                        <div id='global-rate-container' class='d-flex'>
+                                            <div class="static-rate"></div>
+                                            <p class="h3 mb-0 mark-number">{{$global_mark}}</p>
+                                            <p class='mb-0 d-flex flex-column justify-content-end'> sur 5</p>
+                                        </div>
                                         @endif
                                         @if(session()->has('review-feedback')) 
                                             <p class='text-success rounded-0 pl-0 mb-0 font-weight-bold'>{{session('review-feedback')}}</p>
@@ -211,6 +213,7 @@ if (count($product->reviews) > 0){
                                 @endif
                                 @if (count($product->reviews) > 0)
                                 <div class="row m-0 justify-content-lg-between">
+                                    <?php $rate_index = 0; ?>
                                     @foreach ($product->reviews as $review)
                                     <div class="col-12 col-lg-6 p-0 px-lg-2 my-2">
                                         <div class="card">
@@ -227,8 +230,11 @@ if (count($product->reviews) > 0){
                                                         @endif
                                                     @endif
                                                 </div>
-                                                {{-- <div class='static-rate'></div> --}}
-                                                <p class='mb-0 font-weight-bold'>{{$review->mark}} / 5</p>
+                                                <div id='rate-{{$rate_index}}' class='rate-container d-flex'>
+                                                    <div class="static-rate"></div>
+                                                        <p class='mark-number mb-0 font-weight-bold d-flex flex-column justify-content-center'>{{$review->mark}}</p>
+                                                        <p class='mb-0 d-flex flex-column justify-content-center'> / 5</p>
+                                                    </div>
                                                 <p class="card-text mb-0">{{$review->text}}</p>
                                                 @if ($review->adminResponse != null)
                                                 <div class='mt-2 ml-2 pl-2 border-left'>
@@ -239,6 +245,7 @@ if (count($product->reviews) > 0){
                                             </div>
                                         </div> 
                                     </div>
+                                    <?php $rate_index++; ?>
                                     @endforeach 
                                 </div>
                                 @else
@@ -258,15 +265,22 @@ if (count($product->reviews) > 0){
 
 {{--  Review creation show / hide  --}}
 <script>
-    //Statics rating stars
-    $(function () {
- 
-    $(".static-rate").rateYo({
-        rating: 3.2,
-        readOnly: true
+
+    $('.rate-container').each(function () {
+        console.log($(this).children('.mark-number').text());
+        $(this).children('.static-rate').rateYo({
+            rating: $(this).children('.mark-number').text(),
+            readOnly: true
         });
     });
 
+    $('#global-rate-container').children('.static-rate').rateYo({
+        rating: $('#global-rate-container').children('.mark-number').text(),
+        readOnly: true
+    })
+
+    //Statics rating stars
+    
     //Rating stars
     $(function () {
  

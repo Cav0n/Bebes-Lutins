@@ -20,4 +20,20 @@ class Address extends Model
     public function orders(){
         return $this->hasMany('App\Order');
     }
+
+    public function civilityToString(){
+        switch($this->civility){
+            case '1':
+                return 'Mr';
+                break;
+
+            case '2':
+                return 'Mme';
+                break;
+
+            default:
+                return "";
+                break;
+        }
+    }
 }

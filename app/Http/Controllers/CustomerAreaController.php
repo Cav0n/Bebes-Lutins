@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Order;
 use App\Http\Requests\Login; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -54,7 +55,8 @@ class CustomerAreaController extends Controller
     }
 
     public function ordersPage(){
-        return view('pages.customer-area.orders');
+        $orders = Order::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->paginate(10);
+        return view('pages.customer-area.orders')->withOrders($orders);
     }
 
     public function addressPage(){

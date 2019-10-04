@@ -27,7 +27,7 @@ $parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'as
         <div class='collapse navbar-collapse' id="collapsibleNavId">
             <ul class="navbar-nav mt-2 mt-lg-0 w-100 d-none d-lg-flex">
                 <li class="nav-item desktop transition" style='cursor:pointer;width:18rem;'>
-                    <a class="h4 nav-link text-dark text-center mb-0 pb-1 font-weight-bold" href="/contact">Contactez-nous</a>
+                    <a class="h5 nav-link text-dark text-center mb-0 pb-1 font-weight-bold" href="/contact">CONTACTEZ-NOUS</a>
                     <div class='row justify-content-center mt-1'>
                         <img src="{{asset('images/icons/call-bw.svg')}}" class='mx-2' alt="Téléphone" style='width:1.6rem;height:1.6rem;'>
                         <img src="{{asset('images/icons/email-bw.svg')}}" class='mx-2' alt="E-mail" style='width:1.6rem;height:1.6rem;'>
@@ -37,7 +37,7 @@ $parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'as
 
                 <li class="nav-item desktop ml-auto transition" style='cursor:pointer;width:12rem;'>
                     @guest
-                        <a class="h4 nav-link text-dark text-center mb-0 pb-1 font-weight-bold" href="/espace-client">Mon compte</a>
+                        <a class="h5 nav-link text-dark text-center mb-0 pb-1 font-weight-bold" href="/espace-client">MON COMPTE</a>
                         <a class="nav-link text-dark text-center py-0" href="/espace-client/connexion">Se connecter</a>
                         <a class="nav-link text-dark text-center py-0" href="/espace-client/enregistrement">Créer mon compte</a>
                     @else
@@ -48,7 +48,7 @@ $parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'as
                     
                 </li>
                 <li class="nav-item desktop transition" style="cursor:pointer;width:12rem">
-                    <a class="h4 nav-link text-dark text-center mb-0 pb-1 font-weight-bold" href="/panier">Mon panier</a>
+                    <a class="h5 nav-link text-dark text-center mb-0 pb-1 font-weight-bold" href="/panier">MON PANIER</a>
                     <p id='shopping_cart_price' class='text-center py-0 my-0'>{{number_format($total_price, 2)}} €</p>
                     <p class='text-center py-0 my-0'>{{$total_quantity}} articles</p>
                 </li>

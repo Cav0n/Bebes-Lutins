@@ -84,7 +84,7 @@ $parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'as
                 <li class="nav-item hover-green p-2 transition-fast" style='width:10rem;'>
                     <a class="nav-link dropdown-toggle text-dark p-0 text-center" href="#" id="dropdown-open" aria-haspopup="true" aria-expanded="false">Nos produits</a>
                     
-                    <div id="categories-dropdown" class="bg-white dropdown-menu w-100">
+                    <div id="categories-dropdown" class="bg-white dropdown-menu w-100" style='box-shadow: 0 2px 8px -1px rgb(100,100,100);'>
                         <div class="row">
                             <div class="col-md-2">
                                 <ul class="nav nav-pills flex-column" id="myTab" role="tablist">

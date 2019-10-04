@@ -42,6 +42,7 @@
 
 @include('components.public.popups.add-to-cart')
 
+{{-- Category selection --}}
 <script>
     $.ajaxSetup({
         headers: {
@@ -51,41 +52,24 @@
 
     function switch_category(selector, category){
         if(!selector.hasClass('selected')){
-            $.ajax({
-            url: "/produits/selectionner_categorie/" + category,
+            url = "/produits/selectionner_categorie/" + category;
+        }else {
+            url = "/produits/deselectionner_categorie/" + category;
+        }
+        $.ajax({
+            url: url,
             type: 'POST',
             data: { },
             success: function(data){
-                console.log('Produit bien retiré du panier.');
                 document.location.href = '/produits'
             },
             beforeSend: function() {
-                //selector.addClass('running');
+                selector.toggleClass('selected');
             }
-            })
-            .done(function( data ) {
-                
-            }); 
-        }
-        else {
-            $.ajax({
-            url: "/produits/deselectionner_categorie/" + category,
-            type: 'POST',
-            data: { },
-            success: function(data){
-                console.log('Produit bien retiré du panier.');
-                document.location.href = '/produits'
-            },
-            beforeSend: function() {
-                //selector.addClass('running');
-            }
-            })
-            .done(function( data ) {
-                
-            }); 
-        }
-        selector.toggleClass('selected');
-        
+        })
+        .done(function( data ) {
+            
+        }); 
     }
 </script>
 @endsection

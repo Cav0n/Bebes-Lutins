@@ -1,5 +1,3 @@
-<?php $orders = App\Order::where('status', '=', -3)->paginate(15); ?>
-
 {{ $orders->links() }}
 <table class="table">
     <thead>
@@ -31,3 +29,33 @@
         @endforeach
     </tbody>
 </table>
+
+<script>
+        old_status = "{{$oldStatus}}"
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        function select_status_to_display(selector, status){
+            if(!selector.hasClass('selected')){
+                url = "/dashboard/commandes/select_order_status";
+            }else {
+                url = "/dashboard/commandes/unselect_order_status";
+            }
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: { status: status, page: old_status },
+                success: function(data){
+                    location.reload();
+                },
+                beforeSend: function() {
+                    selector.toggleClass('selected');
+                }
+            })
+            .done(function( data ) {
+                
+            }); 
+        }
+    </script>

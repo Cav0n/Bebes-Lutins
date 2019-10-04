@@ -1,10 +1,11 @@
-<?php $orders = App\Order::where('status', '!=', 22)->where('status', '>=', 3)->orderBy('created_at', 'desc')->paginate(15); ?>
-
 <div class="row">
     <div class="col-12 d-flex flex-row flex-wrap">
-        <p class="py-1 px-3 mr-2 bg-light border rounded">Livrées</p>
-        <p class="py-1 px-3 mr-2 bg-light border rounded">Participations enregistrées</p>
-        <p class="py-1 px-3 mr-2 bg-light border rounded">Annulées</p>
+        <p class="status-selector py-1 px-3 mr-2 bg-light border rounded @if(session()->has('selected_order_status' . $oldStatus)) @if(session()->get('selected_order_status' . $oldStatus) == 3) selected @endif @endif" onclick='select_status_to_display($(this), 3)'>
+            Livrées</p>
+        <p class="status-selector py-1 px-3 mr-2 bg-light border rounded @if(session()->has('selected_order_status' . $oldStatus)) @if(session()->get('selected_order_status' . $oldStatus) == 33) selected @endif @endif" onclick='select_status_to_display($(this), 33)'>
+            Participations enregistrées</p>
+        <p class="status-selector py-1 px-3 mr-2 bg-light border rounded @if(session()->has('selected_order_status' . $oldStatus)) @if(session()->get('selected_order_status' . $oldStatus) == -1) selected @endif @endif" onclick='select_status_to_display($(this), -1)'>
+            Annulées</p>
     </div>
 </div>
 {{ $orders->links() }}
@@ -38,3 +39,33 @@
         @endforeach
     </tbody>
 </table>
+
+<script>
+        old_status = "{{$oldStatus}}"
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        function select_status_to_display(selector, status){
+            if(!selector.hasClass('selected')){
+                url = "/dashboard/commandes/select_order_status";
+            }else {
+                url = "/dashboard/commandes/unselect_order_status";
+            }
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: { status: status, page: old_status },
+                success: function(data){
+                    location.reload();
+                },
+                beforeSend: function() {
+                    selector.toggleClass('selected');
+                }
+            })
+            .done(function( data ) {
+                
+            }); 
+        }
+    </script>

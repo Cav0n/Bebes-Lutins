@@ -66,20 +66,26 @@ Route::get('/espace-client/adresses', 'CustomerAreaController@addressPage'); //T
 * Dashboard
 */
 Route::get('/dashboard', 'DashboardController@index'); //TODO
+//ORDERS
 Route::get('/dashboard/commandes', 'DashboardController@orders'); //TODO
 Route::get('/dashboard/commandes/{status}', 'DashboardController@orders'); //TODO
+Route::post('/dashboard/commandes/changer_status/{order}', 'OrderController@update');
+Route::post('/dashboard/commandes/select_order_status', 'DashboardController@select_order_status');
+Route::post('/dashboard/commandes/unselect_order_status', 'DashboardController@unselect_order_status');
+//PRODUCTS
 Route::get('/dashboard/produits', 'DashboardController@products'); //TODO
 Route::get('/dashboard/produits/stocks', 'DashboardController@stocks'); //TODO
 Route::get('/dashboard/produits/categories', 'DashboardController@categories'); //TODO
 Route::get('/dashboard/produits/categories/rang/{category}/{rank}', 'CategoryController@updateRank');
+Route::get('/dashboard/switch_is_hidden_product/{product}', 'ProductController@switchIsHidden');
+Route::get('/dashboard/switch_is_hidden_category/{category}', 'CategoryController@switchIsHidden');
+//CUSTOMERS
 Route::get('/dashboard/clients', 'DashboardController@customers'); //TODO
 Route::get('/dashboard/clients/avis', 'DashboardController@reviews');
 Route::get('/dashboard/clients/avis/{review}', 'ReviewController@show');
 Route::post('/dashboard/clients/avis/repondre/{review}', 'ReviewController@update');
 Route::post('/dashboard/clients/avis/supprimer-reponse/{review}','ReviewController@update');
+//OTHERS
 Route::get('/dashboard/reductions', 'DashboardController@vouchers'); //TODO
 Route::get('/dashboard/newsletter', 'DashboardController@newsletters'); //TODO
-
-Route::get('/dashboard/switch_is_hidden_product/{product}', 'ProductController@switchIsHidden');
-Route::get('/dashboard/switch_is_hidden_category/{category}', 'CategoryController@switchIsHidden');
 /* ---------------- */

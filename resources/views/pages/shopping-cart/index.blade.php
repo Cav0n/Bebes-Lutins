@@ -28,7 +28,6 @@ $total = $total_price + $shipping_price;
 @extends('templates.template')
 
 @section('head-options')
-@section('head-options')
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('scss/custom/shopping-cart/index.css')}}">
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/loading/loading.css')}}">

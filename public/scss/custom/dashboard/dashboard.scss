@@ -1,5 +1,12 @@
 $background-color: #edf1f3;
+$primary:       #9ce849 !default;
 $secondary:     #9d1cda !default;
+$success:       rgb(42, 212, 42) !default;
+$info:          rgb(59, 243, 243) !default;
+$warning:       yellow !default;
+$danger:        rgb(243, 60, 60) !default;
+$light:         #ebebeb !default;
+$dark:          #242424 !default;
 
 html{
     background: $background-color;
@@ -76,4 +83,16 @@ table tr .btn{
 
 #sidenav .active svg{
     fill:$secondary;
+}
+
+.status-selector {
+    cursor: pointer;
+}
+
+.status-selector:hover{
+    background: #c8f597 !important;
+}
+
+.status-selector.selected{
+    background: $primary !important;
 }

@@ -75,4 +75,16 @@ table tr .btn {
 #sidenav .active svg {
   fill: #9d1cda;
 }
+
+.status-selector {
+  cursor: pointer;
+}
+
+.status-selector:hover {
+  background: #c8f597 !important;
+}
+
+.status-selector.selected {
+  background: #9ce849 !important;
+}
 /*# sourceMappingURL=dashboard.css.map */

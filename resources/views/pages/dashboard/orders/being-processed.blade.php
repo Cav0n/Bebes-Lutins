@@ -1,11 +1,13 @@
-<?php $orders = App\Order::where('status', '>', 0)->where('status', '!=', 3)->where('status', '!=', '33')->orderBy('created_at', 'desc')->paginate(15); ?>
-
 <div class="row">
     <div class="col-12 d-flex flex-row flex-wrap">
-        <p class="py-1 px-3 mr-2 bg-light border rounded">En attente de paiement</p>
-        <p class="py-1 px-3 mr-2 bg-light border rounded">En cours de préparation</p>
-        <p class="py-1 px-3 mr-2 bg-light border rounded">En cours de livraison</p>
-        <p class="py-1 px-3 mr-2 bg-light border rounded">A retirer à l'atelier</p>
+        <p class="status-selector py-1 px-3 mr-2 bg-light border rounded transition-fast @if(session()->has('selected_order_status' . $oldStatus)) @if(session()->get('selected_order_status' . $oldStatus) == 0) selected @endif @endif" onclick='select_status_to_display($(this), 0)'>
+            En attente de paiement</p>
+        <p class="status-selector py-1 px-3 mr-2 bg-light border rounded transition-fast @if(session()->has('selected_order_status' . $oldStatus)) @if(session()->get('selected_order_status' . $oldStatus) == 1) selected @endif @endif" onclick='select_status_to_display($(this), 1)'>
+            En cours de préparation</p>
+        <p class="status-selector py-1 px-3 mr-2 bg-light border rounded transition-fast @if(session()->has('selected_order_status' . $oldStatus)) @if(session()->get('selected_order_status' . $oldStatus) == 2) selected @endif @endif" onclick='select_status_to_display($(this), 2)'>
+            En cours de livraison</p>
+        <p class="status-selector py-1 px-3 mr-2 bg-light border rounded transition-fast @if(session()->has('selected_order_status' . $oldStatus)) @if(session()->get('selected_order_status' . $oldStatus) == 22) selected @endif @endif" onclick='select_status_to_display($(this), 22)'>
+            A retirer à l'atelier</p>
     </div>
 </div>
 {{ $orders->links() }}
@@ -39,3 +41,33 @@
         @endforeach
     </tbody>
 </table>
+
+<script>
+    old_status = "{{$oldStatus}}"
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    function select_status_to_display(selector, status){
+        if(!selector.hasClass('selected')){
+            url = "/dashboard/commandes/select_order_status";
+        }else {
+            url = "/dashboard/commandes/unselect_order_status";
+        }
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: { status: status, page: old_status },
+            success: function(data){
+                location.reload();
+            },
+            beforeSend: function() {
+                selector.toggleClass('selected');
+            }
+        })
+        .done(function( data ) {
+            
+        }); 
+    }
+</script>

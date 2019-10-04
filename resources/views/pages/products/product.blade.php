@@ -30,13 +30,13 @@ if (count($product->reviews) > 0){
         <div class="col-12 col-lg-8 px-0 px-lg-3">
             <div class="row m-0">
                 {{-- Breadcrumb --}}
-                <div class="col-lg-12 p-0 my-3 d-none d-lg-flex justify-content-center">
+                <div class="col-lg-12 p-0 my-3 d-none d-sm-flex justify-content-center">
                     @include('layouts.public.breadcrumb-product')
                 </div>
 
                 {{-- Image, title and buttons --}}
                 <div class="col-lg-12 p-0">
-                    <div class="row m-0">
+                    <div class="row m-0 justify-content-center">
 
                         {{--  Thumbnails  --}}
                         <div class="col-lg-1 p-0 d-none d-lg-flex flex-column pr-3">
@@ -51,16 +51,16 @@ if (count($product->reviews) > 0){
                         </div>
 
                         {{--  Product infos  --}}
-                        <div class="col-lg-11 p-0 border bg-white" style='height:intrinsic'>
+                        <div class="col-sm-9 col-lg-11 p-0 border bg-white" style='height:intrinsic'>
                             <div class="row m-0">
 
                                 {{-- Main image --}}
-                                <div class="col-12 col-lg-3 p-0">
+                                <div class="col-12 col-sm-5 col-lg-3 p-0">
                                     <img id='main-image' class="w-100 h-100 zoom" src="{{asset('images/products/' . $product->mainImage)}}" style='object-fit:cover' data-magnify-src="{{asset('images/products/' . $product->mainImage)}}">
                                 </div>
 
                                 {{-- Texts and buttons --}}
-                                <div class="col-lg-8 p-3 d-flex flex-column justify-content-between">
+                                <div class="col-sm-7 col-lg-8 p-3 d-flex flex-column justify-content-between">
                                     <div class="row m-0">
                                         {{--  Title  --}}
                                         <div class="col-lg-12 p-0">
@@ -105,17 +105,22 @@ if (count($product->reviews) > 0){
                 </div>
                 
                 {{-- Description --}}
-                <div class="col-lg-12 p-3 p-lg-0 mt-0 mt-lg-4 border bg-white">
+                <div class="col-lg-12 p-3 p-lg-0 mt-0 mt-sm-4 border bg-white">
                     <div class="card rounded-0 border-0">
                         <div class="card-body p-0 p-lg-3">
-                            <h4 class="card-title px-0 px-lg-2 d-none d-lg-flex">Description</h4>
+                            <h4 class="card-title px-0 px-lg-2 d-none d-sm-flex">Description</h4>
                             <p class="card-text px-0 px-lg-2">{{$product->description}}</p>
                         </div>
                     </div>
                 </div>
 
+                {{-- Certifications --}}
+                <div class="col-12 mt-4 mt-lg-4 p-0 bg-white">
+                    @include('components.public.certifications')
+                </div>
+
                 {{-- Avis clients --}}
-                <div class="col-lg-12 p-3 p-lg-0 mt-0 mt-lg-4 border bg-white">
+                <div class="col-lg-12 p-3 p-lg-0 mt-0 my-sm-4 border bg-white">
                     <div class="card rounded-0 border-0">
                         <div class="card-body p-0 p-lg-3">
                             <h4 class="card-title px-0 px-lg-2">{{count($product->reviews)}} avis clients</h4>
@@ -135,8 +140,11 @@ if (count($product->reviews) > 0){
                                         @if(session()->has('review-feedback')) 
                                             <p class='text-success rounded-0 pl-0 mb-0 font-weight-bold'>{{session('review-feedback')}}</p>
                                         @endif
+                                        @if (!Auth::check())
+                                            <p class='mb-0 mt-2 border p-2 text-center'>Vous devez être connecté pour pouvoir laisser un avis.</p>
+                                        @endif
                                         @if(Auth::check() && !$has_commented)
-                                        <button type="button" class="btn btn-primary rounded-0 my-2" onclick='toggle_review_creation($(this))'>Écrire un commentaire</button>
+                                            <button type="button" class="btn btn-primary rounded-0 my-2" onclick='toggle_review_creation($(this))'>Écrire un commentaire</button>
                                         @endif
                                     </div>
                                 </div>

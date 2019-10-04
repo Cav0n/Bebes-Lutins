@@ -115,6 +115,22 @@ body{
     object-position: center;
 }
 
+#certifications-container svg{
+    fill: $dark;
+}
+
+.certification{
+    cursor: pointer;
+}
+
+.certification:hover p{
+    color: $secondary !important;
+}
+
+.certification:hover svg{
+    fill: $secondary !important;
+}
+
 button .svg{
     height:1.4rem;
     width: 1.4rem;

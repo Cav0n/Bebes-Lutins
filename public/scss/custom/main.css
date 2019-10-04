@@ -129,6 +129,22 @@ body {
      object-position: center;
 }
 
+#certifications-container svg {
+  fill: #242424;
+}
+
+.certification {
+  cursor: pointer;
+}
+
+.certification:hover p {
+  color: #9d1cda !important;
+}
+
+.certification:hover svg {
+  fill: #9d1cda !important;
+}
+
 button .svg {
   height: 1.4rem;
   width: 1.4rem;

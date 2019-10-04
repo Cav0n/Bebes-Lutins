@@ -25,12 +25,15 @@
                 @foreach (App\Product::all()->take(8) as $product)
                     @include('components.public.product-display')
                 @endforeach
-                <div class="col-12 my-4">
+                <div class="col-12 mt-4">
                     <div class="row justify-content-center">
                         <div class="col col-sm-4 col-md-4 col-lg-6">
                             <a name="all-products-button" id="all-products-button" class="btn btn-light w-100 border rounded-0" href="/produits" role="button">Tous nos produits ></a>
                         </div>
                     </div>
+                </div>
+                <div class="col-12 mt-4 my-lg-4 p-0 bg-light">
+                    @include('components.public.certifications')
                 </div>
             </div>
         </div>

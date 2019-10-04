@@ -27,6 +27,7 @@
                 @endforeach
             </div>
         </div>
+        {{$products->links()}}
         <table class="table">
             <thead>
                 <tr>
@@ -36,7 +37,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (App\Product::all() as $product)
+                @foreach ($products as $product)
                 <tr>
                     <td scope="row">{{$product->name}}</td>
                     <td class='text-center'>{{$product->stock}}</td>

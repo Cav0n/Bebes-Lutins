@@ -28,6 +28,7 @@
                 @endforeach
             </div>
         </div>
+        {{$products->links()}}
         <table class="table">
             <thead>
                 <tr>
@@ -37,11 +38,11 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (App\Product::all() as $product)
+                @foreach ($products as $product)
                 <tr class='@if($product->isHidden){{'hidden'}}@endif'>
                     <td scope="row">{{$product->name}}<BR> 
                         @foreach ($product->categories as $category)
-                            {{$category->name}}
+                            <small class='text-muted'>{{$category->name}}</small><BR>
                         @endforeach
                     </td>
                     <td>{{$product->price}}€</td>

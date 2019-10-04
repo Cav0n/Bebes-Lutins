@@ -29,6 +29,14 @@ table{
     margin-bottom:0 !important;
 }
 
+table tr{
+    cursor: pointer;
+}
+
+table tr:hover{
+    background: $light;
+}
+
 table tr.hidden{
     opacity: 0.4;
 }

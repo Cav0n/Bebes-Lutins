@@ -20,6 +20,7 @@
                 </div>
             </div>
         </form>
+        {{$users->links()}}
         <table class="table" style=''>
             <thead>
                 <tr class='d-flex'>
@@ -30,7 +31,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (App\User::all() as $user)
+                @foreach ($users as $user)
                 <tr class='d-flex'>
                     <td class='col-3'>{{$user->firstname}} {{$user->lastname}}</td>
                     <td class='col-5'>{{$user->email}}</td>

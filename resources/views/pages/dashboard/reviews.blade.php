@@ -20,6 +20,7 @@
                 </div>
             </div>
         </form>
+        {{$reviews->links()}}        
         <table class="table" style='table-layout:fixed'>
             <thead>
                 <tr>
@@ -30,7 +31,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (App\Review::all() as $review)
+                @foreach ($reviews as $review)
                 <tr onclick='load_url("/dashboard/clients/avis/{{$review->id}}")'>
                     <td scope="row" class='small'>{{$review->created_at->formatLocalized('%e %B %Y')}}<BR>à {{$review->created_at->formatLocalized('%R')}}</td>
                     <td>{{$review->customerPublicName}}</td>

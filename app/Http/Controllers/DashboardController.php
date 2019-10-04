@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use \App\Order;
+use \App\Product;
+use \App\User;
+use \App\Review;
+use \App\Voucher;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -59,11 +63,13 @@ class DashboardController extends Controller
     }
 
     public function products(){
-        return view('pages.dashboard.products');
+        $products = Product::where('isDeleted', '!=', '1')->orderBy('name', 'asc')->paginate(20);
+        return view('pages.dashboard.products')->withProducts($products);
     }
 
     public function stocks(){
-        return view('pages.dashboard.stocks');
+        $products = Product::where('isDeleted', '!=', '1')->orderBy('name', 'asc')->paginate(20);
+        return view('pages.dashboard.stocks')->withProducts($products);
     }
 
     public function categories(){
@@ -71,15 +77,18 @@ class DashboardController extends Controller
     }
 
     public function customers(){
-        return view('pages.dashboard.customers');
+        $users = User::where('id', '!=', null)->orderBy('created_at', 'desc')->paginate(20);
+        return view('pages.dashboard.customers')->withUsers($users);
     }
 
     public function reviews(){
-        return view('pages.dashboard.reviews');
+        $reviews = Review::where('id', '!=', null)->orderBy('created_at', 'desc')->paginate(20);
+        return view('pages.dashboard.reviews')->withReviews($reviews);
     }
 
     public function vouchers(){
-
+        $vouchers = Voucher::where('id', '!=', null)->orderBy('dateLast', 'desc')->paginate(20);
+        return view('pages.dashboard.vouchers')->withVouchers($vouchers);
     }
 
     public function newsletters(){

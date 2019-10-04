@@ -26,6 +26,8 @@ Route::get('/categories/{category}', 'CategoryController@show');
 Route::get('/produits', 'ProductController@index');
 Route::get('/produits/{product}', 'ProductController@show');
 Route::get('/produits/{category}/{product}', 'ProductController@show');
+Route::post('/produits/selectionner_categorie/{category}', 'ProductController@add_selected_category');
+Route::post('/produits/deselectionner_categorie/{category}', 'ProductController@unselected_category');
 /* ---------------- */
 
 /**

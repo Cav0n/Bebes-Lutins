@@ -9,11 +9,15 @@
 
 @section('content')
 <main class='container-fluid mt-3 mt-md-0'>
+
+    {{-- Swiper --}}
     @include('layouts.public.main-swiper')
 
     <div class='row justify-content-center mx-md-5 mt-md-4'>
         <div class="col-lg-10 mt-md-0">
             <div class="row justify-content-lg-center">
+
+                {{-- Presentation --}}
                 <div class='col-12'>
                     <h2 class='h3 font-weight-bold'>Bébés Lutins, le spécialiste de la couche lavable écologique et écocitoyenne pour bébé.</h4>
                 </div>
@@ -22,19 +26,26 @@
                         Nous sélectionnons soigneusement les tissus certifiés Oeko-Tex pour offrir une couche lavable écologique qui respecte la peau de
                         bébé. Nos modèles sont conçus pour s'adapter à la morphologie de bébé, tout en lui offrant confort et bien-être.</p>
                 </div>
+
+                {{-- Highlited Products --}}
                 @foreach (App\Product::all()->take(8) as $product)
                     @include('components.public.product-display')
                 @endforeach
-                <div class="col-12 mt-4">
+
+                {{-- All products buttons --}}
+                <div class="col-12">
                     <div class="row justify-content-center">
                         <div class="col col-sm-4 col-md-4 col-lg-6">
                             <a name="all-products-button" id="all-products-button" class="btn btn-light w-100 border rounded-0" href="/produits" role="button">Tous nos produits ></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 mt-4 my-lg-4 p-0 bg-light">
+
+                {{-- Certifications --}}
+                <div class="col-12 mt-4 my-md-4 my-lg-4 p-0 bg-light">
                     @include('components.public.certifications')
                 </div>
+
             </div>
         </div>
     </div>

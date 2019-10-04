@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProductController extends Controller
 {
@@ -22,9 +23,36 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('pages.products.all-products')->withProducts(Product::where('isHidden', 0)->paginate(16));
+        if( (!$request->session()->has("selected-categories")) ){
+            return view('pages.products.all-products')->withProducts(Product::where('isHidden', 0)->paginate(16));
+        } else {
+            if(count(session()->get("selected-categories")) == 0) return view('pages.products.all-products')->withProducts(Product::where('isHidden', 0)->paginate(16));
+            $selected_categories = Category::whereIn('id',session()->get("selected-categories"))->get();
+            $products = array();
+
+            foreach ($selected_categories as $category){
+                foreach($category->products as $product){ $products[] = $product; } 
+                foreach($category->childs as $child){
+                    foreach($child->products as $product){ $products[] = $product; }
+                    foreach ($child->childs as $subchild) {
+                        foreach($subchild->products as $product){ $products[] = $product; }
+                    }
+                }
+            }
+
+            $perPage = 16;   
+            $currentPage = $request['page'];
+            if ($currentPage > count($products) or $currentPage < 1) { $currentPage = 1; }
+            $offset = ($currentPage * $perPage) - $perPage;
+            $perPageProducts = array_slice($products,$offset,$perPage);
+
+            $productsPaginated = new LengthAwarePaginator($perPageProducts, count($products), $perPage, $currentPage);
+            $productsPaginated->withPath('/produits');
+
+            return view('pages.products.all-products')->withProducts($productsPaginated);;
+        }
     }
 
     /**
@@ -92,5 +120,23 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         echo "TODO";
+    }
+
+    public function add_selected_category(Category $category){
+        $selected_categories = array();
+        $selected_categories[] = $category->id;
+        session(['selected-categories' => $selected_categories]);
+    }
+
+    public function unselected_category(Category $category){
+        $selected_categories = session('selected-categories');
+        if ($selected_categories != null){
+            if (($key = array_search($category->id, $selected_categories)) !== false) {
+                unset($selected_categories[$key]);
+            }
+            $selected_categories = array_values($selected_categories); 
+            session(['selected-categories' => $selected_categories]);
+        }
+        
     }
 }

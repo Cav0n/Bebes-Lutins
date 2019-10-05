@@ -42,9 +42,18 @@
                         </div>
                         <div class="row m-0">
                         @foreach ($order->order_items as $item)
-                            <div class="row m-0">
-                                <div class="col-4">
-                                    {{$item->productName}}
+                            <div class="row w-100 m-0 mt-2 border">
+                                <div class="col-12 col-lg-2 p-0" style="max-height: 10rem;">
+                                    <img class='w-100 h-100' src='{{asset("images/products/".$item->product->mainImage)}}' style='object-fit:cover;'>
+                                </div>
+                                <div class="col-6 col-lg-6 d-flex flex-column justify-content-center">
+                                    <small>{{$item->productName}}</small>
+                                </div>
+                                <div class="col-3 col-lg-2 p-0 d-flex flex-column justify-content-center">
+                                    <p class='mb-0 text-center'>{{number_format($item->unitPrice, 2)}} €</p>
+                                </div>
+                                <div class="col-3 col-lg-2 p-0 d-flex flex-column justify-content-center">
+                                    <p class='mb-0 text-center'>x {{$item->quantity}}</p>
                                 </div>
                             </div>
                         @endforeach

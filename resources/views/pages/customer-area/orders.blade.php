@@ -3,7 +3,7 @@
 @section('body')
 <div class="row">
     <div class="col-12">
-        <p class='h5 font-weight-bold'>Vos commandes</p>
+        <p class='h5 font-weight-bold'>Mes commandes</p>
 
         @if (count($orders) == 0)
             <p class='mb-0'>Vous n'avez passé aucune commande pour le moment.</p>

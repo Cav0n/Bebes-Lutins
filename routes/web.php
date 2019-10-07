@@ -62,6 +62,7 @@ Route::get('/espace-client/commandes/{order}', 'OrderController@show'); //TODO
 Route::get('/espace-client/adresses', 'CustomerAreaController@addressPage'); //TODO
 Route::get('/espace-client/adresses/creation', 'AddressController@create');
 Route::post('/espace-client/adresses/creation','AddressController@store');
+Route::get('/espace-client/adresses/edition/{address}', 'AddressController@edit');
 Route::delete('/espace-client/adresses/{address}', 'AddressController@destroy');
 /* ---------------- */
 

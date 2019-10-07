@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Address;
 use Illuminate\Http\Request;
+use Auth;
 
 class AddressController extends Controller
 {
@@ -36,6 +37,7 @@ class AddressController extends Controller
     public function store(Request $request)
     {
         $validated_data = $request->validate([
+            'civility' => 'numeric|max:3|required',
             'firstname' => 'alpha|required',
             'lastname' => 'alpha|required',
             'street' => 'required',
@@ -44,6 +46,8 @@ class AddressController extends Controller
         ]);
 
         $address = new Address();
+        $address->id = substr(uniqid(), 0, 10);
+        $address->civility = $validated_data['civility'];
         $address->firstname = $validated_data['firstname'];
         $address->lastname = $validated_data['lastname'];
         $address->street = $validated_data['street'];
@@ -52,7 +56,11 @@ class AddressController extends Controller
         $address->complement = $request['complement'];
         $address->company = $request['company'];
 
-        dd($address);
+        if(Auth::check()) $address->user_id = Auth::user()->id;
+
+        $address->save();
+
+        return redirect('/espace-client/adresses');
     }
 
     /**
@@ -74,7 +82,7 @@ class AddressController extends Controller
      */
     public function edit(Address $address)
     {
-        //
+        return view('pages.customer-area.addresses.edition')->withAddress($address);
     }
 
     /**

@@ -23,6 +23,8 @@ if($total_price >= 70){
 
 $total = $total_price + $shipping_price;
 
+$has_addresses = Auth::check() && count(Auth::user()->addresses) > 0;
+
 ?>
 
 @extends('templates.template')
@@ -49,14 +51,14 @@ $total = $total_price + $shipping_price;
                     <div id='delivery-selection' class="card p-0 border-0 rounded-0">
                         <div class="card-header bg-white">
                             <ul id='nav-delivery' class="nav nav-tabs card-header-tabs justify-content-center">
-                                @if(Auth::check() && count(Auth::user()->addresses) > 0)
+                                @if($has_addresses)
                                 <li class="nav-item mx-2">
-                                    <a class="nav-link mb-0 noselect" onclick='select_nav_item($(this), $(".savedAddresses"))'>
+                                    <a class="nav-link mb-0 noselect @if($has_addresses) active @endif" onclick='select_nav_item($(this), $(".savedAddresses"))'>
                                         Vos adresses</a>
                                 </li>
                                 @endif
                                 <li class="nav-item mx-2">
-                                    <a class="nav-link mb-0 noselect active" onclick='select_nav_item($(this), $(".newAddress"))'>
+                                    <a class="nav-link mb-0 noselect @if(!$has_addresses) active @endif" onclick='select_nav_item($(this), $(".newAddress"))'>
                                         Nouvelle adresse</a>
                                 </li>
                                 <li class="nav-item mx-2">
@@ -67,9 +69,9 @@ $total = $total_price + $shipping_price;
                         </div>
                         <div id='delivery-choices-container' class='card-body'>
 
-                            @if(Auth::check() && count(Auth::user()->addresses) > 0)
+                            @if($has_addresses)
                             <?php $address = Auth::user()->addresses[0]; ?>
-                            <div id="savedAddresses" class='delivery-choice savedAddresses d-none'>
+                            <div id="savedAddresses" class='delivery-choice savedAddresses'>
                                 <p class='h4'>Vos adresses sauvegardées</p>
 
                                 <form action="/panier/livraison/validation" method="POST">
@@ -118,7 +120,7 @@ $total = $total_price + $shipping_price;
                             </div>
                             @endif
 
-                            <div id="newAddress" class='delivery-choice newAddress'>
+                            <div id="newAddress" class='delivery-choice newAddress @if($has_addresses) d-none @endif'>
                                 <form action="/panier/livraison/validation" method="POST">
                                     <input type='hidden' value='new-address'>
 

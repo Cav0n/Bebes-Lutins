@@ -46,6 +46,9 @@ Route::post('/panier/change_quantity/{shoppingCartItem}', 'ShoppingCartItemContr
 Route::delete('/panier/remove_item/{shoppingCartItem}', 'ShoppingCartItemController@destroy');
 
 Route::get('/panier/livraison', 'ShoppingCartController@showDelivery');
+Route::post('/panier/livraison/validation', 'ShoppingCartController@validateDelivery');
+
+Route::get('/panier/paiement', 'ShoppingCartController@showPayment');
  /* ---------------- */
 
 /**

@@ -48,12 +48,23 @@ class ShoppingCartController extends Controller
      */
     public function show(ShoppingCart $shoppingCart = null, Request $request)
     {   
-        return view('pages.shopping-cart.index');
+        return view('pages.shopping-cart.index')->withStep(0);
     }
 
     public function showDelivery()
     {
-        return view('pages.shopping-cart.delivery');
+        return view('pages.shopping-cart.delivery')->withStep(1);
+    }
+
+    public function showPayment()
+    {
+        return view('pages.shopping-cart.payment')->withStep(2);
+    }
+
+    public function validateDelivery(Request $request)
+    {
+        //dd($request);
+        return redirect('/panier/paiement');
     }
 
     /**

@@ -51,6 +51,11 @@ class ShoppingCartController extends Controller
         return view('pages.shopping-cart.index');
     }
 
+    public function showDelivery()
+    {
+        return view('pages.shopping-cart.delivery');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

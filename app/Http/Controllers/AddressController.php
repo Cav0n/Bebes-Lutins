@@ -8,6 +8,23 @@ use Auth;
 
 class AddressController extends Controller
 {
+    public function get(Address $address)
+    {
+        $address_array = array();
+        $address_array['civility'] = $address->civilityToString();
+        $address_array['firstname'] = $address->firstname;
+        $address_array['lastname'] = $address->lastname;
+        $address_array['street'] = $address->street;
+        $address_array['zipcode'] = $address->zipCode;
+        $address_array['city'] = $address->city;
+        $address_array['complement'] = $address->complement;
+        $address_array['company'] = $address->company;
+        $data = [ 'address' => $address_array ];
+
+        header('Content-type: application/json');
+        echo json_encode( $data );
+    }
+
     /**
      * Display a listing of the resource.
      *

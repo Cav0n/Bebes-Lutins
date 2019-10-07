@@ -44,6 +44,8 @@ Route::get('/panier', 'ShoppingCartController@show');
 Route::post('/panier/add_item', 'ShoppingCartItemController@store');
 Route::post('/panier/change_quantity/{shoppingCartItem}', 'ShoppingCartItemController@update');
 Route::delete('/panier/remove_item/{shoppingCartItem}', 'ShoppingCartItemController@destroy');
+
+Route::get('/panier/livraison', 'ShoppingCartController@showDelivery');
  /* ---------------- */
 
 /**
@@ -95,3 +97,9 @@ Route::post('/dashboard/clients/avis/supprimer-reponse/{review}','ReviewControll
 Route::get('/dashboard/reductions', 'DashboardController@vouchers'); //TODO
 Route::get('/dashboard/newsletter', 'DashboardController@newsletters'); //TODO
 /* ---------------- */
+
+/**
+ * UTILS
+ */
+Route::post('/addresses/{address}', 'AddressController@get');
+ /* ---------------- */

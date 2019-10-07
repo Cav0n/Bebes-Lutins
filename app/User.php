@@ -68,7 +68,7 @@ class User extends Authenticatable
      */
     public function addresses()
     {
-        return $this->hasMany('App\Address');
+        return $this->hasMany('App\Address')->where('is_deleted', '0')->orderBy('street', 'asc');
     }
 
     /**

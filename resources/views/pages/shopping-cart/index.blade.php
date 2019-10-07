@@ -54,6 +54,10 @@ $total = $total_price + $shipping_price;
         @else
 
         <div class="col-12">
+
+            {{-- STEPS --}}
+            @include('pages.shopping-cart.steps')
+
             <div class="row justify-content-center">
 
                 {{--  ITEMS  --}}
@@ -153,7 +157,7 @@ $total = $total_price + $shipping_price;
                                         réserve les conditions générales de vente.</small>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-12">
-                                        <button type="button" class="btn btn-primary w-100">Valider mon panier</button>
+                                        <button type="button" class="btn btn-primary w-100" onclick='load_url("/panier/livraison")'>Valider mon panier</button>
                                     </div>
                                 </div>
                             </div>

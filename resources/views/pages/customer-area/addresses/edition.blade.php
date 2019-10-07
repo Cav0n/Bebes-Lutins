@@ -6,7 +6,7 @@
       <div class="row m-0">
         <div class="col-12 p-0">
             <a href='/espace-client/adresses' class="small text-muted">< Mes adresses</a>
-            <p class='h5 font-weight-bold'>Nouvelle adresse</p>          
+            <p class='h5 font-weight-bold'>Editer une adresse</p>          
         </div>
       </div>
       <div class="row m-0">
@@ -23,7 +23,7 @@
           </div>
           @endif
 
-          <form action="/espace-client/adresses/creation" method="POST">
+          <form action="/espace-client/adresses/mise-a-jour/{{$address->id}}" method="POST">
             @csrf
             <div class="row">
               <div class="col-2">
@@ -31,9 +31,9 @@
                 <div class="form-group">
                   <label for="civility">Civilité</label>
                   <select class="form-control @error('civility') is-invalid @enderror" name="civility" id="civility" style="font-size:0.8rem;">
-                    <option value="1" selected>Monsieur</option>
-                    <option value="2">Madame</option>
-                    <option value="3">Autre</option>
+                    <option value="1" @if(old('civility', $address->civility) == 1) selected @endif>Monsieur</option>
+                    <option value="2" @if(old('civility', $address->civility) == 2) selected @endif>Madame</option>
+                    <option value="3" @if(old('civility', $address->civility) == 3) selected @endif>Autre</option>
                   </select>
                   @error('civility')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -78,7 +78,7 @@
 
             <div class="form-group">
               <label for="zipcode">Code postal</label>
-              <input type="text" class="form-control @error('zipcode') is-invalid @enderror" name="zipcode" id="zipcode" aria-describedby="helpZipcode" placeholder="" value='{{old('zipcode', $address->zipcode)}}'>
+              <input type="text" class="form-control @error('zipcode') is-invalid @enderror" name="zipcode" id="zipcode" aria-describedby="helpZipcode" placeholder="" value='{{old('zipcode', $address->zipCode)}}'>
               <small id="helpZipcode" class="form-text text-muted">Votre code postal</small>
               @error('zipcode')
                 <div class="invalid-feedback">{{$message}}</div>

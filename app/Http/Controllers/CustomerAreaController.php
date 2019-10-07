@@ -64,4 +64,9 @@ class CustomerAreaController extends Controller
         $addresses = Auth::user()->addresses->where('is_deleted', 0);
         return view('pages.customer-area.address')->withAddresses($addresses);
     }
+
+    public function invertNewsletter(){
+        Auth::user()->wantNewsletter = !Auth::user()->wantNewsletter;
+        Auth::user()->save();
+    }
 }

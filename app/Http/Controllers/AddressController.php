@@ -60,6 +60,8 @@ class AddressController extends Controller
 
         $address->save();
 
+        $request->session()->flash('success', 'Votre adresse à bien été ajoutée.');
+
         return redirect('/espace-client/adresses');
     }
 
@@ -94,7 +96,29 @@ class AddressController extends Controller
      */
     public function update(Request $request, Address $address)
     {
-        //
+        $validated_data = $request->validate([
+            'civility' => 'numeric|max:3|required',
+            'firstname' => 'alpha|required',
+            'lastname' => 'alpha|required',
+            'street' => 'required',
+            'zipcode' => 'numeric|max:95880|required',
+            'city' => 'required',
+        ]);
+
+        $address->civility = $validated_data['civility'];
+        $address->firstname = $validated_data['firstname'];
+        $address->lastname = $validated_data['lastname'];
+        $address->street = $validated_data['street'];
+        $address->zipCode = $validated_data['zipcode'];
+        $address->city = $validated_data['city'];
+        $address->complement = $request['complement'];
+        $address->company = $request['company'];
+
+        $address->save();
+
+        $request->session()->flash('success', 'Votre adresse à bien été mis à jour.');
+
+        return redirect('/espace-client/adresses');
     }
 
     /**

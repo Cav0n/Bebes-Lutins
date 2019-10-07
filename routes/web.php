@@ -57,12 +57,14 @@ Route::post('/espace-client/connexion', 'CustomerAreaController@login')->name('c
 Route::get('/espace-client/enregistrement', 'CustomerAreaController@registerPage'); //TODO
 Route::post('/espace-client/enregistrement', 'CustomerAreaController@register'); //TODO
 Route::get('/espace-client/profil', 'CustomerAreaController@profilPage'); //TODO
+Route::post('/espace-client/newsletter-invert', 'CustomerAreaController@invertNewsletter');
 Route::get('/espace-client/commandes', 'CustomerAreaController@ordersPage'); //TODO
 Route::get('/espace-client/commandes/{order}', 'OrderController@show'); //TODO
 Route::get('/espace-client/adresses', 'CustomerAreaController@addressPage'); //TODO
 Route::get('/espace-client/adresses/creation', 'AddressController@create');
 Route::post('/espace-client/adresses/creation','AddressController@store');
 Route::get('/espace-client/adresses/edition/{address}', 'AddressController@edit');
+Route::post('/espace-client/adresses/mise-a-jour/{address}', 'AddressController@update');
 Route::delete('/espace-client/adresses/{address}', 'AddressController@destroy');
 /* ---------------- */
 

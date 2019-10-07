@@ -26,11 +26,11 @@
     <div class="col-12 col-md-6 col-lg-3 order-3 order-lg-2">
       <p class="h5 font-weight-bold">Nous suivre</p>
       <ul class="list-unstyled">
-        <li class='social-link-container bg-light border col-6 col-md-6 col-lg-8'>
+        <li class='social-link-container bg-light border col-6 col-md-6 col-lg-8 max-content pr-3'>
           <a href='https://www.instagram.com/bebes.lutins' class='text-dark' style='text-decoration:none;'>
           <img src='{{asset('images/icons/instagram.svg')}}'> - Instagram</a>
         </li>
-        <li class='social-link-container bg-light border col-6 col-md-6 col-lg-8'>
+        <li class='social-link-container bg-light border col-6 col-md-6 col-lg-8 max-content pr-3'>
           <a href='https://www.facebook.com/bebes.lutins' class='text-dark' style='text-decoration:none;'>
           <img src='{{asset('images/icons/facebook.svg')}}'s> - Facebook</a>
         </li>

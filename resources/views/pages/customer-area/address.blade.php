@@ -5,6 +5,16 @@
     <div class="col-12">
 
         <p class='h5 font-weight-bold'>Mes adresses</p>
+
+        {{-- Errors --}}
+        @if (session()->has('success'))
+        <div class="alert alert-success">
+            <ul class='mb-0'>
+                <li>{{ session('success') }}</li>
+            </ul>
+        </div>
+        @endif
+
         @if(count($addresses) == 0)
         <p class='mb-0'>Vous n'avez aucune adresse enregistrée.</p>
         @else

@@ -24,7 +24,7 @@ class AddressController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.customer-area.addresses.creation');
     }
 
     /**
@@ -35,7 +35,24 @@ class AddressController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated_data = $request->validate([
+            'firstname' => 'alpha|required',
+            'lastname' => 'alpha|required',
+            'street' => 'required',
+            'zipcode' => 'numeric|max:95880|required',
+            'city' => 'required',
+        ]);
+
+        $address = new Address();
+        $address->firstname = $validated_data['firstname'];
+        $address->lastname = $validated_data['lastname'];
+        $address->street = $validated_data['street'];
+        $address->zipCode = $validated_data['zipcode'];
+        $address->city = $validated_data['city'];
+        $address->complement = $request['complement'];
+        $address->company = $request['company'];
+
+        dd($address);
     }
 
     /**
@@ -80,6 +97,7 @@ class AddressController extends Controller
      */
     public function destroy(Address $address)
     {
-        //
+        $address->is_deleted = true;
+        $address->save();
     }
 }

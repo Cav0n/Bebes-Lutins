@@ -23,10 +23,11 @@ class CreateAddressesTable extends Migration
             $table->string('city');
             $table->string('complement')->nullable();
             $table->string('company')->nullable();
+            $table->boolean('is_deleted')->nullable()->default(false);
 
-            $table->string('userID');
+            $table->string('user_id');
 
-            $table->foreign('userID')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->timestamps();
         });

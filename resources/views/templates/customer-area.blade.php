@@ -1,6 +1,11 @@
 @extends('templates.template')
 
 @section('head-options')
+    {{-- Loading CSS --}}
+    <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/loading/loading.css')}}">
+    <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/loading/loading-btn.css')}}">
+
+    {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 

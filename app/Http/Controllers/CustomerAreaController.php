@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Order;
+use App\Address;
 use App\Http\Requests\Login; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -60,6 +61,7 @@ class CustomerAreaController extends Controller
     }
 
     public function addressPage(){
-        return view('pages.customer-area.address');
+        $addresses = Auth::user()->addresses->where('is_deleted', 0);
+        return view('pages.customer-area.address')->withAddresses($addresses);
     }
 }

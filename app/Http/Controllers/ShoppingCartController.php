@@ -46,25 +46,31 @@ class ShoppingCartController extends Controller
      * @param  \App\ShoppingCart  $shoppingCart
      * @return \Illuminate\Http\Response
      */
-    public function show(ShoppingCart $shoppingCart = null, Request $request)
-    {   
-        return view('pages.shopping-cart.index')->withStep(0);
+    public function show(ShoppingCart $shopping_cart = null, Request $request)
+    {
+        if($shopping_cart == null){
+            $shopping_cart = session('shopping_cart'); 
+        }
+
+        return view('pages.shopping-cart.index')->withStep(0)->withShoppingCart($shopping_cart);
     }
 
     public function showDelivery()
     {
-        return view('pages.shopping-cart.delivery')->withStep(1);
+        $shopping_cart = session('shopping_cart'); 
+
+        return view('pages.shopping-cart.delivery')->withStep(1)->withShoppingCart($shopping_cart);
     }
 
     public function showPayment()
     {
-        return view('pages.shopping-cart.payment')->withStep(2);
+        return view('pages.shopping-cart.payment')->withStep(2)->withShoppingCart($shopping_cart);
     }
 
     public function validateDelivery(Request $request)
     {
-        //dd($request);
-        return redirect('/panier/paiement');
+        dd($request);
+        //return redirect('/panier/paiement');
     }
 
     /**

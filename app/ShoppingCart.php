@@ -30,4 +30,30 @@ class ShoppingCart extends Model
     {
         return $this->belongsTo('App\Voucher');
     }
+
+    public function calculatePricesAndQuantities() : array
+    {
+        $total_price = 0.00;
+        $total_quantity = 0;
+        $shipping_price = 5.90;
+        $total = 0.00;
+        $price_before_free_shipping = 70.00;
+
+        if(count($this->items) > 0){
+            foreach ($this->items as $item) {
+                $total_price += $item->product->price * $item->quantity;
+
+                $total_quantity += $item->quantity;
+            }
+            $price_before_free_shipping -= $total_price;
+        }
+
+        if($total_price >= 70){
+            $shipping_price = 0;
+            $price_before_free_shipping = 0.00;
+        }
+
+        $result = ['products_price' => $total_price, 'shipping_price' => $shipping_price, 'total_quantity' => $total_quantity];
+        return $result;
+    }
 }

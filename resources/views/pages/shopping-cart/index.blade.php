@@ -1,28 +1,12 @@
-<?php $shopping_cart = session('shopping_cart'); 
-//session()->forget('shopping_cart');
-
-$total_price = 0.00;
-$total_quantity = 0;
-$shipping_price = 5.90;
-$total = 0.00;
-$price_before_free_shipping = 70.00;
-
-if(count($shopping_cart->items) > 0){
-    foreach ($shopping_cart->items as $item) {
-        $total_price += $item->product->price * $item->quantity;
-
-        $total_quantity += $item->quantity;
-    }
-    $price_before_free_shipping -= $total_price;
-}
-
-if($total_price >= 70){
-    $shipping_price = 0;
-    $price_before_free_shipping = 0.00;
-}
-
-$total = $total_price + $shipping_price;
-
+<?php
+    $pricesAndQuantities = $shoppingCart->calculatePricesAndQuantities();
+    
+    $products_price = $pricesAndQuantities['products_price'];
+    $shipping_price = $pricesAndQuantities['shipping_price'];
+    $total_quantity = $pricesAndQuantities['total_quantity'];
+    $total = $products_price + $shipping_price;
+    if($products_price < 70) $price_before_free_shipping = 70 - $products_price;
+    else $price_before_free_shipping = 0;
 ?>
 
 @extends('templates.template')
@@ -37,7 +21,7 @@ $total = $total_price + $shipping_price;
 @section('content')
 <main id='main-shopping-cart' class='container-fluid dim-background'>
     <div class="row justify-content-center py-3 py-md-4 py-lg-5">
-        @if (count($shopping_cart->items) <= 0)
+        @if (count($shoppingCart->items) <= 0)
 
         <div class="col-12 col-sm-10 col-md-8 col-xl-6">
             <div class="card my-5 p-0 border rounded-0">
@@ -64,7 +48,7 @@ $total = $total_price + $shipping_price;
                 <div class="col-12 col-sm-10 col-lg-5 my-md-2 my-lg-0">
 
                     {{--  Shopping Cart Items for mobiles and tiny tablets  --}}
-                    @foreach ($shopping_cart->items as $item)
+                    @foreach ($shoppingCart->items as $item)
                     <div class="card p-0 m-0 border-0 rounded-0 mb-2">
                         <div class="row m-0 p-0">
                             <div class="col-4 p-0" style='min-height:8rem; max-height:10rem;'>
@@ -132,7 +116,7 @@ $total = $total_price + $shipping_price;
                                         <p class="card-text">{{$total_quantity}} produits :</p>
                                     </div>
                                     <div class="col-6 p-0">
-                                        <p class="card-text text-right">{{number_format($total_price, 2)}} €</p>
+                                        <p class="card-text text-right">{{number_format($products_price, 2)}} €</p>
                                     </div>
                 
                                     <div class="col-6 p-0">
@@ -169,7 +153,7 @@ $total = $total_price + $shipping_price;
                                     <h1 class='h5 mb-0'>Réductions</h1>
                                 </div>
                                 <div class="card-body row m-0">
-                                    @if ($shopping_cart->voucher == null)
+                                    @if ($shoppingCart->voucher == null)
                                     <form action="/panier/code-coupon/ajout" method="POST" class='w-100'>
                                         @csrf
                                         <div class="form-group">

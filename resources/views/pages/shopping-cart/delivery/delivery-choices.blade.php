@@ -7,7 +7,7 @@
 
     <form id='saved-addresses-form' action="/panier/livraison/validation" method="POST">
         @csrf
-        <input type='hidden' name='delivery-type' value='saved-address'>
+        <input type='hidden' name='delivery-type' value='saved-addresses'>
         <div id='saved-billing-address-container'>
             <div id='saved-billing-address' class="form-group">
                 <label for="billing-address">Choisissez une adresse de facturation</label>
@@ -27,7 +27,7 @@
         </div>
 
         <div class="custom-control custom-checkbox max-content mx-auto my-3 pointer">
-            <input name='same-shipping-address' type="checkbox" class="custom-control-input pointer" id="same-saved-address-checkbox" checked>
+            <input name='same-shipping-address' type="checkbox" class="custom-control-input pointer same-address-checkbox" id="same-saved-address-checkbox" @if(session('same-shipping-address') == "true"|| session('same-shipping-address') == null) checked @endif>
             <label class="custom-control-label noselect pointer" for="same-saved-address-checkbox">Adresse de livraison identique</label>
         </div>
 
@@ -105,7 +105,7 @@
         </div>
 
         <div class="custom-control custom-checkbox max-content mx-auto my-3 pointer">
-            <input name='same-shipping-address' type="checkbox" class="custom-control-input pointer" id="same-address-checkbox" checked>
+            <input name='same-shipping-address' type="checkbox" class="custom-control-input pointer same-address-checkbox" id="same-address-checkbox" @if(session('same-shipping-address') == "true"|| session('same-shipping-address') == null) checked @endif>
             <label class="custom-control-label noselect pointer" for="same-address-checkbox">Adresse de livraison identique</label>
         </div>
 
@@ -178,17 +178,17 @@
         <input type='hidden' name='delivery-type' value='withdrawal-shop'>
         <div class="form-group mb-0 mt-2">
             <label for="email" class='mb-0'>Adresse email *</label>
-            <input type="email" class="form-control" name="email" id="email" aria-describedby="helpEmail" placeholder="jeandupont@gmail.com">
+            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" aria-describedby="helpEmail" placeholder="jeandupont@gmail.com">
             <small id="helpEmail" class="form-text text-muted">Votre adresse email</small>
         </div>
         <div class="form-group mb-0 mt-2">
             <label for="phone" class="mb-0">Numéro de téléphone</label>
-            <input type="phone" class="form-control" name="phone" id="phone" aria-describedby="helpPhone" placeholder="0123456789">
+            <input type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" aria-describedby="helpPhone" placeholder="0123456789">
             <small id="helpPhone" class="form-text text-muted">Votre numéro de téléphone</small>
         </div>
         <div class="form-group mb-0 mt-2">
             <label for="civility" class='mb-0'>Civilité *</label>
-            <select class="custom-select" name="civility-billing" id="civility">
+            <select class="custom-select @error('civility') is-invalid @enderror" name="civility" id="civility">
                 <option value='1'>Monsieur</option>
                 <option value='2'>Madame</option>
                 <option value='3'>Non précisé</option>
@@ -197,33 +197,33 @@
         <div class='row'>
             <div class="form-group mb-0 mt-2 col-6">
                 <label for="firstname" class='mb-0'>Prénom *</label>
-                <input type="text" class="form-control" name="firstname-billing" id="firstname" aria-describedby="helpFirstname" placeholder="Jean">
+                <input type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" id="firstname" aria-describedby="helpFirstname" placeholder="Jean">
             </div>
             <div class="form-group mb-0 mt-2 col-6">
                 <label for="lastname" class='mb-0'>Nom de famille *</label>
-                <input type="text" class="form-control" name="lastname-billing" id="lastname" aria-describedby="helpLastname" placeholder="Dupont">
+                <input type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" id="lastname" aria-describedby="helpLastname" placeholder="Dupont">
             </div>
         </div>
         <p class='h4 mt-4'>Adresse de facturation</p>
         <div class="form-group mb-0 mt-2">
             <label for="street" class='mb-0'>Rue *</label>
-            <input type="text" class="form-control" name="street-billing" id="street" aria-describedby="helpStreet" placeholder="">
+            <input type="text" class="form-control @error('street') is-invalid @enderror" name="street" id="street" aria-describedby="helpStreet" placeholder="">
         </div>
         <div class="form-group mb-0 mt-2">
             <label for="zipcode" class='mb-0'>Code postal *</label>
-            <input type="text" class="form-control" name="zipcode-billing" id="zipcode" aria-describedby="helpZipcode" placeholder="63300" minlength="5" maxlength="5">
+            <input type="text" class="form-control @error('zipcode') is-invalid @enderror" name="zipcode" id="zipcode" aria-describedby="helpZipcode" placeholder="63300" minlength="5" maxlength="5">
         </div>
         <div class="form-group mb-0 mt-2">
             <label for="city" class="mb-0">Ville *</label>
-            <input type="text" class="form-control" name="city-billing" id="city" aria-describedby="helpCity" placeholder="Thiers">
+            <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" id="city" aria-describedby="helpCity" placeholder="Thiers">
         </div>
         <div class="form-group mb-0 mt-2">
-            <label for="complements" class="mb-0">Compléments</label>
-            <input type="text" class="form-control" name="complements-billing" id="complements" aria-describedby="helpComplements" placeholder="">
+            <label for="complement" class="mb-0">Compléments</label>
+            <input type="text" class="form-control @error('complement') is-invalid @enderror" name="complement" id="complement" aria-describedby="helpComplement" placeholder="">
         </div>
         <div class="form-group mb-0 mt-2">
             <label for="company" class="mb-0">Entreprise</label>
-            <input type="text" class="form-control" name="company-billing" id="company" aria-describedby="helpCompany" placeholder="">
+            <input type="text" class="form-control @error('company') is-invalid @enderror" name="company" id="company" aria-describedby="helpCompany" placeholder="">
         </div>
     </form>
 
@@ -231,21 +231,30 @@
 
 {{-- [NEW] - Same shipping address as billing --}}
 <script>
-    $('#shipping-address-container').hide();
-    $("#same-address-checkbox").change(function() {
-        if(this.checked) {
-            $('#shipping-address-container').hide();
-        } else $('#shipping-address-container').show();
-    });
-</script>
+    same_address_checkbox = $(".same-address-checkbox");
 
-{{-- [SAVED] - Same shipping address as billing --}}
-<script>
+    if(same_address_checkbox.checked) {
+        same_address_checkbox.prop("checked", true());
+        $('#shipping-address-container').hide();
+        $('#saved-shipping-address-container').hide();
+    } else {
+        same_address_checkbox.prop("checked", false())
+        $('#shipping-address-container').show();
+        $('#saved-shipping-address-container').show();
+    }
+
+    $('#shipping-address-container').hide();
     $('#saved-shipping-address-container').hide();
-    $('#same-saved-address-checkbox').change(function(){
+    same_address_checkbox.change(function() {
         if(this.checked) {
+            same_address_checkbox.prop("checked", true());
+            $('#shipping-address-container').hide();
             $('#saved-shipping-address-container').hide();
-        } else $('#saved-shipping-address-container').show();
+        } else {
+            same_address_checkbox.prop("checked", false())
+            $('#shipping-address-container').show();
+            $('#saved-shipping-address-container').show();
+        }
     });
 </script>
 

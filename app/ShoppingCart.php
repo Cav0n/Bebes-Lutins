@@ -31,6 +31,16 @@ class ShoppingCart extends Model
         return $this->belongsTo('App\Voucher');
     }
 
+    public function billing_address()
+    {
+        return $this->hasOne('App\Address');
+    }
+
+    public function shipping_address()
+    {
+        return $this->hasOne('App\Address');
+    }
+
     public function calculatePricesAndQuantities() : array
     {
         $total_price = 0.00;

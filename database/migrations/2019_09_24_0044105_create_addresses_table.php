@@ -25,7 +25,11 @@ class CreateAddressesTable extends Migration
             $table->string('company')->nullable();
             $table->boolean('is_deleted')->nullable()->default(false);
 
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+
             $table->string('user_id');
+            
 
             $table->foreign('user_id')->references('id')->on('users');
 

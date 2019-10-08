@@ -75,11 +75,19 @@ class AddressController extends Controller
 
         if(Auth::check()) $address->user_id = Auth::user()->id;
 
+        /* FOR WITHDRAWAL SHOP */
+        if($request['email'] != null) $address->email = $request['email'];
+        if($request['phone'] != null) $address->phone = $request['phone'];
+        /* ------ */
+
         $address->save();
 
-        $request->session()->flash('success', 'Votre adresse à bien été ajoutée.');
-
-        return redirect('/espace-client/adresses');
+        /* If not actually in shopping cart */
+        if($request['delivery-type'] == null){
+            $request->session()->flash('success', 'Votre adresse à bien été ajoutée.');
+            return redirect('/espace-client/adresses');
+        }
+        /* ------ */
     }
 
     public static function storeBilling(Request $request)
@@ -105,9 +113,10 @@ class AddressController extends Controller
         $address->company = $request['company-billing'];
 
         if(Auth::check()) $address->user_id = Auth::user()->id;
+        
+        $address->save();
 
-        dd($address);
-        //$address->save();
+        return $address->id();
     }
 
     public function storeShipping(Request $request)
@@ -134,7 +143,9 @@ class AddressController extends Controller
 
         if(Auth::check()) $address->user_id = Auth::user()->id;
 
-        //$address->save();
+        $address->save();
+
+        return $address->id();
     }
 
     /**

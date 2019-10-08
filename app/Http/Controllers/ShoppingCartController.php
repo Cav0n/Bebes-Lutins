@@ -65,41 +65,46 @@ class ShoppingCartController extends Controller
 
     public function showPayment()
     {
+        $shopping_cart = session('shopping_cart');
+        
         return view('pages.shopping-cart.payment')->withStep(2)->withShoppingCart($shopping_cart);
     }
 
     public function validateDelivery(Request $request)
     {
-        //dd($request);
-        $request->session()->flash('delivery-type', $request['delivery-type']);
+        $shopping_cart = session('shopping_cart');
+
+        $request->session()->flash('delivery-type', $request['delivery-type']); // In case of error keep the delivery type
+        $request->session()->flash('same-shipping-address', $request['same-shipping-address']); // In case of error keep the boolean
 
         switch($request['delivery-type']){
-            case 'new-address':
-            //CREATE NEW ADDRESS AND HAD IT TO SHOPPING CART
+            case 'new-address': // CREATE NEW ADDRESS (BILLING AND SHIPPING if necessary)
+                $same_addresses = $request['same-shipping-address'];
+                $billing_address_id = AddressController::storeBilling($request);
 
-            AddressController::storeBilling($request);
+                if($same_addresses != null){ // If customer want two different addresses (billing & shipping)
+                    $shipping_address_id = AddressController::storeShipping($request);
+                } else { $shipping_address_id = $billing_address_id; }
+                break;
 
-            if($request['same-shipping-address'] != null){
-                AddressController::storeShipping($request);
-            }
+            case 'saved-addresses': // ADD BILLING & SHIPPING ADDRESS IDs
+                $billing_address_id = $request["billing-address"];
+                $same_shipping_address = $request["same-shipping-address"];
 
-            break;
+                if($same_shipping_address != null) $shipping_address_id = $billing_address_id;
+                else $shipping_address_id = $request["shipping-address"];
+                break;
 
-            case 'saved-addresses':
-            $billing_address_id = $request["billing-address"];
-            $shipping_address_id = $request["shipping-address"];
+            case 'withdrawal-shop': // CREATE NEW BILLING ADDRESS WITH EMAIL & PHONE
+                $request->validate([
+                    "email" => "email:filter|required",
+                    "phone" => "required" ]);
 
-            $same_shipping_address = $request["same-shipping-address"];
-
-            break;
-
-            case 'withdrawal-shop':
-            //ADD NEW BILLING ADDRESS AND EMAIL + PHONE
-            $email = $request["email"];
-            $phone = $request["phone"];
-            AddressController::storeBilling($request);
-
-            break;
+                $email = $request["email"];
+                $phone = $request["phone"];
+                $billing_address_id = AddressController::store($request);
+                $shipping_address_id = null;
+                break;
 
             default:
             $request->session()->flash('delivery-error', 'Il y a eu une erreur avec le moyen de livraison. Veuillez réessayer.');
@@ -107,7 +112,10 @@ class ShoppingCartController extends Controller
             break;
         }
 
-        //return redirect('/panier/paiement');
+        $shopping_cart->billing_address_id = $billing_address_id;
+        $shopping_cart->shipping_address_id = $shipping_address_id;
+
+        return redirect('/panier/paiement');
     }
 
     /**

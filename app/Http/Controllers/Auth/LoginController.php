@@ -27,7 +27,10 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/espace-client';
+    protected function redirectTo()
+    {
+        return '/espace-client';
+    }
 
     /**
      * Create a new controller instance.

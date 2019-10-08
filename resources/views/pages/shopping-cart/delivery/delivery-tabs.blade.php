@@ -2,15 +2,13 @@
     @if($has_addresses)
     <li class="nav-item mx-2">
         <a class="nav-link mb-0 noselect 
-        @if(session('delivery-type') == 'saved-addresses') 
-            @if($has_addresses) active @endif @endif" onclick='select_nav_item($(this), $(".savedAddresses"))'>
+        @if(session('delivery-type') == 'saved-addresses' || ($has_addresses && session('delivery-type') == null) ) active @endif" onclick='select_nav_item($(this), $(".savedAddresses"))'>
             Vos adresses</a>
     </li>
     @endif
     <li class="nav-item mx-2">
         <a class="nav-link mb-0 noselect 
-        @if(session('delivery-type') == 'new-address') 
-            @if(!$has_addresses) active @endif @endif" onclick='select_nav_item($(this), $(".newAddress"))'>
+        @if(session('delivery-type') == 'new-address' || (!$has_addresses && session('delivery-type') == null) ) active @endif" onclick='select_nav_item($(this), $(".newAddress"))'>
             Nouvelle adresse</a>
     </li>
     <li class="nav-item mx-2">

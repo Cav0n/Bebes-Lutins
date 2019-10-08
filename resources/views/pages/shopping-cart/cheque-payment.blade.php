@@ -65,42 +65,21 @@
                             
                         </div>
                         <div id='delivery-choices-container' class='card-body d-flex flex-column'>
-                            <div class='d-flex w-100'>
-                                <button type="button" class="btn btn-primary w-100 d-flex rounded-0" onclick='load_url("/panier/paiement/carte-bancaire")'>
-                                    <div class='svg-container' style='height:3rem;width:3rem;'>
-                                        <img class='svg h-100 w-100' src='{{asset('images/icons/credit-card.svg')}}'>
-                                    </div>
-                                    <p class='my-auto ml-3'>Payer par carte bancaire ></p>
-                                </button>
-                            </div>
-                            <div class='w-100 border-top my-4'></div>
-                            <div class='d-flex flex-column w-100'>
-                                <button type="button" class="btn btn-primary w-100 d-flex rounded-0" onclick='display_cheque_payment()'>
-                                    <div class='svg-container' style='height:3rem;width:3rem;'>
-                                        <img class='svg h-100 w-100' src='{{asset('images/icons/bank-cheque.svg')}}'>
-                                    </div>
-                                    <p class='my-auto ml-3'>Payer par chèque bancaire ></p>
-                                </button>
-                                <div id='cheque-payment' class='my-3 p-4 border'>
-                                    <p class='mb-0'>
-                                        Merci d'établir votre chèque à l'ordre de : <b>ACTYPOLES.</b><BR>
-                                        <BR>
-                                        Le paiement est à nous faire parvenir à :<BR>
-                                        Actypoles / Bébés Lutins<BR>
-                                        4, rue du 19 mars 1962<BR>
-                                        63300 THIERS<BR>
-                                        <BR>
-                                        Montant de votre commande : <b>8,90 €.</b><BR>
-                                        <BR>
-                                        Votre commande sera traitée et expédiée à réception de votre chèque.</p>
-                                    <div class='w-100 border-top my-4'></div>
-                                    <button type="button" class="btn btn-primary rounded-0 w-100">Valider ma commande</button>
-                                </div>
-                            </div>
-                            <div class='w-100 border-top my-4'></div>
-                            <div class='d-flex w-100'>
-                                <small>En cliquant sur les boutons ci-dessus vous acceptez sans réserve les conditions générales de vente.</small>
-                            </div>
+                            <p class='mb-0'>
+                                Merci d'établir votre chèque à l'ordre de : <b>ACTYPOLES.</b><BR>
+                                <BR>
+                                Le paiement est à nous faire parvenir à :<BR>
+                                Actypoles / Bébés Lutins<BR>
+                                4, rue du 19 mars 1962<BR>
+                                63300 THIERS<BR>
+                                <BR>
+                                Montant de votre commande : <b>8,90 €.</b><BR>
+                                <BR>
+                                Votre commande sera traitée et expédiée à réception de votre chèque.</p>
+                                <div class='w-100 border-top my-4'></div>
+                                <small class='mb-2'>En cliquant sur le bouton ci-dessous vous acceptez sans réserve 
+                                    les conditions générales de vente.</small>
+                                <button type="button" class="btn btn-primary rounded-0">Valider ma commande</button>
                         </div>
                     </div>
                 </div>
@@ -257,14 +236,6 @@
         </div>
     </div>
 </main>
-
-<script>
-    $('#cheque-payment').hide();
-    function display_cheque_payment()
-    {
-        $('#cheque-payment').fadeToggle(200);
-    }
-</script>
 
 {{--  Reduce product title  --}}
 <script>

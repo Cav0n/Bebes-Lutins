@@ -73,6 +73,11 @@ class ShoppingCartController extends Controller
         return view('pages.shopping-cart.payment')->withStep(2)->withShoppingCart($shopping_cart);
     }
 
+    public function showCreditCardPayment()
+    {
+        dd('REDIRIGER VERS CITELIS');
+    }
+
     public function validateDelivery(Request $request)
     {
         $shopping_cart = session('shopping_cart');

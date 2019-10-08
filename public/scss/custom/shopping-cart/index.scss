@@ -1,3 +1,5 @@
+$dark: #242424 !default;
+
 #main-shopping-cart table td{
     vertical-align: middle;
     border-top: none !important;
@@ -23,4 +25,12 @@
 
 #delivery-selection .nav-item{
     cursor: pointer;
+}
+
+.step.passed{
+    cursor: pointer;
+}
+
+#paiement-selection svg{
+    fill:$dark;
 }

@@ -49,6 +49,7 @@ Route::get('/panier/livraison', 'ShoppingCartController@showDelivery');
 Route::post('/panier/livraison/validation', 'ShoppingCartController@validateDelivery');
 
 Route::get('/panier/paiement', 'ShoppingCartController@showPayment');
+Route::get('/panier/paiement/carte-bancaire', 'ShoppingCartController@showCreditCardPayment');
  /* ---------------- */
 
 /**

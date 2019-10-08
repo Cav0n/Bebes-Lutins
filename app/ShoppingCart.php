@@ -33,12 +33,12 @@ class ShoppingCart extends Model
 
     public function billing_address()
     {
-        return $this->hasOne('App\Address');
+        return $this->hasOne('App\Address', 'id', 'billing_address_id');
     }
 
     public function shipping_address()
     {
-        return $this->hasOne('App\Address');
+        return $this->hasOne('App\Address', 'id', 'shipping_address_id');
     }
 
     public function calculatePricesAndQuantities() : array

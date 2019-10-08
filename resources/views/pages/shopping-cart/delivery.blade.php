@@ -111,7 +111,13 @@
                                         réserve les conditions générales de vente.</small>
                                     </div>
                                     <div class="col-12 col-md-6 col-lg-12">
-                                        <button id='submit-button' type="submit" class="btn btn-primary w-100" form="@if($has_addresses){{'saved-addresses-form'}}@else{{'new-address-form'}}@endif" >Passer au paiement</button>
+                                        <?php 
+                                        $form = 'new-address-form';
+                                        if( ($has_addresses && session('delivery-type') == null) || session('delivery-type') == 'saved-addresses' ) $form = 'saved-addresses-form';
+                                        if( (!$has_addresses && session('delivery-type') == null) || session('delivery-type') == 'new-address') $form = 'new-address-form';
+                                        if(session('delivery-type') == 'withdrawal-shop') $form = 'withdrawal-shop-form';
+                                        ?>
+                                        <button id='submit-button' type="submit" class="btn btn-primary w-100" form="{{$form}}" >Passer au paiement</button>
                                     </div>
                                 </div>
                             </div>

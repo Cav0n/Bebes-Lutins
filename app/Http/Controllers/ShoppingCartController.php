@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ShoppingCart;
 use App\Voucher;
+use App\Address;
 use App\Http\Controllers\AddressController;
 use Illuminate\Http\Request;
 use Auth;
@@ -66,6 +67,8 @@ class ShoppingCartController extends Controller
     public function showPayment()
     {
         $shopping_cart = session('shopping_cart');
+        $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
+        session(['shopping_cart' => $shopping_cart]);
         
         return view('pages.shopping-cart.payment')->withStep(2)->withShoppingCart($shopping_cart);
     }
@@ -82,7 +85,7 @@ class ShoppingCartController extends Controller
                 $same_addresses = $request['same-shipping-address'];
                 $billing_address_id = AddressController::storeBilling($request);
 
-                if($same_addresses != null){ // If customer want two different addresses (billing & shipping)
+                if($same_addresses == null){ // If customer want two different addresses (billing & shipping)
                     $shipping_address_id = AddressController::storeShipping($request);
                 } else { $shipping_address_id = $billing_address_id; }
                 break;
@@ -91,17 +94,16 @@ class ShoppingCartController extends Controller
                 $billing_address_id = $request["billing-address"];
                 $same_shipping_address = $request["same-shipping-address"];
 
-                if($same_shipping_address != null) $shipping_address_id = $billing_address_id;
-                else $shipping_address_id = $request["shipping-address"];
+                if($same_shipping_address == null) $shipping_address_id = $request["shipping-address"];
+                else $shipping_address_id = $billing_address_id;
                 break;
 
             case 'withdrawal-shop': // CREATE NEW BILLING ADDRESS WITH EMAIL & PHONE
-                $request->validate([
-                    "email" => "email:filter|required",
-                    "phone" => "required" ]);
+                $request->validate(["email" => "email:filter|required"]);
 
                 $email = $request["email"];
                 $phone = $request["phone"];
+
                 $billing_address_id = AddressController::store($request);
                 $shipping_address_id = null;
                 break;
@@ -114,6 +116,9 @@ class ShoppingCartController extends Controller
 
         $shopping_cart->billing_address_id = $billing_address_id;
         $shopping_cart->shipping_address_id = $shipping_address_id;
+        $shopping_cart->save();
+
+        $request->session()->put('shopping_cart', $shopping_cart);
 
         return redirect('/panier/paiement');
     }

@@ -65,11 +65,11 @@ class AddressController extends Controller
         $address = new Address();
         $address->id = substr(uniqid(), 0, 10);
         $address->civility = $validated_data['civility'];
-        $address->firstname = $validated_data['firstname'];
-        $address->lastname = $validated_data['lastname'];
+        $address->firstname = ucfirst($validated_data['firstname']);
+        $address->lastname = mb_strtoupper($validated_data['lastname']);
         $address->street = $validated_data['street'];
         $address->zipCode = $validated_data['zipcode'];
-        $address->city = $validated_data['city'];
+        $address->city = mb_strtoupper($validated_data['city']);
         $address->complement = $request['complement'];
         $address->company = $request['company'];
 
@@ -86,7 +86,7 @@ class AddressController extends Controller
         if($request['delivery-type'] == null){
             $request->session()->flash('success', 'Votre adresse à bien été ajoutée.');
             return redirect('/espace-client/adresses');
-        }
+        } else { return $address->id; } 
         /* ------ */
     }
 
@@ -104,11 +104,11 @@ class AddressController extends Controller
         $address = new Address();
         $address->id = substr(uniqid(), 0, 10);
         $address->civility = $validated_data['civility-billing'];
-        $address->firstname = $validated_data['firstname-billing'];
-        $address->lastname = $validated_data['lastname-billing'];
+        $address->firstname = ucfirst($validated_data['firstname-billing']);
+        $address->lastname = mb_strtoupper($validated_data['lastname-billing']);
         $address->street = $validated_data['street-billing'];
         $address->zipCode = $validated_data['zipcode-billing'];
-        $address->city = $validated_data['city-billing'];
+        $address->city = mb_strtoupper($validated_data['city-billing']);
         $address->complement = $request['complement-billing'];
         $address->company = $request['company-billing'];
 
@@ -116,10 +116,10 @@ class AddressController extends Controller
         
         $address->save();
 
-        return $address->id();
+        return $address->id;
     }
 
-    public function storeShipping(Request $request)
+    public static function storeShipping(Request $request)
     {
         $validated_data = $request->validate([
             'civility-shipping' => 'numeric|max:3|required',
@@ -133,11 +133,11 @@ class AddressController extends Controller
         $address = new Address();
         $address->id = substr(uniqid(), 0, 10);
         $address->civility = $validated_data['civility-shipping'];
-        $address->firstname = $validated_data['firstname-shipping'];
-        $address->lastname = $validated_data['lastname-shipping'];
+        $address->firstname = ucfirst($validated_data['firstname-shipping']);
+        $address->lastname = mb_strtoupper($validated_data['lastname-shipping']);
         $address->street = $validated_data['street-shipping'];
         $address->zipCode = $validated_data['zipcode-shipping'];
-        $address->city = $validated_data['city-shipping'];
+        $address->city = mb_strtoupper($validated_data['city-shipping']);
         $address->complement = $request['complement-shipping'];
         $address->company = $request['company-shipping'];
 
@@ -145,7 +145,7 @@ class AddressController extends Controller
 
         $address->save();
 
-        return $address->id();
+        return $address->id;
     }
 
     /**

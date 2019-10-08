@@ -1,30 +1,14 @@
-<?php $shopping_cart = session('shopping_cart'); 
-//session()->forget('shopping_cart');
+<?php 
+    $pricesAndQuantities = $shoppingCart->calculatePricesAndQuantities();
+    
+    $products_price = $pricesAndQuantities['products_price'];
+    $shipping_price = $pricesAndQuantities['shipping_price'];
+    $total_quantity = $pricesAndQuantities['total_quantity'];
+    $total = $products_price + $shipping_price;
+    if($products_price < 70) $price_before_free_shipping = 70 - $products_price;
+    else $price_before_free_shipping = 0;
 
-$total_price = 0.00;
-$total_quantity = 0;
-$shipping_price = 5.90;
-$total = 0.00;
-$price_before_free_shipping = 70.00;
-
-if(count($shopping_cart->items) > 0){
-    foreach ($shopping_cart->items as $item) {
-        $total_price += $item->product->price * $item->quantity;
-
-        $total_quantity += $item->quantity;
-    }
-    $price_before_free_shipping -= $total_price;
-}
-
-if($total_price >= 70){
-    $shipping_price = 0;
-    $price_before_free_shipping = 0.00;
-}
-
-$total = $total_price + $shipping_price;
-
-$has_addresses = Auth::check() && count(Auth::user()->addresses) > 0;
-
+    $has_addresses = Auth::check() && count(Auth::user()->addresses) > 0;
 ?>
 
 @extends('templates.template')
@@ -44,6 +28,32 @@ $has_addresses = Auth::check() && count(Auth::user()->addresses) > 0;
             {{-- STEPS --}}
             @include('pages.shopping-cart.steps')
 
+            {{-- Errors --}}
+            @if (session()->has('delivery-error'))
+            <div class="row m-0 justify-content-center">
+                <div class="col-lg-8">
+                    <div class="alert alert-danger">
+                        <p class='mb-0'>{{ session('delivery-error') }}</p>
+                    </div>
+                </div>
+            </div>
+            @endif
+
+            {{-- Errors --}}
+            @if ($errors->any())
+            <div class="row m-0 justify-content-center">
+                <div class="col-lg-8">
+                    <div class="alert alert-danger">
+                        <ul class='mb-0'>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                        </ul>
+                    </div>
+                </div>  
+            </div>
+            @endif
+
             <div class="row justify-content-center">
 
                 {{--  ITEMS  --}}
@@ -51,12 +61,12 @@ $has_addresses = Auth::check() && count(Auth::user()->addresses) > 0;
                     <div id='delivery-selection' class="card p-0 border-0 rounded-0">
                         <div class="card-header bg-white">
 
-                            PAYYYYEEEEEEE
+                            BORDEL PAYES
                             
                         </div>
                         <div id='delivery-choices-container' class='card-body'>
 
-                            Oui je paye
+                            PAYYYYYYYYEEEEESSS
 
                         </div>
                     </div>
@@ -77,7 +87,7 @@ $has_addresses = Auth::check() && count(Auth::user()->addresses) > 0;
                                         <p class="card-text">{{$total_quantity}} produits :</p>
                                     </div>
                                     <div class="col-6 p-0">
-                                        <p class="card-text text-right">{{number_format($total_price, 2)}} €</p>
+                                        <p class="card-text text-right">{{number_format($products_price, 2)}} €</p>
                                     </div>
                 
                                     <div class="col-6 p-0">
@@ -108,14 +118,14 @@ $has_addresses = Auth::check() && count(Auth::user()->addresses) > 0;
                         </div>
 
                         {{--  Voucher code  --}}
-                        @if($shopping_cart->voucher != null)
+                        @if($shoppingCart->voucher != null)
                         <div class="col-12 my-2 my-lg-2 order-0 order-lg-1">
                             <div class="card p-0 border-0 rounded-0">
                                 <div class="card-header bg-white">
                                     <h1 class='h5 mb-0'>Réductions</h1>
                                 </div>
                                 <div class="card-body row m-0">
-                                    @if ($shopping_cart->voucher == null)
+                                    @if ($shoppingCart->voucher == null)
                                     <form action="/panier/code-coupon/ajout" method="POST" class='w-100'>
                                         @csrf
                                         <div class="form-group">
@@ -165,7 +175,7 @@ $has_addresses = Auth::check() && count(Auth::user()->addresses) > 0;
                                     <h1 class='h5 mb-0'>{{$total_quantity}} articles</h1>
                                 </div>
                                 <div class="card-body">
-                                    @foreach ($shopping_cart->items as $item)
+                                    @foreach ($shoppingCart->items as $item)
                                     <div class='product row m-0 mb-2' style='font-size:0.7rem;'>
                                         <div class="col-3 p-0" style='max-height:4rem;'>
                                             <img class='w-100 h-100' src='{{asset('/images/products/' . $item->product->mainImage)}}' style='object-fit:cover;'>
@@ -179,6 +189,45 @@ $has_addresses = Auth::check() && count(Auth::user()->addresses) > 0;
                                 </div>
                             </div>
                         </div>
+
+                        {{-- Addresses --}}
+                        <div class="col-12 my-2 my-lg-0 mb-lg-2 order-1 order-lg-0">
+                            <div class="card p-0 border-0 rounded-0">
+                                <div class="card-header bg-white">
+                                    <h1 class='h5 mb-0'>Adresses</h1>
+                                </div>
+                                <div class="card-body">
+                                    <div class='billing-address'>
+                                        <p class='h5'>Facturation</p>
+                                        <?php $billing_address = $shoppingCart->billing_address; ?>
+                                        <p class='mb-0'><b>{{$billing_address->firstname}} {{$billing_address->lastname}}</b></p>
+                                        @if($billing_address->company != null) <small class="mb-0"><b>{{$billing_address->company}}</b></small>@endif
+                                        @if($billing_address->complement != null) <small class="mb-0">{{$billing_address->complement}}</small>@endif
+                                        <p class='mb-0'>{{$billing_address->street}}</p>
+                                        <p class='mb-0'>{{$billing_address->zipCode}}, {{$billing_address->city}}</p>
+                                    </div>
+                                    
+                                    <div class='shipping-address mt-4'>
+                                            
+                                        <p class='mb-0 h5'>Livraison</p>
+                                        @if($shoppingCart->shipping_address != null)
+                                        <?php $shipping_address = $shoppingCart->shipping_address; ?>
+                                        <p class='mb-0'><b>{{$shipping_address->firstname}} {{$shipping_address->lastname}}</b></p>
+                                        @if($shipping_address->company != null) <small class="mb-0"><b>{{$shipping_address->company}}</b></small>@endif
+                                        @if($shipping_address->complement != null) <small class="mb-0">{{$shipping_address->complement}}</small>@endif
+                                        <p class='mb-0'>{{$shipping_address->street}}</p>
+                                        <p class='mb-0'>{{$shipping_address->zipCode}}, {{$shipping_address->city}}</p>
+                                        @else 
+                                        <p class='mb-0'>Livraison à l'atelier</p>
+                                        <small class='mb-0'>{{$billing_address->email}}</small>
+                                        @if($billing_address->phone != null)<small class='mb-0'>{{$billing_address->phone}}</small>@endif
+                                        @endif
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+    
 
                     </div>
                 </div>

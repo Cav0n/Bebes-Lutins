@@ -8,7 +8,7 @@
     <form id='saved-addresses-form' action="/panier/livraison/validation" method="POST">
         @csrf
         <input type='hidden' name='delivery-type' value='saved-addresses'>
-        <div id='saved-billing-address-container'>
+        <div class='billing-address-container'>
             <div id='saved-billing-address' class="form-group">
                 <label for="billing-address">Choisissez une adresse de facturation</label>
                 <select class="custom-select" name="billing-address" id="billing-address-selector">
@@ -27,11 +27,11 @@
         </div>
 
         <div class="custom-control custom-checkbox max-content mx-auto my-3 pointer">
-            <input name='same-shipping-address' type="checkbox" class="custom-control-input pointer same-address-checkbox" id="same-saved-address-checkbox" @if(session('same-shipping-address') == "true"|| session('same-shipping-address') == null) checked @endif>
+            <input name='same-shipping-address' type="checkbox" class="custom-control-input pointer same-address-checkbox" id="same-saved-address-checkbox">
             <label class="custom-control-label noselect pointer" for="same-saved-address-checkbox">Adresse de livraison identique</label>
         </div>
 
-        <div id='saved-shipping-address-container'>
+        <div class='shipping-address-container'>
             <div id='saved-shipping-address' class='form-group'>
                 <label for="shipping-address">Choisissez une adresse de livraison</label>
                 <select class="custom-select" name="shipping-address" id="shipping-address-selector">
@@ -61,7 +61,7 @@
         <input type='hidden' name='delivery-type' value='new-address'>
 
         {{-- BILLING ADDRESS --}}
-        <div id='billing-address-container'>
+        <div class='billing-address-container'>
             <p class='h4'>Adresse de facturation</p>
             <small>Les champs avec un astérisque (*) sont obligatoires.</small>
             <div class="form-group mb-0 mt-2">
@@ -105,12 +105,12 @@
         </div>
 
         <div class="custom-control custom-checkbox max-content mx-auto my-3 pointer">
-            <input name='same-shipping-address' type="checkbox" class="custom-control-input pointer same-address-checkbox" id="same-address-checkbox" @if(session('same-shipping-address') == "true"|| session('same-shipping-address') == null) checked @endif>
+            <input name='same-shipping-address' type="checkbox" class="custom-control-input pointer same-address-checkbox" id="same-address-checkbox">
             <label class="custom-control-label noselect pointer" for="same-address-checkbox">Adresse de livraison identique</label>
         </div>
 
         {{-- SHIPPING ADDRESS --}}
-        <div id='shipping-address-container'>
+        <div class='shipping-address-container'>
             <p class='h4'>Adresse de livraison</p>
             <small>Les champs avec un astérisque (*) sont obligatoires.</small>
             <div class="form-group mb-0 mt-2">
@@ -178,12 +178,12 @@
         <input type='hidden' name='delivery-type' value='withdrawal-shop'>
         <div class="form-group mb-0 mt-2">
             <label for="email" class='mb-0'>Adresse email *</label>
-            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" aria-describedby="helpEmail" placeholder="jeandupont@gmail.com">
+            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" aria-describedby="helpEmail" placeholder="jeandupont@gmail.com" value='{{old('email')}}'>
             <small id="helpEmail" class="form-text text-muted">Votre adresse email</small>
         </div>
         <div class="form-group mb-0 mt-2">
             <label for="phone" class="mb-0">Numéro de téléphone</label>
-            <input type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" aria-describedby="helpPhone" placeholder="0123456789">
+            <input type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" aria-describedby="helpPhone" placeholder="0123456789" value='{{old('phone')}}'>
             <small id="helpPhone" class="form-text text-muted">Votre numéro de téléphone</small>
         </div>
         <div class="form-group mb-0 mt-2">
@@ -197,33 +197,33 @@
         <div class='row'>
             <div class="form-group mb-0 mt-2 col-6">
                 <label for="firstname" class='mb-0'>Prénom *</label>
-                <input type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" id="firstname" aria-describedby="helpFirstname" placeholder="Jean">
+                <input type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" id="firstname" aria-describedby="helpFirstname" placeholder="Jean" value='{{old('firstname')}}'>
             </div>
             <div class="form-group mb-0 mt-2 col-6">
                 <label for="lastname" class='mb-0'>Nom de famille *</label>
-                <input type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" id="lastname" aria-describedby="helpLastname" placeholder="Dupont">
+                <input type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" id="lastname" aria-describedby="helpLastname" placeholder="Dupont" value='{{old('lastname')}}'>
             </div>
         </div>
         <p class='h4 mt-4'>Adresse de facturation</p>
         <div class="form-group mb-0 mt-2">
             <label for="street" class='mb-0'>Rue *</label>
-            <input type="text" class="form-control @error('street') is-invalid @enderror" name="street" id="street" aria-describedby="helpStreet" placeholder="">
+            <input type="text" class="form-control @error('street') is-invalid @enderror" name="street" id="street" aria-describedby="helpStreet" placeholder="" value='{{old('street')}}'>
         </div>
         <div class="form-group mb-0 mt-2">
             <label for="zipcode" class='mb-0'>Code postal *</label>
-            <input type="text" class="form-control @error('zipcode') is-invalid @enderror" name="zipcode" id="zipcode" aria-describedby="helpZipcode" placeholder="63300" minlength="5" maxlength="5">
+            <input type="text" class="form-control @error('zipcode') is-invalid @enderror" name="zipcode" id="zipcode" aria-describedby="helpZipcode" placeholder="63300" minlength="5" maxlength="5" value='{{old('zipcode')}}'>
         </div>
         <div class="form-group mb-0 mt-2">
             <label for="city" class="mb-0">Ville *</label>
-            <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" id="city" aria-describedby="helpCity" placeholder="Thiers">
+            <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" id="city" aria-describedby="helpCity" placeholder="Thiers" value='{{old('city')}}'>
         </div>
         <div class="form-group mb-0 mt-2">
             <label for="complement" class="mb-0">Compléments</label>
-            <input type="text" class="form-control @error('complement') is-invalid @enderror" name="complement" id="complement" aria-describedby="helpComplement" placeholder="">
+            <input type="text" class="form-control @error('complement') is-invalid @enderror" name="complement" id="complement" aria-describedby="helpComplement" placeholder="" value='{{old('complement')}}'>
         </div>
         <div class="form-group mb-0 mt-2">
             <label for="company" class="mb-0">Entreprise</label>
-            <input type="text" class="form-control @error('company') is-invalid @enderror" name="company" id="company" aria-describedby="helpCompany" placeholder="">
+            <input type="text" class="form-control @error('company') is-invalid @enderror" name="company" id="company" aria-describedby="helpCompany" placeholder="" value='{{old('company')}}'>
         </div>
     </form>
 
@@ -233,27 +233,23 @@
 <script>
     same_address_checkbox = $(".same-address-checkbox");
 
+    @if(session('same-shipping-address') == "true"|| session('same-shipping-address') == null) same_address_checkbox.checked = true; @endif
+
     if(same_address_checkbox.checked) {
-        same_address_checkbox.prop("checked", true());
-        $('#shipping-address-container').hide();
-        $('#saved-shipping-address-container').hide();
+        same_address_checkbox.prop("checked", true);
+        $('.shipping-address-container').hide();
     } else {
-        same_address_checkbox.prop("checked", false())
-        $('#shipping-address-container').show();
-        $('#saved-shipping-address-container').show();
+        same_address_checkbox.prop("checked", false)
+        $('.shipping-address-container').show();
     }
 
-    $('#shipping-address-container').hide();
-    $('#saved-shipping-address-container').hide();
     same_address_checkbox.change(function() {
         if(this.checked) {
-            same_address_checkbox.prop("checked", true());
-            $('#shipping-address-container').hide();
-            $('#saved-shipping-address-container').hide();
+            same_address_checkbox.prop("checked", true);
+            $('.shipping-address-container').hide();
         } else {
-            same_address_checkbox.prop("checked", false())
-            $('#shipping-address-container').show();
-            $('#saved-shipping-address-container').show();
+            same_address_checkbox.prop("checked", false)
+            $('.shipping-address-container').show();
         }
     });
 </script>

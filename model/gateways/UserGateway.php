@@ -271,7 +271,9 @@ class UserGateway
         foreach ($users_db as $user_db){
             /*$user = new UserConnected($user_db['id'], $user_db['surname'], $user_db['firstname'], $user_db['mail'], $user_db['phone'], $user_db['privilege'], $user_db['registration_date'], $user_db['activated']);
             $user->setNewsletter($user_db['newsletter']); */
-            $users[] = new UserConnected($user_db['id'], $user_db['surname'], $user_db['firstname'], $user_db['mail'], $user_db['phone'], $user_db['privilege'], $user_db['registration_date'], $user_db['activated']);
+            $user = new UserConnected($user_db['id'], $user_db['surname'], $user_db['firstname'], $user_db['mail'], $user_db['phone'], $user_db['privilege'], $user_db['registration_date'], $user_db['activated']);
+            $user->setPassword($user_db['password']);
+            $users[] = $user;
         }
         return $users;
     }

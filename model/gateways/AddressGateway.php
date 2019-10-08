@@ -8,6 +8,29 @@
 
 class AddressGateway
 {
+    public static function GetAllAddress(){
+        global $dblogin, $dbpassword, $dsn;
+        $con = new Connexion($dsn, $dblogin, $dbpassword);
+        $address_list = array();
+
+        $query = 'SELECT id, user_id, civility, surname, firstname, street, city, postal_code, complement, company FROM address_backup';
+        $con->executeQuery($query);
+        $addresses = $con->getResults();
+
+        foreach ($addresses as $address) {
+
+            $query = 'SELECT id, mail, password, surname, firstname, phone, privilege, registration_date, shopping_cart_id, birthlist_id, verification_key, activated, newsletter FROM user WHERE id=:user_id;';
+            $con->executeQuery($query, array(':user_id' => array($address['user_id'], PDO::PARAM_STR)));
+            $user = $con->getResults()[0];
+
+            if($user != null) {
+                $user = new UserConnected($user['id'], $user['surname'], $user['firstname'], $user['mail'], $user['phone'], $user['privilege'], $user['registration_date'], $user['activated']);
+                $address_list[] = new Address($address['id'], $user, $address['civility'], $address['surname'], $address['firstname'], $address['street'], $address['city'], $address['postal_code'], $address['complement'], $address['company']);
+            }
+        }
+        return $address_list;
+    }
+
     public static function GetBillingAndShippingAddress(String $billing_address_id, String $shipping_address_id, UserConnected $user){
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);

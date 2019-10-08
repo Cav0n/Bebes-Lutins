@@ -577,6 +577,18 @@ class ProductGateway
         return $product;
     }
 
+    public static function GetProductNameWithID(String $id)
+    {
+        global $dblogin, $dbpassword, $dsn;
+        $con = new Connexion($dsn, $dblogin, $dbpassword);
+
+        $query ="SELECT name FROM product WHERE id=:id;";
+        $con->executeQuery($query, array(':id' => array($id, PDO::PARAM_STR)));
+        $product = $con->getResults()[0];
+
+        return $product;
+    }
+
     public static function SearchProductsByCategory(Category $category){
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);

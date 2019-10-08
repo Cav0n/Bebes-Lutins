@@ -21,6 +21,7 @@ $product_number = 1;
 if(($highlighted_products != null) && $limit_product_display != -1){
     foreach ($highlighted_products as $highlighted_product){
         $highlighted_product = (new ProductContainer($highlighted_product))->getProduct();
+        if(!$highlighted_product->getHide()){
             if($highlighted_product->getStock() < 1) {$out_of_stock = 1; $class_out_of_stock = "out-of-stock"; $disabled = "disabled"; $link = "";}
             else {$out_of_stock = 0; $class_out_of_stock = ""; $disabled = ""; $link = $highlighted_product->getId();}
 
@@ -49,6 +50,7 @@ if(($highlighted_products != null) && $limit_product_display != -1){
                 <?php echo $disabled;?>>Ajouter au panier</button>
             </div>
         <?php
+        }
     }
 } else {
 

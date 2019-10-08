@@ -11,6 +11,7 @@ class UserConnected extends User
     private $surname;
     private $firstname;
     private $mail;
+    private $password;
     private $phone;
     private $privilege;
     private $registration_date;
@@ -294,5 +295,13 @@ class UserConnected extends User
     public function setWishListID(string $wishlist_id): void
     {
         $this->wishlist_id = $wishlist_id;
+    }
+
+    public function setPassword(string $password){
+        $this->password = $password;
+    }
+
+    public function getPassword(){
+        return $this->password;
     }
 }

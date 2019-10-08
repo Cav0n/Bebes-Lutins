@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ShoppingCart;
 use App\Voucher;
+use App\Http\Controllers\AddressController;
 use Illuminate\Http\Request;
 use Auth;
 
@@ -69,7 +70,43 @@ class ShoppingCartController extends Controller
 
     public function validateDelivery(Request $request)
     {
-        dd($request);
+        //dd($request);
+        $request->session()->flash('delivery-type', $request['delivery-type']);
+
+        switch($request['delivery-type']){
+            case 'new-address':
+            //CREATE NEW ADDRESS AND HAD IT TO SHOPPING CART
+
+            AddressController::storeBilling($request);
+
+            if($request['same-shipping-address'] != null){
+                AddressController::storeShipping($request);
+            }
+
+            break;
+
+            case 'saved-addresses':
+            $billing_address_id = $request["billing-address"];
+            $shipping_address_id = $request["shipping-address"];
+
+            $same_shipping_address = $request["same-shipping-address"];
+
+            break;
+
+            case 'withdrawal-shop':
+            //ADD NEW BILLING ADDRESS AND EMAIL + PHONE
+            $email = $request["email"];
+            $phone = $request["phone"];
+            AddressController::storeBilling($request);
+
+            break;
+
+            default:
+            $request->session()->flash('delivery-error', 'Il y a eu une erreur avec le moyen de livraison. Veuillez réessayer.');
+            return redirect('/panier/livraison');
+            break;
+        }
+
         //return redirect('/panier/paiement');
     }
 

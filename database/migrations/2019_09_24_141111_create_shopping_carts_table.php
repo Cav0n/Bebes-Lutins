@@ -19,9 +19,13 @@ class CreateShoppingCartsTable extends Migration
             
             $table->string('user_id')->nullable();
             $table->string('voucher_id')->nullable();
+            $table->string('billing_address_id')->nullable();
+            $table->string('shipping_address_id')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('voucher_id')->references('id')->on('vouchers');
+            $table->foreign('billing_address_id')->references('id')->on('addresses');
+            $table->foreign('shipping_address_id')->references('id')->on('addresses');
 
             $table->timestamps();
         });

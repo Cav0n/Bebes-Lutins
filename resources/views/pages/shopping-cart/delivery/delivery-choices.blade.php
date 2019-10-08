@@ -2,7 +2,7 @@
 <?php $address = Auth::user()->addresses[0]; ?>
 
 {{-- Saved addresses --}}
-<div id="savedAddresses" class='delivery-choice savedAddresses'>
+<div id="savedAddresses" class='delivery-choice savedAddresses @if(session('delivery-type') == 'saved-addresses' || (session('delivery-type') == null) && $has_addresses) @else d-none @endif'>
     <p class='h4'>Vos adresses sauvegardées</p>
 
     <form id='saved-addresses-form' action="/panier/livraison/validation" method="POST">
@@ -54,7 +54,7 @@
 @endif
 
 {{-- New address creation --}}
-<div id="newAddress" class='delivery-choice newAddress @if($has_addresses) d-none @endif'>
+<div id="newAddress" class='delivery-choice newAddress @if(session('delivery-type') == 'new-address' || (session('delivery-type') == null && !$has_addresses)) @else d-none @endif'>
 
     <form id='new-address-form' action="/panier/livraison/validation" method="POST">
         @csrf
@@ -66,7 +66,7 @@
             <small>Les champs avec un astérisque (*) sont obligatoires.</small>
             <div class="form-group mb-0 mt-2">
                 <label for="civility" class='mb-0'>Civilité *</label>
-                <select class="custom-select" name="civility-billing" id="civility">
+                <select class="custom-select @error('civility-billing') is-invalid @enderror" name="civility-billing" id="civility">
                     <option value='1'>Monsieur</option>
                     <option value='2'>Madame</option>
                     <option value='3'>Non précisé</option>
@@ -75,32 +75,32 @@
             <div class='row'>
                 <div class="form-group mb-0 mt-2 col-6">
                     <label for="firstname" class='mb-0'>Prénom *</label>
-                    <input type="text" class="form-control" name="firstname-billing" id="firstname" aria-describedby="helpFirstname" placeholder="Jean">
+                    <input type="text" class="form-control @error('firstname-billing') is-invalid @enderror" name="firstname-billing" id="firstname" aria-describedby="helpFirstname" placeholder="Jean" value='{{old('firstname-billing')}}'>
                 </div>
                 <div class="form-group mb-0 mt-2 col-6">
                     <label for="lastname" class='mb-0'>Nom de famille *</label>
-                    <input type="text" class="form-control" name="lastname-billing" id="lastname" aria-describedby="helpLastname" placeholder="Dupont">
+                    <input type="text" class="form-control @error('lastname-billing') is-invalid @enderror" name="lastname-billing" id="lastname" aria-describedby="helpLastname" placeholder="Dupont" value='{{old('lastname-billing')}}'>
                 </div>
             </div>
             <div class="form-group mb-0 mt-2">
                 <label for="street" class='mb-0'>Rue *</label>
-                <input type="text" class="form-control" name="street-billing" id="street" aria-describedby="helpStreet" placeholder="">
+                <input type="text" class="form-control @error('street-billing') is-invalid @enderror" name="street-billing" id="street" aria-describedby="helpStreet" placeholder="" value='{{old('street-billing')}}'>
             </div>
             <div class="form-group mb-0 mt-2">
                 <label for="zipcode" class='mb-0'>Code postal *</label>
-                <input type="text" class="form-control" name="zipcode-billing" id="zipcode" aria-describedby="helpZipcode" placeholder="63300" minlength="5" maxlength="5">
+                <input type="text" class="form-control @error('zipcode-billing') is-invalid @enderror" name="zipcode-billing" id="zipcode" aria-describedby="helpZipcode" placeholder="63300" minlength="5" maxlength="5" value='{{old('zipcode-billing')}}'>
             </div>
             <div class="form-group mb-0 mt-2">
                 <label for="city" class="mb-0">Ville *</label>
-                <input type="text" class="form-control" name="city-billing" id="city" aria-describedby="helpCity" placeholder="Thiers">
+                <input type="text" class="form-control @error('city-billing') is-invalid @enderror" name="city-billing" id="city" aria-describedby="helpCity" placeholder="Thiers" value='{{old('city-billing')}}'>
             </div>
             <div class="form-group mb-0 mt-2">
                 <label for="complements" class="mb-0">Compléments</label>
-                <input type="text" class="form-control" name="complements-billing" id="complements" aria-describedby="helpComplements" placeholder="">
+                <input type="text" class="form-control @error('complements-billing') is-invalid @enderror" name="complements-billing" id="complements" aria-describedby="helpComplements" placeholder="" value='{{old('complements-billing')}}'>
             </div>
             <div class="form-group mb-0 mt-2">
                 <label for="company" class="mb-0">Entreprise</label>
-                <input type="text" class="form-control" name="company-billing" id="company" aria-describedby="helpCompany" placeholder="">
+                <input type="text" class="form-control @error('company-billing') is-invalid @enderror" name="company-billing" id="company" aria-describedby="helpCompany" placeholder="" value='{{old('company-billing')}}'>
             </div>
         </div>
 
@@ -115,7 +115,7 @@
             <small>Les champs avec un astérisque (*) sont obligatoires.</small>
             <div class="form-group mb-0 mt-2">
                 <label for="civility" class='mb-0'>Civilité *</label>
-                <select class="custom-select" name="civility-shipping" id="civility">
+                <select class="custom-select @error('civility-shipping') is-invalid @enderror" name="civility-shipping" id="civility">
                     <option value='1'>Monsieur</option>
                     <option value='2'>Madame</option>
                     <option value='3'>Non précisé</option>
@@ -124,32 +124,32 @@
             <div class='row'>
                 <div class="form-group mb-0 mt-2 col-6">
                     <label for="firstname" class='mb-0'>Prénom *</label>
-                    <input type="text" class="form-control" name="firstname-shipping" id="firstname" aria-describedby="helpFirstname" placeholder="Jean">
+                    <input type="text" class="form-control @error('firstname-shipping') is-invalid @enderror" name="firstname-shipping" id="firstname" aria-describedby="helpFirstname" placeholder="Jean" value='{{old('firstname-shipping')}}'>
                 </div>
                 <div class="form-group mb-0 mt-2 col-6">
                     <label for="lastname" class='mb-0'>Nom de famille *</label>
-                    <input type="text" class="form-control" name="lastname-shipping" id="lastname" aria-describedby="helpLastname" placeholder="Dupont">
+                    <input type="text" class="form-control @error('lastname-shipping') is-invalid @enderror" name="lastname-shipping" id="lastname" aria-describedby="helpLastname" placeholder="Dupont" value='{{old('lastname-shipping')}}'>
                 </div>
             </div>
             <div class="form-group mb-0 mt-2">
                 <label for="street" class='mb-0'>Rue *</label>
-                <input type="text" class="form-control" name="street-shipping" id="street" aria-describedby="helpStreet" placeholder="">
+                <input type="text" class="form-control @error('street-shipping') is-invalid @enderror" name="street-shipping" id="street" aria-describedby="helpStreet" placeholder="" value='{{old('street-shipping')}}'>
             </div>
             <div class="form-group mb-0 mt-2">
                 <label for="zipcode" class='mb-0'>Code postal *</label>
-                <input type="text" class="form-control" name="zipcode-shipping" id="zipcode" aria-describedby="helpZipcode" placeholder="63300" minlength="5" maxlength="5">
+                <input type="text" class="form-control @error('zipcode-shipping') is-invalid @enderror" name="zipcode-shipping" id="zipcode" aria-describedby="helpZipcode" placeholder="63300" minlength="5" maxlength="5" value='{{old('zipcode-shipping')}}'>
             </div>
             <div class="form-group mb-0 mt-2">
                 <label for="city" class="mb-0">Ville *</label>
-                <input type="text" class="form-control" name="city-shipping" id="city" aria-describedby="helpCity" placeholder="Thiers">
+                <input type="text" class="form-control @error('city-shipping') is-invalid @enderror" name="city-shipping" id="city" aria-describedby="helpCity" placeholder="Thiers" value='{{old('city-shipping')}}'>
             </div>
             <div class="form-group mb-0 mt-2">
                 <label for="complements" class="mb-0">Compléments</label>
-                <input type="text" class="form-control" name="complements-shipping" id="complements" aria-describedby="helpComplements" placeholder="">
+                <input type="text" class="form-control @error('complements-shipping') is-invalid @enderror" name="complements-shipping" id="complements" aria-describedby="helpComplements" placeholder="" value='{{old('complements-shipping')}}'>
             </div>
             <div class="form-group mb-0 mt-2">
                 <label for="company" class="mb-0">Entreprise</label>
-                <input type="text" class="form-control" name="company-shipping" id="company" aria-describedby="helpCompany" placeholder="">
+                <input type="text" class="form-control @error('company-shipping') is-invalid @enderror" name="company-shipping" id="company" aria-describedby="helpCompany" placeholder="" value='{{old('company-shipping')}}'>
             </div>
         </div>
 
@@ -158,7 +158,7 @@
 </div>
 
 {{-- Withdrawal shop --}}
-<div id="withdrawalShop" class='delivery-choice withdrawalShop d-none'>
+<div id="withdrawalShop" class='delivery-choice withdrawalShop @if(session('delivery-type') == 'withdrawal-shop')  @else d-none @endif'>
     <p class='h4'>Retrait à l'atelier</p>
     <small>Les champs avec un astérisque (*) sont obligatoires.</small>
     <p class='small'>

@@ -51,7 +51,7 @@ class AddressController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public static function store(Request $request)
     {
         $validated_data = $request->validate([
             'civility' => 'numeric|max:3|required',
@@ -80,6 +80,61 @@ class AddressController extends Controller
         $request->session()->flash('success', 'Votre adresse à bien été ajoutée.');
 
         return redirect('/espace-client/adresses');
+    }
+
+    public static function storeBilling(Request $request)
+    {
+        $validated_data = $request->validate([
+            'civility-billing' => 'numeric|max:3|required',
+            'firstname-billing' => 'alpha|required',
+            'lastname-billing' => 'alpha|required',
+            'street-billing' => 'required',
+            'zipcode-billing' => 'numeric|max:95880|required',
+            'city-billing' => 'required',
+        ]);
+
+        $address = new Address();
+        $address->id = substr(uniqid(), 0, 10);
+        $address->civility = $validated_data['civility-billing'];
+        $address->firstname = $validated_data['firstname-billing'];
+        $address->lastname = $validated_data['lastname-billing'];
+        $address->street = $validated_data['street-billing'];
+        $address->zipCode = $validated_data['zipcode-billing'];
+        $address->city = $validated_data['city-billing'];
+        $address->complement = $request['complement-billing'];
+        $address->company = $request['company-billing'];
+
+        if(Auth::check()) $address->user_id = Auth::user()->id;
+
+        dd($address);
+        //$address->save();
+    }
+
+    public function storeShipping(Request $request)
+    {
+        $validated_data = $request->validate([
+            'civility-shipping' => 'numeric|max:3|required',
+            'firstname-shipping' => 'alpha|required',
+            'lastname-shipping' => 'alpha|required',
+            'street-shipping' => 'required',
+            'zipcode-shipping' => 'numeric|max:95880|required',
+            'city-shipping' => 'required',
+        ]);
+
+        $address = new Address();
+        $address->id = substr(uniqid(), 0, 10);
+        $address->civility = $validated_data['civility-shipping'];
+        $address->firstname = $validated_data['firstname-shipping'];
+        $address->lastname = $validated_data['lastname-shipping'];
+        $address->street = $validated_data['street-shipping'];
+        $address->zipCode = $validated_data['zipcode-shipping'];
+        $address->city = $validated_data['city-shipping'];
+        $address->complement = $request['complement-shipping'];
+        $address->company = $request['company-shipping'];
+
+        if(Auth::check()) $address->user_id = Auth::user()->id;
+
+        //$address->save();
     }
 
     /**

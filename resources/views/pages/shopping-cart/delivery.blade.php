@@ -28,6 +28,32 @@
             {{-- STEPS --}}
             @include('pages.shopping-cart.steps')
 
+            {{-- Errors --}}
+            @if (session()->has('delivery-error'))
+            <div class="row m-0 justify-content-center">
+                <div class="col-lg-8">
+                    <div class="alert alert-danger">
+                        <p class='mb-0'>{{ session('delivery-error') }}</p>
+                    </div>
+                </div>
+            </div>
+            @endif
+
+            {{-- Errors --}}
+            @if ($errors->any())
+            <div class="row m-0 justify-content-center">
+                <div class="col-lg-8">
+                    <div class="alert alert-danger">
+                        <ul class='mb-0'>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                        </ul>
+                    </div>
+                </div>  
+            </div>
+            @endif
+
             <div class="row justify-content-center">
 
                 {{--  ITEMS  --}}

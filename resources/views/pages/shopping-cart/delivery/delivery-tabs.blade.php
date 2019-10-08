@@ -1,16 +1,20 @@
 <ul id='nav-delivery' class="nav nav-tabs card-header-tabs justify-content-center">
     @if($has_addresses)
     <li class="nav-item mx-2">
-        <a class="nav-link mb-0 noselect @if($has_addresses) active @endif" onclick='select_nav_item($(this), $(".savedAddresses"))'>
+        <a class="nav-link mb-0 noselect 
+        @if(session('delivery-type') == 'saved-addresses') 
+            @if($has_addresses) active @endif @endif" onclick='select_nav_item($(this), $(".savedAddresses"))'>
             Vos adresses</a>
     </li>
     @endif
     <li class="nav-item mx-2">
-        <a class="nav-link mb-0 noselect @if(!$has_addresses) active @endif" onclick='select_nav_item($(this), $(".newAddress"))'>
+        <a class="nav-link mb-0 noselect 
+        @if(session('delivery-type') == 'new-address') 
+            @if(!$has_addresses) active @endif @endif" onclick='select_nav_item($(this), $(".newAddress"))'>
             Nouvelle adresse</a>
     </li>
     <li class="nav-item mx-2">
-        <a class="nav-link mb-0 noselect" onclick='select_nav_item($(this), $(".withdrawalShop"))'>
+        <a class="nav-link mb-0 noselect @if(session('delivery-type') == 'withdrawal-shop') active @endif " onclick='select_nav_item($(this), $(".withdrawalShop"))'>
             Retrait à l'atelier</a>
     </li>
 </ul>

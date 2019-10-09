@@ -17,7 +17,20 @@
 
         @if(count($addresses) == 0)
         <p class='mb-0'>Vous n'avez aucune adresse enregistrée.</p>
+
+        <div class="col-12 p-0">
+            <button type="button" class="btn btn-secondary mt-2 ld-ext-right" onclick='load_url("/espace-client/adresses/creation")'>
+                 Nouvelle adresse <div class="ld ld-ring ld-spin"></div>
+            </button>
+        </div>
+
         @else
+
+        <div class="col-12 p-0">
+            <button type="button" class="btn btn-secondary mt-2 ld-ext-right" onclick='load_url("/espace-client/adresses/creation")'>
+                 Nouvelle adresse <div class="ld ld-ring ld-spin"></div>
+            </button>
+        </div>
 
         @foreach ($addresses as $address)
         <div class='address-container my-2 p-2 border row justify-content-lg-between m-0' style='box-shadow: 0 0 9px -6px rgb(100,100,100)'>
@@ -30,22 +43,16 @@
             </div>
            <div class="col-6 d-flex justify-content-end">
                 <div class='d-flex flex-column'>
-                    <button type="button" class="btn btn-dark py-1 px-2 ld-ext-right ml-auto max-content mb-2" onclick='load_url("/espace-client/adresses/edition/{{$address->id}}")'>
+                    <button type="button" class="btn btn-outline-dark py-1 px-2 ld-ext-right ml-auto max-content mb-2 rounded-0" onclick='load_url("/espace-client/adresses/edition/{{$address->id}}")'>
                         Editer <div class="ld ld-ring ld-spin"></div>
                     </button>
-                    <button type="button" class="btn btn-danger py-1 px-2 ld-ext-right ml-auto max-content" onclick='delete_address($(this), "{{$address->id}}")'>
+                    <button type="button" class="btn btn-outline-danger py-1 px-2 ld-ext-right ml-auto max-content rounded-0" onclick='delete_address($(this), "{{$address->id}}")'>
                         Supprimer <div class="ld ld-ring ld-spin"></div>
                     </button>
                 </div>
            </div>
         </div>
         @endforeach 
-
-        <div class="col-12 p-0">
-            <button type="button" class="btn btn-secondary mt-2 ld-ext-right" onclick='load_url("/espace-client/adresses/creation")'>
-                 Nouvelle adresse <div class="ld ld-ring ld-spin"></div>
-            </button>
-        </div>
 
         @endif
     </div>

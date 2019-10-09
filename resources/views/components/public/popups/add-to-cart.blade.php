@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class='button-container d-flex p-3'>
-            <button id='refresh-button' type="button" class="btn bg-white border border-primary rounded-0" onclick="validate_and_refresh()">Poursuivre mes achats</button>
+            <button id='refresh-button' type="button" class="btn btn-outline-primary rounded-0" onclick="validate_and_refresh()">Poursuivre mes achats</button>
             <button id='shopping-cart-button' type="button" class="btn btn-secondary rounded-0 ml-auto" onclick="validate_and_go_to_shopping_cart()">Votre panier</button>
         </div>
     </div>

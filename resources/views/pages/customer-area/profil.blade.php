@@ -10,7 +10,7 @@
         <p class='mb-0'>Téléphone : {{ trim( chunk_split(Auth::user()->phone, 2, ' ')) }} </p>
     </div>
     <div class="col-4 col-xl-3">
-        <button id='desktop-button' type="button" class="btn bg-white border-dark w-100 d-none d-md-flex rounded-0">
+        <button id='desktop-button' type="button" class="btn btn-outline-dark w-100 d-none d-md-flex rounded-0">
             <p class='text-center mb-0 mx-auto'>Modifier</p></button>
     </div>
 </div>
@@ -20,7 +20,7 @@
         <p class='mb-0'>Vous pouvez modifier votre mot de passe à tout moment.</p>
     </div>
     <div class="col-4 col-xl-3">
-        <button id='desktop-button' type="button" class="btn bg-white border-dark w-100 d-none d-md-flex rounded-0">
+        <button id='desktop-button' type="button" class="btn btn-outline-dark w-100 d-none d-md-flex rounded-0">
             <p class='text-center mb-0 mx-auto'>Modifier</p></button>
     </div>
 </div>
@@ -33,10 +33,10 @@
     </div>
     <div class="col-4 col-xl-3">
         @if(Auth::user()->wantNewsletter) 
-        <button id='desktop-button' type="button" class="btn bg-white border-success w-100 d-none d-md-flex rounded-0 ld-ext-right text-success" onclick='invert_newsletter($(this))'>
+        <button id='desktop-button' type="button" class="btn btn-outline-success border-success w-100 d-none d-md-flex rounded-0 ld-ext-right" onclick='invert_newsletter($(this))'>
             <p class='text-center mb-0 mx-auto d-flex flex-column justify-content-center'>Activé</p><div class="ld ld-ring ld-spin"></div></button>
         @else 
-        <button id='desktop-button' type="button" class="btn bg-white border-danger w-100 d-none d-md-flex rounded-0 ld-ext-right text-danger" onclick='invert_newsletter($(this))'>
+        <button id='desktop-button' type="button" class="btn btn-outline-danger w-100 d-none d-md-flex rounded-0 ld-ext-right" onclick='invert_newsletter($(this))'>
             <p class='text-center mb-0 mx-auto d-flex flex-column justify-content-center'>Désactivé</p><div class="ld ld-ring ld-spin"></div></button>
         @endif
     </div>

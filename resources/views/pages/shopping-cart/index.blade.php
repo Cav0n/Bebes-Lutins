@@ -76,7 +76,7 @@
                                                 <div class='d-flex flex-column justify-content-center ld-over'>
                                                     <select class="form-control" name="quantity" id="quantity" style='font-size:0.7rem;height:1.4rem;max-width:3rem;' onchange="change_quantity($(this), '{{$item->id}}')">
                                                         <option value='0'>Supprimer</option>
-                                                        @for ($quantity = 1; ($quantity < $item->product->stock) && ($quantity <= 10); $quantity++)
+                                                        @for ($quantity = 1; ($quantity <= $item->product->stock) && ($quantity <= 10); $quantity++)
                                                             <option value='{{$quantity}}' @if($item->quantity == $quantity) selected @endif>{{$quantity}}</option>
                                                         @endfor
                                                     </select>

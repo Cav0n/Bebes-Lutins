@@ -67,12 +67,15 @@ Auth::routes();
 Route::get('/espace-client', 'CustomerAreaController@index'); //TODO
 Route::get('/espace-client/connexion', 'CustomerAreaController@loginPage')->name('connexion'); //TODO
 Route::post('/espace-client/connexion', 'CustomerAreaController@login')->name('connexion'); //TODO
+
 Route::get('/espace-client/enregistrement', 'CustomerAreaController@registerPage'); //TODO
 Route::post('/espace-client/enregistrement', 'CustomerAreaController@register'); //TODO
+
 Route::get('/espace-client/profil', 'CustomerAreaController@profilPage'); //TODO
 Route::post('/espace-client/newsletter-invert', 'CustomerAreaController@invertNewsletter');
 Route::get('/espace-client/commandes', 'CustomerAreaController@ordersPage'); //TODO
 Route::get('/espace-client/commandes/{order}', 'OrderController@show'); //TODO
+
 Route::get('/espace-client/adresses', 'CustomerAreaController@addressPage'); //TODO
 Route::get('/espace-client/adresses/creation', 'AddressController@create');
 Route::post('/espace-client/adresses/creation','AddressController@store');

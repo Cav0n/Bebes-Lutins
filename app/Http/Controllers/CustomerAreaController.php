@@ -46,9 +46,13 @@ class CustomerAreaController extends Controller
     }
 
     public function register(Request $request){
-        if (Auth::check()) {
-            return redirect('/espace-client/profil');
-        } else return redirect('/register');
+        $request->validate([
+            'firstname' => 'min:3|required',
+            'lastname' => 'min:3|required',
+            'email' => 'email:filter|unique:users|required',
+            'password' => 'min:6|confirmed|required',
+        ]);
+        dd($request);
     }
 
     public function profilPage(){

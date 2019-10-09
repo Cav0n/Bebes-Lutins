@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\ShoppingCart;
+use App\ShoppingCartItem;
 use App\Voucher;
 use App\Address;
 use App\Order;
@@ -57,6 +58,45 @@ class ShoppingCartController extends Controller
         }
 
         return view('pages.shopping-cart.index')->withStep(0)->withShoppingCart($shopping_cart);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\ShoppingCart  $shoppingCart
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(ShoppingCart $shoppingCart)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\ShoppingCart  $shoppingCart
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, ShoppingCart $shoppingCart)
+    {
+        if(isset($request['add_voucher'])){
+            $voucher_code = $request['voucher_code'];
+            $request->validate([
+                'voucher_code' => 'required|exists:voucher',
+            ]);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\ShoppingCart  $shoppingCart
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(ShoppingCart $shoppingCart)
+    {
+        //
     }
 
     public function showDelivery()
@@ -171,48 +211,28 @@ class ShoppingCartController extends Controller
 
     }
 
-
-
-    
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\ShoppingCart  $shoppingCart
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ShoppingCart $shoppingCart)
+    public function replace(ShoppingCart $shopping_cart)
     {
-        //
-    }
+        $current_shopping_cart = session('shopping_cart');
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ShoppingCart  $shoppingCart
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ShoppingCart $shoppingCart)
-    {
-        if(isset($request['add_voucher'])){
-            $voucher_code = $request['voucher_code'];
-            $request->validate([
-                'voucher_code' => 'required|exists:voucher',
-            ]);
+        foreach($current_shopping_cart->items as $item){
+            $item->delete();
         }
-    }
+        
+        foreach($shopping_cart->items as $item){
+            $new_item = new ShoppingCartItem();
+            $new_item->quantity = $item->quantity;
+            $new_item->product_id = $item->product_id;
+            $new_item->shopping_cart_id = $current_shopping_cart->id;
+            $new_item->save();
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\ShoppingCart  $shoppingCart
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ShoppingCart $shoppingCart)
-    {
-        //
-    }
+        $current_shopping_cart = ShoppingCart::where('id', $current_shopping_cart->id)->first();
+        $current_shopping_cart->updateProductsPrice();
+        $current_shopping_cart->updateShippingPrice();
+        $current_shopping_cart->save();
+        session(['shopping_cart' => $current_shopping_cart]);
 
-    
+        return redirect('/panier');
+    }
 }

@@ -42,8 +42,18 @@
             {{-- STEPS --}}
             @include('pages.shopping-cart.steps')
 
+            @if($shoppingCart->id != session('shopping_cart')->id)
             <div class="row justify-content-center">
+                <div class="col-12 col-sm-10 col-lg-8 my-2">
+                    <h2 class='mb-0 bg-white p-2'>
+                        Panier partagé @if($shoppingCart->user != null){{'par '. $shoppingCart->user->firstname }}@endif
+                    </h2>
+                </div>
+            </div>
+            @endif
 
+            <div class="row justify-content-center">
+                
                 {{--  ITEMS  --}}
                 <div class="col-12 col-sm-10 col-lg-5 my-md-2 my-lg-0">
 
@@ -74,7 +84,7 @@
                                                     <label for="quantity" class='small mb-0 pr-2'>Quantité :</label>
                                                 </div>
                                                 <div class='d-flex flex-column justify-content-center ld-over'>
-                                                    <select class="form-control" name="quantity" id="quantity" style='font-size:0.7rem;height:1.4rem;max-width:3rem;' onchange="change_quantity($(this), '{{$item->id}}')">
+                                                    <select class="form-control" name="quantity" id="quantity" style='font-size:0.7rem;height:1.4rem;max-width:3rem;' onchange="change_quantity($(this), '{{$item->id}}')" @if($shoppingCart->id != session('shopping_cart')->id) disabled @endif>
                                                         <option value='0'>Supprimer</option>
                                                         @for ($quantity = 1; ($quantity <= $item->product->stock) && ($quantity <= 10); $quantity++)
                                                             <option value='{{$quantity}}' @if($item->quantity == $quantity) selected @endif>{{$quantity}}</option>
@@ -82,10 +92,12 @@
                                                     </select>
                                                     <div class="ld ld-ring ld-spin"></div>
                                                 </div>
+                                                @if($shoppingCart->id == session('shopping_cart')->id)
                                                 <div class='svg-container ld-over d-flex flex-column justify-content-center ml-2' style='width:1rem;' onclick='remove_item_from_shopping_cart($(this), "{{$item->id}}")'>
                                                     <img class='svg' src='{{asset('images/icons/trash.svg')}}' style='height:1rem;'>
                                                     <div class="ld ld-ring ld-spin"></div>
                                                 </div>
+                                                @endif
                                             </div>
                                             <div class="col-12 col-sm-6 col-lg-5 d-flex justify-content-end p-0 pt-2 pt-lg-0 order-3 order-lg-3">
                                                 <div class="d-flex flex-column justify-content-center">
@@ -104,6 +116,21 @@
                 {{--  SUMMARY AND OTHERS  --}}
                 <div class="col-12 col-sm-10 col-lg-3">
                     <div class="row">
+
+                        {{-- SHARING --}}
+                        @if($shoppingCart->id == session('shopping_cart')->id)
+                        <div class="col-12 my-2 my-lg-0 mb-lg-2 order-1 order-lg-0">
+                            <div class="card p-0 border-0 rounded-0">
+                                <div class="card-header bg-white">
+                                    <h1 class='h5 mb-0'>Partage</h1>
+                                </div>
+                                <div class="card-body row justify-content-center m-0 d-flex flex-column">
+                                    <p>Pour partager votre panier veuillez copier le lien ce dessous :</p>
+                                    <p class='small text-center py-2 border rounded-0 text-dark bg-light'>www.bebes-lutins.fr/panier/{{$shoppingCart->id}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
 
                         {{--  Summary  --}}
                         <div class="col-12 my-2 my-lg-0 mb-lg-2 order-1 order-lg-0">
@@ -134,6 +161,8 @@
                                     </div>
                 
                                     <div class="col-12 border-bottom my-4"></div>
+
+                                    @if($shoppingCart->id == session('shopping_cart')->id)
                 
                                     <div class="col-12 col-md-6 col-lg-12 mb-2" style='line-height:0;'>
                                         <small class="small" style="line-height:1rem;">En cliquant sur ce bouton vous acceptez sans 
@@ -142,11 +171,20 @@
                                     <div class="col-12 col-md-6 col-lg-12">
                                         <button type="button" class="btn btn-primary w-100" onclick='load_url("/panier/livraison")'>Valider mon panier</button>
                                     </div>
+
+                                    @else
+
+                                    <div class="col-12 col-md-6 col-lg-12">
+                                        <button type="button" class="btn btn-primary w-100" onclick='load_url("/panier/{{$shoppingCart->id}}/commander")'>Commander ce panier</button>
+                                    </div>
+
+                                    @endif
                                 </div>
                             </div>
                         </div>
 
                         {{--  Voucher code  --}}
+                        @if($shoppingCart->id == session('shopping_cart')->id)
                         <div class="col-12 my-2 my-lg-2 order-0 order-lg-1">
                             <div class="card p-0 border-0 rounded-0">
                                 <div class="card-header bg-white">
@@ -194,8 +232,10 @@
                                 </div>
                             </div>
                         </div>
+                        @endif
 
                         {{--  Free shipping info  --}}
+                        @if($shoppingCart->id == session('shopping_cart')->id)
                         <div class="col-12 my-2 my-lg-0 mt-lg-2 order-2">
                             @if ($price_before_free_shipping > 0)
                             <div class="card p-0 border-0 rounded-0">
@@ -205,6 +245,7 @@
                             </div>
                             @endif
                         </div>
+                        @endif
 
                     </div>
                 </div>

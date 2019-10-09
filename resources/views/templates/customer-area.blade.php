@@ -25,9 +25,11 @@
                         <li class="nav-item">
                             <a class="nav-link @if(Request::is('*/commandes*')) active @endif text-dark" href="/espace-client/commandes">Mes commandes</a>
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link @if(Request::is('*/adresses*')) active @endif text-dark" href="/espace-client/adresses">Mes adresses</a>
                         </li>
+                        
                     </ul>
                 </div>
                 <div class="card-body">

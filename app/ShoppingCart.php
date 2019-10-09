@@ -41,6 +41,24 @@ class ShoppingCart extends Model
         return $this->hasOne('App\Address', 'id', 'shipping_address_id');
     }
 
+    public function updateProductsPrice()
+    {
+        $total_price = 0.0;
+        foreach($this->items as $item){
+            $total_price += $item->product->price * $item->quantity;
+        }
+        $this->productsPrice = $total_price;
+    }
+
+    public function updateShippingPrice()
+    {
+        $this->shippingPrice = 0.0;
+
+        if($this->productsPrice < 70){
+            $this->shippingPrice = 5.90;
+        }
+    }
+
     public function calculatePricesAndQuantities() : array
     {
         $total_price = 0.00;

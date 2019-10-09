@@ -141,8 +141,8 @@ class ShoppingCartController extends Controller
         $order = new Order();
         $order->id = strtoupper(substr(uniqid(), 0, 10));
         $order->paymentMethod = 2;
-        $order->shippingPrice = 0;
-        $order->productsPrice = 100;
+        $order->shippingPrice = $shopping_cart->shippingPrice;
+        $order->productsPrice = $shopping_cart->productsPrice;
         $order->status = 0;
         $order->user_id = $shopping_cart->user_id;
         $order->voucher_id = $shopping_cart->voucher_id;

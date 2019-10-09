@@ -56,9 +56,6 @@ class CheckForShoppingCart
         if($shopping_cart == null){
             if(Auth::check()){
                 if(ShoppingCart::where('user_id', Auth::user()->id)->where('isActive', 1)->exists()){
-                    $shopping_cart->isActive = false;
-                    $shopping_cart->save();
-
                     $shopping_cart = ShoppingCart::where('user_id', Auth::user()->id)->where('isActive', 1)->first();
                     $request->session()->put('shopping_cart', $shopping_cart);
                 }

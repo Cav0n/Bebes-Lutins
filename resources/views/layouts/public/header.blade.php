@@ -1,12 +1,10 @@
 <?php 
-$shopping_cart = session('shopping_cart'); 
-$total_price = 0.00;
+$shopping_cart = session('shopping_cart');
 $total_quantity = 0;
 
 if(count($shopping_cart->items) > 0){
     foreach ($shopping_cart->items as $item) {
         $total_quantity += $item->quantity;
-        $total_price += $item->product->price * $item->quantity;
     }
 }
 
@@ -49,7 +47,7 @@ $parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'as
                 </li>
                 <li class="nav-item desktop transition" style="cursor:pointer;width:12rem">
                     <a class="h5 nav-link text-dark text-center mb-0 pb-1 font-weight-bold" href="/panier">MON PANIER</a>
-                    <p id='shopping_cart_price' class='text-center py-0 my-0'>{{number_format($total_price, 2)}} €</p>
+                    <p id='shopping_cart_price' class='text-center py-0 my-0'>{{number_format($shopping_cart->productsPrice, 2)}} €</p>
                     <p class='text-center py-0 my-0'>{{$total_quantity}} articles</p>
                 </li>
             </ul>

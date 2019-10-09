@@ -55,6 +55,9 @@ class ShoppingCartItemController extends Controller
         }
 
         $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
+        $shopping_cart->updateProductsPrice();
+        $shopping_cart->updateShippingPrice();
+        $shopping_cart->save();
         session(['shopping_cart' => $shopping_cart]);
 
         $response = ['item_id' => $item->id];
@@ -105,7 +108,12 @@ class ShoppingCartItemController extends Controller
         $shoppingCartItem->save();
 
         $shopping_cart = session('shopping_cart');
+
         $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
+        $shopping_cart->updateProductsPrice();
+        $shopping_cart->updateShippingPrice();
+        $shopping_cart->save();
+
         session(['shopping_cart' => $shopping_cart]);
     }
 
@@ -122,7 +130,9 @@ class ShoppingCartItemController extends Controller
         $shopping_cart = session('shopping_cart');
 
         $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
-        
+        $shopping_cart->updateProductsPrice();
+        $shopping_cart->updateShippingPrice();
+        $shopping_cart->save();
         session(['shopping_cart' => $shopping_cart]);
     }
 }

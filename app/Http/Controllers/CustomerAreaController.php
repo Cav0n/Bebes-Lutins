@@ -20,6 +20,7 @@ class CustomerAreaController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->only('index', 'profilPage', 'ordersPage', 'addressPage');
+        $this->middleware('guest')->only('loginPage', 'registerPage');
     }
 
     public function index(){
@@ -29,21 +30,25 @@ class CustomerAreaController extends Controller
     }
 
     public function loginPage(){
-        if (Auth::check()) {
-            return redirect('/espace-client/profil');
-        } else return view('pages.customer-area.login');
+        return view('pages.customer-area.login');
     }
 
     public function login(Login $request){
-        if (Auth::check()) {
+        $credentials = [
+            'email' => $request['email'],
+            'password' => $request['password'] ];
+
+        if (Auth::attempt($credentials)) {
+            $user = User::where('email', $credentials['email'])->first();
+            Auth::login($user);
             return redirect('/espace-client/profil');
-        } else return redirect('/login');
+        } else {
+            return redirect('/espace-client/connexion');
+        }
     }
 
     public function registerPage(){
-        if (Auth::check()) {
-            return redirect('/espace-client/profil');
-        } else return view('pages.customer-area.register');
+        return view('pages.customer-area.register');
     }
 
     public function register(Request $request){

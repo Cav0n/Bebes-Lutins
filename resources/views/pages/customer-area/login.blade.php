@@ -9,7 +9,7 @@
                     Connexion
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="/login">
+                    <form method="POST" action="/espace-client/connexion">
                         @csrf
 
                         <div class="form-group">

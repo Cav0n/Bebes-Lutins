@@ -19,11 +19,11 @@ class CreateUsersTable extends Migration
             $table->string('lastname');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('phone', 10);
+            $table->string('phone', 10)->nullable();
             $table->string('password');
             $table->boolean('wantNewsletter')->default(1);
             $table->boolean('isAdmin')->default(0);
-            $table->integer('privileges')->unsigned();
+            $table->integer('privileges')->unsigned()->default(0);
             $table->rememberToken();
             
             $table->timestamps();

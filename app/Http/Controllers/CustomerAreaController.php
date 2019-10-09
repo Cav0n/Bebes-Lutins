@@ -8,6 +8,7 @@ use App\Address;
 use App\Http\Requests\Login; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class CustomerAreaController extends Controller
 {
@@ -46,13 +47,27 @@ class CustomerAreaController extends Controller
     }
 
     public function register(Request $request){
-        $request->validate([
+        $validated_data = $request->validate([
             'firstname' => 'min:3|required',
             'lastname' => 'min:3|required',
             'email' => 'email:filter|unique:users|required',
             'password' => 'min:6|confirmed|required',
         ]);
-        dd($request);
+
+        $user = new User();
+        $user->id = uniqid();
+        $user->email = $validated_data['email'];
+        $user->phone = null;
+        $user->password = Hash::make($validated_data['password']);
+        $user->firstname = ucfirst($validated_data['firstname']);
+        $user->lastname = mb_strtoupper($validated_data['lastname']);
+        if($request['want-newsletter'] != null) $user->wantNewsletter = true;
+        
+        $user->save();
+
+        Auth::login($user);
+
+        return redirect('/espace-client');
     }
 
     public function profilPage(){

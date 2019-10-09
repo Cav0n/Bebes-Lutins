@@ -16,6 +16,8 @@ class CreateShoppingCartsTable extends Migration
         Schema::create('shopping_carts', function (Blueprint $table) {
             $table->string('id')->primary('id');
             $table->boolean('isActive')->default(0);
+            $table->decimal('shippingPrice',10,2)->unsigned()->nullable();
+            $table->decimal('productsPrice', 10,2)->unsigned()->nullable();
             
             $table->string('user_id')->nullable();
             $table->string('voucher_id')->nullable();

@@ -50,6 +50,10 @@ Route::post('/panier/livraison/validation', 'ShoppingCartController@validateDeli
 
 Route::get('/panier/paiement', 'ShoppingCartController@showPayment');
 Route::get('/panier/paiement/carte-bancaire', 'ShoppingCartController@showCreditCardPayment');
+
+Route::get('/panier/paiement/validation/cheque', 'ShoppingCartController@validateChequePayment');
+Route::get('/panier/paiement/validation/carte-bancaire', 'ShoppingCartController@validateCreditCartPayment');
+Route::get('/merci', 'OrderController@showThanks');
  /* ---------------- */
 
 /**

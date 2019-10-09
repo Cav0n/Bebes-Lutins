@@ -94,7 +94,7 @@
                                         <BR>
                                         Votre commande sera traitée et expédiée à réception de votre chèque.</p>
                                     <div class='w-100 border-top my-4'></div>
-                                    <button type="button" class="btn btn-primary rounded-0 w-100">Valider ma commande</button>
+                                    <button type="button" class="btn btn-primary rounded-0 w-100" onclick='load_url("/panier/paiement/validation/cheque")'>Valider ma commande</button>
                                 </div>
                             </div>
                             <div class='w-100 border-top my-4'></div>

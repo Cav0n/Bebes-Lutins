@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\ShoppingCart;
 use App\Voucher;
 use App\Address;
+use App\Order;
+use App\OrderItem;
 use App\Http\Controllers\AddressController;
 use Illuminate\Http\Request;
 use Auth;
@@ -64,20 +66,6 @@ class ShoppingCartController extends Controller
         return view('pages.shopping-cart.delivery')->withStep(1)->withShoppingCart($shopping_cart);
     }
 
-    public function showPayment()
-    {
-        $shopping_cart = session('shopping_cart');
-        $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
-        session(['shopping_cart' => $shopping_cart]);
-        
-        return view('pages.shopping-cart.payment')->withStep(2)->withShoppingCart($shopping_cart);
-    }
-
-    public function showCreditCardPayment()
-    {
-        dd('REDIRIGER VERS CITELIS');
-    }
-
     public function validateDelivery(Request $request)
     {
         $shopping_cart = session('shopping_cart');
@@ -127,6 +115,65 @@ class ShoppingCartController extends Controller
 
         return redirect('/panier/paiement');
     }
+
+    public function showPayment()
+    {
+        $shopping_cart = session('shopping_cart');
+        $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
+        session(['shopping_cart' => $shopping_cart]);
+        
+        return view('pages.shopping-cart.payment')->withStep(2)->withShoppingCart($shopping_cart);
+    }
+
+    public function showCreditCardPayment()
+    {
+        dd('REDIRIGER VERS CITELIS');
+    }
+
+    public function validateChequePayment()
+    {
+        $shopping_cart = session('shopping_cart');
+        $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
+
+        $shopping_cart->isActive = false;
+        $shopping_cart->save();
+
+        $order = new Order();
+        $order->id = strtoupper(substr(uniqid(), 0, 10));
+        $order->paymentMethod = 2;
+        $order->shippingPrice = 0;
+        $order->productsPrice = 100;
+        $order->status = 0;
+        $order->user_id = $shopping_cart->user_id;
+        $order->voucher_id = $shopping_cart->voucher_id;
+        $order->shipping_address_id = $shopping_cart->shipping_address_id;
+        $order->billing_address_id = $shopping_cart->billing_address_id;
+
+        $order->save();
+
+        foreach($shopping_cart->items as $item){
+            $order_item = new OrderItem();
+            $order_item->productName = $item->product->name;
+            $order_item->quantity = $item->quantity;
+            $order_item->unitPrice = $item->product->price;
+            $order_item->product_id = $item->product->id;
+            $order_item->order_id = $order->id;
+            $order_item->save();
+        }
+
+        session(['shopping_cart' => null]);
+
+        return redirect("/merci");
+    }
+
+    public function validateCreditCartPayment()
+    {
+
+    }
+
+
+
+    
 
     /**
      * Show the form for editing the specified resource.

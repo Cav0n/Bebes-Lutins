@@ -49,6 +49,11 @@ class OrderController extends Controller
         dd($order);
     }
 
+    public function showThanks()
+    {
+        dd('Merci');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

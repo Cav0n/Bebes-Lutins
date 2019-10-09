@@ -90,7 +90,7 @@
                                         4, rue du 19 mars 1962<BR>
                                         63300 THIERS<BR>
                                         <BR>
-                                        Montant de votre commande : <b>8,90 €.</b><BR>
+                                        Montant de votre commande : <b>{{number_format($total, 2)}} €.</b><BR>
                                         <BR>
                                         Votre commande sera traitée et expédiée à réception de votre chèque.</p>
                                     <div class='w-100 border-top my-4'></div>

@@ -5,8 +5,8 @@
     <div class="col-8 col-xl-9">
         <p class='h5 font-weight-bold'>Mes informations personnelles</p>
         <p class='mb-0'>{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</p>
-        <p class='mb-0'>Inscrit depuis le : {{ Auth::user()->created_at }}</p>
-        <p class='mb-0'>Date de naissance : PAS ENCORE</p>
+        <p class='mb-0'>Inscrit depuis le {{ Auth::user()->created_at->formatLocalized('%e %B %Y') }}</p>
+        <p class='mb-0'>Date de naissance : @if(Auth::user()->birthdate != null){{  Auth::user()->birthdate->formatLocalized('%e %B %Y') }} @else non indiquée @endif</p> 
         <p class='mb-0'>Téléphone : {{ trim( chunk_split(Auth::user()->phone, 2, ' ')) }} </p>
     </div>
     <div class="col-4 col-xl-3">

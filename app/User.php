@@ -40,6 +40,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['birthdate'];
+
     public function shopping_carts()
     {
         return $this->hasMany('App\ShoppingCart');

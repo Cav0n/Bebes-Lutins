@@ -40,8 +40,8 @@ Route::delete('/commentaires/supprimer/{review}', 'ReviewController@destroy');
 /**
  * Shopping cart
  */
-Route::get('/panier/{shopping_cart}', 'ShoppingCartController@show');
-Route::get('/panier/{shopping_cart}/commander', 'ShoppingCartController@replace');
+Route::get('/panier/partage/{shopping_cart}', 'ShoppingCartController@show');
+Route::get('/panier/partage/{shopping_cart}/commander', 'ShoppingCartController@replace');
 
 Route::get('/panier', 'ShoppingCartController@show');
 Route::post('/panier/add_item', 'ShoppingCartItemController@store');

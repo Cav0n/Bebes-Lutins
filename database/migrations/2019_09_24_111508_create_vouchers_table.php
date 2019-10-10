@@ -26,6 +26,8 @@ class CreateVouchersTable extends Migration
 
             $table->boolean('certainProducts')->nullable();
             $table->boolean('allProducts')->nullable();
+            $table->boolean('certainCategories')->nullable();
+            $table->boolean('allCategories')->nullable();
 
             $table->timestamps();
         });

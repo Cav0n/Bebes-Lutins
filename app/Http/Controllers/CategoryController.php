@@ -21,23 +21,20 @@ class CategoryController extends Controller
         $category_array['updated_at'] = $category->updated_at;
         $category_array['images'] = $category->images;
 
-        $childs = array();
+        $products = array();
+
+        foreach($category->products as $product){ $products[] = ['id'=>$product->id, 'name'=>$product->name]; } 
         foreach($category->childs as $child){
-            $childs[] = $child;
-            foreach($child->childs as $subchild){
-                $childs[] = $subchild;
+            foreach($child->products as $product){ $products[] = ['id'=>$product->id, 'name'=>$product->name]; }
+            foreach ($child->childs as $subchild) {
+                foreach($subchild->products as $product){ $products[] = ['id'=>$product->id, 'name'=>$product->name]; }
             }
         }
 
-        $products = array();
-        $products[] = $category->products;
-        foreach($childs as $child){
-            $products[] = $child->products;
-        }
-
-        $category_array['childs'] = $childs;
-
-        $data = [ 'category' => $category_array ];
+        $data = [ 
+            'category' => $category_array,
+            'products' => $products
+        ];
 
         header('Content-type: application/json');
         echo json_encode( $data );

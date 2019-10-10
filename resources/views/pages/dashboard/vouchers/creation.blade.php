@@ -115,8 +115,8 @@
                 <p id='products-selector-title' class='h4 mb-0'></p>
                 <p id='no-category-selected' class='mb-0'>Aucune catégorie selectionnée</p>
                 <p id='no-product-selected' class='mb-0'>Aucun produit selectionné</p>
-                <p id='categories-selected-list' class='mb-0'></p>
-                <p id='products-selected-list' class='mb-0'></p>
+                <div id='categories-selected-list' class='row m-0'></div>
+                <div id='products-selected-list' class='m-0'></div>
             </div>
 
             <button type="submit" class="btn btn-secondary my-3">Sauvegarder</button>
@@ -137,17 +137,17 @@
 
             {{-- CATEGORIES SELECTOR --}}
             <div id='categories-selector' class='col-12 p-0'>
-                    @foreach ($categories as $category)
-                    <div class="row category mb-2 mx-0 p-2 border-bottom">
-                        <div class="col-12 p-0">
-                            <div class="custom-control custom-checkbox pointer">
-                                <input id='checkbox-categories-{{$category->id}}' name='categories[]' type="checkbox" class="custom-control-input pointer category-checkbox" value='{{$category->id}}'>
-                                <label class="custom-control-label noselect pointer" for="checkbox-categories-{{$category->id}}"><p class='mb-0'>{{$category->name}}</p></label>
-                            </div>
+                @foreach ($categories as $category)
+                <div class="row category mb-2 mx-0 p-2 border-bottom">
+                    <div class="col-12 p-0">
+                        <div class="custom-control custom-checkbox pointer">
+                            <input id='checkbox-categories-{{$category->id}}' name='categories[]' type="checkbox" class="custom-control-input pointer category-checkbox" value='{{$category->id}}'>
+                            <label class="custom-control-label noselect pointer" for="checkbox-categories-{{$category->id}}"><p class='mb-0'>{{$category->name}}</p></label>
                         </div>
-                    </div>    
-                    @endforeach
-                </div>
+                    </div>
+                </div>    
+                @endforeach
+            </div>
         </form>
     </div>
 </div>
@@ -185,15 +185,15 @@ $.ajaxSetup({
 <script>
     $('#products-selected-list').hide();
     $('#products-selector').hide();
-    selected_products = new Map();
+    cached_products = new Map();
 
     $(".product-checkbox").change(function() {
         if(this.checked) {
             product_id = this.value;
-            product_name = selected_products.get(product_id)
+            product_name = cached_products.get(product_id)
 
             if(product_name != null){ // IF CACHED
-                $('#products-selected-list').html($('#products-selected-list').html() + product_name + '<br>');
+                $('#products-selected-list').append("<p id='" + product_id + "' class='my-2 p-2 border'>"+ product_name +"</p>");
             } else {
                 $.ajax({
                     url: "/produits/" + product_id,
@@ -203,8 +203,8 @@ $.ajaxSetup({
                         var json = $.parseJSON(data);
                         product = json.product;
 
-                        $('#products-selected-list').html($('#products-selected-list').html() + product.name + '<br>');
-                        selected_products.set(product_id, product.name);
+                        $('#products-selected-list').append("<p id='" + product_id + "' class='my-2 p-2 border'>"+ product.name +"</p>");
+                        cached_products.set(product_id, product.name);
                     },
                     beforeSend: function() {
                         $('#no-product-selected').hide();
@@ -214,11 +214,14 @@ $.ajaxSetup({
             }
         } else { // IF UNCHECKED
             product_id = this.value;
-            product_name = selected_products.get(product_id);
+            product_name = cached_products.get(product_id);
 
-            $('#products-selected-list').html($('#products-selected-list').html().replace(product_name + '<br>', ''));
-            if($('#products-selected-list').html() == ''){
+            $('#products-selected-list').find('#'+product_id).remove();
+            
+            if($("#products-selected-list p").length == 0){
                 $('#no-product-selected').show();
+                $('#no-category-selected').show();
+                $('#categories-selected-list').hide();
                 $('#products-selected-list').hide();
             }
         }
@@ -227,17 +230,21 @@ $.ajaxSetup({
 
 {{-- Category selection --}}
 <script>
-     $('#products-selected-list').hide();
+    $('#categories-selected-list').hide();
     $('#categories-selector').hide();
-    selected_categories = new Map();
+    cached_categories = new Map();
+    categories_products = new Map();
 
     $(".category-checkbox").change(function() {
         if(this.checked) {
             category_id = this.value;
-            category_name = selected_categories.get(category_id)
+            category_name = cached_categories.get(category_id)
 
             if(category_name != null){
-                $('#categories-selected-list').html($('#categories-selected-list').html() + category_name + '<br>');
+                $('#categories-selected-list').append("<div class='col-6 p-2'><p id='" + category_id + "' class='p-2 text-center mb-0 bg-secondary text-white'>"+ category_name +"</p></div>");
+                categories_products.get(category_id).forEach(function(product){
+                    $('#products-selected-list').append("<p id='" + product.id + "' class='my-2 p-2 border'>"+ product.name +"</p>");
+                });
             } else {
                 $.ajax({
                     url: "/categories/" + category_id,
@@ -246,23 +253,39 @@ $.ajaxSetup({
                     success: function(data){
                         var json = $.parseJSON(data);
                         category = json.category;
+                        products = json.products;
 
-                        $('#categories-selected-list').html($('#categories-selected-list').html() + category.name + '<br>');
-                        selected_categories.set(category_id, category.name);
+                        $('#categories-selected-list').append("<div class='col-6 p-2'><p id='" + category_id + "' class='p-2 text-center mb-0 bg-secondary text-white'>"+ category.name +"</p></div>");
+                        cached_categories.set(category_id, category.name);
+
+                        products.forEach( function(product) {
+                            cached_products.set(product.id, product.name);
+                            $('#products-selected-list').append("<p id='" + product.id + "' class='my-2 p-2 border'>"+ product.name +"</p>");
+                        });
+
+                        categories_products.set(category_id, products);
+                        console.log(categories_products);
                     },
                     beforeSend: function() {
                         $('#no-product-selected').hide();
                         $('#no-category-selected').hide();
                         $('#categories-selected-list').show();
+                        $('#products-selected-list').show();
                     }
                 })
             }
         } else {
             category_id = this.value;
-            category_name = selected_category.get(category_id);
+            category_name = cached_categories.get(category_id);
+            products = categories_products.get(category_id);
 
-            $('#categories-selected-list').html($('#categories-selected-list').html().replace(categories_name + '<br>', ''));
-            if($('#categories-selected-list').html() == ''){
+            $('#categories-selected-list').find('#' + category_id).remove();
+
+            products.forEach(function(product){
+                $('#products-selected-list').find('#' + product.id).remove();
+            });
+            
+            if($("#categories-selected-list p").length == 0){
                 $('#no-product-selected').show();
                 $('#no-category-selected').show();
                 $('#categories-selected-list').hide();
@@ -276,8 +299,20 @@ $.ajaxSetup({
 <script>
 
     $("#avaibility").change(function() {
-        if(this.value != 'null'){
-            
+        categories_products = new Map();
+        cached_categories = new Map();
+        cached_products = new Map();
+
+        $('.category-checkbox').prop("checked", false);
+        $('.product-checkbox').prop("checked", false);
+
+        $('#categories-selected-list').find('p').remove();
+        $('#products-selected-list').find('p').remove();
+
+        $('#no-product-selected').show();
+        $('#no-category-selected').show();
+
+        if(this.value != 'null'){    
             if(this.value == 'allProducts'){
                 $('#products-selector-title').text("Tous les produits sauf : ")
                 $('#products-selector').show();
@@ -298,6 +333,7 @@ $.ajaxSetup({
         } else {
             $('#products-selector').hide();
             $('#products-selector-title').text("")
+            $('#categories-selector').hide();
         }
     });
 </script>

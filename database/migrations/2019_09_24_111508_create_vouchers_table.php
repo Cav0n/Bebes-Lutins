@@ -24,10 +24,7 @@ class CreateVouchersTable extends Migration
             $table->integer('maxUsage')->unsigned()->nullable();
             $table->boolean('isDeleted')->default(false);
 
-            $table->boolean('certainProducts')->nullable();
-            $table->boolean('allProducts')->nullable();
-            $table->boolean('certainCategories')->nullable();
-            $table->boolean('allCategories')->nullable();
+            $table->string('availability');
 
             $table->timestamps();
         });

@@ -2,14 +2,14 @@
 
 @section('head-options')
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/datepicker/bootstrap-datepicker3.css')}}">
-    <script src="{{asset('js/datepicker/bootstrap-datepicker.min.js')}}"></script>
+    <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/datepicker/jquery.datetimepicker.min.css')}}">
+    <script src="{{asset('js/datepicker/jquery.datetimepicker.full.min.js')}}"></script>
 @endsection
 
 @section('content')
 <div class="row">
     <div class="col-12 pt-3">
-        <a href='/dashboard/clients/avis' class='text-muted'>< Toutes les réductions</a>        
+        <a href='/dashboard/reductions' class='text-muted'>< Toutes les réductions</a>        
     </div>
 </div>
 <div class="card bg-white my-3">
@@ -126,15 +126,15 @@
             </div>
             
             <div class="form-group">
-                <label for="avaibility">Validité</label>
-                <select class="custom-select @error('avaibility') is-invalid @enderror" name="avaibility" id="avaibility">
+                <label for="availability">Validité</label>
+                <select class="custom-select @error('availability') is-invalid @enderror" name="availability" id="availability">
                     <option value='null' selected>Choisissez une validité</option>
                     <option value="certainProducts">Sur certains produits</option>
                     <option value="allProducts">Sur tous les produits</option>
                     <option value="certainCategories">Sur certaines catégories</option>
                     <option value="allCategories">Sur toutes les catégories</option>
                 </select>
-                @error('avaibility')
+                @error('availability')
                     <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>
@@ -183,8 +183,8 @@
 
 {{-- Last date --}}
 <script>
-$('.datepicker').datepicker({
-    format: 'dd/mm/yyyy'
+jQuery('.datepicker').datetimepicker({
+    format:'d/m/Y H:i',
 });
 </script>
 
@@ -331,10 +331,10 @@ $.ajaxSetup({
     });
 </script>
 
-{{-- Avaibility --}}
+{{-- Availability --}}
 <script>
 
-    $("#avaibility").change(function() {
+    $("#availability").change(function() {
         categories_products = new Map();
         cached_categories = new Map();
         cached_products = new Map();

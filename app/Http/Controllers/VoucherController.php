@@ -6,6 +6,7 @@ use App\Voucher;
 use App\Product;
 use App\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class VoucherController extends Controller
 {
@@ -43,11 +44,11 @@ class VoucherController extends Controller
             'code' => 'min:4|required', 
             'type' => 'required',
             'value' => 'required_unless:type,3',
-            'first-date' => 'date_format:d/m/Y|required',
-            'last-date' => 'date_format:d/m/Y|required',
+            'first-date' => 'date_format:d/m/Y H:i|required',
+            'last-date' => 'date_format:d/m/Y H:i|required',
             'minimal-price' => 'numeric|nullable',
             'max-usage' => 'numeric|nullable',
-            'avaibility' => 'required'
+            'availability' => 'required'
         ]);
 
         if($validated_data['first-date'] > $validated_data['last-date']){
@@ -55,7 +56,19 @@ class VoucherController extends Controller
             return back();
         }
 
-        dd($validated_data);
+        $voucher = new Voucher();
+        $voucher->id = substr(uniqid(), 0, 10);
+        $voucher->code = $validated_data['code'];
+        $voucher->discountValue = $validated_data['value'];
+        $voucher->discountType = $validated_data['type'];
+        $voucher->dateFirst = Carbon::createFromFormat('d/m/Y H:i',$validated_data['first-date']);
+        $voucher->dateLast = Carbon::createFromFormat('d/m/Y H:i',$validated_data['last-date']);
+        $voucher->minimalPrice = $validated_data['minimal-price'];
+        $voucher->maxUsage = $validated_data['max-usage'];
+        $voucher->availability = $validated_data['availability'];
+
+        $voucher->save();
+        return redirect('/dashboard/reductions');
     }
 
     /**

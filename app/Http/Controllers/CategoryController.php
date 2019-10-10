@@ -7,6 +7,42 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function getJSON(Category $category)
+    {
+        $category_array = array();
+        $category_array['name'] = $category->name;
+        $category_array['description'] = $category->description;
+        $category_array['mainImage'] = $category->mainImage;
+        $category_array['rank'] = $category->rank;
+        $category_array['isHidden'] = $category->isHidden;
+        $category_array['isDeleted'] = $category->isDeleted;
+        $category_array['parent_id'] = $category->parent_id;
+        $category_array['created_at'] = $category->created_at;
+        $category_array['updated_at'] = $category->updated_at;
+        $category_array['images'] = $category->images;
+
+        $childs = array();
+        foreach($category->childs as $child){
+            $childs[] = $child;
+            foreach($child->childs as $subchild){
+                $childs[] = $subchild;
+            }
+        }
+
+        $products = array();
+        $products[] = $category->products;
+        foreach($childs as $child){
+            $products[] = $child->products;
+        }
+
+        $category_array['childs'] = $childs;
+
+        $data = [ 'category' => $category_array ];
+
+        header('Content-type: application/json');
+        echo json_encode( $data );
+    }
+
     /**
      * @param  \App\Category  $category
      * Switch 'IsHidden' attribute to hide or not category.

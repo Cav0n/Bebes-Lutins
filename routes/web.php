@@ -18,6 +18,7 @@ Route::get('/', 'PageController@index');
  */
 Route::get('/categories', 'CategoryController@index');
 Route::get('/categories/{category}', 'CategoryController@show');
+Route::post('/categories/{category}', 'CategoryController@getJSON');
 /* ---------------- */
 
 /**

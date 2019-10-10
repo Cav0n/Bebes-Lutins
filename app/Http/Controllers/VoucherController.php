@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Voucher;
 use App\Product;
+use App\Category;
 use Illuminate\Http\Request;
 
 class VoucherController extends Controller
@@ -26,7 +27,8 @@ class VoucherController extends Controller
     public function create()
     {
         $products = Product::where('isDeleted', 0)->where('stock', '>', 0)->get();
-        return view('pages.dashboard.vouchers.creation')->withProducts($products);
+        $categories = Category::where('isDeleted', 0)->get();
+        return view('pages.dashboard.vouchers.creation')->withProducts($products)->withCategories($categories);
     }
 
     /**

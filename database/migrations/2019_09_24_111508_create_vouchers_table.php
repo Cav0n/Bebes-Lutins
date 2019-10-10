@@ -21,6 +21,7 @@ class CreateVouchersTable extends Migration
             $table->dateTime('dateFirst');
             $table->dateTime('dateLast');
             $table->decimal('minimalPrice',10,2)->unsigned()->nullable();
+            $table->integer('maxUsage')->unsigned()->nullable();
             $table->boolean('isDeleted')->default(false);
 
             $table->boolean('certainProducts')->nullable();

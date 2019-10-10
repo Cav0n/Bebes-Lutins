@@ -91,6 +91,10 @@ class DashboardController extends Controller
         return view('pages.dashboard.vouchers')->withVouchers($vouchers);
     }
 
+    public function newVoucher(){
+        
+    }
+
     public function newsletters(){
 
     }

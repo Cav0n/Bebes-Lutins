@@ -9,6 +9,29 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProductController extends Controller
 {
+    public function getJSON(Product $product)
+    {
+        $product_array = array();
+        $product_array['name'] = $product->name;
+        $product_array['description'] = $product->description;
+        $product_array['mainImage'] = $product->mainImage;
+        $product_array['stock'] = $product->stock;
+        $product_array['price'] = $product->price;
+        $product_array['isHidden'] = $product->isHidden;
+        $product_array['isDeleted'] = $product->isDeleted;
+        $product_array['creationDate'] = $product->creationDate;
+        $product_array['reviewsCount'] = $product->reviewsCount;
+        $product_array['reviewsStars'] = $product->reviewsStars;
+        $product_array['created_at'] = $product->created_at;
+        $product_array['updated_at'] = $product->updated_at;
+        $product_array['images'] = $product->images;
+
+        $data = [ 'product' => $product_array ];
+
+        header('Content-type: application/json');
+        echo json_encode( $data );
+    }
+
     /**
      * Switch 'IsHidden' attribute to hide or not product.
      */

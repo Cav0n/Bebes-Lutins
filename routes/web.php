@@ -25,6 +25,7 @@ Route::get('/categories/{category}', 'CategoryController@show');
 */
 Route::get('/produits', 'ProductController@index');
 Route::get('/produits/{product}', 'ProductController@show');
+Route::post('/produits/{product}', 'ProductController@getJSON');
 Route::get('/produits/{category}/{product}', 'ProductController@show');
 Route::post('/produits/selectionner_categorie/{category}', 'ProductController@add_selected_category');
 Route::post('/produits/deselectionner_categorie/{category}', 'ProductController@unselected_category');
@@ -109,6 +110,8 @@ Route::post('/dashboard/clients/avis/repondre/{review}', 'ReviewController@updat
 Route::post('/dashboard/clients/avis/supprimer-reponse/{review}','ReviewController@update');
 //OTHERS
 Route::get('/dashboard/reductions', 'DashboardController@vouchers'); //TODO
+Route::get('/dashboard/reductions/nouveau', 'VoucherController@create'); //TODO
+Route::post('/dashboard/reductions/nouveau', 'VoucherController@store');
 Route::get('/dashboard/newsletter', 'DashboardController@newsletters'); //TODO
 /* ---------------- */
 

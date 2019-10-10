@@ -1,7 +1,9 @@
 @extends('templates.dashboard')
 
 @section('head-options')
-<meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/datepicker/bootstrap-datepicker3.css')}}">
+    <script src="{{asset('js/datepicker/bootstrap-datepicker.min.js')}}"></script>
 @endsection
 
 @section('content')
@@ -41,26 +43,35 @@
             @endif
 
             <div class="form-group">
-              <label for="code">Nom du code</label>
-              <input type="text" class="form-control" name="code" id="code" aria-describedby="helpCode" placeholder="">
+                <label for="code">Nom du code</label>
+                <input type="text" class="form-control @error('code') is-invalid @enderror" name="code" id="code" aria-describedby="helpCode" placeholder="" required value='{{old("code")}}'>
+                @error('code')
+                    <div class="invalid-feedback">{{$message}}</div>
+                @enderror
             </div>
 
             <div class="row m-0">
                 <div class="col-6 pl-0">
                     <div class="form-group">
                         <label for="type">Type de réduction</label>
-                        <select class="custom-select" name="type" id="type">
+                        <select class="custom-select @error('type') is-invalid @enderror" name="type" id="type" required>
                             <option value="null" selected>Selectionner un type</option>
                             <option value="1">%</option>
                             <option value="2">€</option>
                             <option value="3">Frais de port</option>
                         </select>
+                        @error('type')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="col-6 pr-0">
                     <div id='value-container' class="form-group">
-                      <label for="value">Valeur</label>
-                      <input type="number" class="form-control" name="value" id="value" aria-describedby="helpValue" placeholder="" min="0" max="100" step='1'>
+                        <label for="value">Valeur</label>
+                        <input type="number" class="form-control @error('value') is-invalid @enderror" name="value" id="value" aria-describedby="helpValue" placeholder="" min="0" max="100" step='1' value='{{old("value")}}'>
+                        @error('value')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
                     </div>
                 </div>
             </div>
@@ -68,15 +79,24 @@
             <div class="row m-0">
                 <div class="col-6 pl-0">
                     <div class="form-group">
-                      <label for="first-date">Début de validité</label>
-                      <input type="text" class="form-control" name="first-date" id="first-date" aria-describedby="helpFirstDate" placeholder="">
+                        <label for="first-date">Début de validité</label>
+                        <input type="text" class="form-control datepicker @error('first-date') is-invalid @enderror @if(session('error-first-date') != null) is-invalid  @endif" name="first-date" id="first-date" aria-describedby="helpFirstDate" placeholder="" value='{{old("first-date")}}'>
+                        @error('first-date')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                        @if(session('error-first-date') != null) 
+                            <div class="invalid-feedback">{{session('error-first-date')}}</div> 
+                        @endif
                       <small id="helpFirstDate" class="form-text text-muted">La date à partir de laquelle le coupon est valable</small>
                     </div>
                 </div>
                 <div class="col-6 pr-0">
                     <div class="form-group">
                       <label for="last-date">Fin de validité</label>
-                      <input type="text" class="form-control" name="last-date" id="last-date" aria-describedby="helpLastDate" placeholder="">
+                      <input type="text" class="form-control datepicker @error('last-date') is-invalid @enderror"  name="last-date" id="last-date" aria-describedby="helpLastDate" placeholder="" value='{{old("last-date")}}'>
+                        @error('last-date')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
                       <small id="helpLastDate" class="form-text text-muted">La date à partir de laquelle le coupon n'est plus valable</small>
                     </div>
                 </div>
@@ -85,29 +105,38 @@
             <div class="row m-0">
                 <div class="col-6 pl-0">
                     <div class="form-group">
-                    <label for="minimal-price">Prix minimal du panier</label>
-                    <input type="text" name="minimal-price" id="minimal-price" class="form-control" placeholder="" aria-describedby="helpMinimalPrice">
-                    <small id="helpMinimalPrice" class="text-muted">Combien l'acheteur doit dépenser pour profiter du code coupon</small>
+                        <label for="minimal-price">Prix minimal du panier</label>
+                        <input type="text" name="minimal-price" id="minimal-price" class="form-control @error('minimal-price') is-invalid @enderror" placeholder="" aria-describedby="helpMinimalPrice" value='{{old("minimal-price")}}'>
+                        @error('minimal-price')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                        <small id="helpMinimalPrice" class="text-muted">Combien l'acheteur doit dépenser pour profiter du code coupon</small>
                     </div>
                 </div>
                 <div class="col-6 pr-0">
                     <div class="form-group">
-                      <label for="max-usage">Nombre d'utilisations maximal</label>
-                      <input type="text" class="form-control" name="max-usage" id="max-usage" aria-describedby="helpMaxUsage" placeholder="">
-                      <small id="helpMaxUsage" class="form-text text-muted">Nombre d'utilisation maximal par personne</small>
+                        <label for="max-usage">Nombre d'utilisations maximal</label>
+                        <input type="text" class="form-control @error('max-usage') is-invalid @enderror" name="max-usage" id="max-usage" aria-describedby="helpMaxUsage" placeholder="" value='{{old("max-usage")}}'>
+                        @error('max-usage')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                        <small id="helpMaxUsage" class="form-text text-muted">Nombre d'utilisation maximal par personne</small>
                     </div>
                 </div>
             </div>
             
             <div class="form-group">
                 <label for="avaibility">Validité</label>
-                <select class="custom-select" name="avaibility" id="avaibility">
+                <select class="custom-select @error('avaibility') is-invalid @enderror" name="avaibility" id="avaibility">
                     <option value='null' selected>Choisissez une validité</option>
                     <option value="certainProducts">Sur certains produits</option>
                     <option value="allProducts">Sur tous les produits</option>
                     <option value="certainCategories">Sur certaines catégories</option>
                     <option value="allCategories">Sur toutes les catégories</option>
                 </select>
+                @error('avaibility')
+                    <div class="invalid-feedback">{{$message}}</div>
+                @enderror
             </div>
 
             {{-- SELECT PRODUCTS LIST --}}
@@ -151,6 +180,13 @@
         </form>
     </div>
 </div>
+
+{{-- Last date --}}
+<script>
+$('.datepicker').datepicker({
+    format: 'dd/mm/yyyy'
+});
+</script>
 
 {{-- Ajax setup --}}
 <script>

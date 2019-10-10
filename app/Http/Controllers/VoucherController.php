@@ -39,7 +39,23 @@ class VoucherController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $validated_data = $request->validate([
+            'code' => 'min:4|required', 
+            'type' => 'required',
+            'value' => 'required_unless:type,3',
+            'first-date' => 'date_format:d/m/Y|required',
+            'last-date' => 'date_format:d/m/Y|required',
+            'minimal-price' => 'numeric|nullable',
+            'max-usage' => 'numeric|nullable',
+            'avaibility' => 'required'
+        ]);
+
+        if($validated_data['first-date'] > $validated_data['last-date']){
+            $request->session()->flash('error-first-date', 'Le début de validité ne peut pas être après la fin de validité');
+            return back();
+        }
+
+        dd($validated_data);
     }
 
     /**

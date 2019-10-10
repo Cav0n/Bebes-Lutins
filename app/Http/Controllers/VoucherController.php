@@ -58,7 +58,7 @@ class VoucherController extends Controller
 
         $voucher = new Voucher();
         $voucher->id = substr(uniqid(), 0, 10);
-        $voucher->code = $validated_data['code'];
+        $voucher->code = mb_strtoupper($validated_data['code']);
         $voucher->discountValue = $validated_data['value'];
         $voucher->discountType = $validated_data['type'];
         $voucher->dateFirst = Carbon::createFromFormat('d/m/Y H:i',$validated_data['first-date']);
@@ -90,7 +90,9 @@ class VoucherController extends Controller
      */
     public function edit(Voucher $voucher)
     {
-        dd('CREER LA VUE D EDITION');
+        $products = Product::where('isDeleted', 0)->where('stock', '>', 0)->get();
+        $categories = Category::where('isDeleted', 0)->get();
+        return view('pages.dashboard.vouchers.edition')->withVoucher($voucher)->withProducts($products)->withCategories($categories);
     }
 
     /**
@@ -113,6 +115,11 @@ class VoucherController extends Controller
      */
     public function destroy(Voucher $voucher)
     {
-        dd($voucher);
+        if($voucher->orders == null){
+            $voucher->delete();
+        } else {
+            $voucher->isDeleted = 1;
+            $voucher->save();
+        }
     }
 }

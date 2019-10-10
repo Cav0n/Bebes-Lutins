@@ -21,6 +21,26 @@ class Voucher extends Model
         return $this->hasMany('App\ShoppingCart');
     }
 
+    public function typeToString(){
+        switch($this->discountType){
+            case '1':
+            return "%";
+            break;
+
+            case '2':
+            return "€";
+            break;
+
+            case '3':
+            return 'Frais de port';
+            break;
+
+            default:
+            return 'inconnu';
+            break;
+        }
+    }
+
     /**
      * The attributes that should be mutated to dates.
      *

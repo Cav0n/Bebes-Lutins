@@ -87,7 +87,7 @@ class DashboardController extends Controller
     }
 
     public function vouchers(){
-        $vouchers = Voucher::where('id', '!=', null)->orderBy('dateLast', 'desc')->paginate(20);
+        $vouchers = Voucher::where('isDeleted', '0')->orderBy('dateLast', 'desc')->paginate(20);
         return view('pages.dashboard.vouchers')->withVouchers($vouchers);
     }
 

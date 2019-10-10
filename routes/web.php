@@ -113,6 +113,7 @@ Route::post('/dashboard/clients/avis/supprimer-reponse/{review}','ReviewControll
 Route::get('/dashboard/reductions', 'DashboardController@vouchers'); //TODO
 Route::get('/dashboard/reductions/nouveau', 'VoucherController@create'); //TODO
 Route::post('/dashboard/reductions/nouveau', 'VoucherController@store');
+Route::get('/dashboard/reductions/edition/{voucher}', 'VoucherController@edit');
 Route::get('/dashboard/newsletter', 'DashboardController@newsletters'); //TODO
 /* ---------------- */
 

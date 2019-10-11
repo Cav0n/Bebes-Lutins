@@ -35,7 +35,7 @@
 
             {{-- Success --}}
             @if(session()->has('success-message'))
-            <div class="col-lg-12">
+            <div class="col-lg-12 p-0 mb-2">
                 <div class="alert alert-success px-3 mb-0">
                     <p class='text-success font-weight-bold mb-0'>{{session('success-message')}}</p>
                 </div>
@@ -55,10 +55,10 @@
                     <div class="form-group">
                         <label for="type">Type de réduction</label>
                         <select class="custom-select @error('type') is-invalid @enderror" name="type" id="type" required>
-                            <option value="null" selected>Selectionner un type</option>
-                            <option value="1">%</option>
-                            <option value="2">€</option>
-                            <option value="3">Frais de port</option>
+                            <option value="null" disabled>Selectionner un type</option>
+                            <option value="1" @if($voucher->discountType == 1) selected @endif>%</option>
+                            <option value="2" @if($voucher->discountType == 2) selected @endif>€</option>
+                            <option value="3" @if($voucher->discountType == 3) selected @endif>Frais de port</option>
                         </select>
                         @error('type')
                             <div class="invalid-feedback">{{$message}}</div>
@@ -68,7 +68,7 @@
                 <div class="col-6 pr-0">
                     <div id='value-container' class="form-group">
                         <label for="value">Valeur</label>
-                        <input type="number" class="form-control @error('value') is-invalid @enderror" name="value" id="value" aria-describedby="helpValue" placeholder="" min="0" max="100" step='1' value='{{old("value", $voucher->value)}}'>
+                        <input type="number" class="form-control @error('value') is-invalid @enderror" name="value" id="value" aria-describedby="helpValue" placeholder="" min="0" max="100" step='1' value='{{old("value", $voucher->discountValue)}}'>
                         @error('value')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -80,7 +80,7 @@
                 <div class="col-6 pl-0">
                     <div class="form-group">
                         <label for="first-date">Début de validité</label>
-                        <input type="text" class="form-control datepicker @error('first-date') is-invalid @enderror @if(session('error-first-date') != null) is-invalid  @endif" name="first-date" id="first-date" aria-describedby="helpFirstDate" placeholder="" value='{{old("first-date", $voucher->dateFirst)}}'>
+                        <input type="text" class="form-control datepicker @error('first-date') is-invalid @enderror @if(session('error-first-date') != null) is-invalid  @endif" name="first-date" id="first-date" aria-describedby="helpFirstDate" placeholder="" value='{{old("first-date", $voucher->dateFirst->format('d/m/Y H:i:s'))}}'>
                         @error('first-date')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -93,7 +93,7 @@
                 <div class="col-6 pr-0">
                     <div class="form-group">
                       <label for="last-date">Fin de validité</label>
-                      <input type="text" class="form-control datepicker @error('last-date') is-invalid @enderror"  name="last-date" id="last-date" aria-describedby="helpLastDate" placeholder="" value='{{old("last-date", $voucher->dateLast)}}'>
+                      <input type="text" class="form-control datepicker @error('last-date') is-invalid @enderror"  name="last-date" id="last-date" aria-describedby="helpLastDate" placeholder="" value='{{old("last-date", $voucher->dateLast->format('d/m/Y H:i:s'))}}'>
                         @error('last-date')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -124,11 +124,10 @@
                     </div>
                 </div>
             </div>
-            
             <div class="form-group">
                 <label for="availability">Validité</label>
                 <select class="custom-select @error('availability') is-invalid @enderror" name="availability" id="availability">
-                    <option value='null' selected>Choisissez une validité</option>
+                    <option value='null' selected disabled>Choisissez une validité</option>
                     <option value="certainProducts">Sur certains produits</option>
                     <option value="allProducts">Sur tous les produits</option>
                     <option value="certainCategories">Sur certaines catégories</option>
@@ -163,7 +162,7 @@
                 </div>    
                 @endforeach
             </div>
-
+            
             {{-- CATEGORIES SELECTOR --}}
             <div id='categories-selector' class='col-12 p-0'>
                 @foreach ($categories as $category)
@@ -181,10 +180,10 @@
     </div>
 </div>
 
-{{-- Last date --}}
+{{-- Dates --}}
 <script>
 jQuery('.datepicker').datetimepicker({
-    format:'d/m/Y H:i',
+    format:'d/m/Y H:i:00',
 });
 </script>
 
@@ -199,11 +198,16 @@ $.ajaxSetup({
 
 {{-- Discount value --}}
 <script>
-    $('#value-container').hide();
+    value_container = $('#value-container');
+    type_selector = $("#type");
+    
+    if(type_selector.val() == 1 || type_selector.val() == 2){
+        value_container.show();
+    } else value_container.hide();
 
     $("#type").change(function() {
         if(this.value != 'null' && this.value != '3'){
-            $('#value-container').show();
+            value_container.show();
             if(this.value == 1){
                 $('#value').attr('max', '100');
                 $('#value').attr('step', '1');
@@ -212,7 +216,7 @@ $.ajaxSetup({
                 $('#value').attr('step', '0.01');
             }
         } else {
-            $('#value-container').hide();
+            value_container.hide();
         }
     });
 </script>
@@ -333,6 +337,20 @@ $.ajaxSetup({
 
 {{-- Availability --}}
 <script>
+    $(document).ready(function(){
+        $('#availability option[value="{{$voucher->availability}}"]').prop('selected', true);
+        $("#availability").change();
+
+        @foreach($voucher->products as $product)
+        $('#checkbox-{{$product->id}}').prop( "checked", true );
+        $('#checkbox-{{$product->id}}').change();
+        @endforeach
+
+        @foreach($voucher->categories as $category)
+        $('#checkbox-categories-{{$category->id}}').prop( "checked", true );
+        $('#checkbox-categories-{{$category->id}}').change();
+        @endforeach
+    });
 
     $("#availability").change(function() {
         categories_products = new Map();

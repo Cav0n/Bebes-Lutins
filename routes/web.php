@@ -98,6 +98,8 @@ Route::post('/dashboard/commandes/select_order_status', 'DashboardController@sel
 Route::post('/dashboard/commandes/unselect_order_status', 'DashboardController@unselect_order_status');
 //PRODUCTS
 Route::get('/dashboard/produits', 'DashboardController@products'); //TODO
+Route::get('/dashboard/produits/nouveau', 'ProductController@create');
+Route::post('/dashboard/produits/nouveau', 'ProductController@store');
 Route::get('/dashboard/produits/stocks', 'DashboardController@stocks'); //TODO
 Route::get('/dashboard/produits/categories', 'DashboardController@categories'); //TODO
 Route::get('/dashboard/produits/categories/rang/{category}/{rank}', 'CategoryController@updateRank');
@@ -114,6 +116,7 @@ Route::get('/dashboard/reductions', 'DashboardController@vouchers'); //TODO
 Route::get('/dashboard/reductions/nouveau', 'VoucherController@create'); //TODO
 Route::post('/dashboard/reductions/nouveau', 'VoucherController@store');
 Route::get('/dashboard/reductions/edition/{voucher}', 'VoucherController@edit');
+Route::post('/dashboard/reductions/edition/{voucher}', 'VoucherController@update');
 Route::get('/dashboard/newsletter', 'DashboardController@newsletters'); //TODO
 /* ---------------- */
 

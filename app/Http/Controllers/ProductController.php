@@ -85,7 +85,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-    
+        return view('pages.dashboard.products.creation');
     }
 
     /**
@@ -96,7 +96,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        dd($request);   
     }
 
     /**

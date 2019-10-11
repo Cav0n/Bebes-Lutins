@@ -55,7 +55,7 @@
                     <div class="form-group">
                         <label for="type">Type de réduction</label>
                         <select class="custom-select @error('type') is-invalid @enderror" name="type" id="type" required>
-                            <option value="null" selected>Selectionner un type</option>
+                            <option value="null" selected disabled>Selectionner un type</option>
                             <option value="1">%</option>
                             <option value="2">€</option>
                             <option value="3">Frais de port</option>
@@ -128,7 +128,7 @@
             <div class="form-group">
                 <label for="availability">Validité</label>
                 <select class="custom-select @error('availability') is-invalid @enderror" name="availability" id="availability">
-                    <option value='null' selected>Choisissez une validité</option>
+                    <option value='null' selected disabled>Choisissez une validité</option>
                     <option value="certainProducts">Sur certains produits</option>
                     <option value="allProducts">Sur tous les produits</option>
                     <option value="certainCategories">Sur certaines catégories</option>
@@ -181,10 +181,10 @@
     </div>
 </div>
 
-{{-- Last date --}}
+{{-- Dates --}}
 <script>
 jQuery('.datepicker').datetimepicker({
-    format:'d/m/Y H:i',
+    format:'d/m/Y H:i:00',
 });
 </script>
 

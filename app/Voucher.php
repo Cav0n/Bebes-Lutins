@@ -21,6 +21,14 @@ class Voucher extends Model
         return $this->hasMany('App\ShoppingCart');
     }
 
+    public function products(){
+        return $this->belongsToMany('App\Product');
+    }
+
+    public function categories(){
+        return $this->belongsToMany('App\Category');
+    }
+
     public function typeToString(){
         switch($this->discountType){
             case '1':

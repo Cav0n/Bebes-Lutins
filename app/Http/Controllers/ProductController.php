@@ -6,6 +6,7 @@ use App\Product;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
@@ -34,11 +35,9 @@ class ProductController extends Controller
 
     public function uploadMainImage(Request $request)
     {
-        $request->validate([
-            'file' => 'image|max:5000',
-        ]);
+        $path = $request->file('file')->store(public_path('/images'));
 
-        return Response::json(dd($request), 200);
+        return $path;
     }
 
     /**

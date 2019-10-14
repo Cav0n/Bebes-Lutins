@@ -112,6 +112,9 @@ $.ajaxSetup({
 
 {{-- DROPZONE --}}
 <script>
+    window.Laravel = {!! json_encode([
+        'csrfToken' => csrf_token(),
+    ]) !!};
     // Disable auto discover for all elements:
     Dropzone.autoDiscover = false;
 
@@ -129,7 +132,9 @@ $.ajaxSetup({
         dictRemoveFile: "Supprimer l'image",
         dictRemoveFileConfirmation: "Êtes-vous sûr de vouloir supprimer l'image ?",
         dictMaxFilesExceeded: "Vous ne pouvez ajouter qu'une image principale",
-        
+        headers: {
+            'X-CSRF-TOKEN': Laravel.csrfToken
+        }
     });
 
     // THUMBNAILS

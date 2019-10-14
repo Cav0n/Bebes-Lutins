@@ -6,6 +6,7 @@ use Storage;
 use App\Product;
 use App\Category;
 use App\Image;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Symfony\Component\HttpFoundation\Response;
@@ -98,36 +99,61 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $contents = Storage::get(public_path('images/tmp/'.$request['main_image_name']) );
+    {   
+        $request->validate([
+            'name' => 'string|min:3|required',
+            'description' => 'string|min:10|required',
+            'stock' => 'integer|min:0|required',
+            'price' => 'numeric|min:0.01|required',
+            'tags' => 'nullable',
+            'main_image_name' => 'required',
+            'thumbnails_names' => 'array|nullable',
+            'is-hidden' => 'nullable'
+        ]);
 
-        dd($contents);
-        // $request->validate([
-        //     'name' => 'string|min:3|required',
-        //     'description' => 'string|min:10|required',
-        //     'stock' => 'integer|min:0|required',
-        //     'price' => 'numeric|min:0.01|required',
-        //     'tags' => 'nullable',
-        //     'main_image_name' => 'required',
-        //     'thumbnails_names' => 'array|required',
-        //     'is-hidden' => 'nullable'
-        // ]);
+        $mainImageName = $request['main_image_name'];
 
-        // $product = new Product();
-        // $product->name = $request['name'];
-        // $product->description = $request['description'];
-        // $product->stock = $request['stock'];
-        // $product->price = $request['price'];
-        // if($request['is-hidden'] != null) $product->isHidden = $request['is-hidden'];
+        $product = new Product();
+        $product->name = $request['name'];
+        $product->description = $request['description'];
+        $product->stock = $request['stock'];
+        $product->price = $request['price'];
+        if($request['is-hidden'] != null) $product->isHidden = $request['is-hidden'];
+        $product->save();
 
-        // // MAIN IMAGE
-        // $mainImage = new Image();
-        // $request['file']->move($destinationPath, $filename);
+        //MAIN IMAGE
+        rename(public_path('images/tmp/').$mainImageName, public_path('images/products/').$mainImageName); // MOVE MAIN IMAGE FROM TMP TO REAL FOLDER
+        $mainImage = new Image();
+        $mainImage->name = $mainImageName;
+        $mainImage->size = filesize(public_path('images/products/').$mainImageName);
+        $mainImage->save();
+        $product->images()->attach($mainImage->id);
+        $product->mainImage = $mainImage->name;
+
+        //THUMBNAILS
+        if($request['thumbnails_name'] != null){
+            foreach ($request['thumbnails_name'] as $thumbnail_name) { // MOVE EACH THUMBNAILS FROM TMP TO REAL FOLDER
+                rename(public_path('images/tmp/').$thumbnail_name, public_path('images/products/thumbnails/').$thumbnail_name);
+                $thumbnail = new Image();
+                $thumbnail->name = $thumbnail_name;
+                $thumbnail->size = filesize(public_path('images/products/thumbnails/').$thumbnail_name);
+                $thumbnail->save();
+                $product->images()->attach($thumbnail->id);
+            }
+        }
+
+        //TAGS
+        foreach(\json_decode($request->tags) as $rtag){
+            $tag = new Tag();
+            $tag->name = $rtag->value;
+            $tag->save();
+            $product->tags()->attach($tag->id);
+        }
         
-        // $products->mainImage = $request['main_image_name'];
+        $product->save();
 
+        dd($product);
 
-        // $products->thumbnails()->attach($request['thumbnails_names']);
     }
 
     /**

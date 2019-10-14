@@ -4,6 +4,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('scss/tagify/tagify.css')}}">
     <script src="{{asset('js/tagify/jQuery.tagify.min.js')}}"></script>
+    <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/dropzone/dropzone.css')}}">
+    <script src="{{asset('js/dropzone/dropzone.js')}}"></script>
 @endsection
 
 @section('content')
@@ -42,6 +44,8 @@
             </div>
             @endif
 
+            <div id='mainImage' class="dropzone mb-2 border rounded"></div>
+
             <div class="form-group">
                 <label for="name">Nom du produit</label>
                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" aria-describedby="helpName" placeholder="" required value='{{old("name")}}'>
@@ -78,6 +82,8 @@
                 <button class='btn btn-outline-dark rounded-0 mt-2 tags--removeAllBtn' type='button'>Supprimer tous les tags</button>
             </div>
 
+            <div id='thumbnails' class='dropzone my-2 border rounded'></div>
+
             <button type="submit" class="btn btn-outline-secondary">Enregistrer</button>
 
         </form>
@@ -102,6 +108,44 @@ $.ajaxSetup({
     
     // bind the "click" event on the "remove all tags" button
     $('.tags--removeAllBtn').on('click', jqTagify.removeAllTags.bind(jqTagify))
+</script>
+
+{{-- DROPZONE --}}
+<script>
+    // Disable auto discover for all elements:
+    Dropzone.autoDiscover = false;
+
+    // MAINIMAGE
+    $("#mainImage").dropzone({
+        url: "/dashboard/produit/upload_mainImage",
+        maxFiles: 1,
+        addRemoveLinks: true,
+        dictDefaultMessage: "Cliquez pour ajouter une image principale",
+        dictFileTooBig: "L'image est trop lourde (maximum 5 Mo)",
+        dictResponseError: "Une erreur est survenue (Code d'erreur : @{{statusCode}})",
+        dictCancelUpload: "Annuler l'upload",
+        dictUploadCanceled: "Upload annulé",
+        dictCancelUploadConfirmation: "Êtes-vous sûr de vouloir annuler l'upload ?",
+        dictRemoveFile: "Supprimer l'image",
+        dictRemoveFileConfirmation: "Êtes-vous sûr de vouloir supprimer l'image ?",
+        dictMaxFilesExceeded: "Vous ne pouvez ajouter qu'une image principale",
+        
+    });
+
+    // THUMBNAILS
+    $("#thumbnails").dropzone({
+        url: "/file/post",
+        maxFiles: 4,
+        dictDefaultMessage: "Cliquez pour ajouter une vignette (4 maximum)",
+        dictFileTooBig: "La vignette est trop lourde (maximum 5 Mo)",
+        dictResponseError: "Une erreur est survenue (Code d'erreur : @{{statusCode}})",
+        dictCancelUpload: "Annuler l'upload",
+        dictUploadCanceled: "Upload annulé",
+        dictCancelUploadConfirmation: "Êtes-vous sûr de vouloir annuler l'upload ?",
+        dictRemoveFile: "Supprimer l'image",
+        dictRemoveFileConfirmation: "Êtes-vous sûr de vouloir supprimer l'image ?",
+        dictMaxFilesExceeded: "Vous ne pouvez ajouter que @{{maxFiles}} vignettes",
+    });
 </script>
 
 @endsection

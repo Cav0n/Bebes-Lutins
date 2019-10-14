@@ -32,6 +32,15 @@ class ProductController extends Controller
         echo json_encode( $data );
     }
 
+    public function uploadMainImage(Request $request)
+    {
+        $request->validate([
+            'file' => 'image|max:5000',
+        ]);
+
+        return Response::json(dd($request), 200);
+    }
+
     /**
      * Switch 'IsHidden' attribute to hide or not product.
      */

@@ -105,7 +105,6 @@ Route::get('/dashboard/produits/categories', 'DashboardController@categories'); 
 Route::get('/dashboard/produits/categories/rang/{category}/{rank}', 'CategoryController@updateRank');
 Route::get('/dashboard/switch_is_hidden_product/{product}', 'ProductController@switchIsHidden');
 Route::get('/dashboard/switch_is_hidden_category/{category}', 'CategoryController@switchIsHidden');
-Route::post('/dashboard/produit/upload_mainImage', 'ProductController@uploadMainImage');
 //CUSTOMERS
 Route::get('/dashboard/clients', 'DashboardController@customers'); //TODO
 Route::get('/dashboard/clients/avis', 'DashboardController@reviews');
@@ -119,6 +118,7 @@ Route::post('/dashboard/reductions/nouveau', 'VoucherController@store');
 Route::get('/dashboard/reductions/edition/{voucher}', 'VoucherController@edit');
 Route::post('/dashboard/reductions/edition/{voucher}', 'VoucherController@update');
 Route::get('/dashboard/newsletter', 'DashboardController@newsletters'); //TODO
+Route::post('/upload_image', 'ImageController@store');
 /* ---------------- */
 
 /**

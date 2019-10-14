@@ -33,13 +33,6 @@ class ProductController extends Controller
         echo json_encode( $data );
     }
 
-    public function uploadMainImage(Request $request)
-    {
-        $path = $request->file('file')->store(public_path('/images'));
-
-        return $path;
-    }
-
     /**
      * Switch 'IsHidden' attribute to hide or not product.
      */

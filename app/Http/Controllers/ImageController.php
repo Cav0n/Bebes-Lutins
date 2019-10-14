@@ -35,7 +35,21 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $file = $request['file'];
+        
+        $filename = $file->getClientOriginalName(); 
+        $destinationPath = public_path('/images/uploads');
+        // If the uploads fail due to file system, you can try doing public_path().'/uploads'
+
+        //$filename = $file->getClientOriginalName();
+        //$extension =$file->getClientOriginalExtension(); 
+        $upload_success = $request['file']->move($destinationPath, $filename);
+
+        if( $upload_success ) {
+            return response()->json('success', 200);
+        } else {
+            return response()->json('error', 400);
+        }
     }
 
     /**

@@ -120,7 +120,7 @@ $.ajaxSetup({
 
     // MAINIMAGE
     $("#mainImage").dropzone({
-        url: "/dashboard/produit/upload_mainImage",
+        url: "/upload_image",
         maxFiles: 1,
         addRemoveLinks: true,
         dictDefaultMessage: "Cliquez pour ajouter une image principale",

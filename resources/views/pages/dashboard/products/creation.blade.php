@@ -75,7 +75,7 @@
             <div class="form-group">
                 <label for="tags">Tags</label>
                 <input id='tags' class="form-control" name='tags' value='try, adding, a tag'> 
-                <button class='btn btn-outline-dark rounded-0 mt-2 tags-removeAllBtn' type='button'>Supprimer tous les tags</button>
+                <button class='btn btn-outline-dark rounded-0 mt-2 tags--removeAllBtn' type='button'>Supprimer tous les tags</button>
             </div>
 
             <button type="submit" class="btn btn-outline-secondary">Enregistrer</button>
@@ -95,7 +95,13 @@ $.ajaxSetup({
 
 {{-- TAGIFY --}}
 <script>
-    $('#tags').tagify();
+    $input = $('#tags').tagify();
+
+    // get the Tagify instance assigned for this jQuery input object so its methods could be accessed
+    var jqTagify = $input.data('tagify');
+    
+    // bind the "click" event on the "remove all tags" button
+    $('.tags--removeAllBtn').on('click', jqTagify.removeAllTags.bind(jqTagify))
 </script>
 
 @endsection

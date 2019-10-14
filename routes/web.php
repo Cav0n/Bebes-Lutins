@@ -119,6 +119,7 @@ Route::get('/dashboard/reductions/edition/{voucher}', 'VoucherController@edit');
 Route::post('/dashboard/reductions/edition/{voucher}', 'VoucherController@update');
 Route::get('/dashboard/newsletter', 'DashboardController@newsletters'); //TODO
 Route::post('/upload_image', 'ImageController@store');
+Route::delete('/delete_image', 'ImageController@destroy');
 /* ---------------- */
 
 /**

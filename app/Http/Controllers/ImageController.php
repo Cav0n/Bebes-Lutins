@@ -37,18 +37,16 @@ class ImageController extends Controller
     {
         $file = $request['file'];
         
-        $filename = $file->getClientOriginalName(); 
-        $destinationPath = public_path('/images/uploads');
-        // If the uploads fail due to file system, you can try doing public_path().'/uploads'
-
-        //$filename = $file->getClientOriginalName();
-        //$extension =$file->getClientOriginalExtension(); 
+        $filename = $file->getClientOriginalName();
+        $destinationPath = public_path('/images/tmp');
+        
         $upload_success = $request['file']->move($destinationPath, $filename);
 
         if( $upload_success ) {
-            return response()->json('success', 200);
+            $response = ['filename' => $filename, 'message' => 'success', 'code' => 200];
+            return response($response);
         } else {
-            return response()->json('error', 400);
+            return response()->json('Erreur', 400);
         }
     }
 
@@ -89,11 +87,11 @@ class ImageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Image  $image
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Image $image)
+    public function destroy(Request $request)
     {
-        //
+        unlink(public_path('/images/tmp/').$request['image']);
     }
 }

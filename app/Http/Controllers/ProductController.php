@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Storage;
 use App\Product;
 use App\Category;
+use App\Image;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Symfony\Component\HttpFoundation\Response;
@@ -97,7 +99,35 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);   
+        $contents = Storage::get(public_path('images/tmp/'.$request['main_image_name']) );
+
+        dd($contents);
+        // $request->validate([
+        //     'name' => 'string|min:3|required',
+        //     'description' => 'string|min:10|required',
+        //     'stock' => 'integer|min:0|required',
+        //     'price' => 'numeric|min:0.01|required',
+        //     'tags' => 'nullable',
+        //     'main_image_name' => 'required',
+        //     'thumbnails_names' => 'array|required',
+        //     'is-hidden' => 'nullable'
+        // ]);
+
+        // $product = new Product();
+        // $product->name = $request['name'];
+        // $product->description = $request['description'];
+        // $product->stock = $request['stock'];
+        // $product->price = $request['price'];
+        // if($request['is-hidden'] != null) $product->isHidden = $request['is-hidden'];
+
+        // // MAIN IMAGE
+        // $mainImage = new Image();
+        // $request['file']->move($destinationPath, $filename);
+        
+        // $products->mainImage = $request['main_image_name'];
+
+
+        // $products->thumbnails()->attach($request['thumbnails_names']);
     }
 
     /**

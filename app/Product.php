@@ -54,4 +54,9 @@ class Product extends Model
     {
         return $this->hasMany('App\OrderItem');
     }
+
+    public function characteristics()
+    {
+        return $this->hasMany('App\ProductCharacteristic');
+    }
 }

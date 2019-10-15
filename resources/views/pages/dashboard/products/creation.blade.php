@@ -95,11 +95,73 @@
                 <label class="custom-control-label noselect pointer" for="is-hidden">Caché</label>
             </div>
 
+            <div id="characteristics-container" class="my-2">
+                <button type="button" class="btn btn-outline-dark rounded-0" onclick="add_characteristic($(this).parent())">Ajouter une caractéristique</button>
+                <div class='characteristic p-3 border my-2'>
+                    <div class="form-group col-6 p-0">
+                        <label for="characteristic_name">Nom de la caractéristique</label>
+                        <input type="text" class="form-control characteristic_name" name="characteristic_name" aria-describedby="helpCharacteristicName" placeholder="Taille">
+                        <small id="helpCharacteristicName" class="form-text text-muted">Par exemple "taille", "couleur"...</small>
+                    </div>
+                    <div class="characteristic-options row m-0 d-flex flex-column">
+                        <label>Options</label>
+
+                        <div class='option d-flex my-2'>
+                            <input type="text" class="form-control characteristic_options mr-2" name="characteristic_options[]" aria-describedby="helpCharacteristicOptions" placeholder="">
+                        </div>
+
+                        <div class='buttons d-flex my-2'>
+                            <button type='button' class="btn btn-dark rounded-0 max-content" onclick="add_option($(this))">Ajouter une option</button>
+                            <button type='button' class="btn btn-danger rounded-0 max-content mx-3" onclick="$(this).parent().parent().parent().remove()">Supprimer la caractéristique</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <button type="submit" class="btn btn-outline-secondary">Enregistrer</button>
 
         </form>
     </div>
 </div>
+
+<script>
+    function add_characteristic(characteristics_container){
+        html = `
+        <div class="characteristic p-3 border my-2">
+            <div class="form-group col-6 p-0">
+                <label for="characteristic_name">Nom de la caractéristique</label>
+                <input type="text" class="form-control characteristic_name" name="characteristic_name" aria-describedby="helpCharacteristicName" placeholder="Taille">
+                <small id="helpCharacteristicName" class="form-text text-muted">Par exemple "taille", "couleur"...</small>
+            </div>
+            <div class="characteristic-options row m-0 d-flex flex-column">
+                <label>Options</label>
+
+                <div class='option d-flex my-2'>
+                    <input type="text" class="form-control characteristic_options mr-2" name="characteristic_options[]" aria-describedby="helpCharacteristicOptions" placeholder="">
+                </div>
+
+                <div class='buttons d-flex my-2'>
+                    <button type='button' class="btn btn-dark rounded-0 max-content" onclick="add_option($(this))">Ajouter une option</button>
+                    <button type='button' class="btn btn-danger rounded-0 max-content mx-3" onclick="$(this).parent().parent().parent().remove()">Supprimer la caractéristique</button>
+                </div>
+            </div>
+        </div>`;
+        characteristics_container.append(html);
+    }
+
+    function add_option(btn){
+        html = `
+        <div class="option d-flex my-2">
+            <input type="text" class="form-control characteristic_options  mr-2" name="characteristic_options[]" aria-describedby="helpCharacteristicOptions" placeholder="">
+            <button class="btn btn-outline-danger" onclick="remove_option($(this))">Supprimer</button>
+        </div>`;
+        btn.parent().before(html);
+    }
+
+    function remove_option(btn){
+        btn.parent().remove();
+    }
+</script>
 
 {{-- Ajax setup --}}
 <script>

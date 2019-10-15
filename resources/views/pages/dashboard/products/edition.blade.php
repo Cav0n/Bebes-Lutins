@@ -17,16 +17,20 @@
 <div class="card bg-white my-3">
     <div class="card-header bg-white">
         <h1 class='h4 m-0 font-weight-normal'>
-            Nouveau produit
+            {{$product->name}}
         </h1>
     </div>
     <div class="card-body">
         <form action='/dashboard/produits/nouveau' method="POST">
             @csrf
 
-            <input type="hidden" name="main_image_name" id="mainImageName" required>
+            <input type="hidden" name="main_image_name" id="mainImageName" value='{{$product->mainImage}}' required>
             <div id='thumbnails-names'>
-                <input type="hidden" name="thumbnails_names[]" class="thumbnails_names">
+                @if($product->thumbnails != null)
+                @foreach ($product->thumbnails as $thumbnail)
+                <input type="hidden" name="thumbnails_names[]" class="thumbnails_names" value='{{$thumbnail->name}}'>
+                @endforeach
+                @endif
             </div>
 
             {{-- Errors --}}
@@ -59,14 +63,14 @@
                 <div class="col-8">
                     <div class="form-group m-0">
                         <label for="name">Nom du produit</label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" aria-describedby="helpName" placeholder="" value='{{old("name")}}' required>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" aria-describedby="helpName" placeholder="" value='{{old("name", $product->name)}}' required>
                         @error('name')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
                     <div class="form-group m-0">
                         <label for="stock">Stock</label>
-                        <input type="number" class="form-control @error('stock') is-invalid @enderror" name="stock" id="stock" aria-describedby="helpStock" placeholder="" min='0' step='1' value='{{old('stock')}}' required>
+                        <input type="number" class="form-control @error('stock') is-invalid @enderror" name="stock" id="stock" aria-describedby="helpStock" placeholder="" min='0' step='1' value='{{old('stock', $product->stock)}}' required>
                         @error('stock')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -77,7 +81,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">€</div>
                             </div>
-                            <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" id="price" aria-describedby="helpPrice" placeholder="" min="0.01" step="0.01" value='{{old('price')}}' required>
+                            <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" id="price" aria-describedby="helpPrice" placeholder="" min="0.01" step="0.01" value='{{old('price', $product->price)}}' required>
                             @error('price')
                                 <div class="invalid-feedback">{{$message}}</div>
                             @enderror
@@ -88,7 +92,7 @@
             
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="5">{{old('description')}}</textarea>
+                <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="5">{{old('description', $product->description)}}</textarea>
                 @error('description')
                     <div class="invalid-feedback">{{$message}}</div>
                 @enderror
@@ -98,7 +102,7 @@
 
             <div class="form-group mb-0">
                 <label for="tags">Tags</label>
-                <input id='tags' class="form-control @error('tags') is-invalid @enderror" name='tags' value=''>
+                <input id='tags' class="form-control @error('tags') is-invalid @enderror" name='tags' value='{{old("tags", $product->tags)}}'>
                 @error('tags')
                     <div class="invalid-feedback">{{$message}}</div>
                 @enderror 
@@ -106,7 +110,7 @@
             </div>
 
             <div class="custom-control custom-checkbox pointer my-2">
-                <input id='is-hidden' name='is-hidden' type="checkbox" class="custom-control-input pointer is-hidden-checkbox">
+                <input id='is-hidden' name='is-hidden' type="checkbox" class="custom-control-input pointer is-hidden-checkbox" value='{{old("is-hidden", $product->isHidden)}}'>
                 <label class="custom-control-label noselect pointer" for="is-hidden">Caché</label>
             </div>
 
@@ -226,6 +230,23 @@ $.ajaxSetup({
                     }
                 });
             });
+            //POPULATE
+            // Create the mock file:
+            var mockFile = { name: "Filename", size: 12345 };
+
+            // Call the default addedfile event handler
+            this.emit("addedfile", mockFile);
+
+            // And optionally show the thumbnail of the file:
+            this.emit("thumbnail", mockFile, "{{asset(public_path('images/products/') . $product->mainImage)}}");
+
+            // Make sure that there is no progress bar, etc...
+            this.emit("complete", mockFile);
+
+            // If you use the maxFiles option, make sure you adjust it to the
+            // correct amount:
+            var existingFileCount = 1; // The number of files already uploaded
+            this.options.maxFiles = this.options.maxFiles - existingFileCount;
         }
     });
 
@@ -264,6 +285,7 @@ $.ajaxSetup({
             });
         }
     });
+    
 </script>
 
 @endsection

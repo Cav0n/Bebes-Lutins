@@ -196,7 +196,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        echo 'Page d\'édition du produit';
+        return view('pages.dashboard.products.edition')->withProduct($product);
     }
 
     /**

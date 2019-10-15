@@ -94,7 +94,7 @@
                 @enderror
             </div>
 
-            <div id='thumbnails' class='dropzone my-2 border rounded text-muted'></div>
+            <div id='thumbnails' class='dropzone my-2 border rounded text-muted d-flex'></div>
 
             <div class="form-group mb-0">
                 <label for="tags">Tags</label>

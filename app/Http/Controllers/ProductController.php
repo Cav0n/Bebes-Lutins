@@ -208,7 +208,77 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        dd($request);
+        $request->validate([
+            'name' => 'string|min:3|required',
+            'description' => 'string|min:10|required',
+            'stock' => 'integer|min:0|required',
+            'price' => 'numeric|min:0.01|required',
+            'tags' => 'nullable',
+            'main_image_name' => 'required',
+            'thumbnails_names' => 'array|nullable',
+            'is-hidden' => 'nullable',
+            'characteristics' => 'array|nullable',
+        ]);
+
+        $mainImageName = $request['main_image_name'];
+        
+        $product->name = $request['name'];
+        $product->description = $request['description'];
+        $product->stock = $request['stock'];
+        $product->price = $request['price'];
+        if($request['is-hidden'] != null) $product->isHidden = $request['is-hidden'];
+        $product->save();
+
+        //MAIN IMAGE
+        rename(public_path('images/tmp/').$mainImageName, public_path('images/products/').$mainImageName); // MOVE MAIN IMAGE FROM TMP TO REAL FOLDER
+        $mainImage = new Image();
+        $mainImage->name = $mainImageName;
+        $mainImage->size = filesize(public_path('images/products/').$mainImageName);
+        $mainImage->save();
+        $product->images()->attach($mainImage->id);
+        $product->mainImage = $mainImage->name;
+
+        //THUMBNAILS
+        if($request['thumbnails_name'] != null){
+            foreach ($request['thumbnails_name'] as $thumbnail_name) { // MOVE EACH THUMBNAILS FROM TMP TO REAL FOLDER
+                rename(public_path('images/tmp/').$thumbnail_name, public_path('images/products/thumbnails/').$thumbnail_name);
+                $thumbnail = new Image();
+                $thumbnail->name = $thumbnail_name;
+                $thumbnail->size = filesize(public_path('images/products/thumbnails/').$thumbnail_name);
+                $thumbnail->save();
+                $product->images()->attach($thumbnail->id);
+            }
+        }
+
+        //TAGS
+        if($request->tags != null){
+            foreach(\json_decode($request->tags) as $r_tag){
+                $tag = new Tag();
+                $tag->name = $r_tag->value;
+                $tag->save();
+                $product->tags()->attach($tag->id);
+            }
+        } 
+
+        //CHARACTERISTICS
+        if($request['characteristics'] != null){
+            foreach($request['characteristics'] as $r_characteristic){
+                $characteristic = new ProductCharacteristic();
+                $characteristic->name = $r_characteristic['name'];
+                $characteristic->product_id = $product->id;
+                $characteristic->save();
+                foreach($r_characteristic['options'] as $r_option){
+                    $option = new ProductCharacteristicOption();
+                    $option->name = $r_option;
+                    $option->product_characteristic_id = $characteristic->id;
+                    $option->save();
+                }
+            }
+        }
+
+        $product->save();
+
+        dd($product);
     }
 
     /**

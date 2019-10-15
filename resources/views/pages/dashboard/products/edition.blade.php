@@ -55,7 +55,7 @@
 
             <div class="row m-0 mb-2">
                 <div class="col-4 p-0">
-                    <div id='mainImage' class="dropzone mb-2 @error('name') border-danger text-danger @enderror border rounded row m-0 justify-content-center h-100"></div> 
+                    <div id='mainImage' class="dropzone mb-2 @error('name') border-danger text-danger @enderror border row m-0 justify-content-center h-100"></div> 
                     @error('main_image_name')
                         <div class="invalid-feedback">{{$message}}</div>
                     @enderror
@@ -98,7 +98,7 @@
                 @enderror
             </div>
 
-            <div id='thumbnails' class='dropzone my-2 border rounded text-muted'></div>
+            <div id='thumbnails' class='dropzone my-2 border text-muted d-flex'></div>
 
             <div class="form-group mb-0">
                 <label for="tags">Tags</label>
@@ -238,15 +238,10 @@ $.ajaxSetup({
             this.emit("addedfile", mockFile);
 
             // And optionally show the thumbnail of the file:
-            this.emit("thumbnail", mockFile, "{{asset(public_path('images/products/') . $product->mainImage)}}");
+            this.emit("thumbnail", mockFile, "{{'/images/products/' . $product->mainImage}}");
 
             // Make sure that there is no progress bar, etc...
             this.emit("complete", mockFile);
-
-            // If you use the maxFiles option, make sure you adjust it to the
-            // correct amount:
-            var existingFileCount = 1; // The number of files already uploaded
-            this.options.maxFiles = this.options.maxFiles - existingFileCount;
         }
     });
 
@@ -283,6 +278,22 @@ $.ajaxSetup({
                     }
                 });
             });
+            //POPULATE
+            @if($product->images != null)
+            @foreach($product->images as $thumbnail)
+            // Create the mock file:
+            var mockFile = { name: "{{$thumbnail->name}}", size: 0, }
+
+            // Call the default addedfile event handler
+            this.emit("addedfile", mockFile);
+
+            // And optionally show the thumbnail of the file:
+            this.emit("thumbnail", mockFile, "{{'/images/products/thumbnails/' . $thumbnail->name}}");
+
+            // Make sure that there is no progress bar, etc...
+            this.emit("complete", mockFile);
+            @endforeach
+            @endif
         }
     });
     

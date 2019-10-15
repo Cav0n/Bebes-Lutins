@@ -7,6 +7,8 @@ use App\Product;
 use App\Category;
 use App\Image;
 use App\Tag;
+use App\ProductCharacteristic;
+use App\ProductCharacteristicOption;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Symfony\Component\HttpFoundation\Response;
@@ -108,7 +110,8 @@ class ProductController extends Controller
             'tags' => 'nullable',
             'main_image_name' => 'required',
             'thumbnails_names' => 'array|nullable',
-            'is-hidden' => 'nullable'
+            'is-hidden' => 'nullable',
+            'characteristics' => 'array|nullable',
         ]);
 
         $mainImageName = $request['main_image_name'];
@@ -143,17 +146,34 @@ class ProductController extends Controller
         }
 
         //TAGS
-        foreach(\json_decode($request->tags) as $rtag){
-            $tag = new Tag();
-            $tag->name = $rtag->value;
-            $tag->save();
-            $product->tags()->attach($tag->id);
+        if($request->tags != null){
+            foreach(\json_decode($request->tags) as $r_tag){
+                $tag = new Tag();
+                $tag->name = $r_tag->value;
+                $tag->save();
+                $product->tags()->attach($tag->id);
+            }
+        } 
+
+        //CHARACTERISTICS
+        if($request['characteristics'] != null){
+            foreach($request['characteristics'] as $r_characteristic){
+                $characteristic = new ProductCharacteristic();
+                $characteristic->name = $r_characteristic['name'];
+                $characteristic->product_id = $product->id;
+                $characteristic->save();
+                foreach($r_characteristic['options'] as $r_option){
+                    $option = new ProductCharacteristicOption();
+                    $option->name = $r_option;
+                    $option->product_characteristic_id = $characteristic->id;
+                    $option->save();
+                }
+            }
         }
-        
+
         $product->save();
 
         dd($product);
-
     }
 
     /**

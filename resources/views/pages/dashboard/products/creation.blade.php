@@ -100,18 +100,18 @@
                 <div class='characteristic p-3 border my-2'>
                     <div class="form-group col-6 p-0">
                         <label for="characteristic_name">Nom de la caractéristique</label>
-                        <input type="text" class="form-control characteristic_name" name="characteristic_name" aria-describedby="helpCharacteristicName" placeholder="Taille">
+                        <input type="text" class="form-control characteristic_name" name="characteristics[0][name]" aria-describedby="helpCharacteristicName" placeholder="Taille">
                         <small id="helpCharacteristicName" class="form-text text-muted">Par exemple "taille", "couleur"...</small>
                     </div>
                     <div class="characteristic-options row m-0 d-flex flex-column">
                         <label>Options</label>
 
                         <div class='option d-flex my-2'>
-                            <input type="text" class="form-control characteristic_options mr-2" name="characteristic_options[]" aria-describedby="helpCharacteristicOptions" placeholder="">
+                            <input type="text" class="form-control characteristic_options mr-2" name="characteristics[0][options][]" aria-describedby="helpCharacteristicOptions" placeholder="">
                         </div>
 
                         <div class='buttons d-flex my-2'>
-                            <button type='button' class="btn btn-dark rounded-0 max-content" onclick="add_option($(this))">Ajouter une option</button>
+                            <button type='button' class="btn btn-dark rounded-0 max-content" onclick="add_option($(this), 0)">Ajouter une option</button>
                             <button type='button' class="btn btn-danger rounded-0 max-content mx-3" onclick="$(this).parent().parent().parent().remove()">Supprimer la caractéristique</button>
                         </div>
                     </div>
@@ -125,34 +125,40 @@
 </div>
 
 <script>
+    characteristics_index = 0
+    $(document).ready(function(){
+        characteristics_index = 1
+    });
+
     function add_characteristic(characteristics_container){
         html = `
         <div class="characteristic p-3 border my-2">
             <div class="form-group col-6 p-0">
                 <label for="characteristic_name">Nom de la caractéristique</label>
-                <input type="text" class="form-control characteristic_name" name="characteristic_name" aria-describedby="helpCharacteristicName" placeholder="Taille">
+                <input type="text" class="form-control characteristic_name" name="characteristics[`+ characteristics_index +`][name]" aria-describedby="helpCharacteristicName" placeholder="Taille">
                 <small id="helpCharacteristicName" class="form-text text-muted">Par exemple "taille", "couleur"...</small>
             </div>
             <div class="characteristic-options row m-0 d-flex flex-column">
                 <label>Options</label>
 
                 <div class='option d-flex my-2'>
-                    <input type="text" class="form-control characteristic_options mr-2" name="characteristic_options[]" aria-describedby="helpCharacteristicOptions" placeholder="">
+                    <input type="text" class="form-control characteristic_options mr-2" name="characteristics[`+ characteristics_index +`][options][]" aria-describedby="helpCharacteristicOptions" placeholder="">
                 </div>
 
                 <div class='buttons d-flex my-2'>
-                    <button type='button' class="btn btn-dark rounded-0 max-content" onclick="add_option($(this))">Ajouter une option</button>
+                    <button type='button' class="btn btn-dark rounded-0 max-content" onclick="add_option($(this), `+ characteristics_index +`)">Ajouter une option</button>
                     <button type='button' class="btn btn-danger rounded-0 max-content mx-3" onclick="$(this).parent().parent().parent().remove()">Supprimer la caractéristique</button>
                 </div>
             </div>
         </div>`;
         characteristics_container.append(html);
+        characteristics_index++;
     }
 
-    function add_option(btn){
+    function add_option(btn, index){
         html = `
         <div class="option d-flex my-2">
-            <input type="text" class="form-control characteristic_options  mr-2" name="characteristic_options[]" aria-describedby="helpCharacteristicOptions" placeholder="">
+            <input type="text" class="form-control characteristic_options  mr-2" name="characteristics[`+ index +`][options][]" aria-describedby="helpCharacteristicOptions" placeholder="">
             <button class="btn btn-outline-danger" onclick="remove_option($(this))">Supprimer</button>
         </div>`;
         btn.parent().before(html);

@@ -241,7 +241,9 @@ border: none;
 background-color: #f33c3c;
 border-color: #f33c3c;
 color:white;
-padding: 3px 0; }
+padding: 3px 0;
+-webkit-transition: all 0.2s ease-out;
+transition: all 0.2s ease-out; }
 .dropzone .dz-preview .dz-remove:hover {
   text-decoration: underline;
   background-color: #b83636;
@@ -285,8 +287,8 @@ line-height: 150%; }
 -ms-transform: scale(1.05, 1.05);
 -o-transform: scale(1.05, 1.05);
 transform: scale(1.05, 1.05);
--webkit-filter: blur(8px);
-filter: blur(8px);
+-webkit-filter: blur(4px);
+filter: blur(4px);
 height: 100%;
 width: 100%;
 object-fit: cover; }
@@ -300,7 +302,9 @@ z-index: 10; }
 .dropzone .dz-preview .dz-image img {
   display: block;
   width: 100%;
-  height: 100%; }
+  height: 100%;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;}
 .dropzone .dz-preview.dz-success .dz-success-mark {
 -webkit-animation: passing-through 3s cubic-bezier(0.77, 0, 0.175, 1);
 -moz-animation: passing-through 3s cubic-bezier(0.77, 0, 0.175, 1);

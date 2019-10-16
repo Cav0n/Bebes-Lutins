@@ -19,8 +19,8 @@ class CreateCategoriesTable extends Migration
             $table->text('description');
             $table->string('mainImage')->nullable();
             $table->unsignedInteger('rank')->nullable();
-            $table->boolean('isHidden')->default(false);
-            $table->boolean('isDeleted')->default(false);
+            $table->boolean('isHidden')->nullable()->default(false);
+            $table->boolean('isDeleted')->nullable()->default(false);
 
             // We declare here the nested set structure columns/fields
             $table->nestedSet();

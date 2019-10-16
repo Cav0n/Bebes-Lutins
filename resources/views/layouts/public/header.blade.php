@@ -62,9 +62,11 @@ $parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'as
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Nos produits</a>
                     <div class="dropdown-menu">
+                        @if($parent_categories != null)
                         @foreach ($parent_categories as $category)
                             <a class="dropdown-item text-dark px-1 py-2" href="/categories/{{$category->id}}">{{$category->name}}</a>
                         @endforeach
+                        @endif
                     </div>
                 </li>
                 <li class="nav-item transition">
@@ -79,6 +81,7 @@ $parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'as
                 <li class="nav-item hover-green p-2 transition-fast border-right" style='width:8rem;'>
                     <a class="nav-link text-dark text-center py-0" href="/">Accueil</a>
                 </li>
+                @if(App\Category::where('parent_id', null)->orderBy('rank', 'asc')->where('isHidden', false)->exists())
                 <li class="nav-item hover-green p-2 transition-fast" style='width:10rem;'>
                     <a class="nav-link dropdown-toggle text-dark p-0 text-center" href="#" id="dropdown-open" aria-haspopup="true" aria-expanded="false">Nos produits</a>
                     
@@ -134,6 +137,7 @@ $parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'as
                     </div>
 
                 </li>
+                @endif
 
                 <li class="nav-item hover-green ml-auto p-2 border-right transition-fast" style='width:12rem;'>
                     <a class="nav-link text-dark text-center py-0" href="/qui-sommes-nous">Qui sommes-nous ?</a>

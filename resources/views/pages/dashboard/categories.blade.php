@@ -6,7 +6,7 @@
         <h1 class='h4 my-auto m-0 font-weight-normal'>
             Catégories
         </h1>
-        <a name="btn-creation" id="btn-creation" class="btn btn-primary border-light ml-auto" href="/dashboard/produits/categories/nouveau" role="button">Nouveau</a>
+        <a name="btn-creation" id="btn-creation" class="btn btn-primary border-light ml-auto" href="/dashboard/produits/categories/nouvelle" role="button">Nouveau</a>
     </div>
     <div class="card-body">
         <form action="/dashboard/produits/recherche" method="POST">

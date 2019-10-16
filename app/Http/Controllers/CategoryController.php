@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Image;
+use App\Tag;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -78,7 +80,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        echo 'Page de création de catégorie';
+        $all_categories = Category::where('isDeleted', 0)->orderBy('name', 'asc')->get();
+        return view('pages.dashboard.categories.creation')->withCategories($all_categories);
     }
 
     /**
@@ -89,7 +92,49 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $request->validate([
+            'name' => 'string|min:3|required',
+            'parent_id' => 'string|nullable',
+            'description' => 'string|min:10|required',
+            'rank' => 'integer|min:0|required',
+            'tags' => 'nullable',
+            'main_image_name' => 'required',
+            'is-hidden' => 'nullable',
+        ]);
+
+        $mainImageName = $request['main_image_name'];
+
+        $category = new Category();
+        $category->name = $request['name'];
+        $category->description = $request['description'];
+        $category->rank = $request['rank'];
+        $category->isHidden = $request['is-hidden'];
+        $category->parent_id = $request['parent_id'];
+        $category->save();
+
+        //MAIN IMAGE
+        rename(public_path('images/tmp/').$mainImageName, public_path('images/categories/').$mainImageName); // MOVE MAIN IMAGE FROM TMP TO REAL FOLDER
+        $mainImage = new Image();
+        $mainImage->name = $mainImageName;
+        $mainImage->size = filesize(public_path('images/categories/').$mainImageName);
+        $mainImage->save();
+
+        $category->images()->attach($mainImage->id);
+        $category->mainImage = $mainImage->name;
+
+        //TAGS
+        if($request->tags != null){
+            foreach(\json_decode($request->tags) as $r_tag){
+                $tag = new Tag();
+                $tag->name = $r_tag->value;
+                $tag->save();
+
+                $category->tags()->attach($tag->id);
+            }
+        }
+
+        $category->save();
+        dd($category);
     }
 
     /**

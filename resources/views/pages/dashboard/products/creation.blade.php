@@ -116,7 +116,7 @@
 
             <div class="custom-control custom-checkbox pointer my-2">
                 <input id='is-hidden' name='is-hidden' type="checkbox" class="custom-control-input pointer is-hidden-checkbox">
-                <label class="custom-control-label noselect pointer" for="is-hidden">Caché</label>
+                <label class="custom-control-label noselect pointer" for="is-hidden">Produit caché</label>
             </div>
 
             <div id="characteristics-container" class="my-2">

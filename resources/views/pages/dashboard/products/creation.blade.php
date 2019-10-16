@@ -85,6 +85,15 @@
                     </div>
                 </div>
             </div>
+
+            <div class="form-group mb-0">
+                <label for="categories">Catégories</label>
+                <input id='categories' class="form-control @error('categories') is-invalid @enderror" name='categories' value='' placeholder="Tapez le nom d'une catégorie">
+                @error('categories')
+                    <div class="invalid-feedback">{{$message}}</div>
+                @enderror 
+                <button class='btn btn-outline-dark rounded-0 mt-2 categories--removeAllBtn' type='button'>Retirer les catégories</button>
+            </div>
             
             <div class="form-group">
                 <label for="description">Description</label>
@@ -174,12 +183,19 @@ $.ajaxSetup({
 {{-- TAGIFY --}}
 <script>
     $input = $('#tags').tagify();
+    $input = $('#categories').tagify({
+        enforceWhitelist : true,
+        whitelist : [@foreach(App\Category::where('isDeleted', 0)->get() as $category) "{{$category->name}}", @endforeach],
+    });
 
     // get the Tagify instance assigned for this jQuery input object so its methods could be accessed
-    var jqTagify = $input.data('tagify');
+    var tags = $input.data('tagify');
+    // get the Tagify instance assigned for this jQuery input object so its methods could be accessed
+    var categories = $input.data('tagify');
     
     // bind the "click" event on the "remove all tags" button
-    $('.tags--removeAllBtn').on('click', jqTagify.removeAllTags.bind(jqTagify))
+    $('.tags--removeAllBtn').on('click', tags.removeAllTags.bind(tags));
+    $('.categories--removeAllBtn').on('click', categories.removeAllTags.bind(categories));
 </script>
 
 {{-- DROPZONE --}}

@@ -124,6 +124,8 @@ class ProductController extends Controller
         if($request['is-hidden'] != null) $product->isHidden = $request['is-hidden'];
         $product->save();
 
+
+
         //MAIN IMAGE
         rename(public_path('images/tmp/').$mainImageName, public_path('images/products/').$mainImageName); // MOVE MAIN IMAGE FROM TMP TO REAL FOLDER
         $mainImage = new Image();
@@ -132,6 +134,14 @@ class ProductController extends Controller
         $mainImage->save();
         $product->images()->attach($mainImage->id);
         $product->mainImage = $mainImage->name;
+
+        //CATEGORIES
+        if($request->categories != null){
+            foreach(\json_decode($request->categories) as $r_category){
+                $category = Category::where('name', $r_category->value)->first();
+                $product->categories()->attach($category->id);
+            }
+        }
 
         //THUMBNAILS
         if($request['thumbnails_name'] != null){

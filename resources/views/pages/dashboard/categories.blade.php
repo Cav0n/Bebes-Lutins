@@ -37,7 +37,7 @@
                                 <input type="number" min='0' step='1' class="form-control" name="rank" id="rank" aria-describedby="helpRank" placeholder="0" value='{{$category->rank}}' onchange='update_rank(this.value, "{{$category->id}}")')>
                             </div>
                         </td>
-                        <td class='col-8' scope="row">{{$category->name}}</td>
+                        <td class='col-8' scope="row"><a href='/dashboard/produits/categories/edition/{{$category->id}}' class='max-content text-dark'>{{$category->name}}</a></td>
                         <td class='col-2 text-center'><div class="form-group"><input type="checkbox" class="form-check-input ml-auto" name="" id="" onclick='switch_isHidden($(this), "{{$category->id}}")' @if($category->isHidden) {{'checked'}} @endif></div></td>
                     </tr>
                     

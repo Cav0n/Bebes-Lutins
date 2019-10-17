@@ -18,7 +18,6 @@ class CreateTagsTable extends Migration
             $table->timestamps();
 
             $table->string('name');
-            $table->integer('usageCount')->unsigned()->default(0);
         });
     }
 

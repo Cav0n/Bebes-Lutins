@@ -109,7 +109,7 @@ class CategoryController extends Controller
         $category->description = $request['description'];
         $category->rank = $request['rank'];
         $category->isHidden = $request['is-hidden'];
-        $category->parent_id = $request['parent_id'];
+        if($request['parent_id'] != 'null') $category->parent_id = $request['parent_id'];
         $category->save();
 
         //MAIN IMAGE
@@ -156,7 +156,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        echo 'Page d\'édition de la catégorie';
+        $categories = Category::where('isDeleted', 0)->orderBy('name', 'asc')->get();
+        return view('pages.dashboard.categories.edition')->withCategory($category)->withCategories($categories);
     }
 
     /**

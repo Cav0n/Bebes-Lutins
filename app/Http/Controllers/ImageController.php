@@ -37,13 +37,16 @@ class ImageController extends Controller
     {
         $file = $request['file'];
         
-        $filename = $file->getClientOriginalName();
+        $fileName = uniqid();
+        $fileExtension = $file->getClientOriginalExtension();
         $destinationPath = public_path('/images/tmp');
+
+        $newfile = $fileName.'.'.$fileExtension;
         
-        $upload_success = $request['file']->move($destinationPath, $filename);
+        $upload_success = $request['file']->move($destinationPath, $newfile);
 
         if( $upload_success ) {
-            $response = ['filename' => $filename, 'message' => 'success', 'code' => 200];
+            $response = ['filename' => $newfile, 'message' => 'success', 'code' => 200];
             return response($response);
         } else {
             return response()->json('Erreur', 400);

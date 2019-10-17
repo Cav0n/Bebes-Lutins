@@ -158,7 +158,8 @@ class ProductController extends Controller
         //TAGS
         if($request->tags != null){
             foreach(\json_decode($request->tags) as $r_tag){
-                $tag = new Tag();
+                if(Tag::where('name', $r_tag->value)->exists()) $tag = Tag::where('name', $r_tag->value)->first();
+                else $tag = new Tag();
                 $tag->name = $r_tag->value;
                 $tag->save();
                 $product->tags()->attach($tag->id);
@@ -288,7 +289,7 @@ class ProductController extends Controller
 
         $product->save();
 
-        dd($product);
+        return view('/dashboard/produits');
     }
 
     /**

@@ -102,7 +102,7 @@
 
             <div class="form-group mb-0">
                 <label for="tags">Tags</label>
-                <input id='tags' class="form-control @error('tags') is-invalid @enderror" name='tags' value='{{old("tags", $product->tags)}}'>
+                <input id='tags' class="form-control @error('tags') is-invalid @enderror" name='tags' value='@foreach($product->tags as $tag) {{$tag->name}}, @endforeach'>
                 @error('tags')
                     <div class="invalid-feedback">{{$message}}</div>
                 @enderror 
@@ -124,6 +124,7 @@
     </div>
 </div>
 
+{{-- CHARACTERISTICS --}}
 <script>
     characteristics_index = 0;
 
@@ -232,7 +233,7 @@ $.ajaxSetup({
             });
             //POPULATE
             // Create the mock file:
-            var mockFile = { name: "Filename", size: 12345 };
+            var mockFile = { name: "{{$product->mainImage}}", size: {{$product->images->first()->size}} };
 
             // Call the default addedfile event handler
             this.emit("addedfile", mockFile);
@@ -281,8 +282,9 @@ $.ajaxSetup({
             //POPULATE
             @if($product->images != null)
             @foreach($product->images as $thumbnail)
+            @if($thumbnail->name != $product->mainImage)
             // Create the mock file:
-            var mockFile = { name: "{{$thumbnail->name}}", size: 0, }
+            var mockFile = { name: "{{$thumbnail->name}}", size: {{$thumbnail->size}}, }
 
             // Call the default addedfile event handler
             this.emit("addedfile", mockFile);
@@ -292,6 +294,7 @@ $.ajaxSetup({
 
             // Make sure that there is no progress bar, etc...
             this.emit("complete", mockFile);
+            @endif
             @endforeach
             @endif
         }

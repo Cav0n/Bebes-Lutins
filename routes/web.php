@@ -103,9 +103,12 @@ Route::post('/dashboard/produits/nouveau', 'ProductController@store');
 Route::get('/dashboard/produits/edition/{product}', 'ProductController@edit');
 Route::post('/dashboard/produits/edition/{product}', 'ProductController@update');
 Route::get('/dashboard/produits/stocks', 'DashboardController@stocks'); //TODO
+//CATEGORIES
 Route::get('/dashboard/produits/categories', 'DashboardController@categories'); //TODO
 Route::get('/dashboard/produits/categories/nouvelle', 'CategoryController@create');
 Route::post('/dashboard/produits/categories/nouvelle', 'CategoryController@store');
+Route::get('/dashboard/produits/categories/edition/{category}', 'CategoryController@edit');
+Route::post('/dashboard/produits/categories/edition/{category}', 'CategoryController@update');
 Route::get('/dashboard/produits/categories/rang/{category}/{rank}', 'CategoryController@updateRank');
 Route::get('/dashboard/switch_is_hidden_product/{product}', 'ProductController@switchIsHidden');
 Route::get('/dashboard/switch_is_hidden_category/{category}', 'CategoryController@switchIsHidden');

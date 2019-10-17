@@ -226,10 +226,7 @@ $.ajaxSetup({
         init: function() {
             this.on("success", function(file, response) { 
                 filename = response.filename;
-
-                console.log(filename);
                 $('#mainImageName').val(filename);
-                file.name = filename;
             });
             this.on("removedfile", function(file) {
                 $.ajax({
@@ -263,8 +260,7 @@ $.ajaxSetup({
             'X-CSRF-TOKEN': Laravel.csrfToken
         },
         init: function() {
-            this.on("success", function(file, response) { 
-                console.log(response.filename);
+            this.on("success", function(file, response) {
                 $('#thumbnails-names').append("<input type='hidden' name='thumbnails_names[]' class='thumbnails_names' value="+ response.filename +">");
             });
             this.on("removedfile", function(file) {

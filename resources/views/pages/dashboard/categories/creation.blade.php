@@ -64,7 +64,7 @@
                     <div class="form-group m-0">
                         <label for="parent_id">Catégorie parente</label>
                         <select class="custom-select" name="parent_id" id="parent_id">
-                            <option selected>Aucune</option>
+                            <option value='null' selected>Aucune</option>
                             @foreach ($categories as $category)
                                 <option value="{{$category->id}}">{{$category->name}}</option>
                             @endforeach

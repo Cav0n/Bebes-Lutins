@@ -12,4 +12,4 @@ npm-debug.log
 yarn-error.log
 /public/images/categories/*
 /public/images/products/*
-/public/images/tmp
+/public/images/tmp/*

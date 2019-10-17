@@ -15,7 +15,7 @@
         </div>
         <div class="card-footer text-muted d-none d-sm-flex p-0 rounded-0 border-0">
         <button type="button" class="btn btn-secondary h-100 w-100 px-0 py-2 rounded-0" @if($product->stock > 0) onclick='add_to_cart("{{$product->id}}", "{{$product->name}}", {{$product->price}}, "{{$product->mainImage}}", "{{$product->stock}}", "{{session("shopping_cart")->id}}")' @endif style='font-size:0.9rem !important;' @if($product->stock <= 0) disabled @endif>
-            @if($product->quantity > 0) Ajouter au panier
+            @if($product->stock > 0) Ajouter au panier
             @else Rupture de stock
             @endif
         </button> 

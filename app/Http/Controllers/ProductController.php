@@ -144,8 +144,8 @@ class ProductController extends Controller
         }
 
         //THUMBNAILS
-        if($request['thumbnails_name'] != null){
-            foreach ($request['thumbnails_name'] as $thumbnail_name) { // MOVE EACH THUMBNAILS FROM TMP TO REAL FOLDER
+        if($request['thumbnails_names'] != null){
+            foreach ($request['thumbnails_names'] as $thumbnail_name) { // MOVE EACH THUMBNAILS FROM TMP TO REAL FOLDER
                 rename(public_path('images/tmp/').$thumbnail_name, public_path('images/products/thumbnails/').$thumbnail_name);
                 $thumbnail = new Image();
                 $thumbnail->name = $thumbnail_name;
@@ -254,8 +254,8 @@ class ProductController extends Controller
         }
 
         //THUMBNAILS
-        if($request['thumbnails_name'] != null){
-            foreach ($request['thumbnails_name'] as $thumbnail_name) { // MOVE EACH THUMBNAILS FROM TMP TO REAL FOLDER
+        if($request['thumbnails_names'] != null){
+            foreach ($request['thumbnails_names'] as $thumbnail_name) { // MOVE EACH THUMBNAILS FROM TMP TO REAL FOLDER
                 rename(public_path('images/tmp/').$thumbnail_name, public_path('images/products/thumbnails/').$thumbnail_name);
                 $thumbnail = new Image();
                 $thumbnail->name = $thumbnail_name;

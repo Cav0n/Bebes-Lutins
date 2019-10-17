@@ -43,7 +43,7 @@ if (count($product->reviews) > 0){
                             <div class='thumbnail-container' style='max-width:3rem; max-height:3rem;'>
                                 <img class='w-100 h-100 border' onclick="change_main_image($(this))" src="{{asset('images/products/' . $product->mainImage)}}" style='object-fit:cover;cursor:pointer;'>
                             </div>
-                            @foreach ($product->images as $image)
+                            @foreach ($product->images->skip(1) as $image)
                             <div class='thumbnail-container pt-2'style='max-width:3rem; max-height:3rem;'>
                                 <img class='w-100 h-100 border' onclick="change_main_image($(this))" src="{{asset('images/products/thumbnails/' . $image->name)}}" style='object-fit;cursor:pointer;'>
                             </div>
@@ -64,7 +64,7 @@ if (count($product->reviews) > 0){
                                     <div class="row m-0">
                                         {{--  Title  --}}
                                         <div class="col-lg-12 p-0">
-                                            <h1 class="h3 mb-0">{{$product->name}}</h1>
+                                            <h1 class="h3 mb-0 text-center text-lg-left">{{$product->name}}</h1>
                                         </div>
                                         {{--  Price  --}}
                                         <div class="col-lg-12 p-0 mt-2">
@@ -91,7 +91,8 @@ if (count($product->reviews) > 0){
                                         <div class="col-lg-12 p-0 mt-2">
                                             <div class="row m-0">
                                                 <div class="col-8 col-lg-4 offset-2 offset-lg-0 p-0 pr-lg-2">
-                                                    <button type="button" class="btn bg-white border-primary rounded-0 w-100" onclick='add_to_cart("{{$product->id}}", "{{$product->name}}", {{$product->price}}, "{{$product->mainImage}}", "{{$product->stock}}", "{{session("shopping_cart")->id}}", $("#item-quantity").val())'>Ajouter au panier</button>
+                                                    <button type="button" class="btn bg-white border-primary rounded-0 w-100" @if($product->stock > 0) onclick='add_to_cart("{{$product->id}}", "{{$product->name}}", {{$product->price}}, "{{$product->mainImage}}", "{{$product->stock}}", "{{session("shopping_cart")->id}}", $("#item-quantity").val())' @endif @if($product->stock <= 0) disabled @endif>
+                                                        Ajouter au panier</button>
                                                 </div>
                                                 <div class="col-2 p-0 d-flex flex-column justify-content-center">
                                                 </div>
@@ -105,7 +106,7 @@ if (count($product->reviews) > 0){
                 </div>
                 
                 {{-- Description --}}
-                <div class="col-lg-12 p-3 p-lg-0 mt-0 mt-sm-4 border bg-white">
+                <div class="col-lg-12 p-3 p-lg-0 mt-2 mt-sm-4 border bg-white">
                     <div class="card rounded-0 border-0">
                         <div class="card-body p-0 p-lg-3">
                             <h4 class="card-title px-0 px-lg-2 d-none d-sm-flex">Description</h4>
@@ -115,12 +116,12 @@ if (count($product->reviews) > 0){
                 </div>
 
                 {{-- Certifications --}}
-                <div class="col-12 mt-4 mt-lg-4 p-0 bg-white">
+                <div class="col-12 mt-2 mt-lg-4 p-0 bg-white">
                     @include('components.public.certifications')
                 </div>
 
                 {{-- Avis clients --}}
-                <div class="col-lg-12 p-3 p-lg-0 mt-0 my-sm-4 border bg-white">
+                <div class="col-lg-12 p-3 p-lg-0 my-2 my-sm-4 border bg-white">
                     <div class="card rounded-0 border-0">
                         <div class="card-body p-0 p-lg-3">
                             <h4 class="card-title px-0 px-lg-2">{{count($product->reviews)}} avis clients</h4>

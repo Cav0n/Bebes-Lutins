@@ -4,7 +4,7 @@
         <p class='popup_title h4 mb-0 p-3 bg-light'>Un produit à bien été ajouté à votre panier</p>
         <div class='popup_description p-3 row'>
             <div class="product-image col-4" style='max-height:11rem;'>
-                <img id='popup-item-image' class='w-100 h-100' src='{{asset("images/products/couche_lavable_te1_et_te2_colombine_évolutive_aubergine.jpg")}}' style='object-fit:cover;'>
+                <img id='popup-item-image' class='w-100 h-100' src='{{asset("images/utils/question-mark.png")}}' style='object-fit:cover;'>
             </div>
             <div class="product-definition col-8">
                 <div class="row m-0 d-flex flex-column justify-content-between h-100">
@@ -16,7 +16,7 @@
                         <div class="col-lg-5 p-0">
                             <p id='popup-product-price' class='mb-0 small'>Prix : 00.00 €</p>
                             <p id='popup-shopping-cart-total' class='mb-0 small'>Total du panier : 00.00€</p>
-                            <input id="popup-item-quantity" class="spinnerProductPopup" type="number" name="quantity" value="1" min="1" max="10" step="1"/>
+                            <input id="popup-item-quantity" class="spinnerProductPopup" type="number" name="quantity" value="1" min="1" max="10" step="1" @if($product->stock <= 1) disabled @endif/>
                         </div>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ShoppingCartItem;
 use App\ShoppingCart;
+use App\Product;
 use Illuminate\Http\Request;
 
 class ShoppingCartItemController extends Controller
@@ -40,12 +41,15 @@ class ShoppingCartItemController extends Controller
 
         $shopping_cart_id = $request['shopping_cart_id'];
         $product_id = $request['product_id'];
+        $product = Product::where('id', $product_id)->first();
         $quantity = $request['quantity'];
 
         if(ShoppingCartItem::where('shopping_cart_id', $shopping_cart_id)->where('product_id', $product_id)->exists()){
             $item = ShoppingCartItem::where('shopping_cart_id', $shopping_cart_id)->where('product_id', $product_id)->first();
-            $item->quantity = $item->quantity + $quantity;
-            $item->save();
+            if($product->quantity > ($item->quantity + $quantity)){
+                $item->quantity = $item->quantity + $quantity;
+                $item->save();
+            }
         } else {
             $item = new ShoppingCartItem();
             $item->quantity = $quantity;

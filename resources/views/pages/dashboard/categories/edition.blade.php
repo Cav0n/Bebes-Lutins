@@ -68,8 +68,8 @@
                         <label for="parent_id">Catégorie parente</label>
                         <select class="custom-select" name="parent_id" id="parent_id">
                             <option value='null' selected>Aucune</option>
-                            @foreach ($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option>
+                            @foreach ($categories as $o_category)
+                                <option value="{{$o_category->id}}">{{$o_category->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -115,6 +115,21 @@
         </form>
     </div>
 </div>
+
+@if(count($category->childs))
+<div class="card bg-white my-3">
+    <div class="card-header bg-white">
+        <h1 class='h4 m-0 font-weight-normal'>
+            Catégories enfants
+        </h1>
+    </div>
+    <div class="card-body">
+        @foreach ($category->childs as $child)
+            <p>{{$child->name}}</p>
+        @endforeach
+    </div>
+</div>
+@endif
 
 {{-- Ajax setup --}}
 <script>

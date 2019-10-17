@@ -1,12 +1,17 @@
 @extends('templates.dashboard')
 
 @section('content')
+<div class="row">
+    <div class="col-12 pt-3">
+        <a href='/dashboard/produits' class='text-muted'>< Tous les produits</a>        
+    </div>
+</div>
 <div class="card bg-white my-3">
     <div class="card-header bg-white d-flex">
         <h1 class='h4 my-auto m-0 font-weight-normal'>
             Catégories
         </h1>
-        <a name="btn-creation" id="btn-creation" class="btn btn-primary border-light ml-auto" href="/dashboard/produits/categories/nouvelle" role="button">Nouveau</a>
+        <a name="btn-creation" id="btn-creation" class="btn btn-outline-secondary border-0 ml-auto" href="/dashboard/produits/categories/nouvelle" role="button">Nouveau</a>
     </div>
     <div class="card-body">
         <form action="/dashboard/produits/recherche" method="POST">
@@ -51,7 +56,7 @@
                                 <input type="number" min='0' step='1' class="form-control" name="rank" id="rank" aria-describedby="helpRank" placeholder="0" value='{{$child->rank}}' onchange='update_rank(this.value, "{{$child->id}}")'>
                             </div>
                         </td>
-                        <td class='col-7'>{{$child->name}}</td>
+                        <td class='col-7'><a href='/dashboard/produits/categories/edition/{{$child->id}}' class='max-content text-dark'>{{$child->name}}</a></td>
                         <td class='col-2 text-center'><div class="form-group"><input type="checkbox" class="form-check-input ml-auto" name="" id="" onclick='switch_isHidden($(this), "{{$child->id}}")' @if($child->isHidden) {{'checked'}} @endif></div></td>
                     </tr>
                     @endforeach

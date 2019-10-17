@@ -1,4 +1,4 @@
-<?php $firstThumbnail = $product->images->first(); ?>
+<?php $firstThumbnail = $product->images->skip(1)->first(); ?>
 <div class="col-6 col-sm-4 col-md-4 col-lg-3 mb-3">
     <div class="card product m-0 h-100 transition-fast rounded-0 border-0" style='font-size:0.9rem;'>
         <div class='images-container border @if($firstThumbnail == null) no-thumbnails @endif' onclick='load_url("/produits/{{$product->id}}")'>

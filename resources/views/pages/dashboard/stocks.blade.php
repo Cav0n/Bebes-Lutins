@@ -1,6 +1,11 @@
 @extends('templates.dashboard')
 
 @section('content')
+<div class="row">
+    <div class="col-12 pt-3">
+        <a href='/dashboard/produits' class='text-muted'>< Tous les produits</a>        
+    </div>
+</div>
 <div class="card bg-white my-3">
     <div class="card-header bg-white">
         <h1 class='h4 m-0 font-weight-normal'>

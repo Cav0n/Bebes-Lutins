@@ -77,6 +77,7 @@ Route::get('/espace-client/profil', 'CustomerAreaController@profilPage'); //TODO
 Route::post('/espace-client/newsletter-invert', 'CustomerAreaController@invertNewsletter');
 Route::get('/espace-client/commandes', 'CustomerAreaController@ordersPage'); //TODO
 Route::get('/espace-client/commandes/{order}', 'OrderController@show'); //TODO
+Route::post('/commandes/{order}', 'OrderController@getJSON');
 
 Route::get('/espace-client/adresses', 'CustomerAreaController@addressPage'); //TODO
 Route::get('/espace-client/adresses/creation', 'AddressController@create');

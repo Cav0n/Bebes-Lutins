@@ -192,6 +192,8 @@ class ShoppingCartController extends Controller
         $order->save();
 
         foreach($shopping_cart->items as $item){
+            $item->product->stock = $item->product->stock - $item->quantity;
+            $item->product->save();
             $order_item = new OrderItem();
             $order_item->productName = $item->product->name;
             $order_item->quantity = $item->quantity;

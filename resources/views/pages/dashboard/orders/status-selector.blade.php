@@ -22,22 +22,76 @@
     });
 
     function change_order_status(select, order_id){
-        console.log(select.val() + ' ' + order_id);
+        var order = null;
+        new_status = select.find(":selected").text();
 
         $.ajax({
-            url: "/dashboard/commandes/changer_status/" + order_id,
+            url: "/commandes/" + order_id,
             type: 'POST',
-            data: { status: select.val() },
+            data: { },
+            async: false, // TO GET ORDER RETURN
             success: function(data){
-                console.log('Status bien modifié !');
-                location.reload();
-            },
-            beforeSend: function() {
-                select.parent().addClass('running');
+                order = $.parseJSON(data).order;
             }
-        })
-        .done(function( data ) {
-            
         });
+
+        if(confirm("Vous avez choisis de modifier la commande de "+ order.user.firstname +" "+ order.user.lastname +", passée le "+order.created_at+", d'une valeur de "+order.products_price+"€.\nAncien status : "+status_to_string(order.status)+"\nNouveau status : "+new_status)){
+            $.ajax({
+                url: "/dashboard/commandes/changer_status/" + order_id,
+                type: 'POST',
+                data: { status: select.val() },
+                success: function(data){
+                    console.log('Status bien modifié !');
+                    location.reload();
+                },
+                beforeSend: function() {
+                    select.parent().addClass('running');
+                }
+            });
+        }
+    }
+
+    function status_to_string(status){
+        switch(status){
+            case 0:
+                return 'En attente de paiement';
+                break;
+
+            case 1:
+                return 'En cours de traitement';
+                break;
+
+            case 2:
+                return 'En cours de livraison';
+                break;
+
+            case 22:
+                return 'Prête à l\'atelier';
+                break;
+
+            case 3:
+                return 'Livrée';
+                break;
+
+            case 33:
+                return 'Participation enregistrée';
+                break;
+
+            case -1:
+                return 'Annulée';
+                break;
+
+            case -2:
+                return 'Vérification bancaire';
+                break;
+
+            case -3:
+                return 'Paiement refusé';
+                break;
+
+            default:
+                return 'Problème de mise à jour';
+                break;
+        }    
     }
 </script>

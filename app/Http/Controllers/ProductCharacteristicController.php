@@ -80,6 +80,6 @@ class ProductCharacteristicController extends Controller
      */
     public function destroy(ProductCharacteristic $productCharacteristic)
     {
-        //
+        $productCharacteristic->options->delete();
     }
 }

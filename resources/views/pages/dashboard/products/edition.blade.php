@@ -14,6 +14,29 @@
         <a href='/dashboard/produits' class='text-muted'>< Tous les produits</a>        
     </div>
 </div>
+
+{{-- Errors --}}
+@if ($errors->any())
+<div class="col-lg-12 p-0 mt-2">
+    <div class="alert alert-danger">
+        <ul class='mb-0'>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    </div>
+</div>
+@endif
+
+{{-- Success --}}
+@if(session()->has('success-message'))
+<div class="col-lg-12 p-0 mt-2">
+    <div class="alert alert-success px-3 mb-0">
+        <p class='text-success font-weight-bold mb-0'>{{session('success-message')}}</p>
+    </div>
+</div>
+@endif
+
 <div class="card bg-white my-3">
     <div class="card-header bg-white">
         <h1 class='h4 m-0 font-weight-normal'>
@@ -21,7 +44,7 @@
         </h1>
     </div>
     <div class="card-body">
-        <form action='/dashboard/produits/nouveau' method="POST">
+        <form action='/dashboard/produits/edition/{{$product->id}}' method="POST">
             @csrf
 
             <input type="hidden" name="main_image_name" id="mainImageName" value='{{$product->mainImage}}' required>
@@ -32,26 +55,6 @@
                 @endforeach
                 @endif
             </div>
-
-            {{-- Errors --}}
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul class='mb-0'>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-                </ul>
-            </div>
-            @endif
-
-            {{-- Success --}}
-            @if(session()->has('success-message'))
-            <div class="col-lg-12">
-                <div class="alert alert-success px-3 mb-0">
-                    <p class='text-success font-weight-bold mb-0'>{{session('success-message')}}</p>
-                </div>
-            </div>
-            @endif
 
             <div class="row m-0 mb-2">
                 <div class="col-4 p-0">
@@ -116,6 +119,35 @@
 
             <div id="characteristics-container" class="my-2">
                 <button type="button" class="btn btn-outline-dark rounded-0" onclick="add_characteristic($(this).parent())">Ajouter une caractéristique</button>
+                <?php $index = 0;?>
+                @if($product->characteristics != null)
+                @foreach ($product->characteristics as $characteristic)
+                <div class="characteristic p-3 border my-2">
+                    <div class="form-group col-6 p-0">
+                        <label for="characteristic_name">Nom de la caractéristique</label>
+                        <input type="text" class="form-control characteristic_name" name="characteristics[{{$index}}][name]" aria-describedby="helpCharacteristicName" placeholder="Taille" value='{{$characteristic->name}}' required>
+                        <small id="helpCharacteristicName" class="form-text text-muted">Par exemple "taille", "couleur"...</small>
+                    </div>
+                    <div class="characteristic-options row m-0 d-flex flex-column">
+                        <label>Options</label>
+        
+                        @if($characteristic->options != null)
+                        @foreach ($characteristic->options as $option)
+                        <div class='option d-flex my-2'>
+                            <input type="text" class="form-control characteristic_options mr-2" name="characteristics[{{$index}}][options][]" aria-describedby="helpCharacteristicOptions" placeholder="" value="{{$option->name}}" required>
+                            <button class="btn btn-outline-danger" onclick="remove_option($(this))">Supprimer</button>
+                        </div>
+                        @endforeach
+                        @endif
+        
+                        <div class='buttons d-flex my-2'>
+                            <button type='button' class="btn btn-dark rounded-0 max-content" onclick="add_option($(this), {{$index}})">Ajouter une option</button>
+                            <button type='button' class="btn btn-danger rounded-0 max-content mx-3" onclick="$(this).parent().parent().parent().remove()">Supprimer la caractéristique</button>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                @endif
             </div>
 
             <button type="submit" class="btn btn-outline-secondary">Enregistrer</button>
@@ -126,7 +158,7 @@
 
 {{-- CHARACTERISTICS --}}
 <script>
-    characteristics_index = 0;
+    characteristics_index = {{$index}};
 
     function add_characteristic(characteristics_container){
         html = `

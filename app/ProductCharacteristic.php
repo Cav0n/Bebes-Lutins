@@ -27,6 +27,6 @@ class ProductCharacteristic extends Model
      */
     public function options()
     {
-        return $this->hasMany('App\ProductCharacteristic');
+        return $this->hasMany('App\ProductCharacteristicOption');
     }
 }

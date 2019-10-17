@@ -108,7 +108,7 @@ class CategoryController extends Controller
         $category->name = $request['name'];
         $category->description = $request['description'];
         $category->rank = $request['rank'];
-        $category->isHidden = $request['is-hidden'];
+        if($request['is-hidden'] != null) $category->isHidden = true;
         if($request['parent_id'] != 'null') $category->parent_id = $request['parent_id'];
         $category->save();
 
@@ -125,7 +125,8 @@ class CategoryController extends Controller
         //TAGS
         if($request->tags != null){
             foreach(\json_decode($request->tags) as $r_tag){
-                $tag = new Tag();
+                if(Tag::where('name', $r_tag->value)->exists()) $tag = Tag::where('name', $r_tag->value)->first();
+                else $tag = new Tag();
                 $tag->name = $r_tag->value;
                 $tag->save();
 
@@ -134,7 +135,7 @@ class CategoryController extends Controller
         }
 
         $category->save();
-        dd($category);
+        return redirect('/dashboard/produits/categories/edition/'.$category->id)->with('success-message', 'La catégorie a été créée avec succés.');
     }
 
     /**
@@ -169,7 +170,61 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        dd($request);
+        $request->validate([
+            'name' => 'string|min:3|required',
+            'parent_id' => 'string|nullable',
+            'description' => 'string|min:10|required',
+            'rank' => 'integer|min:0|required',
+            'tags' => 'nullable',
+            'main_image_name' => 'required',
+            'is-hidden' => 'nullable',
+        ]);
+
+        $mainImageName = $request['main_image_name'];
+
+        $category->name = $request['name'];
+        $category->description = $request['description'];
+        $category->rank = $request['rank'];
+        if($request['is-hidden'] != null) $category->isHidden = true;
+        if($request['parent_id'] != 'null') $category->parent_id = $request['parent_id'];
+        $category->save();
+
+        //MAIN IMAGE
+        if($category->mainImage != $mainImageName){
+            unlink(public_path('images/categories/').$category->mainImage);
+            $category->images()->detach();
+
+            rename(public_path('images/tmp/').$mainImageName, public_path('images/categories/').$mainImageName); // MOVE MAIN IMAGE FROM TMP TO REAL FOLDER
+            $mainImage = new Image();
+            $mainImage->name = $mainImageName;
+            $mainImage->size = filesize(public_path('images/categories/').$mainImageName);
+            $mainImage->save();
+
+            $category->images()->attach($mainImage->id);
+            $category->mainImage = $mainImage->name;
+        }
+
+        
+
+        //TAGS
+        $category->tags()->detach(); 
+        if($request->tags != null){
+            foreach(\json_decode($request->tags) as $r_tag){
+                if(Tag::where('name', $r_tag->value)->exists()){ // IF tag already exists in database
+                    $tag = Tag::where('name', $r_tag->value)->first();
+                    $category->tags()->attach($tag->id);// Add the tag to the category
+
+                } else { // Else create a new tag and attach it to category
+                    $tag = new Tag();
+                    $tag->name = $r_tag->value;
+                    $tag->save();   
+                    $category->tags()->attach($tag->id); 
+                }
+            }
+        }
+
+        $category->save();
+        return redirect('/dashboard/produits/categories/edition/'.$category->id)->with('success-message', 'La catégorie a été mis à jour.');
     }
 
     /**

@@ -14,6 +14,29 @@
         <a href='/dashboard/produits/categories' class='text-muted'>< Toutes les catégories</a>        
     </div>
 </div>
+
+{{-- Errors --}}
+@if ($errors->any())
+<div class="col-lg-12 p-0 mt-2">
+    <div class="alert alert-danger">
+        <ul class='mb-0'>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
+    </div>
+</div>
+@endif
+
+{{-- Success --}}
+@if(session()->has('success-message'))
+<div class="col-lg-12 p-0 mt-2">
+    <div class="alert alert-success px-3 mb-0">
+        <p class='text-success font-weight-bold mb-0'>{{session('success-message')}}</p>
+    </div>
+</div>
+@endif
+
 <div class="card bg-white my-3">
     <div class="card-header bg-white">
         <h1 class='h4 m-0 font-weight-normal'>
@@ -21,30 +44,10 @@
         </h1>
     </div>
     <div class="card-body">
-        <form action='/dashboard/produits/categories/nouvelle' method="POST">
+        <form action='/dashboard/produits/categories/edition/{{$category->id}}' method="POST">
             @csrf
 
-            <input type="hidden" name="main_image_name" id="mainImageName" required>
-
-            {{-- Errors --}}
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul class='mb-0'>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-                </ul>
-            </div>
-            @endif
-
-            {{-- Success --}}
-            @if(session()->has('success-message'))
-            <div class="col-lg-12">
-                <div class="alert alert-success px-3 mb-0">
-                    <p class='text-success font-weight-bold mb-0'>{{session('success-message')}}</p>
-                </div>
-            </div>
-            @endif
+            <input type="hidden" name="main_image_name" id="mainImageName" value='{{old('main_image_name', $category->mainImage)}}' required>
 
             <div class="row m-0 mb-2">
                 <div class="col-4 p-0">
@@ -95,7 +98,7 @@
 
             <div class="form-group mb-0">
                 <label for="tags">Tags</label>
-                <input id='tags' class="form-control @error('tags') is-invalid @enderror" name='tags' value=''>
+                <input id='tags' class="form-control @error('tags') is-invalid @enderror" name='tags' value='@foreach($category->tags as $tag) {{$tag->name}}, @endforeach'>
                 @error('tags')
                     <div class="invalid-feedback">{{$message}}</div>
                 @enderror 

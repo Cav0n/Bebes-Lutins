@@ -121,7 +121,7 @@ class ProductController extends Controller
         $product->description = $request['description'];
         $product->stock = $request['stock'];
         $product->price = $request['price'];
-        if($request['is-hidden'] != null) $product->isHidden = $request['is-hidden'];
+        if($request['is-hidden'] != null) $product->isHidden = true;
         $product->save();
 
 
@@ -183,8 +183,7 @@ class ProductController extends Controller
         }
 
         $product->save();
-
-        dd($product);
+        return redirect('/dashboard/produits/edition/'.$product->id)->with('success-message', 'Le produit a été crée avec succés.');
     }
 
     /**
@@ -237,17 +236,22 @@ class ProductController extends Controller
         $product->description = $request['description'];
         $product->stock = $request['stock'];
         $product->price = $request['price'];
-        if($request['is-hidden'] != null) $product->isHidden = $request['is-hidden'];
+        if($request['is-hidden'] != null) $product->isHidden = true;
         $product->save();
 
         //MAIN IMAGE
-        rename(public_path('images/tmp/').$mainImageName, public_path('images/products/').$mainImageName); // MOVE MAIN IMAGE FROM TMP TO REAL FOLDER
-        $mainImage = new Image();
-        $mainImage->name = $mainImageName;
-        $mainImage->size = filesize(public_path('images/products/').$mainImageName);
-        $mainImage->save();
-        $product->images()->attach($mainImage->id);
-        $product->mainImage = $mainImage->name;
+        if($product->mainImage != $mainImageName){
+            unlink(public_path('images/products/').$product->mainImage);
+            $product->images()->detach();
+
+            rename(public_path('images/tmp/').$mainImageName, public_path('images/products/').$mainImageName); // MOVE MAIN IMAGE FROM TMP TO REAL FOLDER
+            $mainImage = new Image();
+            $mainImage->name = $mainImageName;
+            $mainImage->size = filesize(public_path('images/products/').$mainImageName);
+            $mainImage->save();
+            $product->images()->attach($mainImage->id);
+            $product->mainImage = $mainImage->name;
+        }
 
         //THUMBNAILS
         if($request['thumbnails_name'] != null){
@@ -262,16 +266,29 @@ class ProductController extends Controller
         }
 
         //TAGS
+        $product->tags()->detach(); 
         if($request->tags != null){
             foreach(\json_decode($request->tags) as $r_tag){
-                $tag = new Tag();
-                $tag->name = $r_tag->value;
-                $tag->save();
-                $product->tags()->attach($tag->id);
+                if(Tag::where('name', $r_tag->value)->exists()){ // IF tag already exists in database
+                    $tag = Tag::where('name', $r_tag->value)->first();
+                    $product->tags()->attach($tag->id);// Add the tag to the category
+
+                } else { // Else create a new tag and attach it to category
+                    $tag = new Tag();
+                    $tag->name = $r_tag->value;
+                    $tag->save();   
+                    $product->tags()->attach($tag->id); 
+                }
             }
-        } 
+        }
 
         //CHARACTERISTICS
+        foreach($product->characteristics as $characteristic){
+            foreach($characteristic->options as $option){
+                $option->delete();
+            }
+            $characteristic->delete();
+        }
         if($request['characteristics'] != null){
             foreach($request['characteristics'] as $r_characteristic){
                 $characteristic = new ProductCharacteristic();
@@ -288,8 +305,7 @@ class ProductController extends Controller
         }
 
         $product->save();
-
-        return view('/dashboard/produits');
+        return redirect('/dashboard/produits/edition/'.$product->id)->with('success-message', 'Le produit a été crée avec succés.');
     }
 
     /**

@@ -16,7 +16,7 @@
                         <div class="col-lg-5 p-0">
                             <p id='popup-product-price' class='mb-0 small'>Prix : 00.00 €</p>
                             <p id='popup-shopping-cart-total' class='mb-0 small'>Total du panier : 00.00€</p>
-                            <input id="popup-item-quantity" class="spinnerProductPopup" type="number" name="quantity" value="1" min="1" max="10" step="1" @if($product->stock <= 1) disabled @endif/>
+                            <input id="popup-item-quantity" class="spinnerProductPopup" type="number" name="quantity" value="1" min="1" max="10" step="1" @if($product ?? ''->stock <= 1) disabled @endif/>
                         </div>
                     </div>
                 </div>
@@ -85,17 +85,17 @@ if(count($shopping_cart->items) > 0){
     }
 
     function validate_and_refresh(){
-        update_quantity($('#refresh-button'), $('#hidden-item-id').val(), $('.spinner').val());
+        update_quantity($('#refresh-button'), $('#popup-hidden-item-id').val(), $('#popup-item-quantity').val());
         location.reload();
     }
 
     function validate_and_go_to_shopping_cart(){
-        update_quantity($('#shopping-cart-button'), $('#hidden-item-id').val(), $('.spinner').val());
+        update_quantity($('#shopping-cart-button'), $('#popup-hidden-item-id').val(), $('#popup-item-quantity').val());
         load_url("/panier");
     }
 
     function update_quantity(view, item_id, quantity){
-        quantity = $('#item-quantity').val() - 1;
+        quantity = quantity;
         $.ajax({
             url: "/panier/change_quantity/" + item_id,
             type: 'POST',

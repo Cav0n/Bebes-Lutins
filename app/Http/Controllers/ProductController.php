@@ -124,8 +124,6 @@ class ProductController extends Controller
         if($request['is-hidden'] != null) $product->isHidden = true;
         $product->save();
 
-
-
         //MAIN IMAGE
         rename(public_path('images/tmp/').$mainImageName, public_path('images/products/').$mainImageName); // MOVE MAIN IMAGE FROM TMP TO REAL FOLDER
         $mainImage = new Image();
@@ -146,12 +144,14 @@ class ProductController extends Controller
         //THUMBNAILS
         if($request['thumbnails_names'] != null){
             foreach ($request['thumbnails_names'] as $thumbnail_name) { // MOVE EACH THUMBNAILS FROM TMP TO REAL FOLDER
-                rename(public_path('images/tmp/').$thumbnail_name, public_path('images/products/thumbnails/').$thumbnail_name);
-                $thumbnail = new Image();
-                $thumbnail->name = $thumbnail_name;
-                $thumbnail->size = filesize(public_path('images/products/thumbnails/').$thumbnail_name);
-                $thumbnail->save();
-                $product->images()->attach($thumbnail->id);
+                if($thumbnail_name != ''){
+                    rename(public_path('images/tmp/').$thumbnail_name, public_path('images/products/thumbnails/').$thumbnail_name);
+                    $thumbnail = new Image();
+                    $thumbnail->name = $thumbnail_name;
+                    $thumbnail->size = filesize(public_path('images/products/thumbnails/').$thumbnail_name);
+                    $thumbnail->save();
+                    $product->images()->attach($thumbnail->id);
+                }
             }
         }
 

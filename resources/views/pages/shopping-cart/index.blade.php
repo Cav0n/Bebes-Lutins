@@ -1,12 +1,9 @@
 <?php
     $pricesAndQuantities = $shoppingCart->calculatePricesAndQuantities();
-    
-    $products_price = $pricesAndQuantities['products_price'];
-    $shipping_price = $pricesAndQuantities['shipping_price'];
+
     $total_quantity = $pricesAndQuantities['total_quantity'];
-    $total = $products_price + $shipping_price;
-    if($products_price < 70) $price_before_free_shipping = 70 - $products_price;
-    else $price_before_free_shipping = 0;
+    $total = $shoppingCart->productsPrice + $shoppingCart->shippingPrice;
+    $price_before_free_shipping = 70 - $shoppingCart->productsPrice;
 ?>
 
 @extends('templates.template')
@@ -59,7 +56,7 @@
 
                     {{--  Shopping Cart Items for mobiles and tiny tablets  --}}
                     @foreach ($shoppingCart->items as $item)
-                    <div class="card p-0 m-0 border-0 rounded-0 mb-2">
+                    <div id='product-{{$item->product->id}}' class="card p-0 m-0 border-0 rounded-0 mb-2">
                         <div class="row m-0 p-0">
                             <div class="col-4 p-0" style='min-height:8rem; max-height:10rem;'>
                                 <img class='product-image w-100 h-100' src='{{asset('images/products/' . $item->product->mainImage)}}' alt='Image du produit' style='object-fit:cover;'>                        
@@ -143,14 +140,14 @@
                                         <p class="card-text">{{$total_quantity}} produits :</p>
                                     </div>
                                     <div class="col-6 p-0">
-                                        <p class="card-text text-right">{{number_format($products_price, 2)}} €</p>
+                                        <p class="card-text text-right">{{number_format($shoppingCart->productsPrice, 2)}} €</p>
                                     </div>
                 
                                     <div class="col-6 p-0">
                                         <p class="card-text">Frais de ports :</p>
                                     </div>
                                     <div class="col-6 p-0">
-                                        <p class="card-text text-right">{{number_format($shipping_price, 2)}} €</p>
+                                        <p class="card-text text-right">{{number_format($shoppingCart->shippingPrice, 2)}} €</p>
                                     </div>
                 
                                     <div class="col-6 p-0">
@@ -192,41 +189,40 @@
                                 </div>
                                 <div class="card-body row m-0">
                                     @if ($shoppingCart->voucher == null)
-                                    <form action="/panier/code-coupon/ajout" method="POST" class='w-100'>
-                                        @csrf
+                                    <div class='voucher'>
                                         <div class="form-group">
-                                            @error('voucher-code')
-                                            <div class="row m-0 p-0">
-                                                Le code n'existe pas.
-                                            </div>
-                                            @enderror
                                             <label for="voucher-code">Code coupon : </label>
                                             <div class="row m-0 p-0">
                                                 <div class="col-8 p-0 pr-2">
                                                     <input type="text" class="form-control" name="voucher-code" id="voucher-code" aria-describedby="helpVoucher" placeholder="">
                                                 </div>
                                                 <div class="col-4 p-0">
-                                                    <button type="submit" class="btn btn-light w-100">Ajouter</button>
+                                                    <button type="button" class="btn btn-light w-100 ld-over" onclick="add_voucher($(this), $('#voucher-code').val())">
+                                                        Ajouter
+                                                        <div class="ld ld-ring ld-spin"></div>
+                                                    </button>
                                                 </div> 
                                             </div>
                                             <small id="helpVoucher" class="form-text text-muted">Tapez ici votre code de réduction (si vous en avez un)</small>
                                         </div>
-                                    </form>
+                                    </div>
                                     @else
-                                    <form action="/panier/code-coupon/suppression" method="POST">
-                                        @csrf
+                                    <div class='voucher'>
                                         <div class="form-group">
                                             <label for="voucher-code">Code coupon : </label>
                                             <div class="row m-0 p-0">
                                                 <div class="col-8 p-0 pr-2">
-                                                    <input type="text" class="form-control" name="voucher-code" id="voucher-code" aria-describedby="helpVoucher" placeholder="" disabled>
+                                                    <input type="text" class="form-control" name="voucher-code" id="voucher-code" aria-describedby="helpVoucher" placeholder="" disabled value='{{$shoppingCart->voucher->code}}'>
                                                 </div>
                                                 <div class="col-4 p-0">
-                                                    <button type="submit" class="btn btn-danger w-100">Supprimer</button>
+                                                    <button type="submit" class="btn btn-danger w-100 ld-over" onclick="remove_voucher($(this))">
+                                                        Supprimer
+                                                        <div class="ld ld-ring ld-spin"></div>
+                                                    </button>
                                                 </div> 
                                             </div>
                                         </div>
-                                    </form>
+                                    </div>
                                     @endif
                                     
                                 </div>
@@ -257,6 +253,65 @@
 </main>
 
 <script>
+    function add_voucher(btn, code){
+
+        $.ajax({
+            url: "/panier/code-coupon/ajouter",
+            type: 'POST',
+            data: { code:code },
+            success: function(data){
+                btn.removeClass('running');
+                data = JSON.parse(data);
+                if(data.status == 'error') textclass='text-danger';
+                else textclass='text-success';
+
+                console.log(data.products_id);
+
+                index=0;
+                data.products_id.forEach(function(){
+                    $('#product-' + data.products_id[index]).removeClass('border-0').addClass('border-danger');
+                    index ++;
+                });
+
+                $('#voucher-message').remove();
+                $('.voucher').prepend('<p id="voucher-message" class="'+textclass+'">'+ data.message +'</p>');
+
+                if(data.status != 'error') location.reload();
+            },
+            error: function(data) {
+                console.log("Impossible d'ajouter le code.")
+                btn.removeClass('running');
+            },
+            beforeSend: function() {
+                btn.addClass('running');
+            }
+        }) 
+    }
+
+    function remove_voucher(btn){
+        $.ajax({
+            url: "/panier/code-coupon/supprimer",
+            type: 'POST',
+            data: { },
+            success: function(data){
+                btn.removeClass('running');
+
+                $('.voucher').prepend('<p id="voucher-message" class="text-success">Le code a été supprimé du panier.</p>');
+                location.reload();
+            },
+            error: function(data) {
+                console.log("Impossible de supprimer le code.")
+                btn.removeClass('running');
+            },
+            beforeSend: function() {
+                btn.addClass('running');
+            }
+        }) 
+    }
+</script>
+
+{{-- AJAX SETUP --}}
+<script>
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -282,6 +337,7 @@
     }
 </script>
 
+{{-- CHANGE ITEM QUANTITY --}}
 <script>
     function change_quantity(select, item_id){
         quantity = select.val();
@@ -289,42 +345,44 @@
         if(quantity == 0){
             remove_item_from_shopping_cart(select, item_id);
         } else {
-        $.ajax({
-            url: "/panier/change_quantity/" + item_id,
-            type: 'POST',
-            data: { quantity:quantity },
-            success: function(data){
-                console.log('Quantité modifié avec succés.');
-                document.location.href = '/panier'
-            },
-            beforeSend: function() {
-                select.parent().addClass('running');
-            }
-        }) }
+            $.ajax({
+                url: "/panier/change_quantity/" + item_id,
+                type: 'POST',
+                data: { quantity:quantity },
+                success: function(data){
+                    console.log('Quantité modifié avec succés.');
+                    document.location.href = '/panier'
+                },
+                beforeSend: function() {
+                    select.parent().addClass('running');
+                }
+            }) 
+        }
     }
 </script>
 
+{{-- REDUCE TEXT LENGHT --}}
 <script>
-function textAbstract(el, maxlength = 20, delimiter = " ") {
-    let txt = $(el).text();
-    if (el == null) {
-        return "";
+    function textAbstract(el, maxlength = 20, delimiter = " ") {
+        let txt = $(el).text();
+        if (el == null) {
+            return "";
+        }
+        if (txt.length <= maxlength) {
+            return txt;
+        }
+        let t = txt.substring(0, maxlength);
+        let re = /\s+\S*$/;
+        let m = re.exec(t);
+        t = t.substring(0, m.index);
+        return t + "...";
     }
-    if (txt.length <= maxlength) {
-        return txt;
-    }
-    let t = txt.substring(0, maxlength);
-    let re = /\s+\S*$/;
-    let m = re.exec(t);
-    t = t.substring(0, m.index);
-    return t + "...";
-}
 
-var maxlengthwanted = 50;
+    var maxlengthwanted = 50;
 
-$('.item-name-cropped').each(function(index, element) {
-    $(element).text(textAbstract(element, maxlengthwanted, " "));
-});
+    $('.item-name-cropped').each(function(index, element) {
+        $(element).text(textAbstract(element, maxlengthwanted, " "));
+    });
 </script>
 
 @endsection

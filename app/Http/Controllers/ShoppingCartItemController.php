@@ -44,32 +44,28 @@ class ShoppingCartItemController extends Controller
         $product = Product::where('id', $product_id)->first();
         $quantity = $request['quantity'];
 
-        if($product->stock > 0){
-            if(ShoppingCartItem::where('shopping_cart_id', $shopping_cart_id)->where('product_id', $product_id)->exists()){
-                $item = ShoppingCartItem::where('shopping_cart_id', $shopping_cart_id)->where('product_id', $product_id)->first();
-                if($product->stock > ($item->quantity + $quantity)){
-                    $item->quantity = $item->quantity + $quantity;
-                    $item->save();
-                }
-            } else {
-                $item = new ShoppingCartItem();
-                $item->quantity = $quantity;
-                $item->shopping_cart_id = $shopping_cart_id;
-                $item->product_id = $product_id;
+        if(ShoppingCartItem::where('shopping_cart_id', $shopping_cart_id)->where('product_id', $product_id)->exists()){
+            $item = ShoppingCartItem::where('shopping_cart_id', $shopping_cart_id)->where('product_id', $product_id)->first();
+            if($product->quantity > ($item->quantity + $quantity)){
+                $item->quantity = $item->quantity + $quantity;
                 $item->save();
             }
+        } else {
+            $item = new ShoppingCartItem();
+            $item->quantity = $quantity;
+            $item->shopping_cart_id = $shopping_cart_id;
+            $item->product_id = $product_id;
+            $item->save();
         }
 
-        if(isset($item)){
-            $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
-            $shopping_cart->updateProductsPrice();
-            $shopping_cart->updateShippingPrice();
-            $shopping_cart->save();
-            session(['shopping_cart' => $shopping_cart]);
+        $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
+        $shopping_cart->updateProductsPrice();
+        $shopping_cart->updateShippingPrice();
+        $shopping_cart->save();
+        session(['shopping_cart' => $shopping_cart]);
 
-            $response = ['item_id' => $item->id];
-            echo json_encode($response);
-        }
+        $response = ['item_id' => $item->id];
+        echo json_encode($response);
     }
 
     /**
@@ -106,15 +102,18 @@ class ShoppingCartItemController extends Controller
         $request->validate([
             'quantity' => 'numeric|max:100|required',
         ]);
-        
+
+        $stock = $shoppingCartItem->product->stock;
+        $new_quantity = $request['quantity'];
+
         if(isset($request['add'])){
-            if($shoppingCartItem->$product->stock > ($shoppingCartItem->quantity + $request['quantity'])){
-                $shoppingCartItem->quantity = $shoppingCartItem->quantity + $request['quantity'];
-            } else $shoppingCartItem->quantity = $shoppingCartItem->$product->stock;
+            if($stock > $shoppingCartItem->quantity + $new_quantity){
+                $shoppingCartItem->quantity = $shoppingCartItem->quantity + $new_quantity;
+            } else $shoppingCartItem->quantity = $stock;
         } else {
-            if($shoppingCartItem->$product->stock > $request['quantity']){
-                $shoppingCartItem->quantity = $request['quantity'];
-            } else $shoppingCartItem->quantity = $shoppingCartItem->$product->stock;
+            if($stock > $new_quantity){
+                $shoppingCartItem->quantity = $new_quantity;
+            } else  $shoppingCartItem->quantity = $stock;
         }
 
         $shoppingCartItem->save();

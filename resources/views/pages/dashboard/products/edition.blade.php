@@ -313,7 +313,7 @@ $.ajaxSetup({
             });
             //POPULATE
             @if($product->images != null)
-            @foreach($product->images as $thumbnail)
+            @foreach($product->images->skip(1) as $thumbnail)
             @if($thumbnail->name != $product->mainImage)
             // Create the mock file:
             var mockFile = { name: "{{$thumbnail->name}}", size: {{$thumbnail->size}}, }

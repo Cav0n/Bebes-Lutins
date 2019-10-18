@@ -47,6 +47,14 @@ class ShoppingCart extends Model
         foreach($this->items as $item){
             $total_price += $item->product->price * $item->quantity;
         }
+
+        if($this->voucher != null){
+            switch($this->voucher->discountType){
+                case '1': $total_price = $total_price - ($total_price * $this->voucher->discountValue) / 100;break;
+                case '2': $total_price = ($total_price - $this->voucher->discountValue); break;
+            }
+        }
+
         $this->productsPrice = $total_price;
     }
 
@@ -55,7 +63,9 @@ class ShoppingCart extends Model
         $this->shippingPrice = 0.0;
 
         if($this->productsPrice < 70){
-            $this->shippingPrice = 5.90;
+            if($this->voucher != null && ($this->voucher->discountType == 3)){
+                $this->shippingPrice = 0.00;
+            } else $this->shippingPrice = 5.90;
         }
     }
 

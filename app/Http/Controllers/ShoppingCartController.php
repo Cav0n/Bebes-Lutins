@@ -60,6 +60,8 @@ class ShoppingCartController extends Controller
         $shopping_cart->updateShippingPrice();
         $shopping_cart->save();
         session(['shopping_cart' => $shopping_cart]);
+        
+        //dd($shopping_cart->voucher->discountType);
 
         return view('pages.shopping-cart.index')->withStep(0)->withShoppingCart($shopping_cart);
     }
@@ -247,6 +249,8 @@ class ShoppingCartController extends Controller
         header('Content-type: application/json');
         
         $code = $request['code'];
+        
+        // CODE EXISTS ?
         if(!Voucher::where('code', $code)->exists()){
             $response_array['status'] = 'error'; 
             $response_array['message'] = "Le code n'existe pas."; 
@@ -257,6 +261,7 @@ class ShoppingCartController extends Controller
         $voucher = Voucher::where('code', $code)->first();
         $shopping_cart = session('shopping_cart');
 
+        // FIRST DATE IS IN THE FUTUR ?
         if($voucher->dateFirst > Carbon\Carbon::now()){
             $response_array['status'] = 'error'; 
             $response_array['message'] = "Le code n'existe pas."; 
@@ -264,6 +269,7 @@ class ShoppingCartController extends Controller
             return;
         }
 
+        // LAST DATE IS IN THE PAST ?
         if($voucher->dateLast < Carbon\Carbon::now()){
             $response_array['status'] = 'error'; 
             $response_array['message'] = "Le code n'est plus disponible."; 
@@ -271,6 +277,7 @@ class ShoppingCartController extends Controller
             return;
         }
 
+        // SHOPPING CART MINIMAL PRICE IS OK ?
         if($shopping_cart->productsPrice < $voucher->minimalPrice){
             $response_array['status'] = 'error'; 
             $response_array['message'] = "Votre panier doit atteindre " . number_format($voucher->minimalPrice, 2) . "€."; 
@@ -280,6 +287,7 @@ class ShoppingCartController extends Controller
 
         $usage_number = Order::where('voucher_id', $voucher->id)->where('user_id', $shopping_cart->user_id)->count();
 
+        // NUMBER OF USAGE FOR CURRENT CUSTOMER
         if($usage_number >= $voucher->maxUsage){
             $response_array['status'] = 'error'; 
             $response_array['message'] = "Vous avez atteint la limite d'utilisation de ce code."; 
@@ -287,45 +295,77 @@ class ShoppingCartController extends Controller
             return;
         }
 
-        $productid_voucher_list = array();
-        $productid_shoppingcart_list = array();
-        foreach($voucher->products as $product){
-            $productid_voucher_list[] = $product->id;
-        }
-        foreach ($shopping_cart->items as $item) {
-            $productid_shoppingcart_list[] = $item->product->id;
-        }
-        
-        $categoriesid_voucher_list = array();
-        $categoriesid_shoppingcart_list = array();
-        foreach($voucher->categories as $category){
-            $categoriesid_voucher_list[] = $category->id;
-        }
-        foreach ($shopping_cart->items as $item) {
-            foreach($item->product->categories as $category){
-                $categoriesid_shoppingcart_list[] = $category->id; 
+        // IF DISCOUNT TYPE IS €
+        if($voucher->discountType == 2){
+            // PRODUCTS ID OF THE VOUCHER (AUTHORIZED / FORBIDDEN)
+            $productid_voucher_list = array();
+            foreach($voucher->products as $product){
+                $productid_voucher_list[] = $product->id;
+            }
+            
+            // CATEGORIES ID OF THE VOUCHER (AUTHORIZED / FORBIDDEN)
+            $categoriesid_voucher_list = array();
+            foreach($voucher->categories as $category){
+                $categoriesid_voucher_list[] = $category->id;
+            }
+            
+            switch($voucher->availability){
+                case 'allProducts': // AVAILABLE ON ALL PRODUCTS EXCEPTS ...
+                foreach($shopping_cart->items as $item){
+                    $item->hasReduction = 1;
+                    if(in_array($item->product->id, $productid_voucher_list)){
+                        $item->hasReduction = 0;
+                    }
+                    $item->save();
+                }
+                break;
+
+                case 'certainProducts': // AVAILABLE ON ONLY CERTAIN PRODUCTS
+                foreach($shopping_cart->items as $item){
+                    $item->hasReduction = 0;
+                    if(in_array($item->product->id, $productid_voucher_list)){
+                        $item->hasReduction = 1;
+                    }
+                    $item->save();
+                }
+                break;
+
+                case 'certainCategories': // AVAILABLE ON CERTAIN CATEGORIES
+                foreach($shopping_cart->items as $item){
+                    $item->hasRedution = 0;
+                    $item->save();
+                    foreach($item->product->categories as $category){
+                        while($category->parent != null){
+                            if(in_array($category->id, $categoriesid_voucher_list)){
+                                $item->hasRedution = 1;
+                                $item->save();
+                                break;
+                            } else $category = $category->parent;
+                        }
+                    }
+                }
+                break;
+
+                case 'allCategories': // AVAILABLE ON ALL CATEGORIES EXCEPTS...
+                foreach($shopping_cart->items as $item){
+                    $item->hasRedution = 1;
+                    $item->save();
+                    foreach($item->product->categories as $category){
+                        while($category->parent != null){
+                            if(in_array($category->id, $categoriesid_voucher_list)){
+                                $item->hasRedution = 0;
+                                $item->save();
+                                break;
+                            } else $category = $category->parent;
+                        }
+                    }
+                }
+                break;
             }
         }
-        
 
-        switch($voucher->availability){
-            case 'allProducts':
-            
-            break;
-
-            case 'certainProducts':
-            
-            break;
-
-            case 'certainCategories':
-            
-            break;
-
-            case 'allCategories':
-            
-            break;
-        }
-
+        // IF VOUCHER IS "FREE SHIPPING" AND SHOPPING CART PRICE > 70€
+        // THEN VOUCHER IS NOT NEEDED BECAUSE SHIPPING IS ALREADY FREE
         if($voucher->discountType == 3 && $shopping_cart->productsPrice > 70){
             $response_array['status'] = 'error'; 
             $response_array['message'] = "Vous bénéficiez déjà de la livraison gratuite."; 
@@ -333,15 +373,18 @@ class ShoppingCartController extends Controller
             return;
         }
 
-        $shopping_cart = session('shopping_cart');
+        //UPDATE SHOPPING CART WITH VOUCHER
         $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
         $shopping_cart->voucher_id = $voucher->id;
         $shopping_cart->save();
+
         $shopping_cart->updateProductsPrice();
         $shopping_cart->updateShippingPrice();
         $shopping_cart->save();
+
         session(['shopping_cart' => $shopping_cart]);
 
+        //RESPONSE OK
         $response_array['status'] = 'success'; 
         $response_array['message'] = "Le code a été ajouté au panier."; 
         echo json_encode($response_array, JSON_PRETTY_PRINT);
@@ -349,12 +392,18 @@ class ShoppingCartController extends Controller
 
     public function removeVoucher(Request $request){
         $shopping_cart = session('shopping_cart');
+        foreach($shopping_cart->items as $item){
+            $item->hasReduction = 0;
+            $item->save();
+        }
         $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
         $shopping_cart->voucher_id = null;
         $shopping_cart->save();
+
         $shopping_cart->updateProductsPrice();
         $shopping_cart->updateShippingPrice();
         $shopping_cart->save();
+        
         session(['shopping_cart' => $shopping_cart]);
     }
 }

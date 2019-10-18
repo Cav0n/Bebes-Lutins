@@ -44,15 +44,20 @@ class ShoppingCart extends Model
     public function updateProductsPrice()
     {
         $total_price = 0.0;
+
         foreach($this->items as $item){
-            $total_price += $item->product->price * $item->quantity;
+            $item->newPrice = 0;
+            if($this->voucher != null && $this->voucher->discountType == 1 && $item->hasReduction){ // IF ITEM HAS REDUCTION && VOUCHER TYPE IS %
+                    $item->newPrice = $item->product->price - ($item->product->price * $this->voucher->discountValue) / 100;
+                    $total_price += ($item->newPrice * $item->quantity);
+            } else { 
+                $total_price += ($item->product->price * $item->quantity);
+            } 
+            $item->save();
         }
 
-        if($this->voucher != null){
-            switch($this->voucher->discountType){
-                case '1': $total_price = $total_price - ($total_price * $this->voucher->discountValue) / 100;break;
-                case '2': $total_price = ($total_price - $this->voucher->discountValue); break;
-            }
+        if($this->voucher != null && $this->voucher->discountType == 2){
+            $total_price -= $this->voucher->discountValue;
         }
 
         $this->productsPrice = $total_price;

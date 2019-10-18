@@ -17,6 +17,7 @@ class CreateShoppingCartItemsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('quantity')->unsigned();
             $table->boolean('hasReduction')->default(0);
+            $table->decimal('newPrice', 10, 2)->nullable();
             
 
             $table->integer('product_id')->unsigned();

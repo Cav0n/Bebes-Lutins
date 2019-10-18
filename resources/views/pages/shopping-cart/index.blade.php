@@ -1,6 +1,7 @@
 <?php
     $pricesAndQuantities = $shoppingCart->calculatePricesAndQuantities();
 
+    $products_price_without_voucher = $pricesAndQuantities['products_price'];
     $total_quantity = $pricesAndQuantities['total_quantity'];
     $total = $shoppingCart->productsPrice + $shoppingCart->shippingPrice;
     $price_before_free_shipping = 70 - $shoppingCart->productsPrice;
@@ -96,9 +97,13 @@
                                                 </div>
                                                 @endif
                                             </div>
-                                            <div class="col-12 col-sm-6 col-lg-5 d-flex justify-content-end p-0 pt-2 pt-lg-0 order-3 order-lg-3">
+                                            <div class="col-12 col-sm-6 col-lg-5 d-flex justify-content-left justify-content-sm-end p-0 pt-2 pt-lg-0 order-3 order-lg-3">
                                                 <div class="d-flex flex-column justify-content-center">
+                                                    @if($shoppingCart->voucher != null && $shoppingCart->voucher->discountType == 1 && $item->hasReduction)
+                                                    <p class='mb-0 small font-weight-bold text-right'>Total : <del>{{number_format($item->product->price * $item->quantity, 2)}} €</del><BR>{{number_format($item->newPrice * $item->quantity, 2)}} €</p>
+                                                    @else
                                                     <p class='mb-0 small font-weight-bold'>Total : {{number_format($item->product->price * $item->quantity, 2)}} €</p>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -114,75 +119,9 @@
                 <div class="col-12 col-sm-10 col-lg-3">
                     <div class="row">
 
-                        {{-- SHARING --}}
-                        @if($shoppingCart->id == session('shopping_cart')->id)
-                        <div class="col-12 my-2 my-lg-0 mb-lg-2 order-1 order-lg-0">
-                            <div class="card p-0 border-0 rounded-0">
-                                <div class="card-header bg-white">
-                                    <h1 class='h5 mb-0'>Partage</h1>
-                                </div>
-                                <div class="card-body row justify-content-center m-0 d-flex flex-column">
-                                    <p>Pour partager votre panier veuillez copier le lien ce dessous :</p>
-                                    <p class='small text-center py-2 border rounded-0 text-dark bg-light'>www.bebes-lutins.fr/panier/{{$shoppingCart->id}}</p>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
-
-                        {{--  Summary  --}}
-                        <div class="col-12 my-2 my-lg-0 mb-lg-2 order-1 order-lg-0">
-                            <div class="card p-0 border-0 rounded-0">
-                                <div class="card-header bg-white">
-                                    <h1 class='h5 mb-0'>Résumé</h1>
-                                </div>
-                                <div class="card-body row justify-content-center m-0">
-                                    <div class="col-6 p-0">
-                                        <p class="card-text">{{$total_quantity}} produits :</p>
-                                    </div>
-                                    <div class="col-6 p-0">
-                                        <p class="card-text text-right">{{number_format($shoppingCart->productsPrice, 2)}} €</p>
-                                    </div>
-                
-                                    <div class="col-6 p-0">
-                                        <p class="card-text">Frais de ports :</p>
-                                    </div>
-                                    <div class="col-6 p-0">
-                                        <p class="card-text text-right">{{number_format($shoppingCart->shippingPrice, 2)}} €</p>
-                                    </div>
-                
-                                    <div class="col-6 p-0">
-                                        <p class="card-text font-weight-bold">TOTAL TTC :</p>
-                                    </div>
-                                    <div class="col-6 p-0">
-                                        <p class="card-text text-right font-weight-bold">{{number_format($total, 2)}} €</p>
-                                    </div>
-                
-                                    <div class="col-12 border-bottom my-4"></div>
-
-                                    @if($shoppingCart->id == session('shopping_cart')->id)
-                
-                                    <div class="col-12 col-md-6 col-lg-12 mb-2" style='line-height:0;'>
-                                        <small class="small" style="line-height:1rem;">En cliquant sur ce bouton vous acceptez sans 
-                                        réserve les conditions générales de vente.</small>
-                                    </div>
-                                    <div class="col-12 col-md-6 col-lg-12">
-                                        <button type="button" class="btn btn-primary w-100" onclick='load_url("/panier/livraison")'>Valider mon panier</button>
-                                    </div>
-
-                                    @else
-
-                                    <div class="col-12 col-md-6 col-lg-12">
-                                        <button type="button" class="btn btn-primary w-100" onclick='load_url("/panier/{{$shoppingCart->id}}/commander")'>Commander ce panier</button>
-                                    </div>
-
-                                    @endif
-                                </div>
-                            </div>
-                        </div>
-
                         {{--  Voucher code  --}}
                         @if($shoppingCart->id == session('shopping_cart')->id)
-                        <div class="col-12 my-2 my-lg-2 order-0 order-lg-1">
+                        <div class="col-12 my-2 order-1">
                             <div class="card p-0 border-0 rounded-0">
                                 <div class="card-header bg-white">
                                     <h1 class='h5 mb-0'>Réductions</h1>
@@ -222,9 +161,89 @@
                                                 </div> 
                                             </div>
                                         </div>
+                                        @if($shoppingCart->voucher->discountType == 1)
+                                        <small>- {{number_format($shoppingCart->voucher->discountValue, 2)}} % sur une sélection d'articles.</small>
+                                        @elseif($shoppingCart->voucher->discountType == 2)
+                                        <small>- {{$shoppingCart->voucher->discountValue}} € sur votre commande dès {{number_format($shoppingCart->voucher->minimalPrice, 2)}} € d'achat.</small>
+                                        @elseif($shoppingCart->voucher->discountType == 3)
+                                        <small>Frais de port offert sur votre commande.</small>
+                                        @endif
                                     </div>
                                     @endif
-                                    
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+
+                        {{--  Summary  --}}
+                        <div class="col-12 my-2 my-lg-0 mb-lg-2 order-2">
+                            <div class="card p-0 border-0 rounded-0">
+                                <div class="card-header bg-white">
+                                    <h1 class='h5 mb-0'>Résumé</h1>
+                                </div>
+                                <div class="card-body row justify-content-center m-0">
+                                    <div class="col-6 p-0 pb-2">
+                                        <p class="card-text">{{$total_quantity}} produits :</p>
+                                    </div>
+                                    <div class="col-6 p-0 pb-2">
+                                        <p class="card-text text-right">
+                                            @if($shoppingCart->voucher != null && $shoppingCart->voucher->discountType < 3) 
+                                            <del class='text-danger'>{{number_format($products_price_without_voucher, 2)}} €</del><BR>
+                                            <b>- {{number_format($products_price_without_voucher - $shoppingCart->productsPrice, 2)}} € </b><BR>
+                                            @endif 
+                                            {{number_format($shoppingCart->productsPrice, 2)}} € 
+                                        </p>
+                                    </div>
+
+                                    <div class="col-6 p-0 border-top py-2">
+                                        <p class="card-text">Frais de ports :</p>
+                                    </div>
+                                    <div class="col-6 p-0 border-top py-2">
+                                        <p class="card-text text-right">
+                                            @if($shoppingCart->voucher != null && $shoppingCart->voucher->discountType == 3)
+                                            <del class='text-danger'>5,90 €</del><BR>
+                                            @endif
+                                            {{number_format($shoppingCart->shippingPrice, 2)}} €
+                                        </p>
+                                    </div>
+                
+                                    <div class="col-6 p-0 border-top pt-2">
+                                        <p class="card-text font-weight-bold">TOTAL TTC :</p>
+                                    </div>
+                                    <div class="col-6 p-0 border-top pt-2">
+                                        <p class="card-text text-right font-weight-bold">{{number_format($total, 2)}} €</p>
+                                    </div>
+                
+                                    <div class="col-12 border-bottom my-4"></div>
+
+                                    @if($shoppingCart->id == session('shopping_cart')->id)
+                
+                                    <div class="col-12 col-md-6 col-lg-12 mb-2" style='line-height:0;'>
+                                        <small class="small" style="line-height:1rem;">En cliquant sur ce bouton vous acceptez sans 
+                                        réserve les conditions générales de vente.</small>
+                                    </div>
+                                    <div class="col-12 col-md-6 col-lg-12">
+                                        <button type="button" class="btn btn-primary w-100" onclick='load_url("/panier/livraison")'>Valider mon panier</button>
+                                    </div>
+
+                                    @else
+
+                                    <div class="col-12 col-md-6 col-lg-12">
+                                        <button type="button" class="btn btn-primary w-100" onclick='load_url("/panier/{{$shoppingCart->id}}/commander")'>Commander ce panier</button>
+                                    </div>
+
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- SHARING --}}
+                        @if($shoppingCart->id == session('shopping_cart')->id)
+                        <div class="col-12 p-0 my-2 order-3">
+                            <div class="card p-0 border-0 rounded-0">
+                                <div class="card-body row justify-content-center m-0 d-flex flex-column">
+                                    <p>Pour partager votre panier vous pouvez copier le lien ci dessous :</p>
+                                    <p class='small text-center py-2 border rounded-0 text-dark bg-light'>https://www.bebes-lutins.fr/panier/{{$shoppingCart->id}}</p>
                                 </div>
                             </div>
                         </div>
@@ -232,7 +251,7 @@
 
                         {{--  Free shipping info  --}}
                         @if($shoppingCart->id == session('shopping_cart')->id)
-                        <div class="col-12 my-2 my-lg-0 mt-lg-2 order-2">
+                        <div class="col-12 my-2 my-lg-0 mt-lg-2 order-4">
                             @if ($price_before_free_shipping > 0)
                             <div class="card p-0 border-0 rounded-0">
                                 <div class="card-body infos row m-0">
@@ -264,14 +283,6 @@
                 data = JSON.parse(data);
                 if(data.status == 'error') textclass='text-danger';
                 else textclass='text-success';
-
-                console.log(data.products_id);
-
-                index=0;
-                data.products_id.forEach(function(){
-                    $('#product-' + data.products_id[index]).removeClass('border-0').addClass('border-danger');
-                    index ++;
-                });
 
                 $('#voucher-message').remove();
                 $('.voucher').prepend('<p id="voucher-message" class="'+textclass+'">'+ data.message +'</p>');

@@ -52,7 +52,7 @@ class ShoppingCartItemController extends Controller
             }
         } else {
             $item = new ShoppingCartItem();
-            $item->quantity = $quantity;
+            $item->quantity = $quantity - 1;
             $item->shopping_cart_id = $shopping_cart_id;
             $item->product_id = $product_id;
             $item->save();

@@ -16,7 +16,7 @@
                         <div class="col-lg-5 p-0">
                             <p id='popup-product-price' class='mb-0 small'>Prix : 00.00 €</p>
                             <p id='popup-shopping-cart-total' class='mb-0 small'>Total du panier : 00.00€</p>
-                            <input id="popup-item-quantity" class="spinnerProductPopup" type="number" name="quantity" value="1" min="1" max="10" step="1" @if($product ?? ''->stock <= 1) disabled @endif/>
+                            <input id="popup-item-quantity" class="spinnerProductPopup" type="number" name="quantity" value="1" min="1" max="10" step="1"/>
                         </div>
                     </div>
                 </div>

@@ -146,6 +146,7 @@
                         </div>
                     </div>
                 </div>
+                <?php $index++;?>
                 @endforeach
                 @endif
             </div>

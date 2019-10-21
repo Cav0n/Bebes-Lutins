@@ -37,6 +37,18 @@ body{
     cursor: pointer;
 }
 
+.popover{
+    border-color: $danger !important;
+}
+
+.popover .arrow::before{
+    border-right-color: $danger !important;
+}
+
+.popover-body{
+    color:$danger !important;
+}
+
 #logo{
     height:12rem;
     top:-2rem;

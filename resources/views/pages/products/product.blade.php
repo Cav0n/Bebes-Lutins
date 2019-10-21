@@ -76,6 +76,26 @@ if (count($product->reviews) > 0){
                                         </div>
                                     </div>
                                     <div class="row m-0">
+
+                                        {{-- Characteristics --}}
+                                        @foreach($product->characteristics as $characteristic)
+                                        <div class="col-lg-12 p-0">
+                                            <div class="row m-0 justify-content-center justify-content-lg-start">
+                                                <div class="col-7 col-lg-4 offset-2 offset-lg-0 p-0 pr-2">
+                                                    <div class="form-group m-0">
+                                                        <label for="{{$characteristic->name}}">{{$characteristic->name}}</label>
+                                                        <select class="custom-select characteristic" name="{{$characteristic->name}}" id="{{$characteristic->id}}" required>
+                                                            <option selected value=>Choisissez</option>
+                                                            @foreach ($characteristic->options as $option)
+                                                            <option value="{{$option->id}}">{{$option->name}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                        
                                         {{--  Quantity selector  --}}
                                         <div class="col-lg-12 p-0 my-2">
                                             <div class="row m-0 justify-content-center justify-content-lg-start">
@@ -91,10 +111,9 @@ if (count($product->reviews) > 0){
                                         <div class="col-lg-12 p-0 mt-2">
                                             <div class="row m-0">
                                                 <div class="col-8 col-lg-4 offset-2 offset-lg-0 p-0 pr-lg-2">
-                                                    <button type="button" class="btn bg-white border-primary rounded-0 w-100" @if($product->stock > 0) onclick='add_to_cart("{{$product->id}}", "{{$product->name}}", {{$product->price}}, "{{$product->mainImage}}", "{{$product->stock}}", "{{session("shopping_cart")->id}}", $("#item-quantity").val())' @endif @if($product->stock <= 0) disabled @endif>
-                                                        Ajouter au panier</button>
-                                                </div>
-                                                <div class="col-2 p-0 d-flex flex-column justify-content-center">
+                                                    <span class="d-inline-block w-100" data-trigger="hover" data-toggle="popover" data-content="Veuillez fournir les informations manquantes.">
+                                                        <button id='add-to-cart' class="btn btn-primary w-100 rounded-0" style="pointer-events: none;" type="button" @if($product->stock > 0) onclick='add_to_cart("{{$product->id}}", "{{$product->name}}", {{$product->price}}, "{{$product->mainImage}}", "{{$product->stock}}", "{{session("shopping_cart")->id}}", $("#item-quantity").val())' @endif @if($product->stock <= 0) disabled @endif>Ajouter au panier</button>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -272,6 +291,47 @@ if (count($product->reviews) > 0){
 
 @include('components.public.popups.add-to-cart')
 
+{{-- Verify characteristics --}}
+<script>
+
+    var empty = false;
+    $('.characteristic').each(function(){
+        if ($(this).val().length == 0) {
+            empty = true;
+        }
+    });
+
+    if (empty) {
+        $("[data-toggle=popover]").popover("enable");
+        $('#add-to-cart').attr('style', 'pointer-events: none;');
+        $('#add-to-cart').attr('disabled', 'disabled');
+    } else {
+        $("[data-toggle=popover]").popover("disable");
+        $('#add-to-cart').removeAttr('style', '');
+        $('#add-to-cart').removeAttr('disabled');
+    }
+
+    $('.characteristic').on('change', function(){
+        var empty = false;
+        $('.characteristic').each(function(){
+            if ($(this).val().length == 0) {
+                empty = true;
+            }
+        });
+
+        if (empty) {
+            $("[data-toggle=popover]").popover("enable");
+            $('#add-to-cart').attr('style', 'pointer-events: none;');
+            $('#add-to-cart').attr('disabled', 'disabled');
+        } else {
+            $("[data-toggle=popover]").popover("disable");
+            $('#add-to-cart').removeAttr('style', '');
+            $('#add-to-cart').removeAttr('disabled');
+        }
+    });
+
+</script>
+
 {{--  Review creation show / hide  --}}
 <script>
 
@@ -353,4 +413,8 @@ if (count($product->reviews) > 0){
     }
 </script>
 
+{{-- Popover init --}}
+<script>
+    $("[data-toggle=popover]").popover();
+</script>
 @endsection

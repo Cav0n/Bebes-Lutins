@@ -46,6 +46,18 @@ body {
   cursor: pointer;
 }
 
+.popover {
+  border-color: #f33c3c !important;
+}
+
+.popover .arrow::before {
+  border-right-color: #f33c3c !important;
+}
+
+.popover-body {
+  color: #f33c3c !important;
+}
+
 #logo {
   height: 12rem;
   top: -2rem;

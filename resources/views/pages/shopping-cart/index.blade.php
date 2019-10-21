@@ -84,20 +84,12 @@
                                     <div class="col-12 p-0">
                                         <div class="form-group row m-0">
                                             <div class="col-12 col-sm-6 col-lg-7 d-flex p-0 order-1 order-lg-1">
-                                                <div class='d-flex flex-column justify-content-center'>
-                                                    <label for="quantity" class='small mb-0 pr-2'>Quantité :</label>
-                                                </div>
                                                 <div class='d-flex flex-column justify-content-center ld-over'>
-                                                    <select class="form-control" name="quantity" id="quantity" style='font-size:0.7rem;height:1.4rem;max-width:3rem;' onchange="change_quantity($(this), '{{$item->id}}')" @if($shoppingCart->id != session('shopping_cart')->id) disabled @endif>
-                                                        <option value='0'>Supprimer</option>
-                                                        @for ($quantity = 1; ($quantity <= $item->product->stock) && ($quantity <= 10); $quantity++)
-                                                            <option value='{{$quantity}}' @if($item->quantity == $quantity) selected @endif>{{$quantity}}</option>
-                                                        @endfor
-                                                    </select>
+                                                    <input id="item-quantity" class="spinnerProduct" type="number" name="quantity" value="{{$item->quantity}}" min="0" max="{{$item->product->stock}}" step="1" @if($item->product->stock <= 1) disabled @endif onchange="change_quantity($(this), '{{$item->id}}')" style="height:1rem;font-size:0.8rem;"/>
                                                     <div class="ld ld-ring ld-spin"></div>
                                                 </div>
                                                 @if($shoppingCart->id == session('shopping_cart')->id)
-                                                <div class='svg-container ld-over d-flex flex-column justify-content-center ml-2' style='width:1rem;' onclick='remove_item_from_shopping_cart($(this), "{{$item->id}}")'>
+                                                <div class='svg-container ld-over d-flex flex-column justify-content-center ml-2' style='width:2rem;' onclick='remove_item_from_shopping_cart($(this), "{{$item->id}}")'>
                                                     <img class='svg' src='{{asset('images/icons/trash.svg')}}' style='height:1rem;'>
                                                     <div class="ld ld-ring ld-spin"></div>
                                                 </div>
@@ -354,10 +346,16 @@
     }
 </script>
 
+{{-- Custom Spinner --}}
+<script>
+    $(".spinnerProduct").inputSpinner();
+</script>
+
 {{-- CHANGE ITEM QUANTITY --}}
 <script>
     function change_quantity(select, item_id){
         quantity = select.val();
+        console.log(item_id);
 
         if(quantity == 0){
             remove_item_from_shopping_cart(select, item_id);

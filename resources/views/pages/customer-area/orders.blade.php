@@ -17,9 +17,10 @@
             <div class="row my-2">
                 <div class="col-12">
                     <div class='order-container p-2 border'>
-                        <p class='mb-0 font-weight-bold'>Commande passée le {{$order->created_at->formatLocalized('%e %B %Y')}} {!! $order->statusToBadge() !!}</p>
+                        <p class='mb-0 font-weight-bold'>Commande passée le {{Carbon\Carbon::parse($order->created_at)->formatLocalized('%e %B %Y')}} {!! $order->statusToBadge() !!}</p>
                         <p class='mb-0 mt-2'>Prix total : {{number_format($order->productsPrice + $order->shippingPrice, 2)}} €</p>
                         <p class='mb-2'>Frais de livraison : {{number_format($order->shippingPrice, 2)}} €</p>
+                        @if($order->voucher != null) <p class='mb-2 text-danger small'>Code de réduction utilisé : <b>{{$order->voucher->code}}</b> ({{$order->voucher->description()}})</p>@endif
                         <div class="row m-0">
                             <div class="col-12 p-0 d-flex justify-content-between">
                                 <div class='adress-informations'>

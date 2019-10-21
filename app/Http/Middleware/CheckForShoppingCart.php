@@ -77,7 +77,31 @@ class CheckForShoppingCart
             $this->verifyVoucher($shopping_cart->voucher);
         }
 
+        if($shopping_cart->items != null){
+            $this->verifyProductsAvailability($request, $shopping_cart);
+        }
+
         return $next($request);
+    }
+
+    public function verifyProductsAvailability($request, ShoppingCart $shopping_cart){
+        foreach($shopping_cart->items as $item){
+            if($item->product->isHidden == 1) {
+                $item->delete();
+                $request->session()->put('shopping_cart_infos', 'Un ou plusieurs produits qui étaient dans votre panier ne sont plus disponibles.');
+            }
+            if($item->product->isDeleted == 1) {
+                $item->delete();
+                $request->session()->put('shopping_cart_infos', 'Un ou plusieurs produits qui étaient dans votre panier ne sont plus disponibles.');
+            }
+        }
+
+        $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
+        $shopping_cart->updateProductsPrice();
+        $shopping_cart->updateShippingPrice();
+        $shopping_cart->save();
+
+        session(['shopping_cart' => $shopping_cart]);
     }
 
     public function verifyVoucher($voucher){

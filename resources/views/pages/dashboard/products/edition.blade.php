@@ -113,7 +113,7 @@
             </div>
 
             <div class="custom-control custom-checkbox pointer my-2">
-                <input id='is-hidden' name='is-hidden' type="checkbox" class="custom-control-input pointer is-hidden-checkbox" value='{{old("is-hidden", $product->isHidden)}}'>
+                <input id='is-hidden' name='is-hidden' type="checkbox" class="custom-control-input pointer is-hidden-checkbox" @if(old("is-hidden", $product->isHidden) != null) checked @endif>
                 <label class="custom-control-label noselect pointer" for="is-hidden">Caché</label>
             </div>
 

@@ -56,6 +56,12 @@
                 <div class="col-12 col-sm-10 col-lg-5 my-md-2 my-lg-0">
 
                     {{--  Shopping Cart Items for mobiles and tiny tablets  --}}
+                    @if(isset($shoppingCartInfos))
+                    <div class="card p-0 m-0 border-0 rounded-0 mb-2 p-3 bg-warning">
+                        <p class='mb-0 font-weight-bold'>{{$shoppingCartInfos}}</p>
+                    </div>
+                    
+                    @endif
                     @foreach ($shoppingCart->items as $item)
                     <div id='product-{{$item->product->id}}' class="card p-0 m-0 border-0 rounded-0 mb-2">
                         <div class="row m-0 p-0">
@@ -121,7 +127,7 @@
 
                         {{--  Voucher code  --}}
                         @if($shoppingCart->id == session('shopping_cart')->id)
-                        <div class="col-12 my-2 order-1">
+                        <div class="col-12 mb-2 order-1">
                             <div class="card p-0 border-0 rounded-0">
                                 <div class="card-header bg-white">
                                     <h1 class='h5 mb-0'>Réductions</h1>
@@ -239,7 +245,7 @@
 
                         {{-- SHARING --}}
                         @if($shoppingCart->id == session('shopping_cart')->id)
-                        <div class="col-12 p-0 my-2 order-3">
+                        <div class="col-12 p-0 px-lg-3 my-2 order-3">
                             <div class="card p-0 border-0 rounded-0">
                                 <div class="card-body row justify-content-center m-0 d-flex flex-column">
                                     <p>Pour partager votre panier vous pouvez copier le lien ci dessous :</p>
@@ -250,7 +256,7 @@
                         @endif
 
                         {{--  Free shipping info  --}}
-                        @if($shoppingCart->id == session('shopping_cart')->id)
+                        @if($shoppingCart->id == session('shopping_cart')->id && isset($price_before_free_shipping))
                         <div class="col-12 my-2 my-lg-0 mt-lg-2 order-4">
                             @if ($price_before_free_shipping > 0)
                             <div class="card p-0 border-0 rounded-0">

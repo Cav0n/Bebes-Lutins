@@ -102,7 +102,7 @@ $parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'as
                             <div class="col-md-10 mt-2">
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="{{App\Category::where('parent_id', null)->where('isHidden', false)->orderBy('rank', 'asc')->first()->id}}" role="tabpanel" aria-labelledby="{{App\Category::where('parent_id', null)->where('isHidden', false)->first()->id}}-tab">
-                                        <h2>{{App\Category::where('parent_id', null)->where('isHidden', false)->orderBy('rank', 'asc')->first()->name}}</h2>
+                                        <a href='/categories/{{App\Category::where('parent_id', null)->where('isHidden', false)->orderBy('rank', 'asc')->first()->id}}' class='text-dark h2'>{{App\Category::where('parent_id', null)->where('isHidden', false)->orderBy('rank', 'asc')->first()->name}}</a>
                                         <div class='row'>
                                             @foreach (App\Category::where('parent_id', App\Category::where('parent_id', null)->orderBy('rank','asc')->first()->id)->orderBy('rank', 'asc')->get() as $category)
                                             <div class="card m-2" style="width:12rem;cursor:pointer" onclick='load_url("/categories/{{$category->id}}")'>
@@ -117,7 +117,7 @@ $parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'as
 
                                     @foreach (App\Category::where('parent_id', null)->where('isHidden', false)->orderBy('rank', 'asc')->get()->slice(1) as $parent)
                                     <div class="tab-pane fade" id="{{$parent->id}}" role="tabpanel" aria-labelledby="{{$parent->id}}-tab">
-                                        <h2>{{$parent->name}}</h2>
+                                        <a href='/categories/{{$parent->id}}' class='text-dark h2'>{{$parent->name}}</a>
                                         <div class='row'>
                                             @foreach (App\Category::where('parent_id', $parent->id)->orderBy('rank', 'asc')->get() as $category)
                                             <div class="card m-2" style="width:12rem;cursor:pointer" onclick='load_url("/categories/{{$category->id}}")'>

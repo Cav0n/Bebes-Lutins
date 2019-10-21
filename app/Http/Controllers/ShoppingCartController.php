@@ -60,10 +60,13 @@ class ShoppingCartController extends Controller
         $shopping_cart->updateShippingPrice();
         $shopping_cart->save();
         session(['shopping_cart' => $shopping_cart]);
-        
-        //dd($shopping_cart->voucher->discountType);
 
-        return view('pages.shopping-cart.index')->withStep(0)->withShoppingCart($shopping_cart);
+        if(session('shopping_cart_infos') != null){
+            $shopping_cart_infos = session('shopping_cart_infos');
+            session(['shopping_cart_infos' => null]);
+        } else $shopping_cart_infos = null;
+
+        return view('pages.shopping-cart.index')->withStep(0)->withShoppingCart($shopping_cart)->withShoppingCartInfos($shopping_cart_infos);
     }
 
     /**

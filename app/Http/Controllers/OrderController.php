@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Order;
+use App\Product;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -32,6 +34,31 @@ class OrderController extends Controller
 
         header('Content-type: application/json');
         echo json_encode( $data, JSON_PRETTY_PRINT);
+    }
+
+    public function search(Request $request)
+    {
+        $search_words = array_unique(preg_split('/ +/', mb_strtoupper($request['search'])));
+        $selected_products = array();
+        $selected_orders = array();
+
+        $products = Product::all();
+        $orders = Order::all();
+        foreach($products as $product){
+            if(Str::contains(mb_strtoupper($product->name), $search_words)) $selected_products[] = $product;
+        }
+
+        foreach($orders as $order){
+            if(Str::contains(mb_strtoupper($order->user->firstname), $search_words)) $selected_orders[] = $order; break;
+            if(Str::contains(mb_strtoupper($order->user->lastname), $search_words)) $selected_orders[] = $order; break;
+            foreach($order->order_items as $item){
+               foreach($selected_products as $selected_product){
+                   if($item->product->id == $selected_product->id) $selected_orders[] = $order; break;
+               } 
+            }
+        }
+
+        //dd(array_unique($selected_orders));
     }
 
     /**

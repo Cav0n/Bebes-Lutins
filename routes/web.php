@@ -99,6 +99,7 @@ Route::get('/dashboard/commandes/{status}', 'DashboardController@orders'); //TOD
 Route::post('/dashboard/commandes/changer_status/{order}', 'OrderController@update');
 Route::post('/dashboard/commandes/select_order_status', 'DashboardController@select_order_status');
 Route::post('/dashboard/commandes/unselect_order_status', 'DashboardController@unselect_order_status');
+Route::post('/dashboard/commandes/rechercher', 'OrderController@search');
 //PRODUCTS
 Route::get('/dashboard/produits', 'DashboardController@products'); //TODO
 Route::get('/dashboard/produits/nouveau', 'ProductController@create');

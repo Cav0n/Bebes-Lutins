@@ -8,7 +8,8 @@
         </h1>
     </div>
     <div class="card-body">
-        <form action="/dashboard/produits/recherche" method="POST">
+        <form action="/dashboard/commandes/rechercher" method="POST">
+            @csrf
             <div class="row">
                 <div class="col-9">
                     <div class="form-group">

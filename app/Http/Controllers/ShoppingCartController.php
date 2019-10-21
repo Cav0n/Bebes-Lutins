@@ -95,6 +95,18 @@ class ShoppingCartController extends Controller
                 'voucher_code' => 'required|exists:voucher',
             ]);
         }
+
+        if(isset($request['add_message'])){
+            $shopping_cart = ShoppingCart::where('id', $shoppingCart->id)->first();
+            $shopping_cart->customerMessage = $request['message'];
+            $shopping_cart->save();
+
+            $data = ['message' => $request['message']];
+            header('Content-type: application/json');
+            echo json_encode( $data, JSON_PRETTY_PRINT);
+        }
+        header('Content-type: application/json');
+        echo json_encode( ['test'=>"ca marche pas mec"], JSON_PRETTY_PRINT);
     }
 
     /**
@@ -195,6 +207,7 @@ class ShoppingCartController extends Controller
         $order->status = 0;
         $order->user_id = $shopping_cart->user_id;
         $order->voucher_id = $shopping_cart->voucher_id;
+        $order->customerMessage = $shopping_cart->customerMessage;
         $order->shipping_address_id = $shopping_cart->shipping_address_id;
         $order->billing_address_id = $shopping_cart->billing_address_id;
 

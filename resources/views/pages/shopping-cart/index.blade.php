@@ -111,6 +111,22 @@
                         </div>
                     </div>
                     @endforeach
+
+                    <div class="card p-0 m-0 border-0 rounded-0 mb-2">
+                        <div class="card-header bg-white">
+                            <h1 class='h5 mb-0'>Ajouter un message</h1>
+                        </div>
+                        <div class='card-body'>
+                            <p>Si vous souhaitez ajouter des précisions sur votre commande vous pouvez nous laisser un message ici : </p>
+                            <div class="form-group">
+                                <label for="customer-message">Votre message</label>
+                                <div class='textarea-container ld-over'>
+                                    <textarea class="form-control" name="customer-message" id="customer-message" rows="4">@if($shoppingCart->customerMessage != null){{$shoppingCart->customerMessage}}@endif</textarea>
+                                    <div class="ld ld-ring ld-spin"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 {{--  SUMMARY AND OTHERS  --}}
@@ -294,7 +310,7 @@
             beforeSend: function() {
                 btn.addClass('running');
             }
-        }) 
+        });
     }
 
     function remove_voucher(btn){
@@ -344,6 +360,27 @@
             
         }); 
     }
+</script>
+
+{{-- Customer message --}}
+<script>
+    $("#customer-message").on('change', function(){
+        customer_message = this.value;
+        shopping_cart_id = "{{$shoppingCart->id}}";
+        console.log(customer_message);
+        $.ajax({
+            url: "/panier/ajout_message/" + shopping_cart_id,
+            type: 'POST',
+            data: { message:customer_message, add_message:true },
+            success: function(data){
+                console.log('Message ajouté avec succés !');
+                $(this).parent().removeClass('running');
+            },
+            beforeSend: function() {
+                $(this).parent().addClass('running');
+            }
+        });
+    });
 </script>
 
 {{-- Custom Spinner --}}

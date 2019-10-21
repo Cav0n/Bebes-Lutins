@@ -18,6 +18,7 @@ class CreateShoppingCartsTable extends Migration
             $table->boolean('isActive')->default(0);
             $table->decimal('shippingPrice',10,2)->unsigned()->nullable();
             $table->decimal('productsPrice', 10,2)->unsigned()->nullable();
+            $table->text('customerMessage')->nullable();
             
             $table->string('user_id')->nullable();
             $table->string('voucher_id')->nullable();

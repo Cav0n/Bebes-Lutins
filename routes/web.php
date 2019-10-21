@@ -51,6 +51,7 @@ Route::post('/panier/change_quantity/{shoppingCartItem}', 'ShoppingCartItemContr
 Route::delete('/panier/remove_item/{shoppingCartItem}', 'ShoppingCartItemController@destroy');
 Route::post('/panier/code-coupon/ajouter', 'ShoppingCartController@addVoucher');
 Route::post('/panier/code-coupon/supprimer', 'ShoppingCartController@removeVoucher');
+Route::post('/panier/ajout_message/{shopping_cart}', 'ShoppingCartController@update');
 
 Route::get('/panier/livraison', 'ShoppingCartController@showDelivery');
 Route::post('/panier/livraison/validation', 'ShoppingCartController@validateDelivery');

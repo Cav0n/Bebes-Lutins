@@ -22,5 +22,6 @@ class VerifyCsrfToken extends Middleware
         'produits/*',
         'categories/*',
         'commandes/*',
+        'panier/ajout_message*',
     ];
 }

@@ -24,7 +24,7 @@ class CreateOrdersTable extends Migration
 
             $table->string('user_id');
             $table->string('voucher_id')->nullable();
-            $table->string('shipping_address_id');
+            $table->string('shipping_address_id')->nullable();
             $table->string('billing_address_id')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users');

@@ -81,7 +81,7 @@ if (count($product->reviews) > 0){
                                         @foreach($product->characteristics as $characteristic)
                                         <div class="col-lg-12 p-0">
                                             <div class="row m-0 justify-content-center justify-content-lg-start">
-                                                <div class="col-7 col-lg-4 offset-2 offset-lg-0 p-0 pr-2">
+                                                <div class="col-7 col-lg-4 offset-lg-0 p-0 pr-2">
                                                     <div class="form-group m-0">
                                                         <label for="{{$characteristic->name}}">{{$characteristic->name}}</label>
                                                         <select class="custom-select characteristic" name="{{$characteristic->name}}" id="{{$characteristic->id}}" required>

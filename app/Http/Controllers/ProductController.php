@@ -55,9 +55,9 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         if( (!$request->session()->has("selected-categories")) ){
-            return view('pages.products.all-products')->withProducts(Product::where('isHidden', 0)->paginate(16));
+            return view('pages.products.all-products')->withProducts(Product::where('isHidden', 0)->where('isDeleted', 0)->paginate(16));
         } else {
-            if(count(session()->get("selected-categories")) == 0) return view('pages.products.all-products')->withProducts(Product::where('isHidden', 0)->paginate(16));
+            if(count(session()->get("selected-categories")) == 0) return view('pages.products.all-products')->withProducts(Product::where('isHidden', 0)->where('isDeleted', 0)->paginate(16));
             $selected_categories = Category::whereIn('id',session()->get("selected-categories"))->get();
             $products = array();
 

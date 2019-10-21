@@ -28,7 +28,7 @@
                 </div>
 
                 {{-- Highlited Products --}}
-                @foreach (App\Product::all()->take(8) as $product)
+                @foreach (App\Product::where('isHidden', 0)->where('isDeleted', 0)->get()->take(8) as $product)
                     @include('components.public.product-display')
                 @endforeach
 

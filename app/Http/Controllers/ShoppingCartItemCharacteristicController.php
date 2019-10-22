@@ -33,9 +33,16 @@ class ShoppingCartItemCharacteristicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public static function store(Request $request)
     {
-        //
+        $characteristics = $request['characteristics'];
+        foreach ($characteristics as $name=>$option){
+            $characteristic = new ShoppingCartItemCharacteristic();
+            $characteristic->name = $name;
+            $characteristic->selectedOptionName = $option;
+            $characteristic->shopping_cart_item_id = $request['item_id'];
+            $characteristic->save();
+        }
     }
 
     /**

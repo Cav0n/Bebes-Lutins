@@ -56,6 +56,8 @@ class ShoppingCartItemController extends Controller
             $item->shopping_cart_id = $shopping_cart_id;
             $item->product_id = $product_id;
             $item->save();
+            $request['item_id'] = $item->id;
+            ShoppingCartItemCharacteristicController::store($request);
         }
 
         $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
@@ -64,7 +66,7 @@ class ShoppingCartItemController extends Controller
         $shopping_cart->save();
         session(['shopping_cart' => $shopping_cart]);
 
-        $response = ['item_id' => $item->id];
+        $response = ['item_id' => $item->id, 'characteristics' => $item->characteristics];
         echo json_encode($response);
     }
 

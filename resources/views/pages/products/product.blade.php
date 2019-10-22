@@ -87,7 +87,7 @@ if (count($product->reviews) > 0){
                                                         <select class="custom-select characteristic" name="{{$characteristic->name}}" id="{{$characteristic->id}}" required>
                                                             <option selected value=>Choisissez</option>
                                                             @foreach ($characteristic->options as $option)
-                                                            <option value="{{$option->id}}">{{$option->name}}</option>
+                                                            <option value="{{$option->name}}">{{$option->name}}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -296,6 +296,9 @@ if (count($product->reviews) > 0){
 
     var empty = false;
     $('.characteristic').each(function(){
+        console.log($(this).attr('name'));
+        console.log($(this).val());
+        
         if ($(this).val().length == 0) {
             empty = true;
         }
@@ -314,6 +317,8 @@ if (count($product->reviews) > 0){
     $('.characteristic').on('change', function(){
         var empty = false;
         $('.characteristic').each(function(){
+            console.log($(this).attr('name'));
+            console.log($(this).val());
             if ($(this).val().length == 0) {
                 empty = true;
             }

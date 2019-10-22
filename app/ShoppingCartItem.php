@@ -21,4 +21,12 @@ class ShoppingCartItem extends Model
     {
         return $this->belongsTo('App\Product');
     }
+
+    /**
+     * 
+     */
+    public function characteristics()
+    {
+        return $this->hasMany('App\ShoppingCartItemCharacteristic');
+    }
 }

@@ -53,12 +53,20 @@ if(count($shopping_cart->items) > 0){
     
     function add_to_cart(product_id, product_name, product_price, product_image, product_stock, shopping_cart_id, choosen_quantity = 1)
     {
+        characteristics = {};
+        if($(".characteristic")[0]){
+            $('.characteristic').each(function(){
+                characteristics[$(this).attr('name')] =  $(this).val();
+            });
+        }
+        console.log(characteristics);
         $.ajax({
             url: "/panier/add_item",
             type: 'POST',
-            data: { product_id: product_id, shopping_cart_id : shopping_cart_id, quantity: choosen_quantity, },
+            data: { product_id: product_id, shopping_cart_id : shopping_cart_id, quantity: choosen_quantity, characteristics: characteristics },
             success: function(data){
                 response = JSON.parse(data);
+                console.log(response);
                 item_id = response.item_id;
                 new_shopping_cart_total = shopping_cart_total + product_price;
                 product_price_to_change = product_price;

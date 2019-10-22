@@ -57,7 +57,7 @@ class ShoppingCartItemController extends Controller
             $item->product_id = $product_id;
             $item->save();
             $request['item_id'] = $item->id;
-            ShoppingCartItemCharacteristicController::store($request);
+            if($request['characteristics'] != null) ShoppingCartItemCharacteristicController::store($request);
         }
 
         $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();

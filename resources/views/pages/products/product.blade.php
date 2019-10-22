@@ -296,8 +296,6 @@ if (count($product->reviews) > 0){
 
     var empty = false;
     $('.characteristic').each(function(){
-        console.log($(this).attr('name'));
-        console.log($(this).val());
         
         if ($(this).val().length == 0) {
             empty = true;
@@ -317,8 +315,6 @@ if (count($product->reviews) > 0){
     $('.characteristic').on('change', function(){
         var empty = false;
         $('.characteristic').each(function(){
-            console.log($(this).attr('name'));
-            console.log($(this).val());
             if ($(this).val().length == 0) {
                 empty = true;
             }
@@ -341,7 +337,6 @@ if (count($product->reviews) > 0){
 <script>
 
     $('.rate-container').each(function () {
-        console.log($(this).children('.mark-number').text());
         $(this).children('.static-rate').rateYo({
             rating: $(this).children('.mark-number').text(),
             readOnly: true
@@ -371,7 +366,6 @@ if (count($product->reviews) > 0){
                 $(this).next().text(rating + " / 5");
             },
             onSet: function (rating, rateYoInstance) {
-                console.log(rating);
                 $('#mark').val(rating);
             },
         });

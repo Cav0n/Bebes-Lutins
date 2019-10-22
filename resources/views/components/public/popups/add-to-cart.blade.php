@@ -59,22 +59,26 @@ if(count($shopping_cart->items) > 0){
                 characteristics[$(this).attr('name')] =  $(this).val();
             });
         }
-        console.log(characteristics);
         $.ajax({
             url: "/panier/add_item",
             type: 'POST',
             data: { product_id: product_id, shopping_cart_id : shopping_cart_id, quantity: choosen_quantity, characteristics: characteristics },
             success: function(data){
                 response = JSON.parse(data);
-                console.log(response);
+                console.log(response.message);
                 item_id = response.item_id;
                 new_shopping_cart_total = shopping_cart_total + product_price;
                 product_price_to_change = product_price;
                 updated_price = product_price * choosen_quantity;
+                characteristics_string = "";
+                characteristics = response.characteristics
+                characteristics.forEach(function(item, index){
+                    characteristics_string = characteristics_string + " - " +  item.selectedOptionName;
+                });
                 popup_container = $('#add_to_cart_popup_container');
                 popup_container.removeClass('d-none');
                 
-                $('#popup-item-name').text(product_name);
+                $('#popup-item-name').text(product_name + characteristics_string);
                 $('#popup-item-image').attr('src', '/images/products/'+product_image);
                 $('#popup-product-unit-price').text('Prix unitaire : ' + product_price.toFixed(2) + ' €');
                 $('#popup-product-price').text('Prix : ' + updated_price.toFixed(2) + ' €');

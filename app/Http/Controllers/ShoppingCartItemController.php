@@ -38,19 +38,56 @@ class ShoppingCartItemController extends Controller
     public function store(Request $request)
     {
         $shopping_cart = session('shopping_cart');
+        $message = array();
 
         $shopping_cart_id = $request['shopping_cart_id'];
         $product_id = $request['product_id'];
         $product = Product::where('id', $product_id)->first();
         $quantity = $request['quantity'];
 
+        $already_exists = false;
+
+        $message[] = 'YES';
+
         if(ShoppingCartItem::where('shopping_cart_id', $shopping_cart_id)->where('product_id', $product_id)->exists()){
-            $item = ShoppingCartItem::where('shopping_cart_id', $shopping_cart_id)->where('product_id', $product_id)->first();
-            if($product->quantity > ($item->quantity + $quantity)){
-                $item->quantity = $item->quantity + $quantity;
-                $item->save();
+            $message[] = 'ITEM EXISTS';
+            foreach(ShoppingCartItem::where('shopping_cart_id', $shopping_cart_id)->where('product_id', $product_id)->get() as $item){
+                $already_exists = true;
+                $characteristic_nb = count($item->characteristics);
+                
+
+                if($characteristic_nb > 0){
+                    foreach($request['characteristics'] as $name=>$option){
+                        $r_characteristics[] = $option;
+                    }
+                    foreach($item->characteristics as $characteristic){
+                        $message[] = $characteristic->selectedOptionName;
+                        if(! in_array($characteristic->selectedOptionName, $r_characteristics)){
+                            $already_exists = false;
+                            $message[] = $characteristic->selectedOptionName . ' - ' . $r_characteristics[0];
+                        }
+                        if(in_array($characteristic->selectedOptionName, $r_characteristics)){
+                            $already_exists = true;
+                            $message[] = $characteristic->selectedOptionName . ' - ' . $r_characteristics[0];
+                            break;
+                        }
+                    }
+                } else if($request['characteristics'] != null){
+                    $already_exists = false;
+                    break;
+                } else {
+                    $already_exists = true;
+                    break;
+                }
+                if($already_exists){ 
+                    $selected_item = $item;
+                    break;
+                }
+                
             }
-        } else {
+        } else $already_exists = false;
+
+        if(! $already_exists){
             $item = new ShoppingCartItem();
             $item->quantity = $quantity - 1;
             $item->shopping_cart_id = $shopping_cart_id;
@@ -58,6 +95,10 @@ class ShoppingCartItemController extends Controller
             $item->save();
             $request['item_id'] = $item->id;
             if($request['characteristics'] != null) ShoppingCartItemCharacteristicController::store($request);
+        } else {
+            $quantity--;
+            $selected_item->quantity = $selected_item->quantity + $quantity;
+            $selected_item->save();
         }
 
         $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
@@ -66,7 +107,7 @@ class ShoppingCartItemController extends Controller
         $shopping_cart->save();
         session(['shopping_cart' => $shopping_cart]);
 
-        $response = ['item_id' => $item->id, 'characteristics' => $item->characteristics];
+        $response = ['item_id' => $item->id, 'characteristics' => $item->characteristics, 'message' => $message];
         echo json_encode($response);
     }
 

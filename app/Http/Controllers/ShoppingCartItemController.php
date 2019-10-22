@@ -88,16 +88,30 @@ class ShoppingCartItemController extends Controller
         } else $already_exists = false;
 
         if(! $already_exists){
+            $existing_quantity = 0;
+            foreach(ShoppingCartItem::where('shopping_cart_id', $shopping_cart_id)->where('product_id', $product_id)->get() as $item){
+                $existing_quantity += $item->quantity;
+            }
             $item = new ShoppingCartItem();
             $item->quantity = $quantity - 1;
             $item->shopping_cart_id = $shopping_cart_id;
             $item->product_id = $product_id;
             $item->save();
+            if(($item->quantity + $existing_quantity) > $item->product->stock) {
+                $item->quantity = $item->product->stock;
+                $item->save();
+            }
             $request['item_id'] = $item->id;
             if($request['characteristics'] != null) ShoppingCartItemCharacteristicController::store($request);
         } else {
             $quantity--;
+            $existing_quantity = 0;
+            foreach(ShoppingCartItem::where('shopping_cart_id', $shopping_cart_id)->where('product_id', $product_id)->get() as $item){
+                $existing_quantity += $item->quantity;
+            }
             $selected_item->quantity = $selected_item->quantity + $quantity;
+            if($existing_quantity > $selected_item->product->stock) $selected_item->quantity = $selected_item->product->stock - $existing_quantity;
+
             $selected_item->save();
         }
 
@@ -149,16 +163,20 @@ class ShoppingCartItemController extends Controller
         $stock = $shoppingCartItem->product->stock;
         $new_quantity = $request['quantity'];
 
-        if(isset($request['add'])){
-            if($stock > $shoppingCartItem->quantity + $new_quantity){
-                $shoppingCartItem->quantity = $shoppingCartItem->quantity + $new_quantity;
-            } else $shoppingCartItem->quantity = $stock;
-        } else {
-            if($stock > $new_quantity){
-                $shoppingCartItem->quantity = $new_quantity;
-            } else  $shoppingCartItem->quantity = $stock;
+        $existing_quantity = 0;
+        foreach(ShoppingCartItem::where('shopping_cart_id', $shoppingCartItem->shoppingCart->id)->where('product_id', $shoppingCartItem->product->id)->get() as $item){
+            $existing_quantity += $item->quantity;
         }
 
+        if(isset($request['add'])){
+            if($stock >= $existing_quantity + $new_quantity){
+                $shoppingCartItem->quantity = $shoppingCartItem->quantity + $new_quantity;
+            } else $shoppingCartItem->quantity = $stock - $existing_quantity;
+        } else {
+            if($stock >= $existing_quantity + $new_quantity){
+                $shoppingCartItem->quantity = $new_quantity;
+            } else  $shoppingCartItem->quantity = $stock - $existing_quantity;
+        }
         $shoppingCartItem->save();
 
         $shopping_cart = session('shopping_cart');

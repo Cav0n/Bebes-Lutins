@@ -138,6 +138,9 @@ class ShoppingCartItemController extends Controller
      */
     public function destroy(ShoppingCartItem $shoppingCartItem)
     {
+        foreach($shoppingCartItem->characteristics as $characteristic){
+            $characteristic->delete();
+        }
         $shoppingCartItem->delete();
 
         $shopping_cart = session('shopping_cart');

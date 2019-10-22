@@ -8,6 +8,7 @@ use App\Voucher;
 use App\Address;
 use App\Order;
 use App\OrderItem;
+use App\OrderItemCharacteristic;
 use Carbon;
 use App\Http\Controllers\AddressController;
 use Illuminate\Http\Request;
@@ -223,6 +224,14 @@ class ShoppingCartController extends Controller
             $order_item->product_id = $item->product->id;
             $order_item->order_id = $order->id;
             $order_item->save();
+
+            foreach($item->characteristics as $characteristic){
+                $item_characteristic = new OrderItemCharacteristic();
+                $item_characteristic->name = $characteristic->name;
+                $item_characteristic->selectedOptionName = $characteristic->selectedOptionName;
+                $item_characteristic->order_item_id = $order_item->id;
+                $item_characteristic->save();
+            }
         }
 
         session(['shopping_cart' => null]);

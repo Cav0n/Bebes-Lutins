@@ -61,7 +61,7 @@
                                     <img class='w-100 h-100' src='{{asset("images/products/".$item->product->mainImage)}}' style='object-fit:cover;'>
                                 </div>
                                 <div class="col-6 col-lg-6 p-2 p-lg-0 px-lg-2 d-flex flex-column justify-content-center">
-                                    <small>{{$item->productName}}</small>
+                                    <small>{{$item->productName}} @if(count($item->characteristics) > 0) @foreach($item->characteristics as $characteristic) - {{$characteristic->selectedOptionName}} @endforeach @endif</small>
                                 </div>
                                 <div class="col-3 col-lg-2 p-0 d-flex flex-column justify-content-center">
                                     <p class='mb-0 text-right'>{{number_format($item->unitPrice, 2)}} €</p>

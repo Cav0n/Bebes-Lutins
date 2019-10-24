@@ -76,6 +76,7 @@ class ShoppingCartItemController extends Controller
                     $already_exists = false;
                     break;
                 } else {
+                    $selected_item = $item;
                     $already_exists = true;
                     break;
                 }
@@ -173,9 +174,9 @@ class ShoppingCartItemController extends Controller
                 $shoppingCartItem->quantity = $shoppingCartItem->quantity + $new_quantity;
             } else $shoppingCartItem->quantity = $stock - $existing_quantity;
         } else {
-            if($stock >= $existing_quantity + $new_quantity){
+            if($stock >= ($existing_quantity - $shoppingCartItem->quantity) +  $new_quantity){
                 $shoppingCartItem->quantity = $new_quantity;
-            } else  $shoppingCartItem->quantity = $stock - $existing_quantity;
+            } else  $shoppingCartItem->quantity = $stock - ($existing_quantity - $shoppingCartItem->quantity);
         }
         $shoppingCartItem->save();
 

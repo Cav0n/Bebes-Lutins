@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Order;
 use App\Address;
+use App\Mail\AccountCreated;
 use App\Http\Requests\Login; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+
 
 class CustomerAreaController extends Controller
 {
@@ -71,6 +74,8 @@ class CustomerAreaController extends Controller
         $user->save();
 
         Auth::login($user);
+
+        Mail::to("super_craftman@hotmail.fr")->send(new AccountCreated($user));
 
         return redirect('/espace-client');
     }

@@ -17,7 +17,12 @@ class PageController extends Controller
 
     public function test_mail()
     {
-        Mail::to("cav0n@hotmail.fr")->send(new AccountCreated());
+        Mail::to("super_craftman@hotmail.fr")->send(new AccountCreated());
         echo 'OK';
+    }
+
+    public function test_mail_ui()
+    {
+        return view('emails.account.account-created');
     }
 }

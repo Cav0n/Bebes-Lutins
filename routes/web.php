@@ -13,6 +13,7 @@
 
 Route::get('/', 'PageController@index');
 Route::get('/tests/mail', 'PageController@test_mail');
+Route::get('/tests/mail_ui', 'PageController@test_mail_ui');
 
 /**
  * Categories

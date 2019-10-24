@@ -2,23 +2,29 @@
 
 namespace App\Mail;
 
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Auth;
 
 class AccountCreated extends Mailable
 {
     use Queueable, SerializesModels;
+
+    public $user;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->subject('Votre compte Bébés Lutins');
+        $this->user = $user;
+        
     }
 
     /**
@@ -28,6 +34,6 @@ class AccountCreated extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.tests.first');
+        return $this->view('emails.account.account-created');
     }
 }

@@ -3,18 +3,14 @@
 @section('content')
 <main class='row justify-content-center m-0 my-5 px-4 px-sm-0'>
     <div class="col-12 col-sm-10 col-md-8 col-lg-5">
-        <h1 class="text-primary h2">Votre commande à été enregistrée !</h1>
+        <h1 class="text-primary h2">{!!$title!!}</h1>
         <p class="text-justify">
-            Bonjour {{$order->user->firstname}} {{$order->user->lastname}}, nous vous remercions 
-            d'avoir passé commande sur notre site !
-            Nous nous occupons de celle ci dans les plus brefs délais.
-            Vous pouvez vérifier son état dans votre 
-            <a href='https://www.bebes-lutins.fr/espace-client/commandes'>espace client</a>.<BR>
-            <BR>
+            {!!$infos!!}
+        </p>
+
+        <p>
             Belle journée,<BR>
             L'équipe Bébés Lutins 💚<BR>
-            <BR>
-            L'identifiant de cette commande est : <b>#{{$order->id}}</b><BR>
         </p>
 
         <div class="row m-0 py-4">

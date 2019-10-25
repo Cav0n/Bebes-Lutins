@@ -6,6 +6,7 @@ use App\Order;
 use App\Product;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrderController extends Controller
 {
@@ -130,6 +131,8 @@ class OrderController extends Controller
     {
         $order->status = $request['status'];
         $order->save();
+
+        Mail::to($order->user->email)->send(new \App\Mail\OrderUpdated($order, "Votre commande a été mis à jour !", "Et oui elle a bien été mis à jour !"));
     }
 
     /**

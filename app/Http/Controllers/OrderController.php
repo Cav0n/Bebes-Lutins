@@ -106,7 +106,7 @@ class OrderController extends Controller
 
     public function showThanks()
     {
-        dd('Merci');
+        return view('pages.shopping-cart.thanks');
     }
 
     /**

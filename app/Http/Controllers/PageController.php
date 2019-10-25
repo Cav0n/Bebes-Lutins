@@ -17,12 +17,14 @@ class PageController extends Controller
 
     public function test_mail()
     {
-        Mail::to("super_craftman@hotmail.fr")->send(new AccountCreated());
+        $order = \App\Order::where('id', '5DB2BE7090')->first();
+
+        Mail::to($order->user->email)->send(new \App\Mail\OrderCreated($order));
         echo 'OK';
     }
 
     public function test_mail_ui()
     {
-        return view('emails.account.account-created');
+        return view('emails.orders.order-created')->withOrder(\App\Order::where('id', '5DB2BE7090')->first());
     }
 }

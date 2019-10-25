@@ -104,4 +104,20 @@ class Order extends Model
                 break;
         }    
     }
+
+    public function paymentMethodToString(){
+        switch($this->paymentMethod){
+            case 1:
+            return 'carte bancaire';
+            break;
+
+            case 2:
+            return 'chèque bancaire';
+            break;
+
+            default:
+            return '[moyen de paiement inconnu]';
+            break;
+        }
+    }
 }

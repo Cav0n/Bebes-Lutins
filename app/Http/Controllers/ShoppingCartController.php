@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Carbon;
+use Auth;
 use App\ShoppingCart;
 use App\ShoppingCartItem;
 use App\Voucher;
@@ -9,10 +11,10 @@ use App\Address;
 use App\Order;
 use App\OrderItem;
 use App\OrderItemCharacteristic;
-use Carbon;
+use App\Mail\OrderCreated;
 use App\Http\Controllers\AddressController;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
-use Auth;
 
 class ShoppingCartController extends Controller
 {
@@ -234,7 +236,12 @@ class ShoppingCartController extends Controller
             }
         }
 
+        $shopping_cart->isActive = 0;
+        $shopping_cart->save();
+
         session(['shopping_cart' => null]);
+
+        Mail::to($order->user->email)->send(new \App\Mail\OrderCreated($order));
 
         return redirect("/merci");
     }

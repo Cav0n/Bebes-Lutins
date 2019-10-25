@@ -16,7 +16,7 @@ $parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'as
 <header class='sticky-top p-0 container-fluid border-bottom'>
     <img id='logo' src="{{asset('images/logo.png')}}" class='fixed-top zindex-tooltip transition-fast d-none d-lg-flex' alt="Logo Bébés Lutins" style='height:12rem;' onclick='load_url("/")'>
     <nav id='top-navbar' class="navbar navbar-expand-lg navbar-dark bg-white sticky-top p-0">
-        <a class="navbar-brand text-secondary font-weight-bold ml-3 d-flex d-lg-none" href="/" style='font-size:2rem;font-weight:900 !important;'>Bébés Lutins</a>
+        <a class="navbar-brand text-secondary font-weight-bold ml-3 mr-0 d-flex d-lg-none" href="/" style='font-size:2rem;font-weight:900 !important;'>Bébés Lutins</a>
         <button class="navbar-toggler d-lg-none m-3 bg-secondary" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>

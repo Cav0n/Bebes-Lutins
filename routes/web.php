@@ -64,6 +64,7 @@ Route::get('/panier/paiement/carte-bancaire', 'ShoppingCartController@showCredit
 Route::get('/panier/paiement/validation/cheque', 'ShoppingCartController@validateChequePayment');
 Route::get('/panier/paiement/validation/carte-bancaire', 'ShoppingCartController@validateCreditCartPayment');
 Route::get('/merci', 'OrderController@showThanks');
+Route::get('/panier/paiement/erreur', 'OrderController@showErrorPayment');
  /* ---------------- */
 
 /**
@@ -140,4 +141,5 @@ Route::delete('/delete_image', 'ImageController@destroy');
  * UTILS
  */
 Route::post('/addresses/{address}', 'AddressController@get');
+Route::post('/know_thanks_to/add', 'OrderController@addKnowThanksTo');
  /* ---------------- */

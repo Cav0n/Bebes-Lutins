@@ -7,6 +7,7 @@ use App\Product;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -62,6 +63,17 @@ class OrderController extends Controller
         //dd(array_unique($selected_orders));
     }
 
+    public function addKnowThanksTo(Request $request)
+    {
+        if($request['answer'] != 'other') $request['answer_precision'] = null;
+
+        DB::table('knowed_thanks_to')->insert([
+            'answer' => $request['answer'],
+            'answer_precision' => $request['answer_precision'],
+            'user_id' => $request['user_id'],
+        ]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -107,6 +119,11 @@ class OrderController extends Controller
     public function showThanks()
     {
         return view('pages.shopping-cart.thanks');
+    }
+
+    public function showErrorPayment()
+    {
+        return view('pages.shopping-cart.payment-error');
     }
 
     /**

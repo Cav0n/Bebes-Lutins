@@ -57,6 +57,16 @@ class Product
         $this->hide = $hide;
     }
 
+    public function getID2(): String
+    {
+        $id = $this->getName();
+        $id = UtilsModel::replace_accent_and_keep_space($id);
+        $id = str_replace(' ', '-', $id); // Replaces all spaces with hyphens.
+        $id = preg_replace('/[^A-Za-z0-9\-]/', '', $id); // Removes special chars.
+        
+        return preg_replace('/-+/', '-', $id); // Replaces multiple hyphens with single one.
+    }
+
     /**
      * @return String
      */
@@ -279,6 +289,18 @@ class Product
     public function setReference($reference): void
     {
         $this->reference = $reference;
+    }
+
+    function multiexplode ($delimiters,$string) {
+    
+        $ready = str_replace($delimiters, $delimiters[0], $string);
+        $launch = explode($delimiters[0], $ready);
+        return  $launch;
+    }
+
+    public function getTagsArray()
+    {
+        return $this->multiexplode(array(',', ';'), $this->tags);
     }
 
     /**

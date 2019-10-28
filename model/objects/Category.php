@@ -33,6 +33,16 @@ class Category
         $this->private = $private;
     }
 
+    public function getID(): String
+    {
+        $id = $this->getName();
+        $id = UtilsModel::replace_accent_and_keep_space($id);
+        $id = str_replace(' ', '-', $id); // Replaces all spaces with hyphens.
+        $id = preg_replace('/[^A-Za-z0-9\-]/', '', $id); // Removes special chars.
+
+        return preg_replace('/-+/', '-', $id); // Replaces multiple hyphens with single one.
+    }
+
     /**
      * @return String nameForURL
      */

@@ -113,6 +113,11 @@ class UserConnected extends User
         $this->mail = $mail;
     }
 
+    public function getPhoneWithoutSpaces()
+    {
+        return substr($this->phone, 0, 10);
+    }
+
     /**
      * @return String
      */

@@ -25,6 +25,23 @@ class CategoryGateway
         return $results;
     }
 
+    public static function GetCategoriesBackup() : array{
+        global $dblogin, $dbpassword, $dsn;
+        $con = new Connexion($dsn, $dblogin, $dbpassword);
+        $results = array();
+
+        $query ="SELECT name, parent, image, description, rank, tags, private FROM category_backup GROUP BY name";
+        $con->executeQuery($query);
+        $categories = $con->getResults();
+
+        foreach ($categories as $category){
+            $categ = new Category($category['name'], $category['parent'], new ImageCategory($category['image']), $category['description'], $category['rank'], $category['tags'], $category['private']);
+            $results[] = $categ;
+        }
+
+        return $results;
+    }
+
     public static function AddCategory(String $name, $parent, String $image, String $description, int $rank, $tags, $private ){
         global $dblogin, $dbpassword, $dsn;
         $con = new Connexion($dsn, $dblogin, $dbpassword);

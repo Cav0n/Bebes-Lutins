@@ -23,7 +23,7 @@ class CreateAddressesTable extends Migration
             $table->string('city');
             $table->string('complement')->nullable();
             $table->string('company')->nullable();
-            $table->boolean('is_deleted')->nullable()->default(false);
+            $table->boolean('isDeleted')->nullable()->default(false);
 
             $table->string('email')->nullable();
             $table->string('phone')->nullable();

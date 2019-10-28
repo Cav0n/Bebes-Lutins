@@ -22,7 +22,16 @@ class CreateCategoriesTable extends Migration
             $table->boolean('isHidden')->nullable()->default(false);
             $table->boolean('isDeleted')->nullable()->default(false);
 
-            $table->string('parent_id')->nullable()->index();
+            // The previous `nestedSet` blueprint helper is equivalent to
+            // the following column/field declarations:
+            //
+            $table->string('parent_id')->nullable();
+            $table->integer('left')->unsigned()->nullable()->index();
+            $table->integer('right')->unsgined()->nullable()->index();
+            $table->integer('depth')->unsigned()->nullable()->index();
+            //
+            // Feel free to modify at your own will but note that all columns
+            // *must be present* and initialized on the model accordingly.
             
             $table->timestamps();
         });

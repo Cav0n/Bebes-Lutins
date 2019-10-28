@@ -15,7 +15,7 @@ class CategoryImage extends Migration
     {
         Schema::create('category_image', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('category_id')->unsigned();
+            $table->string('category_id');
             $table->bigInteger('image_id')->unsigned();
 
             $table->foreign('category_id')->references('id')->on('categories');

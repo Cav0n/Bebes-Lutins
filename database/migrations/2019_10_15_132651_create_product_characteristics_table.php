@@ -17,7 +17,7 @@ class CreateProductCharacteristicsTable extends Migration
             $table->increments('id');
             $table->string('name');
 
-            $table->integer('product_id')->unsigned();
+            $table->string('product_id');
 
             $table->foreign('product_id')->references('id')->on('products');
 

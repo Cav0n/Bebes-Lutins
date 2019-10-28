@@ -19,7 +19,7 @@ class CreateOrderItemsTable extends Migration
             $table->integer('quantity')->unsigned();
             $table->decimal('unitPrice',10,2)->unsigned();
 
-            $table->integer('product_id')->unsigned();
+            $table->string('product_id');
             $table->string('order_id');
 
             $table->foreign('order_id')->references('id')->on('orders');

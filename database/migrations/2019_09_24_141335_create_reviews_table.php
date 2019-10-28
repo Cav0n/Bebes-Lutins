@@ -22,7 +22,7 @@ class CreateReviewsTable extends Migration
             $table->text('adminResponse')->nullable();
             $table->boolean('isDeclined')->default(0);
 
-            $table->integer('product_id')->unsigned();
+            $table->string('product_id');
             $table->string('user_id')->nullable();
 
             $table->foreign('product_id')->references('id')->on('products');

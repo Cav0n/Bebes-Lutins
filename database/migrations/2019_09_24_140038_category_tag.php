@@ -15,7 +15,7 @@ class CategoryTag extends Migration
     {
         Schema::create('category_tag', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('category_id')->unsigned();
+            $table->string('category_id');
             $table->bigInteger('tag_id')->unsigned();
 
             $table->foreign('category_id')->references('id')->on('categories');

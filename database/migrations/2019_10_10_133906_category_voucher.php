@@ -15,7 +15,7 @@ class CategoryVoucher extends Migration
     {
         Schema::create('category_voucher', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('category_id')->unsigned();
+            $table->string('category_id');
             $table->string('voucher_id');
 
             $table->foreign('category_id')->references('id')->on('categories');

@@ -20,7 +20,7 @@ class CreateShoppingCartItemsTable extends Migration
             $table->decimal('newPrice', 10, 2)->nullable();
             
 
-            $table->integer('product_id')->unsigned();
+            $table->string('product_id');
             $table->string('shopping_cart_id');
 
             $table->foreign('product_id')->references('id')->on('products');

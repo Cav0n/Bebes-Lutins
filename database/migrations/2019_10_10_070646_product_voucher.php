@@ -15,7 +15,7 @@ class ProductVoucher extends Migration
     {
         Schema::create('product_voucher', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('product_id')->unsigned();
+            $table->string('product_id');
             $table->string('voucher_id');
 
             $table->foreign('product_id')->references('id')->on('products');

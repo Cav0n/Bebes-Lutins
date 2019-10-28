@@ -21,7 +21,7 @@ class KnowedThanksTo extends Migration
             $table->string('user_id');
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->timestamps()->useCurrent();
+            $table->timestamps();
         });
     }
 

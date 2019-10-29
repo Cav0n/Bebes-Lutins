@@ -90,7 +90,7 @@ class CustomerAreaController extends Controller
     }
 
     public function addressPage(){
-        $addresses = Auth::user()->addresses->where('is_deleted', 0);
+        $addresses = Auth::user()->addresses;
         return view('pages.customer-area.address')->withAddresses($addresses);
     }
 

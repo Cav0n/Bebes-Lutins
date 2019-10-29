@@ -34,6 +34,12 @@
           <a href='https://www.facebook.com/bebes.lutins' class='text-dark' style='text-decoration:none;'>
           <img src='{{asset('images/icons/facebook.svg')}}'s> - Facebook</a>
         </li>
+        @if(Auth::check() && Auth::user()->isAdmin && Auth::user()->privileges > 0)
+        <li class='social-link-container bg-light border col-6 col-md-6 col-lg-8 max-content pr-3'>
+          <a href='/dashboard' class='text-dark' style='text-decoration:none;'>
+          <img src='{{asset('images/icons/dashboard.svg')}}'s> - Dashboard</a>
+        </li>
+        @endif
       </ul>
     </div>
     <div class="col-12 col-md-6 col-lg-3 order-2 order-lg-3">

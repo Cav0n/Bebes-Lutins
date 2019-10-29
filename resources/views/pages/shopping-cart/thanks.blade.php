@@ -35,7 +35,7 @@
                 <p class='mb-0'>Vous allez recevoir une confirmation de commande par mail.</p>
                 <p>Retrouvez le suivi de votre commande dans votre espace "mon compte", rubrique "mes commandes". </p>
                 <div class="col-12 p-0 d-flex justify-content-center">
-                    <button class='btn btn-primary rounded-0'>Voir mes commandes</button>                    
+                    <button class='btn btn-primary rounded-0' onclick='load_url("/espace-client/commandes")'>Voir mes commandes</button>                    
                 </div>
             </div>
 

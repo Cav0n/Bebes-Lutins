@@ -212,7 +212,7 @@ class AddressController extends Controller
      */
     public function destroy(Address $address)
     {
-        $address->is_deleted = true;
+        $address->isDeleted = true;
         $address->save();
     }
 }

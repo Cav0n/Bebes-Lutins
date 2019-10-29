@@ -129,7 +129,7 @@ if (count($product->reviews) > 0){
                     <div class="card rounded-0 border-0">
                         <div class="card-body p-0 p-lg-3">
                             <h4 class="card-title px-0 px-lg-2 d-none d-sm-flex">Description</h4>
-                            <p class="card-text px-0 px-lg-2">{{$product->description}}</p>
+                            <p class="card-text px-0 px-lg-2">{!!$product->description!!}</p>
                         </div>
                     </div>
                 </div>

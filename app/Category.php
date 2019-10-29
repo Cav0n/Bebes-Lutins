@@ -8,6 +8,8 @@ use Baum\NestedSet\Node as WorksAsNestedSet;
 class Category extends Model
 {
     use WorksAsNestedSet;
+    protected $primaryKey = 'id';
+    public $incrementing = false;
 
     /**
      * The products that belongs to the category.

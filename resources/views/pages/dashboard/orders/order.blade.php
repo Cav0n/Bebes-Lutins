@@ -40,7 +40,7 @@
 
     <div class="row">
         <div class="col-12">
-            <h1 class='h4 mb-0'><b>Commande passée le {{$order->created_at}}</b></h1>
+            <h1 class='h4 mb-0'><b>Commande passée le {{Carbon\Carbon::parse($order->created_at)->formatLocalized('%e %B %Y')}}</b></h1>
             <p class='mb-2 small'>Payée par {{$order->paymentMethodToString()}}</p>
             <table class='table table-striped'>
                 <thead>

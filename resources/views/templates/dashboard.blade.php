@@ -38,7 +38,7 @@
 <body>
     <main class='container-fluid'>
         <div class="row justify-content-md-center">
-            <div class="col-lg-10 col-xl-8">
+            <div class="col-lg-11 col-xl-9">
             @include('layouts.dashboard.header')
             
             <div class="row">

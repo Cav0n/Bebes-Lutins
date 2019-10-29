@@ -104,6 +104,7 @@ Route::post('/dashboard/commandes/changer_status/{order}', 'OrderController@upda
 Route::post('/dashboard/commandes/select_order_status', 'DashboardController@select_order_status');
 Route::post('/dashboard/commandes/unselect_order_status', 'DashboardController@unselect_order_status');
 Route::post('/dashboard/commandes/rechercher', 'OrderController@search');
+Route::get('/dashboard/commandes/fiche/{order}', 'OrderController@show');
 //PRODUCTS
 Route::get('/dashboard/produits', 'DashboardController@products'); //TODO
 Route::get('/dashboard/produits/nouveau', 'ProductController@create');
@@ -127,6 +128,7 @@ Route::get('/dashboard/clients/avis', 'DashboardController@reviews');
 Route::get('/dashboard/clients/avis/{review}', 'ReviewController@show');
 Route::post('/dashboard/clients/avis/repondre/{review}', 'ReviewController@update');
 Route::post('/dashboard/clients/avis/supprimer-reponse/{review}','ReviewController@update');
+Route::get('/dashboard/clients/fiche/{user}', "DashboardController@customer");
 //OTHERS
 Route::get('/dashboard/reductions', 'DashboardController@vouchers'); //TODO
 Route::get('/dashboard/reductions/nouveau', 'VoucherController@create'); //TODO

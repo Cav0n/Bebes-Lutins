@@ -25,18 +25,16 @@
             <thead>
                 <tr class='d-flex'>
                     <th class='border-top-0 col-3'>Nom</th>
-                    <th class='border-top-0 col-5'>Email</th>
+                    <th class='border-top-0 col-6'>Email</th>
                     <th class='border-top-0 col-3'>Téléphone</th>
-                    <th class='border-top-0 col-1' ></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($users as $user)
-                <tr class='d-flex'>
-                    <td class='col-3'>{{$user->firstname}} {{$user->lastname}}</td>
-                    <td class='col-5'>{{$user->email}}</td>
+                <tr class='d-flex' onclick='load_url("/dashboard/clients/fiche/{{$user->id}}")'>
+                    <td class='col-3'><b>{{$user->firstname}} {{$user->lastname}}</b></td>
+                    <td class='col-6'>{{$user->email}}</td>
                     <td class='col-3'>{{$user->phone}}</td>
-                    <td class='col-1'><img src='{{asset('images/icons/eye.svg')}}' style='height:1.4rem;width:1.4rem;'></td>
                 </tr>
                 @endforeach
             </tbody>

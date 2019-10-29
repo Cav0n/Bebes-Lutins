@@ -81,6 +81,10 @@ class DashboardController extends Controller
         return view('pages.dashboard.customers')->withUsers($users);
     }
 
+    public function customer(User $user){
+        return view('pages.dashboard.customers.customer')->withCustomer($user);
+    }
+
     public function reviews(){
         $reviews = Review::where('id', '!=', null)->orderBy('created_at', 'desc')->paginate(20);
         return view('pages.dashboard.reviews')->withReviews($reviews);

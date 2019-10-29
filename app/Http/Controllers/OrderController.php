@@ -113,7 +113,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        dd($order);
+        return view('pages.dashboard.orders.order')->withOrder($order);
     }
 
     public function showThanks()

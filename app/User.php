@@ -75,7 +75,7 @@ class User extends Authenticatable
      */
     public function addresses()
     {
-        return $this->hasMany('App\Address')->where('isDeleted', '0')->orderBy('street', 'asc');
+        return $this->hasMany('App\Address')->where('isDeleted', null)->orderBy('street', 'asc');
     }
 
     /**

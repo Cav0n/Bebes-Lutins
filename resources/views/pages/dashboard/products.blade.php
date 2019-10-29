@@ -39,7 +39,7 @@
             </thead>
             <tbody>
                 @foreach ($products as $product)
-                <tr class='@if($product->isHidden){{'hidden'}}@endif' onclick="load_url('/dashboard/produits/edition/' + {{$product->id}})">
+                <tr class='@if($product->isHidden){{'hidden'}}@endif' onclick="load_url('/dashboard/produits/edition/' + '{{$product->id}}')">
                     <td scope="row">{{$product->name}}<BR> 
                         @foreach ($product->categories as $category)
                             <small class='text-muted'>{{$category->name}}</small><BR>

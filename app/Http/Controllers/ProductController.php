@@ -316,7 +316,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        echo "TODO";
+        $product->categories()->detach();
+        $product->delete();
     }
 
     public function add_selected_category(Category $category){

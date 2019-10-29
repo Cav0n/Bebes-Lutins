@@ -38,10 +38,13 @@
 @endif
 
 <div class="card bg-white my-3">
-    <div class="card-header bg-white">
+    <div class="card-header bg-white d-flex justify-content-between">
         <h1 class='h4 m-0 font-weight-normal'>
             {{$product->name}}
         </h1>
+        <button class='btn btn-danger ld-over' onclick='remove_product($(this), "{{$product->id}}")'>
+            Supprimer
+            <div class="ld ld-ring ld-spin"></div></button>
     </div>
     <div class="card-body">
         <form action='/dashboard/produits/edition/{{$product->id}}' method="POST">
@@ -209,6 +212,26 @@ $.ajaxSetup({
 });
 </script>
 
+{{-- Remove product --}}
+<script>
+    function remove_product(btn, product_id){
+        $.ajax({
+            url: "/dashboard/produits/supprimer/" + product_id,
+            type: 'DELETE',
+            data: { },
+            success: function(data){
+                alert('PRODUIT SUPPRIMÉ AVEC SUCCES')
+            },
+            error: function(data) {
+                alert('Suppression impossible')
+            },
+            beforeSend: function() {
+                btn.addClass('running');
+            }
+        });
+    }
+</script>
+
 {{-- TAGIFY --}}
 <script>
     $input = $('#tags').tagify();
@@ -265,6 +288,7 @@ $.ajaxSetup({
                 });
             });
             //POPULATE
+            @if($product->images->first() != null)
             // Create the mock file:
             var mockFile = { name: "{{$product->mainImage}}", size: {{$product->images->first()->size}} };
 
@@ -276,6 +300,7 @@ $.ajaxSetup({
 
             // Make sure that there is no progress bar, etc...
             this.emit("complete", mockFile);
+            @endif
         }
     });
 

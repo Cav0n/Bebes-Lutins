@@ -48,7 +48,9 @@ class CustomerAreaController extends Controller
         if (Auth::attempt($credentials)) {
             $user = User::where('email', $credentials['email'])->first();
             Auth::login($user);
-            return redirect('/espace-client/profil');
+            $redirectTo = $request->session()->get('returnTo', '/espace-client/profil');
+            $request->session()->forget('returnTo');
+            return redirect($redirectTo);
         } else {
             return redirect('/espace-client/connexion')->withErrors(['password' => 'Mot de passe incorrect'])->withInput(['email'=>$request['email']]);
         }

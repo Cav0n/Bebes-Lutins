@@ -19,6 +19,7 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
+        session(['returnTo' => url()->current()]);
         if(Auth::check() && Auth::user()->isAdmin){
             return $next($request);
         } else return redirect('/espace-client/connexion');

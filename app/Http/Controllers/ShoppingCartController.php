@@ -19,6 +19,22 @@ use Illuminate\Http\Request;
 class ShoppingCartController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->only(
+            'showDelivery',
+            'validateDelivery',
+            'showPayment',
+            'showCreditCardPayment',
+            'validateChequePayment',
+            'validateCreditCartPayment');
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

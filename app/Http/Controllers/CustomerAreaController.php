@@ -37,6 +37,10 @@ class CustomerAreaController extends Controller
     }
 
     public function login(Login $request){
+        $request->validate([
+            'email' => 'email|exists:users|required',
+            'password' => 'required'
+        ]);
         $credentials = [
             'email' => $request['email'],
             'password' => $request['password'] ];
@@ -46,7 +50,7 @@ class CustomerAreaController extends Controller
             Auth::login($user);
             return redirect('/espace-client/profil');
         } else {
-            return redirect('/espace-client/connexion');
+            return redirect('/espace-client/connexion')->withErrors(['password' => 'Mot de passe incorrect'])->withInput(['email'=>$request['email']]);
         }
     }
 

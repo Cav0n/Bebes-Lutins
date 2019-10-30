@@ -8,6 +8,8 @@ use Carbon;
 use App\Order;
 use App\ShoppingCart;
 
+use Illuminate\Support\Facades\DB;
+
 class CheckForShoppingCart
 {
     /**
@@ -35,6 +37,14 @@ class CheckForShoppingCart
             if(Auth::check()){
                 if($shopping_cart->user == null){
                     if(count($shopping_cart->items) > 0){
+                        DB::table('shopping_carts')
+                            ->where('user_id', Auth::user()->id)
+                            ->update(['isActive' => 0]);
+
+                        DB::table('shopping_carts')
+                            ->where('id', $shopping_cart->id)
+                            ->update(['isActive' => 1]);
+
                         $shopping_cart->user_id = Auth::user()->id;
                         $shopping_cart->save();
                         $request->session()->put('shopping_cart', $shopping_cart);

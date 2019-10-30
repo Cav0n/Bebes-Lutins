@@ -6,6 +6,26 @@
         <a href='/dashboard/produits' class='text-muted'>< Tous les produits</a>        
     </div>
 </div>
+
+@if(count($categoriesWithMissingImages) > 0)
+<div class="card bg-warning my-3">
+    <div class="card-header bg-warning d-flex">
+        <h1 class='h4 m-0 my-auto font-weight-normal'>
+            Certains produits n'ont pas d'images !
+        </h1>
+    </div>
+    <div class="card-body">
+        <ul>
+            @foreach ($categoriesWithMissingImages as $category)
+            <li class='text-muted'>
+                <a href='/dashboard/produits/categories/edition/{{$category->id}}' class='text-muted'>
+                    {{$category->name}}</a></li>
+            @endforeach
+        </ul>
+    </div>
+</div>
+@endif
+
 <div class="card bg-white my-3">
     <div class="card-header bg-white d-flex">
         <h1 class='h4 my-auto m-0 font-weight-normal'>
@@ -35,7 +55,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (App\Category::where('parent_id', null)->orderBy('rank')->get() as $category)
+                @foreach ($categories as $category)
                     <tr class='d-flex clickable @if($category->isHidden){{'hidden'}}@endif' data-toggle="collapse" data-target=".accordion-{{$category->id}}" class="clickable">
                         <td class='col-2'>
                             <div class="form-group">

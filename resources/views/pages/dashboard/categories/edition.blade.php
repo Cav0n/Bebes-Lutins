@@ -197,7 +197,7 @@ $.ajaxSetup({
             });
             //POPULATE
             // Create the mock file:
-            var mockFile = { name: "{{$category->mainImage}}", size: {{$category->images->first()->size}} };
+            var mockFile = { name: "{{$category->mainImage}}", size: 0 };
 
             // Call the default addedfile event handler
             this.emit("addedfile", mockFile);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use \App\Order;
 use \App\Product;
+use \App\Category;
 use \App\User;
 use \App\Review;
 use \App\Voucher;
@@ -64,7 +65,20 @@ class DashboardController extends Controller
 
     public function products(){
         $products = Product::where('isDeleted', '!=', '1')->orderBy('name', 'asc')->paginate(20);
-        return view('pages.dashboard.products')->withProducts($products);
+        $productsWithMissingImages = $this->verifyAllProductImages($products);
+        return view('pages.dashboard.products')
+            ->withProducts($products)
+            ->withProductsWithMissingImages($productsWithMissingImages);
+    }
+
+    public function verifyAllProductImages($products){
+        $result = array();
+        foreach($products as $product){
+            if((! file_exists( public_path() . '/images/products/' . $product->mainImage) || $product->mainImage == null)){
+                $result[] = $product;
+            }
+        }
+        return $result;
     }
 
     public function stocks(){
@@ -73,7 +87,21 @@ class DashboardController extends Controller
     }
 
     public function categories(){
-        return view('pages.dashboard.categories');
+        $categories = Category::where('isDeleted', '!=', '1')->orderBy('rank', 'asc')->orderBy('name', 'asc')->get();
+        $categoriesWithMissingImages = $this->verifyAllCategoriesImages($categories);
+        return view('pages.dashboard.categories')
+            ->withCategories($categories)
+            ->withCategoriesWithMissingImages($categoriesWithMissingImages);
+    }
+
+    public function verifyAllCategoriesImages($categories){
+        $result = array();
+        foreach($categories as $category){
+            if((! file_exists( public_path() . '/images/categories/' . $category->mainImage) || $category->mainImage == null)){
+                $result[] = $category;
+            }
+        }
+        return $result;
     }
 
     public function customers(){

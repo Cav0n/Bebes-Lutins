@@ -1,6 +1,26 @@
 @extends('templates.dashboard')
 
 @section('content')
+
+@if(count($productsWithMissingImages) > 0)
+<div class="card bg-warning my-3">
+    <div class="card-header bg-warning d-flex">
+        <h1 class='h4 m-0 my-auto font-weight-normal'>
+            Certains produits n'ont pas d'images !
+        </h1>
+    </div>
+    <div class="card-body">
+        <ul>
+            @foreach ($productsWithMissingImages as $product)
+            <li class='text-muted'>
+                <a href='/dashboard/produits/edition/{{$product->id}}' class='text-muted'>
+                    {{$product->name}}</a></li>
+            @endforeach
+        </ul>
+    </div>
+</div>
+@endif
+
 <div class="card bg-white my-3">
     <div class="card-header bg-white d-flex">
         <h1 class='h4 m-0 my-auto font-weight-normal'>

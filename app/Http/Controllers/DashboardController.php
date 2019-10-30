@@ -74,6 +74,14 @@ class DashboardController extends Controller
     public function verifyAllProductImages($products){
         $result = array();
         foreach($products as $product){
+            $imageName = $product->mainImage;
+            $newImageName = \App\Image::removeSpecialCharacters($imageName);
+            if(file_exists( public_path() . '/images/products/' . $product->mainImage) || $product->mainImage == null){
+                rename(public_path("/images/products/") . $imageName , public_path("/images/products/") . $newImageName);
+                $product->mainImage = $newImageName;
+                $product->save();
+            }
+
             if((! file_exists( public_path() . '/images/products/' . $product->mainImage) || $product->mainImage == null)){
                 $result[] = $product;
             }
@@ -97,7 +105,16 @@ class DashboardController extends Controller
     public function verifyAllCategoriesImages($categories){
         $result = array();
         foreach($categories as $category){
-            if((! file_exists( public_path() . '/images/categories/' . $category->mainImage) || $category->mainImage == null)){
+            $imageName = $category->mainImage;
+            $newImageName = \App\Image::removeSpecialCharacters($imageName);
+
+            if(file_exists( public_path() . '/images/categories/' . $category->mainImage) || $category->mainImage == null){
+                rename(public_path("/images/categories/") . $imageName , public_path("/images/categories/") . $newImageName);
+                $category->mainImage = $newImageName;
+                $category->save();
+            }
+
+            if((! file_exists( public_path() . '/images/categories/' . $category->mainImage)) || $category->mainImage == null){
                 $result[] = $category;
             }
         }

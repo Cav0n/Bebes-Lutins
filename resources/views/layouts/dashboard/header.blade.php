@@ -36,7 +36,7 @@
                         <a class="nav-link" href="/dashboard/newsletters">Newsletters</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/dashboard/analyses">Analyses</a>
+                        <a class="nav-link" href="/dashboard/analyses">Analyses<span class="badge badge-secondary ml-2">New</span></a>
                     </li>
                 </ul>
             </div>

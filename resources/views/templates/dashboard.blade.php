@@ -41,7 +41,7 @@
             <div class="col-lg-11 col-xl-9">
             @include('layouts.dashboard.header')
             
-            <div class="row">
+            <div class="row m-0">
                 
                 @include('layouts.dashboard.sidenav')
                 

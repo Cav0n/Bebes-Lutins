@@ -44,7 +44,6 @@ class ProductController extends Controller
         foreach($products as $product){
             $oldMainImageName = $product->mainImage;
             $newMainImageName = \App\Image::removeSpecialCharacters($oldMainImageName);
-            echo '<p>'.$oldMainImageName . ' --- ' . $newMainImageName.'</p><br>' ;
             $product->mainImage = $newMainImageName;
             $product->save();
 
@@ -60,6 +59,8 @@ class ProductController extends Controller
                     public_path('/images/products/') . $newMainImageName);
             }
         }
+
+        return redirect('/dashboard/produits');
     }
 
     /**
@@ -342,6 +343,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->isDeleted = true;
+        $product->save();
     }
 
     public function add_selected_category(Category $category){

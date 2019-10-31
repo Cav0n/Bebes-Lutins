@@ -220,10 +220,11 @@ $.ajaxSetup({
             type: 'DELETE',
             data: { },
             success: function(data){
-                alert('PRODUIT SUPPRIMÉ AVEC SUCCES')
+                alert('PRODUIT SUPPRIMÉ AVEC SUCCES');
+                window.location.replace("/dashboard/produits");
             },
             error: function(data) {
-                alert('Suppression impossible')
+                alert('Suppression impossible');
             },
             beforeSend: function() {
                 btn.addClass('running');

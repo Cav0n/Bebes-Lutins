@@ -7,16 +7,16 @@
     </div>
 </div>
 
-@if(count($categoriesWithMissingImages) > 0)
+ @if(count($categoriesWithMissingMainImage) > 0)
 <div class="card bg-warning my-3">
     <div class="card-header bg-warning d-flex">
         <h1 class='h4 m-0 my-auto font-weight-normal'>
-            Certains produits n'ont pas d'images !
+            Certaines catégories ont des problèmes d'images !
         </h1>
     </div>
     <div class="card-body">
         <ul>
-            @foreach ($categoriesWithMissingImages as $category)
+            @foreach ($categoriesWithMissingMainImage as $category)
             <li class='text-muted'>
                 <a href='/dashboard/produits/categories/edition/{{$category->id}}' class='text-muted'>
                     {{$category->name}}</a></li>
@@ -24,7 +24,7 @@
         </ul>
     </div>
 </div>
-@endif
+@endif 
 
 <div class="card bg-white my-3">
     <div class="card-header bg-white d-flex">

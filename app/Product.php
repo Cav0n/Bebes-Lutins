@@ -62,4 +62,26 @@ class Product extends Model
     {
         return $this->hasMany('App\ProductCharacteristic');
     }
+
+    public function mainImageExists()
+    {
+        if(file_exists(public_path('/images/products/') . $this->mainImage)){
+            return true; 
+        } else return false;
+    }
+
+    public function thumbnailsExists()
+    {
+        $allExists = true;
+        foreach($this->images as $image){
+            if($image->name != $this->mainImage){
+                if(! file_exists(public_path('/images/products/thumbnails/') . $image->name)){
+                    $allExists = false;
+                    break;
+                }
+            }
+        }
+
+        return $allExists;
+    }
 }

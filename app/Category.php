@@ -43,6 +43,12 @@ class Category extends Model
         return $this->hasMany('App\Category', 'parent_id')->orderBy('rank');
     }
 
+    public function mainImageExists(){
+        if(file_exists(public_path('/images/categories/') . $this->mainImage)){
+            return true;
+        } else return false; 
+    }
+
     /**
      * Generate the breadcrumb of all parent categories of the category
      */

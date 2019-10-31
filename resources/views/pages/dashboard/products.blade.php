@@ -2,7 +2,7 @@
 
 @section('content')
 
-@if(count($productsWithMissingImages) > 0)
+@if(count($productsWithMissingMainImage) > 0)
 <div class="card bg-warning my-3">
     <div class="card-header bg-warning d-flex">
         <h1 class='h4 m-0 my-auto font-weight-normal'>
@@ -11,7 +11,26 @@
     </div>
     <div class="card-body">
         <ul>
-            @foreach ($productsWithMissingImages as $product)
+            @foreach ($productsWithMissingMainImage as $product)
+            <li class='text-muted'>
+                <a href='/dashboard/produits/edition/{{$product->id}}' class='text-muted'>
+                    {{$product->name}}</a></li>
+            @endforeach
+        </ul>
+    </div>
+</div>
+@endif
+
+@if(count($productsWithMissingThumbnails) > 0)
+<div class="card bg-warning my-3">
+    <div class="card-header bg-warning d-flex">
+        <h1 class='h4 m-0 my-auto font-weight-normal'>
+            Certains produits ont des miniatures incorrectes !
+        </h1>
+    </div>
+    <div class="card-body">
+        <ul>
+            @foreach ($productsWithMissingThumbnails as $product)
             <li class='text-muted'>
                 <a href='/dashboard/produits/edition/{{$product->id}}' class='text-muted'>
                     {{$product->name}}</a></li>

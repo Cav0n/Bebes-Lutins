@@ -64,29 +64,22 @@ class DashboardController extends Controller
     }
 
     public function products(){
-        $products = Product::where('isDeleted', '!=', '1')->orderBy('name', 'asc')->paginate(20);
-        $productsWithMissingImages = $this->verifyAllProductImages($products);
-        return view('pages.dashboard.products')
-            ->withProducts($products)
-            ->withProductsWithMissingImages($productsWithMissingImages);
-    }
+        $productsToVerify = Product::all();
+        $productsToDisplay = Product::where('isDeleted', '!=', '1')->orderBy('name', 'asc')->paginate(20);
+        $productsWithMissingImage = array();
+        $productsWithMissingThumbnails = array();
 
-    public function verifyAllProductImages($products){
-        $result = array();
-        foreach($products as $product){
-            $imageName = $product->mainImage;
-            $newImageName = \App\Image::removeSpecialCharacters($imageName);
-            if(file_exists( public_path() . '/images/products/' . $product->mainImage) || $product->mainImage == null){
-                rename(public_path("/images/products/") . $imageName , public_path("/images/products/") . $newImageName);
-                $product->mainImage = $newImageName;
-                $product->save();
-            }
-
-            if((! file_exists( public_path() . '/images/products/' . $product->mainImage) || $product->mainImage == null)){
-                $result[] = $product;
-            }
+        foreach($productsToVerify as $product){
+            if(! $product->mainImageExists()){
+                $productsWithMissingMainImage[] = $product;}
+            if(! $product->thumbnailsExists()){
+                $productsWithMissingThumbnails[] = $product;}
         }
-        return $result;
+
+        return view('pages.dashboard.products')
+            ->withProducts($productsToDisplay)
+            ->withProductsWithMissingMainImage($productsWithMissingMainImage)
+            ->withProductsWithMissingThumbnails($productsWithMissingThumbnails);
     }
 
     public function stocks(){
@@ -95,30 +88,18 @@ class DashboardController extends Controller
     }
 
     public function categories(){
-        $categories = Category::where('isDeleted', '!=', '1')->orderBy('rank', 'asc')->orderBy('name', 'asc')->get();
-        $categoriesWithMissingImages = $this->verifyAllCategoriesImages($categories);
-        return view('pages.dashboard.categories')
-            ->withCategories($categories)
-            ->withCategoriesWithMissingImages($categoriesWithMissingImages);
-    }
+        $categoriesToVerify = Category::all();
+        $categoriesToDisplay = Category::where('isDeleted', '!=', '1')->orderBy('rank', 'asc')->orderBy('name', 'asc')->get();
+        $categoriesWithMissingMainImage = array();
 
-    public function verifyAllCategoriesImages($categories){
-        $result = array();
-        foreach($categories as $category){
-            $imageName = $category->mainImage;
-            $newImageName = \App\Image::removeSpecialCharacters($imageName);
-
-            if(file_exists( public_path() . '/images/categories/' . $category->mainImage) || $category->mainImage == null){
-                rename(public_path("/images/categories/") . $imageName , public_path("/images/categories/") . $newImageName);
-                $category->mainImage = $newImageName;
-                $category->save();
-            }
-
-            if((! file_exists( public_path() . '/images/categories/' . $category->mainImage)) || $category->mainImage == null){
-                $result[] = $category;
-            }
+        foreach($categoriesToVerify as $category){
+            if(! $category->mainImageExists()){
+                $categoriesWithMissingMainImage[] = $category; }
         }
-        return $result;
+
+        return view('pages.dashboard.categories')
+            ->withCategories($categoriesToDisplay)
+            ->withCategoriesWithMissingMainImage($categoriesWithMissingMainImage);
     }
 
     public function customers(){

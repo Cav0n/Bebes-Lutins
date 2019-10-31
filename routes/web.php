@@ -113,6 +113,7 @@ Route::get('/dashboard/produits/edition/{product}', 'ProductController@edit');
 Route::post('/dashboard/produits/edition/{product}', 'ProductController@update');
 Route::get('/dashboard/produits/stocks', 'DashboardController@stocks'); //TODO
 Route::delete('/dashboard/produits/supprimer/{product}', 'ProductController@destroy');
+Route::get('/dashboard/produits/correction-images', 'ProductController@correctAllMainImages');
 //CATEGORIES
 Route::get('/dashboard/produits/categories', 'DashboardController@categories'); //TODO
 Route::get('/dashboard/produits/categories/nouvelle', 'CategoryController@create');

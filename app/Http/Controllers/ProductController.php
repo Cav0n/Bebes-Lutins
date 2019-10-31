@@ -38,6 +38,30 @@ class ProductController extends Controller
         echo json_encode( $data );
     }
 
+    public function correctAllMainImages()
+    {
+        $products = Product::all();
+        foreach($products as $product){
+            $oldMainImageName = $product->mainImage;
+            $newMainImageName = \App\Image::removeSpecialCharacters($oldMainImageName);
+            echo '<p>'.$oldMainImageName . ' --- ' . $newMainImageName.'</p><br>' ;
+            $product->mainImage = $newMainImageName;
+            $product->save();
+
+            foreach($product->images as $image){
+                if($image->name == $oldMainImageName){
+                    $image->name = $newMainImageName;
+                    $image->save();
+                }
+            }
+
+            if(file_exists(public_path('/images/products/thumbnails/') . $oldMainImageName)){
+                rename(public_path('/images/products/') . $oldMainImageName, 
+                    public_path('/images/products/') . $newMainImageName);
+            }
+        }
+    }
+
     /**
      * Switch 'IsHidden' attribute to hide or not product.
      */
@@ -46,6 +70,7 @@ class ProductController extends Controller
         $product->isHidden = !$product->isHidden;
         $product->save();
     }
+    
 
     /**
      * Display a listing of the resource.
@@ -316,8 +341,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        $product->categories()->detach();
-        $product->delete();
+        $product->isDeleted = true;
     }
 
     public function add_selected_category(Category $category){

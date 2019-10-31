@@ -17,6 +17,7 @@
                     {{$product->name}}</a></li>
             @endforeach
         </ul>
+        <a href='/dashboard/produits/correction-images' class='btn btn-danger'>Tenter de corriger le problème</a>
     </div>
 </div>
 @endif

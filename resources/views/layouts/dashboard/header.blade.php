@@ -1,7 +1,7 @@
 <header class='pb-2 border-bottom sticky-top'>
     <nav class="navbar navbar-expand-md navbar-light px-0 px-lg-2">
-            <a class="navbar-brand text-secondary font-weight-bold mb-0" href="/" style='font-size:2rem;'>Bébés Lutins</a>
-            <button class="navbar-toggler d-lg-none m-3 bg-secondary" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand text-secondary font-weight-bold mb-0 mr-0" href="/" style='font-size:2rem;'>Bébés Lutins</a>
+            <button class="navbar-toggler d-lg-none bg-secondary ml-0" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavId">
@@ -34,6 +34,9 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/dashboard/newsletters">Newsletters</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard/analyses">Analyses</a>
                     </li>
                 </ul>
             </div>

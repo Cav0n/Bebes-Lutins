@@ -129,6 +129,11 @@ class DashboardController extends Controller
 
     }
 
+    public function analytics(){
+        $orders = Order::all();
+        return view('pages.dashboard.analytics.analytics')->withOrders($orders);
+    }
+
     public function select_order_status(Request $request){
         $selected_order_status = array();
         $selected_order_status = $request['status'];

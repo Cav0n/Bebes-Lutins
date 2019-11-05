@@ -71,7 +71,36 @@ class ProductController extends Controller
         $product->isHidden = !$product->isHidden;
         $product->save();
     }
-    
+
+    public function search(Request $request)
+    {
+        $search_words = preg_split('/\s+/', $request['search']);
+
+        $found_valid_products = array();
+        $found_possible_products = array();
+        $result = array();
+
+        $products = Product::where('isDeleted', '!=', '1')->orderBy('name', 'asc')->get();
+        $total_valid_words = count($search_words);
+
+        foreach($products as $product){
+            $count_valid_words = 0;
+            foreach($search_words as $word) {
+                if (stripos(mb_strtoupper($product->name),mb_strtoupper($word)) !== false) $count_valid_words++;
+            }
+            if($count_valid_words == $total_valid_words) {
+                $categories = $product->categories;
+                $found_valid_products[$product->id] = $product;
+            }
+            else if($count_valid_words > 0) $found_possible_products[] = $product;
+        }
+
+        $result['valid_products'] = $found_valid_products;
+        $result['possible_products'] = $found_possible_products;
+
+        header('Content-type: application/json');
+        echo json_encode( $result, JSON_PRETTY_PRINT);
+    }
 
     /**
      * Display a listing of the resource.

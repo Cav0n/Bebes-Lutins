@@ -9,6 +9,33 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function search(Request $request)
+    {
+        $search_words = preg_split('/\s+/', $request['search']);
+
+        $found_valid_categories = array();
+        $found_possible_categories = array();
+        $result = array();
+
+        $categories = Category::where('isDeleted', '!=', '1')->orderBy('name', 'asc')->get();
+        $total_valid_words = count($search_words);
+
+        foreach($categories as $category){
+            $count_valid_words = 0;
+            foreach($search_words as $word) {
+                if (stripos(mb_strtoupper($category->name),mb_strtoupper($word)) !== false) $count_valid_words++;
+            }
+            if($count_valid_words == $total_valid_words) {$found_valid_categories[$category->id] = $category;}
+            else if($count_valid_words > 0) $found_possible_categories[] = $category;
+        }
+
+        $result['valid_categories'] = $found_valid_categories;
+        $result['possible_categories'] = $found_possible_categories;
+
+        header('Content-type: application/json');
+        echo json_encode( $result, JSON_PRETTY_PRINT);
+    }
+
     public function getJSON(Category $category)
     {
         $category_array = array();

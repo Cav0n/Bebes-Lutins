@@ -13,4 +13,6 @@
     <a href='/dashboard/reductions' class='text-dark d-flex mt-3 @if(Request::is('*/reductions*')) active @endif'><img src='{{asset('images/icons/coupon4.svg')}}' class='svg'><p class='ml-2 my-auto'>- Réductions</p></a>
     <a href='/dashboard/newsletters' class='text-dark d-flex mt-3 @if(Request::is('*/newsletters*')) active @endif'><img src='{{asset('images/icons/newsletters2.svg')}}' class='svg'><p class='ml-2 my-auto'>- Newsletters</p></a>
     <a href='/dashboard/analyses' class='text-dark d-flex mt-3 @if(Request::is('*/analyses*')) active @endif'><img src='{{asset('images/icons/analytics.svg')}}' class='svg'><p class='ml-2 my-auto'>- Analyses<span class="badge badge-secondary ml-2">New</span></p></a>
+
+    <small class="text-muted pl-5 pt-3">Version 5.0.0</small>
 </div>

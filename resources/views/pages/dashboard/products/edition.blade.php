@@ -361,4 +361,25 @@ $.ajaxSetup({
     
 </script>
 
+{{-- CKEDITOR --}}
+<script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
+
+<script>
+    ClassicEditor
+    .create( document.querySelector( '#description' ) ,
+    {
+        ckfinder: {
+            uploadUrl: '/public/js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json',
+        }
+    }
+    )
+    .then( editor => {
+        console.log( 'Editor was initialized', editor );
+        myEditor = editor;
+    } )
+    .catch( err => {
+        console.error( err.stack );
+    } );
+</script>
+
 @endsection

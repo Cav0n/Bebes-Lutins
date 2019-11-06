@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class ImageController extends Controller
 {
+
+    public function upload(){
+        header('Content-type: application/json');
+        echo json_encode( ['uploaded' => true, 'url' => 'https://www.bebes-lutins.fr/'], JSON_PRETTY_PRINT);
+    }
+    
     /**
      * Display a listing of the resource.
      *

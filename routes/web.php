@@ -152,4 +152,5 @@ Route::delete('/delete_image', 'ImageController@destroy');
  */
 Route::post('/addresses/{address}', 'AddressController@get');
 Route::post('/know_thanks_to/add', 'OrderController@addKnowThanksTo');
+Route::post('/images/upload', 'ImageController@upload');
  /* ---------------- */

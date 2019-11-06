@@ -97,7 +97,6 @@
             </div>
             
             <div class="form-group">
-                <label for="description">Description</label>
                 <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="5">{{old('description', $product->description)}}</textarea>
                 @error('description')
                     <div class="invalid-feedback">{{$message}}</div>
@@ -361,25 +360,29 @@ $.ajaxSetup({
     
 </script>
 
-{{-- CKEDITOR --}}
 <script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
-
+<script src="{{asset('js/ckfinder/ckfinder.js')}}"></script>
 <script>
-    ClassicEditor
-    .create( document.querySelector( '#description' ) ,
-    {
+    ClassicEditor.create(document.querySelector("#description"), {
         ckfinder: {
-            uploadUrl: '/public/js/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images&responseType=json',
-        }
-    }
-    )
-    .then( editor => {
-        console.log( 'Editor was initialized', editor );
-        myEditor = editor;
-    } )
-    .catch( err => {
-        console.error( err.stack );
-    } );
+            uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
+        },
+        image: {
+            // You need to configure the image toolbar, too, so it uses the new style buttons.
+            toolbar: [ 'imageTextAlternative', '|', 'imageStyle:alignLeft', 'imageStyle:full', 'imageStyle:alignRight' ],
+
+            styles: [
+                // This option is equal to a situation where no style is applied.
+                'full',
+                // This represents an image aligned to the left.
+                'alignLeft',
+                // This represents an image aligned to the right.
+                'alignRight'
+            ]
+        },
+        toolbar: [ 'ckfinder', 'imageUpload', '|', 'heading', '|', 'bold', 'italic', '|', 'undo', 'redo' ],
+
+    }).then(e => {window.editor = e}).catch(e => {console.error(e.stack)});
 </script>
 
 @endsection

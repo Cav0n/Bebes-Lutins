@@ -139,7 +139,7 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
             <div id='categories-popup2' class='popup horizontal' style='top: calc(8rem - 1px);left: 0;background: white;position: fixed;max-width:100vw;box-sizing:border-box;border-top:1px solid;box-shadow:black 0px 1px 10px -5px;padding:1rem 0;'>
                 <div id='parent-categories' class='vertical' style='max-width:15rem;min-width:15rem;'>
                     
-                    <?php foreach($categories as $category) { if($category->getParent() == 'none' && !$category->getPrivate()) {?>
+                    <?php foreach($categories as $category) { if($category->getParent() == null && !$category->getPrivate()) {?>
                         <div class='category-container' onclick='select_category($(this))' style='padding: 0.5rem;border: 1px solid rgb(202, 202, 202);margin:0.3rem 0.5rem;  -webkit-touch-callout: none; /* iOS Safari */-webkit-user-select: none; /* Safari */-khtml-user-select: none; /* Konqueror HTML */-moz-user-select: none; /* Firefox */-ms-user-select: none; /* Internet Explorer/Edge */user-select: none; /* Non-prefixed version, currentlysupported by Chrome and Opera */cursor:pointer;font-weight: 400;font-size: 0.95rem;border-radius: 2px;'>
                             <?php echo $category->getName(); ?>
                         </div>
@@ -147,7 +147,7 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
 
                 </div>
                 <div id='child-categories' class='horizontal' style='width:calc(100vw - 14rem);'>
-                    <?php foreach($categories as $category) { if($category->getParent() == 'none' && !$category->getPrivate()) { ?>
+                    <?php foreach($categories as $category) { if($category->getParent() == null && !$category->getPrivate()) { ?>
                         <div id='<?php echo $category->getNameForURL(); ?>-container' class="category-child horizontal wrap hidden" >
                             <?php foreach($sub_categories_list as $sub_category) { if(!$sub_category->getPrivate()) {
                                 if($sub_category->getParent() == $category->getName()) { ?>
@@ -187,6 +187,7 @@ foreach ($shopping_cart_items as $shopping_cart_item) {
     $(document).ready(function(){
         $("#child-categories").hide();
         $('#categories-popup2').hide();
+        console.log('<?php foreach($categories as $category) echo $category->getName(); ?>');
     });
 
     function load_category(category) {

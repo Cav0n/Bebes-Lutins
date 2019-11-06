@@ -11,6 +11,47 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    public function search(Request $request)
+    {
+        $search_words = preg_split('/\s+/', $request['search']);
+
+        $found_valid_orders = array();
+        $found_possible_orders = array();
+        $result = array();
+
+        $orders = Order::where('id', '!=', null)->orderBy('created_at', 'asc')->get();
+        $total_valid_words = count($search_words);
+
+        foreach($orders as $order){
+            $count_valid_words = 0;
+            foreach($search_words as $word) {
+                if (stripos(mb_strtoupper($order->user->firstname),mb_strtoupper($word)) !== false) $count_valid_words++;
+                if (stripos(mb_strtoupper($order->user->lastname),mb_strtoupper($word)) !== false) $count_valid_words++;
+                if (stripos(mb_strtoupper($order->user->mail),mb_strtoupper($word)) !== false) $count_valid_words++;
+                if (stripos(mb_strtoupper($order->user->phone),mb_strtoupper($word)) !== false) $count_valid_words++;
+                foreach($order->order_items as $item){
+                    if (stripos(mb_strtoupper($item->product->name),mb_strtoupper($word)) !== false) {$count_valid_words++; break;}                    
+                }
+
+            }
+            if($count_valid_words == $total_valid_words) {
+                $found_valid_orders[$order->id] = $order;
+                $found_valid_orders[$order->id]['color'] = \App\OrderStatus::statusToRGBColor($order->status);
+            }
+            else if($count_valid_words > 0){
+                $found_possible_orders[$order->id] = $order;
+                $found_possible_orders[$order->id]['color'] = \App\OrderStatus::statusToRGBColor($order->status);
+            }
+        }
+
+        $result['valid_orders'] = $found_valid_orders;
+        $result['possible_orders'] = $found_possible_orders;
+        $result['valid_results_nb'] = count($found_valid_orders);
+
+        header('Content-type: application/json');
+        echo json_encode( $result, JSON_PRETTY_PRINT);
+    }
+
     public function getJSON(Order $order)
     {
         $order_array = array();
@@ -36,31 +77,6 @@ class OrderController extends Controller
 
         header('Content-type: application/json');
         echo json_encode( $data, JSON_PRETTY_PRINT);
-    }
-
-    public function search(Request $request)
-    {
-        $search_words = array_unique(preg_split('/ +/', mb_strtoupper($request['search'])));
-        $selected_products = array();
-        $selected_orders = array();
-
-        $products = Product::all();
-        $orders = Order::all();
-        foreach($products as $product){
-            if(Str::contains(mb_strtoupper($product->name), $search_words)) $selected_products[] = $product;
-        }
-
-        foreach($orders as $order){
-            if(Str::contains(mb_strtoupper($order->user->firstname), $search_words)) $selected_orders[] = $order; break;
-            if(Str::contains(mb_strtoupper($order->user->lastname), $search_words)) $selected_orders[] = $order; break;
-            foreach($order->order_items as $item){
-               foreach($selected_products as $selected_product){
-                   if($item->product->id == $selected_product->id) $selected_orders[] = $order; break;
-               } 
-            }
-        }
-
-        //dd(array_unique($selected_orders));
     }
 
     public function addKnowThanksTo(Request $request)

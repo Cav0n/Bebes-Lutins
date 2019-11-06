@@ -1,3 +1,4 @@
+<div id='orders-container'>
 {{ $orders->links() }}
 <table class="table">
     <thead>
@@ -29,6 +30,7 @@
         @endforeach
     </tbody>
 </table>
+</div>
 
 <script>
         old_status = "{{$oldStatus}}"

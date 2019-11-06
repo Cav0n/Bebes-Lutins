@@ -1,3 +1,4 @@
+<div id='orders-container'>
 <div class="row">
     <div class="col-12 d-flex flex-row flex-wrap">
         <p class="status-selector py-1 px-3 mr-2 bg-light border rounded transition-fast @if(session()->has('selected_order_status' . $oldStatus)) @if(session()->get('selected_order_status' . $oldStatus) == 0) selected @endif @endif" onclick='select_status_to_display($(this), 0)'>
@@ -42,6 +43,7 @@
         @endforeach
     </tbody>
 </table>
+</div>
 
 <script>
     old_status = "{{$oldStatus}}"

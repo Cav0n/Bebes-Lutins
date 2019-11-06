@@ -24,6 +24,7 @@ class VerifyCsrfToken extends Middleware
         'commandes/*',
         'panier/ajout_message*',
         'dashboard/produits/recherche',
-        'dashboard/clients/recherche'
+        'dashboard/clients/recherche',
+        'dashboard/commandes/recherche'
     ];
 }

@@ -105,6 +105,7 @@ Route::post('/dashboard/commandes/select_order_status', 'DashboardController@sel
 Route::post('/dashboard/commandes/unselect_order_status', 'DashboardController@unselect_order_status');
 Route::post('/dashboard/commandes/rechercher', 'OrderController@search');
 Route::get('/dashboard/commandes/fiche/{order}', 'OrderController@show');
+Route::post('/dashboard/commandes/recherche', 'OrderController@search');
 //PRODUCTS
 Route::get('/dashboard/produits', 'DashboardController@products'); //TODO
 Route::get('/dashboard/produits/nouveau', 'ProductController@create');

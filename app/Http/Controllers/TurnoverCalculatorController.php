@@ -30,6 +30,8 @@ class TurnoverCalculatorController extends Controller
     }
 
     public function calculateCustomTurnover(Request $request){
-        TurnoverCalculator::custom($request['firstdate'], $request['lastdate']);
+        $result = TurnoverCalculator::custom($request['firstdate'], $request['lastdate']);
+        header('Content-type: application/json');
+        echo json_encode( $result, JSON_PRETTY_PRINT);
     }
 }

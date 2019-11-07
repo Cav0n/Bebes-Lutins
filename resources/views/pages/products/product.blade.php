@@ -18,6 +18,7 @@ if (count($product->reviews) > 0){
 @extends('templates.template')
 
 @section('head-options')
+    <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/custom/product.css')}}">
     {{--  Rate Yo  --}}
     <script src="{{asset('js/rateyo/rateyo.js')}}"></script>
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/rateyo/rateyo.css')}}">
@@ -129,7 +130,9 @@ if (count($product->reviews) > 0){
                     <div class="card rounded-0 border-0">
                         <div class="card-body p-0 p-lg-3">
                             <h4 class="card-title px-0 px-lg-2 d-none d-sm-flex">Description</h4>
-                            <p class="card-text px-0 px-lg-2">{!!$product->description!!}</p>
+                            <div id='description'>
+                                {!!$product->description!!}
+                            </div>
                         </div>
                     </div>
                 </div>

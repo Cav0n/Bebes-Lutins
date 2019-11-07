@@ -45,7 +45,25 @@ foreach($orders as $order){
 }
 ?>
 
+@section('head-options')
+    <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/datepicker/jquery.datetimepicker.min.css')}}">
+    <script src="{{asset('js/datepicker/jquery.datetimepicker.full.min.js')}}"></script>
+@endsection
+
 @section('content')
+{{--  CUSTOM TURNOVER  --}}
+<div class="row border-bottom">
+    <div class="col-12">
+        <h1 class='h1 m-0 font-weight-bold text-secondary text-center mt-3 mb-0'>{{number_format($turnover_total, 2, '.', ' ')}} €</h1>
+        <p class='text-center mb-0'>Chiffre d'affaire</p>
+        <div class='d-flex justify-content-center mb-2'>
+            <p class='m-0 mr-2 d-flex flex-column justify-content-center'>Du</p>
+            <input type="text" class="form-control datepicker w-25 mr-2" name="first-date" id="first-date" aria-describedby="helpFirstDate" placeholder="">
+            <p class='m-0 mr-2 d-flex flex-column justify-content-center'>au</p>
+            <input type="text" class="form-control datepicker w-25 ml-2" name="last-date" id="last-date" aria-describedby="helpFirstDate" placeholder="">
+        </div>
+    </div>
+</div>
 {{-- TOTAL TURNOVER --}}
 <div class="row border-bottom">
     <div class="col-12 col-md-6">
@@ -109,5 +127,12 @@ foreach($orders as $order){
         <p class='text-center'>Produits commandés ce mois</p>
     </div>
 </div>
+
+{{-- Dates --}}
+<script>
+jQuery('.datepicker').datetimepicker({
+    format:'d/m/Y H:i:00',
+});
+</script>
 
 @endsection

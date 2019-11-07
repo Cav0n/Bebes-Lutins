@@ -26,6 +26,7 @@ class VerifyCsrfToken extends Middleware
         'dashboard/produits/recherche',
         'dashboard/clients/recherche',
         'dashboard/commandes/recherche',
-        'dashboard/analyses/calculate_turnover'
+        'dashboard/analyses/calculate_turnover',
+        '/dashboard/analyses/calculate_all'
     ];
 }

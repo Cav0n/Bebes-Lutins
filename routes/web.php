@@ -143,6 +143,7 @@ Route::post('/dashboard/reductions/edition/{voucher}', 'VoucherController@update
 Route::get('/dashboard/newsletter', 'DashboardController@newsletters'); //TODO
 Route::get('/dashboard/analyses', 'DashboardController@analytics');
 Route::post('/dashboard/analyses/calculate_turnover', 'TurnoverCalculatorController@calculateCustomTurnover');
+Route::post('/dashboard/analyses/calculate_all', 'TurnoverCalculatorController@calculateAll');
 
 Route::post('/upload_image', 'ImageController@store');
 Route::delete('/delete_image', 'ImageController@destroy');

@@ -21,10 +21,10 @@ class TurnoverCalculator
             }
         }
         $result = [
-            'turnover_total' => $turnover_total,
-            'shipping_price_total' => $shipping_price_total,
-            'order_count_total' => $order_count_total,
-            'items_count_total' => $items_count_total
+            'turnover' => number_format($turnover_total, 2, ",", " "),
+            'shipping_price' => number_format($shipping_price_total, 2, ",", " "),
+            'order_count' => $order_count_total,
+            'items_count' => $items_count_total
         ];
         return $result;
     }
@@ -47,10 +47,10 @@ class TurnoverCalculator
         }
 
         $result = [
-            'turnover_of_the_year' => $turnover_of_the_year,
-            'shipping_price_of_the_year' => $shipping_price_of_the_year,
-            'order_count_year' => $order_count_year,
-            'items_count_year' => $items_count_year
+            'turnover' => number_format($turnover_of_the_year, 2, ",", " "),
+            'shipping_price' => number_format($shipping_price_of_the_year, 2, ",", " "),
+            'order_count' => $order_count_year,
+            'items_count' => $items_count_year
         ];
         return $result;
     }
@@ -73,10 +73,10 @@ class TurnoverCalculator
         }
 
         $result = [
-            'turnover_of_the_month' => $turnover_of_the_month,
-            'shipping_price_of_the_month' => $shipping_price_of_the_month,
-            'order_count_month' => $order_count_month,
-            'items_count_month' => $items_count_month
+            'turnover' => number_format($turnover_of_the_month, 2, ",", " "),
+            'shipping_price' => number_format($shipping_price_of_the_month, 2, ",", " "),
+            'order_count' => $order_count_month,
+            'items_count' => $items_count_month
         ];
         return $result;
     }
@@ -90,7 +90,7 @@ class TurnoverCalculator
         $firstDate = TurnoverCalculator::correctDate($firstDate);
         $lastDate = TurnoverCalculator::correctDate($lastDate);
 
-        foreach(\App\Order::all() as $order){
+        foreach(\App\Order::where('status', '>=', 2)->get() as $order){
             if(Carbon::parse($order->created_at)->gte($firstDate) && Carbon::parse($order->created_at)->lte($lastDate)){
                 $turnover_custom += $order->productsPrice + $order->shippingPrice;
                 $shipping_price_custom += $order->shippingPrice;
@@ -103,10 +103,10 @@ class TurnoverCalculator
         }
 
         $result = [
-            'turnover_custom' => $turnover_custom,
-            'shipping_price_custom' => $shipping_price_custom,
-            'order_count_custom' => $order_count_custom,
-            'items_count_custom' => $items_count_custom
+            'turnover' => number_format($turnover_custom, 2, ",", " "),
+            'shipping_price' => number_format($shipping_price_custom, 2, ",", " "),
+            'order_count' => $order_count_custom,
+            'items_count' => $items_count_custom
         ];
 
         header('Content-type: application/json');
@@ -114,8 +114,7 @@ class TurnoverCalculator
     }
 
     public static function correctDate($date){
-        $date = Carbon::parse($date);
-        $correctedDate = Carbon::create($date->year, $date->day, $date->month, $date->hour, $date->minute, $date->second);
+        $correctedDate = Carbon::createFromFormat('d/m/Y H:i:s', $date);
         return $correctedDate;
     }
 }

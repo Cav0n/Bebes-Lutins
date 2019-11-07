@@ -1,27 +1,5 @@
 @extends('templates.dashboard')
 
-<?php
-$turnover_from_beginning = \App\TurnoverCalculator::total($orders);
-$turnover_year = \App\TurnoverCalculator::currentYear($orders);
-$turnover_month = \App\TurnoverCalculator::currentMonth($orders);
-
-$turnover_total = $turnover_from_beginning['turnover_total'];
-$turnover_of_the_year = $turnover_year['turnover_of_the_year'];
-$turnover_of_the_month = $turnover_month['turnover_of_the_month'];
-
-$shipping_price_total = $turnover_from_beginning['shipping_price_total'];
-$shipping_price_of_the_year = $turnover_year['shipping_price_of_the_year']; 
-$shipping_price_of_the_month = $turnover_month['shipping_price_of_the_month'];;
-
-$order_count_total = $turnover_from_beginning['order_count_total'];
-$order_count_year = $turnover_year['order_count_year'];
-$order_count_month = $turnover_month['order_count_month'];;
-
-$items_count_total = $turnover_from_beginning['items_count_total'];
-$items_count_year = $turnover_year['items_count_year'];
-$items_count_month = $turnover_month['items_count_month'];;
-?>
-
 @section('head-options')
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/datepicker/jquery.datetimepicker.min.css')}}">
     <script src="{{asset('js/datepicker/jquery.datetimepicker.full.min.js')}}"></script>
@@ -31,76 +9,106 @@ $items_count_month = $turnover_month['items_count_month'];;
 {{--  CUSTOM TURNOVER  --}}
 <div class="row border-bottom">
     <div class="col-12">
-        <h1 class='h1 m-0 font-weight-bold text-secondary text-center mt-3 mb-0'>{{number_format($turnover_total, 2, '.', ' ')}} €</h1>
-        <p class='text-center mb-0'>Chiffre d'affaire</p>
-        <div class='d-flex justify-content-center mb-2'>
-            <p class='m-0 mr-2 d-flex flex-column justify-content-center'>Du</p>
-            <input type="text" class="form-control datepicker w-25 mr-2" name="first-date" id="first-date" aria-describedby="helpFirstDate" placeholder="">
-            <p class='m-0 mr-2 d-flex flex-column justify-content-center'>au</p>
-            <input type="text" class="form-control datepicker w-25 ml-2" name="last-date" id="last-date" aria-describedby="helpFirstDate" placeholder="">
+        <div class="row">
+            <div class='col-12 col-sm-6 col-lg-4'>
+                <h1 id='turnover-custom' class='h1 m-0 font-weight-bold text-primary text-center mt-3 mb-0'>--,-- €</h1>
+                <p class='text-center mb-0'>Chiffre d'affaire</p>
+            </div>
+            <div class='col-12 col-sm-6 col-lg-4'>
+                <h1 id='shipping-price-custom' class='h1 m-0 font-weight-bold text-primary text-center mt-3 mb-0'>--,-- €</h1>
+                <p class='text-center mb-0'>Frais de port</p>
+            </div>
+            <div class='col-12 col-sm-6 col-lg-2'>
+                <h1 id='order-count-custom' class='h1 m-0 text-primary text-center mt-3 mb-0'>--</h1>
+                <p class='text-center mb-0'>Commandes</p>
+            </div>
+            <div class='col-12 col-sm-6 col-lg-2'>
+                <h1 id='items-count-custom' class='h1 m-0 text-primary text-center mt-3 mb-0'>--</h1>
+                <p class='text-center mb-0'>Produits commandés</p>
+            </div>
+        </div>
+
+        {{--  Date selection  --}}
+        <div class='row justify-content-center my-2'>
+            <div class="col-12 col-md-6 d-flex my-2">
+                <div class="col-1 p-0 d-flex flex-column justify-content-center">
+                    <p class='ml-auto m-0'>Du</p>
+                </div>
+                <div class="col-11">
+                    <input type="text" class="form-control datepicker w-100" name="first-date" id="first-date" aria-describedby="helpFirstDate" placeholder=""> 
+                </div>
+            </div>
+            <div class="col-12 col-md-6 d-flex my-2">
+                <div class="col-1 p-0 d-flex flex-column justify-content-center">
+                    <p class='ml-auto m-0'>Au</p>  
+                </div>
+                <div class="col-11">
+                    <input type="text" class="form-control datepicker w-100" name="last-date" id="last-date" aria-describedby="helpFirstDate" placeholder="">                    
+                </div>
+            </div>
         </div>
     </div>
 </div>
 {{-- TOTAL TURNOVER --}}
 <div class="row border-bottom">
     <div class="col-12 col-md-6">
-        <h1 class='h1 m-0 font-weight-bold text-secondary text-center mt-3 mb-0'>{{number_format($turnover_total, 2, '.', ' ')}} €</h1>
+        <h1 id='turnover-total' class='h1 m-0 font-weight-bold text-secondary text-center mt-3 mb-0'>--,-- €</h1>
         <p class='text-center'>Chiffre d'affaire total</p>
     </div>
     <div class="col-12 col-md-6">
-        <h1 class='h1 m-0 text-secondary text-center mt-3 mb-0'>{{number_format($shipping_price_total, 2, '.', ' ')}} €</h1>
+        <h1 id='shipping-price-total' class='h1 m-0 text-secondary text-center mt-3 mb-0'>--,-- €</h1>
         <p class='text-center'>Frais de port totaux</p>
     </div>
 </div>
 {{-- THIS YEAR TURNOVER --}}
 <div class="row border-bottom">
     <div class="col-12 col-md-6">
-        <h1 class='h1 m-0 font-weight-bold text-secondary text-center mt-3 mb-0'>{{number_format($turnover_of_the_year, 2, '.', ' ')}} €</h1>
+        <h1 id='turnover-year' class='h1 m-0 font-weight-bold text-secondary text-center mt-3 mb-0'>--,-- €</h1>
         <p class='text-center'>Chiffre d'affaire de l'année</p>
     </div>
     <div class="col-12 col-md-6">
-        <h1 class='h1 m-0 text-secondary text-center mt-3 mb-0'>{{number_format($shipping_price_of_the_year, 2, '.', ' ')}} €</h1>
+        <h1 id='shipping-price-year' class='h1 m-0 text-secondary text-center mt-3 mb-0'>--,-- €</h1>
         <p class='text-center'>Frais de port de l'année</p>
     </div>
 </div>
 {{-- THIS MONTH TURNOVER --}}
 <div class="row border-bottom">
     <div class="col-12 col-md-6">
-        <h1 class='h1 m-0 font-weight-bold text-secondary text-center mt-3 mb-0'>{{number_format($turnover_of_the_month, 2, '.', ' ')}} €</h1>
+        <h1 id='turnover-month' class='h1 m-0 font-weight-bold text-secondary text-center mt-3 mb-0'>--,-- €</h1>
         <p class='text-center'>Chiffre d'affaire du mois</p>
     </div>
     <div class="col-12 col-md-6">
-        <h1 class='h1 m-0 text-secondary text-center mt-3 mb-0'>{{number_format($shipping_price_of_the_month, 2, '.', ' ')}} €</h1>
+        <h1 id='shipping-price-month' class='h1 m-0 text-secondary text-center mt-3 mb-0'>--,-- €</h1>
         <p class='text-center'>Frais de port du mois</p>
     </div>
 </div>
 
 <div class="row border-bottom">
     <div class="col-12 col-md-6 col-lg-4">
-        <h1 class='h1 m-0 font-weight-bold text-secondary text-center mt-3 mb-0'>{{$order_count_total}}</h1>
+        <h1 id='order-count-total' class='h1 m-0 font-weight-bold text-secondary text-center mt-3 mb-0'>--</h1>
         <p class='text-center'>Commandes depuit le début</p>
     </div>
     <div class="col-12 col-md-6 col-lg-4">
-        <h1 class='h1 m-0 text-secondary text-center mt-3 mb-0'>{{$order_count_year}}</h1>
+        <h1 id='order-count-year' class='h1 m-0 text-secondary text-center mt-3 mb-0'>--</h1>
         <p class='text-center'>Commandes cette année</p>
     </div>
     <div class="col-12 col-md-6 col-lg-4">
-        <h1 class='h1 m-0 text-secondary text-center mt-3 mb-0'>{{$order_count_month}}</h1>
+        <h1 id='order-count-month' class='h1 m-0 text-secondary text-center mt-3 mb-0'>--</h1>
         <p class='text-center'>Commandes ce mois</p>
     </div>
 </div>
 
 <div class="row">
     <div class="col-12 col-md-6 col-lg-4">
-        <h1 class='h1 m-0 font-weight-bold text-secondary text-center mt-3 mb-0'>{{$items_count_total}}</h1>
+        <h1 id='items-count-total' class='h1 m-0 font-weight-bold text-secondary text-center mt-3 mb-0'>--</h1>
         <p class='text-center'>Produits commandés depuis le début</p>
     </div>
     <div class="col-12 col-md-6 col-lg-4">
-        <h1 class='h1 m-0 text-secondary text-center mt-3 mb-0'>{{$items_count_year}}</h1>
+        <h1 id='items-count-year' class='h1 m-0 text-secondary text-center mt-3 mb-0'>--</h1>
         <p class='text-center'>Produits commandés cette année</p>
     </div>
     <div class="col-12 col-md-6 col-lg-4">
-        <h1 class='h1 m-0 text-secondary text-center mt-3 mb-0'>{{$items_count_month}}</h1>
+        <h1 id='items-count-month' class='h1 m-0 text-secondary text-center mt-3 mb-0'>--</h1>
         <p class='text-center'>Produits commandés ce mois</p>
     </div>
 </div>
@@ -112,24 +120,68 @@ $('.datepicker').on('change', function(){
     lastdate = $('#last-date').val()
     if(firstdate != '' && lastdate != ''){
         $.ajax({
-                url : '/dashboard/analyses/calculate_turnover', // on appelle le script JSON
-                type: "POST",
-                dataType : 'json', // on spécifie bien que le type de données est en JSON
-                data : {
-                    firstdate: firstdate,
-                    lastdate: lastdate
-                },
-                beforeSend: function(){
-                    //button.addClass('running');
-                },
-                success : function(data){
+            url : '/dashboard/analyses/calculate_turnover', // on appelle le script JSON
+            type: "POST",
+            dataType : 'json', // on spécifie bien que le type de données est en JSON
+            data : {
+                firstdate: firstdate,
+                lastdate: lastdate
+            },
+            beforeSend: function(){
+                $('#turnover-custom').text('--,-- €');
+                $('#shipping-price-custom').text('--,-- €');
+                $('#order-count-custom').text('--');
+                $('#items-count-custom').text('--');
+            },
+            success : function(data){
+                console.log(data)
 
-                    console.log(data)
-
-                    //button.removeClass('running');
+                if(data.order_count > 0){
+                    $('#turnover-custom').text(data.turnover + ' €');
+                    $('#shipping-price-custom').text(data.shipping_price + ' €');
+                    $('#order-count-custom').text(data.order_count);
+                    $('#items-count-custom').text(data.items_count);
+                } else {
+                    $('#turnover-custom').text('--,-- €');
+                    $('#shipping-price-custom').text('--,-- €');
+                    $('#order-count-custom').text('--');
+                    $('#items-count-custom').text('--');
                 }
-            });
+            }
+        });
     }
+});
+</script>
+
+{{--  Init page  --}}
+<script>
+$(document).ready(function(){
+    $.ajax({
+        url : '/dashboard/analyses/calculate_all', // on appelle le script JSON
+        type: "POST",
+        dataType : 'json', // on spécifie bien que le type de données est en JSON
+
+        success : function(data){
+
+            console.log(data)
+
+            $('#turnover-total').text(data.total.turnover+' €');
+            $('#turnover-year').text(data.year.turnover+' €');
+            $('#turnover-month').text(data.month.turnover+' €');
+
+            $('#shipping-price-total').text(data.total.shipping_price+' €');
+            $('#shipping-price-year').text(data.year.shipping_price+' €');
+            $('#shipping-price-month').text(data.month.shipping_price+' €');
+            
+            $('#order-count-total').text(data.total.order_count);
+            $('#order-count-year').text(data.year.order_count);
+            $('#order-count-month').text(data.month.order_count);
+
+            $('#items-count-total').text(data.total.items_count);
+            $('#items-count-year').text(data.year.items_count);
+            $('#items-count-month').text(data.month.items_count);
+        }
+    });
 });
 </script>
 

@@ -1,48 +1,25 @@
 @extends('templates.dashboard')
 
-<?php 
-$turnover_total = 0;
-$turnover_of_the_year = 0;
-$turnover_of_the_month = 0;
+<?php
+$turnover_from_beginning = \App\TurnoverCalculator::total($orders);
+$turnover_year = \App\TurnoverCalculator::currentYear($orders);
+$turnover_month = \App\TurnoverCalculator::currentMonth($orders);
 
-$shipping_price_total = 0;
-$shipping_price_of_the_year = 0; 
-$shipping_price_of_the_month = 0;
+$turnover_total = $turnover_from_beginning['turnover_total'];
+$turnover_of_the_year = $turnover_year['turnover_of_the_year'];
+$turnover_of_the_month = $turnover_month['turnover_of_the_month'];
 
-$order_count_total = 0;
-$order_count_year = 0;
-$order_count_month = 0;
+$shipping_price_total = $turnover_from_beginning['shipping_price_total'];
+$shipping_price_of_the_year = $turnover_year['shipping_price_of_the_year']; 
+$shipping_price_of_the_month = $turnover_month['shipping_price_of_the_month'];;
 
-$items_count_total = 0;
-$items_count_year = 0;
-$items_count_month = 0;
+$order_count_total = $turnover_from_beginning['order_count_total'];
+$order_count_year = $turnover_year['order_count_year'];
+$order_count_month = $turnover_month['order_count_month'];;
 
-
-foreach($orders as $order){
-    $turnover_total += $order->productsPrice + $order->shippingPrice;
-    $shipping_price_total += $order->shippingPrice;
-    $order_count_total++;
-    $items_count = 0;
-    foreach ($order->order_items as $item) {
-        $items_count += $item->quantity; }
-    $items_count_total += $items_count;
-
-    if(Carbon\Carbon::parse($order->created_at)->gte(Carbon\Carbon::create(Carbon\Carbon::now()->year, 1, 1, 0, 0, 0))){
-        $turnover_of_the_year += $order->productsPrice + $order->shippingPrice;
-        $shipping_price_of_the_year += $order->shippingPrice;
-        $order_count_year++;
-        $items_count_year += $items_count;
-
-    }
-
-    if(Carbon\Carbon::parse($order->created_at)->gte(Carbon\Carbon::create(Carbon\Carbon::now()->year, Carbon\Carbon::now()->month, 1, 0, 0, 0))){
-        $turnover_of_the_month += $order->productsPrice + $order->shippingPrice;
-        $shipping_price_of_the_month += $order->shippingPrice;
-        $order_count_month++;
-        $items_count_month += $items_count;
-
-    }
-}
+$items_count_total = $turnover_from_beginning['items_count_total'];
+$items_count_year = $turnover_year['items_count_year'];
+$items_count_month = $turnover_month['items_count_month'];;
 ?>
 
 @section('head-options')
@@ -127,6 +104,34 @@ foreach($orders as $order){
         <p class='text-center'>Produits commandés ce mois</p>
     </div>
 </div>
+
+{{--  Calculate Custom turnover  --}}
+<script>
+$('.datepicker').on('change', function(){
+    firstdate = $('#first-date').val();
+    lastdate = $('#last-date').val()
+    if(firstdate != '' && lastdate != ''){
+        $.ajax({
+                url : '/dashboard/analyses/calculate_turnover', // on appelle le script JSON
+                type: "POST",
+                dataType : 'json', // on spécifie bien que le type de données est en JSON
+                data : {
+                    firstdate: firstdate,
+                    lastdate: lastdate
+                },
+                beforeSend: function(){
+                    //button.addClass('running');
+                },
+                success : function(data){
+
+                    console.log(data)
+
+                    //button.removeClass('running');
+                }
+            });
+    }
+});
+</script>
 
 {{-- Dates --}}
 <script>

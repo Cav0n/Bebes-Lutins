@@ -171,7 +171,7 @@ $.ajaxSetup({
                         product_html = `
                             <tr `;
                         if(product.isHidden == 1) product_html = product_html + "class='hidden'";
-                        product_html = product_html + `onclick="load_url('/dashboard/produits/edition/'`+ product.id +`)">
+                        product_html = product_html + `onclick="load_url('/dashboard/produits/edition/`+ product.id +`')">
                             <td scope="row">`+ product.name +`<BR>`;
 
                         $.each(product.categories, function(index, category){
@@ -192,7 +192,7 @@ $.ajaxSetup({
                     $.each(data.possible_products, function(index, product){
                         console.log(product);
                         product_html = `
-                            <tr onclick="load_url('/dashboard/produits/edition/'`+ product.id +`)">
+                            <tr onclick="load_url('/dashboard/produits/edition/`+ product.id +`')">
                                 <td scope="row">`+ product.name +`<BR>`;
 
                         $.each(product.categories, function(index, category){

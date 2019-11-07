@@ -380,7 +380,7 @@ $.ajaxSetup({
                 'alignRight'
             ]
         },
-        toolbar: [ 'ckfinder', 'imageUpload', '|', 'heading', '|', 'bold', 'italic', '|', 'undo', 'redo' ],
+        toolbar: [ 'ckfinder', '|', 'heading', '|', 'bold', 'italic', 'link', '|', 'undo', 'redo' ],
 
     }).then(e => {window.editor = e}).catch(e => {console.error(e.stack)});
 </script>

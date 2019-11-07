@@ -60,7 +60,16 @@ class ProductController extends Controller
             }
         }
 
-        return redirect('/dashboard/produits');
+        $images_list = scandir(public_path('/images/products/'));
+        foreach($images_list as $image_name){
+            if($image_name != '.' && $image_name != '..'){
+                $new_image = \App\Image::removeSpecialCharacters($image_name);
+                rename(public_path('/images/products/') . $image_name, public_path('/images/products/') . $new_image);
+                echo '<p>'.$image_name .' - '. $new_image .'</p><BR>';
+            }
+        }
+
+        //return redirect('/dashboard/produits');
     }
 
     /**

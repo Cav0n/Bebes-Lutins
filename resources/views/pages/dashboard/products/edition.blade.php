@@ -39,10 +39,10 @@
 
 <div class="card bg-white my-3">
     <div class="card-header bg-white d-flex justify-content-between">
-        <h1 class='h4 m-0 font-weight-normal'>
+        <h1 class='h4 m-0 font-weight-normal d-flex flex-column justify-content-center'>
             {{$product->name}}
         </h1>
-        <button class='btn btn-danger ld-over' onclick='remove_product($(this), "{{$product->id}}")'>
+        <button class='btn btn-danger ld-over' onclick='remove_product($(this), "{{$product->id}}")' style='height:2.5rem;'>
             Supprimer
             <div class="ld ld-ring ld-spin"></div></button>
     </div>
@@ -214,21 +214,23 @@ $.ajaxSetup({
 {{-- Remove product --}}
 <script>
     function remove_product(btn, product_id){
-        $.ajax({
-            url: "/dashboard/produits/supprimer/" + product_id,
-            type: 'DELETE',
-            data: { },
-            success: function(data){
-                alert('PRODUIT SUPPRIMÉ AVEC SUCCES');
-                window.location.replace("/dashboard/produits");
-            },
-            error: function(data) {
-                alert('Suppression impossible');
-            },
-            beforeSend: function() {
-                btn.addClass('running');
-            }
-        });
+        if(confirm("Êtes vous sûr de vouloir supprimer ce produit ?")){
+            $.ajax({
+                url: "/dashboard/produits/supprimer/" + product_id,
+                type: 'DELETE',
+                data: { },
+                success: function(data){
+                    alert('PRODUIT SUPPRIMÉ AVEC SUCCES');
+                    window.location.replace("/dashboard/produits");
+                },
+                error: function(data) {
+                    alert('Suppression impossible');
+                },
+                beforeSend: function() {
+                    btn.addClass('running');
+                }
+            });
+        }
     }
 </script>
 
@@ -360,6 +362,7 @@ $.ajaxSetup({
     
 </script>
 
+{{--  CLASSIC EDITOR  --}}
 <script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
 <script src="{{asset('js/ckfinder/ckfinder.js')}}"></script>
 <script>

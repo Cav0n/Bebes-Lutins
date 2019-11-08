@@ -6,6 +6,12 @@
     <script src="{{asset('js/tagify/jQuery.tagify.min.js')}}"></script>
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/dropzone/dropzone.css')}}">
     <script src="{{asset('js/dropzone/dropzone.js')}}"></script>
+
+    <style>
+        .ck-editor__editable_inline {
+            min-height: 10rem;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -50,13 +56,13 @@
             @endif
 
             <div class="row m-0 mb-2">
-                <div class="col-4 p-0">
+                <div class="col-md-4 p-0 pb-3 pb-md-0">
                     <div id='mainImage' class="dropzone mb-2 @error('name') border-danger text-danger @enderror border rounded row m-0 justify-content-center h-100"></div> 
                     @error('main_image_name')
                         <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-8">
+                <div class="col-md-8 p-0 pl-md-3">
                     <div class="form-group m-0">
                         <label for="name">Nom du produit</label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" aria-describedby="helpName" placeholder="" value='{{old("name")}}' required>
@@ -86,7 +92,7 @@
                 </div>
             </div>
 
-            <div class="form-group mb-0">
+            <div class="form-group">
                 <label for="categories">Catégories</label>
                 <input id='categories' class="form-control @error('categories') is-invalid @enderror" name='categories' value='' placeholder="Tapez le nom d'une catégorie">
                 @error('categories')
@@ -96,8 +102,7 @@
             </div>
             
             <div class="form-group">
-                <label for="description">Description</label>
-                <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="5">{{old('description')}}</textarea>
+                <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description">{{old('description')}}</textarea>
                 @error('description')
                     <div class="invalid-feedback">{{$message}}</div>
                 @enderror
@@ -129,6 +134,7 @@
     </div>
 </div>
 
+{{-- CHARACTERISTICS --}}
 <script>
     characteristics_index = 0;
 
@@ -276,6 +282,32 @@ $.ajaxSetup({
             });
         }
     });
+</script>
+
+{{--  CLASSIC EDITOR  --}}
+<script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
+<script src="{{asset('js/ckfinder/ckfinder.js')}}"></script>
+<script>
+    ClassicEditor.create(document.querySelector("#description"), {
+        ckfinder: {
+            uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
+        },
+        image: {
+            // You need to configure the image toolbar, too, so it uses the new style buttons.
+            toolbar: [ 'imageTextAlternative', '|', 'imageStyle:alignLeft', 'imageStyle:full', 'imageStyle:alignRight' ],
+
+            styles: [
+                // This option is equal to a situation where no style is applied.
+                'full',
+                // This represents an image aligned to the left.
+                'alignLeft',
+                // This represents an image aligned to the right.
+                'alignRight'
+            ]
+        },
+        toolbar: [ 'ckfinder', '|', 'heading', '|', 'bold', 'italic', 'link', '|', 'undo', 'redo' ],
+
+    }).then(e => {window.editor = e}).catch(e => {console.error(e.stack)});
 </script>
 
 @endsection

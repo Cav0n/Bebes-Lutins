@@ -54,7 +54,7 @@
                 <tbody>
                     @foreach ($order->order_items as $item)
                     <tr>
-                        <td><small>{{$item->product->name}}</small></td>
+                        <td><small>@if($item->product->reference != null){{$item->product->reference}} - @endif{{$item->productName}}</small></td>
                         <td class='text-right d-none d-sm-table-cell'>{{number_format($item->unitPrice, 2)}} €</td>
                         <td class='text-center'>{{$item->quantity}}</td>
                         <td class='text-right'>{{number_format($item->unitPrice * $item->quantity, 2)}} €</td>

@@ -8,7 +8,7 @@ if(count($shopping_cart->items) > 0){
     }
 }
 
-$parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'asc')->where('isHidden', false)->get();
+$parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'asc')->where('isHidden', 0)->get();
 
 ?>
 
@@ -18,7 +18,7 @@ $parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'as
     <nav id='top-navbar' class="navbar navbar-expand-lg navbar-dark bg-white sticky-top p-0">
         <a class="navbar-brand text-secondary font-weight-bold ml-3 mr-0 d-flex d-lg-none" href="/" style='font-size:2rem;font-weight:900 !important;'>Bébés Lutins</a>
         <button class="navbar-toggler d-lg-none m-3 bg-secondary" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-            aria-expanded="false" aria-label="Toggle navigation">
+            aria-expanded="0" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -60,7 +60,7 @@ $parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'as
                     <a class="nav-link text-dark" href="/panier">Mon panier</a>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Nos produits</a>
+                    <a class="nav-link dropdown-toggle text-dark" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="0">Nos produits</a>
                     <div class="dropdown-menu">
                         @if($parent_categories != null)
                         @foreach ($parent_categories as $category)
@@ -81,18 +81,18 @@ $parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'as
                 <li class="nav-item hover-green p-2 transition-fast border-right" style='width:8rem;'>
                     <a class="nav-link text-dark text-center py-0" href="/">Accueil</a>
                 </li>
-                @if(App\Category::where('parent_id', null)->orderBy('rank', 'asc')->where('isHidden', false)->exists())
+                @if(App\Category::where('parent_id', null)->orderBy('rank', 'asc')->where('isHidden', 0)->exists())
                 <li class="nav-item hover-green p-2 transition-fast" style='width:10rem;'>
-                    <a class="nav-link dropdown-toggle text-dark p-0 text-center" href="#" id="dropdown-open" aria-haspopup="true" aria-expanded="false">Nos produits</a>
+                    <a class="nav-link dropdown-toggle text-dark p-0 text-center" href="#" id="dropdown-open" aria-haspopup="true" aria-expanded="0">Nos produits</a>
                     
                     <div id="categories-dropdown" class="bg-white dropdown-menu w-100" style='box-shadow: 0 2px 8px -1px rgb(100,100,100);'>
                         <div class="row">
                             <div class="col-md-2">
                                 <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
                                     <li class="nav-item ">
-                                        <a class="nav-link active rounded-0" id="{{App\Category::where('parent_id', null)->where('isHidden', false)->orderBy('rank', 'asc')->first()->id}}-tab" data-toggle="tab" href="#{{App\Category::where('parent_id', null)->where('isHidden', false)->orderBy('rank', 'asc')->first()->id}}" role="tab" aria-controls="{{App\Category::where('parent_id', null)->where('isHidden', false)->orderBy('rank', 'asc')->first()->id}}" aria-selected="true">{{App\Category::where('parent_id', null)->where('isHidden', false)->orderBy('rank', 'asc')->first()->name}}</a>
+                                        <a class="nav-link active rounded-0" id="{{App\Category::where('parent_id', null)->where('isHidden', 0)->orderBy('rank', 'asc')->first()->id}}-tab" data-toggle="tab" href="#{{App\Category::where('parent_id', null)->where('isHidden', 0)->orderBy('rank', 'asc')->first()->id}}" role="tab" aria-controls="{{App\Category::where('parent_id', null)->where('isHidden', 0)->orderBy('rank', 'asc')->first()->id}}" aria-selected="true">{{App\Category::where('parent_id', null)->where('isHidden', 0)->orderBy('rank', 'asc')->first()->name}}</a>
                                     </li>
-                                    @foreach (App\Category::where('parent_id', null)->orderBy('rank', 'asc')->where('isHidden', false)->get()->slice(1) as $category)
+                                    @foreach (App\Category::where('parent_id', null)->orderBy('rank', 'asc')->where('isHidden', 0)->get()->slice(1) as $category)
                                         <li class="nav-item ">
                                             <a class="nav-link rounded-0" id="{{$category->id}}-tab" data-toggle="tab" href="#{{$category->id}}" role="tab" aria-controls="{{$category->id}}" aria-selected="true">{{$category->name}}</a>
                                         </li>
@@ -101,10 +101,10 @@ $parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'as
                             </div>
                             <div class="col-md-10 mt-2">
                                 <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="{{App\Category::where('parent_id', null)->where('isHidden', false)->orderBy('rank', 'asc')->first()->id}}" role="tabpanel" aria-labelledby="{{App\Category::where('parent_id', null)->where('isHidden', false)->first()->id}}-tab">
-                                        <a href='/categories/{{App\Category::where('parent_id', null)->where('isHidden', false)->orderBy('rank', 'asc')->first()->id}}' class='text-dark h2'>{{App\Category::where('parent_id', null)->where('isHidden', false)->orderBy('rank', 'asc')->first()->name}}</a>
+                                    <div class="tab-pane fade show active" id="{{App\Category::where('parent_id', null)->where('isHidden', 0)->orderBy('rank', 'asc')->first()->id}}" role="tabpanel" aria-labelledby="{{App\Category::where('parent_id', null)->where('isHidden', 0)->first()->id}}-tab">
+                                        <a href='/categories/{{App\Category::where('parent_id', null)->where('isHidden', 0)->orderBy('rank', 'asc')->first()->id}}' class='text-dark h2'>{{App\Category::where('parent_id', null)->where('isHidden', 0)->orderBy('rank', 'asc')->first()->name}}</a>
                                         <div class='row'>
-                                            @foreach (App\Category::where('parent_id', App\Category::where('parent_id', null)->orderBy('rank','asc')->first()->id)->orderBy('rank', 'asc')->get() as $category)
+                                            @foreach (App\Category::where('parent_id', App\Category::where('parent_id', null)->where('isHidden', 0)->orderBy('rank','asc')->first()->id)->where('isHidden', 0)->orderBy('rank', 'asc')->get() as $category)
                                             <div class="card m-2" style="width:12rem;cursor:pointer" onclick='load_url("/categories/{{$category->id}}")'>
                                                 <img src="{{asset('images/categories/'. $category->mainImage)}}" class="card-img-top" alt="catégorie">
                                                 <div class="card-body p-3">
@@ -115,11 +115,11 @@ $parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'as
                                         </div>
                                     </div>
 
-                                    @foreach (App\Category::where('parent_id', null)->where('isHidden', false)->orderBy('rank', 'asc')->get()->slice(1) as $parent)
+                                    @foreach (App\Category::where('parent_id', null)->where('isHidden', 0)->orderBy('rank', 'asc')->get()->slice(1) as $parent)
                                     <div class="tab-pane fade" id="{{$parent->id}}" role="tabpanel" aria-labelledby="{{$parent->id}}-tab">
                                         <a href='/categories/{{$parent->id}}' class='text-dark h2'>{{$parent->name}}</a>
                                         <div class='row'>
-                                            @foreach (App\Category::where('parent_id', $parent->id)->orderBy('rank', 'asc')->get() as $category)
+                                            @foreach (App\Category::where('parent_id', $parent->id)->where('isHidden', 0)->orderBy('rank', 'asc')->get() as $category)
                                             <div class="card m-2" style="width:12rem;cursor:pointer" onclick='load_url("/categories/{{$category->id}}")'>
                                                 <img src="{{asset('images/categories/'. $category->mainImage)}}" class="card-img-top" alt="catégorie">
                                                 <div class="card-body p-3">

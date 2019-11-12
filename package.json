@@ -10,6 +10,11 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
     },
     "devDependencies": {
+        "@ckeditor/ckeditor5-indent": "^15.0.0",
+        "@ckeditor/ckeditor5-media-embed": "^15.0.0",
+        "@ckeditor/ckeditor5-paste-from-office": "^15.0.0",
+        "@ckeditor/ckeditor5-table": "^15.0.0",
+        "@ckeditor/ckeditor5-ui": "^15.0.0",
         "axios": "^0.19",
         "bootstrap": "^4.0.0",
         "cross-env": "^5.1",
@@ -42,7 +47,6 @@
         "@ckeditor/ckeditor5-list": "^15.0.0",
         "@ckeditor/ckeditor5-paragraph": "^15.0.0",
         "@ckeditor/ckeditor5-theme-lark": "^15.0.0",
-        "@ckeditor/ckeditor5-ui": "^15.0.0",
         "@ckeditor/ckeditor5-upload": "^15.0.0",
         "@ckeditor/ckeditor5-vue": "^1.0.0",
         "postcss-loader": "^3.0.0",

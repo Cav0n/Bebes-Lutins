@@ -363,7 +363,16 @@ $.ajaxSetup({
 </script>
 
 {{--  CLASSIC EDITOR  --}}
-<script type='module' src="{{asset('js/ckeditor/ckeditor.js')}}"></script>
 <script src="{{asset('js/ckfinder/ckfinder.js')}}"></script>
+<script src="{{asset('js/ckeditor/ckeditor.js')}}"></script>
+<script>
+	ClassicEditor.create( document.querySelector( '#description' ) )
+		.then( editor => {
+			window.editor = editor;
+		} )
+		.catch( err => {
+			console.error( err.stack );
+		} );
+</script>
 
 @endsection

@@ -64,7 +64,7 @@
         <div id="products-container">
             <div class="row">
                 <div class="col-12 d-flex flex-row flex-wrap">
-                    @foreach (App\Category::where('parent_id', null)->get() as $category)
+                    @foreach (App\Category::where('isDeleted', '!=', '1')->orderBy('rank', 'asc')->orderBy('name', 'asc')->get() as $category)
                         <p class="py-1 px-3 mr-2 bg-light border rounded">{{$category->name}}</p>
                     @endforeach
                 </div>

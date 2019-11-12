@@ -64,9 +64,9 @@ class DashboardController extends Controller
     }
 
     public function products(){
-        $productsToVerify = Product::all();
+        $productsToVerify = Product::where('isDeleted', '!=', '1')->orderBy('name', 'asc')->get();
         $productsToDisplay = Product::where('isDeleted', '!=', '1')->orderBy('name', 'asc')->paginate(20);
-        $productsWithMissingImage = array();
+        $productsWithMissingMainImage = array();
         $productsWithMissingThumbnails = array();
 
         foreach($productsToVerify as $product){
@@ -88,8 +88,8 @@ class DashboardController extends Controller
     }
 
     public function categories(){
-        $categoriesToVerify = Category::all();
-        $categoriesToDisplay = Category::where('isDeleted', '!=', '1')->orderBy('rank', 'asc')->orderBy('name', 'asc')->get();
+        $categoriesToVerify = Category::where('isDeleted', '!=', '1')->orderBy('rank', 'asc')->orderBy('name', 'asc')->get();
+        $categoriesToDisplay = Category::where('isDeleted', '!=', '1')->where('parent_id', null)->orderBy('rank', 'asc')->orderBy('name', 'asc')->get();
         $categoriesWithMissingMainImage = array();
 
         foreach($categoriesToVerify as $category){

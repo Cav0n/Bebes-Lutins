@@ -120,12 +120,12 @@
 <div class="card bg-white my-3">
     <div class="card-header bg-white">
         <h1 class='h4 m-0 font-weight-normal'>
-            Catégories enfants
+            Sous-catégories
         </h1>
     </div>
     <div class="card-body">
         @foreach ($category->childs as $child)
-            <p>{{$child->name}}</p>
+            <a href='/dashboard/produits/categories/edition/{{$child->id}}'>{{$child->name}}</p>
         @endforeach
     </div>
 </div>

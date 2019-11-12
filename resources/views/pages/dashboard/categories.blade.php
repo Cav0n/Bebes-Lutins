@@ -52,7 +52,7 @@
                     <tr class='d-flex'>
                         <th class='border-top-0 col-4 col-md-2'></th>
                         <th class='border-top-0 col-8'>Nom</th>
-                        <th class='border-top-0 text-center d-none col-md-2'>Caché</th>
+                        <th class='border-top-0 text-center d-none d-md-table-cell col-md-2'>Caché</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,7 +64,7 @@
                                 </div>
                             </td>
                             <td class='col-8' scope="row"><a href='/dashboard/produits/categories/edition/{{$category->id}}' class='max-content text-dark'>{{$category->name}}</a></td>
-                            <td class='d-none col-md-2 text-center'><div class="form-group"><input type="checkbox" class="form-check-input ml-auto" name="" id="" onclick='switch_isHidden($(this), "{{$category->id}}")' @if($category->isHidden) {{'checked'}} @endif></div></td>
+                            <td class='d-none d-md-table-cell col-md-2 text-center'><div class="form-group"><input type="checkbox" class="form-check-input ml-auto" name="" id="" onclick='switch_isHidden($(this), "{{$category->id}}")' @if($category->isHidden) {{'checked'}} @endif></div></td>
                         </tr>
                         
                         @foreach ($category->childs as $child)

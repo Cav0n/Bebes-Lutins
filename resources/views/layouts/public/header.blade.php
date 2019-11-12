@@ -94,6 +94,7 @@ $parent_categories = App\Category::where('parent_id', null)->where('isDeleted', 
                         <div class="row">
                             <div class="col-md-2">
                                 <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
+
                                     <?php $index = 0; ?>
                                     @foreach ($parent_categories as $category)
                                         <li class="nav-item ">
@@ -101,6 +102,7 @@ $parent_categories = App\Category::where('parent_id', null)->where('isDeleted', 
                                         </li>
                                         <?php $index ++;?>
                                     @endforeach
+                                    
                                 </ul>
                             </div>
                             <div class="col-md-10 mt-2">
@@ -123,7 +125,7 @@ $parent_categories = App\Category::where('parent_id', null)->where('isDeleted', 
                                         </div>
                                         <?php $index++; ?>
                                     @endforeach
-                                    
+
                                 </div>
                             </div>
                         </div>

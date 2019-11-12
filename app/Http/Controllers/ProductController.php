@@ -89,7 +89,7 @@ class ProductController extends Controller
         $found_possible_products = array();
         $result = array();
 
-        $products = Product::where('isDeleted', '!=', '1')->orderBy('name', 'asc')->get();
+        $products = Product::where('isDeleted', 0)->orderBy('name', 'asc')->get();
         $total_valid_words = count($search_words);
 
         foreach($products as $product){
@@ -101,7 +101,10 @@ class ProductController extends Controller
                 $categories = $product->categories;
                 $found_valid_products[$product->id] = $product;
             }
-            else if($count_valid_words > 0) $found_possible_products[] = $product;
+            else if($count_valid_words > 0) {
+                $categories = $product->categories;
+                $found_possible_products[$product->id] = $product;
+            }
         }
 
         $result['valid_products'] = $found_valid_products;
@@ -299,6 +302,7 @@ class ProductController extends Controller
 
         $mainImageName = $request['main_image_name'];
         
+        $product->reference = $request['reference'];
         $product->name = $request['name'];
         $product->description = $request['description'];
         $product->stock = $request['stock'];

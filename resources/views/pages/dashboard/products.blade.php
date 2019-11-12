@@ -64,7 +64,7 @@
         <div id="products-container">
             <div class="row">
                 <div class="col-12 d-flex flex-row flex-wrap">
-                    @foreach (App\Category::where('isDeleted', '!=', '1')->orderBy('rank', 'asc')->orderBy('name', 'asc')->get() as $category)
+                    @foreach (App\Category::where('isDeleted', 0)->orderBy('rank', 'asc')->orderBy('name', 'asc')->get() as $category)
                         <p class="py-1 px-3 mr-2 bg-light border rounded">{{$category->name}}</p>
                     @endforeach
                 </div>
@@ -81,7 +81,7 @@
                 <tbody>
                     @foreach ($products as $product)
                     <tr class='@if($product->isHidden){{'hidden'}}@endif' onclick="load_url('/dashboard/produits/edition/' + '{{$product->id}}')">
-                        <td scope="row">{{$product->name}}<BR> 
+                        <td scope="row">@if($product->reference != null) {{$product->reference . ' - '}} @endif{{$product->name}}<BR> 
                             @foreach ($product->categories as $category)
                                 <small class='text-muted'>{{$category->name}}</small><BR>
                             @endforeach
@@ -167,45 +167,13 @@ $.ajaxSetup({
                     $("#search-possible-table-body").empty();
 
                     $.each(data.valid_products, function(index, product){
-                        console.log(product);
-                        product_html = `
-                            <tr `;
-                        if(product.isHidden == 1) product_html = product_html + "class='hidden'";
-                        product_html = product_html + `onclick="load_url('/dashboard/produits/edition/`+ product.id +`')">
-                            <td scope="row">`+ product.name +`<BR>`;
-
-                        $.each(product.categories, function(index, category){
-                            console.log()
-                            product_html = product_html + `<small class='text-muted'>`+category.name+`</small><BR>`;
-                        });
-
-                        product_html = product_html + `
-                                </td>
-                                <td>`+ product.price +`€</td>
-                                <td><div class="form-group"><input type="checkbox" class="form-check-input ml-auto" name="" id="" onclick='switch_isHidden($(this), "`+ product.id +`")'`;
-                        if(product.isHidden == 1) product_html = product_html + `checked </div></td>`;
-                        product_html = product_html +`</tr>`;
+                        product_html = prepare_product_html(product)
 
                         $("#search-table-body").append(product_html);
                     });
 
                     $.each(data.possible_products, function(index, product){
-                        console.log(product);
-                        product_html = `
-                            <tr onclick="load_url('/dashboard/produits/edition/`+ product.id +`')">
-                                <td scope="row">`+ product.name +`<BR>`;
-
-                        $.each(product.categories, function(index, category){
-                            console.log()
-                            product_html = product_html + `<small class='text-muted'>`+category.name+`</small><BR>`;
-                        });
-
-                        product_html = product_html + `
-                                </td>
-                                <td>`+ product.price +`€</td>
-                                <td><div class="form-group"><input type="checkbox" class="form-check-input ml-auto" name="" id="" onclick='switch_isHidden($(this), "`+ product.id +`")'`;
-                        if(product.isHidden == 1) product_html = product_html + `checked </div></td>`;
-                        product_html = product_html +`</tr>`;
+                        product_html = prepare_product_html(product)
 
                         $("#search-possible-table-body").append(product_html);
                     });
@@ -217,6 +185,45 @@ $.ajaxSetup({
             $("#products-container").show();
             $("#search-container").hide();
         }
+    }
+
+    function prepare_product_html(product){
+        product_html = `
+            <tr class='###class' onclick='load_url("/dashboard/produits/edition/###product_id")'>
+                <td scope="row">
+                ###product_name <BR>
+                    ###categories
+                </td>
+                <td>###product_price €</td>
+                <td>
+                    <div class="form-group">
+                        <input type="checkbox" class="form-check-input ml-auto" name="" id="" onclick='switch_isHidden($(this), "###product_id")' ###checked>
+                    </div>
+                </td>
+            </tr>
+            `;
+
+        if(product.reference != '') reference = product.reference + ' - ';
+            else reference = "";
+
+        if(product.isHidden == 1) {
+            product_html = product_html.replace('###class', "hidden");
+            product_html = product_html.replace('###checked', 'checked');
+        } else {
+            product_html = product_html.replace('###class', "");
+            product_html = product_html.replace('###checked', ''); }
+
+        categories_html = "";
+        $.each(product.categories, function(index, category){
+            categories_html = categories_html + `<small class='text-muted'>`+category.name+`</small><BR>`;
+        });
+
+        product_html = product_html.replace('###categories', categories_html);
+        product_html = product_html.replace('###product_id', product.id);
+        product_html = product_html.replace('###product_name', reference + product.name);
+        product_html = product_html.replace('###product_price', product.price);
+
+        return product_html;
     }
 </script>
 

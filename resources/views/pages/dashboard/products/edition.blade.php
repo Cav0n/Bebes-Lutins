@@ -68,6 +68,18 @@
                 </div>
                 <div class="col-8">
                     <div class="form-group m-0">
+                        <label for="reference">Référence</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">#</div>
+                            </div>
+                            <input type="text" class="form-control @error('reference') is-invalid @enderror" name="reference" id="reference" aria-describedby="helpReference" placeholder="" value='{{old('reference', $product->reference)}}'>
+                            @error('reference')
+                                <div class="invalid-feedback">{{$reference}}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group m-0">
                         <label for="name">Nom du produit</label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" aria-describedby="helpName" placeholder="" value='{{old("name", $product->name)}}' required>
                         @error('name')

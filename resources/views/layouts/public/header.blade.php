@@ -8,7 +8,7 @@ if(count($shopping_cart->items) > 0){
     }
 }
 
-$parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'asc')->where('isHidden', 0)->get();
+$parent_categories = App\Category::where('parent_id', null)->where('isDeleted', 0)->where('isHidden', 0)->orderBy('rank', 'asc')->get();
 
 ?>
 
@@ -81,7 +81,12 @@ $parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'as
                 <li class="nav-item hover-green p-2 transition-fast border-right" style='width:8rem;'>
                     <a class="nav-link text-dark text-center py-0" href="/">Accueil</a>
                 </li>
-                @if(App\Category::where('parent_id', null)->orderBy('rank', 'asc')->where('isHidden', 0)->exists())
+                @if(App\Category::where('parent_id', null)->where('isDeleted', 0)->where('isHidden', 0)->orderBy('rank', 'asc')->where('isHidden', 0)->exists())
+                <?php 
+                
+                $parent_categories = App\Category::where('parent_id', null)->where('isDeleted', 0)->where('isHidden', 0)->orderBy('rank', 'asc')->get();
+                
+                ?>
                 <li class="nav-item hover-green p-2 transition-fast" style='width:10rem;'>
                     <a class="nav-link dropdown-toggle text-dark p-0 text-center" href="#" id="dropdown-open" aria-haspopup="true" aria-expanded="0">Nos produits</a>
                     
@@ -89,47 +94,36 @@ $parent_categories = App\Category::where('parent_id', null)->orderBy('rank', 'as
                         <div class="row">
                             <div class="col-md-2">
                                 <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
-                                    <li class="nav-item ">
-                                        <a class="nav-link active rounded-0" id="{{App\Category::where('parent_id', null)->where('isHidden', 0)->orderBy('rank', 'asc')->first()->id}}-tab" data-toggle="tab" href="#{{App\Category::where('parent_id', null)->where('isHidden', 0)->orderBy('rank', 'asc')->first()->id}}" role="tab" aria-controls="{{App\Category::where('parent_id', null)->where('isHidden', 0)->orderBy('rank', 'asc')->first()->id}}" aria-selected="true">{{App\Category::where('parent_id', null)->where('isHidden', 0)->orderBy('rank', 'asc')->first()->name}}</a>
-                                    </li>
-                                    @foreach (App\Category::where('parent_id', null)->orderBy('rank', 'asc')->where('isHidden', 0)->get()->slice(1) as $category)
+                                    <?php $index = 0; ?>
+                                    @foreach ($parent_categories as $category)
                                         <li class="nav-item ">
-                                            <a class="nav-link rounded-0" id="{{$category->id}}-tab" data-toggle="tab" href="#{{$category->id}}" role="tab" aria-controls="{{$category->id}}" aria-selected="true">{{$category->name}}</a>
+                                            <a class="nav-link rounded-0 @if($index == 0) {{'active'}} @endif" id="{{$category->id}}-tab" data-toggle="tab" href="#{{$category->id}}" role="tab" aria-controls="{{$category->id}}" aria-selected="true">{{$category->name}}</a>
                                         </li>
+                                        <?php $index ++;?>
                                     @endforeach
                                 </ul>
                             </div>
                             <div class="col-md-10 mt-2">
                                 <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="{{App\Category::where('parent_id', null)->where('isHidden', 0)->orderBy('rank', 'asc')->first()->id}}" role="tabpanel" aria-labelledby="{{App\Category::where('parent_id', null)->where('isHidden', 0)->first()->id}}-tab">
-                                        <a href='/categories/{{App\Category::where('parent_id', null)->where('isHidden', 0)->orderBy('rank', 'asc')->first()->id}}' class='text-dark h2'>{{App\Category::where('parent_id', null)->where('isHidden', 0)->orderBy('rank', 'asc')->first()->name}}</a>
-                                        <div class='row'>
-                                            @foreach (App\Category::where('parent_id', App\Category::where('parent_id', null)->where('isHidden', 0)->orderBy('rank','asc')->first()->id)->where('isHidden', 0)->orderBy('rank', 'asc')->get() as $category)
-                                            <div class="card m-2" style="width:12rem;cursor:pointer" onclick='load_url("/categories/{{$category->id}}")'>
-                                                <img src="{{asset('images/categories/'. $category->mainImage)}}" class="card-img-top" alt="catégorie">
-                                                <div class="card-body p-3">
-                                                    <a class="card-text text-dark" href='/categories/{{$category->id}}'>{{$category->name}}</a>
-                                                </div>
-                                            </div>
-                                            @endforeach
-                                        </div>
-                                    </div>
 
-                                    @foreach (App\Category::where('parent_id', null)->where('isHidden', 0)->orderBy('rank', 'asc')->get()->slice(1) as $parent)
-                                    <div class="tab-pane fade" id="{{$parent->id}}" role="tabpanel" aria-labelledby="{{$parent->id}}-tab">
-                                        <a href='/categories/{{$parent->id}}' class='text-dark h2'>{{$parent->name}}</a>
-                                        <div class='row'>
-                                            @foreach (App\Category::where('parent_id', $parent->id)->where('isHidden', 0)->orderBy('rank', 'asc')->get() as $category)
-                                            <div class="card m-2" style="width:12rem;cursor:pointer" onclick='load_url("/categories/{{$category->id}}")'>
-                                                <img src="{{asset('images/categories/'. $category->mainImage)}}" class="card-img-top" alt="catégorie">
-                                                <div class="card-body p-3">
-                                                    <a class="card-text text-dark" href='/categories/{{$category->id}}'>{{$category->name}}</a>
+                                    <?php $index = 0; ?>
+                                    @foreach ($parent_categories as $parent)
+                                        <div class="tab-pane fade @if($index == 0) {{'show active'}} @endif" id="{{$parent->id}}" role="tabpanel" aria-labelledby="{{$parent->id}}-tab">
+                                            <a href='/categories/{{$parent->id}}' class='text-dark h2'>{{$parent->name}}</a>
+                                            <div class='row'>
+                                                @foreach (App\Category::where('parent_id', $parent->id)->where('isHidden', 0)->orderBy('rank', 'asc')->get() as $category)
+                                                <div class="card m-2" style="width:12rem;cursor:pointer" onclick='load_url("/categories/{{$category->id}}")'>
+                                                    <img src="{{asset('images/categories/'. $category->mainImage)}}" class="card-img-top" alt="catégorie">
+                                                    <div class="card-body p-3">
+                                                        <a class="card-text text-dark" href='/categories/{{$category->id}}'>{{$category->name}}</a>
+                                                    </div>
                                                 </div>
+                                                @endforeach
                                             </div>
-                                            @endforeach
                                         </div>
-                                    </div>
+                                        <?php $index++; ?>
                                     @endforeach
+                                    
                                 </div>
                             </div>
                         </div>

@@ -64,6 +64,18 @@
                 </div>
                 <div class="col-md-8 p-0 pl-md-3">
                     <div class="form-group m-0">
+                        <label for="reference">Référence</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">#</div>
+                            </div>
+                            <input type="text" class="form-control @error('reference') is-invalid @enderror" name="reference" id="reference" aria-describedby="helpReference" placeholder="" value='{{old('reference')}}'>
+                            @error('reference')
+                                <div class="invalid-feedback">{{$reference}}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group m-0">
                         <label for="name">Nom du produit</label>
                         <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" aria-describedby="helpName" placeholder="" value='{{old("name")}}' required>
                         @error('name')
@@ -285,29 +297,16 @@ $.ajaxSetup({
 </script>
 
 {{--  CLASSIC EDITOR  --}}
-<script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
 <script src="{{asset('js/ckfinder/ckfinder.js')}}"></script>
+<script src="{{asset('js/ckeditor/ckeditor.js')}}"></script>
 <script>
-    ClassicEditor.create(document.querySelector("#description"), {
-        ckfinder: {
-            uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
-        },
-        image: {
-            // You need to configure the image toolbar, too, so it uses the new style buttons.
-            toolbar: [ 'imageTextAlternative', '|', 'imageStyle:alignLeft', 'imageStyle:full', 'imageStyle:alignRight' ],
-
-            styles: [
-                // This option is equal to a situation where no style is applied.
-                'full',
-                // This represents an image aligned to the left.
-                'alignLeft',
-                // This represents an image aligned to the right.
-                'alignRight'
-            ]
-        },
-        toolbar: [ 'ckfinder', '|', 'heading', '|', 'bold', 'italic', 'link', '|', 'undo', 'redo' ],
-
-    }).then(e => {window.editor = e}).catch(e => {console.error(e.stack)});
+	ClassicEditor.create( document.querySelector( '#description' ) )
+		.then( editor => {
+			window.editor = editor;
+		} )
+		.catch( err => {
+			console.error( err.stack );
+		} );
 </script>
 
 @endsection

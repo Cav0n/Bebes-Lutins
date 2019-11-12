@@ -165,7 +165,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   
+    {           
         $request->validate([
             'name' => 'string|min:3|required',
             'description' => 'string|min:10|required',
@@ -178,9 +178,12 @@ class ProductController extends Controller
             'characteristics' => 'array|nullable',
         ]);
 
+        $id = \App\IDCreator::stringToId($request['name']);
         $mainImageName = $request['main_image_name'];
 
         $product = new Product();
+        $product->id = $id;
+        $product->reference = $request['reference'];
         $product->name = $request['name'];
         $product->description = $request['description'];
         $product->stock = $request['stock'];
@@ -381,6 +384,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->isDeleted = true;
+        $product->id = uniqid();
         $product->save();
     }
 

@@ -101,6 +101,11 @@ class CheckForShoppingCart
                 $request->session()->put('shopping_cart_infos', 'Un ou plusieurs produits qui étaient dans votre panier ne sont plus disponibles.');
             }
             if($item->product->isDeleted == 1) {
+                if(count($item->characteristics) > 0){
+                    foreach($item->characteristics as $c){
+                        $c->delete();
+                    }
+                }
                 $item->delete();
                 $request->session()->put('shopping_cart_infos', 'Un ou plusieurs produits qui étaient dans votre panier ne sont plus disponibles.');
             }

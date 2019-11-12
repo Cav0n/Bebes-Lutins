@@ -20,7 +20,7 @@ class IDCreator extends Model
 
     public static function stringToId(String $id)
     {
-        $id = UtilsModel::replace_accent($id);
+        $id = IDCreator::replaceAccent($id);
         $id = str_replace(' ', '-', $id); // Replaces all spaces with hyphens.
         $id = preg_replace('/[^A-Za-z0-9\-]/', '', $id); // Removes special chars.
         $id = preg_replace('/-+/', '-', $id); // Replaces multiple hyphens with single one.

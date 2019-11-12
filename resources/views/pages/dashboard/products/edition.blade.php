@@ -363,29 +363,7 @@ $.ajaxSetup({
 </script>
 
 {{--  CLASSIC EDITOR  --}}
-<script src="https://cdn.ckeditor.com/ckeditor5/15.0.0/classic/ckeditor.js"></script>
+<script type='module' src="{{asset('js/ckeditor/ckeditor.js')}}"></script>
 <script src="{{asset('js/ckfinder/ckfinder.js')}}"></script>
-<script>
-    ClassicEditor.create(document.querySelector("#description"), {
-        ckfinder: {
-            uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
-        },
-        image: {
-            // You need to configure the image toolbar, too, so it uses the new style buttons.
-            toolbar: [ 'imageTextAlternative', '|', 'imageStyle:alignLeft', 'imageStyle:full', 'imageStyle:alignRight' ],
-
-            styles: [
-                // This option is equal to a situation where no style is applied.
-                'full',
-                // This represents an image aligned to the left.
-                'alignLeft',
-                // This represents an image aligned to the right.
-                'alignRight'
-            ]
-        },
-        toolbar: [ 'ckfinder', '|', 'heading', '|', 'bold', 'italic', 'link', '|', 'undo', 'redo' ],
-
-    }).then(e => {window.editor = e}).catch(e => {console.error(e.stack)});
-</script>
 
 @endsection

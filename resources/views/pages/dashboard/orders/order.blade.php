@@ -61,12 +61,6 @@
                     </tr>
                     @endforeach
                     <tr>
-                        <td><small>Une notice d'entretien</small></td>
-                        <td class='text-right d-none d-sm-table-cell'>{{number_format(0, 2)}} €</td>
-                        <td class='text-center'>1</td>
-                        <td class='text-right'>{{number_format(0, 2)}} €</td>
-                    </tr>
-                    <tr>
                         <td></td>
                         <td class='d-none d-sm-table-cell'></td>
                         <td class='text-right'>Sous total TTC</td>

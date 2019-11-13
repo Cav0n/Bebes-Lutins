@@ -1,5 +1,5 @@
 #product-main #description figure.image{
-    width:100%;
+    max-width:100%;
 }
 
 #product-main #description figure.image img{

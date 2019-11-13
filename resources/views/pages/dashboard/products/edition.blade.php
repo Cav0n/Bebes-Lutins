@@ -30,7 +30,7 @@
 
 {{-- Success --}}
 @if(session()->has('success-message'))
-<div class="col-lg-12 p-0 mt-2">
+<div id='successMessage' class="col-lg-12 p-0 mt-2">
     <div class="alert alert-success px-3 mb-0">
         <p class='text-success font-weight-bold mb-0'>{{session('success-message')}}</p>
     </div>
@@ -170,6 +170,11 @@
         </form>
     </div>
 </div>
+
+{{-- AUTO HIDE SUCCESS MESSAGE --}}
+<script>
+    $('#successMessage').delay(3000).fadeOut('slow');
+</script>
 
 {{-- CHARACTERISTICS --}}
 <script>

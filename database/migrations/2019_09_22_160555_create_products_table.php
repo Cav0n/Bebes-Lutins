@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('mainImage')->nullable();
             $table->unsignedInteger('stock')->default(0);
             $table->unsignedDecimal('price', 10, 2);
+            $table->boolean('isHighlighted')->default(false);
             $table->boolean('isHidden')->default(false);
             $table->boolean('isDeleted')->default(false);
             $table->unsignedBigInteger('reviewsCount')->default(0);

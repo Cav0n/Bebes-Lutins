@@ -38,6 +38,21 @@ class ProductController extends Controller
         echo json_encode( $data );
     }
 
+    public function highlightProducts(Request $request)
+    {
+        foreach(Product::where('isHighlighted', 1)->get() as $product){
+            $product->isHighlighted = 0;
+            $product->save();
+        }
+        if($request['selected_products_id'] != null){
+            foreach($request['selected_products_id'] as $id){
+                $product = Product::where('id', $id)->first();
+                $product->isHighlighted = 1;
+                $product->save();
+            }
+        }
+    }
+
     public function correctAllMainImages()
     {
         $products = Product::all();

@@ -17,12 +17,16 @@ if (count($product->reviews) > 0){
 
 @extends('templates.template')
 
+@section('title', $product->name . ' - Bébés Lutins')
+
 @section('head-options')
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/custom/product.css')}}">
     {{--  Rate Yo  --}}
     <script src="{{asset('js/rateyo/rateyo.js')}}"></script>
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/rateyo/rateyo.css')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <meta name="description" content="{{strip_tags($product->description)}}" />
 @endsection
 
 @section('content')

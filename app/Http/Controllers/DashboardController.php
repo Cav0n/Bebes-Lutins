@@ -23,35 +23,37 @@ class DashboardController extends Controller
     }
 
     public function index(){
-        return redirect('/dashboard/commandes/en-cours');
+        return redirect('/dashboard/commandes/toutes');
     }
 
     public function orders(string $status = null){
         if(session()->has('selected_order_status' . $status)){
-            $orders = Order::where('status', '=', session('selected_order_status'.$status))->orderBy('created_at', 'desc')->paginate(15); 
-        }
+            $orders = Order::where('status', '=', session('selected_order_status'.$status))->orderBy('created_at', 'desc')->paginate(15); }
 
         switch($status){
+            case 'toutes':
+                if(!isset($orders)){
+                    $orders = Order::where('id', '!=', null)->where('status', '!=', -3)->orderBy('created_at', 'desc')->paginate(20); }
+                $old_status = $status;
+                $status = "toutes";
+                break;
             case 'en-cours':
                 if(!isset($orders)){
-                    $orders = Order::where('status', '>=', 0)->where('status', '!=', 3)->where('status', '!=', '33')->orderBy('created_at', 'desc')->paginate(15); 
-                }
+                    $orders = Order::where('status', '>=', 0)->where('status', '!=', 3)->where('status', '!=', '33')->orderBy('created_at', 'desc')->paginate(15); }
                 $old_status = $status;
                 $status = "en cours";
                 break;
 
             case 'terminees':
                 if(!isset($orders)){
-                    $orders = Order::where('status', '!=', 22)->where('status', '>=', 3)->orderBy('created_at', 'desc')->paginate(15);
-                }
+                    $orders = Order::where('status', '!=', 22)->where('status', '>=', 3)->orderBy('created_at', 'desc')->paginate(15); }
                 $old_status = $status;
                 $status = "terminées";
                 break;
 
             case 'refusees':
                 if(!isset($orders)){
-                    $orders = Order::where('status', '=', -3)->paginate(15);
-                }
+                    $orders = Order::where('status', '=', -3)->paginate(15); }
                 $old_status = $status;
                 $status = "refusées";
                 break;
@@ -85,6 +87,14 @@ class DashboardController extends Controller
     public function stocks(){
         $products = Product::where('isDeleted', '!=', '1')->orderBy('name', 'asc')->paginate(20);
         return view('pages.dashboard.stocks')->withProducts($products);
+    }
+
+    public function highlighted(){
+        $products = Product::where('isDeleted', 0)->orderBy('name', 'asc')->get();
+        $highlighted_products = Product::where('isHighlighted', 1)->orderBy('name', 'asc')->get();
+        return view('pages.dashboard.highlighted')
+            ->withProducts($products)
+            ->withHighlightedProducts($highlighted_products);
     }
 
     public function categories(){

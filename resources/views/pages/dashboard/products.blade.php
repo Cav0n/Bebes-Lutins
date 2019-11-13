@@ -65,7 +65,9 @@
             <div class="row">
                 <div class="col-12 d-flex flex-row flex-wrap">
                     @foreach (App\Category::where('isDeleted', 0)->orderBy('rank', 'asc')->orderBy('name', 'asc')->get() as $category)
+                    @if(count($category->products) > 0)
                         <p class="py-1 px-3 mr-2 bg-light border rounded">{{$category->name}}</p>
+                    @endif
                     @endforeach
                 </div>
             </div>

@@ -22,7 +22,7 @@
             {{-- Categories selectors --}}
             <div class="row">
                 <div class="col-12 d-inline-flex flex-wrap">
-                    @foreach (App\Category::where('isHidden', 0)->where('parent_id', null)->get() as $category)
+                    @foreach (App\Category::where('isHidden', 0)->where('isDeleted', 0)->where('parent_id', null)->get() as $category)
                         <p class='category-selector transition-fast px-3 py-1 bg-light my-1 mr-2 ml-0 rounded @if(session()->has('selected-categories')) @if(in_array($category->id, session('selected-categories'))) selected  @endif @endif' onclick='switch_category($(this),"{{$category->id}}")'>{{$category->name}}</p>
                     @endforeach
                 </div>

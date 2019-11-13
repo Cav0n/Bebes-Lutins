@@ -32,34 +32,6 @@ table tr.hidden {
   opacity: 0.4;
 }
 
-table tr .btn {
-  font-size: 0.8rem;
-  background: #f7f7f7;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  background: -webkit-gradient(linear, left top, left bottom, from(white), to(#f9fafb));
-  background: linear-gradient(to bottom, white, #f9fafb);
-  -webkit-box-shadow: 0 1px 0 0 rgba(22, 29, 37, 0.05);
-  box-shadow: 0 1px 0 0 rgba(22, 29, 37, 0.05);
-  color: #212b36;
-  -webkit-transition-property: background, border, -webkit-box-shadow;
-  transition-property: background, border, -webkit-box-shadow;
-  transition-property: background, border, box-shadow;
-  transition-property: background, border, box-shadow, -webkit-box-shadow;
-  -webkit-transition-timing-function: cubic-bezier(0.64, 0, 0.35, 1);
-  transition-timing-function: cubic-bezier(0.64, 0, 0.35, 1);
-  -webkit-transition-duration: 200ms;
-  transition-duration: 200ms;
-  -webkit-tap-highlight-color: transparent;
-}
-
 #sidenav .sublink {
   margin-left: 2.6rem;
   font-size: 0.9rem;

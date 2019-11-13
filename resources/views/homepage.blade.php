@@ -27,10 +27,21 @@
                         bébé. Nos modèles sont conçus pour s'adapter à la morphologie de bébé, tout en lui offrant confort et bien-être.</p>
                 </div>
 
-                {{-- Highlited Products --}}
+                {{-- Highlighted Products --}}
+                @if(App\Product::where('isHighlighted', 1)->where('isHidden', 0)->where('isDeleted', 0)->exists())
+
+                @foreach (App\Product::where('isHighlighted', 1)->where('isHidden', 0)->where('isDeleted', 0)->get()->take(8) as $product)
+                    @include('components.public.product-display')
+                @endforeach
+
+                @else
+
                 @foreach (App\Product::where('isHidden', 0)->where('isDeleted', 0)->get()->take(8) as $product)
                     @include('components.public.product-display')
                 @endforeach
+
+                @endif
+                
 
                 {{-- All products buttons --}}
                 <div class="col-12">

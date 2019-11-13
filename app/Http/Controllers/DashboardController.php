@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use \App\Order;
 use \App\Product;
 use \App\Category;
@@ -64,9 +65,11 @@ class DashboardController extends Controller
         return view('pages.dashboard.orders')->withStatus($status)->withOrders($orders)->withOldStatus($old_status);
     }
 
-    public function products(){
-        $productsToVerify = Product::where('isDeleted', '!=', '1')->orderBy('name', 'asc')->get();
+    public function products(Request $request){
         $productsToDisplay = Product::where('isDeleted', '!=', '1')->orderBy('name', 'asc')->paginate(20);
+
+        $productsToVerify = Product::where('isDeleted', '!=', '1')->orderBy('name', 'asc')->get();
+        
         $productsWithMissingMainImage = array();
         $productsWithMissingThumbnails = array();
 

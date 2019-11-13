@@ -118,6 +118,7 @@ Route::post('/dashboard/produits/mis-en-avant', 'ProductController@highlightProd
 Route::delete('/dashboard/produits/supprimer/{product}', 'ProductController@destroy');
 Route::get('/dashboard/produits/correction-images', 'ProductController@correctAllMainImages');
 Route::post('/dashboard/produits/recherche', 'ProductController@search');
+Route::post('/dashboard/produits/trier-par-categorie/{category}', 'ProductController@searchWithCategory');
 //CATEGORIES
 Route::get('/dashboard/produits/categories', 'DashboardController@categories'); //TODO
 Route::get('/dashboard/produits/categories/nouvelle', 'CategoryController@create');

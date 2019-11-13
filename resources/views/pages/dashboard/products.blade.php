@@ -61,17 +61,31 @@
                 </button>
             </div>
         </div>
-        <div id="products-container">
-            <div class="row">
-                <div class="col-12 d-flex flex-row flex-wrap">
-                    @foreach (App\Category::where('isDeleted', 0)->orderBy('rank', 'asc')->orderBy('name', 'asc')->get() as $category)
-                    @if(count($category->products) > 0)
-                        <p class="py-1 px-3 mr-2 bg-light border rounded">{{$category->name}}</p>
-                    @endif
-                    @endforeach
+        <div class="row">
+            <div class="col-12 d-flex flex-row flex-wrap">
+                <div class="form-group">
+                    <label for="category-select">Catégorie</label>
+                    <select class="custom-select" name="category-select" id="category-select">
+                        <option value='all' selected>Toutes</option>
+                        @foreach (App\Category::where('isDeleted', 0)->orderBy('rank', 'asc')->orderBy('name', 'asc')->get()
+                            as $category)
+
+                            <?php $products_count = 0; ?>
+                            @foreach($category->products as $product)
+                            @if($product->isDeleted == 0) <?php $products_count++; ?> @endif
+                            @endforeach
+                            @if($products_count > 0)
+
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+
+                            @endif
+
+                        @endforeach
+                    </select>
                 </div>
             </div>
-            {{$products->links()}}
+        </div>
+        <div id="products-container">
             <table class="table">
                 <thead>
                     <tr>
@@ -119,6 +133,21 @@
                     </tr>
                 </thead>
                 <tbody id='search-possible-table-body'>
+
+                </tbody>
+            </table>
+        </div>
+        <div id='sort-container'>
+            <h2 id='sort-title' class='h4'>Résulats</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class='border-top-0'>Nom</th>
+                        <th class='border-top-0'>Prix</th>
+                        <th class='border-top-0 align-right'>Caché</th>
+                    </tr>
+                </thead>
+                <tbody id='sort-table-body'>
 
                 </tbody>
             </table>
@@ -229,6 +258,48 @@ $.ajaxSetup({
     }
 </script>
 
+{{-- CATEGORY SORTING --}}
+<script>
+$('#category-select').change(function(){
+    category_name = $( this ).children('option:selected').text();
+    category_id = $( this ).children('option:selected').val();
+    
+    if(category_id != 'all'){
+        $.ajax({
+            url : '/dashboard/produits/trier-par-categorie/' + category_id, // on appelle le script JSON
+            type: "POST",
+            dataType : 'json', // on spécifie bien que le type de données est en JSON
+            beforeSend: function(){
+                console.log(category_id);
+            },
+            success : function(data){
+                $("#products-container").hide();
+                $("#search-container").hide();
+                $("#sort-container").show();
+
+                $("#sort-table-body").empty();
+
+                $.each(data.products, function(index, product){
+                    if(product.isDeleted == 0){
+                        product_html = prepare_product_html(product)
+
+                        $("#sort-table-body").append(product_html);
+                    }
+                });
+
+                $("#sort-title").text(category_name);
+            }
+        });
+    } else {
+        $("#products-container").show();
+        $("#sort-container").hide();
+
+        $("#sort-table-body").empty();
+    }
+});
+</script>
+
+{{-- SWITCH HIDDEN PRODUCT --}}
 <script>
 function switch_isHidden(checkbox, product_id){
     $.ajax({

@@ -129,6 +129,15 @@ class ProductController extends Controller
         echo json_encode( $result, JSON_PRETTY_PRINT);
     }
 
+    public function searchWithCategory(Request $request, Category $category)
+    {
+        $products = $category->products;
+
+        $result['products'] = $products;
+        header('Content-type: application/json');
+        echo json_encode( $result, JSON_PRETTY_PRINT);
+    }
+
     /**
      * Display a listing of the resource.
      *

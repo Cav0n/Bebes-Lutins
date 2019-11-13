@@ -30,7 +30,7 @@
 
         {{--  Date selection  --}}
         <div class='row justify-content-center my-2'>
-            <div class="col-12 col-md-6 d-flex my-2">
+            <div class="col-12 col-sm-6 d-flex my-2">
                 <div class="col-1 p-0 d-flex flex-column justify-content-center">
                     <p class='ml-auto m-0'>Du</p>
                 </div>
@@ -38,7 +38,7 @@
                     <input type="text" class="form-control datepicker w-100" name="first-date" id="first-date" aria-describedby="helpFirstDate" placeholder=""> 
                 </div>
             </div>
-            <div class="col-12 col-md-6 d-flex my-2">
+            <div class="col-12 col-sm-6 d-flex my-2">
                 <div class="col-1 p-0 d-flex flex-column justify-content-center">
                     <p class='ml-auto m-0'>Au</p>  
                 </div>
@@ -51,63 +51,63 @@
 </div>
 {{-- TOTAL TURNOVER --}}
 <div class="row border-bottom">
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-sm-6">
         <h1 id='turnover-total' class='h1 m-0 font-weight-bold text-secondary text-center mt-3 mb-0'>--,-- €</h1>
         <p class='text-center'>Chiffre d'affaire total</p>
     </div>
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-sm-6">
         <h1 id='shipping-price-total' class='h1 m-0 text-secondary text-center mt-3 mb-0'>--,-- €</h1>
         <p class='text-center'>Frais de port totaux</p>
     </div>
 </div>
 {{-- THIS YEAR TURNOVER --}}
 <div class="row border-bottom">
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-sm-6">
         <h1 id='turnover-year' class='h1 m-0 font-weight-bold text-secondary text-center mt-3 mb-0'>--,-- €</h1>
         <p class='text-center'>Chiffre d'affaire de l'année</p>
     </div>
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-sm-6">
         <h1 id='shipping-price-year' class='h1 m-0 text-secondary text-center mt-3 mb-0'>--,-- €</h1>
         <p class='text-center'>Frais de port de l'année</p>
     </div>
 </div>
 {{-- THIS MONTH TURNOVER --}}
 <div class="row border-bottom">
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-sm-6">
         <h1 id='turnover-month' class='h1 m-0 font-weight-bold text-secondary text-center mt-3 mb-0'>--,-- €</h1>
         <p class='text-center'>Chiffre d'affaire du mois</p>
     </div>
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-sm-6">
         <h1 id='shipping-price-month' class='h1 m-0 text-secondary text-center mt-3 mb-0'>--,-- €</h1>
         <p class='text-center'>Frais de port du mois</p>
     </div>
 </div>
 
 <div class="row border-bottom">
-    <div class="col-12 col-md-6 col-lg-4">
+    <div class="col-12 col-sm-6 col-lg-4">
         <h1 id='order-count-total' class='h1 m-0 font-weight-bold text-secondary text-center mt-3 mb-0'>--</h1>
         <p class='text-center'>Commandes depuit le début</p>
     </div>
-    <div class="col-12 col-md-6 col-lg-4">
+    <div class="col-12 col-sm-6 col-lg-4">
         <h1 id='order-count-year' class='h1 m-0 text-secondary text-center mt-3 mb-0'>--</h1>
         <p class='text-center'>Commandes cette année</p>
     </div>
-    <div class="col-12 col-md-6 col-lg-4">
+    <div class="col-12 col-sm-6 col-lg-4">
         <h1 id='order-count-month' class='h1 m-0 text-secondary text-center mt-3 mb-0'>--</h1>
         <p class='text-center'>Commandes ce mois</p>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-12 col-md-6 col-lg-4">
+    <div class="col-12 col-sm-6 col-lg-4">
         <h1 id='items-count-total' class='h1 m-0 font-weight-bold text-secondary text-center mt-3 mb-0'>--</h1>
         <p class='text-center'>Produits commandés depuis le début</p>
     </div>
-    <div class="col-12 col-md-6 col-lg-4">
+    <div class="col-12 col-sm-6 col-lg-4">
         <h1 id='items-count-year' class='h1 m-0 text-secondary text-center mt-3 mb-0'>--</h1>
         <p class='text-center'>Produits commandés cette année</p>
     </div>
-    <div class="col-12 col-md-6 col-lg-4">
+    <div class="col-12 col-sm-6 col-lg-4">
         <h1 id='items-count-month' class='h1 m-0 text-secondary text-center mt-3 mb-0'>--</h1>
         <p class='text-center'>Produits commandés ce mois</p>
     </div>

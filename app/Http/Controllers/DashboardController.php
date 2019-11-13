@@ -31,11 +31,10 @@ class DashboardController extends Controller
             $orders = Order::where('status', '=', session('selected_order_status'.$status))->orderBy('created_at', 'desc')->paginate(15); }
 
         switch($status){
-            case 'toutes':
+            case null:
                 if(!isset($orders)){
                     $orders = Order::where('id', '!=', null)->where('status', '!=', -3)->orderBy('created_at', 'desc')->paginate(20); }
                 $old_status = $status;
-                $status = "toutes";
                 break;
             case 'en-cours':
                 if(!isset($orders)){

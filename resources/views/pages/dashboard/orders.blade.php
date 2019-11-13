@@ -21,7 +21,7 @@
             </div>
         </div>
         @switch($status)
-            @case('toutes')
+            @case(null)
                 @include('pages.dashboard.orders.all')
                 @break
             @case('en cours')

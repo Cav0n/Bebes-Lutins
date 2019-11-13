@@ -17,7 +17,7 @@
         <div class='card card bg-white my-3'>
             <div class="card-header bg-white d-flex justify-content-between">
                 <h1 class='h4 m-0 font-weight-normal d-flex flex-column justify-content-center'>
-                    Produits mis en avant
+                    Produits mis en avant - ({{count($highlightedProducts)}})
                 </h1>
                 <button type="button" class="btn btn-primary py-1" data-toggle="modal" data-target="#product-selection-popup">
                     Choisir des produits</button>

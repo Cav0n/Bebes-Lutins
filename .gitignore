@@ -14,4 +14,4 @@ yarn-error.log
 /public/images/products/*
 /public/images/tmp/*
 /public/ckfinder/*
-*.DS_STORE
+*.DS_Store

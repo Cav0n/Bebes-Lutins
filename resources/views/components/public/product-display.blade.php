@@ -13,20 +13,41 @@
         <div class='card-footer text-muted d-flex px-0 py-1 border' @if($product->stock > 0) onclick='load_url("/produits/{{$product->id}}")' @endif>
             <p class='mb-0 w-100 text-center'>{{$product->price}}€</p>
         </div>
-        <div class="card-footer text-muted d-none d-sm-flex p-0 rounded-0 border-0">
-        <button type="button" class="btn btn-secondary h-100 w-100 px-0 py-2 rounded-0"
+        <div class="card-footer text-muted d-flex p-0 rounded-0 border-0">
+        <button type="button" class="btn btn-secondary h-100 w-100 px-0 py-2 rounded-0 open-product-added-dialog"
+
         @if($product->stock > 0) 
-        @if(count($product->characteristics) == 0) onclick='add_to_cart("{{$product->id}}", "{{$product->name}}", {{$product->price}}, "{{$product->mainImage}}", "{{$product->stock}}", "{{session("shopping_cart")->id}}")'
-        @else onclick='load_url("/produits/{{$product->id}}")'
-        @endif
+            @if(count($product->characteristics) == 0) 
+
+            data-toggle="modal" 
+            data-target="#addToCartPopup" 
+            data-product_name="{{$product->name}}"
+            data-product_image="{{asset('images/products/' . $product->mainImage)}}"
+
+            @else onclick='load_url("/produits/{{$product->id}}")'
+            @endif
         @endif style='font-size:0.9rem !important;' @if($product->stock <= 0) disabled @endif>
-            @if($product->stock > 0)
+
+        @if($product->stock > 0)
             @if(count($product->characteristics) == 0) Ajouter au panier
             @else Voir le produit
             @endif
-            @else Rupture de stock
-            @endif
+        @else Rupture de stock
+        @endif
         </button> 
         </div>
     </div> 
 </div>
+
+<script>
+$('.open-product-added-dialog').on('click', function(){
+    var productName = $(this).data('product_name');
+    var productImage = $(this).data('product_image');
+
+    $("#addToCartPopup .modal-title").text( productName );
+    $("#addToCartPopup .modal-image").attr('src', productImage );
+    $("#addToCartPopup .modal-text-confirmation").html("Vous venez d'ajouter " + productName.bold() + " à votre panier.");
+
+
+});
+</script>

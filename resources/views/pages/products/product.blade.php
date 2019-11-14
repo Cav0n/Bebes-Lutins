@@ -119,7 +119,12 @@ if (count($product->reviews) > 0){
                                         {{--  Add to cart button  --}}
                                         <div class="col-12 px-lg-0">
                                             <span class="d-inline-block w-100" data-trigger="hover" data-toggle="popover" data-content="Veuillez fournir les informations manquantes.">
-                                                <button id='add-to-cart' class="btn btn-primary w-100 rounded" style="pointer-events: none;" type="button" @if($product->stock > 0) onclick='add_to_cart("{{$product->id}}", "{{$product->name}}", {{$product->price}}, "{{$product->mainImage}}", "{{$product->stock}}", "{{session("shopping_cart")->id}}", $("#item-quantity").val())' @endif @if($product->stock <= 0) disabled @endif>Ajouter au panier</button>
+                                                <button id='add-to-cart' class="btn btn-primary w-100 rounded open-product-added-dialog" style="pointer-events: none;" type="button" @if($product->stock > 0) 
+                                                    data-toggle="modal" 
+                                                    data-target="#addToCartPopup" 
+                                                    data-product_name="{{$product->name}}"
+                                                    data-product_image="{{asset('images/products/' . $product->mainImage)}}" 
+                                                    @endif @if($product->stock <= 0) disabled @endif>Ajouter au panier</button>
                                             </span>
                                         </div>
                                     </div>
@@ -424,4 +429,17 @@ if (count($product->reviews) > 0){
 <script>
     $("[data-toggle=popover]").popover();
 </script>
+
+<script>
+    $('.open-product-added-dialog').on('click', function(){
+        var productName = $(this).data('product_name');
+        var productImage = $(this).data('product_image');
+    
+        $("#addToCartPopup .modal-title").text( productName );
+        $("#addToCartPopup .modal-image").attr('src', productImage );
+        $("#addToCartPopup .modal-text-confirmation").html("Vous venez d'ajouter " + productName.bold() + " à votre panier.");
+    
+    
+    });
+    </script>
 @endsection

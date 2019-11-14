@@ -67,9 +67,13 @@ if (count($product->reviews) > 0){
                                 {{-- Texts and buttons --}}
                                 <div class="col-sm-7 col-lg-6 p-3 d-flex flex-column justify-content-between">
                                     <div class="row m-0">
-                                        {{--  Title  --}}
+                                        {{--  Title and little description  --}}
                                         <div class="col-lg-12 p-0">
                                             <h1 class="h3 mb-0 text-center text-lg-left">{{$product->name}}</h1>
+                                        </div>
+                                        <div class='col-12 p-0'>
+                                            <p id='little-description' class='cropped d-none d-sm-flex text-justify pt-2'>{{$product->description}}</p>
+                                            <a name="to-description-link" id="to-description-link" class="btn btn-secondary d-none d-lg-flex max-content" href="#description-link" role="button">En savoir plus</a>
                                         </div>
                                     </div>
                                     <div class="row m-0">
@@ -98,10 +102,10 @@ if (count($product->reviews) > 0){
 
                                 {{--  Buttons container  --}}
                                 <div class='col-lg-3 p-md-3 p-0'>
-                                    <div id='buttons-container' class='row m-0 p-3 h-100'>
+                                    <div id='buttons-container' class='row m-0 p-3'>
                                         {{--  Price  --}}
                                         <div class='col-6 col-lg-12 px-lg-0 mb-2'>
-                                            <p class='h5  m-0 px-2 py-1 text-center font-weight-bold rounded bg-white border border-light'>
+                                            <p id='price' class='h5  m-0 px-2 py-1 text-center font-weight-bold rounded bg-white border border-light'>
                                                 {{number_format($product->price, 2, ',', ' ')}} €</p>
                                         </div>
 
@@ -122,8 +126,11 @@ if (count($product->reviews) > 0){
                                                 <button id='add-to-cart' class="btn btn-primary w-100 rounded open-product-added-dialog" style="pointer-events: none;" type="button" @if($product->stock > 0) 
                                                     data-toggle="modal" 
                                                     data-target="#addToCartPopup" 
+                                                    data-product_id="{{$product->id}}"
                                                     data-product_name="{{$product->name}}"
                                                     data-product_image="{{asset('images/products/' . $product->mainImage)}}" 
+                                                    data-product_price="{{$product->price}}"
+                                                    data-product_quantity="1"
                                                     @endif @if($product->stock <= 0) disabled @endif>Ajouter au panier</button>
                                             </span>
                                         </div>
@@ -133,12 +140,14 @@ if (count($product->reviews) > 0){
                         </div> 
                     </div>
                 </div>
-                
+            
                 {{-- Description --}}
                 <div class="col-lg-12 p-3 p-lg-0 mt-sm-4 border bg-white">
+                    <div class="anchor" id="description-link" style='display: block;position: relative;top: -10rem;visibility: hidden;'></div>
+
                     <div class="card rounded-0 border-0">
                         <div class="card-body p-0 p-lg-3">
-                            <h4 class="card-title px-0 px-lg-2 d-none d-sm-flex">Description</h4>
+                            {{-- <h4 class="card-title px-0 px-lg-2 d-none d-sm-flex">Description</h4> --}}
                             <div id='description'>
                                 {!!$product->description!!}
                             </div>
@@ -400,6 +409,9 @@ if (count($product->reviews) > 0){
     product_price = {{$product->price}}
 
     $(".spinnerProduct").inputSpinner();
+    $(".spinnerProduct").on("change", function (event) {
+        $('#add-to-cart').attr('data-product_quantity', $(this).val());
+    })
 
     // !!!! DISABLED !!!!
     // $(".spinnerProduct").on("change", function (event) {
@@ -430,16 +442,29 @@ if (count($product->reviews) > 0){
     $("[data-toggle=popover]").popover();
 </script>
 
+{{-- REDUCE TEXT LENGHT --}}
 <script>
-    $('.open-product-added-dialog').on('click', function(){
-        var productName = $(this).data('product_name');
-        var productImage = $(this).data('product_image');
-    
-        $("#addToCartPopup .modal-title").text( productName );
-        $("#addToCartPopup .modal-image").attr('src', productImage );
-        $("#addToCartPopup .modal-text-confirmation").html("Vous venez d'ajouter " + productName.bold() + " à votre panier.");
-    
-    
+    function textAbstract(el, maxlength = 20, delimiter = " ") {
+        let txt = $(el).text();
+        if (el == null) {
+            return "";
+        }
+        if (txt.length <= maxlength) {
+            return txt;
+        }
+        let t = txt.substring(0, maxlength);
+        let re = /\s+\S*$/;
+        let m = re.exec(t);
+        t = t.substring(0, m.index);
+        return t + "...";
+    }
+
+    var maxlengthwanted = 200;
+
+    $('#little-description').text($('#little-description').text().replace(/<[^>]*>?/gm, '').replace('&nbsp;', '\n'));
+
+    $('.cropped').each(function(index, element) {
+        $(element).text(textAbstract(element, maxlengthwanted, " "));
     });
-    </script>
+</script>
 @endsection

@@ -21,8 +21,11 @@
 
             data-toggle="modal" 
             data-target="#addToCartPopup" 
+            data-product_id="{{$product->id}}"
             data-product_name="{{$product->name}}"
             data-product_image="{{asset('images/products/' . $product->mainImage)}}"
+            data-product_price="{{number_format($product->price, 2, ',', " ")}}"
+            data-product_quantity="1"
 
             @else onclick='load_url("/produits/{{$product->id}}")'
             @endif
@@ -38,16 +41,3 @@
         </div>
     </div> 
 </div>
-
-<script>
-$('.open-product-added-dialog').on('click', function(){
-    var productName = $(this).data('product_name');
-    var productImage = $(this).data('product_image');
-
-    $("#addToCartPopup .modal-title").text( productName );
-    $("#addToCartPopup .modal-image").attr('src', productImage );
-    $("#addToCartPopup .modal-text-confirmation").html("Vous venez d'ajouter " + productName.bold() + " à votre panier.");
-
-
-});
-</script>

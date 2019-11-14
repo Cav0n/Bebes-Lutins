@@ -56,7 +56,7 @@ if (count($product->reviews) > 0){
                         </div>
 
                         {{--  Product infos  --}}
-                        <div class="col-sm-9 col-lg-11 p-0 border bg-white" style='height:intrinsic'>
+                        <div class="col-sm-9 col-lg-11 p-0 border bg-white mb-2" style='height:intrinsic'>
                             <div class="row m-0">
 
                                 {{-- Main image --}}
@@ -65,19 +65,11 @@ if (count($product->reviews) > 0){
                                 </div>
 
                                 {{-- Texts and buttons --}}
-                                <div class="col-sm-7 col-lg-8 p-3 d-flex flex-column justify-content-between">
+                                <div class="col-sm-7 col-lg-6 p-3 d-flex flex-column justify-content-between">
                                     <div class="row m-0">
                                         {{--  Title  --}}
                                         <div class="col-lg-12 p-0">
                                             <h1 class="h3 mb-0 text-center text-lg-left">{{$product->name}}</h1>
-                                        </div>
-                                        {{--  Price  --}}
-                                        <div class="col-lg-12 p-0 mt-2">
-                                            <div class="row m-0">
-                                                <div class="col-12 col-lg-5 p-0 pr-2">
-                                                    <p id='product-price' class="mb-0 text-center text-lg-left">Prix : {{number_format($product->price, 2)}} €</p>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                     <div class="row m-0">
@@ -101,26 +93,34 @@ if (count($product->reviews) > 0){
                                         </div>
                                         @endforeach
                                         
-                                        {{--  Quantity selector  --}}
-                                        <div class="col-lg-12 p-0 my-2">
-                                            <div class="row m-0 justify-content-center justify-content-lg-start">
-                                                <div class="col-7 col-lg-4 offset-2 offset-lg-0 p-0 pr-2">
-                                                    <input id="item-quantity" class="spinnerProduct" type="number" name="quantity" value="1" min="1" max="{{$product->stock}}" step="1" @if($product->stock <= 1) disabled @endif />                                            
-                                                </div>
-                                                <div class="col-2 p-0 d-flex flex-column justify-content-center">
-                                                    <p id='total-product-price' class="text-left mb-0 d-none">Prix total : {{number_format($product->price, 2)}} €</p>
-                                                </div>
-                                            </div>
+                                    </div>
+                                </div>
+
+                                {{--  Buttons container  --}}
+                                <div class='col-lg-3 p-md-3 p-0'>
+                                    <div id='buttons-container' class='row m-0 p-3 h-100'>
+                                        {{--  Price  --}}
+                                        <div class='col-6 col-lg-12 px-lg-0 mb-2'>
+                                            <p class='h5  m-0 px-2 py-1 text-center font-weight-bold rounded bg-white border border-light'>
+                                                {{number_format($product->price, 2, ',', ' ')}} €</p>
                                         </div>
-                                        {{--  Buttons  --}}
-                                        <div class="col-lg-12 p-0 mt-2">
-                                            <div class="row m-0">
-                                                <div class="col-8 col-lg-4 offset-2 offset-lg-0 p-0 pr-lg-2">
-                                                    <span class="d-inline-block w-100" data-trigger="hover" data-toggle="popover" data-content="Veuillez fournir les informations manquantes.">
-                                                        <button id='add-to-cart' class="btn btn-primary w-100 rounded-0" style="pointer-events: none;" type="button" @if($product->stock > 0) onclick='add_to_cart("{{$product->id}}", "{{$product->name}}", {{$product->price}}, "{{$product->mainImage}}", "{{$product->stock}}", "{{session("shopping_cart")->id}}", $("#item-quantity").val())' @endif @if($product->stock <= 0) disabled @endif>Ajouter au panier</button>
-                                                    </span>
-                                                </div>
-                                            </div>
+
+                                        {{--  Quantity selector  --}}
+                                        <div class="col-6 col-lg-12 px-lg-0 mb-2">
+                                            <input id="item-quantity" class="spinnerProduct h-100" type="number" name="quantity" value="1" min="1" max="{{$product->stock}}" step="1" @if($product->stock <= 1) disabled @endif />
+                                        </div>
+
+                                        {{--  Total price  --}}
+                                        {{--  <div class="col-6 col-md-12">
+                                            <p id='total-product-price' class="mb-0 d-none py-1 bg-white border border-light text-center rounded">
+                                                Prix total : {{number_format($product->price, 2)}} €</p>
+                                        </div>  --}}
+
+                                        {{--  Add to cart button  --}}
+                                        <div class="col-12 px-lg-0">
+                                            <span class="d-inline-block w-100" data-trigger="hover" data-toggle="popover" data-content="Veuillez fournir les informations manquantes.">
+                                                <button id='add-to-cart' class="btn btn-primary w-100 rounded" style="pointer-events: none;" type="button" @if($product->stock > 0) onclick='add_to_cart("{{$product->id}}", "{{$product->name}}", {{$product->price}}, "{{$product->mainImage}}", "{{$product->stock}}", "{{session("shopping_cart")->id}}", $("#item-quantity").val())' @endif @if($product->stock <= 0) disabled @endif>Ajouter au panier</button>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
@@ -130,7 +130,7 @@ if (count($product->reviews) > 0){
                 </div>
                 
                 {{-- Description --}}
-                <div class="col-lg-12 p-3 p-lg-0 mt-2 mt-sm-4 border bg-white">
+                <div class="col-lg-12 p-3 p-lg-0 mt-sm-4 border bg-white">
                     <div class="card rounded-0 border-0">
                         <div class="card-body p-0 p-lg-3">
                             <h4 class="card-title px-0 px-lg-2 d-none d-sm-flex">Description</h4>
@@ -396,20 +396,21 @@ if (count($product->reviews) > 0){
 
     $(".spinnerProduct").inputSpinner();
 
-    $(".spinnerProduct").on("change", function (event) {
-        quantity_to_add = $(this).val();
-        new_product_price = product_price * quantity_to_add
+    // !!!! DISABLED !!!!
+    // $(".spinnerProduct").on("change", function (event) {
+    //     quantity_to_add = $(this).val();
+    //     new_product_price = product_price * quantity_to_add
 
-        if(quantity_to_add > 1) {
-            $('#total-product-price').removeClass('d-none');
-        } else {
-            if(!$('#total-product-price').hasClass('d-none')){
-                $('#total-product-price').toggleClass('d-none');
-            }
-        }
+    //     if(quantity_to_add > 1) {
+    //         $('#total-product-price').removeClass('d-none');
+    //     } else {
+    //         if(!$('#total-product-price').hasClass('d-none')){
+    //             $('#total-product-price').toggleClass('d-none');
+    //         }
+    //     }
 
-        $('#total-product-price').text(new_product_price.toFixed(2) + ' €')
-    })
+    //     $('#total-product-price').text(new_product_price.toFixed(2) + ' €')
+    // })
 </script>
 
 {{-- Change main image --}}

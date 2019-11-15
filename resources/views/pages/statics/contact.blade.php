@@ -3,12 +3,16 @@
 @section('title', 'Contact - Bébés Lutins')
 
 @section('head-options')
+    {{-- Loading CSS --}}
+    <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/loading/loading.css')}}">
+    <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/loading/loading-btn.css')}}">
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
 @section('content')
 <div class="row justify-content-center m-0 bg-light">
-    <div class="col-lg-6 m-3 p-0">
+    <div class="col-lg-6 m-3 mx-lg-0 my-lg-5 p-0">
         <div class="card">
             <div class='card-header'>
                 <h2 class='mb-0'>Contactez-nous</h2>
@@ -31,7 +35,13 @@
                         <label for="contact-message">Votre message</label>
                         <textarea name="contact-message" id="contact-message" class="form-control" cols="30" rows="7"></textarea>
                     </div>
-                    <button type="button" class="btn btn-primary" onclick='send_message()'>Envoyer</button>
+                    <div class='d-flex'>
+                        <button type="button" class="btn btn-primary ld-ext-right" onclick='send_message($(this))'>
+                            Envoyer <div class="ld ld-ring ld-spin"></div>
+                        </button>
+                        <p id='success-message' class='mb-0 text-success flex-column justify-content-center pl-3 d-none'>
+                            Votre message a bien été envoyé !</p>
+                    </div>
                 </form>
                 <div class='border-top mt-3 pt-3'>
                     <p>Vous pouvez aussi nous contacter par :</p>
@@ -69,7 +79,7 @@
 </script>
 
 <script>
-    function send_message(){
+    function send_message(btn){
         contactName = $('#contact-name').val();
         contactEmail = $('#contact-email').val();
         contactMessage = $('#contact-message').val();
@@ -83,11 +93,12 @@
                 'contact-email' : contactEmail,
                 'contact-message' : contactMessage },
             beforeSend: function(){
-                console.log('Envoie en cours')
+                btn.addClass('running');
             },
             success : function(data){
-                console.log(data.message);
                 alert('Message envoyé !');
+                btn.removeClass('running');
+                $('#success-message').addClass('d-flex'); 
             }
         });
     }

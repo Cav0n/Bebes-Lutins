@@ -16,21 +16,22 @@
             
             <div class='card-body'>
                 <form action="/contact/envoie-message">
+                    @csrf
                     <div class="form-group">
-                        <label for="name">Votre nom</label>
-                        <input type="text" name="name" id="name" class="form-control" placeholder="" aria-describedby="helpName">
+                        <label for="contact-name">Votre nom</label>
+                        <input type="text" name="contact-name" id="contact-name" class="form-control" placeholder="" aria-describedby="helpName">
                         <small id="helpName" class="text-muted">Votre nom et prénom</small>
                     </div>
                     <div class="form-group">
-                        <label for="email">Votre adresse mail</label>
-                        <input type="email" name="email" id="email" class="form-control" placeholder="" aria-describedby="helpEmail">
+                        <label for="contact-email">Votre adresse mail</label>
+                        <input type="email" name="contact-email" id="contact-email" class="form-control" placeholder="" aria-describedby="helpEmail">
                         <small id="helpEmail" class="text-muted">Nous avons besoin de votre adresse pour vous répondre</small>
                     </div>
                     <div class="form-group">
-                        <label for="message">Votre message</label>
-                        <textarea name="message" id="message" class="form-control" cols="30" rows="7"></textarea>
+                        <label for="contact-message">Votre message</label>
+                        <textarea name="contact-message" id="contact-message" class="form-control" cols="30" rows="7"></textarea>
                     </div>
-                    <button type="button" class="btn btn-primary">Envoyer</button>
+                    <button type="button" class="btn btn-primary" onclick='send_message()'>Envoyer</button>
                 </form>
                 <div class='border-top mt-3 pt-3'>
                     <p>Vous pouvez aussi nous contacter par :</p>
@@ -56,4 +57,39 @@
         </form>
     </div>
 </div>
+
+
+{{-- PREPARE AJAX --}}
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
+
+<script>
+    function send_message(){
+        contactName = $('#contact-name').val();
+        contactEmail = $('#contact-email').val();
+        contactMessage = $('#contact-message').val();
+
+        $.ajax({
+            url : '/contact/envoie-message', // on appelle le script JSON
+            type: "POST",
+            dataType : 'json', // on spécifie bien que le type de données est en JSON
+            data : {
+                'contact-name' : contactName,
+                'contact-email' : contactEmail,
+                'contact-message' : contactMessage },
+            beforeSend: function(){
+                console.log('Envoie en cours')
+            },
+            success : function(data){
+                console.log(data.message);
+                alert('Message envoyé !');
+            }
+        });
+    }
+</script>
 @endsection

@@ -163,4 +163,5 @@ Route::post('/images/upload', 'ImageController@upload');
  /**
   * STATICS
   */
-Route::get('/contact', 'PageController@contact');
+Route::get('/contact', 'MessageController@create');
+Route::post('contact/envoie-message', 'MessageController@store');

@@ -24,18 +24,18 @@
             {{$users->links()}}
             <table class="table" style=''>
                 <thead>
-                    <tr class='d-flex'>
-                        <th class='border-top-0 col-3'>Nom</th>
-                        <th class='border-top-0 col-6'>Email</th>
-                        <th class='border-top-0 col-3'>Téléphone</th>
+                    <tr>
+                        <th class='border-top-0'>Nom</th>
+                        <th class='d-none d-sm-table-cell border-top-0'>Email</th>
+                        <th class='d-none d-md-table-cell border-top-0'>Téléphone</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($users as $user)
-                    <tr class='d-flex' onclick='load_url("/dashboard/clients/fiche/{{$user->id}}")'>
-                        <td class='col-3'><b>{{$user->firstname}} {{$user->lastname}}</b></td>
-                        <td class='col-6'>{{mb_strtolower($user->email)}}</td>
-                        <td class='col-3'>{{chunk_split($user->phone, 2, ' ')}}</td>
+                    <tr onclick='load_url("/dashboard/clients/fiche/{{$user->id}}")'>
+                        <td class=''><b>{{$user->firstname}} {{$user->lastname}}</b></td>
+                        <td class='d-none d-sm-table-cell'>{{mb_strtolower($user->email)}}</td>
+                        <td class='d-none d-md-table-cell'>{{chunk_split($user->phone, 2, ' ')}}</td>
                     </tr>
                     @endforeach
                 </tbody>

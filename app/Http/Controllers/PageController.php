@@ -27,4 +27,9 @@ class PageController extends Controller
     {
         return view('emails.orders.order-created')->withOrder(\App\Order::where('id', '5DB2BE7090')->first());
     }
+
+    public function contact()
+    {
+        return view('pages.statics.contact');
+    }
 }

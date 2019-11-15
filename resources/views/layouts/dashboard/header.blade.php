@@ -29,6 +29,7 @@
                         <div class="dropdown-menu" aria-labelledby="dropdownId">
                             <a class="dropdown-item" href="/dashboard/clients">Tous les clients</a>
                             <a class="dropdown-item" href="/dashboard/clients/avis">Avis clients</a>
+                            <a class="dropdown-item" href="/dashboard/clients/messages">Messages</a>
                         </div>
                     </li>
                     <li class="nav-item">

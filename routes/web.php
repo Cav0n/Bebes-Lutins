@@ -137,6 +137,7 @@ Route::post('/dashboard/clients/avis/repondre/{review}', 'ReviewController@updat
 Route::post('/dashboard/clients/avis/supprimer-reponse/{review}','ReviewController@update');
 Route::get('/dashboard/clients/fiche/{user}', "DashboardController@customer");
 Route::post('/dashboard/clients/recherche', "CustomerController@search");
+Route::get('/dashboard/clients/messages', "MessageController@index");
 //OTHERS
 Route::get('/dashboard/reductions', 'DashboardController@vouchers'); //TODO
 Route::get('/dashboard/reductions/nouveau', 'VoucherController@create'); //TODO

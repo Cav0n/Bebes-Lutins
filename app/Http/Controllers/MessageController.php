@@ -14,7 +14,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.dashboard.customers.messages')
+                ->withMessages(Message::where('id', '!=', null)->paginate(20));
     }
 
     /**

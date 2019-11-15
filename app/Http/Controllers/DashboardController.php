@@ -24,7 +24,7 @@ class DashboardController extends Controller
     }
 
     public function index(){
-        return redirect('/dashboard/commandes/toutes');
+        return redirect('/dashboard/commandes');
     }
 
     public function orders(string $status = null){

@@ -50,15 +50,19 @@
      </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-9">
+            <div class="col">
                 <div class="form-group">
-                    <input type="text" name="search" id="search-bar" class="form-control" placeholder="Rechercher un produit" aria-describedby="helpSearch">
+                    <div class="input-group mb-3">
+                        <input type="search" name="search" id="search-bar" class="form-control" placeholder="Rechercher un produit" aria-describedby="helpSearch">
+
+                        <div class="input-group-append">
+                            <button class="btn btn-secondary d-flex flex-column justify-content-center" type="button">
+                                <p class='d-none d-sm-flex mb-0'>Rechercher</p>
+                                <img class='d-flex d-sm-none svg' style="fill:grey" src='{{asset('images/icons/search.svg')}}'>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col-3">
-                <button type="button" id='search-button' class="btn btn-secondary w-100 border-light ld-over" onclick='search_product()'>
-                    Rechercher <div class="ld ld-ring ld-spin"></div>
-                </button>
             </div>
         </div>
         <div class="row">
@@ -102,8 +106,12 @@
                                 <small class='text-muted'>{{$category->name}}</small><BR>
                             @endforeach
                         </td>
-                        <td>{{$product->price}}€</td>
-                        <td><div class="form-group"><input type="checkbox" class="form-check-input ml-auto" name="" id="" onclick='switch_isHidden($(this), "{{$product->id}}")' @if($product->isHidden) {{'checked'}} @endif></div></td>
+                        <td class='align-middle'>{{$product->price}}€</td>
+                        <td class='text-center align-middle'>
+                            <div class="form-group">
+                                <input type="checkbox" class="form-check-input m-0" name="" id="" onclick='switch_isHidden($(this), "{{$product->id}}")' @if($product->isHidden) {{'checked'}} @endif>
+                            </div>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -193,6 +201,7 @@ $.ajaxSetup({
                 },
                 success : function(data){
                     $("#products-container").hide();
+                    $("#sort-container").hide();
                     $("#search-container").show();
                     $("#search-table-body").empty();
                     $("#search-possible-table-body").empty();
@@ -215,6 +224,7 @@ $.ajaxSetup({
         } else {
             $("#products-container").show();
             $("#search-container").hide();
+            $("#sort-container").hide();
         }
     }
 
@@ -225,8 +235,8 @@ $.ajaxSetup({
                 ###product_name <BR>
                     ###categories
                 </td>
-                <td>###product_price €</td>
-                <td>
+                <td class='align-middle'>###product_price €</td>
+                <td class='text-center align-middle'>
                     <div class="form-group">
                         <input type="checkbox" class="form-check-input ml-auto" name="" id="" onclick='switch_isHidden($(this), "###product_id")' ###checked>
                     </div>

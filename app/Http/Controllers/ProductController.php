@@ -111,6 +111,7 @@ class ProductController extends Controller
             $count_valid_words = 0;
             foreach($search_words as $word) {
                 if (stripos(mb_strtoupper($product->name),mb_strtoupper($word)) !== false) $count_valid_words++;
+                else if (stripos(mb_strtoupper($product->reference),mb_strtoupper($word)) !== false) $count_valid_words++;
             }
             if($count_valid_words == $total_valid_words) {
                 $categories = $product->categories;

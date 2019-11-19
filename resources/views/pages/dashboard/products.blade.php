@@ -56,9 +56,10 @@
                         <input type="search" name="search" id="search-bar" class="form-control" placeholder="Rechercher un produit" aria-describedby="helpSearch">
 
                         <div class="input-group-append">
-                            <button class="btn btn-secondary d-flex flex-column justify-content-center" type="button">
+                            <button id='search-button' class="btn btn-secondary d-flex flex-column justify-content-center ld-over" type="button" onclick='search_product()'>
                                 <p class='d-none d-sm-flex mb-0'>Rechercher</p>
                                 <img class='d-flex d-sm-none svg' style="fill:grey" src='{{asset('images/icons/search.svg')}}'>
+                                <div class="ld ld-ring ld-spin"></div>
                             </button>
                         </div>
                     </div>
@@ -100,13 +101,14 @@
                 </thead>
                 <tbody>
                     @foreach ($products as $product)
-                    <tr class='@if($product->isHidden){{'hidden'}}@endif' onclick="load_url('/dashboard/produits/edition/' + '{{$product->id}}')">
-                        <td scope="row">@if($product->reference != null) {{$product->reference . ' - '}} @endif{{$product->name}}<BR> 
+                    <tr class='@if($product->isHidden){{'hidden'}}@endif'>
+                        <td scope="row" onclick="load_url('/dashboard/produits/edition/' + '{{$product->id}}')">
+                            @if($product->reference != null) {{$product->reference . ' - '}} @endif{{$product->name}}<BR> 
                             @foreach ($product->categories as $category)
                                 <small class='text-muted'>{{$category->name}}</small><BR>
                             @endforeach
                         </td>
-                        <td class='align-middle'>{{$product->price}}€</td>
+                        <td class='align-middle' onclick="load_url('/dashboard/produits/edition/' + '{{$product->id}}')">{{$product->price}}€</td>
                         <td class='text-center align-middle'>
                             <div class="form-group">
                                 <input type="checkbox" class="form-check-input m-0" name="" id="" onclick='switch_isHidden($(this), "{{$product->id}}")' @if($product->isHidden) {{'checked'}} @endif>
@@ -177,6 +179,7 @@ $.ajaxSetup({
 
     $("#products-container").show();
     $("#search-container").hide();
+    $("#sort-container").hide();
 
     $("#search-bar").keyup(function(event) {
         if (event.keyCode === 13) {
@@ -230,12 +233,14 @@ $.ajaxSetup({
 
     function prepare_product_html(product){
         product_html = `
-            <tr class='###class' onclick='load_url("/dashboard/produits/edition/###product_id")'>
-                <td scope="row">
+            <tr class='###class'>
+                <td scope="row" onclick='load_url("/dashboard/produits/edition/###product_id")'>
                 ###product_name <BR>
                     ###categories
                 </td>
-                <td class='align-middle'>###product_price €</td>
+                <td class='align-middle' onclick='load_url("/dashboard/produits/edition/###product_id")'>
+                    ###product_price €
+                </td>
                 <td class='text-center align-middle'>
                     <div class="form-group">
                         <input type="checkbox" class="form-check-input ml-auto" name="" id="" onclick='switch_isHidden($(this), "###product_id")' ###checked>
@@ -260,7 +265,7 @@ $.ajaxSetup({
         });
 
         product_html = product_html.replace('###categories', categories_html);
-        product_html = product_html.replace('###product_id', product.id);
+        product_html = product_html.replace(/###product_id/g, product.id);
         product_html = product_html.replace('###product_name', reference + product.name);
         product_html = product_html.replace('###product_price', product.price);
 

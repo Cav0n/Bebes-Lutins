@@ -101,6 +101,8 @@ class ImageController extends Controller
      */
     public function destroy(Request $request)
     {
-        unlink(public_path('/images/tmp/').$request['image']);
+        if($request['path'] != null){
+            unlink(public_path($request['path']).$request['image']);
+        } else { unlink(public_path('/images/tmp/').$request['image']); }
     }
 }

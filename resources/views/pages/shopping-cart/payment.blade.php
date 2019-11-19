@@ -1,12 +1,10 @@
 <?php 
     $pricesAndQuantities = $shoppingCart->calculatePricesAndQuantities();
     
-    $products_price = $pricesAndQuantities['products_price'];
-    $shipping_price = $pricesAndQuantities['shipping_price'];
+    $products_price_without_voucher = $pricesAndQuantities['products_price'];
     $total_quantity = $pricesAndQuantities['total_quantity'];
-    $total = $products_price + $shipping_price;
-    if($products_price < 70) $price_before_free_shipping = 70 - $products_price;
-    else $price_before_free_shipping = 0;
+    $total = $shoppingCart->productsPrice + $shoppingCart->shippingPrice;
+    $price_before_free_shipping = 70 - $shoppingCart->productsPrice;
 
     $has_addresses = Auth::check() && count(Auth::user()->addresses) > 0;
 ?>
@@ -136,14 +134,14 @@
                                         <p class="card-text">{{$total_quantity}} produits :</p>
                                     </div>
                                     <div class="col-6 p-0">
-                                        <p class="card-text text-right">{{number_format($products_price, 2)}} €</p>
+                                        <p class="card-text text-right">{{number_format($shoppingCart->productsPrice, 2)}} €</p>
                                     </div>
                 
                                     <div class="col-6 p-0">
                                         <p class="card-text">Frais de ports :</p>
                                     </div>
                                     <div class="col-6 p-0">
-                                        <p class="card-text text-right">{{number_format($shipping_price, 2)}} €</p>
+                                        <p class="card-text text-right">{{number_format($shoppingCart->shippingPrice, 2)}} €</p>
                                     </div>
                 
                                     <div class="col-6 p-0">

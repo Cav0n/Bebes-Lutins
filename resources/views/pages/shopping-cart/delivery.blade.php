@@ -1,12 +1,10 @@
 <?php 
     $pricesAndQuantities = $shoppingCart->calculatePricesAndQuantities();
     
-    $products_price = $pricesAndQuantities['products_price'];
-    $shipping_price = $pricesAndQuantities['shipping_price'];
+    $products_price_without_voucher = $pricesAndQuantities['products_price'];
     $total_quantity = $pricesAndQuantities['total_quantity'];
-    $total = $products_price + $shipping_price;
-    if($products_price < 70) $price_before_free_shipping = 70 - $products_price;
-    else $price_before_free_shipping = 0;
+    $total = $shoppingCart->productsPrice + $shoppingCart->shippingPrice;
+    $price_before_free_shipping = 70 - $shoppingCart->productsPrice;
 
     $has_addresses = Auth::check() && count(Auth::user()->addresses) > 0;
 ?>
@@ -93,35 +91,46 @@
                     <div class="row">
 
                         {{--  Summary  --}}
-                        <div class="col-12 my-2 my-lg-0 mb-lg-2 order-1 order-lg-0">
+                        <div class="col-12 my-2 my-lg-0 mb-lg-2 order-2">
                             <div class="card p-0 border-0 rounded-0">
                                 <div class="card-header bg-white">
                                     <h1 class='h5 mb-0'>Résumé</h1>
                                 </div>
                                 <div class="card-body row justify-content-center m-0">
-                                    <div class="col-6 p-0">
+                                    <div class="col-6 p-0 pb-2">
                                         <p class="card-text">{{$total_quantity}} produits :</p>
                                     </div>
-                                    <div class="col-6 p-0">
-                                        <p class="card-text text-right">{{number_format($products_price, 2)}} €</p>
+                                    <div class="col-6 p-0 pb-2">
+                                        <p class="card-text text-right">
+                                            @if($shoppingCart->voucher != null && $shoppingCart->voucher->discountType < 3) 
+                                            <del class='text-danger'>{{number_format($products_price_without_voucher, 2)}} €</del><BR>
+                                            <b>- {{number_format($products_price_without_voucher - $shoppingCart->productsPrice, 2)}} € </b><BR>
+                                            @endif 
+                                            {{number_format($shoppingCart->productsPrice, 2)}} € 
+                                        </p>
                                     </div>
-                
-                                    <div class="col-6 p-0">
+
+                                    <div class="col-6 p-0 border-top py-2">
                                         <p class="card-text">Frais de ports :</p>
                                     </div>
-                                    <div class="col-6 p-0">
-                                        <p class="card-text text-right">{{number_format($shipping_price, 2)}} €</p>
+                                    <div class="col-6 p-0 border-top py-2">
+                                        <p class="card-text text-right">
+                                            @if($shoppingCart->voucher != null && $shoppingCart->voucher->discountType == 3)
+                                            <del class='text-danger'>5,90 €</del><BR>
+                                            @endif
+                                            {{number_format($shoppingCart->shippingPrice, 2)}} €
+                                        </p>
                                     </div>
                 
-                                    <div class="col-6 p-0">
+                                    <div class="col-6 p-0 border-top pt-2">
                                         <p class="card-text font-weight-bold">TOTAL TTC :</p>
                                     </div>
-                                    <div class="col-6 p-0">
+                                    <div class="col-6 p-0 border-top pt-2">
                                         <p class="card-text text-right font-weight-bold">{{number_format($total, 2)}} €</p>
                                     </div>
                 
                                     <div class="col-12 border-bottom my-4"></div>
-                
+                                    
                                     <div class="col-12 col-md-6 col-lg-12 mb-2" style='line-height:0;'>
                                         <small class="small" style="line-height:1rem;">En cliquant sur ce bouton vous acceptez sans 
                                         réserve les conditions générales de vente.</small>

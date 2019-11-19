@@ -299,7 +299,7 @@ $.ajaxSetup({
                 $.ajax({
                     url: "/delete_image",
                     type: 'DELETE',
-                    data: { image:file.name },
+                    data: { image:file.name, path:'images/products/' },
                     success: function(data){
                         console.log('['+file.name+'] Image bien supprimé');
                         $('#mainImageName').val("");

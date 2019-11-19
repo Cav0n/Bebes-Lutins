@@ -319,25 +319,36 @@ class ProductController extends Controller
             'stock' => 'integer|min:0|required',
             'price' => 'numeric|min:0.01|required',
             'tags' => 'nullable',
-            'main_image_name' => 'required',
             'thumbnails_names' => 'array|nullable',
             'is-hidden' => 'nullable',
             'characteristics' => 'array|nullable',
         ]);
-
-        $mainImageName = $request['main_image_name'];
         
         $product->reference = $request['reference'];
         $product->name = $request['name'];
         $product->description = $request['description'];
         $product->stock = $request['stock'];
         $product->price = $request['price'];
+
+        $mainImageName = $request['main_image_name'];
+
+        if($mainImageName == null){
+            if(file_exists(public_path('images/products/').$product->mainImage) && $product->mainImage != null){
+                unlink(public_path('images/products/').$product->mainImage); }
+            $product->images()->detach();
+
+            $product->mainImage = null;
+        }
+
         if($request['is-hidden'] != null) $product->isHidden = true;
+        else $product->isHidden = false;
+
         $product->save();
 
         //MAIN IMAGE
-        if($product->mainImage != $mainImageName){
-            unlink(public_path('images/products/').$product->mainImage);
+        if($mainImageName != null && $product->mainImage != $mainImageName){
+            if(file_exists(public_path('images/products/').$product->mainImage) && $product->mainImage != null){
+                unlink(public_path('images/products/').$product->mainImage); }
             $product->images()->detach();
 
             rename(public_path('images/tmp/').$mainImageName, public_path('images/products/').$mainImageName); // MOVE MAIN IMAGE FROM TMP TO REAL FOLDER
@@ -401,7 +412,7 @@ class ProductController extends Controller
         }
 
         $product->save();
-        return redirect('/dashboard/produits/edition/'.$product->id)->with('success-message', 'Le produit a été crée avec succés.');
+        return redirect('/dashboard/produits/edition/'.$product->id)->with('success-message', 'Le produit a été mis à jour avec succés.');
     }
 
     /**

@@ -80,6 +80,8 @@ Route::get('/espace-client/enregistrement', 'CustomerAreaController@registerPage
 Route::post('/espace-client/enregistrement', 'CustomerAreaController@register'); //TODO
 
 Route::get('/espace-client/profil', 'CustomerAreaController@profilPage'); //TODO
+Route::post('/espace-client/profil/modifier-informations', 'CustomerController@update');
+Route::post('/espace-client/profil/modifier-mot-de-passe', 'CustomerController@updatePasswordOnly');
 Route::post('/espace-client/newsletter-invert', 'CustomerAreaController@invertNewsletter');
 Route::get('/espace-client/commandes', 'CustomerAreaController@ordersPage'); //TODO
 Route::get('/espace-client/commandes/{order}', 'OrderController@show'); //TODO

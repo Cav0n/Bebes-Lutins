@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
+
+use Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -41,5 +44,51 @@ class CustomerController extends Controller
 
         header('Content-type: application/json');
         echo json_encode( $result, JSON_PRETTY_PRINT);
+    }
+    
+    public function update(Request $request)
+    {
+        $request->validate([
+            'firstname' => 'min:2|required',
+            'lastname' => 'min:2|required',
+            'phone' => 'size:10|nullable',
+        ]);
+
+        $user = Auth::user();
+
+        $user->firstname = $request['firstname'];
+        $user->lastname = $request['lastname'];
+        $user->phone = $request['phone'];
+        $user->birthdate = $request['birthdate'];
+        $user->save();
+
+        $result['code'] = 200;
+        $result['message'] = 'Profil mis à jour avec succés.';
+        
+        return response()->json($result);
+    }
+
+    public function updatePasswordOnly(Request $request)
+    {
+        $user = Auth::user();
+        
+        $request->validate([
+            'new_password' => 'required|min:8',
+        ]);
+        
+        // CHECK OLD PASSWORD
+        if (Hash::check($request['old_password'], $user->password)) {
+            $user->password = Hash::make($request['new_password']);
+            $user->save();
+
+            $result['success'] = 'Mot de passe modifié avec succés.';
+            $code = 200;
+        } else {
+            $result['errors'] = ['old_password' => 'Mot de passe incorrect'];
+            $result['message'] = 'Ancien mot de passe incorrect.';
+            $code = 300;
+        }
+
+        return response()->json($result, $code);
     }
 }

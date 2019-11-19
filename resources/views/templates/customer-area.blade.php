@@ -18,16 +18,35 @@
                     <p class='h2 mb-0'>Bonjour {{Auth::user()->firstname}} {{Auth::user()->lastname}}</p>
                     <p class='font-weight-light text-muted'>Bienvenue dans votre espace client</p>
                     <ul class="nav nav-tabs card-header-tabs mx-0">
-                        <li class="nav-item mr-2">
-                            <a class="nav-link @if(Request::is('*/profil*')) active @endif text-dark" href="/espace-client/profil">Mon profil</a>
-                        </li>
-                        
-                        <li class="nav-item mr-2">
-                            <a class="nav-link @if(Request::is('*/commandes*')) active @endif text-dark" href="/espace-client/commandes">Mes commandes</a>
-                        </li>
 
-                        <li class="nav-item mr-2">
-                            <a class="nav-link @if(Request::is('*/adresses*')) active @endif text-dark" href="/espace-client/adresses">Mes adresses</a>
+                        {{-- NAV LINKS (TABS) --}}
+                        <div class='d-none d-sm-flex'>
+                            <li class="nav-item mr-2">
+                                <a class="nav-link @if(Request::is('*/profil*')) active @endif text-dark" href="/espace-client/profil">Mon profil</a>
+                            </li>
+                            
+                            <li class="nav-item mr-2">
+                                <a class="nav-link @if(Request::is('*/commandes*')) active @endif text-dark" href="/espace-client/commandes">Mes commandes</a>
+                            </li>
+
+                            <li class="nav-item mr-2">
+                                <a class="nav-link @if(Request::is('*/adresses*')) active @endif text-dark" href="/espace-client/adresses">Mes adresses</a>
+                            </li>
+                        </div>
+
+                        {{-- MOBILE NAV LINKS (DROPDOWN TABS) --}}
+                        <li class="nav-item dropdown d-flex d-sm-none">
+                            <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Naviguer</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item @if(Request::is('*/profil*')) active @endif text-dark" href="/espace-client/profil">
+                                    Mon profil</a>
+                                <a class="dropdown-item @if(Request::is('*/commandes*')) active @endif text-dark" href="/espace-client/commandes">
+                                    Mes commandes</a>
+                                <a class="dropdown-item @if(Request::is('*/adresses*')) active @endif text-dark" href="/espace-client/adresses">
+                                    Mes adresses</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" onclick='logout()'>Déconnexion</a>
+                            </div>
                         </li>
                         
                     </ul>
@@ -36,7 +55,7 @@
                     @yield('body')
                 </div>
                 <div class="card-footer bg-white text-muted">
-                    <button type="button" class="btn btn-light" onclick='logout()'>Se déconnecter</button>
+                    <button type="button" class="btn btn-dark" onclick='logout()'>Se déconnecter</button>
                 </div>
             </div>
         </div>

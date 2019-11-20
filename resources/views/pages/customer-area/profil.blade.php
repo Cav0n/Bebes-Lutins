@@ -9,7 +9,7 @@
             <p class='mb-0'>{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</p>
             <p class='mb-0'>Inscrit depuis le {{ Auth::user()->created_at->formatLocalized('%e %B %Y') }}</p>
             <p class='mb-0'>Date de naissance : @if(Auth::user()->birthdate != null){{  Auth::user()->birthdate->formatLocalized('%e %B %Y') }} @else non indiquée @endif</p> 
-            <p class='mb-0'>Téléphone : {{ trim( chunk_split(Auth::user()->phone, 2, ' ')) }} </p>
+            <p class='mb-0'>Téléphone : @if(Auth::user()->phone != null){{ trim( chunk_split(Auth::user()->phone, 2, ' ')) }} @else non indiqué @endif </p>
         </div>
         <div id='profil-infos-modification'>
             <p class='h5 font-weight-bold'>Modifier mes informations</p>
@@ -219,6 +219,8 @@
                 },1200); //delayTime should be written in milliseconds e.g. 1000 which equals 1 second
             },
             error: function(response){
+                btn.removeClass('running');
+                
                 error_message = response.responseJSON.message;
                 errors_fields = Object.keys(response.responseJSON.errors);
                 

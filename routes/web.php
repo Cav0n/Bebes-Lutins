@@ -14,6 +14,7 @@
 Route::get('/', 'PageController@index');
 Route::get('/tests/mail', 'PageController@test_mail');
 Route::get('/tests/mail_ui', 'PageController@test_mail_ui');
+Route::get('/commandes/{order}', 'PageController@bill');
 
 /**
  * Categories
@@ -75,6 +76,11 @@ Auth::routes();
 Route::get('/espace-client', 'CustomerAreaController@index'); //TODO
 Route::get('/espace-client/connexion', 'CustomerAreaController@loginPage')->name('connexion'); //TODO
 Route::post('/espace-client/connexion', 'CustomerAreaController@login')->name('connexion'); //TODO
+Route::post('/espace-client/reinitialiser-mot-de-passe', 'CustomerController@resetPassword');
+
+Route::get('/espace-client/mot-de-passe-oublie', 'CustomerAreaController@resetPasswordPage');
+Route::post('/espace-client/generer-code-reinitialisation', 'CustomerController@resetPasswordCode');
+Route::post('/espace-client/verifier-code-reinitialisation', 'CustomerController@verifyResetCode');
 
 Route::get('/espace-client/enregistrement', 'CustomerAreaController@registerPage'); //TODO
 Route::post('/espace-client/enregistrement', 'CustomerAreaController@register'); //TODO

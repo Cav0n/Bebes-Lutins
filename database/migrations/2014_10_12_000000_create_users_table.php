@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->boolean('isAdmin')->default(0);
             $table->integer('privileges')->unsigned()->default(0);
 
+            $table->string('resetCode')->nullable();
             $table->rememberToken();
             
             $table->timestamps();

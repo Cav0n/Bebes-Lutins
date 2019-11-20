@@ -92,7 +92,7 @@ class OrderStatus
                 $title = 'Votre commande a été enregistrée';
                 $message = "
                 Bonjour $firstname_lastname,<BR>
-                Nous avons enregistrée votre commande $order_id.
+                Nous avons enregistrée votre commande <a href='http://192.168.1.102/commandes/$order_id'>#$order_id</a>
                 Nous préparerons votre commande dans les plus brefs délais.";
                 break;
             case 1:

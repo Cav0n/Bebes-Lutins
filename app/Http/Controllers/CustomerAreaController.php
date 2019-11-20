@@ -86,6 +86,10 @@ class CustomerAreaController extends Controller
         return redirect('/espace-client');
     }
 
+    public function resetPasswordPage(Request $request){
+        return view('pages.customer-area.reset-password');
+    }
+
     public function profilPage(){
         return view('pages.customer-area.profil');
     }

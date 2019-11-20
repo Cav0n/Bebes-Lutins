@@ -10,6 +10,11 @@ use Auth;
 
 class PageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only('bill');
+    }
+
     public function index()
     {
         return view('homepage');
@@ -26,5 +31,14 @@ class PageController extends Controller
     public function test_mail_ui()
     {
         return view('emails.orders.order-created')->withOrder(\App\Order::where('id', '5DB2BE7090')->first());
+    }
+
+    public function bill(Request $request, \App\Order $order)
+    {
+        if(Auth::user()->id == $order->user->id || (Auth::user()->isAdmin && Auth::user()->privileges > 1 )){
+            return view('pages.orders.bill')->withOrder($order);
+        } else {
+            return redirect('/');
+        }
     }
 }

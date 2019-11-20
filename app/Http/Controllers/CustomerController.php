@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\User;
 
 use Auth;
-use Illuminate\Support\Facades\Hash;
+use App\Mail\ResetPassword;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Hash;
 
 class CustomerController extends Controller
 {
@@ -71,7 +73,7 @@ class CustomerController extends Controller
     public function updatePasswordOnly(Request $request)
     {
         $user = Auth::user();
-        
+
         $request->validate([
             'new_password' => 'required|min:8',
         ]);
@@ -86,6 +88,63 @@ class CustomerController extends Controller
         } else {
             $result['errors'] = ['old_password' => 'Mot de passe incorrect'];
             $result['message'] = 'Ancien mot de passe incorrect.';
+            $code = 300;
+        }
+
+        return response()->json($result, $code);
+    }
+
+    public function resetPasswordCode(Request $request)
+    {
+        $email = $request['email'];
+
+        if(User::where('email', $email)->exists()){
+            $user = User::where('email', $email)->first();
+            $user->resetCode = rand(10000000,99999999);
+            $user->save();
+
+            Mail::to($email)->send(new ResetPassword($user));
+            $result['message'] = 'Le compte existe';
+            $code = 200;
+        } else {
+            $result['message'] = 'Le compte n\'existe pas';
+            $code = 300;
+        }
+
+        return response()->json($result, $code);
+    }
+
+    public function verifyResetCode(Request $request)
+    {
+        $email = $request['email'];
+
+        if(User::where('email', $email)->where('resetCode', $request['confirmation_code'])->exists()){
+            $result['message'] = 'Le code est bon';
+            $code = 200;
+        } else {
+            $result['message'] = 'Le code est incorrect';
+            $code = 300;
+        }
+
+        return response()->json($result, $code);
+    }
+
+    public function resetPassword(Request $request){
+        $email = $request['email'];
+        $confirmationCode = $request['confirmation_code'];
+        $newPassword = $request['new_password'];
+
+        if(User::where('email', $email)->where('resetCode', $request['confirmation_code'])->exists()){
+            $user = User::where('email', $email)->first();
+            $user->password = Hash::make($newPassword);
+            $user->save();
+
+            Mail::to($email)->send(new \App\Mail\PasswordReseted($user));
+            $result['new_password'] = $newPassword;
+            $result['message'] = 'Mot de passe modifié';
+            $code = 200;
+        } else {
+            $result['message'] = 'Un problème est survenu';
             $code = 300;
         }
 

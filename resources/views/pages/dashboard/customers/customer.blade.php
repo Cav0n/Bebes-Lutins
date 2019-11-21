@@ -3,7 +3,7 @@
 @section('title', $customer->firstname . ' ' . $customer->lastname)
 
 @section('content')
-<div class="container-fluid py-2">
+<div class="container-fluid py-2 bg-white">
     <div class="row">
         <div class="col-12">
             <h1><b>{{$customer->firstname}} {{$customer->lastname}}</b></h1>

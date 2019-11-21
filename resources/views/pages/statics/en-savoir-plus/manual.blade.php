@@ -1,6 +1,6 @@
 @extends('templates.template')
 
-@section('title', 'Qui sommes nous ? - Bébés Lutins')
+@section('title', "Mode d'emploi des couches lavables - Bébés Lutins")
 
 @section('content')
 <div class="row justify-content-center py-lg-5 m-0">

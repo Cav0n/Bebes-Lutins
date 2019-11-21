@@ -29,7 +29,7 @@
             <p class='text-justify'>Fort de son expérience, Bébés Lutins a soigneusement choisi ses tissus pour vous proposer des couches 
             lavables écocitoyennes, durables, efficaces et saines pour vos enfants.<br>
             <br>
-            Confectionnées dans notre atelier au cœur de l'Auvergne, nos couches lavables sont françaises . Tous 
+            Confectionnées dans notre atelier au cœur de l'Auvergne, nos couches lavables sont françaises. Tous 
             nos produits sont proposés aux particuliers et aux collectivités.<br>
             N’hésitez pas à nous rendre visite, nous vous recevrons avec plaisir sur rendez-vous pour que vous 
             puissiez découvrir les couches lavables et autres accessoires Bébés Lutins.<br>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" style='max-width:1000px;margin:0 auto;'>
+<html lang="fr" style='max-width:1000px;margin:0 auto;' class='bg-dark'>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -24,7 +24,7 @@
 
     <title>@yield('title', 'Bébés Lutins')</title>
 </head>
-<body>
+<body class='bg-dark'>
     @yield('content')
 </body>
 

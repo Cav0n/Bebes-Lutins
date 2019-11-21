@@ -6,12 +6,12 @@
     <div class="col-12 col-md-6 col-lg-3 order-0">
       <p class="h5 font-weight-bold">Infos pratiques</p>
       <ul class='list-unstyled'>
-        <li><a href='/livraison-et-frais-de-ports' class='text-light'>Livraison et frais de ports</a></li>
-        <li><a href='/paiement' class='text-light'>Paiement</a></li>
-        <li><a href='/echanges-et-retours' class='text-light'>Échanges et retours</a></li>
-        <li><a href='/mentions-legales' class='text-light'>Mentions légales</a></li>
-        <li><a href='/conditions-de-ventes' class='text-light'>Conditions de ventes</a></li>
-        <li><a href='/plan-du-site' class='text-light'>Plan du site</a></li>
+        <li><a href='/infos-pratiques/livraison-et-frais-de-ports' class='text-light'>Livraison et frais de ports</a></li>
+        <li><a href='/infos-pratiques/paiement' class='text-light'>Paiement</a></li>
+        <li><a href='/infos-pratiques/echanges-et-retours' class='text-light'>Échanges et retours</a></li>
+        <li><a href='/infos-pratiques/mentions-legales' class='text-light'>Mentions légales</a></li>
+        <li><a href='/infos-pratiques/conditions-de-ventes' class='text-light'>Conditions de ventes</a></li>
+        <li><a href='/infos-pratiques/plan-du-site' class='text-light'>Plan du site</a></li>
       </ul>
     </div>
     <div class="col-12 col-md-6 col-lg-3 order-1">
@@ -45,12 +45,12 @@
     <div class="col-12 col-md-6 col-lg-3 order-2 order-lg-3">
       <p class="h5 font-weight-bold">En savoir plus</p>
       <ul class="list-unstyled">
-        <li><a href='' class='text-light'>Qui sommes-nous ?</a></li>
-        <li><a href='' class='text-light'>Pourquoi les couches lavables ?</a></li>
-        <li><a href='' class='text-light'>Entretien des couches lavables</a></li>
-        <li><a href='' class='text-light'>Mode d'emploi des couches lavables</a></li>
-        <li><a href='' class='text-light'>Comment s'équiper ?</a></li>
-        <li><a href='' class='text-light'>Nos revendeurs</a></li>
+        <li><a href='/en-savoir-plus/qui-sommes-nous' class='text-light'>Qui sommes-nous ?</a></li>
+        <li><a href='/en-savoir-plus/pourquoi-les-couches-lavables' class='text-light'>Pourquoi les couches lavables ?</a></li>
+        <li><a href='/en-savoir-plus/entretien-des-couches-lavables' class='text-light'>Entretien des couches lavables</a></li>
+        <li><a href='/en-savoir-plus/mode-d-emploi' class='text-light'>Mode d'emploi des couches lavables</a></li>
+        <li><a href='/en-savoir-plus/comment-s-equiper' class='text-light'>Comment s'équiper ?</a></li>
+        <li><a href='/en-savoir-plus/nos-revendeurs' class='text-light'>Nos revendeurs</a></li>
       </ul>
     </div>
   </div>

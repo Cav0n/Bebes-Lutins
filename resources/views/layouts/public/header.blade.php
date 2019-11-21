@@ -136,7 +136,7 @@ $parent_categories = App\Category::where('parent_id', null)->where('isDeleted', 
                 @endif
 
                 <li class="nav-item hover-green ml-auto p-2 border-right transition-fast" style='width:12rem;'>
-                    <a class="nav-link text-dark text-center py-0" href="/qui-sommes-nous">Qui sommes-nous ?</a>
+                    <a class="nav-link text-dark text-center py-0" href="/en-savoir-plus/qui-sommes-nous">Qui sommes-nous ?</a>
                 </li>
                 <li class="nav-item hover-green p-2 transition-fast" style='width:12rem'>
                     <a class="nav-link text-dark text-center py-0" href="/guide-et-conseils">Guide et conseils</a>

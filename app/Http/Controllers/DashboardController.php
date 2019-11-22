@@ -30,11 +30,15 @@ class DashboardController extends Controller
     public function orders(string $status = null){
         if(session()->has('selected_order_status' . $status)){
             $orders = Order::where('status', '=', session('selected_order_status'.$status))->orderBy('created_at', 'desc')->paginate(15); }
-
+        
+        session(['no_status' => false]);
+        
         switch($status){
             case null:
                 if(!isset($orders)){
-                    $orders = Order::where('id', '!=', null)->where('status', '!=', -3)->orderBy('created_at', 'desc')->paginate(20); }
+                    $orders = Order::where('id', '!=', null)->where('status', '!=', -3)->orderBy('created_at', 'desc')->paginate(20); 
+                    session(['no_status' => true]);
+                }
                 $old_status = $status;
                 break;
             case 'en-cours':
@@ -59,9 +63,11 @@ class DashboardController extends Controller
                 break;
 
             default:
+                session(['no_status' => true]);
                 return redirect('/dashboard/commandes/en-cours');
                 break;
         }
+        
         return view('pages.dashboard.orders')->withStatus($status)->withOrders($orders)->withOldStatus($old_status);
     }
 

@@ -3,7 +3,7 @@
 @section('title', "Commande #" . $order->id)
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid bg-white">
     <div class="row py-3">
         <div class="col-12 col-sm-6 col-lg-5">
             <div class='address-container p-2 border border-dark'>

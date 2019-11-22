@@ -53,6 +53,17 @@ class ProductController extends Controller
         }
     }
 
+    public function highlightProductsRemove(Request $request, Product $product)
+    {
+        $product->isHighlighted = 0;
+        $product->save();
+
+        $response['message'] = 'Product removed from highlight';
+        $response['code'] = '200';
+
+        return response()->json($response, $response['code']);
+    }
+
     public function correctAllMainImages()
     {
         $products = Product::all();

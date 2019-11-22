@@ -123,6 +123,7 @@ Route::post('/dashboard/produits/edition/{product}', 'ProductController@update')
 Route::get('/dashboard/produits/stocks', 'DashboardController@stocks'); //TODO
 Route::get('/dashboard/produits/mis-en-avant', 'DashboardController@highlighted'); //TODO
 Route::post('/dashboard/produits/mis-en-avant', 'ProductController@highlightProducts');
+Route::post('/dashboard/produits/mis-en-avant/enlever/{product}', 'ProductController@highlightProductsRemove');
 Route::delete('/dashboard/produits/supprimer/{product}', 'ProductController@destroy');
 Route::get('/dashboard/produits/correction-images', 'ProductController@correctAllMainImages');
 Route::post('/dashboard/produits/recherche', 'ProductController@search');

@@ -25,13 +25,13 @@
         @foreach ($orders as $order)
         <tr class='d-flex' style='color:{{App\OrderStatus::statusToRGBColor($order->status)}}'>
 
-            <td class='col-2 small text-center mb-0 d-none d-md-table-cell' scope="row" onclick='load_url("/dashboard/commandes/fiche/{{$order->id}}")'>{{$order->created_at}}</td>
+            <td class='col-2 small text-center mb-0 d-none d-md-table-cell' scope="row" onclick='load_in_new_tab("/dashboard/commandes/fiche/{{$order->id}}")'>{{$order->created_at}}</td>
             
-            <td class='col-4' onclick='load_url("/dashboard/commandes/fiche/{{$order->id}}")'>
+            <td class='col-4' onclick='load_in_new_tab("/dashboard/commandes/fiche/{{$order->id}}")'>
                 <p class='font-weight-bold mb-0'>{{$order->user->firstname}} {{$order->user->lastname}}</p>
             </td>
             
-            <td class='col-4 col-md-2 text-center' onclick='load_url("/dashboard/commandes/fiche/{{$order->id}}")'>
+            <td class='col-4 col-md-2 text-center' onclick='load_in_new_tab("/dashboard/commandes/fiche/{{$order->id}}")'>
                 <p class='mb-0'>{{$order->productsPrice}}€</p> 
                 @if($order->shippingPrice != 0) <p class='small mb-0'>(+{{$order->shippingPrice}}€)</p> @endif 
             </td>

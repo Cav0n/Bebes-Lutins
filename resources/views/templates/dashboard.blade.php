@@ -98,5 +98,9 @@
 function load_url(url){
     document.location.href=url;
 }
+
+function load_in_new_tab(url){
+    window.open(url, "_blank"); 
+}
 </script>
 </html>

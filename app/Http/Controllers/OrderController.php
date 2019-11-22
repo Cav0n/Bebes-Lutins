@@ -54,29 +54,8 @@ class OrderController extends Controller
 
     public function getJSON(Order $order)
     {
-        $order_array = array();
-        $order_array['id'] = $order->id;
-        $order_array['status'] = $order->status;
-        $order_array['shipping_price'] = $order->shippingPrice;
-        $order_array['products_price'] = $order->productsPrice;
-        $order_array['payment_method'] = $order->paymentMethod;
-        
-        $order_array['customer_message'] = $order->customerMessage;
-        $order_array['shipping_address_id'] = $order->shipping_address_id;
-        $order_array['billing_address_id'] = $order->billing_address_id;
-        $order_array['is_canceled'] = $order->isCanceled;
-        $order_array['created_at'] = $order->created_at;
-        $order_array['updated_at'] = $order->updated_at;
-        $order_array['user'] = $order->user;
-        $order_array['voucher'] = $order->voucher;
-        $order_array['items'] = $order->order_items;
-        
-        $data = [ 
-            'order' => $order_array
-        ];
-
-        header('Content-type: application/json');
-        echo json_encode( $data, JSON_PRETTY_PRINT);
+        $user = $order->user; // THIS PERMIT TO INIT USER IN RESPONSE
+        return response()->json(['order' => $order], 200);
     }
 
     public function addKnowThanksTo(Request $request)

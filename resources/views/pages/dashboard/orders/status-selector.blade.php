@@ -1,5 +1,5 @@
 <div class="form-group mb-0 ld-over">
-    <select class='custom-select' onchange="change_order_status($(this), '{{$order->id}}')">
+    <select id='select-for-{{$order->id}}' class='custom-select status-selector' style='color:{{App\OrderStatus::statusToRGBColor($order->status)}}'>
         <option value='0' @if($order->status == 0) selected @endif>En attente de paiement</option>
         <option value='1' @if($order->status == 1) selected @endif>En cours de traitement</option>
         <option value='2' @if($order->status == 2) selected @endif>En cours de livraison</option>

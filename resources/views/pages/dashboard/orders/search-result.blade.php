@@ -72,23 +72,22 @@ function search_order(){
                 $("#search-possible-table-body").empty();
 
                 $.each(data.valid_orders, function(index, order){
-                    console.log(order.shippingPrice);
                     order_html = `
                     <tr class='d-flex' style='color:!color'>
-                        <td class='col-2 small text-center mb-0' scope="row" onclick='load_url("/dashboard/commandes/fiche/`+order.id+`")'>`+order.created_at+`</td>
+                        <td class='col-2 small text-center mb-0' scope="row" onclick='load_in_new_tab("/dashboard/commandes/fiche/`+order.id+`")'>`+order.created_at+`</td>
                         
-                        <td class='col-4' onclick='load_url("/dashboard/commandes/fiche/`+order.id+`")'>
+                        <td class='col-4' onclick='load_in_new_tab("/dashboard/commandes/fiche/`+order.id+`")'>
                             <p class='font-weight-bold mb-0'>`+order.user.firstname+` `+order.user.lastname+`</p>
                         </td>
                         
-                        <td class='col-2 text-center' onclick='load_url("/dashboard/commandes/fiche/`+order.id+`")'>
+                        <td class='col-2 text-center' onclick='load_in_new_tab("/dashboard/commandes/fiche/`+order.id+`")'>
                             <p class='mb-0'>`+order.productsPrice+` €</p> 
                             !shipping_price
                         </td>
 
                         <td class='col-4'>
                             <div class="form-group mb-0 ld-over">
-                                <select class='custom-select' onchange="change_order_status($(this), '`+order.id+`')">
+                                <select class='custom-select status-selector'>
                                     <option value='0' !selected_0 >En attente de paiement</option>
                                     <option value='1' !selected_1 >En cours de traitement</option>
                                     <option value='2' !selected_2 >En cours de livraison</option>
@@ -109,8 +108,8 @@ function search_order(){
                     if(order.shippingPrice != 0) order_html = order_html.replace("!shipping_price", "<p class='small mb-0'>(+"+ order.shippingPrice +"€)</p>");
                     else order_html = order_html.replace("!shipping_price", "");
 
-                    order_html = order_html.replace("!selected_" + order.status, "selected");
-                    order_html = order_html.replace(/!selected_[-]?\d+/, "");
+                    order_html = order_html.replace("!selected_" + order.status, " selected ");
+                    order_html = order_html.replace(/[!]selected_[-]?\d+?/g, "");
                     order_html = order_html.replace('!color', order.color);
 
                     $('#result-title').text("Résultats ("+data.valid_results_nb+" commandes)");
@@ -119,23 +118,22 @@ function search_order(){
                 });
 
                 $.each(data.possible_orders, function(index, order){
-                    console.log(order);
                     order_html = `
                     <tr class='d-flex' style='color:!color'>
-                        <td class='col-2 small text-center mb-0' scope="row" onclick='load_url("/dashboard/commandes/fiche/`+order.id+`")'>`+order.created_at+`</td>
+                        <td class='col-2 small text-center mb-0' scope="row" onclick='load_in_new_tab("/dashboard/commandes/fiche/`+order.id+`")'>`+order.created_at+`</td>
                         
-                        <td class='col-4' onclick='load_url("/dashboard/commandes/fiche/`+order.id+`")'>
+                        <td class='col-4' onclick='load_in_new_tab("/dashboard/commandes/fiche/`+order.id+`")'>
                             <p class='font-weight-bold mb-0'>`+order.user.firstname+` `+order.user.lastname+`</p>
                         </td>
                         
-                        <td class='col-2 text-center' onclick='load_url("/dashboard/commandes/fiche/`+order.id+`")'>
+                        <td class='col-2 text-center' onclick='load_in_new_tab("/dashboard/commandes/fiche/`+order.id+`")'>
                             <p class='mb-0'>`+order.productsPrice+` €</p> 
                             !shipping_price
                         </td>
 
                         <td class='col-4'>
                             <div class="form-group mb-0 ld-over">
-                                <select class='custom-select' onchange="change_order_status($(this), '`+order.id+`')">
+                                <select class='custom-select status-selector'>
                                     <option value='0' !selected_0 >En attente de paiement</option>
                                     <option value='1' !selected_1 >En cours de traitement</option>
                                     <option value='2' !selected_2 >En cours de livraison</option>
@@ -156,8 +154,8 @@ function search_order(){
                     if(order.shippingPrice != 0) order_html = order_html.replace("!shipping_price", "<p class='small mb-0'>(+"+ order.shippingPrice +"€)</p>");
                     else order_html = order_html.replace("!shipping_price", "");
 
-                    order_html = order_html.replace("!selected_" + order.status, "selected");
-                    order_html = order_html.replace(/!selected_[-]?\d+/, "");
+                    order_html = order_html.replace("!selected_" + order.status, " selected ");
+                    order_html = order_html.replace(/[!]selected_[-]?\d+/g, "");
                     order_html = order_html.replace('!color', order.color);
 
                     $("#search-possible-table-body").append(order_html);

@@ -9,14 +9,18 @@
             <div class='address-container p-2 border border-dark'>
                 <h1 class='mb-0 h3'><b>Adresse de livraison</b></h1>
             
+                @if($order->status != 22 && strpos($order->shipping_address->id, "withdrawal-shop") != true )
                 <p class='mb-0'>{{$order->shipping_address->civilityToString()}} {{ucfirst($order->shipping_address->firstname)}} {{mb_strtoupper($order->shipping_address->lastname)}}</p>
                 @if($order->shipping_address->complement)<small class='m-0'>{{$order->shipping_address->complement}}</small>@endif
                 @if($order->shipping_address->company)<small class='mb-0'>{{$order->shipping_address->company}}</small>@endif
                 <p class='mb-0'>{{$order->shipping_address->street}}</p>
                 <p class='mb-0'>{{$order->shipping_address->zipCode}}, {{$order->shipping_address->city}}</p>
+                @else
+                <p class='mb-0'>A retirer à l'atelier</p>
+                @endif
 
                 <div class='customer-infos border-top border-dark pt-2 mt-2'>
-                    <p class='mb-0'><u>E-mail</u> : <a class='text-dark' href='mailto:{{$order->user->email}}'>{{$order->user->email}}</a></p>
+                    <p class='mb-0'><u>E-mail</u> : <a class='text-dark' href='mailto:{{strtolower($order->user->email)}}'>{{strtolower($order->user->email)}}</a></p>
                     @if($order->user->phone != null)
                     <p class='mb-0'><u>Téléphone</u> : <a class='text-dark' href='tel:{{$order->user->phone}}'>{{chunk_split($order->user->phone, 2, ' ')}}</a></p>
                     @else

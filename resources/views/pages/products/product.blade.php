@@ -49,9 +49,11 @@ if (count($product->reviews) > 0){
                                 <img class='w-100 h-100 border' onclick="change_main_image($(this))" src="{{asset('images/products/' . $product->mainImage)}}" style='object-fit:cover;cursor:pointer;'>
                             </div>
                             @foreach ($product->images->skip(1) as $image)
-                            <div class='thumbnail-container pt-2'style='max-width:3rem; max-height:3rem;'>
+                            @if(file_exists(public_path('images/products/thumbnails/'). $image->name))
+                            <div class='thumbnail-container mt-2'style='max-width:3rem; max-height:3rem;'>
                                 <img class='w-100 h-100 border' onclick="change_main_image($(this))" src="{{asset('images/products/thumbnails/' . $image->name)}}" style='object-fit;cursor:pointer;'>
                             </div>
+                            @endif
                             @endforeach
                         </div>
 

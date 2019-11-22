@@ -23,10 +23,10 @@
                     Choisir des produits</button>
             </div>
             <div class='card-body'>
-                <table class='table'>
+                <table id='highlighted_products_table' class='table'>
                     <?php $index = 0; ?>
                     @foreach ($highlightedProducts as $product)
-                        <tr class='@if($index == 0) border-top-0 @else border-top @endif' onclick='select_product($(this), "{{$product->id}}")'>
+                        <tr class='@if($index == 0) border-top-0 @else border-top @endif'>
                             <td class='border-top-0' style='width:5rem;'>
                                 <div class=' mr-0'style='width:5rem;height:5rem;'>
                                     <img class='h-100 w-100' src='{{asset('images/products/'.$product->mainImage)}}' style='object-fit:cover;'>
@@ -34,9 +34,11 @@
                             </td>
                             <td class='border-top-0 align-middle'>{{$product->name}}</td>
                             <td class='border-top-0 align-middle'>
-                                <button type="button" class="btn btn-danger py-1">
+                                <button type="button" class="btn btn-danger py-1 ld-over" onclick='unselect_product($(this), "{{$product->id}}")'>
                                     <p class='d-none d-md-flex m-0'>Enlever</p>
-                                    <img class='d-flex d-md-none svg pt-1' src='{{asset('images/icons/trash.svg')}}'></button>
+                                    <img class='d-flex d-md-none svg pt-1' src='{{asset('images/icons/trash.svg')}}'>
+                                    <div class="ld ld-ring ld-spin"></div>
+                                </button>
                             </td>
                         </tr>
                     <?php $index++; ?> 
@@ -107,6 +109,25 @@ function select_product(element, product_id){
 
     $('#product-counter').text(selected_product_id.length);
 
+}
+
+function unselect_product(btn, product_id){
+    $.ajax({
+        url: "/dashboard/produits/mis-en-avant/enlever/" + product_id,
+        type: 'POST',
+        data: { },
+        success: function(data){
+            console.log('Produits bien supprimé.');
+            btn.parent().parent().remove();
+
+            if($('#highlighted_products_table tr').length < 1){
+                document.location.reload();
+            }
+        },
+        beforeSend: function() {
+            btn.addClass('running');
+        }
+    });
 }
 
 function validate_selection(btn){

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Message;
+use App\Mail\MessageNotificationSender;
+use App\Mail\MessageNotificationAdmin;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -47,6 +50,9 @@ class MessageController extends Controller
         $message->senderEmail = $request['contact-email'];
         $message->message = $request['contact-message'];
         $message->save();
+
+        Mail::to("contact@bebes-lutins.fr")->send(new MessageNotificationAdmin($message));
+        Mail::to($message->senderEmail)->send(new MessageNotificationSender($message));
 
         $result = ['code' => 200, 'message' => "Message envoyé avec succés !"];
 

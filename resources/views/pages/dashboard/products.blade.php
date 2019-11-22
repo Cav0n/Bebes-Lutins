@@ -49,23 +49,9 @@
         <a name="btn-creation" id="btn-creation" class="btn btn-outline-secondary border-0 ml-auto" href="/dashboard/produits/nouveau" role="button">Nouveau</a>
      </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <div class="input-group mb-3">
-                        <input type="search" name="search" id="search-bar" class="form-control" placeholder="Rechercher un produit" aria-describedby="helpSearch">
 
-                        <div class="input-group-append">
-                            <button id='search-button' class="btn btn-secondary d-flex flex-column justify-content-center ld-over" type="button" onclick='search_product()'>
-                                <p class='d-none d-sm-flex mb-0'>Rechercher</p>
-                                <img class='d-flex d-sm-none svg' style="fill:grey" src='{{asset('images/icons/search.svg')}}'>
-                                <div class="ld ld-ring ld-spin"></div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @include('components.dashboard.search-bar')
+
         <div class="row">
             <div class="col-12 d-flex flex-row flex-wrap">
                 <div class="form-group">
@@ -180,24 +166,18 @@ $.ajaxSetup({
     $("#products-container").show();
     $("#search-container").hide();
     $("#sort-container").hide();
-
-    $("#search-bar").keyup(function(event) {
-        if (event.keyCode === 13) {
-            $("#search-button").click();
-        }
-    });
             
-    function search_product(){
-        search = $("#search-bar").val();
+    function search(){
+        search_words = $("#search-bar").val();
         button = $("#search-button");
 
-        if(search != ""){
+        if(search_words != ""){
             $.ajax({
                 url : '/dashboard/produits/recherche', // on appelle le script JSON
                 type: "POST",
                 dataType : 'json', // on spécifie bien que le type de données est en JSON
                 data : {
-                    search: search
+                    search: search_words
                 },
                 beforeSend: function(){
                     button.addClass('running');

@@ -9,18 +9,9 @@
         <a name="btn-creation" id="btn-creation" class="btn btn-primary border-light ml-auto" href="/dashboard/reductions/nouveau" role="button">Nouveau</a>
     </div>
     <div class="card-body">
-        <form action="/dashboard/produits/recherche" method="POST">
-            <div class="row">
-                <div class="col-9">
-                    <div class="form-group">
-                        <input type="text" name="search" id="search-bar" class="form-control" placeholder="Rechercher une réduction" aria-describedby="helpSearch">
-                    </div>
-                </div>
-                <div class="col-3">
-                    <button type="submit" class="btn btn-secondary w-100 border-light">Rechercher</button>
-                </div>
-            </div>
-        </form>
+
+        @include('components.dashboard.search-bar')
+
         {{$vouchers->links()}}        
         <table class="table">
             <thead>

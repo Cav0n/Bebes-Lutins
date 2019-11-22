@@ -2,21 +2,21 @@
     <div class="row">
         <div class="col-12 d-flex flex-row flex-wrap">
             <p class="status-selector py-1 px-3 mr-2 bg-light border rounded transition-fast @if(session()->get('no_status') == true) selected @endif" onclick='select_status_to_display($(this), null)'>
-                Toutes</p>
+                Toutes - ({{\App\Order::where('id', '!=', null)->count()}})</p>
             <p class="status-selector py-1 px-3 mr-2 bg-light border rounded transition-fast @if(session()->has('selected_order_status' . $oldStatus)) @if(session()->get('selected_order_status' . $oldStatus) == 0) selected @endif @endif" onclick='select_status_to_display($(this), 0)'>
-                En attente de paiement</p>
+                En attente de paiement - ({{\App\Order::where('status', 0)->count()}})</p>
             <p class="status-selector py-1 px-3 mr-2 bg-light border rounded transition-fast @if(session()->has('selected_order_status' . $oldStatus)) @if(session()->get('selected_order_status' . $oldStatus) == 1) selected @endif @endif" onclick='select_status_to_display($(this), 1)'>
-                En cours de préparation</p>
+                En cours de préparation - ({{\App\Order::where('status', 1)->count()}})</p>
             <p class="status-selector py-1 px-3 mr-2 bg-light border rounded transition-fast @if(session()->has('selected_order_status' . $oldStatus)) @if(session()->get('selected_order_status' . $oldStatus) == 2) selected @endif @endif" onclick='select_status_to_display($(this), 2)'>
-                En cours de livraison</p>
+                En cours de livraison - ({{\App\Order::where('status', 2)->count()}})</p>
             <p class="status-selector py-1 px-3 mr-2 bg-light border rounded transition-fast @if(session()->has('selected_order_status' . $oldStatus)) @if(session()->get('selected_order_status' . $oldStatus) == 22) selected @endif @endif" onclick='select_status_to_display($(this), 22)'>
-                A retirer à l'atelier</p>
+                A retirer à l'atelier - ({{\App\Order::where('status', 22)->count()}})</p>
             <p class="status-selector py-1 px-3 mr-2 bg-light border rounded @if(session()->has('selected_order_status' . $oldStatus)) @if(session()->get('selected_order_status' . $oldStatus) == 3) selected @endif @endif" onclick='select_status_to_display($(this), 3)'>
-                    Livrées</p>
+                Livrées - ({{\App\Order::where('status', 3)->count()}})</p>
             <p class="status-selector py-1 px-3 mr-2 bg-light border rounded @if(session()->has('selected_order_status' . $oldStatus)) @if(session()->get('selected_order_status' . $oldStatus) == 33) selected @endif @endif" onclick='select_status_to_display($(this), 33)'>
-                Participations enregistrées</p>
+                Participations enregistrées - ({{\App\Order::where('status', 33)->count()}})</p>
             <p class="status-selector py-1 px-3 mr-2 bg-light border rounded @if(session()->has('selected_order_status' . $oldStatus)) @if(session()->get('selected_order_status' . $oldStatus) == -1) selected @endif @endif" onclick='select_status_to_display($(this), -1)'>
-                Annulées</p>
+                Annulées - ({{\App\Order::where('status', -1)->count()}})</p>
         </div>
     </div>
     {{ $orders->links() }}

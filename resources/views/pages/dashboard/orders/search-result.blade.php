@@ -50,17 +50,17 @@ $("#search-bar").keyup(function(event) {
     }
 });
             
-function search_order(){
-    search = $("#search-bar").val();
+function search(){
+    search_words = $("#search-bar").val();
     button = $("#search-button");
 
-    if(search != ""){
+    if(search_words != ""){
         $.ajax({
             url : '/dashboard/commandes/recherche', // on appelle le script JSON
             type: "POST",
             dataType : 'json', // on spécifie bien que le type de données est en JSON
             data : {
-                search: search
+                search: search_words
             },
             beforeSend: function(){
                 button.addClass('running');

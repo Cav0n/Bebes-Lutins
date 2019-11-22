@@ -34,18 +34,9 @@
         <a name="btn-creation" id="btn-creation" class="btn btn-outline-secondary border-0 ml-auto" href="/dashboard/produits/categories/nouvelle" role="button">Nouveau</a>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-9">
-                <div class="form-group">
-                    <input type="text" name="search" id="search-bar" class="form-control" placeholder="Rechercher une catégorie" aria-describedby="helpSearch">
-                </div>
-            </div>
-            <div class="col-3">
-                <button type="submit" id="search-button" class="btn btn-secondary w-100 border-light ld-over" onclick='search_category()'>
-                    Rechercher <div class="ld ld-ring ld-spin"></div>
-                </button>
-            </div>
-        </div>
+
+        @include('components.dashboard.search-bar')
+
         <div id='categories-container'>
             <table class="table">
                 <thead>
@@ -139,17 +130,17 @@
         }
     });
             
-    function search_category(){
-        search = $("#search-bar").val();
+    function search(){
+        search_words = $("#search-bar").val();
         button = $("#search-button");
 
-        if(search != ""){
+        if(search_words != ""){
             $.ajax({
                 url : '/dashboard/categories/recherche', // on appelle le script JSON
                 type: "POST",
                 dataType : 'json', // on spécifie bien que le type de données est en JSON
                 data : {
-                    search: search
+                    search: search_words
                 },
                 beforeSend: function(){
                     button.addClass('running');

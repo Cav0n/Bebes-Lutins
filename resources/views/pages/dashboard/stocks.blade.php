@@ -13,18 +13,9 @@
         </h1>
     </div>
     <div class="card-body">
-        <form action="/dashboard/produits/recherche" method="POST">
-            <div class="row">
-                <div class="col-9">
-                    <div class="form-group">
-                        <input type="text" name="search" id="search-bar" class="form-control" placeholder="Rechercher un produit" aria-describedby="helpSearch">
-                    </div>
-                </div>
-                <div class="col-3">
-                    <button type="submit" class="btn btn-secondary w-100 border-light">Rechercher</button>
-                </div>
-            </div>
-        </form>
+
+        @include('components.dashboard.search-bar')
+
         <div class="row">
             <div class="col-12 d-flex flex-row flex-wrap">
                 @foreach (App\Category::where('parent_id', null)->get() as $category)

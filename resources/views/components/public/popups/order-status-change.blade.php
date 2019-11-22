@@ -37,7 +37,7 @@
             },
             beforeSend: function() {
                 $(this).addClass('running');
-            
+            }, 
         });
     });
 </script>

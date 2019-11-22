@@ -8,18 +8,9 @@
         </h1>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-9">
-                <div class="form-group">
-                    <input type="text" name="search" id="search-bar" class="form-control" placeholder="Rechercher un client" aria-describedby="helpSearch">
-                </div>
-            </div>
-            <div class="col-3">
-                <button id='search-button' type="button" class="btn btn-secondary w-100 border-light ld-over" onclick="search_customer()">
-                    Rechercher <div class="ld ld-ring ld-spin">
-                </button>
-            </div>
-        </div>
+
+        @include('components.dashboard.search-bar')
+
         <div id='customers-container'>
             {{$users->links()}}
             <table class="table" style=''>
@@ -94,17 +85,17 @@
         }
     });
             
-    function search_customer(){
-        search = $("#search-bar").val();
+    function search(){
+        search_words = $("#search-bar").val();
         button = $("#search-button");
 
-        if(search != ""){
+        if(search_words != ""){
             $.ajax({
                 url : '/dashboard/clients/recherche', // on appelle le script JSON
                 type: "POST",
                 dataType : 'json', // on spécifie bien que le type de données est en JSON
                 data : {
-                    search: search
+                    search: search_words
                 },
                 beforeSend: function(){
                     button.addClass('running');

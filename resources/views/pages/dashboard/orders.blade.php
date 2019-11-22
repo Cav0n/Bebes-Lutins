@@ -8,18 +8,9 @@
         </h1>
     </div>
     <div class="card-body">
-        <div class="row">
-            <div class="col-9">
-                <div class="form-group">
-                    <input type="text" name="search" id="search-bar" class="form-control" placeholder="Rechercher une commande" aria-describedby="helpSearch">
-                </div>
-            </div>
-            <div class="col-3">
-                <button type="button" id="search-button" class="btn btn-secondary w-100 border-light ld-over" onclick='search_order()'>
-                    Rechercher  <div class="ld ld-ring ld-spin"></div>
-                </button>
-            </div>
-        </div>
+        
+        @include('components.dashboard.search-bar')
+
         @switch($status)
             @case(null)
                 @include('pages.dashboard.orders.all')

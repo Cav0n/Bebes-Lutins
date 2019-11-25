@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="modal-footer flex-wrap">
-                <button type="button" class="mr-auto mb-2 mb-sm-0 btn btn-outline-primary rounded-0">
+                <button type="button" class="mr-auto mb-2 mb-sm-0 btn btn-outline-primary rounded-0" onclick='reload_page()'>
                     Continuer mes achats</button>
                 <button type="button" class="btn btn-secondary rounded-0 mb-2 mb-sm-0" data-dismiss="modal" onclick='load_url("/panier")'>
                     Voir mon panier</button>
@@ -50,6 +50,11 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+    function reload_page()
+    {
+        location.reload();
+    }
 
     function add_to_cart(shoppingCartID, productID, quantity){
         $.ajax({

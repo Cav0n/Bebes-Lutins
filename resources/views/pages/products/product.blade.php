@@ -118,8 +118,29 @@ if (count($product->reviews) > 0){
     
                                     {{-- ADD TO CART BUTTON --}}
                                     <span class="d-inline-block w-100" data-trigger="hover" data-toggle="popover" data-content="Veuillez fournir les informations manquantes.">
-                                        <button id='add-to-cart' type="button" class="btn btn-outline-dark rounded-0 w-100">
-                                            Ajouter au panier</button>
+                                        <button type="button" class="btn btn-outline-dark rounded-0 w-100 open-product-added-dialog"
+                                            @if($product->stock > 0) 
+                                                @if(count($product->characteristics) == 0) 
+
+                                                    data-toggle="modal" 
+                                                    data-target="#addToCartPopup" 
+                                                    data-product_id="{{$product->id}}"
+                                                    data-product_name="{{$product->name}}"
+                                                    data-product_image="{{asset('images/products/' . $product->mainImage)}}"
+                                                    data-product_price="{{number_format($product->price, 2, ',', " ")}}"
+                                                    data-product_quantity="1"
+
+                                                    @else onclick='load_url("/produits/{{$product->id}}")'
+                                                    @endif
+                                                @endif style='font-size:0.9rem !important;' @if($product->stock <= 0) disabled @endif>
+
+                                                @if($product->stock > 0)
+                                                    @if(count($product->characteristics) == 0) Ajouter au panier
+                                                    @else Voir le produit
+                                                    @endif
+                                                @else Rupture de stock
+                                            @endif
+                                        </button>
                                     </span>
 
                                     {{-- ADD TO WISHLIST BUTTON --}}
@@ -341,7 +362,6 @@ if (count($product->reviews) > 0){
         });
     });
 </script>
-@endauth
 
 <script>
     $('#add-to-wishlist').on('click', function(){
@@ -395,6 +415,7 @@ if (count($product->reviews) > 0){
         });
     });
 </script>
+@endauth
 
 {{-- ADD TO CART --}}
 <script>

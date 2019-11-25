@@ -51,8 +51,8 @@ Route::get('/panier/partage/{shopping_cart}', 'ShoppingCartController@show');
 Route::get('/panier/partage/{shopping_cart}/commander', 'ShoppingCartController@replace');
 
 Route::get('/panier', 'ShoppingCartController@show');
-Route::post('/panier/add_item', 'ShoppingCartItemController@store');
-Route::post('/panier/change_quantity/{shoppingCartItem}', 'ShoppingCartItemController@update');
+Route::post('/panier/add_item', 'ShoppingCartItemController@checkIfProductAlreadyInShoppingCart');
+Route::post('/panier/change_quantity/{shoppingCartItem}', 'ShoppingCartItemController@updateQuantityOnly');
 Route::delete('/panier/remove_item/{shoppingCartItem}', 'ShoppingCartItemController@destroy');
 Route::post('/panier/code-coupon/ajouter', 'ShoppingCartController@addVoucher');
 Route::post('/panier/code-coupon/supprimer', 'ShoppingCartController@removeVoucher');

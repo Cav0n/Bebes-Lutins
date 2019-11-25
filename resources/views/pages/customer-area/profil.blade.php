@@ -80,20 +80,17 @@
     </div>
 </div>
 <div class="row mt-4 pt-4 border-top">
-    <div class="col-8 col-xl-9">
+    <div class="col-12 col-md-9">
         <p class='h5 font-weight-bold'>Newsletter</p>
-        @if(Auth::user()->wantNewsletter) <p class='mb-0'> Vous avez indiqué vouloir recevoir les actualités Bébés Lutins.</p>
-        @else <p class='mb-0'> Vous avez indiqué ne pas vouloir recevoir les actualités Bébés Lutins.</p>
-        @endif
+        <p id='newsletter-infos' class='mb-0'> 
+            @if(Auth::user()->wantNewsletter)Vous avez indiqué vouloir recevoir les actualités Bébés Lutins.
+            @else Vous avez indiqué ne pas vouloir recevoir les actualités Bébés Lutins.
+            @endif
+        </p>
     </div>
-    <div class="col-4 col-xl-3">
-        @if(Auth::user()->wantNewsletter) 
-        <button id='desktop-button' type="button" class="btn btn-outline-success border-success w-100 d-none d-md-flex rounded-0 ld-ext-right" onclick='invert_newsletter($(this))'>
-            <p class='text-center mb-0 mx-auto d-flex flex-column justify-content-center'>Activé</p><div class="ld ld-ring ld-spin"></div></button>
-        @else 
-        <button id='desktop-button' type="button" class="btn btn-outline-danger w-100 d-none d-md-flex rounded-0 ld-ext-right" onclick='invert_newsletter($(this))'>
-            <p class='text-center mb-0 mx-auto d-flex flex-column justify-content-center'>Désactivé</p><div class="ld ld-ring ld-spin"></div></button>
-        @endif
+    <div class="col-12 col-md-3 pt-2 pt-md-0">
+        <button id='newsletter-switcher' type="button" class="btn w-100 rounded-0 ld-ext-right @if(Auth::user()->wantNewsletter) btn-outline-success activated @else btn-outline-danger  @endif">
+            <p class='text-center mb-0 mx-auto'>Activé</p><div class="ld ld-ring ld-spin"></div></button>
     </div>
 </div>
 
@@ -191,6 +188,10 @@
 
         }
     });
+
+    $('#newsletter-switcher').on('click', function(){
+        invert_newsletter($(this));
+    });
 </script>
 
 {{-- AJAX UPDATE INFOS --}}
@@ -285,16 +286,27 @@
             type: 'POST',
             data: { },
             success: function(data){
-                console.log('Toggle newsletter.');
-                location.reload();
+                btn.removeClass('running');
+
+                if(btn.hasClass('activated')){
+                    btn.removeClass('activated');
+                    btn.removeClass('btn-outline-success').addClass('btn-outline-danger');
+                    btn.text("Désactivé");
+
+                    $('#newsletter-infos').text("Vous avez indiqué vouloir recevoir les actualités Bébés Lutins.");
+                } else {
+                    btn.addClass('activated');
+                    btn.removeClass('btn-outline-danger').addClass('btn-outline-success');
+                    btn.text("Activé");
+
+                    $('#newsletter-infos').text("Vous avez indiqué ne pas vouloir recevoir les actualités Bébés Lutins.");
+
+                }
             },
             beforeSend: function() {
                 btn.addClass('running');
             }
-        })
-        .done(function( data ) {
-            
-        }); 
+        });
     }
 </script>
     

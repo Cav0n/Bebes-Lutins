@@ -53,11 +53,11 @@ if (count($product->reviews) > 0){
                                 {{-- THUMBNAILS --}}
                                 <div class="col-xl-3 d-none d-lg-flex flex-lg-column ">
                                     <div class='thumbnail-container w-100' style="max-height:3rem;">
-                                        <img class='w-100 h-100' src='{{asset('images/products/'. $product->mainImage)}}'>
+                                        <img class='w-100 h-100' src='{{asset('images/products/'. $product->mainImage)}}' onclick='change_main_image($(this))' style='cursor:pointer'>
                                     </div>
                                     @foreach ($product->images->skip(1) as $image) @if(file_exists(public_path('/images/products/thumbnails/'. $image->name)))
                                     <div class='thumbnail-container w-100 mt-2' style="max-height:3rem;">
-                                        <img class='w-100 h-100' src='{{asset('images/products/thumbnails/'. $image->name)}}'>
+                                        <img class='w-100 h-100' src='{{asset('images/products/thumbnails/'. $image->name)}}' onclick='change_main_image($(this))' style='cursor:pointer'>
                                     </div>
                                     @endif @endforeach
                                 </div>
@@ -65,7 +65,7 @@ if (count($product->reviews) > 0){
                                 {{-- MAIN IMAGE --}}
                                 <div class="col-md-12 col-xl-9 p-0">
                                     <div class='main-image-container w-100'>
-                                        <img class='w-100 h-100' src='{{asset('images/products/'. $product->mainImage)}}'>
+                                        <img id='big-image' class='w-100 h-100' src='{{asset('images/products/'. $product->mainImage)}}'>
                                     </div>
                                     <div class='social-container mb-2 mb-lg-0'>
                                         <a name="facebook-share-btn" id="facebook-share-btn" class="btn btn-light rounded-0 w-100 mt-2 p-0 d-flex" target="_blank" href="http://www.facebook.com/sharer.php?u=https://www.bebes-lutins.fr/produits/{{$product->id}}" role="button">
@@ -562,7 +562,7 @@ if (count($product->reviews) > 0){
 {{-- Change main image --}}
 <script>
     function change_main_image(img){
-        $('#main-image').attr('src', img.attr('src'));
+        $('#big-image').attr('src', img.attr('src'));
     }
 </script>
 

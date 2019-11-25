@@ -33,6 +33,8 @@ Route::post('/produits/{product}', 'ProductController@getJSON');
 Route::get('/produits/{category}/{product}', 'ProductController@show');
 Route::post('/produits/selectionner_categorie/{category}', 'ProductController@add_selected_category');
 Route::post('/produits/deselectionner_categorie/{category}', 'ProductController@unselected_category');
+Route::post('/espace-client/ma-liste-d-envie/ajout-produit/{product}', 'WishListItemController@store');
+Route::delete('/espace-client/ma-liste-d-envie/retirer-produit/{product}', 'WishListItemController@destroy');
 /* ---------------- */
 
 /**
@@ -92,6 +94,8 @@ Route::post('/espace-client/newsletter-invert', 'CustomerAreaController@invertNe
 Route::get('/espace-client/commandes', 'CustomerAreaController@ordersPage'); //TODO
 Route::get('/espace-client/commandes/{order}', 'OrderController@show'); //TODO
 Route::post('/commandes/{order}', 'OrderController@getJSON');
+Route::get('/espace-client/ma-liste-d-envie', 'WishListController@show');
+Route::post('/liste-envie/verifier-produit', 'WishListItemController@checkIfProductIsInWishlist');
 
 Route::get('/espace-client/adresses', 'CustomerAreaController@addressPage'); //TODO
 Route::get('/espace-client/adresses/creation', 'AddressController@create');

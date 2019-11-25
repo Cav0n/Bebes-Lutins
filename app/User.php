@@ -85,4 +85,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Review');
     }
+
+    /**
+     * Get the phone record associated with the user.
+     */
+    public function wishlist()
+    {
+        return $this->hasOne('App\WishList');
+    }
 }

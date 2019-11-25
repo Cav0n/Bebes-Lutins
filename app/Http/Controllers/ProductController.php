@@ -383,6 +383,15 @@ class ProductController extends Controller
             }
         }
 
+        //CATEGORIES
+        $product->categories()->detach(); 
+        if($request->categories != null){
+            foreach(\json_decode($request->categories) as $r_category){
+                $category = Category::where('name', $r_category->value)->first();
+                $product->categories()->attach($category->id);
+            }
+        }
+
         //TAGS
         $product->tags()->detach(); 
         if($request->tags != null){

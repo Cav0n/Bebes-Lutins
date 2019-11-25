@@ -107,6 +107,15 @@
                     </div>
                 </div>
             </div>
+
+            <div class="form-group">
+                <label for="categories">Catégories</label>
+                <input id='categories' class="form-control @error('categories') is-invalid @enderror" name='categories' value='@foreach($product->categories as $category) {{$category->name}}, @endforeach' placeholder="Tapez le nom d'une catégorie">
+                @error('categories')
+                    <div class="invalid-feedback">{{$message}}</div>
+                @enderror 
+                <button class='btn btn-outline-dark rounded-0 mt-2 categories--removeAllBtn' type='button'>Retirer les catégories</button>
+            </div>
             
             <div class="form-group">
                 <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="5">{{old('description', $product->description)}}</textarea>
@@ -253,13 +262,46 @@ $.ajaxSetup({
 
 {{-- TAGIFY --}}
 <script>
-    $input = $('#tags').tagify();
+    $input_tags = $('#tags').tagify();
+    $input_categories = $('#categories').tagify({
+        enforceWhitelist : true,
+        whitelist : [@foreach(App\Category::where('isDeleted', 0)->get() as $category) "{{$category->name}}", @endforeach],
+        dropdown: {
+            position: "manual",
+            maxItems: Infinity,
+            enabled: 0,
+            classname: "customSuggestionsList"
+        },
+    });
 
     // get the Tagify instance assigned for this jQuery input object so its methods could be accessed
-    var jqTagify = $input.data('tagify');
+    var jqTagify = $input_tags.data('tagify');
+    var categories = $input_categories.data('tagify');
     
     // bind the "click" event on the "remove all tags" button
     $('.tags--removeAllBtn').on('click', jqTagify.removeAllTags.bind(jqTagify))
+    $('.categories--removeAllBtn').on('click', categories.removeAllTags.bind(categories));
+
+    categories.on("dropdown:show", onSuggestionsListUpdate)
+          .on("dropdown:hide", onSuggestionsListHide)
+
+    renderSuggestionsList()
+
+    // ES2015 argument destructuring
+    function onSuggestionsListUpdate({ detail:suggestionsElm }){
+        console.log(  suggestionsElm  )
+    }
+
+    function onSuggestionsListHide(){
+        console.log("hide dropdown")
+    }
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/Element/insertAdjacentElement
+    function renderSuggestionsList(){
+        categories.dropdown.show.call(categories) // load the list
+        categories.DOM.scope.parentNode.appendChild(categories.DOM.dropdown)
+    }
+
 </script>
 
 {{-- DROPZONE --}}

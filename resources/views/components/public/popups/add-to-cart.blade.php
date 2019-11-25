@@ -26,14 +26,6 @@
     </div>
 </div>
 
-
-{{-- Custom Spinner --}}
-<script>
-    product_price = {{$product->price}}
-
-    $(".spinnerProductPopup").inputSpinner();
-</script>
-
 {{-- Update popup with product infos --}}
 <script>
     $('.open-product-added-dialog').on('click', function(){

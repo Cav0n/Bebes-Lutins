@@ -24,6 +24,10 @@ if (count($product->reviews) > 0){
     {{--  Rate Yo  --}}
     <script src="{{asset('js/rateyo/rateyo.js')}}"></script>
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/rateyo/rateyo.css')}}">
+    {{-- Loading CSS --}}
+    <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/loading/loading.css')}}">
+    <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/loading/loading-btn.css')}}">
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <meta name="description" content="{{strip_tags($product->description)}}" />
@@ -32,119 +36,115 @@ if (count($product->reviews) > 0){
 @section('content')
 <main id='product-main' class='container-fluid my-0 py-0 py-lg-3 dim-background'>
     <div class="row justify-content-center">
-        <div class="col-12 col-lg-8 px-0 px-lg-3">
-            <div class="row m-0">
+        <div class="col-12 col-lg-10 px-0 px-lg-3">
+            <div class="row justify-content-center m-0">
                 {{-- Breadcrumb --}}
                 <div class="col-lg-12 p-0 my-3 d-none d-sm-flex justify-content-center">
                     @include('layouts.public.breadcrumb-product')
                 </div>
 
-                {{-- Image, title and buttons --}}
-                <div class="col-lg-12 p-0">
-                    <div class="row m-0 justify-content-center">
+                {{-- NEW IMAGES, TITLE AND BUTTONS --}}
+                <div class="col-10 col-lg-12 p-0 py-3">
+                    <div class="row m-0">
 
-                        {{--  Thumbnails  --}}
-                        <div class="col-lg-1 p-0 d-none d-lg-flex flex-column pr-3">
-                            <div class='thumbnail-container' style='max-width:3rem; max-height:3rem;'>
-                                <img class='w-100 h-100 border' onclick="change_main_image($(this))" src="{{asset('images/products/' . $product->mainImage)}}" style='object-fit:cover;cursor:pointer;'>
+                        <div class="col-md-3">
+                            <div class="row">
+
+                                {{-- THUMBNAILS --}}
+                                <div class="col-xl-3 d-none d-lg-flex flex-lg-column ">
+                                    <div class='thumbnail-container w-100' style="max-height:3rem;">
+                                        <img class='w-100 h-100' src='{{asset('images/products/'. $product->mainImage)}}'>
+                                    </div>
+                                    @foreach ($product->images->skip(1) as $image) @if(file_exists(public_path('/images/products/thumbnails/'. $image->name)))
+                                    <div class='thumbnail-container w-100 mt-2' style="max-height:3rem;">
+                                        <img class='w-100 h-100' src='{{asset('images/products/thumbnails/'. $image->name)}}'>
+                                    </div>
+                                    @endif @endforeach
+                                </div>
+
+                                {{-- MAIN IMAGE --}}
+                                <div class="col-md-12 col-xl-9 p-0">
+                                    <div class='main-image-container w-100'>
+                                        <img class='w-100 h-100' src='{{asset('images/products/'. $product->mainImage)}}'>
+                                    </div>
+                                    <div class='social-container mb-2 mb-lg-0'>
+                                        <a name="facebook-share-btn" id="facebook-share-btn" class="btn btn-light rounded-0 w-100 mt-2 p-0 d-flex" target="_blank" href="http://www.facebook.com/sharer.php?u=https://www.bebes-lutins.fr/produits/{{$product->id}}" role="button">
+                                            <img class='svg social-button-icon' src='{{asset('images/icons/facebook.svg')}}'>
+                                            <p class='mb-0 d-flex flex-column justify-content-center ml-2 small'> - Partager sur Facebook</p></a>
+                                        <a name="instagram-share-btn" id="facebook-share-btn" class="btn btn-light rounded-0 w-100 mt-2 p-0 d-flex" target="_blank" href="https://www.instagram.com/bebeslutins" role="button">
+                                            <img class='svg social-button-icon' src='{{asset('images/icons/instagram.svg')}}'>
+                                            <p class='mb-0 d-flex flex-column justify-content-center ml-2 small'> - Notre page Instagram</p></a>
+                                    </div>
+                                </div>
+
                             </div>
-                            @foreach ($product->images->skip(1) as $image)
-                            @if(file_exists(public_path('images/products/thumbnails/'). $image->name))
-                            <div class='thumbnail-container mt-2'style='max-width:3rem; max-height:3rem;'>
-                                <img class='w-100 h-100 border' onclick="change_main_image($(this))" src="{{asset('images/products/thumbnails/' . $image->name)}}" style='object-fit;cursor:pointer;'>
-                            </div>
-                            @endif
-                            @endforeach
                         </div>
 
-                        {{--  Product infos  --}}
-                        <div class="col-sm-9 col-lg-11 p-0 border bg-white mb-2" style='height:intrinsic'>
-                            <div class="row m-0">
+                        <div class="col-md-6 px-0 px-md-2 px-lg-3">
+                            <div class='w-100 bg-white p-3'>
+                                <h1 id='product-title' class='h3 mb-0'>{{$product->name}}</h1>
+                                <p id='little-description' class='cropped d-none d-sm-flex text-justify pt-2'>{{$product->description}}</p>
+                                <a name="to-description-link" id="to-description-link" class="btn btn-secondary d-none d-md-flex max-content py-1 rounded-0" href="#description-link" role="button">En savoir plus</a>
+                            </div>
+                        </div>
 
-                                {{-- Main image --}}
-                                <div class="col-12 col-sm-5 col-lg-3 p-0">
-                                    <img id='main-image' class="w-100 h-100 zoom" src="{{asset('images/products/' . $product->mainImage)}}" style='object-fit:cover' data-magnify-src="{{asset('images/products/' . $product->mainImage)}}">
-                                </div>
-
-                                {{-- Texts and buttons --}}
-                                <div class="col-sm-7 col-lg-6 p-3 d-flex flex-column justify-content-between">
-                                    <div class="row m-0">
-                                        {{--  Title and little description  --}}
-                                        <div class="col-lg-12 p-0">
-                                            <h1 class="h3 mb-0 text-center text-lg-left">{{$product->name}}</h1>
-                                        </div>
-                                        <div class='col-12 p-0'>
-                                            <p id='little-description' class='cropped d-none d-sm-flex text-justify pt-2'>{{$product->description}}</p>
-                                            <a name="to-description-link" id="to-description-link" class="btn btn-secondary d-none d-lg-flex max-content" href="#description-link" role="button">En savoir plus</a>
-                                        </div>
+                        <div class="col-md-3">
+                            <div class="row justify-content-center bg-white">
+                                <div class="col-12 px-3 pb-3 p-md-3">
+                                    {{-- PRICE --}}
+                                    <p class="text-center mb-2 py-2 font-weight-bold border bg-light">{{$product->price}} €</p>
+    
+                                    {{-- QUANTITY SPINNER --}}
+                                    <div class="col-12 px-lg-0 mb-2 mx-auto mx-lg-0">
+                                        <input id="item-quantity" class="spinnerProduct h-100" type="number" name="quantity" value="1" min="1" max="{{$product->stock}}" step="1" @if($product->stock <= 1) disabled @endif />
                                     </div>
-                                    <div class="row m-0">
-
-                                        {{-- Characteristics --}}
+    
+                                    {{-- CHARACTERISTICS --}}
+                                    @if(count($product->characteristics) > 0)
+                                    <div id='characteristics-container' class='w-100 my-2 p-2 border bg-light text-center font-weight-bold'>
                                         @foreach($product->characteristics as $characteristic)
-                                        <div class="col-lg-12 p-0">
-                                            <div class="row m-0 justify-content-center justify-content-lg-start">
-                                                <div class="col-7 col-lg-4 offset-lg-0 p-0 pr-2">
-                                                    <div class="form-group m-0">
-                                                        <label for="{{$characteristic->name}}">{{$characteristic->name}}</label>
-                                                        <select class="custom-select characteristic" name="{{$characteristic->name}}" id="{{$characteristic->id}}" required>
-                                                            <option selected value=>Choisissez</option>
-                                                            @foreach ($characteristic->options as $option)
-                                                            <option value="{{$option->name}}">{{$option->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div class="form-group">
+                                            <label for="{{$characteristic->name}}">{{$characteristic->name}}</label>
+                                            <select class="custom-select characteristic" name="{{$characteristic->name}}" id="{{$characteristic->id}}" required>
+                                                <option selected value=>Choisissez</option>
+                                                @foreach ($characteristic->options as $option)
+                                                <option value="{{$option->name}}">{{$option->name}}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         @endforeach
-                                        
                                     </div>
-                                </div>
+                                    @endif
+    
+                                    {{-- ADD TO CART BUTTON --}}
+                                    <span class="d-inline-block w-100" data-trigger="hover" data-toggle="popover" data-content="Veuillez fournir les informations manquantes.">
+                                        <button id='add-to-cart' type="button" class="btn btn-outline-dark rounded-0 w-100">
+                                            Ajouter au panier</button>
+                                    </span>
 
-                                {{--  Buttons container  --}}
-                                <div class='col-lg-3 p-md-3 p-0'>
-                                    <div id='buttons-container' class='row m-0 p-3'>
-                                        {{--  Price  --}}
-                                        <div class='col-6 col-lg-12 px-lg-0 mb-2'>
-                                            <p id='price' class='h5  m-0 px-2 py-1 text-center font-weight-bold rounded bg-white border border-light'>
-                                                {{number_format($product->price, 2, ',', ' ')}} €</p>
-                                        </div>
-
-                                        {{--  Quantity selector  --}}
-                                        <div class="col-6 col-lg-12 px-lg-0 mb-2">
-                                            <input id="item-quantity" class="spinnerProduct h-100" type="number" name="quantity" value="1" min="1" max="{{$product->stock}}" step="1" @if($product->stock <= 1) disabled @endif />
-                                        </div>
-
-                                        {{--  Total price  --}}
-                                        {{--  <div class="col-6 col-md-12">
-                                            <p id='total-product-price' class="mb-0 d-none py-1 bg-white border border-light text-center rounded">
-                                                Prix total : {{number_format($product->price, 2)}} €</p>
-                                        </div>  --}}
-
-                                        {{--  Add to cart button  --}}
-                                        <div class="col-12 px-lg-0">
-                                            <span class="d-inline-block w-100" data-trigger="hover" data-toggle="popover" data-content="Veuillez fournir les informations manquantes.">
-                                                <button id='add-to-cart' class="btn btn-primary w-100 rounded open-product-added-dialog" style="pointer-events: none;" type="button" @if($product->stock > 0) 
-                                                    data-toggle="modal" 
-                                                    data-target="#addToCartPopup" 
-                                                    data-product_id="{{$product->id}}"
-                                                    data-product_name="{{$product->name}}"
-                                                    data-product_image="{{asset('images/products/' . $product->mainImage)}}" 
-                                                    data-product_price="{{$product->price}}"
-                                                    data-product_quantity="1"
-                                                    @endif @if($product->stock <= 0) disabled @endif>Ajouter au panier</button>
-                                            </span>
-                                        </div>
-                                    </div>
+                                    {{-- ADD TO WISHLIST BUTTON --}}
+                                    @auth
+                                    
+                                    <span id='add-to-wishlist-container' class="w-100">
+                                        <button id='add-to-wishlist' type="button" class="btn btn-outline-secondary rounded-0 w-100 mt-2 ld-ext-right">
+                                            <p class='mb-0'>Ajouter à ma liste</p> <div class="ld ld-ring ld-spin"></div></button>
+                                    </span>
+                                    <span id='remove-from-wishlist-container' class="w-100">
+                                        <button id='remove-from-wishlist' type="button" class="btn btn-outline-secondary rounded-0 w-100 mt-2 ld-ext-right">
+                                            <p class='mb-0'>Supprimer de ma liste</p> <div class="ld ld-ring ld-spin"></div></button>
+                                    </span>
+                                    
+                                    @endauth
                                 </div>
                             </div>
-                        </div> 
+                            
+                        </div>
                     </div>
                 </div>
+
             
                 {{-- Description --}}
-                <div class="col-lg-12 p-3 p-lg-0 mt-sm-4 border bg-white">
+                <div class="col-md-10 col-lg-12 p-3 p-lg-0 mt-sm-4 border bg-white">
                     <div class="anchor" id="description-link" style='display: block;position: relative;top: -10rem;visibility: hidden;'></div>
 
                     <div class="card rounded-0 border-0">
@@ -158,12 +158,12 @@ if (count($product->reviews) > 0){
                 </div>
 
                 {{-- Certifications --}}
-                <div class="col-12 mt-2 mt-lg-4 p-0 bg-white">
+                <div class="col-md-10 col-12 mt-2 mt-lg-4 p-0 bg-white">
                     @include('components.public.certifications')
                 </div>
 
                 {{-- Avis clients --}}
-                <div class="col-lg-12 p-3 p-lg-0 my-2 my-sm-4 border bg-white">
+                <div class="col-md-10 col-lg-12 p-3 p-lg-0 my-2 my-sm-4 border bg-white">
                     <div class="card rounded-0 border-0">
                         <div class="card-body p-0 p-lg-3">
                             <h4 class="card-title px-0 px-lg-2">{{count($product->reviews)}} avis clients</h4>
@@ -314,16 +314,122 @@ if (count($product->reviews) > 0){
 
 @include('components.public.popups.add-to-cart')
 
+@auth
+<script>
+    $(document).ready(function(){
+        $('#add-to-wishlist-container').hide();
+        $('#remove-from-wishlist-container').hide();
+
+        wishlist_id = "{{Auth::user()->wishlist->id}}";
+        product_id = "{{$product->id}}";
+        
+        $.ajax({
+            url: "/liste-envie/verifier-produit",
+            type: 'POST',
+            data: { wishlist_id:wishlist_id ,product_id:product_id },
+            success: function(response){
+                if(response.result == true){
+                    $('#remove-from-wishlist-container').show();
+                } else {
+                    $('#add-to-wishlist-container').show();
+                }
+            },
+            error: function(response){
+                response = response.responseJSON;
+                console.log(response.message)
+            }
+        });
+    });
+</script>
+@endauth
+
+<script>
+    $('#add-to-wishlist').on('click', function(){
+        product_id = "{{$product->id}}";
+        btn = $(this);
+        $.ajax({
+            url: "/espace-client/ma-liste-d-envie/ajout-produit/" + product_id,
+            type: 'POST',
+            data: { },
+            success: function(response){
+                btn.removeClass('running');
+                $('#add-to-wishlist-container').hide();
+                $('#remove-from-wishlist-container').show();
+            },
+            error: function(response){
+                btn.removeClass('running');
+
+                response = response.responseJSON;
+                console.log(response.message)
+            },
+            beforeSend: function() {
+                btn.addClass('running');
+            }
+        });
+    });
+
+    $('#remove-from-wishlist').on('click', function(){
+
+        wishlist_id = "{{Auth::user()->wishlist->id}}";
+        product_id = "{{$product->id}}";
+
+        btn = $(this);
+        $.ajax({
+            url: "/espace-client/ma-liste-d-envie/retirer-produit/" + product_id,
+            type: 'DELETE',
+            data: { wishlist_id:wishlist_id ,product_id:product_id },
+            success: function(response){
+                btn.removeClass('running');
+                $('#add-to-wishlist-container').show();
+                $('#remove-from-wishlist-container').hide();
+            },
+            error: function(response){
+                btn.removeClass('running');
+
+                response = response.responseJSON;
+                console.log(response.message)
+            },
+            beforeSend: function() {
+                btn.addClass('running');
+            }
+        });
+    });
+</script>
+
+{{-- ADD TO CART --}}
+<script>
+    $('#add-to-cart').on('click', function(){
+        if(empty_characteristics() == false){
+            quantity = $('#item-quantity').val();
+
+            $('.modal-product-image').attr('src', '/images/products/{{$product->mainImage}}');
+            $('.modal-product-name').text('{{$product->name}}s');
+            $('.modal-product-price').text('{{$product->price}} € x ' + quantity);
+
+            $('#addToCartPopup').modal('show');
+        }
+    });
+</script>
+
+{{-- check if there is empty characteristics --}}
+<script>
+    function empty_characteristics(){
+        var empty = false;
+        $('.characteristic').each(function(){
+            
+            if ($(this).val().length == 0) {
+                empty = true;
+            }
+        });
+
+        return empty;
+    }
+</script>
+
 {{-- Verify characteristics --}}
 <script>
 
-    var empty = false;
-    $('.characteristic').each(function(){
-        
-        if ($(this).val().length == 0) {
-            empty = true;
-        }
-    });
+    empty = empty_characteristics();
 
     if (empty) {
         $("[data-toggle=popover]").popover("enable");
@@ -463,7 +569,7 @@ if (count($product->reviews) > 0){
 
     var maxlengthwanted = 200;
 
-    $('#little-description').text($('#little-description').text().replace(/<[^>]*>?/gm, '').replace('&nbsp;', '\n'));
+    $('#little-description').text($('#little-description').text().replace(/<[^>]*>?/gm, '').replace(/&nbsp;/g, '\n'));
 
     $('.cropped').each(function(index, element) {
         $(element).text(textAbstract(element, maxlengthwanted, " "));

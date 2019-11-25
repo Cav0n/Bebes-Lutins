@@ -80,7 +80,7 @@ body {
 }
 
 .dim-background {
-  background: #ebebeb;
+  background: whitesmoke;
 }
 
 .swiper-container {
@@ -190,6 +190,11 @@ button .svg {
   width: 1.4rem;
   fill: white;
   margin: auto;
+}
+
+.social-button-icon {
+  height: 2rem;
+  width: 2rem;
 }
 
 #top-navbar .nav-item.desktop:hover {

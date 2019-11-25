@@ -22,15 +22,23 @@
                         {{-- NAV LINKS (TABS) --}}
                         <div class='d-none d-sm-flex'>
                             <li class="nav-item mr-2">
-                                <a class="nav-link @if(Request::is('*/profil*')) active @endif text-dark" href="/espace-client/profil">Mon profil</a>
+                                <a class="nav-link @if(Request::is('*/profil*')) active @endif text-dark" href="/espace-client/profil">
+                                    Mon profil</a>
                             </li>
                             
                             <li class="nav-item mr-2">
-                                <a class="nav-link @if(Request::is('*/commandes*')) active @endif text-dark" href="/espace-client/commandes">Mes commandes</a>
+                                <a class="nav-link @if(Request::is('*/commandes*')) active @endif text-dark" href="/espace-client/commandes">
+                                    Mes commandes</a>
                             </li>
 
                             <li class="nav-item mr-2">
-                                <a class="nav-link @if(Request::is('*/adresses*')) active @endif text-dark" href="/espace-client/adresses">Mes adresses</a>
+                                <a class="nav-link @if(Request::is('*/adresses*')) active @endif text-dark" href="/espace-client/adresses">
+                                    Mes adresses</a>
+                            </li>
+
+                            <li class="nav-item mr-2">
+                                <a class="nav-link @if(Request::is('*/ma-liste-d-envie*')) active @endif text-dark" href="/espace-client/ma-liste-d-envie">
+                                    Ma liste d'envie</a>
                             </li>
                         </div>
 
@@ -44,6 +52,8 @@
                                     Mes commandes</a>
                                 <a class="dropdown-item @if(Request::is('*/adresses*')) active @endif text-dark" href="/espace-client/adresses">
                                     Mes adresses</a>
+                                <a class="dropdown-item @if(Request::is('*/ma-liste-d-envie*')) active @endif text-dark" href="/espace-client/ma-liste-d-envie">
+                                    Ma liste d'envie</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" onclick='logout()'>Déconnexion</a>
                             </div>

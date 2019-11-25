@@ -45,6 +45,14 @@ class Product extends Model
     /**
      * 
      */
+    public function wishListItem()
+    {
+        return $this->hasMany('App\WishList');
+    }
+
+    /**
+     * 
+     */
     public function shoppingCartItems()
     {
         return $this->hasMany('App\ShoppingCartItem');

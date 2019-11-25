@@ -37,7 +37,8 @@
             @endif
         @else Rupture de stock
         @endif
-        </button> 
+        </button>
+        
         </div>
     </div> 
 </div>

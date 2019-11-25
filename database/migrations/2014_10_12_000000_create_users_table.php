@@ -24,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->string('phone', 10)->nullable();
             $table->date('birthdate')->nullable();
 
+            $table->string('wishlist_id')->nullable();
+
             $table->boolean('isAdmin')->default(0);
             $table->integer('privileges')->unsigned()->default(0);
 

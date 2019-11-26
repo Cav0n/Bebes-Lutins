@@ -14,6 +14,7 @@ class AccountCreated extends Mailable
     use Queueable, SerializesModels;
 
     public $user;
+    public $title;
 
     /**
      * Create a new message instance.
@@ -23,6 +24,8 @@ class AccountCreated extends Mailable
     public function __construct(User $user)
     {
         $this->subject('Votre compte Bébés Lutins');
+
+        $this->title = "Bienvenue chez Bébés Lutins !";
         $this->user = $user;
         
     }

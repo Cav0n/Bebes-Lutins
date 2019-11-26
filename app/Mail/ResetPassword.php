@@ -13,6 +13,7 @@ class ResetPassword extends Mailable
     use Queueable, SerializesModels;
 
     public $user;
+    public $title;
 
     /**
      * Create a new message instance.
@@ -22,6 +23,8 @@ class ResetPassword extends Mailable
     public function __construct(User $user)
     {
         $this->subject('Réinitialisation de votre mot de passe');
+
+        $this->title = "Réinitialisation de votre mot de passe";
         $this->user = $user;
     }
 

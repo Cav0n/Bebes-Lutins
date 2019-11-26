@@ -13,6 +13,7 @@ class MessageNotificationSender extends Mailable
     use Queueable, SerializesModels;
 
     public $contact_message;
+    public $title;
 
     /**
      * Create a new message instance.
@@ -22,6 +23,8 @@ class MessageNotificationSender extends Mailable
     public function __construct(Message $message)
     {
         $this->subject('Message reçu !');
+
+        $this->title = 'Merci pour votre message.';
         $this->contact_message = $message;
     }
 

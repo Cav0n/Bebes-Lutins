@@ -13,6 +13,7 @@ class PasswordReseted extends Mailable
     use Queueable, SerializesModels;
 
     public $user;
+    public $title;
 
     /**
      * Create a new message instance.
@@ -22,6 +23,8 @@ class PasswordReseted extends Mailable
     public function __construct(User $user)
     {
         $this->subject('Votre mot de passe a été modifié');
+
+        $this->title = "Votre mot de passe a été modifié";
         $this->user = $user;
     }
 

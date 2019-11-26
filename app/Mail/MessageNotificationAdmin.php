@@ -13,6 +13,7 @@ class MessageNotificationAdmin extends Mailable
     use Queueable, SerializesModels;
 
     public $contact_message;
+    public $title;
 
     /**
      * Create a new message instance.
@@ -22,6 +23,8 @@ class MessageNotificationAdmin extends Mailable
     public function __construct(Message $message)
     {
         $this->subject('Un nouveau message depuis le site !');
+
+        $this->title = 'Un nouveau message depuis le site !';
         $this->contact_message = $message;
     }
 

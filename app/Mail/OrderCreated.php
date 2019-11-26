@@ -13,6 +13,7 @@ class OrderCreated extends Mailable
     use Queueable, SerializesModels;
 
     public $order;
+    public $title;
 
     /**
      * Create a new message instance.
@@ -22,6 +23,8 @@ class OrderCreated extends Mailable
     public function __construct(Order $order)
     {
         $this->subject('Votre commande #' . $order->id);
+        $this->title = 'Votre commande #' . $order->id;
+
         $this->order = $order;
     }
 

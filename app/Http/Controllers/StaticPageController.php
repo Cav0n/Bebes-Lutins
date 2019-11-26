@@ -15,6 +15,11 @@ class StaticPageController extends Controller
         
     }
 
+    public function guide_and_tips()
+    {
+        return view("pages.statics.en-savoir-plus.guide-and-tips");
+    }
+
     public function who()
     {
         return view("pages.statics.en-savoir-plus.who");

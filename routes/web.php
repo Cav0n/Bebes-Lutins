@@ -183,10 +183,11 @@ Route::post('contact/envoie-message', 'MessageController@store');
 //EN SAVOIR PLUS
 Route::get('/en-savoir-plus/qui-sommes-nous', 'StaticPageController@who');
 Route::get('/en-savoir-plus/pourquoi-les-couches-lavables', 'StaticPageController@why');
-Route::get('en-savoir-plus/entretien-des-couches-lavables', 'StaticPageController@maintenance');
-Route::get('en-savoir-plus/mode-d-emploi', 'StaticPageController@manual');
-Route::get('en-savoir-plus/comment-s-equiper', 'StaticPageController@how');
-Route::get('en-savoir-plus/nos-revendeurs', 'StaticPageController@resellers');
+Route::get('/en-savoir-plus/entretien-des-couches-lavables', 'StaticPageController@maintenance');
+Route::get('/en-savoir-plus/mode-d-emploi', 'StaticPageController@manual');
+Route::get('/en-savoir-plus/comment-s-equiper', 'StaticPageController@how');
+Route::get('/en-savoir-plus/nos-revendeurs', 'StaticPageController@resellers');
+Route::get('/en-savoir-plus/guide-et-conseils', 'StaticPageController@guide_and_tips');
 
 //INFOS PRATIQUES
 Route::get('/infos-pratiques/livraison-et-frais-de-ports', 'StaticPageController@shipping');

@@ -24,6 +24,7 @@ class CustomerAreaController extends Controller
     {
         $this->middleware('auth')->only('index', 'profilPage', 'ordersPage', 'addressPage');
         $this->middleware('guest')->only('loginPage', 'registerPage');
+        $this->middleware('wishlist')->only('login');
     }
 
     public function index(){

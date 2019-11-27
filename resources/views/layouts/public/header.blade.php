@@ -113,7 +113,7 @@ $parent_categories = App\Category::where('parent_id', null)->where('isDeleted', 
                                         <div class="tab-pane fade @if($index == 0) {{'show active'}} @endif" id="{{$parent->id}}" role="tabpanel" aria-labelledby="{{$parent->id}}-tab">
                                             <a href='/categories/{{$parent->id}}' class='text-dark h2'>{{$parent->name}}</a>
                                             <div class='row'>
-                                                @foreach (App\Category::where('parent_id', $parent->id)->where('isHidden', 0)->orderBy('rank', 'asc')->get() as $category)
+                                                @foreach (App\Category::where('parent_id', $parent->id)->where('isHidden', 0)->where('isDeleted', 0)->orderBy('rank', 'asc')->get() as $category)
                                                 <div class="card m-2" style="width:12rem;cursor:pointer" onclick='load_url("/categories/{{$category->id}}")'>
                                                     <img src="{{asset('images/categories/'. $category->mainImage)}}" class="card-img-top" alt="catégorie">
                                                     <div class="card-body p-3">

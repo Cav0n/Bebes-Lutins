@@ -72,4 +72,27 @@
         }); 
     }
 </script>
+
+<script>
+    $(document).ready(function(){
+        card_product = $('.images-container');
+
+        card_product.children('.main-image').show();
+        card_product.children('.thumbnail').hide();
+
+        card_product.mouseenter(function(){
+            if(!$(this).hasClass('no-thumbnails')){
+                $(this).children('.main-image').hide();
+                $(this).children('.thumbnail').removeClass('d-none');
+                $(this).children('.thumbnail').show();
+            }
+        }).mouseleave(function(){
+            if(!$(this).hasClass('no-thumbnails')){
+                $(this).children('.thumbnail').hide();
+                $(this).children('.thumbnail').addClass('d-none');
+                $(this).children('.main-image').show();
+            }
+        });
+    });
+</script>
 @endsection

@@ -207,7 +207,76 @@ class ShoppingCartController extends Controller
 
     public function showCreditCardPayment()
     {
-        dd('REDIRIGER VERS CITELIS');
+        $array = array();
+
+        $shopping_cart = session('shopping_cart');
+        $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
+
+        $shopping_cart->isActive = false;
+        $shopping_cart->save();
+
+        $order = new Order();
+        $order->id = strtoupper(substr(uniqid(), 0, 10));
+        $order->paymentMethod = 2;
+        $order->shippingPrice = $shopping_cart->shippingPrice;
+        $order->productsPrice = $shopping_cart->productsPrice;
+        $order->status = 0;
+        $order->user_id = $shopping_cart->user_id;
+        $order->voucher_id = $shopping_cart->voucher_id;
+        $order->customerMessage = $shopping_cart->customerMessage;
+        $order->shipping_address_id = $shopping_cart->shipping_address_id;
+        $order->billing_address_id = $shopping_cart->billing_address_id;
+
+        $order_id = $order->id;
+        $total_price = $order->shippingPrice + $order->productsPrice;
+
+        $payline = new \App\Payment\paylineSDK(env("MERCHANT_ID"), env("ACCESS_KEY"), env("PROXY_HOST"), env("PROXY_PORT"), env("PROXY_LOGIN"), env("PROXY_PASSWORD"), env("ENVIRONMENT"));
+        $payline->returnURL = env("RETURN_URL"). "&order_id=". $order_id;
+        $payline->cancelURL = env("CANCEL_URL") . "&order_id=". $order_id;
+        $payline->notificationURL = env("NOTIFICATION_URL"). "&order_id=". $order_id;
+        $payline->customPaymentPageCode = env("CUSTOM_PAYMENT_PAGE_CODE");
+
+//VERSION
+        $array['version'] = env("WS_VERSION");
+
+// PAYMENT
+        $array['payment']['amount'] = $total_price * 100;
+        $array['payment']['currency'] = 978;
+        $array['payment']['action'] = env("PAYMENT_ACTION");
+        $array['payment']['mode'] = env("PAYMENT_MODE");
+
+// ORDER
+        $array['order']['ref'] = $order_id;
+        $array['order']['amount'] = $total_price * 100;
+        $array['order']['currency'] = 978;
+
+// CONTRACT NUMBERS
+        $array['payment']['contractNumber'] = env("CONTRACT_NUMBER");
+        $contracts = explode(";",env("CONTRACT_NUMBER_LIST"));
+        $array['contracts'] = $contracts;
+        $secondContracts = explode(";",env("SECOND_CONTRACT_NUMBER_LIST"));
+        $array['secondContracts'] = $secondContracts;
+
+// EXECUTE
+        $response = $payline->doWebPayment($array);
+
+
+        if(isset($response) && $response['result']['code'] == '00000'){
+            if( !headers_sent() ){
+                header("location:".$response['redirectURL']);
+            }else{
+                ?>
+                <script type="text/javascript">
+                    document.location.href="<?php echo $response['redirectURL'];?>";
+                </script>
+                Vous allez être rediriger vers la <a href="<?php echo $response['redirectURL'] ?>">page de paiement</a>.
+                <?php
+            }
+            die();
+        }elseif(isset($response)) {
+            echo "Une erreur s'est produite : ".$response['result']['code']. ' '.$response['result']['longMessage']." 
+            <BR>Vous pouvez nous contacter à l'adresse suivante : contact@bebes-lutins.fr";
+        }
     }
 
     public function validateChequePayment()

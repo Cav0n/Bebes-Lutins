@@ -7,7 +7,20 @@
             Commandes @if($status != null) {{$status}} @endif
         </h1>
     </div>
+
+@php
+$bad_orders = array();
+foreach(\App\Order::all() as $order){
+    if(count($order->order_items) < 1) $bad_orders[] = $order;
+}
+@endphp
+
     <div class="card-body">
+
+        <p>Commandes qui n'ont aucun articles :</p>
+        @foreach ($bad_orders as $bad_order)
+            {{$bad_order->id}} <BR>
+        @endforeach
         
         @include('components.dashboard.search-bar')
 

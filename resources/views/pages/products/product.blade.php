@@ -145,7 +145,7 @@ if (count($product->reviews) > 0){
 
                                     {{-- ADD TO WISHLIST BUTTON --}}
                                     @auth
-                                    
+                                    @if(Auth::user()->wishlist != null)
                                     <span id='add-to-wishlist-container' class="w-100">
                                         <button id='add-to-wishlist' type="button" class="btn btn-outline-secondary rounded-0 w-100 mt-2 ld-ext-right">
                                             <p class='mb-0'>Ajouter à ma liste</p> <div class="ld ld-ring ld-spin"></div></button>
@@ -154,7 +154,7 @@ if (count($product->reviews) > 0){
                                         <button id='remove-from-wishlist' type="button" class="btn btn-outline-secondary rounded-0 w-100 mt-2 ld-ext-right">
                                             <p class='mb-0'>Supprimer de ma liste</p> <div class="ld ld-ring ld-spin"></div></button>
                                     </span>
-                                    
+                                    @endif
                                     @endauth
                                 </div>
                             </div>
@@ -179,7 +179,7 @@ if (count($product->reviews) > 0){
                 </div>
 
                 {{-- Certifications --}}
-                <div class="col-md-10 col-12 mt-2 mt-lg-4 p-0 bg-white">
+                <div class="col-md-10 col-lg-12 mt-2 mt-lg-4 p-0 bg-white">
                     @include('components.public.certifications')
                 </div>
 
@@ -203,9 +203,6 @@ if (count($product->reviews) > 0){
                                         @endif
                                         @if(session()->has('review-feedback')) 
                                             <p class='text-success rounded-0 pl-0 mb-0 font-weight-bold'>{{session('review-feedback')}}</p>
-                                        @endif
-                                        @if (!Auth::check())
-                                            <p class='mb-0 mt-2 border p-2 text-center'>Vous devez être connecté pour pouvoir laisser un avis.</p>
                                         @endif
                                         @if(Auth::check() && !$has_commented)
                                             <button type="button" class="btn btn-primary rounded-0 my-2" onclick='toggle_review_creation($(this))'>Écrire un commentaire</button>
@@ -321,7 +318,7 @@ if (count($product->reviews) > 0){
                                     @endforeach 
                                 </div>
                                 @else
-                                <p class="card-text p-0 px-lg-2 mt-2">Aucun client n'a posté d'avis pour le moment...</p>
+                                <p class="card-text p-0 px-lg-2 mt-2">Aucun client n'a posté d'avis pour le moment</p>
                                 @endif
                             </div>
                             
@@ -336,6 +333,7 @@ if (count($product->reviews) > 0){
 @include('components.public.popups.add-to-cart')
 
 @auth
+@if(Auth::user()->wishlist != null)
 <script>
     $(document).ready(function(){
         $('#add-to-wishlist-container').hide();
@@ -415,6 +413,7 @@ if (count($product->reviews) > 0){
         });
     });
 </script>
+@endif
 @endauth
 
 {{-- ADD TO CART --}}

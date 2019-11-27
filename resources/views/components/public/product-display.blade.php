@@ -1,10 +1,15 @@
-<?php $firstThumbnail = $product->images->skip(1)->first(); ?>
+@php 
+    $firstThumbnail = $product->images->skip(1)->first();
+@endphp
+
 <div class="col-6 col-sm-4 col-md-4 col-lg-3 mb-3" @if($product->stock <= 0) style='opacity:0.7;' @endif>
     <div class="card product m-0 h-100 transition-fast rounded-0 border-0" style='font-size:0.9rem;'>
         <div class='images-container border @if($firstThumbnail == null) no-thumbnails @endif' @if($product->stock > 0) onclick='load_url("/produits/{{$product->id}}")' @endif>
             <img class="card-img-top main-image h-100 rounded-0" src="{{asset('images/products/'.$product->mainImage)}}" alt="{{$product->name}}" title="{{$product->name}}">
-            @if($firstThumbnail != null)<img class='card-img-top thumbnail d-none h-100 rounded-0' src="{{asset('images/products/thumbnails/'.$firstThumbnail['name'])}}">
-            @else <img class="card-img-top thumbnail d-none h-100 rounded-0" src="{{asset('images/products/'.$product->mainImage)}}">
+            @if($firstThumbnail != null && $firstThumbnail->name != $product->mainImage)
+                <img class='card-img-top thumbnail d-none h-100 rounded-0' src="{{asset('images/products/thumbnails/'.$firstThumbnail['name'])}}">
+            @else
+                <img class='card-img-top thumbnail d-none h-100 rounded-0' src="{{asset('images/products/'.$product->mainImage)}}">
             @endif
         </div>
         <div class="card-body border-left border-right" @if($product->stock > 0) onclick='load_url("/produits/{{$product->id}}")' @endif>

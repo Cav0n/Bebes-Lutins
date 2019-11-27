@@ -165,11 +165,23 @@ class ProductController extends Controller
             $products = array();
 
             foreach ($selected_categories as $category){
-                foreach($category->products as $product){ $products[] = $product; } 
+                foreach($category->products as $product){ 
+                    if($product->isDeleted == 0 && $product->isHidden == 0){
+                        $products[] = $product; }
+                } 
+
                 foreach($category->childs as $child){
-                    foreach($child->products as $product){ $products[] = $product; }
+                    foreach($child->products as $product){ 
+                        if($product->isDeleted == 0 && $product->isHidden == 0){
+                            $products[] = $product; }
+                    }
+
                     foreach ($child->childs as $subchild) {
-                        foreach($subchild->products as $product){ $products[] = $product; }
+                        foreach($subchild->products as $product){ 
+                            if($product->isDeleted == 0 && $product->isHidden == 0){
+                                $products[] = $product; }
+                        }
+
                     }
                 }
             }

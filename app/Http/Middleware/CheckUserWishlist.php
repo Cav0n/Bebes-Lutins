@@ -16,11 +16,13 @@ class CheckUserWishlist
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::check() && Auth::user()->wishlist_id == null){
+        $response = $next($request);
+
+        if(Auth::check() && Auth::user()->wishlist == null){
             $wishlistController = new \App\Http\Controllers\WishListController();
             $wishlistController->store($request, Auth::user());
         }
-
-        return $next($request);
+        
+        return $response;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Order;
 use App\ShoppingCart;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -25,7 +26,9 @@ class PaymentController extends Controller
             if($order->status < 1){
                 $order->status = 1;
                 $order->save();
-                //TODO: SEND MAIL
+
+                $result = \App\OrderStatus::statusToEmailMessage($order);
+                Mail::to($order->user->email)->send(new \App\Mail\OrderUpdated($order, $result['title'], $result['message']));
             }
 
             return redirect('/merci');
@@ -38,7 +41,9 @@ class PaymentController extends Controller
                     $item->product->stock = $item->product->stock + $item->quantity;
                     $item->product->save();
                 }
-                //TODO: SEND MAIL
+
+                $result = \App\OrderStatus::statusToEmailMessage($order);
+                Mail::to($order->user->email)->send(new \App\Mail\OrderUpdated($order, $result['title'], $result['message']));
             }
 
             return redirect('/paiement-annule');
@@ -49,15 +54,17 @@ class PaymentController extends Controller
     {
         $token = $request['token'];
 
-        if($order->status > -3){
+        if($order->status > -1){
             foreach($order->order_items as $item){
                 $item->product->stock = $item->product->stock + $item->quantity;
                 $item->product->save();
             }
 
-            $order->status = -3;
+            $order->status = -1;
             $order->save();
-            //TODO: SEND MAIL
+
+            $result = \App\OrderStatus::statusToEmailMessage($order);
+            Mail::to($order->user->email)->send(new \App\Mail\OrderUpdated($order, $result['title'], $result['message']));
         }
 
         
@@ -73,13 +80,17 @@ class PaymentController extends Controller
             if( $order->getStatus() < 1 ){
                 $order->status = 1;
                 $order->save();
-                //TODO: SEND MAIL
+
+                $result = \App\OrderStatus::statusToEmailMessage($order);
+                Mail::to($order->user->email)->send(new \App\Mail\OrderUpdated($order, $result['title'], $result['message']));
             }
         } else {
             if($order->status != -3 && $order->status != -1){
                 $order->status = -3;
                 $order->save();
-                //TODO: SEND MAIL
+
+                $result = \App\OrderStatus::statusToEmailMessage($order);
+                Mail::to($order->user->email)->send(new \App\Mail\OrderUpdated($order, $result['title'], $result['message']));
             }
         }
 

@@ -71,7 +71,7 @@
                                                 <!-- main section button -->
 
                                                 <div style="line-height: 22px;">
-                                                    <a href="http://192.168.1.102/espace-client" style="color: #ffffff; text-decoration: none;">MON COMPTE</a>
+                                                    <a href="https://www.bebes-lutins.fr/espace-client" style="color: #ffffff; text-decoration: none;">MON COMPTE</a>
                                                 </div>
                                             </td>
                                         </tr>

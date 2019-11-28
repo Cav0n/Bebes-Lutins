@@ -292,20 +292,21 @@
             url: "/panier/code-coupon/ajouter",
             type: 'POST',
             data: { code:code },
-            success: function(data){
+            success: function(response){
+                message = response.message;
                 btn.removeClass('running');
-                data = JSON.parse(data);
-                if(data.status == 'error') textclass='text-danger';
-                else textclass='text-success';
 
                 $('#voucher-message').remove();
-                $('.voucher').prepend('<p id="voucher-message" class="'+textclass+'">'+ data.message +'</p>');
+                $('.voucher').prepend('<p id="voucher-message" class="text-success">'+ message +'</p>');
 
-                if(data.status != 'error') location.reload();
+                location.reload();
             },
-            error: function(data) {
-                console.log("Impossible d'ajouter le code.")
+            error: function(response) {
+                message = response.responseJSON.message;
                 btn.removeClass('running');
+
+                $('#voucher-message').remove();
+                $('.voucher').prepend('<p id="voucher-message" class="text-danger">'+ message +'</p>');
             },
             beforeSend: function() {
                 btn.addClass('running');

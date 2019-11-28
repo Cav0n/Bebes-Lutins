@@ -184,7 +184,7 @@
                                             <label for="voucher-code">Code coupon : </label>
                                             <div class="row m-0 p-0">
                                                 <div class="col-8 p-0 pr-2">
-                                                    <input type="text" class="form-control" name="voucher-code" id="voucher-code" aria-describedby="helpVoucher" placeholder="" disabled>
+                                                    <input type="text" class="form-control" name="voucher-code" id="voucher-code" aria-describedby="helpVoucher" placeholder="" disabled value='{{$shoppingCart->voucher->code}}'>
                                                 </div>
                                                 <div class="col-4 p-0">
                                                     <button type="submit" class="btn btn-danger w-100">Supprimer</button>

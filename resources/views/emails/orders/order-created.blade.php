@@ -75,7 +75,7 @@
                                                 <!-- main section button -->
 
                                                 <div style="line-height: 22px;">
-                                                    <a href="http://192.168.1.102/espace-client/commandes" style="color: #ffffff; text-decoration: none;">MES COMMANDES</a>
+                                                    <a href="https://www.bebes-lutins.fr/espace-client/commandes" style="color: #ffffff; text-decoration: none;">MES COMMANDES</a>
                                                 </div>
                                             </td>
                                         </tr>

@@ -281,6 +281,8 @@ class ShoppingCartController extends Controller
 
 
         if(isset($response) && $response['result']['code'] == '00000'){
+            Mail::to($order->user->email)->send(new \App\Mail\OrderCreated($order));
+
             if( !headers_sent() ){
                 header("location:".$response['redirectURL']);
             }else{
@@ -382,16 +384,14 @@ class ShoppingCartController extends Controller
 
     public function addVoucher(Request $request)
     {
-        header('Content-type: application/json');
-        
         $code = $request['code'];
         
         // CODE EXISTS ?
         if(!Voucher::where('code', $code)->exists()){
-            $response_array['status'] = 'error'; 
-            $response_array['message'] = "Le code n'existe pas."; 
-            echo json_encode($response_array, JSON_PRETTY_PRINT);
-            return;
+            $response['message'] = "Le code n'existe pas.";
+            $response['code'] = '300';
+
+            return response()->json($response, $response['code']);
         }
 
         $voucher = Voucher::where('code', $code)->first();
@@ -399,36 +399,36 @@ class ShoppingCartController extends Controller
 
         // FIRST DATE IS IN THE FUTUR ?
         if($voucher->dateFirst > Carbon\Carbon::now()){
-            $response_array['status'] = 'error'; 
-            $response_array['message'] = "Le code n'existe pas."; 
-            echo json_encode($response_array, JSON_PRETTY_PRINT);
-            return;
+            $response['message'] = "Le code n'existe pas.";
+            $response['code'] = '300';
+
+            return response()->json($response, $response['code']);
         }
 
         // LAST DATE IS IN THE PAST ?
         if($voucher->dateLast < Carbon\Carbon::now()){
-            $response_array['status'] = 'error'; 
-            $response_array['message'] = "Le code n'est plus disponible."; 
-            echo json_encode($response_array, JSON_PRETTY_PRINT);
-            return;
+            $response['message'] = "Il semble que le code soit périmé.";
+            $response['code'] = '300';
+
+            return response()->json($response, $response['code']);
         }
 
         // SHOPPING CART MINIMAL PRICE IS OK ?
         if($shopping_cart->productsPrice < $voucher->minimalPrice){
-            $response_array['status'] = 'error'; 
-            $response_array['message'] = "Votre panier doit atteindre " . number_format($voucher->minimalPrice, 2) . "€."; 
-            echo json_encode($response_array, JSON_PRETTY_PRINT);
-            return;
+            $response['message'] = "Votre panier doit atteindre " . number_format($voucher->minimalPrice, 2) . "€.";
+            $response['code'] = '300';
+
+            return response()->json($response, $response['code']);
         }
 
         $usage_number = Order::where('voucher_id', $voucher->id)->where('user_id', $shopping_cart->user_id)->count();
 
         // NUMBER OF USAGE FOR CURRENT CUSTOMER
         if($usage_number >= $voucher->maxUsage){
-            $response_array['status'] = 'error'; 
-            $response_array['message'] = "Vous avez atteint la limite d'utilisation de ce code."; 
-            echo json_encode($response_array, JSON_PRETTY_PRINT);
-            return;
+            $response['message'] = "Vous avez atteint la limite d'utilisation de ce code."; 
+            $response['code'] = '300';
+
+            return response()->json($response, $response['code']);
         }
 
         // IF DISCOUNT TYPE IS €
@@ -503,10 +503,10 @@ class ShoppingCartController extends Controller
         // IF VOUCHER IS "FREE SHIPPING" AND SHOPPING CART PRICE > 70€
         // THEN VOUCHER IS NOT NEEDED BECAUSE SHIPPING IS ALREADY FREE
         if($voucher->discountType == 3 && $shopping_cart->productsPrice > 70){
-            $response_array['status'] = 'error'; 
-            $response_array['message'] = "Vous bénéficiez déjà de la livraison gratuite."; 
-            echo json_encode($response_array, JSON_PRETTY_PRINT);
-            return;
+            $response['message'] = "Vous bénéficiez déjà de la livraison gratuite."; 
+            $response['code'] = '300';
+
+            return response()->json($response, $response['code']);
         }
 
         //UPDATE SHOPPING CART WITH VOUCHER
@@ -521,9 +521,10 @@ class ShoppingCartController extends Controller
         session(['shopping_cart' => $shopping_cart]);
 
         //RESPONSE OK
-        $response_array['status'] = 'success'; 
-        $response_array['message'] = "Le code a été ajouté au panier."; 
-        echo json_encode($response_array, JSON_PRETTY_PRINT);
+        $response['message'] = "Le code a été ajouté à votre panier."; 
+        $response['code'] = '200';
+
+        return response()->json($response, $response['code']);
     }
 
     public function removeVoucher(Request $request){

@@ -68,6 +68,14 @@ Route::get('/panier/paiement/validation/cheque', 'ShoppingCartController@validat
 Route::get('/panier/paiement/validation/carte-bancaire', 'ShoppingCartController@validateCreditCartPayment');
 Route::get('/merci', 'OrderController@showThanks');
 Route::get('/panier/paiement/erreur', 'OrderController@showErrorPayment');
+//PAYMENT 
+Route::get('/cancel_payment/{order}', 'PaymentController@cancel');
+Route::get('/notification_payment/{order}', 'PaymentController@notification');
+Route::get('/payment_endpoint/{order}', 'PaymentController@endPoint');
+
+Route::get('/paiement-annule', 'PageController@canceledPayment');
+Route::get('/merci', 'PageController@successPayment');
+
  /* ---------------- */
 
 /**

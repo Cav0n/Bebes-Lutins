@@ -212,9 +212,6 @@ class ShoppingCartController extends Controller
         $shopping_cart = session('shopping_cart');
         $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
 
-        $shopping_cart->isActive = false;
-        $shopping_cart->save();
-
         $order = new Order();
         $order->id = strtoupper(substr(uniqid(), 0, 10));
         $order->paymentMethod = 2;
@@ -227,13 +224,35 @@ class ShoppingCartController extends Controller
         $order->shipping_address_id = $shopping_cart->shipping_address_id;
         $order->billing_address_id = $shopping_cart->billing_address_id;
 
+        $order->save();
+
+        foreach($shopping_cart->items as $item){
+            $item->product->stock = $item->product->stock - $item->quantity;
+            $item->product->save();
+            $order_item = new OrderItem();
+            $order_item->productName = $item->product->name;
+            $order_item->quantity = $item->quantity;
+            $order_item->unitPrice = $item->product->price;
+            $order_item->product_id = $item->product->id;
+            $order_item->order_id = $order->id;
+            $order_item->save();
+
+            foreach($item->characteristics as $characteristic){
+                $item_characteristic = new OrderItemCharacteristic();
+                $item_characteristic->name = $characteristic->name;
+                $item_characteristic->selectedOptionName = $characteristic->selectedOptionName;
+                $item_characteristic->order_item_id = $order_item->id;
+                $item_characteristic->save();
+            }
+        }
+
         $order_id = $order->id;
         $total_price = $order->shippingPrice + $order->productsPrice;
 
         $payline = new \App\Payment\paylineSDK(env("MERCHANT_ID"), env("ACCESS_KEY"), env("PROXY_HOST"), env("PROXY_PORT"), env("PROXY_LOGIN"), env("PROXY_PASSWORD"), env("ENVIRONMENT"));
-        $payline->returnURL = env("RETURN_URL"). "&order_id=". $order_id;
-        $payline->cancelURL = env("CANCEL_URL") . "&order_id=". $order_id;
-        $payline->notificationURL = env("NOTIFICATION_URL"). "&order_id=". $order_id;
+        $payline->returnURL = env("RETURN_URL").'/'. $order_id .'/';
+        $payline->cancelURL = env("CANCEL_URL").'/'. $order_id .'/';
+        $payline->notificationURL = env("NOTIFICATION_URL").'/'. $order_id .'/';
         $payline->customPaymentPageCode = env("CUSTOM_PAYMENT_PAGE_CODE");
 
 //VERSION

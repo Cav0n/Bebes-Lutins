@@ -1,0 +1,48 @@
+2019-11-28 10:04:26 - ----------------------------------------------------------
+2019-11-28 10:04:26 - paylineSDK::__construct(550146*******9, c****************76A, , , , , PROD)
+2019-11-28 10:04:26 - Request : WebPaymentAPI.doWebPayment(order.ref = 5DDF8D9A18)
+2019-11-28 10:04:26 - Response : code = 00000 - token = 1PBiEaN6byJ8My4874451574931866463
+2019-11-28 10:05:06 - ----------------------------------------------------------
+2019-11-28 10:05:06 - paylineSDK::__construct(550146*******9, c****************76A, , , , , PROD)
+2019-11-28 10:05:06 - Request : WebPaymentAPI.doWebPayment(order.ref = 5DDF8DC21D)
+2019-11-28 10:05:06 - Response : code = 00000 - token = 1fs6ySlgWTubqT9109331574931906487
+2019-11-28 10:12:38 - ----------------------------------------------------------
+2019-11-28 10:12:38 - paylineSDK::__construct(550146*******9, c****************76A, , , , , PROD)
+2019-11-28 10:12:39 - Request : WebPaymentAPI.doWebPayment(order.ref = 5DDF8F8690)
+2019-11-28 10:12:39 - Response : code = 00000 - token = 1cjNKI3NJwZwEEY105301574932358948
+2019-11-28 10:13:29 - ----------------------------------------------------------
+2019-11-28 10:13:29 - paylineSDK::__construct(550146*******9, c****************76A, , , , , PROD)
+2019-11-28 10:13:29 - Request : WebPaymentAPI.doWebPayment(order.ref = 5DDF8FB907)
+2019-11-28 10:13:29 - Response : code = 00000 - token = 1XRkab6OA6n6QVD935321574932409381
+2019-11-28 10:33:11 - ----------------------------------------------------------
+2019-11-28 10:33:11 - paylineSDK::__construct(550146*******9, c****************76A, , , , , PROD)
+2019-11-28 10:33:11 - Request : WebPaymentAPI.getWebPaymentDetails(token = )
+2019-11-28 10:33:11 - Response : code = 02305 - transactionId = 
+2019-11-28 10:42:13 - ----------------------------------------------------------
+2019-11-28 10:42:13 - paylineSDK::__construct(550146*******9, c****************76A, , , , , PROD)
+2019-11-28 10:42:13 - Request : WebPaymentAPI.getWebPaymentDetails(token = )
+2019-11-28 10:42:13 - Response : code = 02305 - transactionId = 
+2019-11-28 10:42:26 - ----------------------------------------------------------
+2019-11-28 10:42:26 - paylineSDK::__construct(550146*******9, c****************76A, , , , , PROD)
+2019-11-28 10:42:26 - Request : WebPaymentAPI.getWebPaymentDetails(token = )
+2019-11-28 10:42:26 - Response : code = 02305 - transactionId = 
+2019-11-28 10:44:53 - ----------------------------------------------------------
+2019-11-28 10:44:53 - paylineSDK::__construct(550146*******9, c****************76A, , , , , PROD)
+2019-11-28 10:44:53 - Request : WebPaymentAPI.getWebPaymentDetails(token = )
+2019-11-28 10:44:53 - Response : code = 02305 - transactionId = 
+2019-11-28 10:45:00 - ----------------------------------------------------------
+2019-11-28 10:45:00 - paylineSDK::__construct(550146*******9, c****************76A, , , , , PROD)
+2019-11-28 10:45:00 - Request : WebPaymentAPI.getWebPaymentDetails(token = )
+2019-11-28 10:45:00 - Response : code = 02305 - transactionId = 
+2019-11-28 11:18:35 - ----------------------------------------------------------
+2019-11-28 11:18:35 - paylineSDK::__construct(550146*******9, c****************76A, , , , , PROD)
+2019-11-28 11:18:36 - Request : WebPaymentAPI.getWebPaymentDetails(token = )
+2019-11-28 11:18:36 - Response : code = 02305 - transactionId = 
+2019-11-28 11:18:37 - ----------------------------------------------------------
+2019-11-28 11:18:37 - paylineSDK::__construct(550146*******9, c****************76A, , , , , PROD)
+2019-11-28 11:18:37 - Request : WebPaymentAPI.getWebPaymentDetails(token = )
+2019-11-28 11:18:37 - Response : code = 02305 - transactionId = 
+2019-11-28 11:23:07 - ----------------------------------------------------------
+2019-11-28 11:23:07 - paylineSDK::__construct(550146*******9, c****************76A, , , , , PROD)
+2019-11-28 11:23:07 - Request : WebPaymentAPI.doWebPayment(order.ref = 5DDFA00B22)
+2019-11-28 11:23:07 - Response : code = 00000 - token = 1cqmanOakGA00j1139001574936587541

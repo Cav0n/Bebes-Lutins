@@ -20,6 +20,16 @@ class PageController extends Controller
         return view('homepage');
     }
 
+    public function canceledPayment()
+    {
+        return view('pages.payment.cancel-payment');
+    }
+
+    public function successPayment()
+    {
+        return view('pages.payment.success-payment');
+    }
+
     public function test_mail()
     {
         $order = \App\Order::where('id', '5DB2BE7090')->first();

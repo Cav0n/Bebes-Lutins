@@ -9,7 +9,7 @@
             <div class='address-container p-2 border border-dark'>
                 <h1 class='mb-0 h3'><b>Adresse de livraison</b></h1>
             
-                @if($order->status != 22 && strpos($order->shipping_address->id, "withdrawal-shop") != true )
+                @if($order->status != 22 && $order->shipping_address != null)
                 <p class='mb-0'>{{$order->shipping_address->civilityToString()}} {{ucfirst($order->shipping_address->firstname)}} {{mb_strtoupper($order->shipping_address->lastname)}}</p>
                 @if($order->shipping_address->complement)<small class='m-0'>{{$order->shipping_address->complement}}</small>@endif
                 @if($order->shipping_address->company)<small class='mb-0'>{{$order->shipping_address->company}}</small>@endif

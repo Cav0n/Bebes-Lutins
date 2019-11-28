@@ -213,9 +213,10 @@ class ShoppingCartController extends Controller
         $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
 
         $order = new Order();
-        $order->id = strtoupper(substr(uniqid(), 0, 10));
-        $order->paymentMethod = 2;
-        $order->shippingPrice = $shopping_cart->shippingPrice;
+        $order->id = $shopping_cart->user->lastname . '-' . substr($shopping_cart->user->firstname, 0, 2) . '-' . strtoupper(substr(uniqid(), 0, 10));
+        $order->paymentMethod = 1;
+        if($shopping_cart->shipping_address_id != null) $order->shippingPrice = $shopping_cart->shippingPrice;
+        else $order->shippingPrice = 0;
         $order->productsPrice = $shopping_cart->productsPrice;
         $order->status = 0;
         $order->user_id = $shopping_cart->user_id;

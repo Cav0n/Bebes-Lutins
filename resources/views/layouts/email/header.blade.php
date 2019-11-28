@@ -37,13 +37,13 @@
                                         class="container590 hide">
                                         <tr>
                                             <td width="120" align="center" style="font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
-                                                <a href="" style="color: #312c32; text-decoration: none;">NOS COUCHES</a>
+                                                <a href="https://www.bebes-lutins.fr/categories/Couches-lavables" style="color: #312c32; text-decoration: none;">NOS COUCHES</a>
                                             </td>
                                             <td width="120" align="center" style="font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
-                                                <a href="" style="color: #312c32; text-decoration: none;">PACKS ET KITS</a>
+                                                <a href="https://www.bebes-lutins.fr/categories/Packs-et-kits-de-couches-lavables" style="color: #312c32; text-decoration: none;">PACKS ET KITS</a>
                                             </td>
                                             <td width="120" align="center" style="font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
-                                                <a href="" style="color: #312c32; text-decoration: none;">MODE D'EMPLOI</a>
+                                                <a href="https://www.bebes-lutins.fr/en-savoir-plus/mode-d-emploi" style="color: #312c32; text-decoration: none;">MODE D'EMPLOI</a>
                                             </td>
                                         </tr>
                                     </table>

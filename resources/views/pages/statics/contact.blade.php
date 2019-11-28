@@ -8,6 +8,7 @@
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/loading/loading-btn.css')}}">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
 @endsection
 
 @section('content')
@@ -36,6 +37,7 @@
                         <textarea name="contact-message" id="contact-message" class="form-control" cols="30" rows="7"></textarea>
                     </div>
                     <div class='d-flex'>
+                        <div class="g-recaptcha" data-sitekey="6Ldj9p4UAAAAAAY_KU7zSzFiAIvfLagBc4WXHaEt"></div>
                         <button type="button" class="btn btn-primary ld-ext-right" onclick='send_message($(this))'>
                             Envoyer <div class="ld ld-ring ld-spin"></div>
                         </button>

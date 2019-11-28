@@ -39,6 +39,7 @@
                 </div>
             </div>
 
+            @auth
             @if(! DB::table('knowed_thanks_to')->where('user_id', Auth::user()->id)->exists())
             {{--  Known thanks to  --}}
             <div id='know_thanks_to_container' class="col-12 p-3 bg-white border mt-3">
@@ -91,6 +92,7 @@
                 <h1 class="h2 mb-0">Merci de votre retour !</h1>
             </div>
             @endif
+            @endauth
         </div>
     </div>
 </main>

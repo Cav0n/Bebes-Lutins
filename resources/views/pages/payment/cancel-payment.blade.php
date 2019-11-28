@@ -23,8 +23,8 @@
                     Une erreur est survenue
                 </h1>
                 <p class='mb-0'>
-                    Il semblerait que le paiement de votre commande est échoué, ou que vous ayez annulé
-                    le paiement de votre commande. Vous ne serez donc pas débité.<br>
+                    Il semblerait que le paiement de votre commande ait échoué, ou que vous ayez annulé
+                    le paiement. Vous ne serez donc pas débité.<br>
                     <br>
                     Si vous pensez qu'il s'agit d'un problème de notre côté vous pouvez nous contacter
                     à l'adresse <a href='mailto:contact@bebes-lutins.fr'>contact@bebes-lutins.fr</a><br>

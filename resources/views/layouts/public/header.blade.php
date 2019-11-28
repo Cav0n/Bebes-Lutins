@@ -24,7 +24,7 @@ $parent_categories = App\Category::where('parent_id', null)->where('isDeleted', 
 
         <div class='collapse navbar-collapse' id="collapsibleNavId">
             <ul class="navbar-nav mt-2 mt-lg-0 w-100 d-none d-lg-flex">
-                <li class="nav-item desktop transition" style='cursor:pointer;width:18rem;'>
+                <li class="nav-item desktop transition" style='cursor:pointer;width:18rem;' onclick='load_url("/contact")'>
                     <a class="h5 nav-link text-dark text-center mb-0 pb-1 font-weight-bold" href="/contact">CONTACTEZ-NOUS</a>
                     <div class='row justify-content-center mt-1'>
                         <img src="{{asset('images/icons/call-bw.svg')}}" class='mx-2' alt="Téléphone" style='width:1.6rem;height:1.6rem;'>
@@ -45,7 +45,7 @@ $parent_categories = App\Category::where('parent_id', null)->where('isDeleted', 
                     @endguest
                     
                 </li>
-                <li class="nav-item desktop transition" style="cursor:pointer;width:12rem">
+                <li class="nav-item desktop transition" style="cursor:pointer;width:12rem" onclick='load_url("/panier")'>
                     <a class="h5 nav-link text-dark text-center mb-0 pb-1 font-weight-bold" href="/panier">MON PANIER</a>
                     <p id='shopping_cart_price' class='text-center py-0 my-0'>{{number_format($shopping_cart->productsPrice, 2)}} €</p>
                     <p class='text-center py-0 my-0'>{{$total_quantity}} articles</p>

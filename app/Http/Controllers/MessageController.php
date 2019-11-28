@@ -39,25 +39,45 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'contact-name' => 'required',
-            'contact-email' => 'required',
-            'contact-message' => 'required'
-        ]);
+        $captcha = $request['captcha'];
 
-        $message = new Message();
-        $message->senderName = $request['contact-name'];
-        $message->senderEmail = $request['contact-email'];
-        $message->message = $request['contact-message'];
-        $message->save();
+        if(!$captcha){
+            $response['message'] = "Veuillez vérifier que vous n'êtes pas un robot !";
+            $response['code'] = '300';
 
-        Mail::to("contact@bebes-lutins.fr")->send(new MessageNotificationAdmin($message));
-        Mail::to($message->senderEmail)->send(new MessageNotificationSender($message));
+            return response()->json($response, $response['code']);
+        } else {
+            $secretKey = "6Ldj9p4UAAAAAO-lFqcTg5irY1504Y_NCU2S01js";
+            $ip = $_SERVER['REMOTE_ADDR'];
 
-        $result = ['code' => 200, 'message' => "Message envoyé avec succés !"];
+            // post request to server
+            $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) . '&response=' . urlencode($captcha);
+            $response_captcha = file_get_contents($url);
+            $responseKeys_captcha = json_decode($response_captcha, true);
 
-        header('Content-type: application/json');
-        echo json_encode( $result );
+            // should return JSON with success as true
+            if ($responseKeys_captcha["success"]) {
+                $request->validate([
+                    'contact-name' => 'required',
+                    'contact-email' => 'required',
+                    'contact-message' => 'required'
+                ]);
+
+                $message = new Message();
+                $message->senderName = $request['contact-name'];
+                $message->senderEmail = $request['contact-email'];
+                $message->message = $request['contact-message'];
+                $message->save();
+
+                Mail::to("contact@bebes-lutins.fr")->send(new MessageNotificationAdmin($message));
+                Mail::to($message->senderEmail)->send(new MessageNotificationSender($message));
+
+                $response['message'] = "Message envoyé avec succés !";
+                $response['code'] = '200';
+
+                return response()->json($response, $response['code']);
+            }
+        }
     }
 
     /**

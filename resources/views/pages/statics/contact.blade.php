@@ -85,6 +85,7 @@
         contactName = $('#contact-name').val();
         contactEmail = $('#contact-email').val();
         contactMessage = $('#contact-message').val();
+        captcha = $("#g-recaptcha-response").val();
 
         $.ajax({
             url : '/contact/envoie-message', // on appelle le script JSON
@@ -93,14 +94,20 @@
             data : {
                 'contact-name' : contactName,
                 'contact-email' : contactEmail,
-                'contact-message' : contactMessage },
+                'contact-message' : contactMessage,
+                'captcha' : captcha },
             beforeSend: function(){
                 btn.addClass('running');
             },
-            success : function(data){
+            success : function(response){
                 alert('Message envoyé !');
                 btn.removeClass('running');
                 $('#success-message').addClass('d-flex'); 
+
+                console.log(response.message);
+            },
+            error: function(response){
+                console.log(response.responseJSON.message);
             }
         });
     }

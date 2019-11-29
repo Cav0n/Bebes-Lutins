@@ -20,6 +20,11 @@
         <a href='/dashboard/produits' class='text-muted'>< Tous les produits</a>        
     </div>
 </div>
+<div class='row'>
+    <div class='col-12 pt-3'>
+        <a href='#' class='text-muted' onclick='open_product_importation()'>Importer les informations à partir d'un autre produit</a>
+    </div>
+</div>
 <div class="card bg-white my-3">
     <div class="card-header bg-white">
         <h1 class='h4 m-0 font-weight-normal'>
@@ -145,6 +150,8 @@
         </form>
     </div>
 </div>
+
+@include('components.dashboard.import-product')
 
 {{-- CHARACTERISTICS --}}
 <script>
@@ -332,6 +339,46 @@ $.ajaxSetup({
 		.catch( err => {
 			console.error( err.stack );
 		} );
+</script>
+
+
+<script>
+    function open_product_importation(){
+        $('#product-selection-popup').modal('show');
+    }
+
+    function import_product(id){
+        $.ajax({
+            url: "/produits2/" + id,
+            type: 'POST',
+            data: { },
+            success: function(response){
+                console.log(response);
+                complete_fields(response);
+                $('#product-selection-popup').modal('hide');
+            },
+            error: function(response) {
+                console.log(response.responseJSON);
+            }
+        });
+    }
+
+    function complete_fields(product){
+        $('#reference').val(product.reference);
+        $('#name').val(product.name);
+        $('#stock').val(product.stock);
+        $('#price').val(product.price);
+        $('#description').text(product.description);
+        editor.setData(product.description);
+
+        product.categories.forEach(function(element){
+            $('#categories').data('tagify').addTags(element.name);
+        });
+
+        product.tags.forEach(function(element){
+            $('#tags').data('tagify').addTags(element.name);
+        });
+    }
 </script>
 
 @endsection

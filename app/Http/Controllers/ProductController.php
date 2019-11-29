@@ -38,6 +38,13 @@ class ProductController extends Controller
         echo json_encode( $data );
     }
 
+    public function getJSON2(Product $product)
+    {
+        $product->categories; // INIT CATEGORIES
+        $product->tags; // INIT TAGS
+        return response()->json($product, 200);
+    }
+
     public function highlightProducts(Request $request)
     {
         foreach(Product::where('isHighlighted', 1)->get() as $product){

@@ -30,6 +30,7 @@ Route::post('/categories/{category}', 'CategoryController@getJSON');
 Route::get('/produits', 'ProductController@index');
 Route::get('/produits/{product}', 'ProductController@show');
 Route::post('/produits/{product}', 'ProductController@getJSON');
+Route::post('/produits2/{product}', 'ProductController@getJSON2');
 Route::get('/produits/{category}/{product}', 'ProductController@show');
 Route::post('/produits/selectionner_categorie/{category}', 'ProductController@add_selected_category');
 Route::post('/produits/deselectionner_categorie/{category}', 'ProductController@unselected_category');

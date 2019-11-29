@@ -142,6 +142,15 @@ class ShoppingCartController extends Controller
     public function showDelivery()
     {
         $shopping_cart = session('shopping_cart'); 
+        $shopping_cart->billing_address_id = null;
+        $shopping_cart->shipping_address_id = null;
+        if($shopping_cart->voucher != null && ($shopping_cart->voucher->discountType == 3)){
+            $shopping_cart->shippingPrice = 0.00;
+        } else  $shopping_cart->shippingPrice = 5.90;
+
+        $shopping_cart->save();
+
+        session(['shopping_cart' => $shopping_cart]);
 
         return view('pages.shopping-cart.delivery')->withStep(1)->withShoppingCart($shopping_cart);
     }
@@ -149,6 +158,7 @@ class ShoppingCartController extends Controller
     public function validateDelivery(Request $request)
     {
         $shopping_cart = session('shopping_cart');
+        $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
 
         $request->session()->flash('delivery-type', $request['delivery-type']); // In case of error keep the delivery type
         $request->session()->flash('same-shipping-address', $request['same-shipping-address']); // In case of error keep the boolean
@@ -173,6 +183,7 @@ class ShoppingCartController extends Controller
 
             case 'withdrawal-shop': // CREATE NEW BILLING ADDRESS WITH EMAIL & PHONE
                 $request->validate(["email" => "email:filter|required"]);
+                $shopping_cart->shippingPrice = 0;
 
                 $email = $request["email"];
                 $phone = $request["phone"];
@@ -191,7 +202,7 @@ class ShoppingCartController extends Controller
         $shopping_cart->shipping_address_id = $shipping_address_id;
         $shopping_cart->save();
 
-        $request->session()->put('shopping_cart', $shopping_cart);
+        session(['shopping_cart' => $shopping_cart]);
 
         return redirect('/panier/paiement');
     }

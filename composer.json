@@ -9,11 +9,12 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "baum/baum": "2.x",
+        "caouecs/laravel-lang": "~4.0",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.0",
         "laravel/telescope": "^2.1",
-        "laravel/tinker": "^1.0",
-        "baum/baum": "2.x"
+        "laravel/tinker": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^1.4",

@@ -70,8 +70,12 @@ class ShoppingCart extends Model
         if($this->productsPrice < 70){
             if($this->voucher != null && ($this->voucher->discountType == 3)){
                 $this->shippingPrice = 0.00;
+            } if($this->shipping_address == null && $this->billing_address != null){
+                $this->shippingPrice = 0;
+                $price_before_free_shipping = 0.00;
             } else $this->shippingPrice = 5.90;
         }
+        
     }
 
     public function calculatePricesAndQuantities() : array
@@ -92,6 +96,11 @@ class ShoppingCart extends Model
         }
 
         if($total_price >= 70){
+            $shipping_price = 0;
+            $price_before_free_shipping = 0.00;
+        }
+
+        if($this->shipping_address == null && $this->billing_address != null){
             $shipping_price = 0;
             $price_before_free_shipping = 0.00;
         }

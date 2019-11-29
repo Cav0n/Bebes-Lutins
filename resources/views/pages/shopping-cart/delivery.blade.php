@@ -114,7 +114,7 @@
                                         <p class="card-text">Frais de ports :</p>
                                     </div>
                                     <div class="col-6 p-0 border-top py-2">
-                                        <p class="card-text text-right">
+                                        <p id='@if($shoppingCart->voucher != null && $shoppingCart->voucher->discountType == 3){{'shipping-price-with-voucher'}}@else{{'shipping-price'}}@endif' class="card-text text-right">
                                             @if($shoppingCart->voucher != null && $shoppingCart->voucher->discountType == 3)
                                             <del class='text-danger'>5,90 €</del><BR>
                                             @endif
@@ -126,7 +126,8 @@
                                         <p class="card-text font-weight-bold">TOTAL TTC :</p>
                                     </div>
                                     <div class="col-6 p-0 border-top pt-2">
-                                        <p class="card-text text-right font-weight-bold">{{number_format($total, 2)}} €</p>
+                                        <input id='total-price-save' type="hidden" value="{{$total}}">
+                                        <p id='@if($shoppingCart->voucher != null && $shoppingCart->voucher->discountType == 3){{'total-price-with-voucher'}}@else{{'total-price'}}@endif' class="card-text text-right font-weight-bold">{{number_format($total, 2)}} €</p>
                                     </div>
                 
                                     <div class="col-12 border-bottom my-4"></div>

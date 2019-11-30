@@ -75,32 +75,32 @@
             <div class='row'>
                 <div class="form-group mb-0 mt-2 col-6">
                     <label for="firstname" class='mb-0'>Prénom *</label>
-                    <input type="text" class="form-control @error('firstname-billing') is-invalid @enderror" name="firstname-billing" id="firstname" aria-describedby="helpFirstname" placeholder="Jean" value='{{old('firstname-billing')}}'>
+                    <input type="text" class="form-control @error('firstname-billing') is-invalid @enderror" name="firstname-billing" id="firstname" aria-describedby="helpFirstname"  value='{{old('firstname-billing')}}'>
                 </div>
                 <div class="form-group mb-0 mt-2 col-6">
                     <label for="lastname" class='mb-0'>Nom de famille *</label>
-                    <input type="text" class="form-control @error('lastname-billing') is-invalid @enderror" name="lastname-billing" id="lastname" aria-describedby="helpLastname" placeholder="Dupont" value='{{old('lastname-billing')}}'>
+                    <input type="text" class="form-control @error('lastname-billing') is-invalid @enderror" name="lastname-billing" id="lastname" aria-describedby="helpLastname"  value='{{old('lastname-billing')}}'>
                 </div>
             </div>
             <div class="form-group mb-0 mt-2">
                 <label for="street" class='mb-0'>Rue *</label>
-                <input type="text" class="form-control @error('street-billing') is-invalid @enderror" name="street-billing" id="street" aria-describedby="helpStreet" placeholder="" value='{{old('street-billing')}}'>
+                <input type="text" class="form-control @error('street-billing') is-invalid @enderror" name="street-billing" id="street" aria-describedby="helpStreet"  value='{{old('street-billing')}}'>
             </div>
             <div class="form-group mb-0 mt-2">
                 <label for="zipcode" class='mb-0'>Code postal *</label>
-                <input type="text" class="form-control @error('zipcode-billing') is-invalid @enderror" name="zipcode-billing" id="zipcode" aria-describedby="helpZipcode" placeholder="63300" minlength="5" maxlength="5" value='{{old('zipcode-billing')}}'>
+                <input type="text" class="form-control @error('zipcode-billing') is-invalid @enderror" name="zipcode-billing" id="zipcode" aria-describedby="helpZipcode"  value='{{old('zipcode-billing')}}'>
             </div>
             <div class="form-group mb-0 mt-2">
                 <label for="city" class="mb-0">Ville *</label>
-                <input type="text" class="form-control @error('city-billing') is-invalid @enderror" name="city-billing" id="city" aria-describedby="helpCity" placeholder="Thiers" value='{{old('city-billing')}}'>
+                <input type="text" class="form-control @error('city-billing') is-invalid @enderror" name="city-billing" id="city" aria-describedby="helpCity"  value='{{old('city-billing')}}'>
             </div>
             <div class="form-group mb-0 mt-2">
                 <label for="complements" class="mb-0">Compléments</label>
-                <input type="text" class="form-control @error('complements-billing') is-invalid @enderror" name="complements-billing" id="complements" aria-describedby="helpComplements" placeholder="" value='{{old('complements-billing')}}'>
+                <input type="text" class="form-control @error('complements-billing') is-invalid @enderror" name="complements-billing" id="complements" aria-describedby="helpComplements"  value='{{old('complements-billing')}}'>
             </div>
             <div class="form-group mb-0 mt-2">
                 <label for="company" class="mb-0">Entreprise</label>
-                <input type="text" class="form-control @error('company-billing') is-invalid @enderror" name="company-billing" id="company" aria-describedby="helpCompany" placeholder="" value='{{old('company-billing')}}'>
+                <input type="text" class="form-control @error('company-billing') is-invalid @enderror" name="company-billing" id="company" aria-describedby="helpCompany"  value='{{old('company-billing')}}'>
             </div>
         </div>
 
@@ -124,32 +124,32 @@
             <div class='row'>
                 <div class="form-group mb-0 mt-2 col-6">
                     <label for="firstname" class='mb-0'>Prénom *</label>
-                    <input type="text" class="form-control @error('firstname-shipping') is-invalid @enderror" name="firstname-shipping" id="firstname" aria-describedby="helpFirstname" placeholder="Jean" value='{{old('firstname-shipping')}}'>
+                    <input type="text" class="form-control @error('firstname-shipping') is-invalid @enderror" name="firstname-shipping" id="firstname" aria-describedby="helpFirstname"  value='{{old('firstname-shipping')}}'>
                 </div>
                 <div class="form-group mb-0 mt-2 col-6">
                     <label for="lastname" class='mb-0'>Nom de famille *</label>
-                    <input type="text" class="form-control @error('lastname-shipping') is-invalid @enderror" name="lastname-shipping" id="lastname" aria-describedby="helpLastname" placeholder="Dupont" value='{{old('lastname-shipping')}}'>
+                    <input type="text" class="form-control @error('lastname-shipping') is-invalid @enderror" name="lastname-shipping" id="lastname" aria-describedby="helpLastname"  value='{{old('lastname-shipping')}}'>
                 </div>
             </div>
             <div class="form-group mb-0 mt-2">
                 <label for="street" class='mb-0'>Rue *</label>
-                <input type="text" class="form-control @error('street-shipping') is-invalid @enderror" name="street-shipping" id="street" aria-describedby="helpStreet" placeholder="" value='{{old('street-shipping')}}'>
+                <input type="text" class="form-control @error('street-shipping') is-invalid @enderror" name="street-shipping" id="street" aria-describedby="helpStreet"  value='{{old('street-shipping')}}'>
             </div>
             <div class="form-group mb-0 mt-2">
                 <label for="zipcode" class='mb-0'>Code postal *</label>
-                <input type="text" class="form-control @error('zipcode-shipping') is-invalid @enderror" name="zipcode-shipping" id="zipcode" aria-describedby="helpZipcode" placeholder="63300" minlength="5" maxlength="5" value='{{old('zipcode-shipping')}}'>
+                <input type="text" class="form-control @error('zipcode-shipping') is-invalid @enderror" name="zipcode-shipping" id="zipcode" aria-describedby="helpZipcode"  value='{{old('zipcode-shipping')}}'>
             </div>
             <div class="form-group mb-0 mt-2">
                 <label for="city" class="mb-0">Ville *</label>
-                <input type="text" class="form-control @error('city-shipping') is-invalid @enderror" name="city-shipping" id="city" aria-describedby="helpCity" placeholder="Thiers" value='{{old('city-shipping')}}'>
+                <input type="text" class="form-control @error('city-shipping') is-invalid @enderror" name="city-shipping" id="city" aria-describedby="helpCity"  value='{{old('city-shipping')}}'>
             </div>
             <div class="form-group mb-0 mt-2">
                 <label for="complements" class="mb-0">Compléments</label>
-                <input type="text" class="form-control @error('complements-shipping') is-invalid @enderror" name="complements-shipping" id="complements" aria-describedby="helpComplements" placeholder="" value='{{old('complements-shipping')}}'>
+                <input type="text" class="form-control @error('complements-shipping') is-invalid @enderror" name="complements-shipping" id="complements" aria-describedby="helpComplements"  value='{{old('complements-shipping')}}'>
             </div>
             <div class="form-group mb-0 mt-2">
                 <label for="company" class="mb-0">Entreprise</label>
-                <input type="text" class="form-control @error('company-shipping') is-invalid @enderror" name="company-shipping" id="company" aria-describedby="helpCompany" placeholder="" value='{{old('company-shipping')}}'>
+                <input type="text" class="form-control @error('company-shipping') is-invalid @enderror" name="company-shipping" id="company" aria-describedby="helpCompany"  value='{{old('company-shipping')}}'>
             </div>
         </div>
 
@@ -178,12 +178,12 @@
         <input type='hidden' name='delivery-type' value='withdrawal-shop'>
         <div class="form-group mb-0 mt-2">
             <label for="email" class='mb-0'>Adresse email *</label>
-            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" aria-describedby="helpEmail" placeholder="jeandupont@gmail.com" value='{{old('email')}}'>
+            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" id="email" aria-describedby="helpEmail" value='{{old('email', strtolower(Auth::user()->email))}}'>
             <small id="helpEmail" class="form-text text-muted">Votre adresse email</small>
         </div>
         <div class="form-group mb-0 mt-2">
             <label for="phone" class="mb-0">Numéro de téléphone</label>
-            <input type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" aria-describedby="helpPhone" placeholder="0123456789" value='{{old('phone')}}'>
+            <input type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" id="phone" aria-describedby="helpPhone"  value='{{old('phone', Auth::user()->phone)}}'>
             <small id="helpPhone" class="form-text text-muted">Votre numéro de téléphone</small>
         </div>
         <div class="form-group mb-0 mt-2">
@@ -197,33 +197,33 @@
         <div class='row'>
             <div class="form-group mb-0 mt-2 col-6">
                 <label for="firstname" class='mb-0'>Prénom *</label>
-                <input type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" id="firstname" aria-describedby="helpFirstname" placeholder="Jean" value='{{old('firstname')}}'>
+                <input type="text" class="form-control @error('firstname') is-invalid @enderror" name="firstname" id="firstname" aria-describedby="helpFirstname"  value='{{old('firstname', Auth::user()->firstname)}}'>
             </div>
             <div class="form-group mb-0 mt-2 col-6">
                 <label for="lastname" class='mb-0'>Nom de famille *</label>
-                <input type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" id="lastname" aria-describedby="helpLastname" placeholder="Dupont" value='{{old('lastname')}}'>
+                <input type="text" class="form-control @error('lastname') is-invalid @enderror" name="lastname" id="lastname" aria-describedby="helpLastname"  value='{{old('lastname', Auth::user()->lastname)}}'>
             </div>
         </div>
         <p class='h4 mt-4'>Adresse de facturation</p>
         <div class="form-group mb-0 mt-2">
             <label for="street" class='mb-0'>Rue *</label>
-            <input type="text" class="form-control @error('street') is-invalid @enderror" name="street" id="street" aria-describedby="helpStreet" placeholder="" value='{{old('street')}}'>
+            <input type="text" class="form-control @error('street') is-invalid @enderror" name="street" id="street" aria-describedby="helpStreet"  value='{{old('street')}}'>
         </div>
         <div class="form-group mb-0 mt-2">
             <label for="zipcode" class='mb-0'>Code postal *</label>
-            <input type="text" class="form-control @error('zipcode') is-invalid @enderror" name="zipcode" id="zipcode" aria-describedby="helpZipcode" placeholder="63300" minlength="5" maxlength="5" value='{{old('zipcode')}}'>
+            <input type="text" class="form-control @error('zipcode') is-invalid @enderror" name="zipcode" id="zipcode" aria-describedby="helpZipcode"  value='{{old('zipcode')}}'>
         </div>
         <div class="form-group mb-0 mt-2">
             <label for="city" class="mb-0">Ville *</label>
-            <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" id="city" aria-describedby="helpCity" placeholder="Thiers" value='{{old('city')}}'>
+            <input type="text" class="form-control @error('city') is-invalid @enderror" name="city" id="city" aria-describedby="helpCity"  value='{{old('city')}}'>
         </div>
         <div class="form-group mb-0 mt-2">
             <label for="complement" class="mb-0">Compléments</label>
-            <input type="text" class="form-control @error('complement') is-invalid @enderror" name="complement" id="complement" aria-describedby="helpComplement" placeholder="" value='{{old('complement')}}'>
+            <input type="text" class="form-control @error('complement') is-invalid @enderror" name="complement" id="complement" aria-describedby="helpComplement"  value='{{old('complement')}}'>
         </div>
         <div class="form-group mb-0 mt-2">
             <label for="company" class="mb-0">Entreprise</label>
-            <input type="text" class="form-control @error('company') is-invalid @enderror" name="company" id="company" aria-describedby="helpCompany" placeholder="" value='{{old('company')}}'>
+            <input type="text" class="form-control @error('company') is-invalid @enderror" name="company" id="company" aria-describedby="helpCompany"  value='{{old('company')}}'>
         </div>
     </form>
 

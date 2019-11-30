@@ -95,14 +95,14 @@ class ShoppingCart extends Model
             $price_before_free_shipping -= $total_price;
         }
 
-        if($total_price >= 70){
-            $shipping_price = 0;
-            $price_before_free_shipping = 0.00;
-        }
-
-        if($this->shipping_address == null && $this->billing_address != null){
-            $shipping_price = 0;
-            $price_before_free_shipping = 0.00;
+        if($this->productsPrice < 70){
+            if($this->voucher != null && ($this->voucher->discountType == 3)){
+                $this->shippingPrice = 0.00;
+                $this->save();
+            } else if($this->shipping_address == null && $this->billing_address != null){
+                $this->shippingPrice = 0;
+                $price_before_free_shipping = 0.00;
+            } else $this->shippingPrice = 5.90;
         }
 
         $result = ['products_price' => $total_price, 'shipping_price' => $shipping_price, 'total_quantity' => $total_quantity];

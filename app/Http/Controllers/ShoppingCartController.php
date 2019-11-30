@@ -224,7 +224,7 @@ class ShoppingCartController extends Controller
         $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
 
         $order = new Order();
-        $order->id = $shopping_cart->user->lastname . '-' . substr($shopping_cart->user->firstname, 0, 2) . '-' . strtoupper(substr(uniqid(), 0, 10));
+        $order->id = $shopping_cart->user->lastname . '-' . substr($shopping_cart->user->firstname, 0, 3) . '-' . strtoupper(substr(uniqid(), 0, 10));
         $order->paymentMethod = 1;
         if($shopping_cart->shipping_address_id != null) $order->shippingPrice = $shopping_cart->shippingPrice;
         else $order->shippingPrice = 0;
@@ -317,11 +317,20 @@ class ShoppingCartController extends Controller
         $shopping_cart = session('shopping_cart');
         $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
 
+        if($shopping_cart->productsPrice < 70){
+            if($shopping_cart->voucher != null && ($shopping_cart->voucher->discountType == 3)){
+                $shopping_cart->shippingPrice = 0.00;
+            } else if($shopping_cart->shipping_address == null && $shopping_cart->billing_address != null){
+                $shopping_cart->shippingPrice = 0;
+                $price_before_free_shipping = 0.00;
+            } else $shopping_cart->shippingPrice = 5.90;
+        }
+
         $shopping_cart->isActive = false;
         $shopping_cart->save();
 
         $order = new Order();
-        $order->id = strtoupper(substr(uniqid(), 0, 10));
+        $order->id = $shopping_cart->user->lastname . '-' . substr($shopping_cart->user->firstname, 0, 3) . '-' . strtoupper(substr(uniqid(), 0, 10));
         $order->paymentMethod = 2;
         $order->shippingPrice = $shopping_cart->shippingPrice;
         $order->productsPrice = $shopping_cart->productsPrice;

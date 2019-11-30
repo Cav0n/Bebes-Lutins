@@ -7,6 +7,20 @@
             Notes de mise à jour
         </h1>
         <div class='update-infos-container py-2'>
+            <h2 class="h6">Mise à jour 5.0.2</h2>
+            <ul>
+                <li>Ajout du champ "téléphone" dans le formulaire de création de compte</li>
+                <li>Ajout d'une fonctionnalité permettant de verrouiller le bouton "Créer mon compte" lorsque tous les champs requis ne sont pas remplis</li>
+                <li>Ajout du message du client dans la facture</li>
+                <li>Ajout de l'affichage des codes promos dans la facture des commandes</li>
+                <li>Correction des codes promos offrant la livraison gratuite</li>
+                <li>Le nom des produits dans les factures sont écrits en plus gros</li>
+                <li>Lors de la selection "Retrait à l'atelier" les informations de contact du client se complètent automatiquement</li>
+                <li>Les clients peuvent ecrire un message concernant leur commande à n'importe quel étape de leur commande</li>
+                <li>Suppression des "placeholder" dans le formulaire de création de compte</li>
+            </ul>
+        </div>
+        <div class='update-infos-container py-2'>
             <h2 class="h6">Mise à jour 5.0.1</h2>
             <ul>
                 <li>Ajout du bouton permettant d'afficher la liste des catégories lors de la création / mis à jour d'un produit</li>

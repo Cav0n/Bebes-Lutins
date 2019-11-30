@@ -46,6 +46,7 @@
         <div class="col-12">
             <h1 class='h4 mb-0'><b>Commande passée le {{Carbon\Carbon::parse($order->created_at)->formatLocalized('%e %B %Y')}}</b></h1>
             <p class='mb-2 small'>Payée par {{$order->paymentMethodToString()}}</p>
+            @if($order->customerMessage != null) <p>Message du client : <b>{{$order->customerMessage}}</b></p> @endif
             <table class='table table-striped'>
                 <thead>
                     <tr>
@@ -58,12 +59,20 @@
                 <tbody>
                     @foreach ($order->order_items as $item)
                     <tr>
-                        <td><small>@if($item->product->reference != null){{$item->product->reference}} - @endif{{$item->productName}}</small></td>
+                        <td>@if($item->product->reference != null){{$item->product->reference}} - @endif{{$item->productName}}</td>
                         <td class='text-right d-none d-sm-table-cell'>{{number_format($item->unitPrice, 2)}} €</td>
                         <td class='text-center'>{{$item->quantity}}</td>
                         <td class='text-right'>{{number_format($item->unitPrice * $item->quantity, 2)}} €</td>
                     </tr>
                     @endforeach
+                    @if($order->voucher != null)
+                    <tr>
+                        <td>CODE PROMO : <b>{{$order->voucher->code}}</b> ({{$order->voucher->description()}})</td>
+                        <td class='d-none d-sm-table-cell'></td>
+                        <td class='text-right'></td>
+                        <td class='text-right'></td>
+                    </tr>
+                    @endif
                     <tr>
                         <td></td>
                         <td class='d-none d-sm-table-cell'></td>

@@ -168,7 +168,7 @@ class ProductController extends Controller
             return view('pages.products.all-products')->withProducts(Product::where('isHidden', 0)->where('isDeleted', 0)->paginate(16));
         } else {
             if(count(session()->get("selected-categories")) == 0) return view('pages.products.all-products')->withProducts(Product::where('isHidden', 0)->where('isDeleted', 0)->paginate(16));
-            $selected_categories = Category::whereIn('id',session()->get("selected-categories"))->get();
+            $selected_categories = Category::whereIn('id',session()->get("selected-categories"))->where('isHidden', 0)->where('isDeleted', 0)->get();
             $products = array();
 
             foreach ($selected_categories as $category){

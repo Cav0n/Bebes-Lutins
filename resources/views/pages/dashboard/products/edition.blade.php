@@ -114,7 +114,7 @@
                 @error('categories')
                     <div class="invalid-feedback">{{$message}}</div>
                 @enderror 
-                <button class='btn btn-outline-dark rounded-0 mt-2 categories--removeAllBtn' type='button'>Retirer les catégories</button>
+                <button id='toggle-categories-list-button' class='btn btn-outline-dark mt-2 isHidden' type='button'>Afficher les catégories</button>
             </div>
             
             <div class="form-group">
@@ -183,6 +183,24 @@
 {{-- AUTO HIDE SUCCESS MESSAGE --}}
 <script>
     $('#successMessage').delay(3000).fadeOut('slow');
+</script>
+
+{{--  prepare page  --}}
+<script>
+    $(document).ready(function(){
+        $(".customSuggestionsList").hide();
+        $('#toggle-categories-list-button').on('click', function(){
+            $(".customSuggestionsList").fadeToggle();
+            if($(this).hasClass('isHidden')){
+                $(this).text("Cacher les catégories");
+                $(this).removeClass('isHidden');
+            } else {
+                $(this).text("Afficher les catégories");
+                $(this).addClass('isHidden');
+            }
+            
+        });
+    });
 </script>
 
 {{-- CHARACTERISTICS --}}

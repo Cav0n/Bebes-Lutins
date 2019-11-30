@@ -115,7 +115,7 @@
                 @error('categories')
                     <div class="invalid-feedback">{{$message}}</div>
                 @enderror 
-                <button class='btn btn-outline-dark mt-2' type='button' onclick='$(".customSuggestionsList").fadeToggle();$(this).text("Afficher la liste");'>Cacher la liste</button>
+                <button id='toggle-categories-list-button' class='btn btn-outline-dark mt-2 isHidden' type='button' >Afficher les catégories</button>
             </div>
             
             <div class="form-group">
@@ -152,6 +152,24 @@
 </div>
 
 @include('components.dashboard.import-product')
+
+{{--  prepare page  --}}
+<script>
+    $(document).ready(function(){
+        $(".customSuggestionsList").hide();
+        $('#toggle-categories-list-button').on('click', function(){
+            $(".customSuggestionsList").fadeToggle();
+            if($(this).hasClass('isHidden')){
+                $(this).text("Cacher les catégories");
+                $(this).removeClass('isHidden');
+            } else {
+                $(this).text("Afficher les catégories");
+                $(this).addClass('isHidden');
+            }
+            
+        });
+    });
+</script>
 
 {{-- CHARACTERISTICS --}}
 <script>
@@ -210,7 +228,7 @@ $.ajaxSetup({
     $input_tags = $('#tags').tagify();
     $input_categories = $('#categories').tagify({
         enforceWhitelist : true,
-        whitelist : [@foreach(App\Category::where('isDeleted', 0)->get() as $category) "{{$category->name}}", @endforeach],
+        whitelist : [@foreach(App\Category::where('isDeleted', 0)->orderBy('name')->get() as $category) "{{$category->name}}", @endforeach],
         dropdown: {
             position: "manual",
             maxItems: Infinity,

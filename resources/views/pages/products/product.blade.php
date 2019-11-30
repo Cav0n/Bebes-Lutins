@@ -117,7 +117,7 @@ if (count($product->reviews) > 0){
                                     @endif
     
                                     {{-- ADD TO CART BUTTON --}}
-                                    <span class="d-inline-block w-100" data-trigger="hover" data-toggle="popover" data-content="Veuillez fournir les informations manquantes.">
+                                    {{-- <span class="d-inline-block w-100" data-trigger="hover" data-toggle="popover" data-content="Veuillez fournir les informations manquantes.">
                                         <button type="button" class="btn btn-outline-dark rounded-0 w-100 open-product-added-dialog"
                                             @if($product->stock > 0) 
                                                 @if(count($product->characteristics) == 0) 
@@ -139,6 +139,17 @@ if (count($product->reviews) > 0){
                                                     @else Voir le produit
                                                     @endif
                                                 @else Rupture de stock
+                                            @endif
+                                        </button>
+                                    </span> --}}
+
+                                    {{-- ADD TO CART BUTTON 2 --}}
+                                    <span class="d-inline-block w-100" data-trigger="hover" data-toggle="popover" data-content="Veuillez fournir les informations manquantes.">
+                                        <button id='add-to-cart' type="button" class="btn btn-outline-dark rounded-0 w-100 open-product-added-dialog" @if($product->stock <= 0) disabled @endif>
+                                            @if($product->stock > 0)
+                                            Ajouter au panier
+                                            @else
+                                            Rupture de stock
                                             @endif
                                         </button>
                                     </span>
@@ -330,7 +341,7 @@ if (count($product->reviews) > 0){
     </div>
 </main>
 
-@include('components.public.popups.add-to-cart')
+@include('components.public.popups.add-to-cart2')
 
 @auth
 @if(Auth::user()->wishlist != null)
@@ -420,11 +431,7 @@ if (count($product->reviews) > 0){
 <script>
     $('#add-to-cart').on('click', function(){
         if(empty_characteristics() == false){
-            quantity = $('#item-quantity').val();
-
-            $('.modal-product-image').attr('src', '/images/products/{{$product->mainImage}}');
-            $('.modal-product-name').text('{{$product->name}}s');
-            $('.modal-product-price').text('{{$product->price}} € x ' + quantity);
+            $('#addToCartPopup #product-id').val("{{$product->id}}");
 
             $('#addToCartPopup').modal('show');
         }
@@ -538,7 +545,7 @@ if (count($product->reviews) > 0){
 
     $(".spinnerProduct").inputSpinner();
     $(".spinnerProduct").on("change", function (event) {
-        $('#add-to-cart').attr('data-product_quantity', $(this).val());
+        $('#addToCartPopup #quantity').val($(this).val());
     })
 
     // !!!! DISABLED !!!!

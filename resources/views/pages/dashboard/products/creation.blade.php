@@ -115,7 +115,7 @@
                 @error('categories')
                     <div class="invalid-feedback">{{$message}}</div>
                 @enderror 
-                <button class='btn btn-outline-dark rounded-0 mt-2 categories--removeAllBtn' type='button'>Retirer les catégories</button>
+                <button class='btn btn-outline-dark mt-2' type='button' onclick='$(".customSuggestionsList").fadeToggle();$(this).text("Afficher la liste");'>Cacher la liste</button>
             </div>
             
             <div class="form-group">

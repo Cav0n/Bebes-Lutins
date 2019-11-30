@@ -27,6 +27,11 @@ class DashboardController extends Controller
         return redirect('/dashboard/commandes');
     }
 
+    public function changelog()
+    {
+        return view('pages.dashboard.changelog');
+    }
+
     public function orders(string $status = null){
         if(session()->has('selected_order_status' . $status)){
             $orders = Order::where('status', '=', session('selected_order_status'.$status))->orderBy('created_at', 'desc')->paginate(15); }

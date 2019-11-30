@@ -118,6 +118,7 @@ Route::delete('/espace-client/adresses/{address}', 'AddressController@destroy');
 * Dashboard
 */
 Route::get('/dashboard', 'DashboardController@index'); //TODO
+Route::get('/dashboard/changelog', 'DashboardController@changelog');
 //ORDERS
 Route::get('/dashboard/commandes', 'DashboardController@orders'); //TODO
 Route::get('/dashboard/commandes/{status}', 'DashboardController@orders'); //TODO

@@ -90,7 +90,7 @@
     </div>
     <div class="col-12 col-md-3 pt-2 pt-md-0">
         <button id='newsletter-switcher' type="button" class="btn w-100 rounded-0 ld-ext-right @if(Auth::user()->wantNewsletter) btn-outline-success activated @else btn-outline-danger  @endif">
-            <p class='text-center mb-0 mx-auto'>Activé</p><div class="ld ld-ring ld-spin"></div></button>
+            <p class='text-center mb-0 mx-auto'>@if(Auth::user()->wantNewsletter)Activé @else Désactivé @endif</p><div class="ld ld-ring ld-spin"></div></button>
     </div>
 </div>
 
@@ -293,13 +293,13 @@
                     btn.removeClass('btn-outline-success').addClass('btn-outline-danger');
                     btn.text("Désactivé");
 
-                    $('#newsletter-infos').text("Vous avez indiqué vouloir recevoir les actualités Bébés Lutins.");
+                    $('#newsletter-infos').text("Vous avez indiqué ne pas vouloir recevoir les actualités Bébés Lutins.");
                 } else {
                     btn.addClass('activated');
                     btn.removeClass('btn-outline-danger').addClass('btn-outline-success');
                     btn.text("Activé");
 
-                    $('#newsletter-infos').text("Vous avez indiqué ne pas vouloir recevoir les actualités Bébés Lutins.");
+                    $('#newsletter-infos').text("Vous avez indiqué vouloir recevoir les actualités Bébés Lutins.");
 
                 }
             },

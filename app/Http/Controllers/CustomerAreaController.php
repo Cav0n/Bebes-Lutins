@@ -72,11 +72,12 @@ class CustomerAreaController extends Controller
         $user = new User();
         $user->id = uniqid();
         $user->email = $validated_data['email'];
-        $user->phone = null;
+        $user->phone = $request['phone'];
         $user->password = Hash::make($validated_data['password']);
         $user->firstname = ucfirst($validated_data['firstname']);
         $user->lastname = mb_strtoupper($validated_data['lastname']);
         if($request['want-newsletter'] != null) $user->wantNewsletter = true;
+        else $user->wantNewsletter = false;
         
         $user->save();
 

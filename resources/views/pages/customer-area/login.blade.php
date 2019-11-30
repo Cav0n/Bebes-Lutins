@@ -14,7 +14,7 @@
 
                         <div class="form-group">
                           <label for="email">Adresse e-mail</label>
-                          <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="" aria-describedby="helpEmail" value='{{old('email', '')}}'>
+                          <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" aria-describedby="helpEmail" value='{{old('email', '')}}'>
                           @error('email')
                             <div class="invalid-feedback">{{$message}}</div>
                           @enderror
@@ -22,7 +22,7 @@
 
                         <div class="form-group">
                           <label for="password">Mot de passe</label>
-                          <input type="password" name="password" id="password" class="form-control  @error('password') is-invalid @enderror" placeholder="" aria-describedby="helpPassword">
+                          <input type="password" name="password" id="password" class="form-control  @error('password') is-invalid @enderror" aria-describedby="helpPassword">
                           @error('password')
                             <div class="invalid-feedback">{{$message}}</div>
                           @enderror

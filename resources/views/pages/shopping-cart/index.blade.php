@@ -243,7 +243,7 @@
                                     @else
 
                                     <div class="col-12 col-md-6 col-lg-12">
-                                        <button type="button" class="btn btn-primary w-100" onclick='load_url("/panier/{{$shoppingCart->id}}/commander")'>Commander ce panier</button>
+                                        <button type="button" class="btn btn-primary w-100" onclick='load_url("/panier/partage/{{$shoppingCart->id}}/commander")'>Commander ce panier</button>
                                     </div>
 
                                     @endif
@@ -257,7 +257,7 @@
                             <div class="card p-0 border-0 rounded-0">
                                 <div class="card-body row justify-content-center m-0 d-flex flex-column">
                                     <p>Pour partager votre panier vous pouvez copier le lien ci dessous :</p>
-                                    <p class='small text-center py-2 border rounded-0 text-dark bg-light'>https://www.bebes-lutins.fr/panier/{{$shoppingCart->id}}</p>
+                                    <p class='small text-center py-2 border rounded-0 text-dark bg-light'>https://www.bebes-lutins.fr/panier/partage/{{$shoppingCart->id}}</p>
                                 </div>
                             </div>
                         </div>

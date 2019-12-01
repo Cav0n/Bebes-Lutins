@@ -14,6 +14,8 @@
                 <li>Ajout du message du client dans la facture</li>
                 <li>Ajout de l'affichage des codes promos dans la facture des commandes</li>
                 <li>Correction des codes promos offrant la livraison gratuite</li>
+                <li>Correction du lien de partage de panier</li>
+                <li>Correction d'un bug permettant d'accéder à la page de paiement sans choisir de livraison</li>
                 <li>Le nom des produits dans les factures sont écrits en plus gros</li>
                 <li>Lors de la selection "Retrait à l'atelier" les informations de contact du client se complètent automatiquement</li>
                 <li>Les clients peuvent ecrire un message concernant leur commande à n'importe quel étape de leur commande</li>

@@ -73,17 +73,20 @@ class ShoppingCartController extends Controller
      */
     public function show(ShoppingCart $shopping_cart = null, Request $request)
     {
-        $shopping_cart = session('shopping_cart');
-        $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
-        $shopping_cart->updateProductsPrice();
-        $shopping_cart->updateShippingPrice();
-        $shopping_cart->save();
-        session(['shopping_cart' => $shopping_cart]);
+        $shopping_cart_infos = null;
+        if($shopping_cart == null){
+            $shopping_cart = session('shopping_cart');
+            $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
+            $shopping_cart->updateProductsPrice();
+            $shopping_cart->updateShippingPrice();
+            $shopping_cart->save();
+            session(['shopping_cart' => $shopping_cart]);
 
-        if(session('shopping_cart_infos') != null){
-            $shopping_cart_infos = session('shopping_cart_infos');
-            session(['shopping_cart_infos' => null]);
-        } else $shopping_cart_infos = null;
+            if(session('shopping_cart_infos') != null){
+                $shopping_cart_infos = session('shopping_cart_infos');
+                session(['shopping_cart_infos' => null]);
+            }
+        }
 
         return view('pages.shopping-cart.index')->withStep(0)->withShoppingCart($shopping_cart)->withShoppingCartInfos($shopping_cart_infos);
     }
@@ -212,8 +215,12 @@ class ShoppingCartController extends Controller
         $shopping_cart = session('shopping_cart');
         $shopping_cart = ShoppingCart::where('id', $shopping_cart->id)->first();
         session(['shopping_cart' => $shopping_cart]);
-        
-        return view('pages.shopping-cart.payment')->withStep(2)->withShoppingCart($shopping_cart);
+
+        if($shopping_cart->billing_address == null){
+            return redirect('/panier/livraison');
+        } else {
+            return view('pages.shopping-cart.payment')->withStep(2)->withShoppingCart($shopping_cart);
+        } 
     }
 
     public function showCreditCardPayment()

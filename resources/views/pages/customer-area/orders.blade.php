@@ -56,12 +56,18 @@
                         @endif
                         <div class="row m-0 py-2 border-top">
                         @foreach ($order->order_items as $item)
-                            <div class="row w-100 m-0 mt-2 border" @if($item->product->isHidden == 0 && $item->product->isDeleted == 0) onclick='load_url("/produits/{{$item->product->id}}")' @endif>
+                            <div class="row w-100 m-0 mt-2 border">
                                 <div class="col-12 col-lg-2 p-0" style="max-height: 10rem;">
                                     <img class='w-100 h-100' src='{{asset("images/products/".$item->product->mainImage)}}' style='object-fit:cover;'>
                                 </div>
                                 <div class="col-6 col-lg-6 p-2 p-lg-0 px-lg-2 d-flex flex-column justify-content-center">
-                                    <small>{{$item->productName}} @if(count($item->characteristics) > 0) @foreach($item->characteristics as $characteristic) - {{$characteristic->selectedOptionName}} @endforeach @endif</small>
+                                    <div>
+                                        @if($item->product->isHidden == 0 && $item->product->isDeleted == 0)
+                                        <a href='/produits/{{$item->product->id}}'><small>{{$item->productName}} @if(count($item->characteristics) > 0) @foreach($item->characteristics as $characteristic) - {{$characteristic->selectedOptionName}} @endforeach @endif</small></a>
+                                        @else
+                                        <small>{{$item->productName}} @if(count($item->characteristics) > 0) @foreach($item->characteristics as $characteristic) - {{$characteristic->selectedOptionName}} @endforeach  @endif</small> <span class="badge badge-warning">Plus disponible</span>
+                                        @endif
+                                    </div>
                                 </div>
                                 <div class="col-3 col-lg-2 p-0 d-flex flex-column justify-content-center">
                                     <p class='mb-0 text-right'>{{number_format($item->unitPrice, 2)}} €</p>

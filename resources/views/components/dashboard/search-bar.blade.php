@@ -2,7 +2,7 @@
     <div class="col">
         <div class="form-group">
             <div class="input-group mb-3">
-                <input type="search" name="search" id="search-bar" class="form-control" placeholder="Rechercher un produit" aria-describedby="helpSearch">
+                <input type="search" name="search" id="search-bar" class="form-control" aria-describedby="helpSearch">
 
                 <div class="input-group-append">
                     <button id='search-button' class="btn btn-secondary d-flex flex-column justify-content-center ld-over" type="button" onclick='search()'>

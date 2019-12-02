@@ -144,9 +144,9 @@ class OrderController extends Controller
         $order->status = $request['status'];
         $order->save();
 
-        $result = \App\OrderStatus::statusToEmailMessage($order);
+        //$result = \App\OrderStatus::statusToEmailMessage($order);
 
-        Mail::to($order->user->email)->send(new \App\Mail\OrderUpdated($order, $result['title'], $result['message']));
+        //Mail::to($order->user->email)->send(new \App\Mail\OrderUpdated($order, $result['title'], $result['message']));
     }
 
     /**

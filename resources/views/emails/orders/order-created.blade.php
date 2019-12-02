@@ -57,9 +57,6 @@
                                         Vous pouvez vérifier son état dans votre 
                                         <a href='https://www.bebes-lutins.fr/espace-client/commandes'>espace client</a>.<BR>
                                         <BR>
-                                        Belle journée,<BR>
-                                        L'équipe Bébés Lutins 💚<BR>
-                                        <BR>
                                         L'identifiant de cette commande est : <b>#{{$order->id}}</b><BR>
 
                                     </p>

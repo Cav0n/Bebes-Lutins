@@ -28,3 +28,7 @@
 #bottom-navbar .nav-item.show{
     background: #9ce849;
 }
+
+.swiper-slide{
+    cursor:pointer;
+}

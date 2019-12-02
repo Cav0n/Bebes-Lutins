@@ -5,9 +5,9 @@
         <div class="swiper-wrapper">
             <!-- Slides -->
             <div class="swiper-slide" onclick='load_url("/categories/Nouvelle-collection-TE2-Evolutives")'><img style='height:100%;width:100%;' src='{{asset('images/swiper/main/NewCollection.jpg')}}'></div>
-            <div class="swiper-slide"><img style='height:100%;width:100%;' src='{{asset('images/swiper/main/1.jpg')}}'></div>
-            <div class="swiper-slide"><img style='height:100%;width:100%;' src='{{asset('images/swiper/main/2.jpg')}}'></div>
-            <div class="swiper-slide"><img style='height:100%;width:100%;' src='{{asset('images/swiper/main/3.jpg')}}'></div>
+            <div class="swiper-slide" onclick='load_url("/categories/Couches-lavables-TE2-Tout-en-2")'><img style='height:100%;width:100%;' src='{{asset('images/swiper/main/1.jpg')}}'></div>
+            <div class="swiper-slide" onclick='load_url("/en-savoir-plus/qui-sommes-nous")'><img style='height:100%;width:100%;' src='{{asset('images/swiper/main/2.jpg')}}'></div>
+            <div class="swiper-slide" onclick='load_url("/categories/Packs-et-kits-de-couches-lavables")'><img style='height:100%;width:100%;' src='{{asset('images/swiper/main/3.jpg')}}'></div>
         </div>
         <!-- If we need pagination -->
         <div class="swiper-pagination"></div>

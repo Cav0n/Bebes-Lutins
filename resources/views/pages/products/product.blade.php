@@ -343,6 +343,8 @@ if (count($product->reviews) > 0){
 
 @include('components.public.popups.add-to-cart2')
 
+@include('components.public.popups.product-image')
+
 @auth
 @if(Auth::user()->wishlist != null)
 <script>
@@ -426,6 +428,15 @@ if (count($product->reviews) > 0){
 </script>
 @endif
 @endauth
+
+{{-- prepare page --}}
+<script>
+    $(document).ready(function(){
+        $('#big-image').on('click', function(){
+            $('#productImageModal').modal('show');
+        });
+    });
+</script>
 
 {{-- ADD TO CART --}}
 <script>
@@ -569,6 +580,7 @@ if (count($product->reviews) > 0){
 <script>
     function change_main_image(img){
         $('#big-image').attr('src', img.attr('src'));
+        $('#productImageModal-img').attr('src', img.attr('src'));
     }
 </script>
 

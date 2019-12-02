@@ -10,6 +10,7 @@
             <h2 class="h6">Mise à jour 5.0.2.1</h2>
             <ul>
                 <li>Ajout de la première catégorie parente dans le fil d'ariane de la page de produit</li>
+                <li>Ajout d'un popup qui affiche l'image du produit en grand lorsque l'on clique dessus (dans la page de produit)</li>
                 <li>Création de l'identifiant d'une catégorie lors de sa création</li>
                 <li>Correction d'un bug qui rendait illisible le changement de statut d'une commande</li>
             </ul>

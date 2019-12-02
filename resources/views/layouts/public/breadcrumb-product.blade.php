@@ -7,7 +7,9 @@
         @endforeach
         / <a href='/produits/{{$product->id}}' class='text-dark font-weight-light small mx-2'>{{$product->name}}</a>
     @else
-        / <a href='/produits' class='text-dark font-weight-light small mx-2'>Nos produits</a> / <a href='/produits/{{$product->id}}' class='text-dark font-weight-light small mx-2'>{{$product->name}}</a>
+        / <a href='/produits' class='text-dark font-weight-light small mx-2'>Nos produits</a>
+        @if($product->categories->first() != null) / <a href='/categories/{{$product->categories->first()->id}}' class='text-dark font-weight-light small mx-2'>{{$product->categories->first()->name}}</a> @endif
+        / <a href='/produits/{{$product->id}}' class='text-dark font-weight-light small mx-2'>{{$product->name}}</a>
     @endif
     
 </span>

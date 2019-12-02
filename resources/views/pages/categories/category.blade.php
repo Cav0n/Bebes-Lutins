@@ -9,16 +9,7 @@
 <main id='category-main' class='container-fluid my-4 px-4'>
     <div class="row justify-content-center">
         <div class="col-lg-10">
-            <div class="row">
-                <div class="col-12">
-                    <p>
-                        <a href='/'>Accueil</a>
-                        @foreach ($category->generateBreadcrumb() as $item)
-                            / <a href='/categories/{{$item->id}}'>{{$item->name}}</a>
-                        @endforeach
-                    </p>
-                </div>
-            </div>
+            @include('layouts.public.breadcrumb-category')
             <div class="row">
                 <div class="col-12 col-sm-10 col-md-8 col-lg-7">
                     <h1 class='w-100 font-weight-bold'>{{$category->name}}</h1>

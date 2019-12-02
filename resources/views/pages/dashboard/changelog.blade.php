@@ -10,6 +10,7 @@
             <h2 class="h6">Mise à jour 5.0.2.1</h2>
             <ul>
                 <li>Création de l'identifiant d'une catégorie lors de sa création</li>
+                <li>Correction d'un bug qui rendait illisible le changement de statut d'une commande</li>
             </ul>
         </div>
         <div class='update-infos-container py-2'>

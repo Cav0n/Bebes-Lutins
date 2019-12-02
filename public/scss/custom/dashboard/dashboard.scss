@@ -69,10 +69,6 @@ table tr.hidden{
     cursor: pointer;
 }
 
-.status-selector:hover{
-    background: #c8f597 !important;
-}
-
 .status-selector.selected{
     background: $primary !important;
 }

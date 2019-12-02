@@ -132,6 +132,7 @@ class CategoryController extends Controller
         $mainImageName = $request['main_image_name'];
 
         $category = new Category();
+        $category->id = \App\IDCreator::stringToId($request['name']);
         $category->name = $request['name'];
         $category->description = $request['description'];
         $category->rank = $request['rank'];

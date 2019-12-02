@@ -7,6 +7,12 @@
             Notes de mise à jour
         </h1>
         <div class='update-infos-container py-2'>
+            <h2 class="h6">Mise à jour 5.0.2.1</h2>
+            <ul>
+                <li>Création de l'identifiant d'une catégorie lors de sa création</li>
+            </ul>
+        </div>
+        <div class='update-infos-container py-2'>
             <h2 class="h6">Mise à jour 5.0.2</h2>
             <ul>
                 <li>Ajout du champ "téléphone" dans le formulaire de création de compte</li>

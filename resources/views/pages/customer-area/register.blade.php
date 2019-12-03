@@ -44,7 +44,8 @@
                         <div class="form-group mb-2">
                           <label for="phone" class='mb-0'>Numéro de téléphone</label>
                           <input type="phone" name="phone" id="phone" class="form-control @error('phone') is-invalid @enderror" aria-describedby="helpPhone" value='{{old('phone', '')}}'>
-                          <small id="helpPhone" class="form-text text-muted">Votre numéro de téléphone n'est pas obligatoire mais nous permet de vous contacter plus facilement</small>
+                          <small id="helpPhone" class="form-text text-muted">Votre numéro de téléphone n'est pas obligatoire mais nous permet de vous contacter 
+                            plus facilement en cas de besoin pour traiter votre commande</small>
                           @error('phone')
                             <div class="invalid-feedback">{{$message}}</div>
                           @enderror

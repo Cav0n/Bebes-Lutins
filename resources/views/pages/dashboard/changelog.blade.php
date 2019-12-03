@@ -7,6 +7,23 @@
             Notes de mise à jour
         </h1>
         <div class='update-infos-container py-2'>
+            <h2 class="h6">Mise à jour 5.0.3</h2>
+            <ul>
+                <li>La quantité dans le récapitulatif de commande s'affiche désormais avant le prix unitaire de chaque produits</li>
+                <li>Lorsque l'on clique sur une image dans les manuels d'utilisation elles s'ouvrent en grand dans un nouvel onglet</li>
+                <li>Changement dans l'entete du site sur mobile :</li>
+                <li>Le bouton de déconnexion dans l'espace client affiche une roue de chargement lorsque l'on clique dessus.</li>
+                <br>
+                <li>Modification de l'en-tête du site (header) sur mobile :
+                    <ul>
+                        <li>Correction du lien "A propos", renommé en "Qui sommes nous" et redirige vers la bonne page</li>
+                        <li>Ajout du lien "Guide et conseils"</li>
+                        <li>Lorsque l'utilisateur est connecté, le lien "Se connecter" devient "Mon compte" et un bouton de déconnexion apparait</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class='update-infos-container py-2'>
             <h2 class="h6">Mise à jour 5.0.2.1</h2>
             <ul>
                 <li>Ajout de la première catégorie parente dans le fil d'ariane de la page de produit</li>

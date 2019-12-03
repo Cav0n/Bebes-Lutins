@@ -54,7 +54,13 @@ $parent_categories = App\Category::where('parent_id', null)->where('isDeleted', 
             
             <ul class="navbar-nav mt-2 px-3 mt-lg-0 d-flex d-lg-none">
                 <li class="nav-item transition">
-                    <a class="nav-link text-dark" href="/espace-client">Mon compte</a>
+                    <a class="nav-link text-dark" href="/espace-client">
+                        @auth
+                        Mon compte
+                        @endauth 
+                        @guest
+                        Se connecter
+                        @endguest</a>
                 </li>
                 <li class="nav-item transition">
                     <a class="nav-link text-dark" href="/panier">Mon panier</a>
@@ -70,8 +76,21 @@ $parent_categories = App\Category::where('parent_id', null)->where('isDeleted', 
                     </div>
                 </li>
                 <li class="nav-item transition">
-                    <a class="nav-link text-dark" href="/panier">A propos</a>
+                    <a class="nav-link text-dark" href="/en-savoir-plus/guide-et-conseils">Guides et conseils</a>
                 </li>
+                <li class="nav-item transition">
+                    <a class="nav-link text-dark" href="/en-savoir-plus/qui-sommes-nous">Qui sommes nous ?</a>
+                </li>
+
+                @auth
+                <div class="dropdown-divider"></div>
+                <li class="nav-item transition mb-2">
+                    <button type="button" class="btn btn-dark ld-ext-right" onclick='logout($(this))'>
+                        Se déconnecter
+                        <div class='ld ld-hourglass ld-spin-fast'></div>
+                    </button>
+                </li> 
+                @endauth
             </ul>
         </div>
     </nav>
@@ -160,5 +179,32 @@ $parent_categories = App\Category::where('parent_id', null)->where('isDeleted', 
             $('.dropdown-menu').removeClass('show');
         }
     });
+    </script>
+    
+    <script>
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+        
+    function refresh_page(){
+        location.reload();
+    }
+
+    function logout(btn)
+    {
+        $.ajax({
+            url: "/logout",
+            type: 'POST',
+            success: function(data){
+                refresh_page();
+            },
+            beforeSend: function() {
+                btn.addClass('running');
+            }
+        })   
+    }
     </script>
 </header>

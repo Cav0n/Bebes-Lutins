@@ -191,14 +191,14 @@
             <div class='pt-3'>
                 <h2 class='h4'>En image</h2>
                 <div class="row">
-                    <div class="col-4 my-2 my-lg-2">
-                        <img class='w-100' src='{{asset('images/utils/manual/Mode-Emploi-Colombine.jpg')}}'>
+                    <div class="col-12 col-lg-4 my-2 my-lg-2">
+                        <img class='w-100' src='{{asset('images/utils/manual/Mode-Emploi-Colombine.jpg')}}' onclick='load_url_in_new_tab("/images/utils/manual/Mode-Emploi-Colombine.jpg")' style='cursor:pointer'>
                     </div>
-                    <div class="col-4 my-2 my-lg-2">
-                        <img class='w-100' src='{{asset('images/utils/manual/Mode-Emploi-CoucheCulotte.jpg')}}'>
+                    <div class="col-12 col-lg-4 my-2 my-lg-2">
+                        <img class='w-100' src='{{asset('images/utils/manual/Mode-Emploi-CoucheCulotte.jpg')}}' onclick='load_url_in_new_tab("/images/utils/manual/Mode-Emploi-CoucheCulotte.jpg")' style='cursor:pointer'>
                     </div>
-                    <div class="col-4 my-2 my-lg-2">
-                        <img class='w-100' src='{{asset('images/utils/manual/Mode-Emploi-Papillon.jpg')}}'>
+                    <div class="col-12 col-lg-4 my-2 my-lg-2">
+                        <img class='w-100' src='{{asset('images/utils/manual/Mode-Emploi-Papillon.jpg')}}' onclick='load_url_in_new_tab("/images/utils/manual/Mode-Emploi-Papillon.jpg")' style='cursor:pointer'>
                     </div>
                 </div>
             </div>

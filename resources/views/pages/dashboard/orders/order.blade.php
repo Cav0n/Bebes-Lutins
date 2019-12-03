@@ -51,8 +51,8 @@
                 <thead>
                     <tr>
                         <th class='border-bottom-0'>Produits</th>
-                        <th class='border-bottom-0 text-right d-none d-sm-table-cell'>Prix unitaire TTC</th>
                         <th class='border-bottom-0 text-center'>Quantité</th>
+                        <th class='border-bottom-0 text-right d-none d-sm-table-cell'>Prix unitaire TTC</th>
                         <th class='border-bottom-0 text-right'>TOTAL TTC</th>
                     </tr>
                 </thead>
@@ -60,8 +60,8 @@
                     @foreach ($order->order_items as $item)
                     <tr>
                         <td class="h5">@if($item->product->reference != null){{$item->product->reference}} - @endif{{$item->productName}}</td>
-                        <td class='text-right d-none d-sm-table-cell h5'>{{number_format($item->unitPrice, 2)}} €</td>
                         <td class='text-center h5'>{{$item->quantity}}</td>
+                        <td class='text-right d-none d-sm-table-cell h5'>{{number_format($item->unitPrice, 2)}} €</td>
                         <td class='text-right h5'>{{number_format($item->unitPrice * $item->quantity, 2)}} €</td>
                     </tr>
                     @endforeach

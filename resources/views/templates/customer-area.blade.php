@@ -65,38 +65,15 @@
                     @yield('body')
                 </div>
                 <div class="card-footer bg-white text-muted">
-                    <button type="button" class="btn btn-dark" onclick='logout()'>Se déconnecter</button>
+                    <button type="button" class="btn btn-dark ld-ext-right" onclick='logout($(this))'>
+                        Se déconnecter
+                        <div class='ld ld-hourglass ld-spin-fast'></div>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </main>
-
-<script>
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    
-    function logout()
-    {
-        $.ajax({
-            url: "/logout",
-            type: 'POST',
-            success: function(data){
-                refresh_page();
-            },
-            beforeSend: function() {
-    
-            }
-        })   
-    }
-    
-    function refresh_page(){
-        location.reload();
-    }
-</script>
 <script>
     function load_url(url){
         document.location.href=url;

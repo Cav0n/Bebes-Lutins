@@ -75,5 +75,10 @@
 function load_url(url){
     document.location.href=url;
 }
+
+function load_url_in_new_tab(url){
+    var win = window.open(url, '_blank');
+    win.focus();
+}
 </script>
 </html>

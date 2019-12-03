@@ -6,7 +6,7 @@
             <th class='border-top-0 col-2 text-center'>Date</th>
             <th class='border-top-0 col-4'>Client</th>
             <th class='border-top-0 col-2 text-center'>Prix</th>
-            <th class='border-top-0 col-4 text-center'>Status</th>
+            <th class='border-top-0 col-4 text-center'>Statut</th>
         </tr>
     </thead>
     <tbody>

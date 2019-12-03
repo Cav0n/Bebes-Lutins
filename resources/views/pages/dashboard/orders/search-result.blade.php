@@ -6,7 +6,7 @@
                 <th class='border-top-0 col-2 d-none d-md-table-cell text-center'>Date</th>
                 <th class='border-top-0 col-4'>Client</th>
                 <th class='border-top-0 col-4 col-md-2 text-center'>Prix</th>
-                <th class='border-top-0 col-4 text-center'>Status</th>
+                <th class='border-top-0 col-4 text-center'>Statut</th>
             </tr>
         </thead>
         <tbody id='search-table-body'>
@@ -21,7 +21,7 @@
                 <th class='border-top-0 col-2 d-none d-md-table-cell text-center'>Date</th>
                 <th class='border-top-0 col-4'>Client</th>
                 <th class='border-top-0 col-4 col-md-2 text-center'>Prix</th>
-                <th class='border-top-0 col-4 text-center'>Status</th>
+                <th class='border-top-0 col-4 text-center'>Statut</th>
             </tr>
         </thead>
         <tbody id='search-possible-table-body'>

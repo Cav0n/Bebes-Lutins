@@ -1,3 +1,8 @@
+@php
+  //or, if you DO want a file to cache, use:
+  header("Cache-Control: max-age=2592000"); //30days (60sec * 60min * 24hours * 30days)
+@endphp
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -18,7 +23,7 @@
     <script src="{{asset('js/input-spinner/input-spinner.js')}}"></script>
 
     {{-- Custom CSS --}}
-    <link media="all" type="text/css" rel="stylesheet" href="{{asset('scss/custom/main.css')}}">
+    <link rel="stylesheet" href="{{asset('scss/custom/main.css')}}" media="all" type="text/css">
 
     <!-- FontAwesome icons -->
     <script src="{{asset('js/fontawesome/fontawesome.js')}}"></script>

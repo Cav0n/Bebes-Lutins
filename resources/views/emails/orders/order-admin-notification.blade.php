@@ -1,4 +1,4 @@
-@extends('templates.email')
+@extends('templates.simple-email')
 
 @section('title', "Merci pour votre commande !")
 

@@ -71,8 +71,8 @@
                             <div class="col-8 p-2 d-flex flex-column">
                                 <div class="row m-0">
                                     <div class="col-12 p-0">
-                                        <a href='/produits/{{$item->product->id}}' class='mb-0 font-weight-bold text-dark d-flex d-md-none item-name-cropped'>{{$item->product->name}}@if(count($item->characteristics) > 0) @foreach($item->characteristics as $characteristic) - {{$characteristic->selectedOptionName}} @endforeach @endif</a> 
-                                        <a href='/produits/{{$item->product->id}}' class='mb-0 font-weight-bold text-dark d-none d-md-flex item-name-full'>{{$item->product->name}}@if(count($item->characteristics) > 0) @foreach($item->characteristics as $characteristic) - {{$characteristic->selectedOptionName}} @endforeach @endif</a> 
+                                        <a href='/produits/{{$item->product->id}}' class='mb-0 font-weight-bold text-dark d-flex d-md-none item-name-cropped'>{{$item->name}}</a> 
+                                        <a href='/produits/{{$item->product->id}}' class='mb-0 font-weight-bold text-dark d-none d-md-flex item-name-full'>{{$item->name}}</a> 
                                     </div>
                                 </div>
                                 <div class="row m-0 mb-auto">

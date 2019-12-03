@@ -99,6 +99,13 @@ if (count($product->reviews) > 0){
                                         <input id="item-quantity" class="spinnerProduct h-100" type="number" name="quantity" value="1" min="1" max="{{$product->stock}}" step="1" @if($product->stock <= 1) disabled @endif />
                                     </div>
     
+                                    @foreach($product->characteristics as $characteristic)
+                                    @isset($characteristic->message)
+                                    <div class='w-100 my-2 p-2 border bg-light text-center font-weight-bold'>
+                                        <p class='text-danger mb-0'>{{$characteristic->message}}</p>
+                                    </div>
+                                    @endisset
+                                    @endforeach
                                     {{-- CHARACTERISTICS --}}
                                     @if(count($product->characteristics) > 0)
                                     <div id='characteristics-container' class='w-100 my-2 p-2 border bg-light text-center font-weight-bold'>
@@ -115,33 +122,6 @@ if (count($product->reviews) > 0){
                                         @endforeach
                                     </div>
                                     @endif
-    
-                                    {{-- ADD TO CART BUTTON --}}
-                                    {{-- <span class="d-inline-block w-100" data-trigger="hover" data-toggle="popover" data-content="Veuillez fournir les informations manquantes.">
-                                        <button type="button" class="btn btn-outline-dark rounded-0 w-100 open-product-added-dialog"
-                                            @if($product->stock > 0) 
-                                                @if(count($product->characteristics) == 0) 
-
-                                                    data-toggle="modal" 
-                                                    data-target="#addToCartPopup" 
-                                                    data-product_id="{{$product->id}}"
-                                                    data-product_name="{{$product->name}}"
-                                                    data-product_image="{{asset('images/products/' . $product->mainImage)}}"
-                                                    data-product_price="{{number_format($product->price, 2, ',', " ")}}"
-                                                    data-product_quantity="1"
-
-                                                    @else onclick='load_url("/produits/{{$product->id}}")'
-                                                    @endif
-                                                @endif style='font-size:0.9rem !important;' @if($product->stock <= 0) disabled @endif>
-
-                                                @if($product->stock > 0)
-                                                    @if(count($product->characteristics) == 0) Ajouter au panier
-                                                    @else Voir le produit
-                                                    @endif
-                                                @else Rupture de stock
-                                            @endif
-                                        </button>
-                                    </span> --}}
 
                                     {{-- ADD TO CART BUTTON 2 --}}
                                     <span class="d-inline-block w-100" data-trigger="hover" data-toggle="popover" data-content="Veuillez fournir les informations manquantes.">

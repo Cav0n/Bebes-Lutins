@@ -296,6 +296,7 @@ class ProductController extends Controller
             foreach($request['characteristics'] as $r_characteristic){
                 $characteristic = new ProductCharacteristic();
                 $characteristic->name = $r_characteristic['name'];
+                $characteristic->message = $r_characteristic['message'];
                 $characteristic->product_id = $product->id;
                 $characteristic->save();
                 foreach($r_characteristic['options'] as $r_option){
@@ -439,6 +440,8 @@ class ProductController extends Controller
             foreach($request['characteristics'] as $r_characteristic){
                 $characteristic = new ProductCharacteristic();
                 $characteristic->name = $r_characteristic['name'];
+                if(isset($r_characteristic['message'])) $characteristic->message = $r_characteristic['message'];
+                else $characteristic->message = null;
                 $characteristic->product_id = $product->id;
                 $characteristic->save();
                 foreach($r_characteristic['options'] as $r_option){

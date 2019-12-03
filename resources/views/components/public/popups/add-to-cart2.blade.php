@@ -36,6 +36,20 @@
         productID = $('#addToCartPopup #product-id').val();
         quantity = $('#addToCartPopup #quantity').val();
         shoppingCartID = $('#addToCartPopup #shopping-cart-id').val();
+
+        
+        if ($('#characteristics-container').length){
+            characteristics = [];
+            $('.characteristic').each(function(){
+                if ($(this).val().length != 0) {
+                    char_name = $('label[for="'+ $(this).attr('name') +'"]').text();
+
+                    characteristics.push(char_name + ': ' + $(this).val());
+                }
+            });
+        } else characteristics = null;
+        
+
         $.ajax({
             url: "/produits2/" + productID,
             type: 'POST',
@@ -43,10 +57,19 @@
             success: function(response){
                 console.log(response);
 
+                name = response.name;
+
+                if(characteristics != null){
+                    characteristics.forEach(function(c){
+                        name = name + " - " + c;
+                    })
+                }
+
                 $("#addToCartPopup .modal-product-image").attr('src', '/images/products/' + response.mainImage );
-                $("#addToCartPopup .modal-product-name").html(response.name.bold());
+                $("#addToCartPopup .modal-product-name").html(name.bold());
                 $("#addToCartPopup .modal-product-price").text(response.price + ' € x ' + quantity);
-                add_to_cart(shoppingCartID, productID, quantity);
+
+                add_to_cart(shoppingCartID, productID, quantity, name);
             }
         }) 
     })
@@ -64,11 +87,11 @@
         location.reload();
     }
 
-    function add_to_cart(shoppingCartID, productID, quantity){
+    function add_to_cart(shoppingCartID, productID, quantity, name){
         $.ajax({
             url: "/panier/add_item",
             type: 'POST',
-            data: { shopping_cart_id: shoppingCartID, product_id: productID, quantity:quantity },
+            data: { shopping_cart_id: shoppingCartID, product_id: productID, quantity:quantity, name:name },
             success: function(data){
                 console.log('Quantité modifié avec succés.');
             },

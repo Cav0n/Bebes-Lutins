@@ -16,6 +16,7 @@ class CreateProductCharacteristicsTable extends Migration
         Schema::create('product_characteristics', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('message')->nullable();
 
             $table->string('product_id');
 

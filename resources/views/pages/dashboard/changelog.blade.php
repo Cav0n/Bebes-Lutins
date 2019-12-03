@@ -13,6 +13,9 @@
                 <li>Lorsque l'on clique sur une image dans les manuels d'utilisation elles s'ouvrent en grand dans un nouvel onglet</li>
                 <li>Changement dans l'entete du site sur mobile :</li>
                 <li>Le bouton de déconnexion dans l'espace client affiche une roue de chargement lorsque l'on clique dessus.</li>
+                <li>Ajout des caractéristiques simplifiées dans le panier ("Nom du produit " - "caractéristique"...)</li>
+                <li>Ajout des caractéristiques simplifiées dans le résumé de commande ("Nom du produit " - "option" - "caractéristique"...)</li>
+                <li>Ajout d'un message d'aide personnalisé sur la page du produit pour chaque caractéristiques (en rouge)</li>
                 <br>
                 <li>Modification de l'en-tête du site (header) sur mobile :
                     <ul>

@@ -183,6 +183,13 @@
                 <input type="text" class="form-control characteristic_name" name="characteristics[`+ characteristics_index +`][name]" aria-describedby="helpCharacteristicName" placeholder="Taille" required>
                 <small id="helpCharacteristicName" class="form-text text-muted">Par exemple "taille", "couleur"...</small>
             </div>
+
+            <div class="form-group">
+                <label for="message">Message d'aide</label>
+                <textarea class="form-control" name="characteristics[`+ characteristics_index +`][message]" id="message" aria-describedby="helpMessage" >{{$characteristic->message}}</textarea>
+                <small id="helpMessage" class="form-text text-muted">Par exemple : "Laissez nous vos choix de coloris dans le champ commentaires dans votre panier"</small>
+            </div>
+
             <div class="characteristic-options row m-0 d-flex flex-column">
                 <label>Options</label>
 

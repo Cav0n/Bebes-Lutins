@@ -15,6 +15,7 @@ class CreateShoppingCartItemsTable extends Migration
     {
         Schema::create('shopping_cart_items', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name')->nullable();
             $table->integer('quantity')->unsigned();
             $table->boolean('hasReduction')->default(0);
             $table->decimal('newPrice', 10, 2)->nullable();

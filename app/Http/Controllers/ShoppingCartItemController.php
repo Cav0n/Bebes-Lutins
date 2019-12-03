@@ -14,11 +14,12 @@ class ShoppingCartItemController extends Controller
         $shopping_cart = session('shopping_cart');
         $product_id = $request['product_id'];
 
-        if(! ShoppingCartItem::where('shopping_cart_id', $shopping_cart->id)->where('product_id', $product_id)->exists()){
-            $this->store($request);
-        } else {
-            $shoppingCartItem = ShoppingCartItem::where('shopping_cart_id', $shopping_cart->id)->where('product_id', $product_id)->first();
+
+        if(ShoppingCartItem::where('shopping_cart_id', $shopping_cart->id)->where('product_id', $product_id)->where('name', $request['name'])->exists()){
+            $shoppingCartItem = ShoppingCartItem::where('shopping_cart_id', $shopping_cart->id)->where('product_id', $product_id)->where('name', $request['name'])->first();
             $this->update($request, $shoppingCartItem);
+        } else {
+            $this->store($request);
         }
     }
 
@@ -55,6 +56,7 @@ class ShoppingCartItemController extends Controller
         $quantity = $request['quantity'];
 
         $item = new ShoppingCartItem();
+        $item->name = $request['name'];
         $item->quantity = $quantity;
         $item->shopping_cart_id = $shopping_cart->id;
         $item->product_id = $product->id;
@@ -113,12 +115,7 @@ class ShoppingCartItemController extends Controller
         $shopping_cart = session('shopping_cart');
         $new_quantity = $request['quantity'];
         $stock = $shoppingCartItem->product->stock;
-
-        $existing_quantity = 0;
-        foreach(ShoppingCartItem::where('shopping_cart_id', $shoppingCartItem->shoppingCart->id)->where('product_id', $shoppingCartItem->product->id)->get() as $item){
-            $existing_quantity += $item->quantity;
-        }
-
+        
         $shoppingCartItem->quantity += $new_quantity;
         if($shoppingCartItem->quantity > $stock) $shoppingCartItem->quantity = $stock; 
         $shoppingCartItem->save();

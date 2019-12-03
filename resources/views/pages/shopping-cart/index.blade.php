@@ -71,8 +71,8 @@
                             <div class="col-8 p-2 d-flex flex-column">
                                 <div class="row m-0">
                                     <div class="col-12 p-0">
-                                        <a href='/produits/{{$item->product->id}}' class='mb-0 font-weight-bold text-dark d-flex d-md-none item-name-cropped'>{{$item->name}}</a> 
-                                        <a href='/produits/{{$item->product->id}}' class='mb-0 font-weight-bold text-dark d-none d-md-flex item-name-full'>{{$item->name}}</a> 
+                                        <a href='/produits/{{$item->product->id}}' class='mb-0 font-weight-bold text-dark d-flex d-md-none item-name-cropped'>@if($item->name != null) {{$item->name}} @else {{$item->product->name}} @endif</a> 
+                                        <a href='/produits/{{$item->product->id}}' class='mb-0 font-weight-bold text-dark d-none d-md-flex item-name-full'>@if($item->name != null) {{$item->name}} @else {{$item->product->name}} @endif</a> 
                                     </div>
                                 </div>
                                 <div class="row m-0 mb-auto">
@@ -114,12 +114,12 @@
 
                     <div class="card p-0 m-0 border-0 rounded-0 mb-2">
                         <div class="card-header bg-white">
-                            <h1 class='h5 mb-0'>Ajouter un message</h1>
+                            <h1 class='h5 mb-0'>Ajouter un commentaire</h1>
                         </div>
                         <div class='card-body'>
                             <p>Si vous souhaitez ajouter des précisions sur votre commande vous pouvez nous laisser un message ici : </p>
                             <div class="form-group">
-                                <label for="customer-message">Votre message</label>
+                                <label for="customer-message">Votre commentaire</label>
                                 <div class='textarea-container ld-over'>
                                     <textarea class="form-control" name="customer-message" id="customer-message" rows="4">@if($shoppingCart->customerMessage != null){{$shoppingCart->customerMessage}}@endif</textarea>
                                     <div class="ld ld-ring ld-spin"></div>

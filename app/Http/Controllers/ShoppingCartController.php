@@ -354,7 +354,8 @@ class ShoppingCartController extends Controller
             $item->product->stock = $item->product->stock - $item->quantity;
             $item->product->save();
             $order_item = new OrderItem();
-            $order_item->productName = $item->name;
+            if($item->name != null) $order_item->productName = $item->name;
+            else $order_item->productName = $item->product->name;
             $order_item->quantity = $item->quantity;
             $order_item->unitPrice = $item->product->price;
             $order_item->product_id = $item->product->id;
@@ -376,6 +377,7 @@ class ShoppingCartController extends Controller
         session(['shopping_cart' => null]);
 
         Mail::to($order->user->email)->send(new \App\Mail\OrderCreated($order));
+        Mail::to('contact@bebes-lutins.fr')->send(new \App\Mail\OrderAdminNotification($order));
 
         return redirect("/merci");
     }

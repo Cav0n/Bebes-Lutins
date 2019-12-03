@@ -102,14 +102,14 @@
                         </div>
                     </div>
                     
-                    <div class="card p-0 m-0 border-0 rounded-0 my-2">
+                    <div class="card p-0 m-0 border-0 rounded-0 mb-2">
                         <div class="card-header bg-white">
-                            <h1 class='h5 mb-0'>Ajouter un message</h1>
+                            <h1 class='h5 mb-0'>Ajouter un commentaire</h1>
                         </div>
                         <div class='card-body'>
                             <p>Si vous souhaitez ajouter des précisions sur votre commande vous pouvez nous laisser un message ici : </p>
                             <div class="form-group">
-                                <label for="customer-message">Votre message</label>
+                                <label for="customer-message">Votre commentaire</label>
                                 <div class='textarea-container ld-over'>
                                     <textarea class="form-control" name="customer-message" id="customer-message" rows="4">@if($shoppingCart->customerMessage != null){{$shoppingCart->customerMessage}}@endif</textarea>
                                     <div class="ld ld-ring ld-spin"></div>

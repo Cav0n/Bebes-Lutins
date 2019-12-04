@@ -16,6 +16,7 @@
                 <li>Ajout des caractéristiques simplifiées dans le panier ("Nom du produit " - "caractéristique"...)</li>
                 <li>Ajout des caractéristiques simplifiées dans le résumé de commande ("Nom du produit " - "option" - "caractéristique"...)</li>
                 <li>Ajout d'un message d'aide personnalisé sur la page du produit pour chaque caractéristiques (en rouge)</li>
+                <li>Ajout des miniatures sur la fiche produit sur mobile et tablette</li>
                 <li>Correction des dates (commentaires des produits, affichage des commandes)</li>
                 <br>
                 <li>Modification de l'en-tête du site (header) sur mobile :

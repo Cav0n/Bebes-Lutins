@@ -47,6 +47,7 @@ if (count($product->reviews) > 0){
                 <div class="col-10 col-lg-12 p-0 py-3">
                     <div class="row m-0">
 
+                        {{-- IMAGES --}}
                         <div class="col-md-3">
                             <div class="row">
 
@@ -67,10 +68,21 @@ if (count($product->reviews) > 0){
                                     <div class='main-image-container w-100'>
                                         <img id='big-image' class='w-100 h-100' src='{{asset('images/products/'. $product->mainImage)}}'>
                                     </div>
+                                    <div class='thumbnails-container-mobile d-flex d-xl-none w-100 mt-2'>
+                                        <div class='thumbnail-container w-25'>
+                                            <img class='w-100 h-100' src='{{asset('images/products/'. $product->mainImage)}}' onclick='change_main_image($(this))' style='cursor:pointer'>
+                                        </div>
+                                        @foreach ($product->images->skip(1) as $image) @if(file_exists(public_path('/images/products/thumbnails/'. $image->name)))
+                                        <div class='thumbnail-container w-25'>
+                                            <img class='w-100 h-100' src='{{asset('images/products/thumbnails/'. $image->name)}}' onclick='change_main_image($(this))' style='cursor:pointer'>
+                                        </div>
+                                        @endif @endforeach
+                                    </div>
                                     <div class='social-container mb-2 mb-lg-0'>
                                         <a name="facebook-share-btn" id="facebook-share-btn" class="btn btn-light rounded-0 w-100 mt-2 p-0 d-flex" target="_blank" href="http://www.facebook.com/sharer.php?u=https://www.bebes-lutins.fr/produits/{{$product->id}}" role="button">
                                             <div style='height:2rem;width:2rem;'><img class='svg social-button-icon' src='{{asset('images/icons/facebook.svg')}}'></div>
                                             <p class='mb-0 d-flex flex-column justify-content-center ml-2 small'> - Partager sur Facebook</p></a>
+
                                         <a name="instagram-share-btn" id="facebook-share-btn" class="btn btn-light rounded-0 w-100 mt-2 p-0 d-flex" target="_blank" href="https://www.instagram.com/bebeslutins" role="button">
                                             <div style='height:2rem;width:2rem;'><img class='svg social-button-icon' src='{{asset('images/icons/instagram.svg')}}'></div>
                                             <p class='mb-0 d-flex flex-column justify-content-center ml-2 small'> - Notre page Instagram</p></a>
@@ -80,6 +92,7 @@ if (count($product->reviews) > 0){
                             </div>
                         </div>
 
+                        {{-- TITLE --}}
                         <div class="col-md-6 px-0 px-md-2 px-lg-3">
                             <div class='w-100 bg-white p-3'>
                                 <h1 id='product-title' class='h3 mb-0'>{{$product->name}}</h1>

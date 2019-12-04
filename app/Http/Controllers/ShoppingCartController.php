@@ -249,7 +249,8 @@ class ShoppingCartController extends Controller
             $item->product->stock = $item->product->stock - $item->quantity;
             $item->product->save();
             $order_item = new OrderItem();
-            $order_item->productName = $item->name;
+            if($item->name != null) $order_item->productName = $item->name;
+            else $order_item->productName = $item->product->name;
             $order_item->quantity = $item->quantity;
             $order_item->unitPrice = $item->product->price;
             $order_item->product_id = $item->product->id;
@@ -268,20 +269,20 @@ class ShoppingCartController extends Controller
         $order_id = $order->id;
         $total_price = $order->shippingPrice + $order->productsPrice;
 
-        $payline = new \App\Payment\paylineSDK(env("MERCHANT_ID"), env("ACCESS_KEY"), env("PROXY_HOST"), env("PROXY_PORT"), env("PROXY_LOGIN"), env("PROXY_PASSWORD"), env("ENVIRONMENT"));
-        $payline->returnURL = env("RETURN_URL").'/'. $order_id .'/';
-        $payline->cancelURL = env("CANCEL_URL").'/'. $order_id .'/';
-        $payline->notificationURL = env("NOTIFICATION_URL").'/'. $order_id .'/';
-        $payline->customPaymentPageCode = env("CUSTOM_PAYMENT_PAGE_CODE");
+        $payline = new \App\Payment\paylineSDK('55014688529519', 'c9NO9GpRWqosIUhpM76A', '', '', '', '', 'PROD');
+        $payline->returnURL = 'https://www.bebes-lutins.fr/payment_endpoint/'. $order_id .'/';
+        $payline->cancelURL = 'https://www.bebes-lutins.fr/cancel_payment/'. $order_id .'/';
+        $payline->notificationURL = 'https://www.bebes-lutins.fr/notification_payment/'. $order_id .'/';
+        $payline->customPaymentPageCode = 'UVxJNmK2iRpbjPUgDoTj';
 
 //VERSION
-        $array['version'] = env("WS_VERSION");
+        $array['version'] = '';
 
 // PAYMENT
         $array['payment']['amount'] = $total_price * 100;
         $array['payment']['currency'] = 978;
-        $array['payment']['action'] = env("PAYMENT_ACTION");
-        $array['payment']['mode'] = env("PAYMENT_MODE");
+        $array['payment']['action'] = '101';
+        $array['payment']['mode'] = 'CPT';
 
 // ORDER
         $array['order']['ref'] = $order_id;
@@ -289,10 +290,10 @@ class ShoppingCartController extends Controller
         $array['order']['currency'] = 978;
 
 // CONTRACT NUMBERS
-        $array['payment']['contractNumber'] = env("CONTRACT_NUMBER");
-        $contracts = explode(";",env("CONTRACT_NUMBER_LIST"));
+        $array['payment']['contractNumber'] = '1104366';
+        $contracts = explode(";",'');
         $array['contracts'] = $contracts;
-        $secondContracts = explode(";",env("SECOND_CONTRACT_NUMBER_LIST"));
+        $secondContracts = explode(";",'');
         $array['secondContracts'] = $secondContracts;
 
 // EXECUTE

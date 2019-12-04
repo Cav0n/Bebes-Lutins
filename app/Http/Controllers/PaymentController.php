@@ -94,6 +94,7 @@ class PaymentController extends Controller
             }
         }
 
+        return response()->json(['message' => 'ok'], 200);
     }
 
     public function verify(Request $request, Order $order)
@@ -102,7 +103,7 @@ class PaymentController extends Controller
 
         $token = $request['token'];
 
-        $paylineSDK = new \App\Payment\paylineSDK(env("MERCHANT_ID"), env("ACCESS_KEY"), env("PROXY_HOST"), env("PROXY_PORT"), env("PROXY_LOGIN"), env("PROXY_PASSWORD"), env("ENVIRONMENT"));
+        $paylineSDK = new \App\Payment\paylineSDK('55014688529519', 'c9NO9GpRWqosIUhpM76A', '', '', '', '', 'PROD');
         $payment_details = $paylineSDK->getWebPaymentDetails(['token'=>$token]);
         
         $result_code = $payment_details['result']['code'];

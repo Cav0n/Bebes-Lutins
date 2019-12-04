@@ -22,7 +22,11 @@
     <tbody>
         @foreach ($orders as $order)
         <tr class='d-flex' style='color:{{App\OrderStatus::statusToRGBColor($order->status)}}'>
-            <td class='col-2 small text-center mb-0' scope="row" onclick='load_in_new_tab("/dashboard/commandes/fiche/{{$order->id}}")'>{{$order->created_at}}</td>
+            
+            <td class='col-2 small text-center mb-0 d-none d-md-table-cell' scope="row" onclick='load_in_new_tab("/dashboard/commandes/fiche/{{$order->id}}")'>
+                {{$order->created_at->format('j / n / Y')}} <br>
+                {{$order->created_at->format('h:i:s')}} <br>
+            </td>
             
             <td class='col-4' onclick='load_in_new_tab("/dashboard/commandes/fiche/{{$order->id}}")'>
                 <p class='font-weight-bold mb-0'>{{$order->user->firstname}} {{$order->user->lastname}}</p>

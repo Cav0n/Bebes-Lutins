@@ -15,7 +15,7 @@
         <table class="table" style='table-layout:fixed'>
             <thead>
                 <tr>
-                    <th class='border-top-0'>Date</th>
+                    <th class='border-top-0 text-center'>Date</th>
                     <th class='border-top-0'>Client</th>
                     <th class='border-top-0'>Produit</th>
                     <th class='border-top-0 text-center'>Note</th>
@@ -24,10 +24,10 @@
             <tbody>
                 @foreach ($reviews as $review)
                 <tr onclick='load_url("/dashboard/clients/avis/{{$review->id}}")'>
-                    <td scope="row" class='small'>{{$review->created_at->formatLocalized('%e %B %Y')}}<BR>à {{$review->created_at->formatLocalized('%R')}}</td>
-                    <td>{{$review->customerPublicName}}</td>
-                    <td class='small'>{{$review->product->name}}</td>
-                    <td class='text-center'>{{$review->mark}} / 5</td>
+                    <td scope="row" class='small align-middle text-center'>{{$review->created_at->formatLocalized('%e %B %Y')}}<BR>à {{$review->created_at->formatLocalized('%R')}}</td>
+                    <td class='align-middle'>{{$review->customerPublicName}}</td>
+                    <td class='small align-middle'>{{$review->product->name}}</td>
+                    <td class='text-center align-middle'>{{$review->mark}} / 5</td>
                 </tr>
                 @endforeach
             </tbody>

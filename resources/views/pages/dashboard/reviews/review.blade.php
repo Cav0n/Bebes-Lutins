@@ -18,6 +18,20 @@
     </div>
     <div class="card-body">
         <div class="row">
+
+            <div class="col-12 mb-3 row m-0 p-0">
+                <div class='col-lg-2'>
+                    <img src='{{asset("images/products/". $review->product->mainImage)}}' class="w-100">
+                </div>
+                <div class='col-lg-10'>
+                    <div class="form-group d-flex flex-column justify-content-center h-100">
+                        <a id='product-name' href='/produits/{{$review->product->id}}' target="_blank">{{$review->product->name}}</a>
+                        {{-- <input type="text" class="form-control" name="customer-name" id="customer-name" aria-describedby="helpCustomerName" value="{{$review->product->name}}" disabled> --}}
+                        <small id="helpProductName" class="form-text text-muted">Le produit sur lequel figure le commentaire</small>
+                    </div>
+                </div>
+            </div>
+            
             <div class="col-lg-6">
                 <div class="form-group">
                     <label for="customer-name">Nom du client :</label>

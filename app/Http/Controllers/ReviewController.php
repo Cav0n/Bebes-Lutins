@@ -61,6 +61,7 @@ class ReviewController extends Controller
         $request->session()->flash('review-feedback', 'Votre commentaire a été envoyé.');
 
         Mail::to($review->customerEmail)->send(new \App\Mail\ReviewPosted($review));
+        Mail::to("contact@bebes-lutins.fr")->send(new \App\Mail\ReviewPostedAdministrationNotification($review));
 
         return redirect('/produits/' . $product->id)->withProduct($product);
     }

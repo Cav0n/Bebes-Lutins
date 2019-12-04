@@ -97,20 +97,13 @@ class ReviewController extends Controller
      */
     public function update(Request $request, Review $review)
     {
-        if($request['options'] == 'delete_response'){
-            $review->adminResponse = null;
-            $review->save();
-            $request->session()->flash('success-message', 'La réponse à bien été supprimée.');
-        } else {
-            $validated_data = $request->validate([
-                'admin-response' => 'required',
-            ]);
+        $review->adminResponse = $request['admin-response'];
+        $review->save();
 
-            $review->adminResponse = $validated_data['admin-response'];
-            $review->save();
-            $request->session()->flash('success-message', 'La réponse à bien été mis à jour.');
-        }
-        return redirect("/dashboard/clients/avis/" . $review->id);
+        $result['message'] = "Réponse envoyée.";
+        $result['code'] = 200;
+
+        return response()->json($result, $result['code']);
     }
 
     /**

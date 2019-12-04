@@ -26,7 +26,6 @@
                 <div class='col-lg-10'>
                     <div class="form-group d-flex flex-column justify-content-center h-100">
                         <a id='product-name' href='/produits/{{$review->product->id}}' target="_blank">{{$review->product->name}}</a>
-                        {{-- <input type="text" class="form-control" name="customer-name" id="customer-name" aria-describedby="helpCustomerName" value="{{$review->product->name}}" disabled> --}}
                         <small id="helpProductName" class="form-text text-muted">Le produit sur lequel figure le commentaire</small>
                     </div>
                 </div>
@@ -58,25 +57,12 @@
         <form class="row" action='/dashboard/clients/avis/repondre/{{$review->id}}' method="POST">
             @csrf
 
-            {{-- Errors --}}
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul class='mb-0'>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-                </ul>
-            </div>
-            @endif
-
             {{-- Success --}}
-            @if(session()->has('success-message'))
-            <div class="col-lg-12">
+            <div id="success-container" class="col-lg-12 d-none">
                 <div class="alert alert-success px-3 mb-0">
-                    <p class='text-success font-weight-bold mb-0'>{{session('success-message')}}</p>
+                    <p id='success-message' class='text-success font-weight-bold mb-0'>Tout est bon ✅</p>
                 </div>
             </div>
-            @endif
 
             <div class="col-lg-12">
                 <div class="form-group">
@@ -89,10 +75,14 @@
             </div>
             <div class="col-12">
                 <div class='d-flex'>
-                    <button type="submit" class="btn btn-secondary">Envoyer la réponse</button>
-                    <div class='ld-over' onclick='delete_response($(this), "{{$review->id}}")'>
-                        <button type="button" class="btn btn-danger ml-3">Supprimer la réponse</button>
+                    <button id='send-response-btn' type="button" class="btn btn-secondary ld-ext-right" onclick="send_response($(this))">
+                        Envoyer la réponse
                         <div class="ld ld-ring ld-spin"></div>
+                    </button>
+                    <button id='delete-response-btn' type="button" class="btn btn-danger ml-3 ld-ext-right" onclick='delete_response($(this))'>
+                        Supprimer la réponse
+                        <div class="ld ld-ring ld-spin"></div>
+                    </button>
                     </div>
                 </div>
             </div>
@@ -101,28 +91,56 @@
 </div>
 
 <script>
+// prepare AJAX
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
 
-function delete_response(btn, review_id){
+// prepare page
+$(document).ready(function(){
+    toggle_buttons();
+});
+$('#admin-response').on('input', function() {
+  toggle_buttons();
+});
+
+function toggle_buttons(){
+    if($('#admin-response').val().length > 0){
+        $('#delete-response-btn').show();
+        $('#send-response-btn').attr("disabled", false);
+    } else {
+        $('#delete-response-btn').hide();
+        $('#send-response-btn').attr("disabled", true);
+    }
+}
+
+function send_response(btn){
+    admin_response = $('#admin-response').val();
+
     $.ajax({
-            url: "/dashboard/clients/avis/supprimer-reponse/" + review_id,
-            type: 'post',
-            data: { options: 'delete_response' },
-            success: function(data){
-                console.log('Réponse supprimée avec succés.');
-                document.location.href = '/dashboard/clients/avis/' + review_id
-            },
-            beforeSend: function() {
-                btn.addClass('running');
-            }
-        })
-    .done(function( data ) {
-            
+        url: "/dashboard/clients/avis/repondre/{{$review->id}}",
+        type: 'post',
+        data: { 'admin-response':admin_response },
+        success: function(response){
+            setTimeout( function(){ $("#success-container").slideUp(300); }, 2000 )
+
+            $("#success-container").slideDown(300);
+            $("#success-container").removeClass('d-none');
+
+            btn.removeClass('running');
+        },
+        beforeSend: function() {
+            btn.addClass('running');
+        }
     });
+}
+
+function delete_response(btn, review_id){
+    $('#admin-response').val('');
+    send_response(btn);
+    toggle_buttons();
 }
 </script>
 @endsection

@@ -6,6 +6,7 @@ use App\Review;
 use App\Product;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ReviewController extends Controller
 {
@@ -58,6 +59,9 @@ class ReviewController extends Controller
         $review->save();
 
         $request->session()->flash('review-feedback', 'Votre commentaire a été envoyé.');
+
+        Mail::to($review->customerEmail)->send(new \App\Mail\ReviewPosted($review));
+
         return redirect('/produits/' . $product->id)->withProduct($product);
     }
 

@@ -107,5 +107,7 @@
 
 </table>
 
+@include('layouts.email.promotion')
+
 <!-- end section -->
 @endsection

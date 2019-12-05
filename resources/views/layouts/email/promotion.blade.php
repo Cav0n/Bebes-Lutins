@@ -2,8 +2,8 @@
 <table border="0" width="100%" cellpadding="0" cellspacing="0" bgcolor="2a2e36">
 
     <tr>
-        <td align="center" style="background-image: url(https://mdbootstrap.com/img/Photos/Others/slide.jpg); background-size: cover; background-position: top center; background-repeat: no-repeat;"
-            background="https://mdbootstrap.com/img/Photos/Others/slide.jpg">
+        <td align="center" style="background-image: url(https://www.bebes-lutins.fr/images/utils/new-collection-btn.jpg); background-size: cover; background-position: top center; background-repeat: no-repeat;"
+            background="https://www.bebes-lutins.fr/images/utils/new-collection-btn.jpg">
 
             <table border="0" align="center" width="590" cellpadding="0" cellspacing="0" class="container590">
 
@@ -20,10 +20,10 @@
                                 <td align="center">
                                     <table border="0" align="center" cellpadding="0" cellspacing="0" class="container580">
                                         <tr>
-                                            <td align="center" style="color: #cccccc; font-size: 16px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 26px;">
+                                            <td align="center" style="color: #ffffff; font-size: 16px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 26px;background: rgba(0,0,0,0.4);">
                                                 <!-- section text ======-->
 
-                                                <div style="line-height: 26px">
+                                                <div style="line-height: 26px; margin:0.5rem 0;">
 
                                                     Nos nouveaux coloris de couches sont disponibles !
 
@@ -55,7 +55,7 @@
                                     <!-- main section button -->
 
                                     <div style="line-height: 22px;">
-                                        <a href="" style="color: #fff; text-decoration: none;">VOIR LA COLLECTION</a>
+                                        <a href="https://bebes-lutins.fr/categories/Nouvelle-collection-TE2-Evolutives" style="color: #fff; text-decoration: none;">VOIR LA COLLECTION</a>
                                     </div>
                                 </td>
                             </tr>

@@ -102,7 +102,7 @@
 
 </table>
 
-{{-- @include('layouts.email.promotion') --}}
+@include('layouts.email.promotion')
 
 <!-- end section -->
 @endsection

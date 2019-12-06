@@ -9,7 +9,8 @@
         <div class='update-infos-container py-2'>
             <h2 class="h6">Mise à jour 5.0.4</h2>
             <ul>
-                <li>Ajout de message spécial lié au produit.</li>
+                <li>Ajout de message spécial lié au produit</li>
+                <li>Ajout d'une case à cocher pour ne pas notifier les clients lors d'un changement de statut</li>
             </ul>
         </div>
         <div class='update-infos-container py-2'>

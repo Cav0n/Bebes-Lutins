@@ -11,6 +11,11 @@
             <input id='hidden_order_id' type="hidden" name="order_id">
             <input id='hidden_new_status' type="hidden" name="new_status">
             <p class='mb-0' id='message'></p>
+            <br>
+            <div class="custom-control custom-checkbox noselect">
+                <input type="checkbox" class="custom-control-input" id="dont-notify-customer" name="dont-notify-customer">
+                <label class="custom-control-label" for="dont-notify-customer">Ne pas notifier le client</label>
+            </div>
         </div>
         <div class="modal-footer flex-wrap">
             <button id='cancel-order-status' type="button" class="mr-auto mb-2 mb-sm-0 btn btn-outline-danger rounded-0" data-dismiss="modal">
@@ -24,15 +29,19 @@
 {{-- PREPARE BUTTON --}}
 <script>
     $('#apply-order-status').on('click', function(){
+        $(this).addClass('running');
+
         order_id = $('#hidden_order_id').val();
         new_status = $('#hidden_new_status').val();
-        $(this).addClass('running');
+        notify_customer = !$('#dont-notify-customer').prop("checked");
+        // console.log(notify_customer);
 
         $.ajax({
             url: "/dashboard/commandes/changer_status/" + order_id,
             type: 'POST',
-            data: { status: new_status },
-            success: function(data){
+            data: { status: new_status, notify_customer:notify_customer },
+            success: function(response){
+                // console.log(response);
                 location.reload();
             },
             beforeSend: function() {

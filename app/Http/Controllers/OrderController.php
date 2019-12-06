@@ -146,7 +146,13 @@ class OrderController extends Controller
 
         $result = \App\OrderStatus::statusToEmailMessage($order);
 
-        Mail::to($order->user->email)->send(new \App\Mail\OrderUpdated($order, $result['title'], $result['message']));
+        if($request['notify_customer'] == 'true'){
+            Mail::to($order->user->email)->send(new \App\Mail\OrderUpdated($order, $result['title'], $result['message']));
+            $response['message'] = $request['notify_customer'];
+            $response['code'] = 200;
+        }
+
+        // return response()->json($response, $response['code']);
     }
 
     /**

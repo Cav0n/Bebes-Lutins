@@ -113,6 +113,15 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-12 text-center mt-2 mb-5">
+        <a href='#' class="text-muted" onclick='$("#analyticsModal").modal("show")'>
+            Comment tout cela est calculé ?</a>
+    </div>
+</div>
+
+@include('components.dashboard.popups.analytics-informations')
+
 {{--  Calculate Custom turnover  --}}
 <script>
 $('.datepicker').on('change', function(){

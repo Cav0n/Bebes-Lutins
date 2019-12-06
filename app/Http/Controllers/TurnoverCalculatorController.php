@@ -18,15 +18,15 @@ class TurnoverCalculatorController extends Controller
     }
 
     public function calculateTotal(){
-        return TurnoverCalculator::total(\App\Order::where('status', '>=', 2)->get());
+        return TurnoverCalculator::total(\App\Order::where('status', '>=', 1)->get());
     }
 
     public function calculateCurrentYear(){
-        return TurnoverCalculator::currentYear(\App\Order::where('status', '>=', 2)->get());
+        return TurnoverCalculator::currentYear(\App\Order::where('status', '>=', 1)->get());
     }
 
     public function calculateCurrentMonth(){
-        return TurnoverCalculator::currentMonth(\App\Order::where('status', '>=', 2)->get());
+        return TurnoverCalculator::currentMonth(\App\Order::where('status', '>=', 1)->get());
     }
 
     public function calculateCustomTurnover(Request $request){

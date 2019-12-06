@@ -36,7 +36,7 @@ class TurnoverCalculator
         }
 
         //Calculate turnover and others...
-        foreach(\App\Order::where('status', '>=', 2)->get() as $order){
+        foreach(\App\Order::where('status', '>=', 1)->get() as $order){
             if(Carbon::parse($order->created_at)->gte($firstDate) && Carbon::parse($order->created_at)->lte($lastDate)){
                 $turnover += $order->productsPrice + $order->shippingPrice;
                 $shipping_price += $order->shippingPrice;

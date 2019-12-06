@@ -111,6 +111,12 @@ if (count($product->reviews) > 0){
                                     <div class="col-12 px-lg-0 mb-2 mx-auto mx-lg-0">
                                         <input id="item-quantity" class="spinnerProduct h-100" type="number" name="quantity" value="1" min="1" max="{{$product->stock}}" step="1" @if($product->stock <= 1) disabled @endif />
                                     </div>
+
+                                    @isset($product->helpMessage)
+                                    <div class='w-100 my-2 p-2 border bg-light text-center font-weight-bold'>
+                                        <p class='text-danger mb-0'>{{$product->helpMessage}}</p>
+                                    </div>
+                                    @endisset
     
                                     @foreach($product->characteristics as $characteristic)
                                     @isset($characteristic->message)

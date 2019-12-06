@@ -6,12 +6,6 @@
     <script src="{{asset('js/tagify/jQuery.tagify.min.js')}}"></script>
     <link media="all" type="text/css" rel="stylesheet" href="{{asset('css/dropzone/dropzone.css')}}">
     <script src="{{asset('js/dropzone/dropzone.js')}}"></script>
-
-    <style>
-        .ck-editor__editable_inline {
-            min-height: 10rem;
-        }
-    </style>
 @endsection
 
 @section('content')
@@ -20,61 +14,66 @@
         <a href='/dashboard/produits' class='text-muted'>< Tous les produits</a>        
     </div>
 </div>
-<div class='row'>
-    <div class='col-12 pt-3'>
-        <a href='#' class='text-muted' onclick='open_product_importation()'>Importer les informations à partir d'un autre produit</a>
+
+{{-- Errors --}}
+@if ($errors->any())
+<div class="col-lg-12 p-0 mt-2">
+    <div class="alert alert-danger">
+        <ul class='mb-0'>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+        </ul>
     </div>
 </div>
+@endif
+
+{{-- Success --}}
+@if(session()->has('success-message'))
+<div id='successMessage' class="col-lg-12 p-0 mt-2">
+    <div class="alert alert-success px-3 mb-0">
+        <p class='text-success font-weight-bold mb-0'>{{session('success-message')}}</p>
+    </div>
+</div>
+@endif
+
 <div class="card bg-white my-3">
-    <div class="card-header bg-white">
-        <h1 class='h4 m-0 font-weight-normal'>
-            Nouveau produit
+    <div class="card-header bg-white d-flex justify-content-between">
+        <h1 class='h4 m-0 font-weight-normal d-flex flex-column justify-content-center'>
+            {{$product->name}}
         </h1>
+        <button class='btn btn-danger ld-over' onclick='remove_product($(this), "{{$product->id}}")' style='height:2.5rem;'>
+            Supprimer
+            <div class="ld ld-ring ld-spin"></div></button>
     </div>
     <div class="card-body">
-        <form action='/dashboard/produits/nouveau' method="POST">
+        <form action='/dashboard/produits/edition/{{$product->id}}' method="POST">
             @csrf
 
-            <input type="hidden" name="main_image_name" id="mainImageName" required>
+            <input type="hidden" name="main_image_name" id="mainImageName" value='{{$product->mainImage}}' required>
             <div id='thumbnails-names'>
-                <input type="hidden" name="thumbnails_names[]" class="thumbnails_names">
-            </div>
-
-            {{-- Errors --}}
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul class='mb-0'>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
+                @if($product->thumbnails != null)
+                @foreach ($product->thumbnails as $thumbnail)
+                <input type="hidden" name="thumbnails_names[]" class="thumbnails_names" value='{{$thumbnail->name}}'>
                 @endforeach
-                </ul>
+                @endif
             </div>
-            @endif
-
-            {{-- Success --}}
-            @if(session()->has('success-message'))
-            <div class="col-lg-12">
-                <div class="alert alert-success px-3 mb-0">
-                    <p class='text-success font-weight-bold mb-0'>{{session('success-message')}}</p>
-                </div>
-            </div>
-            @endif
 
             <div class="row m-0 mb-2">
-                <div class="col-md-4 p-0 pb-3 pb-md-0">
-                    <div id='mainImage' class="dropzone mb-2 @error('name') border-danger text-danger @enderror border rounded row m-0 justify-content-center h-100"></div> 
+                <div class="col-4 p-0">
+                    <div id='mainImage' class="dropzone mb-2 @error('name') border-danger text-danger @enderror border row m-0 justify-content-center h-100"></div> 
                     @error('main_image_name')
                         <div class="invalid-feedback">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="col-md-8 p-0 pl-md-3">
+                <div class="col-8">
                     <div class="form-group m-0">
                         <label for="reference">Référence</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <div class="input-group-text">#</div>
                             </div>
-                            <input type="text" class="form-control @error('reference') is-invalid @enderror" name="reference" id="reference" aria-describedby="helpReference" placeholder="" value='{{old('reference')}}'>
+                            <input type="text" class="form-control @error('reference') is-invalid @enderror" name="reference" id="reference" aria-describedby="helpReference" placeholder="" value='{{old('reference', $product->reference)}}'>
                             @error('reference')
                                 <div class="invalid-feedback">{{$reference}}</div>
                             @enderror
@@ -82,14 +81,14 @@
                     </div>
                     <div class="form-group m-0">
                         <label for="name">Nom du produit</label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" aria-describedby="helpName" placeholder="" value='{{old("name")}}' required>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" aria-describedby="helpName" placeholder="" value='{{old("name", $product->name)}}' required>
                         @error('name')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
                     <div class="form-group m-0">
                         <label for="stock">Stock</label>
-                        <input type="number" class="form-control @error('stock') is-invalid @enderror" name="stock" id="stock" aria-describedby="helpStock" placeholder="" min='0' step='1' value='{{old('stock')}}' required>
+                        <input type="number" class="form-control @error('stock') is-invalid @enderror" name="stock" id="stock" aria-describedby="helpStock" placeholder="" min='0' step='1' value='{{old('stock', $product->stock)}}' required>
                         @error('stock')
                             <div class="invalid-feedback">{{$message}}</div>
                         @enderror
@@ -100,7 +99,7 @@
                             <div class="input-group-prepend">
                                 <div class="input-group-text">€</div>
                             </div>
-                            <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" id="price" aria-describedby="helpPrice" placeholder="" min="0.01" step="0.01" value='{{old('price')}}' required>
+                            <input type="number" class="form-control @error('price') is-invalid @enderror" name="price" id="price" aria-describedby="helpPrice" placeholder="" min="0.01" step="0.01" value='{{old('price', $product->price)}}' required>
                             @error('price')
                                 <div class="invalid-feedback">{{$message}}</div>
                             @enderror
@@ -111,55 +110,85 @@
 
             <div class="form-group">
                 <label for="categories">Catégories</label>
-                <input id='categories' class="form-control @error('categories') is-invalid @enderror" name='categories' value='' placeholder="Tapez le nom d'une catégorie">
+                <input id='categories' class="form-control @error('categories') is-invalid @enderror" name='categories' value='@foreach($product->categories as $category) {{$category->name}}, @endforeach' placeholder="Tapez le nom d'une catégorie">
                 @error('categories')
                     <div class="invalid-feedback">{{$message}}</div>
                 @enderror 
-                <button id='toggle-categories-list-button' class='btn btn-outline-dark mt-2 isHidden' type='button' >Afficher les catégories</button>
+                <button id='toggle-categories-list-button' class='btn btn-outline-dark mt-2 isHidden' type='button'>Afficher les catégories</button>
             </div>
             
             <div class="form-group">
-                <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description">{{old('description')}}</textarea>
+                <textarea class="form-control @error('description') is-invalid @enderror" name="description" id="description" rows="5">{{old('description', $product->description)}}</textarea>
                 @error('description')
                     <div class="invalid-feedback">{{$message}}</div>
                 @enderror
             </div>
 
-            <div id='thumbnails' class='dropzone my-2 border rounded text-muted d-flex'></div>
+            <div id='thumbnails' class='dropzone my-2 border text-muted d-flex'></div>
 
             <div class="form-group mb-0">
                 <label for="tags">Tags</label>
-                <input id='tags' class="form-control @error('tags') is-invalid @enderror" name='tags' value=''>
+                <input id='tags' class="form-control @error('tags') is-invalid @enderror" name='tags' value='@foreach($product->tags as $tag) {{$tag->name}}, @endforeach'>
                 @error('tags')
                     <div class="invalid-feedback">{{$message}}</div>
                 @enderror 
-            </div>
-
-            <div class="form-group">
-                <label for="helpMessage">Message spécial</label>
-                <textarea class="form-control" name="helpMessage" id="helpMessage" aria-describedby="helpMessageHelp" placeholder="">{{old('helpMessage')}}</textarea>
-                <small id="helpMessageHelp" class="form-text text-muted">Par exemple : "Laissez nous vos choix de coloris dans le champ commentaires dans votre panier"</small>
+                <button class='btn btn-outline-dark rounded-0 mt-2 tags--removeAllBtn' type='button'>Supprimer tous les tags</button>
             </div>
 
             <div class="custom-control custom-checkbox pointer my-2">
-                <input id='is-hidden' name='is-hidden' type="checkbox" class="custom-control-input pointer is-hidden-checkbox">
-                <label class="custom-control-label noselect pointer" for="is-hidden">Produit caché</label>
+                <input id='is-hidden' name='is-hidden' type="checkbox" class="custom-control-input pointer is-hidden-checkbox" @if(old("is-hidden", $product->isHidden) != null) checked @endif>
+                <label class="custom-control-label noselect pointer" for="is-hidden">Caché</label>
             </div>
 
             <div id="characteristics-container" class="my-2">
                 <button type="button" class="btn btn-outline-dark rounded-0" onclick="add_characteristic($(this).parent())">Ajouter une caractéristique</button>
+                <?php $index = 0;?>
+                @if($product->characteristics != null)
+                @foreach ($product->characteristics as $characteristic)
+                <div class="characteristic p-3 border my-2">
+                    <div class="form-group col-6 p-0">
+                        <label for="characteristic_name">Nom de la caractéristique</label>
+                        <input type="text" class="form-control characteristic_name" name="characteristics[{{$index}}][name]" aria-describedby="helpCharacteristicName" placeholder="Taille" value='{{$characteristic->name}}' required>
+                        <small id="helpCharacteristicName" class="form-text text-muted">Par exemple "taille", "couleur"...</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message d'aide</label>
+                        <textarea class="form-control" name="characteristics[{{$index}}][message]" id="message" aria-describedby="helpMessage" >{{$characteristic->message}}</textarea>
+                        <small id="helpMessage" class="form-text text-muted">Par exemple : "Laissez nous vos choix de coloris dans le champ commentaires dans votre panier"</small>
+                    </div>
+                    <div class="characteristic-options row m-0 d-flex flex-column">
+                        <label>Options</label>
+        
+                        @if($characteristic->options != null)
+                        @foreach ($characteristic->options as $option)
+                        <div class='option d-flex my-2'>
+                            <input type="text" class="form-control characteristic_options mr-2" name="characteristics[{{$index}}][options][]" aria-describedby="helpCharacteristicOptions" placeholder="" value="{{$option->name}}" required>
+                            <button class="btn btn-outline-danger" onclick="remove_option($(this))">Supprimer</button>
+                        </div>
+                        @endforeach
+                        @endif
+        
+                        <div class='buttons d-flex my-2'>
+                            <button type='button' class="btn btn-dark rounded-0 max-content" onclick="add_option($(this), {{$index}})">Ajouter une option</button>
+                            <button type='button' class="btn btn-danger rounded-0 max-content mx-3" onclick="$(this).parent().parent().parent().remove()">Supprimer la caractéristique</button>
+                        </div>
+                    </div>
+                </div>
+                <?php $index++;?>
+                @endforeach
+                @endif
             </div>
 
-            <button id='save-btn' type="submit" class="btn btn-outline-secondary ld-ext-right">
-                Enregistrer
-                <div class="ld ld-hourglass ld-squeeze"></div>
-            </button>
+            <button type="submit" class="btn btn-outline-secondary">Enregistrer</button>
 
         </form>
     </div>
 </div>
 
-@include('components.dashboard.import-product')
+{{-- AUTO HIDE SUCCESS MESSAGE --}}
+<script>
+    $('#successMessage').delay(3000).fadeOut('slow');
+</script>
 
 {{--  prepare page  --}}
 <script>
@@ -176,15 +205,12 @@
             }
             
         });
-        $("#save-btn").on('click', function(){
-            $(this).addClass('running');
-        });
     });
 </script>
 
 {{-- CHARACTERISTICS --}}
 <script>
-    characteristics_index = 0;
+    characteristics_index = {{$index}};
 
     function add_characteristic(characteristics_container){
         html = `
@@ -197,7 +223,7 @@
 
             <div class="form-group">
                 <label for="message">Message d'aide</label>
-                <textarea class="form-control" name="characteristics[`+ characteristics_index +`][message]" id="message" aria-describedby="helpMessage" ></textarea>
+                <textarea class="form-control" name="characteristics[`+ characteristics_index +`][message]" id="message" aria-describedby="helpMessage" >{{$characteristic->message}}</textarea>
                 <small id="helpMessage" class="form-text text-muted">Par exemple : "Laissez nous vos choix de coloris dans le champ commentaires dans votre panier"</small>
             </div>
 
@@ -241,12 +267,35 @@ $.ajaxSetup({
 });
 </script>
 
+{{-- Remove product --}}
+<script>
+    function remove_product(btn, product_id){
+        if(confirm("Êtes vous sûr de vouloir supprimer ce produit ?")){
+            $.ajax({
+                url: "/dashboard/produits/supprimer/" + product_id,
+                type: 'DELETE',
+                data: { },
+                success: function(data){
+                    alert('PRODUIT SUPPRIMÉ AVEC SUCCES');
+                    window.location.replace("/dashboard/produits");
+                },
+                error: function(data) {
+                    alert('Suppression impossible');
+                },
+                beforeSend: function() {
+                    btn.addClass('running');
+                }
+            });
+        }
+    }
+</script>
+
 {{-- TAGIFY --}}
 <script>
     $input_tags = $('#tags').tagify();
     $input_categories = $('#categories').tagify({
         enforceWhitelist : true,
-        whitelist : [@foreach(App\Category::where('isDeleted', 0)->orderBy('name')->get() as $category) "{{$category->name}}", @endforeach],
+        whitelist : [@foreach(App\Category::where('isDeleted', 0)->get() as $category) "{{$category->name}}", @endforeach],
         dropdown: {
             position: "manual",
             maxItems: Infinity,
@@ -282,6 +331,7 @@ $.ajaxSetup({
         categories.dropdown.show.call(categories) // load the list
         categories.DOM.scope.parentNode.appendChild(categories.DOM.dropdown)
     }
+
 </script>
 
 {{-- DROPZONE --}}
@@ -312,19 +362,36 @@ $.ajaxSetup({
         init: function() {
             this.on("success", function(file, response) { 
                 filename = response.filename;
+
+                console.log(filename);
                 $('#mainImageName').val(filename);
+                file.name = filename;
             });
             this.on("removedfile", function(file) {
                 $.ajax({
                     url: "/delete_image",
                     type: 'DELETE',
-                    data: { image:file.name },
+                    data: { image:file.name, path:'images/products/' },
                     success: function(data){
                         console.log('['+file.name+'] Image bien supprimé');
                         $('#mainImageName').val("");
                     }
                 });
             });
+            //POPULATE
+            @if($product->images->first() != null)
+            // Create the mock file:
+            var mockFile = { name: "{{$product->mainImage}}", size: {{$product->images->first()->size}} };
+
+            // Call the default addedfile event handler
+            this.emit("addedfile", mockFile);
+
+            // And optionally show the thumbnail of the file:
+            this.emit("thumbnail", mockFile, "{{'/images/products/' . $product->mainImage}}");
+
+            // Make sure that there is no progress bar, etc...
+            this.emit("complete", mockFile);
+            @endif
         }
     });
 
@@ -346,7 +413,8 @@ $.ajaxSetup({
             'X-CSRF-TOKEN': Laravel.csrfToken
         },
         init: function() {
-            this.on("success", function(file, response) {
+            this.on("success", function(file, response) { 
+                console.log(response.filename);
                 $('#thumbnails-names').append("<input type='hidden' name='thumbnails_names[]' class='thumbnails_names' value="+ response.filename +">");
             });
             this.on("removedfile", function(file) {
@@ -360,8 +428,27 @@ $.ajaxSetup({
                     }
                 });
             });
+            //POPULATE
+            @if($product->images != null)
+            @foreach($product->images->skip(1) as $thumbnail)
+            @if($thumbnail->name != $product->mainImage)
+            // Create the mock file:
+            var mockFile = { name: "{{$thumbnail->name}}", size: {{$thumbnail->size}}, }
+
+            // Call the default addedfile event handler
+            this.emit("addedfile", mockFile);
+
+            // And optionally show the thumbnail of the file:
+            this.emit("thumbnail", mockFile, "{{'/images/products/thumbnails/' . $thumbnail->name}}");
+
+            // Make sure that there is no progress bar, etc...
+            this.emit("complete", mockFile);
+            @endif
+            @endforeach
+            @endif
         }
     });
+    
 </script>
 
 {{--  CLASSIC EDITOR  --}}
@@ -375,46 +462,6 @@ $.ajaxSetup({
 		.catch( err => {
 			console.error( err.stack );
 		} );
-</script>
-
-
-<script>
-    function open_product_importation(){
-        $('#product-selection-popup').modal('show');
-    }
-
-    function import_product(id){
-        $.ajax({
-            url: "/produits2/" + id,
-            type: 'POST',
-            data: { },
-            success: function(response){
-                console.log(response);
-                complete_fields(response);
-                $('#product-selection-popup').modal('hide');
-            },
-            error: function(response) {
-                console.log(response.responseJSON);
-            }
-        });
-    }
-
-    function complete_fields(product){
-        $('#reference').val(product.reference);
-        $('#name').val(product.name);
-        $('#stock').val(product.stock);
-        $('#price').val(product.price);
-        $('#description').text(product.description);
-        editor.setData(product.description);
-
-        product.categories.forEach(function(element){
-            $('#categories').data('tagify').addTags(element.name);
-        });
-
-        product.tags.forEach(function(element){
-            $('#tags').data('tagify').addTags(element.name);
-        });
-    }
 </script>
 
 @endsection

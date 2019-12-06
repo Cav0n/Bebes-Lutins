@@ -234,6 +234,7 @@ class ProductController extends Controller
             'thumbnails_names' => 'array|nullable',
             'is-hidden' => 'nullable',
             'characteristics' => 'array|nullable',
+            'helpMessage' => 'nullable',
         ]);
 
         $id = \App\IDCreator::stringToId($request['name']);
@@ -246,6 +247,7 @@ class ProductController extends Controller
         $product->description = $request['description'];
         $product->stock = $request['stock'];
         $product->price = $request['price'];
+        $product->helpMessage = $request['helpMessage'];
         if($request['is-hidden'] != null) $product->isHidden = true;
         $product->save();
 
@@ -353,6 +355,7 @@ class ProductController extends Controller
             'thumbnails_names' => 'array|nullable',
             'is-hidden' => 'nullable',
             'characteristics' => 'array|nullable',
+            'helpMessage' => 'nullable',
         ]);
         
         $product->reference = $request['reference'];
@@ -360,6 +363,7 @@ class ProductController extends Controller
         $product->description = $request['description'];
         $product->stock = $request['stock'];
         $product->price = $request['price'];
+        $product->helpMessage = $request['helpMessage'];
 
         $mainImageName = $request['main_image_name'];
 

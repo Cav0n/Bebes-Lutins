@@ -17,5 +17,5 @@
     <a href='/dashboard/newsletters' class='text-dark d-flex mt-3 @if(Request::is('*/newsletters*')) active @endif'><img src='{{asset('images/icons/newsletters2.svg')}}' class='svg'><p class='ml-2 my-auto'>- Newsletters</p></a>
     <a href='/dashboard/analyses' class='text-dark d-flex mt-3 @if(Request::is('*/analyses*')) active @endif'><img src='{{asset('images/icons/analytics.svg')}}' class='svg'><p class='ml-2 my-auto'>- Analyses<span class="badge badge-secondary ml-2">New</span></p></a>
 
-    <a href='/dashboard/changelog' class='ml-5 mt-3 text-muted'><small>Version 5.0.3</small></a>
+    <a href='/dashboard/changelog' class='ml-5 mt-3 text-muted'><small>Version 5.0.4</small></a>
 </div>

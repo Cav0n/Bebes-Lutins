@@ -7,6 +7,12 @@
             Notes de mise à jour
         </h1>
         <div class='update-infos-container py-2'>
+            <h2 class="h6">Mise à jour 5.0.4</h2>
+            <ul>
+                <li>Ajout de message spécial lié au produit.</li>
+            </ul>
+        </div>
+        <div class='update-infos-container py-2'>
             <h2 class="h6">Mise à jour 5.0.3</h2>
             <ul>
                 <li>La quantité dans le récapitulatif de commande s'affiche désormais avant le prix unitaire de chaque produits</li>

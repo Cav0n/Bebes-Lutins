@@ -132,12 +132,12 @@
                 @error('tags')
                     <div class="invalid-feedback">{{$message}}</div>
                 @enderror 
-                <button class='btn btn-outline-dark rounded-0 mt-2 tags--removeAllBtn' type='button'>Supprimer tous les tags</button>
             </div>
 
-            <div class="custom-control custom-checkbox pointer my-2">
-                <input id='is-hidden' name='is-hidden' type="checkbox" class="custom-control-input pointer is-hidden-checkbox" @if(old("is-hidden", $product->isHidden) != null) checked @endif>
-                <label class="custom-control-label noselect pointer" for="is-hidden">Caché</label>
+            <div class="form-group">
+                <label for="helpMessage">Message spécial</label>
+                <textarea class="form-control" name="helpMessage" id="helpMessage" aria-describedby="helpMessageHelp" placeholder="">{{old('helpMessage', $product->helpMessage)}}</textarea>
+                <small id="helpMessageHelp" class="form-text text-muted">Par exemple : "Laissez nous vos choix de coloris dans le champ commentaires dans votre panier"</small>
             </div>
 
             <div id="characteristics-container" class="my-2">
@@ -179,7 +179,15 @@
                 @endif
             </div>
 
-            <button type="submit" class="btn btn-outline-secondary">Enregistrer</button>
+            <div class="custom-control custom-checkbox pointer my-2">
+                <input id='is-hidden' name='is-hidden' type="checkbox" class="custom-control-input pointer is-hidden-checkbox" @if(old("is-hidden", $product->isHidden) != null) checked @endif>
+                <label class="custom-control-label noselect pointer" for="is-hidden">Caché</label>
+            </div>
+
+            <button id='save-btn' type="submit" class="btn btn-outline-secondary ld-ext-right">
+                Enregistrer
+                <div class="ld ld-hourglass ld-squeeze"></div>
+            </button>
 
         </form>
     </div>
@@ -205,6 +213,10 @@
             }
             
         });
+
+        $("#save-btn").on('click', function(){
+            $(this).addClass('running');
+        });
     });
 </script>
 
@@ -223,7 +235,7 @@
 
             <div class="form-group">
                 <label for="message">Message d'aide</label>
-                <textarea class="form-control" name="characteristics[`+ characteristics_index +`][message]" id="message" aria-describedby="helpMessage" >{{$characteristic->message}}</textarea>
+                <textarea class="form-control" name="characteristics[`+ characteristics_index +`][message]" id="message" aria-describedby="helpMessage" ></textarea>
                 <small id="helpMessage" class="form-text text-muted">Par exemple : "Laissez nous vos choix de coloris dans le champ commentaires dans votre panier"</small>
             </div>
 

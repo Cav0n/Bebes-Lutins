@@ -76,7 +76,7 @@
                             </div>
                             <input type="text" class="form-control @error('reference') is-invalid @enderror" name="reference" id="reference" aria-describedby="helpReference" placeholder="" value='{{old('reference')}}'>
                             @error('reference')
-                                <div class="invalid-feedback">{{$reference}}</div>
+                                <div class="invalid-feedback">{{$message}}</div>
                             @enderror
                         </div>
                     </div>

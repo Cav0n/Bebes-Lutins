@@ -83,7 +83,7 @@ class CustomerAreaController extends Controller
 
         Auth::login($user);
 
-        Mail::to("super_craftman@hotmail.fr")->send(new AccountCreated($user));
+        Mail::to($user->email)->send(new AccountCreated($user));
 
         return redirect('/espace-client');
     }

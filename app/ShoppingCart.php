@@ -103,6 +103,9 @@ class ShoppingCart extends Model
                 $this->shippingPrice = 0;
                 $price_before_free_shipping = 0.00;
             } else $this->shippingPrice = 5.90;
+        } else {
+            $this->shippingPrice = 0.00;
+            $this->save();
         }
 
         $result = ['products_price' => $total_price, 'shipping_price' => $shipping_price, 'total_quantity' => $total_quantity];

@@ -19,6 +19,8 @@
 
 {{-- prepare page --}}
 <script>
+    base_shipping_price = {{$shoppingCart->shippingPrice}};
+
     $(document).ready(function(){
         total_price = $('#total-price-save').val();
         var options1 = { style: 'currency', currency: 'EUR' };
@@ -28,21 +30,21 @@
         switch(selected_delivery_type){
             case 'Vos adresses':
                 $('#submit-button').attr('form', 'saved-addresses-form');
-                $('#shipping-price').text('5.90 €');
-                $('#total-price').text('5.90 €');
+                $('#shipping-price').text(base_shipping_price + ' €');
+                $('#total-price').text(base_shipping_price + ' €');
                 $('#total-price').text(numberFormat1.format(total_price));
 
                 break;
             case 'Nouvelle adresse':
                 $('#submit-button').attr('form', 'new-address-form');
-                $('#shipping-price').text('5.90 €');
+                $('#shipping-price').text(base_shipping_price + ' €');
                 $('#total-price').text(numberFormat1.format(total_price));
 
                 break;
             case "Retrait à l'atelier":
                 $('#submit-button').attr('form', 'withdrawal-shop-form');
-                $('#shipping-price').text('0.00 €')
-                $('#total-price').text(numberFormat1.format(total_price - 5.90));
+                $('#shipping-price').text(base_shipping_price + ' €')
+                $('#total-price').text(numberFormat1.format(total_price - base_shipping_price));
                 break;
         }
     });
@@ -63,21 +65,21 @@
         switch(delivery_type){
             case 'Vos adresses':
                 $('#submit-button').attr('form', 'saved-addresses-form');
-                $('#shipping-price').text('5.90 €');
-                $('#total-price').text('5.90 €');
+                $('#shipping-price').text(base_shipping_price + ' €');
+                $('#total-price').text(base_shipping_price + ' €');
                 $('#total-price').text(numberFormat1.format(total_price));
 
                 break;
             case 'Nouvelle adresse':
                 $('#submit-button').attr('form', 'new-address-form');
-                $('#shipping-price').text('5.90 €');
+                $('#shipping-price').text(base_shipping_price + ' €');
                 $('#total-price').text(numberFormat1.format(total_price));
 
                 break;
             case "Retrait à l'atelier":
                 $('#submit-button').attr('form', 'withdrawal-shop-form');
                 $('#shipping-price').text('0.00 €')
-                $('#total-price').text(numberFormat1.format(total_price - 5.90));
+                $('#total-price').text(numberFormat1.format(total_price - base_shipping_price));
                 break;
         }
         

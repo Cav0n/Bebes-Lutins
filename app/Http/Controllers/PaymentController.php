@@ -29,6 +29,7 @@ class PaymentController extends Controller
 
                 $result = \App\OrderStatus::statusToEmailMessage($order);
                 Mail::to($order->user->email)->send(new \App\Mail\OrderUpdated($order, $result['title'], $result['message']));
+                Mail::to('contact@bebes-lutins.fr')->send(new \App\Mail\OrderAdminNotification($order));
             }
 
             return redirect('/merci');

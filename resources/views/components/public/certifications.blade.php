@@ -1,5 +1,5 @@
 <div id='certifications-container' class="row justify-content-around m-0 p-2 border">
-    <div class="certification col-4 col-lg-2 p-0 d-flex flex-column justify-content-center" onclick="load_url('/infos-pratiques/livraison-et-frais-de-port')">
+    <div class="certification col-4 col-lg-2 p-0 d-flex flex-column justify-content-center" onclick="load_url('/infos-pratiques/livraison-et-frais-de-ports')">
         <div class='d-flex flex-column justify-content-center'>
             <div class='icon-container d-flex justify-content-center'>
                 <img class='svg w-50 h-50' src="{{asset('images/icons/shipping.svg')}}">

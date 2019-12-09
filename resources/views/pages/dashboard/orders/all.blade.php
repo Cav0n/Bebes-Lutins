@@ -43,8 +43,8 @@
                 </td>
                 
                 <td class='col-4 col-md-2 text-center' onclick='load_in_new_tab("/dashboard/commandes/fiche/{{$order->id}}")'>
-                    <p class='mb-0'>{{$order->productsPrice}}€</p> 
-                    @if($order->shippingPrice != 0) <p class='small mb-0'>(+{{$order->shippingPrice}}€)</p> @endif 
+                    <p class='mb-0'>{{number_format($order->productsPrice + $order->shippingPrice, 2)}}€</p> 
+                    @if($order->shippingPrice != 0) <p class='small mb-0'>(dont {{$order->shippingPrice}} € de fdp)</p> @endif 
                 </td>
     
                 <td class='col-4'>

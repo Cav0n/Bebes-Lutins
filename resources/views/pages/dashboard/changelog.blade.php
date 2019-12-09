@@ -11,6 +11,7 @@
             <ul>
                 <li>Ajout de message spécial lié au produit</li>
                 <li>Ajout d'une case à cocher pour ne pas notifier les clients lors d'un changement de statut</li>
+                <li>Création du "sitemap.xml" pour améliorer le référencement</li>
             </ul>
         </div>
         <div class='update-infos-container py-2'>

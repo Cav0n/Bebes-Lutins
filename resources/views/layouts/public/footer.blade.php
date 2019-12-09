@@ -11,7 +11,7 @@
         <li><a href='/infos-pratiques/echanges-et-retours' class='text-light'>Échanges et retours</a></li>
         <li><a href='/infos-pratiques/mentions-legales' class='text-light'>Mentions légales</a></li>
         <li><a href='/infos-pratiques/conditions-de-ventes' class='text-light'>Conditions de ventes</a></li>
-        <li><a href='/infos-pratiques/plan-du-site' class='text-light'>Plan du site</a></li>
+        {{--  <li><a href='/infos-pratiques/plan-du-site' class='text-light'>Plan du site</a></li>  --}}
       </ul>
     </div>
     <div class="col-12 col-md-6 col-lg-3 order-1">

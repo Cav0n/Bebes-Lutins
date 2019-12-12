@@ -20,9 +20,9 @@
                 @endif
 
                 <div class='customer-infos border-top border-dark pt-2 mt-2'>
-                    <p class='mb-0'><u>E-mail</u> : <a class='text-dark' href='mailto:{{strtolower($order->user->email)}}'>{{strtolower($order->user->email)}}</a></p>
+                    <p class='mb-0'><u>E-mail</u> : <a class='text-dark' href='mailto:{{strtolower($order->user->email)}}' style='text-decoration: none;'>{{strtolower($order->user->email)}}</a></p>
                     @if($order->user->phone != null)
-                    <p class='mb-0'><u>Téléphone</u> : <a class='text-dark' href='tel:{{$order->user->phone}}'>{{chunk_split($order->user->phone, 2, ' ')}}</a></p>
+                    <p class='mb-0'><u>Téléphone</u> : <a class='text-dark' href='tel:{{$order->user->phone}}' style='text-decoration: none;'>{{chunk_split($order->user->phone, 2, ' ')}}</a></p>
                     @else
                     <p class='mb-0'><u>Téléphone</u> : Aucun numéro renseigné</p>
                     @endif

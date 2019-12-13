@@ -13,8 +13,10 @@
             <div id='orders-container'>
                 <div class="row">
                     <div class="col-12 d-flex flex-row flex-wrap">
-                        <button type="button" class="btn btn-secondary" onclick="javascript:xport.toCSV('Commandes');">
+                        <button type="button" class="btn btn-secondary" onclick="fnExcelReport();">
                             Exporter vers Excel</button>
+                        <button type="button" class="btn btn-secondary ml-3" onclick="javascript:xport.toCSV('Commandes');">
+                            Exporter vers Numbers</button>
                     </div>
                 </div>
                 <table id='Commandes' class="table">

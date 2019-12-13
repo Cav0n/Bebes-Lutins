@@ -13,7 +13,7 @@ class OrderController extends Controller
 {
     public function exportPage()
     {
-        return view('pages.dashboard.orders.export')->withOrders(Order::where('status', '>', -3)->get());
+        return view('pages.dashboard.orders.export')->withOrders(Order::where('status', '>', -3)->orderBy('created_at', 'desc')->get());
     }
 
     public function search(Request $request)

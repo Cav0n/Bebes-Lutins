@@ -1,5 +1,5 @@
 <div id='sidenav' class="col-3 d-none d-lg-flex flex-column my-3">
-    <a href='/dashboard/commandes/toutes' class='text-dark d-flex @if(Request::is('*/commandes*')) active @endif'><img src='{{asset('images/icons/orders1.svg')}}' class='svg'><p class='ml-2 my-auto'>- Commandes</p></a>
+    <a href='/dashboard/commandes' class='text-dark d-flex @if(Request::is('*/commandes*')) active @endif'><img src='{{asset('images/icons/orders1.svg')}}' class='svg'><p class='ml-2 my-auto'>- Commandes</p></a>
         <a href="/dashboard/commandes" class='sublink text-dark @if(Request::is('*/commandes')) active @endif'><p class='mb-0'>Toutes les commandes</p></a>
         <a href="/dashboard/commandes/en-cours" class='sublink text-dark @if(Request::is('*/commandes/en-cours')) active @endif'><p class='mb-0'>En cours</p></a>
         <a href="/dashboard/commandes/terminees" class='sublink text-dark @if(Request::is('*/commandes/terminees')) active @endif'><p class='mb-0'>Terminées</p></a>

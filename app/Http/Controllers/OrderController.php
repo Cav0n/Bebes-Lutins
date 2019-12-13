@@ -16,6 +16,47 @@ class OrderController extends Controller
         return view('pages.dashboard.orders.export')->withOrders(Order::where('status', '>', -3)->orderBy('created_at', 'desc')->get());
     }
 
+    public function generateCustomExport(Request $request)
+    {
+        $orders = Order::where('id', '!=', null);
+
+        //FIRST DATE
+        if($request['first_date'] != null){
+            $first_date = $request['first_date'];
+            $orders = $orders->where('created_at', '>=', $first_date);
+        } else $first_date = null;
+
+        //LAST DATE
+        if($request['last_date'] != null){
+            $last_date = $request['last_date'];
+            $orders = $orders->where('created_at', '<=', $last_date);
+        } else $last_date = null;
+
+        //STATUS
+        if($request['status'] != null){
+            $status = $request['status'];
+            $orders = $orders->whereIn('status', $status);
+        } else $status = null;
+
+        //MINIMUM PRICE
+        if($request['minimum_price'] != null){
+            $minimum_price = $request['minimum_price'];
+            $orders = $orders->where('productsPrice', '>=', $minimum_price);
+        } else $minimum_price = 0;
+
+        //MAXIMUM PRICE
+        if($request['maximum_price'] != null){
+            $maximum_price = $request['maximum_price'];
+            $orders = $orders->where('productsPrice', '<=', $maximum_price);
+        } else $maximum_price = 0;
+
+        //WANT SHIPPING PRICE
+        $want_shipping_price =  $request['want_shipping_price'];
+        if(! $want_shipping_price) $orders = $orders->where('shippingPrice', 0);
+
+        return view('pages.dashboard.orders.export')->withOrders($orders->orderBy('created_at', 'desc')->get());
+    }
+
     public function search(Request $request)
     {
         $search_words = preg_split('/\s+/', $request['search']);

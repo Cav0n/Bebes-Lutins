@@ -1,6 +1,116 @@
 @extends('templates.dashboard')
 
 @section('content')
+
+
+<div class="card bg-white my-3">
+        <div class="card-header bg-white">
+            <h1 class='h4 m-0 font-weight-normal'>
+                Exportation spécifique
+            </h1>
+        </div>
+    
+        <div class="card-body">
+
+            <form action="/dashboard/commandes/generer-exportation" class='d-flex flex-column' method='post'>
+                @csrf
+                <h2 class='h4'>Dates</h2>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="first_date">Du</label>
+                        <input type="date" class="form-control" name="first_date" id="first_date" aria-describedby="helpFirstDate" placeholder="">
+                        <small id="helpFirstDate" class="form-text text-muted">La première date à prendre en compte</small>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="last_date">Au</label>
+                        <input type="date" class="form-control" name="last_date" id="last_date" aria-describedby="helpLastDate" placeholder="">
+                        <small id="helpLastDate" class="form-text text-muted">La dernière date à prendre en compte</small>
+                    </div>
+                </div>
+                
+
+                <h2 class='h4'>Status</h2>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label noselect">
+                        <input class="form-check-input noselect" type="checkbox" name="status[]" value="0"> En attente de paiement
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label noselect">
+                        <input class="form-check-input noselect" type="checkbox" name="status[]" value="1"> En cours de traitement
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label noselect">
+                        <input class="form-check-input noselect" type="checkbox" name="status[]" value="2"> En cours de livraison
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label noselect">
+                        <input class="form-check-input noselect" type="checkbox" name="status[]" value="22"> A retirer à l'atelier
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label noselect">
+                        <input class="form-check-input noselect" type="checkbox" name="status[]" value="3"> Livrée
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label noselect">
+                        <input class="form-check-input noselect" type="checkbox" name="status[]" value="33"> Participation enregistrée
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label noselect">
+                        <input class="form-check-input noselect" type="checkbox" name="status[]" value="-1"> Annulée
+                    </label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label noselect">
+                        <input class="form-check-input noselect" type="checkbox" name="status[]" value="-3"> Paiement refusé
+                    </label>
+                </div>
+
+                <h2 class='h4 mt-3'>Prix</h2>
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="minimum_price">Minimum</label>
+                        <input type="number" class="form-control" name="minimum_price" id="minimum_price" aria-describedby="helpMinimumPrice" step="0.01">
+                        <small id="helpMinimumPrice" class="form-text text-muted">Le prix minimal de commande (prix total avec les frais de ports)</small>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="maximum_price">Maximum</label>
+                        <input type="number" class="form-control" name="maximum_price" id="maximum_price" aria-describedby="helpMaximumPrice" step="0.01">
+                        <small id="helpMaximumPrice" class="form-text text-muted">Le prix maximal de commande (prix total avec les frais de ports)</small>
+                    </div> 
+                </div>
+
+                <h2 class='h4'>Frais de port</h2>
+                <div class="btn-group" data-toggle="buttons">
+                    <label class="btn btn-secondary active">
+                        <input type="radio" name="want_shipping_price" id="want_shipping_price" autocomplete="off" checked value=1> Oui
+                    </label>
+                    <label class="btn btn-secondary">
+                        <input type="radio" name="want_shipping_price" id="want_shipping_price" autocomplete="off" value=0> Non
+                    </label>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-6">
+                        <button type="submit" class='btn btn-primary mt-3'>Générer l'exportation</button>   
+                    </div>
+                </div>
+            </form>
+    
+        </div>
+    </div>
+
+
+
+
+
+
+
 <div class="card bg-white my-3">
     <div class="card-header bg-white">
         <h1 class='h4 m-0 font-weight-normal'>

@@ -128,6 +128,7 @@ Route::post('/dashboard/commandes/rechercher', 'OrderController@search');
 Route::get('/dashboard/commandes/fiche/{order}', 'OrderController@show');
 Route::post('/dashboard/commandes/recherche', 'OrderController@search');
 Route::get('/dashboard/commandes/exports', 'OrderController@exportPage');
+Route::post('/dashboard/commandes/generer-exportation', 'OrderController@generateCustomExport');
 Route::get('/dashboard/commandes/{status}', 'DashboardController@orders'); //TODO
 
 //PRODUCTS

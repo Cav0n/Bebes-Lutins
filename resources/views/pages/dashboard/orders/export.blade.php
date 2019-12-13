@@ -75,13 +75,21 @@
                 <div class="row">
                     <div class="form-group col-6">
                         <label for="minimum_price">Minimum</label>
-                        <input type="number" class="form-control" name="minimum_price" id="minimum_price" aria-describedby="helpMinimumPrice" step="0.01">
-                        <small id="helpMinimumPrice" class="form-text text-muted">Le prix minimal de commande (prix total avec les frais de ports)</small>
+                        <div class="input-group mb-2">
+                            <input type="number" class="form-control" id="minimum_price" name='minimum_price' step="0.01" min='0' aria-describedby="helpMinimumPrice">
+                            <div class="input-group-append">
+                                <div class="input-group-text">€</div>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group col-6">
                         <label for="maximum_price">Maximum</label>
-                        <input type="number" class="form-control" name="maximum_price" id="maximum_price" aria-describedby="helpMaximumPrice" step="0.01">
-                        <small id="helpMaximumPrice" class="form-text text-muted">Le prix maximal de commande (prix total avec les frais de ports)</small>
+                        <div class="input-group mb-2">
+                            <input type="number" class="form-control" id="maximum_price" name='maximum_price' step="0.01" min='0' aria-describedby="helpMaximumPrice">
+                            <div class="input-group-append">
+                                <div class="input-group-text">€</div>
+                            </div>
+                        </div>
                     </div> 
                 </div>
 
@@ -97,7 +105,7 @@
 
                 <div class="row">
                     <div class="col-lg-6">
-                        <button type="submit" class='btn btn-primary mt-3'>Générer l'exportation</button>   
+                        <button type="submit" class='btn btn-outline-secondary mt-3'>Générer l'exportation</button>   
                     </div>
                 </div>
             </form>

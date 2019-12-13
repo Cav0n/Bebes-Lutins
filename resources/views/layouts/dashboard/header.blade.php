@@ -13,6 +13,7 @@
                             <a class="dropdown-item" href="/dashboard/commandes/en-cours">En cours</a>
                             <a class="dropdown-item" href="/dashboard/commandes/terminees">Terminées</a>
                             <a class="dropdown-item" href="/dashboard/commandes/refusees">Refusées</a>
+                            <a class="dropdown-item" href="/dashboard/commandes/exports">Exportation<span class="badge badge-secondary ml-1">New</span></a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -39,7 +40,7 @@
                         <a class="nav-link" href="/dashboard/newsletters">Newsletters</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/dashboard/analyses">Analyses<span class="badge badge-secondary ml-2">New</span></a>
+                        <a class="nav-link" href="/dashboard/analyses">Analyses</a>
                     </li>
                 </ul>
             </div>

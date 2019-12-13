@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    public function exportPage()
+    public function exportPage(Request $request)
     {
-        return view('pages.dashboard.orders.export')->withOrders(Order::where('status', '>', -3)->orderBy('created_at', 'desc')->get());
+        return view('pages.dashboard.orders.export')->withOrders(Order::all());
     }
 
     public function generateCustomExport(Request $request)
@@ -54,7 +54,7 @@ class OrderController extends Controller
         $want_shipping_price =  $request['want_shipping_price'];
         if(! $want_shipping_price) $orders = $orders->where('shippingPrice', 0);
 
-        return view('pages.dashboard.orders.export')->withOrders($orders->orderBy('created_at', 'desc')->get());
+        return view('pages.dashboard.orders.export')->withOrders($orders->orderBy('created_at', 'desc')->get())->withRequest($request);
     }
 
     public function search(Request $request)

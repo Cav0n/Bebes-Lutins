@@ -4,120 +4,128 @@
 
 
 <div class="card bg-white my-3">
-        <div class="card-header bg-white">
-            <h1 class='h4 m-0 font-weight-normal'>
-                Exportation spécifique
-            </h1>
-        </div>
-    
-        <div class="card-body">
-
-            <form action="/dashboard/commandes/generer-exportation" class='d-flex flex-column' method='post'>
-                @csrf
-                <h2 class='h4'>Dates</h2>
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label for="first_date">Du</label>
-                        <input type="date" class="form-control" name="first_date" id="first_date" aria-describedby="helpFirstDate" placeholder="">
-                        <small id="helpFirstDate" class="form-text text-muted">La première date à prendre en compte</small>
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="last_date">Au</label>
-                        <input type="date" class="form-control" name="last_date" id="last_date" aria-describedby="helpLastDate" placeholder="">
-                        <small id="helpLastDate" class="form-text text-muted">La dernière date à prendre en compte</small>
-                    </div>
-                </div>
-                
-
-                <h2 class='h4'>Status</h2>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label noselect">
-                        <input class="form-check-input noselect" type="checkbox" name="status[]" value="0"> En attente de paiement
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label noselect">
-                        <input class="form-check-input noselect" type="checkbox" name="status[]" value="1"> En cours de traitement
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label noselect">
-                        <input class="form-check-input noselect" type="checkbox" name="status[]" value="2"> En cours de livraison
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label noselect">
-                        <input class="form-check-input noselect" type="checkbox" name="status[]" value="22"> A retirer à l'atelier
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label noselect">
-                        <input class="form-check-input noselect" type="checkbox" name="status[]" value="3"> Livrée
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label noselect">
-                        <input class="form-check-input noselect" type="checkbox" name="status[]" value="33"> Participation enregistrée
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label noselect">
-                        <input class="form-check-input noselect" type="checkbox" name="status[]" value="-1"> Annulée
-                    </label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <label class="form-check-label noselect">
-                        <input class="form-check-input noselect" type="checkbox" name="status[]" value="-3"> Paiement refusé
-                    </label>
-                </div>
-
-                <h2 class='h4 mt-3'>Prix</h2>
-                <div class="row">
-                    <div class="form-group col-6">
-                        <label for="minimum_price">Minimum</label>
-                        <div class="input-group mb-2">
-                            <input type="number" class="form-control" id="minimum_price" name='minimum_price' step="0.01" min='0' aria-describedby="helpMinimumPrice">
-                            <div class="input-group-append">
-                                <div class="input-group-text">€</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group col-6">
-                        <label for="maximum_price">Maximum</label>
-                        <div class="input-group mb-2">
-                            <input type="number" class="form-control" id="maximum_price" name='maximum_price' step="0.01" min='0' aria-describedby="helpMaximumPrice">
-                            <div class="input-group-append">
-                                <div class="input-group-text">€</div>
-                            </div>
-                        </div>
-                    </div> 
-                </div>
-
-                <h2 class='h4'>Frais de port</h2>
-                <div class="btn-group" data-toggle="buttons">
-                    <label class="btn btn-secondary active">
-                        <input type="radio" name="want_shipping_price" id="want_shipping_price" autocomplete="off" checked value=1> Oui
-                    </label>
-                    <label class="btn btn-secondary">
-                        <input type="radio" name="want_shipping_price" id="want_shipping_price" autocomplete="off" value=0> Non
-                    </label>
-                </div>
-
-                <div class="row">
-                    <div class="col-lg-6">
-                        <button type="submit" class='btn btn-outline-secondary mt-3'>Générer l'exportation</button>   
-                    </div>
-                </div>
-            </form>
-    
-        </div>
+    <div class="card-header bg-white">
+        <h1 class='h4 m-0 font-weight-normal'>
+            Exportation spécifique
+        </h1>
     </div>
 
+    <div class="card-body">
 
+        <form action="/dashboard/commandes/exports" class='d-flex flex-column' method='post'>
+            @csrf
+            <h2 class='h4'>Dates</h2>
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="first_date">Du</label>
+                    <input type="date" class="form-control" name="first_date" id="first_date" aria-describedby="helpFirstDate" placeholder="" @isset($request) value='{{$request["first_date"]}}' @endisset>
+                    <small id="helpFirstDate" class="form-text text-muted">La première date à prendre en compte</small>
+                </div>
+                <div class="form-group col-6">
+                    <label for="last_date">Au</label>
+                    <input type="date" class="form-control" name="last_date" id="last_date" aria-describedby="helpLastDate" placeholder="" @isset($request) value='{{$request["last_date"]}}' @endisset>
+                    <small id="helpLastDate" class="form-text text-muted">La dernière date à prendre en compte</small>
+                </div>
+            </div>
+            
 
+            <h2 class='h4'>Status</h2>
+            <div class="row">
+                <div class="col-lg-12">
+                    <button id='toggle-button' type="button" class="btn btn-dark py-1 px-3 mb-2" onclick='toggle_all()'>Tout cocher</button>
+                </div>
+            </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label noselect">
+                    <input class="form-check-input noselect" type="checkbox" name="status[]" value="0" @isset($request) {{ (is_array($request['status']) and in_array(0, $request['status'])) ? ' checked' : '' }} @endif>
+                    En attente de paiement
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label noselect">
+                    <input class="form-check-input noselect" type="checkbox" name="status[]" value="1" @isset($request) {{ (is_array($request['status']) and in_array(1, $request['status'])) ? ' checked' : '' }} @endif>
+                    En cours de traitement
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label noselect">
+                    <input class="form-check-input noselect" type="checkbox" name="status[]" value="2" @isset($request) {{ (is_array($request['status']) and in_array(2, $request['status'])) ? ' checked' : '' }} @endif>
+                    En cours de livraison
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label noselect">
+                    <input class="form-check-input noselect" type="checkbox" name="status[]" value="22" @isset($request) {{ (is_array($request['status']) and in_array(22, $request['status'])) ? ' checked' : '' }} @endif>
+                    A retirer à l'atelier
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label noselect">
+                    <input class="form-check-input noselect" type="checkbox" name="status[]" value="3" @isset($request) {{ (is_array($request['status']) and in_array(3, $request['status'])) ? ' checked' : '' }} @endif>
+                    Livrée
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label noselect">
+                    <input class="form-check-input noselect" type="checkbox" name="status[]" value="33" @isset($request) {{ (is_array($request['status']) and in_array(33, $request['status'])) ? ' checked' : '' }} @endif>
+                    Participation enregistrée
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label noselect">
+                    <input class="form-check-input noselect" type="checkbox" name="status[]" value="-1" @isset($request) {{ (is_array($request['status']) and in_array(-1, $request['status'])) ? ' checked' : '' }} @endif>
+                    Annulée
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label noselect">
+                    <input class="form-check-input noselect" type="checkbox" name="status[]" value="-3" @isset($request) {{ (is_array($request['status']) and in_array(-3, $request['status'])) ? ' checked' : '' }} @endif>
+                    Paiement refusé
+                </label>
+            </div>
 
+            <h2 class='h4 mt-3'>Prix</h2>
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="minimum_price">Minimum</label>
+                    <div class="input-group mb-2">
+                        <input type="number" class="form-control" id="minimum_price" name='minimum_price' step="0.01" min='0' aria-describedby="helpMinimumPrice" @isset($request) value='{{$request["minimum_price"]}}' @endisset>
+                        <div class="input-group-append">
+                            <div class="input-group-text">€</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label for="maximum_price">Maximum</label>
+                    <div class="input-group mb-2">
+                        <input type="number" class="form-control" id="maximum_price" name='maximum_price' step="0.01" min='0' aria-describedby="helpMaximumPrice" @isset($request) value='{{$request["maximum_price"]}}' @endisset>
+                        <div class="input-group-append">
+                            <div class="input-group-text">€</div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
 
+            <h2 class='h4'>Frais de port</h2>
+            <label>Souhaitez vous inclure les commandes ayant des frais de ports ?</label>
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-secondary active">
+                    <input type="radio" name="want_shipping_price" id="want_shipping_price" autocomplete="off" value=1 @isset($request) @if($request['want_shipping_price'] == 1) checked @endif @endisset @if(!isset($request)) checked @endif)> Oui
+                </label>
+                <label class="btn btn-secondary">
+                    <input type="radio" name="want_shipping_price" id="want_shipping_price" autocomplete="off" value=0 @isset($request) @if($request['want_shipping_price'] == 0) checked @endif @endisset> Non
+                </label>
+            </div>
 
+            <div class="row">
+                <div class="col-lg-6">
+                    <button type="submit" class='btn btn-outline-secondary mt-3'>Générer l'exportation</button>   
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
 
 <div class="card bg-white my-3">
     <div class="card-header bg-white">
@@ -176,4 +184,21 @@
 </div>
 
 <script src="{{asset('/js/excel-export.js')}}"></script>
+<script>
+$(document).ready(function(){
+    $('form').submit(function(){init_loading()}); 
+});
+
+function toggle_all(){
+    $('.form-check-input').prop("checked", !$('.form-check-input').prop("checked")).change();
+}
+
+$(".form-check-input").change(function(){
+    if ($('.form-check-input:checked').length == $('.form-check-input').length) {
+        $('#toggle-button').text('Tout décocher');
+    } else {
+        $('#toggle-button').text('Tout cocher');
+    }
+});
+</script>
 @endsection

@@ -7,9 +7,10 @@
             Notes de mise à jour
         </h1>
         <div class='update-infos-container py-2'>
-            <h2 class="h6">Mise à jour 5.1</h2>
+            <h2 class="h6">Mise à jour 5.1.0</h2>
             <ul>
                 <li>Ajout d'un outil d'exportation des commandes vers Excel</li>
+                <li>Ajout de filtre dans l'outil d'exportation des commandes (dates, prix, status, frais de port)</li>
             </ul>
         </div>
         <div class='update-infos-container py-2'>

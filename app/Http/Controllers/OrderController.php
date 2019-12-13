@@ -11,6 +11,11 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
+    public function exportPage()
+    {
+        return view('pages.dashboard.orders.export')->withOrders(Order::where('status', '>', -3)->get());
+    }
+
     public function search(Request $request)
     {
         $search_words = preg_split('/\s+/', $request['search']);

@@ -121,13 +121,15 @@ Route::get('/dashboard', 'DashboardController@index'); //TODO
 Route::get('/dashboard/changelog', 'DashboardController@changelog');
 //ORDERS
 Route::get('/dashboard/commandes', 'DashboardController@orders'); //TODO
-Route::get('/dashboard/commandes/{status}', 'DashboardController@orders'); //TODO
 Route::post('/dashboard/commandes/changer_status/{order}', 'OrderController@update');
 Route::post('/dashboard/commandes/select_order_status', 'DashboardController@select_order_status');
 Route::post('/dashboard/commandes/unselect_order_status', 'DashboardController@unselect_order_status');
 Route::post('/dashboard/commandes/rechercher', 'OrderController@search');
 Route::get('/dashboard/commandes/fiche/{order}', 'OrderController@show');
 Route::post('/dashboard/commandes/recherche', 'OrderController@search');
+Route::get('/dashboard/commandes/exports', 'OrderController@exportPage');
+Route::get('/dashboard/commandes/{status}', 'DashboardController@orders'); //TODO
+
 //PRODUCTS
 Route::get('/dashboard/produits', 'DashboardController@products'); //TODO
 Route::get('/dashboard/produits/nouveau', 'ProductController@create');

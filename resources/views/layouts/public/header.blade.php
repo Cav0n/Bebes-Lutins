@@ -14,6 +14,13 @@ $parent_categories = App\Category::where('parent_id', null)->where('isDeleted', 
 
 
 <header class='sticky-top p-0 container-fluid border-bottom'>
+    
+    <div class="bg-dark" style="z-index: 10000;position: sticky;">
+        <p class="mb-0 text-white text-center">
+            bonsoir les amis
+        </p>
+    </div>
+
     <img id='logo' src="{{asset('images/logo.png')}}" class='fixed-top zindex-tooltip transition-fast d-none d-lg-flex' alt="Logo Bébés Lutins" style='height:12rem;' onclick='load_url("/")'>
     <nav id='top-navbar' class="navbar navbar-expand-lg navbar-dark bg-white sticky-top p-0">
         <a class="navbar-brand text-secondary font-weight-bold ml-3 mr-0 d-flex d-lg-none" href="/" style='font-size:2rem;font-weight:900 !important;'>Bébés Lutins</a>

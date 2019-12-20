@@ -14,12 +14,15 @@ $parent_categories = App\Category::where('parent_id', null)->where('isDeleted', 
 
 
 <header class='sticky-top p-0 container-fluid border-bottom'>
-    
+
+    @if (\App\Parameter::where('name', 'informationMessage')->exists() && \App\Parameter::where('name', 'informationMessage')->first()->value != null)
     <div class="bg-dark" style="z-index: 10000;position: sticky;">
         <p class="mb-0 text-white text-center">
-            bonsoir les amis
+            {{\App\Parameter::where('name', 'informationMessage')->first()->value}}
         </p>
     </div>
+    @endif
+    
 
     <img id='logo' src="{{asset('images/logo.png')}}" class='fixed-top zindex-tooltip transition-fast d-none d-lg-flex' alt="Logo Bébés Lutins" style='height:12rem;' onclick='load_url("/")'>
     <nav id='top-navbar' class="navbar navbar-expand-lg navbar-dark bg-white sticky-top p-0">

@@ -4,7 +4,7 @@
         <a href="/dashboard/commandes/en-cours" class='sublink text-dark @if(Request::is('*/commandes/en-cours')) active @endif'><p class='mb-0'>En cours</p></a>
         <a href="/dashboard/commandes/terminees" class='sublink text-dark @if(Request::is('*/commandes/terminees')) active @endif'><p class='mb-0'>Terminées</p></a>
         <a href="/dashboard/commandes/refusees" class='sublink text-dark @if(Request::is('*/commandes/refusees')) active @endif'><p class='mb-0'>Refusées</p></a>
-        <a href="/dashboard/commandes/exports" class='sublink text-dark @if(Request::is('*/commandes/exports')) active @endif'><p class='mb-0'>Exportation<span class="badge badge-secondary ml-1">New</span></p></a>
+        <a href="/dashboard/commandes/exports" class='sublink text-dark @if(Request::is('*/commandes/exports')) active @endif'><p class='mb-0'>Exportation</p></a>
 
     <a href='/dashboard/produits' class='text-dark d-flex mt-3 @if(Request::is('*/produits*')) active @endif'><img src='{{asset('images/icons/nappy2.svg')}}' class='svg'><p class='ml-2 my-auto'>- Produits</p></a>
         <a href="/dashboard/produits" class='sublink text-dark @if(Request::is('*/produits')) active @endif'><p class='mb-0'>Tous les produits</p></a>
@@ -20,6 +20,7 @@
     <a href='/dashboard/reductions' class='text-dark d-flex mt-3 @if(Request::is('*/reductions*')) active @endif'><img src='{{asset('images/icons/coupon4.svg')}}' class='svg'><p class='ml-2 my-auto'>- Réductions</p></a>
     <a href='/dashboard/newsletters' class='text-dark d-flex mt-3 @if(Request::is('*/newsletters*')) active @endif'><img src='{{asset('images/icons/newsletters2.svg')}}' class='svg'><p class='ml-2 my-auto'>- Newsletters</p></a>
     <a href='/dashboard/analyses' class='text-dark d-flex mt-3 @if(Request::is('*/analyses*')) active @endif'><img src='{{asset('images/icons/analytics.svg')}}' class='svg'><p class='ml-2 my-auto'>- Analyses</p></a>
+    <a href="/dashboard/parametres" class='text-dark d-flex mt-3 @if(Request::is('*/parametres*')) active @endif'><img src='{{asset('images/icons/settings.svg')}}' class='svg'><p class='ml-2 my-auto'>- Paramètres <span class="badge badge-secondary ml-1">New</span></p></a>
 
-    <a href='/dashboard/changelog' class='ml-5 mt-3 text-muted'><small>Version 5.1.0</small></a>
+    <a href='/dashboard/changelog' class='ml-5 mt-3 text-muted'><small>Version 5.1.1</small></a>
 </div>

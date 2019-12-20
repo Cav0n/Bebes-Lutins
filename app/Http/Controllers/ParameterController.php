@@ -14,7 +14,7 @@ class ParameterController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.dashboard.parameters');
     }
 
     /**
@@ -67,9 +67,12 @@ class ParameterController extends Controller
      * @param  \App\Parameter  $parameter
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Parameter $parameter)
+    public function update(Request $request)
     {
-        //
+        $informationMessage = $request['informationMessage'];
+        $informationMessageParam = Parameter::where('name', 'informationMessage')->first();
+        $informationMessageParam->value = $informationMessage;
+        $informationMessageParam->save();
     }
 
     /**

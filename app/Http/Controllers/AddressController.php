@@ -55,8 +55,8 @@ class AddressController extends Controller
     {
         $validated_data = $request->validate([
             'civility' => 'numeric|max:3|required',
-            'firstname' => 'alpha|required',
-            'lastname' => 'alpha|required',
+            'firstname' => 'required',
+            'lastname' => 'required',
             'street' => 'required',
             'zipcode' => 'numeric|max:95880|required',
             'city' => 'required',
@@ -94,8 +94,8 @@ class AddressController extends Controller
     {
         $validated_data = $request->validate([
             'civility-billing' => 'numeric|max:3|required',
-            'firstname-billing' => 'alpha|required',
-            'lastname-billing' => 'alpha|required',
+            'firstname-billing' => 'required',
+            'lastname-billing' => 'required',
             'street-billing' => 'required',
             'zipcode-billing' => 'numeric|max:95880|required',
             'city-billing' => 'required',
@@ -123,8 +123,8 @@ class AddressController extends Controller
     {
         $validated_data = $request->validate([
             'civility-shipping' => 'numeric|max:3|required',
-            'firstname-shipping' => 'alpha|required',
-            'lastname-shipping' => 'alpha|required',
+            'firstname-shipping' => 'required',
+            'lastname-shipping' => 'required',
             'street-shipping' => 'required',
             'zipcode-shipping' => 'numeric|max:95880|required',
             'city-shipping' => 'required',
@@ -181,8 +181,8 @@ class AddressController extends Controller
     {
         $validated_data = $request->validate([
             'civility' => 'numeric|max:3|required',
-            'firstname' => 'alpha|required',
-            'lastname' => 'alpha|required',
+            'firstname' => 'required',
+            'lastname' => 'required',
             'street' => 'required',
             'zipcode' => 'numeric|max:95880|required',
             'city' => 'required',

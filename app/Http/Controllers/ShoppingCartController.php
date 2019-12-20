@@ -232,6 +232,7 @@ class ShoppingCartController extends Controller
 
         $order = new Order();
         $order->id = $shopping_cart->user->lastname . '-' . substr($shopping_cart->user->firstname, 0, 3) . '-' . strtoupper(substr(uniqid(), 0, 10));
+        $order->id = \App\IDCreator::stringToId($order->id);
         $order->paymentMethod = 1;
         if($shopping_cart->shipping_address_id != null) $order->shippingPrice = $shopping_cart->shippingPrice;
         else $order->shippingPrice = 0;

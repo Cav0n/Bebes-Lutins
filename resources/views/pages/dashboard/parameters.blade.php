@@ -20,6 +20,8 @@
                 <textarea class="form-control" name="informationMessage" id="informationMessage" aria-describedby="helpInformationMessage">{{\App\Parameter::where('name', 'informationMessage')->first()->value}}</textarea>
                 <small id="helpInformationMessage" class="form-text text-muted">
                     Un message qui s'affiche en haut du site pour indiquer une information (ex: congés)</small>
+                <input type="color" name="backgroundColor" id="backgroundColor"> Fond de la bannière
+                <input type="color" name="textColor" id="textColor"> Couleur du texte
             </div>
         </div>
 
@@ -61,11 +63,13 @@
 
     function save_parameters(btn){
         informationMessage = $('#informationMessage').val();
+        backgroundcolor = $('#backgroundColor').val();
+        textcolor = $('#textColor').val()
 
         $.ajax({
             url: '/dashboard/parametres/sauvegarder',
             type: 'POST',
-            data: { informationMessage: informationMessage },
+            data: { informationMessage: informationMessage, backgroundcolor:backgroundcolor,textcolor:textcolor },
             success: function(response){
                 btn.removeClass('running');
                 if(informationMessage == ''){
@@ -78,6 +82,9 @@
             },
             beforeSend: function(){
                 btn.addClass('running');
+                console.log($('#backgroundColor').val());
+                console.log($('#textColor').val());
+
             }
         });
 

@@ -70,9 +70,20 @@ class ParameterController extends Controller
     public function update(Request $request)
     {
         $informationMessage = $request['informationMessage'];
+        $informationMessageBackgroundColor = $request['backgroundcolor'];
+        $informationMessageTextColor = $request['textcolor'];
+
         $informationMessageParam = Parameter::where('name', 'informationMessage')->first();
         $informationMessageParam->value = $informationMessage;
         $informationMessageParam->save();
+
+        $informationMessageBgColor = Parameter::where('name', 'informationMessageBackgroundColor')->first();
+        $informationMessageBgColor->value = $informationMessageBackgroundColor;
+        $informationMessageBgColor->save();
+
+        $informationMessageTextColor = Parameter::where('name', 'informationMessageTextColor')->first();
+        $informationMessageTextColor->value = $informationMessageTextColor;
+        $informationMessageTextColor->save();
     }
 
     /**

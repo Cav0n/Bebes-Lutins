@@ -1,0 +1,196 @@
+.back-button{
+    width: 100%;
+}
+
+#shopping-cart-main{
+    background: #f7f7f7;
+}
+
+#shopping-cart-wrapper{
+    padding-top: 4em;
+}
+
+#shopping-cart-wrapper #alert-container{
+    width: 820px;
+    margin: 2rem auto 1rem auto;
+    padding: 1rem;
+    background: rgb(255, 74, 74);
+    font-family: Roboto, sans-serif;
+    color: white;
+    border-radius: 3px;
+    box-sizing: border-box;
+    border: 1px solid rgb(220,220,220);
+}
+
+#shopping-cart-wrapper #alert-container h1{
+    font-size: 1.5rem;
+}
+
+#shopping-cart-wrapper #alert-container svg{
+    height: 4rem;
+    width: 4rem;
+    margin-right: 1rem;
+}
+
+#shopping-cart-wrapper #shopping-cart-empty{
+    margin: 1rem auto 2rem auto
+}
+
+#shopping-cart-wrapper #shopping-cart-empty #empty-infos{
+    text-align: center;
+    width: 500px;
+    margin: 0 auto;
+    height: 200px;
+    background: #fefefe;
+    border: 1px solid rgb(220,220,220);
+    border-radius: 2px;
+}
+
+#shopping-cart-wrapper #shopping-cart-empty #empty-infos h1{
+    font-size: 1.4em;
+    font-weight: 600;
+}
+
+#shopping-cart-wrapper #shopping-cart-empty #empty-infos p{
+    padding-top: 15px;
+}
+
+#shopping-cart-wrapper #shopping-cart-empty #empty-infos button{
+    width: fit-content;
+    width: max-content;
+    margin: 10px auto;
+    font-size: 1em;
+    background: #333333;
+    color: white;
+    padding: 0 1rem;
+}
+#shopping-cart-wrapper #shopping-cart-empty #empty-infos button:hover{
+    background: #555555;
+    color: #DDDDDD;
+}
+
+#shopping-cart-wrapper #shopping-cart-content{
+    padding-bottom: 20px;
+}
+
+#shopping-cart-wrapper #shopping-cart-content .products{
+    width: 500px;
+    margin: 0 20px 0 0;
+}
+
+#shopping-cart-wrapper #shopping-cart-content .products .shopping-cart-element-wrapper{
+    padding: 10px;
+    background: white;
+    margin: 0 10px 10px 0;
+}
+
+#shopping-cart-wrapper #shopping-cart-content .products .shopping-cart-element-wrapper img{
+    margin: 0;
+}
+
+#shopping-cart-wrapper #shopping-cart-content .products .shopping-cart-element-wrapper .texts{
+    padding: 0 10px 10px 10px;
+}
+
+#shopping-cart-wrapper #shopping-cart-content .products .shopping-cart-element-wrapper .texts .categories{
+    font-size: 0.8rem;
+    font-weight: 100;
+}
+
+#shopping-cart-wrapper #shopping-cart-content .products .shopping-cart-element-wrapper select{
+    width: 45px;
+    margin: 5px 0;
+}
+
+#shopping-cart-wrapper #shopping-cart-content .products .shopping-cart-element-wrapper button{
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    border-radius: 20px;
+    margin: 0 30px;
+}
+#shopping-cart-wrapper #shopping-cart-content .products .shopping-cart-element-wrapper i{
+    padding: 0;
+}
+
+#shopping-cart-wrapper #shopping-cart-content .products #message-add{
+    padding: 20px;
+    background: white;
+    margin: 0 10px 10px 0;
+}
+
+#shopping-cart-wrapper #shopping-cart-content .products #message-add label{
+    width: fit-content;
+width: max-content;
+    width: max-content;
+    margin-left: 10px;
+    margin-bottom: -10px;
+    z-index: 2;
+    background: white;
+}
+#shopping-cart-wrapper #shopping-cart-content .products #message-add textarea {
+    height: 140px;
+    font-size: 0.9em;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #CCCCCC;
+    background: white;
+    max-width: 95%;
+    min-width: 95%;
+    min-height: 100px;
+}
+#shopping-cart-wrapper #shopping-cart-content .products #message-add button {
+    margin-top: 15px;
+}
+
+#shopping-cart-wrapper #shopping-cart-content .numbers{
+    width: 300px;
+    height: 300px;
+    padding: 40px;
+    background: white;
+    box-sizing: border-box;
+}
+
+#shopping-cart-wrapper #shopping-cart-content .numbers #start-checkout p{
+    margin-bottom: 10px;
+}
+
+#shopping-cart-wrapper #shopping-cart-content .numbers #start-checkout button{
+    font-size: 0.9rem;
+    width: 100%;
+    margin: auto 0 0 0;
+    font-family: Roboto,sans-serif;
+}
+
+#shopping-cart-wrapper #shopping-cart-content .numbers #start-checkout button:hover{
+    background: #a7d744;
+}
+
+#shopping-cart-wrapper #shopping-cart-content #infos-free-shipping, #shopping-cart-wrapper #shopping-cart-content #voucher-add{
+    width: 300px;
+    box-sizing: border-box;
+    padding: 40px;
+    background: white;
+    margin-top: 10px;
+}
+
+#shopping-cart-wrapper #shopping-cart-content #voucher-add label{
+    width: fit-content;
+width: max-content;
+    margin-left: 10px;
+    margin-bottom: -10px;
+    z-index: 2;
+    background: white;
+}
+
+#shopping-cart-wrapper #shopping-cart-content #voucher-add input{
+    font-size: 1em;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #CCCCCC;
+    background: white;
+}
+
+#shopping-cart-wrapper #shopping-cart-content #voucher-add button{
+    margin-top: 15px;
+}

@@ -1,0 +1,47 @@
+#categories h1{
+    text-align: center;
+}
+
+#categories-container{
+    margin: 2em 0;
+}
+
+#categories-container .category{
+    width: 300px;
+    height: 300px;
+    margin: 10px;
+    cursor: pointer;
+    position: relative;
+}
+
+#categories-container .category img{
+    width: 300px;
+    height: 300px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#categories-container .category:hover img{
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+#categories-container .category p{
+    position: absolute;
+    text-align: center;
+    width: 300px;
+    height: 300px;
+    top: 0;
+    border-radius: 15px;
+    opacity: 0;
+
+    text-shadow: 0 0 10px black;
+    color: white;
+    font-size: 1.4em;
+}
+#categories-container .category:hover p{
+    background: #31a90963;
+    opacity: 1;
+}

@@ -1,0 +1,111 @@
+#administration #display-windows #search-window{
+    width: 100%;
+    margin: 1.5em;
+}
+
+#administration #display-windows #search-window #search-container{
+    width: 100%;
+    border: 1px solid #CCCCCC;
+}
+
+#search-container #search-text{
+    width: 80%;
+    font-size: 1.3em;
+    border: none;
+    padding: 10px;
+}
+
+#search-container button{
+    border-radius: 0;
+    width: 20%;
+}
+
+#search-choice-container{
+    margin: 1em auto;
+    width: fit-content;
+    border: 1px solid #DDDDDD;
+}
+
+#search-choice-container a{
+    padding: 1em;
+    background: #FAFAFA;
+}
+
+#search-choice-container a:hover{
+    text-decoration: none;
+    background: #F0F0F0;
+}
+
+#search-choice-container .selected{
+    background: #EAEAEA;
+}
+
+#search-window table#result-container{
+    border-collapse: collapse;
+    border-spacing: 1px;
+    border: 1px solid #CCCCCC;
+}
+
+#search-window #result-container tr{
+    border: 1px solid #CCCCCC;
+}
+#search-window #result-container tr.result-header{
+    background: #F4F4F4;
+}
+
+#search-window #result-container th{
+    padding: 10px;
+}
+
+#search-window #result-container td{
+    padding: 10px;
+}
+
+#search-window #result-container tr.result-header .customer-page-link{
+    padding: 10px;
+}
+
+#search-window #result-container tr.result{
+    background: #FDFDFD;
+}
+#search-window #result-container .date-user{
+    width: 15%;
+}
+#search-window #result-container .name-user{
+    text-align: left;
+    width: 35%;
+}
+#search-window #result-container .mail-user{
+    text-align: left;
+    width: 35%;
+}
+#search-window #result-container .phone-user{
+    text-align: left;
+    width: 10%;
+}
+#search-window #result-container .customer-page-link{
+    width: 5%;
+    padding: 0 10px;
+}
+
+#search-window #result-container .reference-product{
+    width: 10%;
+}
+
+#search-window #result-container .name-product{
+    width: 60%;
+    text-align: left;
+}
+
+#search-window #result-container .price-product{
+    width: 10%;
+}
+
+#search-window #result-container .stock-product{
+    width: 10%;
+}
+
+#search-window #result-container .product-page-link{
+    width: 10%;
+    padding: 10px;
+}

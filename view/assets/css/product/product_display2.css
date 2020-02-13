@@ -1,0 +1,235 @@
+#product-page-main {
+    background: #f7f7f7 !important;
+}
+
+#product-page-container {
+    padding: 4rem 8rem;
+}
+
+#product-page-container #breadcrumb-container {
+    font-family: Roboto, sans-serif;
+    font-weight: 300;
+    margin-bottom: 2rem;
+    font-size: 0.8rem;
+}
+
+#product-page-container #breadcrumb-container #breadcrumb b {
+    font-size: 1rem;
+    padding: 0 10px;
+}
+
+#product-page-container #breadcrumb-container #breadcrumb i {
+    font-style: normal;
+    color: rgb(140, 193, 63);
+}
+
+#product-page-container #product-presentation-container #left-column {
+    margin-right: 10px;
+    box-sizing: border-box;
+}
+
+#product-page-container #product-presentation-container #right-column {
+    margin-left: 10px;
+    padding: 1rem;
+    background: white;
+    border: 1px solid rgb(229, 229, 229);
+    border-radius: 3px;
+    height: fit-content;
+    box-sizing: border-box;
+    min-height: 200px;
+}
+
+#product-page-container #product-presentation-container #extra-column {
+    width: 200px;
+    padding: 1rem;
+    margin-left: 1rem;
+    border: 1px solid rgb(220, 220, 220);
+    background: white;
+    border-radius: 3px;
+    max-width: 200px;
+    min-width: 200px;
+    box-sizing: border-box;
+    height: fit-content;
+    height: max-content;
+}
+
+#product-page-container #product-presentation-container #images-container {
+    height: 200px;
+}
+
+#product-page-container #images-container #thumbnails-container {
+    margin-right: 10px;
+}
+
+#product-page-container #images-container #thumbnails-container .thumbnail {
+    height: 40px;
+    width: 40px;
+    margin-bottom: 10px;
+    border-radius: 2px;
+}
+
+#product-page-container #images-container #main-image-container #big-image {
+    height: 200px;
+    width: 200px;
+    border-radius: 2px;
+}
+
+#product-page-container #social-media-container {
+    width: 200px;
+    margin-left: auto;
+    margin-top: 1rem;
+}
+
+#product-page-container #social-media-container svg {
+    height: 24px;
+}
+
+#product-page-container #social-media-container #facebook-link {
+    font-size: 0.8rem;
+    background: white;
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 3px;
+    padding-right: 5px;
+    height: 24px;
+}
+
+#product-page-container #facebook-link:hover,
+#instagram-link:hover {
+    cursor: pointer;
+}
+
+#product-page-container #social-media-container #facebook-link p {
+    margin-left: 5px;
+}
+
+#product-page-container #product-presentation-container #title-container {
+    margin-bottom: 1rem;
+}
+
+#product-page-container #product-presentation-container #title-container h1 {
+    font-size: 2rem;
+    font-family: Roboto, sans-serif;
+}
+
+#product-page-container #product-presentation-container #price-container {
+    height: 2rem;
+    background: linear-gradient(to top, #fcfcfc, #fafbfc);
+    border: 1px solid #c4cdd5;
+    box-shadow: 0 1px 0 0 rgba(22, 29, 37, .05);
+    border-radius: 3px;
+    color: #3f4455;
+    text-align: center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-decoration: none;
+    transition-property: background, border, box-shadow;
+    transition-duration: .2s;
+    transition-timing-function: cubic-bezier(.64, 0, .35, 1);
+    font-size: 1rem;
+}
+
+#product-page-container #price-container #price {
+    flex-direction: column;
+    justify-content: center;
+    display: flex;
+    font-weight: bold;
+    font-family: Roboto, sans-serif;
+}
+
+#product-page-container #product-presentation-container #add-to-cart-container {
+    height: 2rem;
+    background: linear-gradient(180deg, #fff, #f9fafb);
+    border: 1px solid #c4cdd5;
+    box-shadow: 0 1px 0 0 rgba(22, 29, 37, .05);
+    border-radius: 3px;
+    color: #212b36;
+    text-align: center;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-decoration: none;
+    transition-property: background, border, box-shadow;
+    transition-duration: .2s;
+    transition-timing-function: cubic-bezier(.64, 0, .35, 1);
+    font-size: 1rem;
+}
+
+#product-page-container #add-to-cart-container #quantity-input {
+    border: none;
+    height: 2rem;
+    width: 2rem;
+    margin: 0;
+    padding: 0 0 0 10px;
+    background: none;
+    border-right: 1px solid rgb(200, 200, 200);
+    background: white;
+    border-radius: 2px;
+    box-shadow: inset 0 0px 10px 1px rgba(220, 220, 220, 0.6);
+}
+
+#product-page-container #add-to-cart-container #add-to-cart-button {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0 1rem;
+    background: none;
+    border: none;
+    border-radius: 0;
+    font-size: 0.75rem;
+    font-weight: bold;
+    font-family: Robot, sans-serif;
+}
+
+#product-page-container #add-to-cart-container button:disabled,
+#product-page-container #add-to-cart-container button[disabled] {
+    background: #f7f7f7 !important;
+    color: #777 !important;
+}
+
+#product-page-container #add-to-cart-container button:disabled svg,
+#product-page-container #add-to-cart-container button[disabled] svg {
+    fill: gray;
+}
+
+#product-page-container #add-to-cart-container #add-to-cart-button svg {
+    height: 1.4rem;
+    width: 1.4rem;
+    margin: auto 0;
+}
+
+#product-page-container #add-to-cart-container #add-to-cart-button.add-to-wishlist {
+    margin: auto 0;
+}
+
+#prod0uct-page-container #ceo-description-container p {
+    font-size: 1rem;
+}
+
+#product-page-container #product-description-container {
+    margin-top: 2rem;
+    padding: 1rem;
+    border: 1px solid rgb(228, 228, 228);
+    border-radius: 2px;
+    background: white;
+}
+
+#product-page-container #product-description-container a{
+    color: rgb(140, 193, 63);
+}
+
+#product-page-container #product-description-container h2 {
+    font-family: Roboto, sans-serif;
+    margin-bottom: 1rem;
+}
+
+#product-page-container #product-review-container {
+    margin: 2rem 0;
+    padding: 1rem;
+    border: 1px solid rgb(228, 228, 228);
+    border-radius: 2px;
+    background: white;
+}

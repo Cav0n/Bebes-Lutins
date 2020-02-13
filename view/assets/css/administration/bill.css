@@ -1,0 +1,60 @@
+#bill{
+    width: 900px;
+    margin: 0 auto;
+    background-color: white;
+}
+
+#bill header{
+    width: 900px;
+    box-shadow: none;
+    height: auto; /* Mozilla & Edge */
+    height: fit-content; /* Chrome & Safari */
+    box-sizing: border-box;
+    position: relative;
+    padding: 20px;
+}
+
+#bill header .address-container{
+    padding: 10px;
+    border: 1px solid #444444;
+    height: fit-content;
+}
+
+#bill header .address-container .contact-infos{
+    padding-top: 10px;
+    margin-top: 10px;
+    border-top: 1px solid #444444;
+}
+
+#bill main {
+    margin: 0;
+    min-height: 0;
+    padding: 20px;
+}
+
+#bill main table{
+    width: 100%;
+}
+
+#bill main table, #bill main table td, #bill main table tr{
+    border-collapse: collapse;
+    border-width:1px;
+    border-style:solid;
+    border-color:black;
+}
+
+#bill main table tr.empty, #bill main table td.empty {
+    border-width: 0 !important;
+}
+
+#bill main table tr .table-price{
+    text-align: right;
+}
+
+#bill main table tr .table-quantity{
+    text-align: center;
+}
+
+#bill main .payment-method{
+    text-align: right;
+}

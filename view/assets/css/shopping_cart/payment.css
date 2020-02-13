@@ -1,0 +1,178 @@
+#payment-wrapper{
+    padding: 4em 0 2em 0;
+}
+
+#payment-wrapper #payment-inner #payment-container{
+    width: 500px;
+    height: fit-content;
+    margin: 0 20px 20px;
+    box-sizing: border-box;
+}
+
+#payment-wrapper #payment-inner #payment-container #payment-choice{
+    padding: 20px;
+    background: white;
+    margin-bottom: 15px;
+}
+
+#payment-wrapper #payment-inner #payment-container #payment-choice label{
+    width: fit-content;
+width: max-content;
+    margin-left: 10px;
+    margin-bottom: -10px;
+    z-index: 2;
+    background: white;
+}
+
+#payment-wrapper #payment-inner #payment-container #payment-choice select{
+    font-size: 1em;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #CCCCCC;
+    background: white;
+    height: 40px;
+}
+
+#payment-wrapper #payment-inner #payment-container #start-payment{
+    padding-top: 20px;
+}
+
+#payment-wrapper #payment-inner #payment-container #start-payment.validate{
+    padding: 30px;
+    background: white;
+}
+
+#payment-wrapper #payment-inner #payment-container #start-payment button{
+    margin-top: 15px;
+}
+
+#payment-wrapper #payment-inner #order-summary-container{
+    width: 300px;
+    height: fit-content;
+    margin: 0 20px 20px;
+    box-sizing: border-box;
+}
+
+#payment-wrapper #payment-inner #order-summary-container .order-items{
+    padding: 40px;
+    margin-bottom: 10px;
+    background: white;
+}
+
+#payment-wrapper #payment-inner #order-summary-container .order-items .product{
+    margin-bottom: 10px;
+}
+
+#payment-wrapper #payment-inner #order-summary-container .order-items .product img{
+    width: 80px;
+    height: 80px;
+}
+
+#payment-wrapper #payment-inner #order-summary-container .order-items .product .texts{
+    margin-left: 10px;
+}
+
+#payment-wrapper #payment-inner #order-summary-container .order-items .product .texts .name-price{
+    font-size: 0.7em;
+}
+
+#payment-wrapper #payment-inner #order-summary-container .order-items .product .texts .price{
+    font-weight: 600;
+}
+
+#payment-wrapper #payment-inner #order-summary-container .numbers{
+    padding: 40px;
+    background: white;
+    margin-bottom: 10px;
+}
+
+#payment-wrapper #payment-inner #order-summary-container .order-address{
+    padding: 40px;
+    background: white;
+    margin-bottom: 10px;
+}
+
+
+#payment-wrapper #payment-inner #order-summary-container .order-address .address-title {
+    font-size: 1.1em;
+}
+
+#payment-wrapper #payment-inner #order-summary-container .order-address  .address {
+    font-size: 0.9em;
+}
+
+/* Thanks*/
+#payment-wrapper #payment-inner .thanks-header{
+    width: 70%;
+    max-width: 800px;
+    min-width: 500px;
+    margin: 0 auto;
+}
+
+#payment-wrapper #payment-inner .thanks-checksign{
+    color: #00c300;
+}
+
+#payment-wrapper #payment-inner .thanks-message{
+    padding-left: 15px;
+}
+
+#payment-wrapper #payment-inner #thanks-image{
+    padding-top: 2em;
+}
+
+#payment-wrapper #payment-inner #thanks-image img{
+    width: 277px;
+    height: 463px;
+}
+
+#payment-wrapper #payment-inner #thanks-image #thanks-text-image{
+    position: absolute;
+    padding-top: 231px;
+    font-size: 2em;
+    box-sizing: border-box;
+    height: 463px;
+    width: 277px;
+    padding-left: 100px;
+    color: black;
+    background: rgba(0, 255, 149, 0.58);
+    border-radius: 20px;
+
+    opacity: 0;
+}
+
+#payment-wrapper #payment-inner #thanks-image #thanks-text-image:hover{
+    opacity: 1;
+}
+/* ---- */
+
+/* VOUCHER */
+#payment-wrapper #voucher{
+    width: 300px;
+    box-sizing: border-box;
+    padding: 40px;
+    background: white;
+    margin-bottom: 10px;
+}
+
+#payment-wrapper #voucher label{
+    width: fit-content;
+width: max-content;
+    margin-left: 10px;
+    margin-bottom: -10px;
+    z-index: 2;
+    background: white;
+}
+
+#payment-wrapper #voucher input{
+    font-size: 1em;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #CCCCCC;
+    background: white;
+}
+
+#payment-wrapper #voucher button{
+    margin-top: 15px;
+}
+/* ---- */

@@ -1,0 +1,59 @@
+<?php
+
+use Illuminate\Support\Facades\Route; // Fix for VS Code
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', 'MainController@index');
+
+
+/**
+ * ============
+ * AUTH
+ * ============
+ */
+
+// Connexion
+Route::get('/connexion', 'Auth\LoginController@showLoginPage')->name('login');
+Route::post('/connexion', 'Auth\LoginController@login');
+
+// Registration
+Route::get('/enregistrement', 'Auth\RegisterController@showRegistrationPage')->name('registration');
+Route::post('/enregistrement', 'Auth\RegisterController@register');
+
+// Logout
+Route::any('/logout', 'Auth\LoginController@logout')->name('logout');
+/** =========== */
+
+/**
+ * ============
+ * CUSTOMER AREA
+ * ============
+ */
+Route::get('/espace-client', 'CustomerArea\MainController@index')->name('customer.area');
+/** ============ */
+
+/**
+ * ============
+ * CATEGORY
+ * ============
+ */
+Route::get('/categories/{category}', 'CategoryController@show')->name('category');
+/** ============ */
+
+/**
+ * ============
+ * PRODUCT
+ * ============
+ */
+Route::get('/produits/{product}', 'ProductController@show')->name('product');
+/** ============ */

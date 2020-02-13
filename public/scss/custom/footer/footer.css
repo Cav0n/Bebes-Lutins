@@ -1,0 +1,12 @@
+footer .social-link-container {
+  padding: 0.3rem;
+  margin: 5px 0;
+  border-radius: 2px;
+  text-decoration: none;
+}
+
+footer .social-link-container img {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+/*# sourceMappingURL=footer.css.map */

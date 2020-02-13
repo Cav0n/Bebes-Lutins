@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 /vendor/
 node_modules/
 npm-debug.log
@@ -32,3 +33,22 @@ composer.phar
 # You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
 # composer.lock
 >>>>>>> 34edcb51750937895aeb8c4d62c0c1de313d893b
+=======
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/vendor
+.env
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+npm-debug.log
+yarn-error.log
+/public/images/categories/*
+/public/images/products/*
+/public/images/tmp/*
+/public/ckfinder/*
+*.DS_Store
+>>>>>>> 2019e5694553027f40b694a8f477be2d802c877c

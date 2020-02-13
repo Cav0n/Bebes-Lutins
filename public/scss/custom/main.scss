@@ -1,0 +1,179 @@
+@import "./footer/footer";
+
+$primary:       #9ce849 !default;
+$secondary:     #9d1cda !default;
+$success:       rgb(42, 212, 42) !default;
+$info:          rgb(59, 243, 243) !default;
+$warning:       yellow !default;
+$danger:        rgb(243, 60, 60) !default;
+$light:         #ebebeb !default;
+$dark:          #242424 !default;
+
+html{
+    background: $dark;
+}
+
+body{
+    background: $dark;
+}
+
+.max-content{
+    width: intrinsic !important;            /* Safari/WebKit uses a non-standard name */
+    width: -moz-max-content !important;     /* Firefox/Gecko */
+    width: -webkit-max-content !important;  /* Chrome */
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+            -moz-user-select: none; /* Old versions of Firefox */
+            -ms-user-select: none; /* Internet Explorer/Edge */
+                user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Opera and Firefox */
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.popover{
+    border-color: $danger !important;
+}
+
+.popover .arrow::before{
+    border-right-color: $danger !important;
+}
+
+.popover-body{
+    color:$danger !important;
+}
+
+#logo{
+    height:12rem;
+    top:-2rem;
+    left:calc(50vw - 6rem);
+    cursor: pointer;
+}
+
+#logo:hover{
+    top:-1rem;
+}
+
+.transition{
+    transition: all 0.4s ease-out;
+}
+
+.transition-fast{
+    transition: all 0.3s ease-out;
+}
+
+.dim-background{
+    background: rgb(245, 245, 245);
+}
+
+.swiper-container{
+    width: 100%;
+    height: calc((100vw)/4.2 - 1px);
+}
+
+.swiper-pagination-bullet{
+    background-color: white !important;
+    opacity: 0.5 !important;
+}
+
+.swiper-pagination-bullet-active{
+    opacity: 1 !important;
+}
+
+.swiper-button-prev, .swiper-button-next{
+    color:white !important;
+    background: rgba(20,20,20,0.6);
+    top: 1.4rem !important;
+    width: 3rem !important;
+    height: 100% !important;
+}
+.swiper-button-prev{
+    left:0 !important;
+}
+
+.swiper-button-next{
+    right:0 !important;
+}
+
+.pagination{
+    margin: 1rem auto !important;
+}
+
+.popup-container{
+    height: 100vh !important;
+    width: 102vw !important;
+    background: rgba(100,100,100,0.7);
+    z-index: 2000;
+}
+
+.thumbnail-container img:hover{
+    border: 1px solid $primary !important;
+}
+
+.card.product{
+    cursor: pointer;
+}
+
+.card.product:hover {
+    box-shadow: 0 0 6px -1px rgba(150,150,150,0.8);
+}
+
+.card.product .images-container{
+    position: relative;
+    width: 100%; /* The size you want */
+}
+
+.card.product .images-container:after{
+    content: "";
+    display: block;
+    padding-bottom: 100%; /* The padding depends on the width, not on the height, so with a padding-bottom of 100% you will get a square */
+}
+
+.card.product .images-container img{
+    position: absolute; /* Take your picture out of the flow */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0; /* Make the picture taking the size of it's parent */
+    width: 100%; /* This if for the object-fit */
+    height: 100%; /* This if for the object-fit */
+    object-fit: cover; /* Equivalent of the background-size: cover; of a background-image */
+    object-position: center;
+}
+
+#certifications-container svg{
+    fill: $dark;
+}
+
+.certification{
+    cursor: pointer;
+}
+
+.certification:hover p{
+    color: $secondary !important;
+}
+
+.certification:hover svg{
+    fill: $secondary !important;
+}
+
+button .svg{
+    height:1.4rem;
+    width: 1.4rem;
+    fill:white;
+    margin: auto;
+}
+
+.social-button-icon{
+    height: 2rem;
+    width: 2rem;
+}
+
+@import "./header/header.scss";
+@import "../bootstrap/bootstrap";

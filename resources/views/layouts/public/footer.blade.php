@@ -1,0 +1,57 @@
+<footer class='page-footer font-small bg-dark text-light container-fluid'>
+  <div class='footer-copyright text-center py-3'>
+    © Bébés Lutins 2019
+  </div>
+  <div class='row'>
+    <div class="col-12 col-md-6 col-lg-3 order-0">
+      <p class="h5 font-weight-bold">Infos pratiques</p>
+      <ul class='list-unstyled'>
+        <li><a href='/infos-pratiques/livraison-et-frais-de-ports' class='text-light'>Livraison et frais de ports</a></li>
+        <li><a href='/infos-pratiques/paiement' class='text-light'>Paiement</a></li>
+        <li><a href='/infos-pratiques/echanges-et-retours' class='text-light'>Échanges et retours</a></li>
+        <li><a href='/infos-pratiques/mentions-legales' class='text-light'>Mentions légales</a></li>
+        <li><a href='/infos-pratiques/conditions-de-ventes' class='text-light'>Conditions de ventes</a></li>
+        {{--  <li><a href='/infos-pratiques/plan-du-site' class='text-light'>Plan du site</a></li>  --}}
+      </ul>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3 order-1">
+      <p class="h5 font-weight-bold">Nous contacter</p>
+      <ul class="list-unstyled">
+        <li><a href='tel:+33641569165' class='text-light'>06 41 56 91 65</a></li>
+        <li><a href='mailto:contact@bebes-lutins.fr' class='text-light'>contact@bebes-lutins.fr</a></li>
+        <li><a href='/contact' class='text-light'>Formulaire de contact</a></li>
+        <li class="mt-3">Katia répondra avec plaisir à vos questions.</li>
+      </ul>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3 order-3 order-lg-2">
+      <p class="h5 font-weight-bold">Nous suivre</p>
+      <ul class="list-unstyled">
+        <li class='social-link-container bg-light border col-6 col-md-6 col-lg-8 max-content pr-3'>
+          <a href='https://www.instagram.com/bebes.lutins' class='text-dark' style='text-decoration:none;'>
+          <img src='{{asset('images/icons/instagram.svg')}}'> - Instagram</a>
+        </li>
+        <li class='social-link-container bg-light border col-6 col-md-6 col-lg-8 max-content pr-3'>
+          <a href='https://www.facebook.com/bebes.lutins' class='text-dark' style='text-decoration:none;'>
+          <img src='{{asset('images/icons/facebook.svg')}}'s> - Facebook</a>
+        </li>
+        @if(Auth::check() && Auth::user()->isAdmin && Auth::user()->privileges > 0)
+        <li class='social-link-container bg-light border col-6 col-md-6 col-lg-8 max-content pr-3'>
+          <a href='/dashboard' class='text-dark' style='text-decoration:none;'>
+          <img src='{{asset('images/icons/dashboard.svg')}}'s> - Dashboard</a>
+        </li>
+        @endif
+      </ul>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3 order-2 order-lg-3">
+      <p class="h5 font-weight-bold">En savoir plus</p>
+      <ul class="list-unstyled">
+        <li><a href='/en-savoir-plus/qui-sommes-nous' class='text-light'>Qui sommes-nous ?</a></li>
+        <li><a href='/en-savoir-plus/pourquoi-les-couches-lavables' class='text-light'>Pourquoi les couches lavables ?</a></li>
+        <li><a href='/en-savoir-plus/entretien-des-couches-lavables' class='text-light'>Entretien des couches lavables</a></li>
+        <li><a href='/en-savoir-plus/mode-d-emploi' class='text-light'>Mode d'emploi des couches lavables</a></li>
+        <li><a href='/en-savoir-plus/comment-s-equiper' class='text-light'>Comment s'équiper ?</a></li>
+        <li><a href='/en-savoir-plus/nos-revendeurs' class='text-light'>Nos revendeurs</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>

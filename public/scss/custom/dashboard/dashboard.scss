@@ -1,0 +1,74 @@
+$background-color: #edf1f3;
+$primary:       #9ce849 !default;
+$secondary:     #9d1cda !default;
+$success:       rgb(42, 212, 42) !default;
+$info:          rgb(59, 243, 243) !default;
+$warning:       yellow !default;
+$danger:        rgb(243, 60, 60) !default;
+$light:         #ebebeb !default;
+$dark:          #242424 !default;
+
+html{
+    background: $background-color;
+}
+
+body{
+    background: $background-color;
+}
+
+header{
+    background: $background-color;
+}
+
+.card{
+    box-shadow: 0 2px 3px #cdd8df;
+    border: none;
+}
+
+table{
+    margin-bottom:0 !important;
+}
+
+table tr{
+    cursor: pointer;
+}
+
+table tr:hover{
+    background: $light;
+}
+
+table tr.hidden{
+    opacity: 0.4;
+}
+
+#sidenav .sublink{
+    margin-left:2.6rem;
+    font-size: 0.9rem;
+}
+
+#sidenav .active{
+    color: $secondary !important;
+    font-weight: 600;
+}
+
+#sidenav img{
+    height:2rem;
+    width:2rem;
+}
+
+#sidenav svg{
+    height:2rem;
+    width:2rem;
+}
+
+#sidenav .active svg{
+    fill:$secondary;
+}
+
+.status-selector {
+    cursor: pointer;
+}
+
+.status-selector.selected{
+    background: $primary !important;
+}

@@ -1,0 +1,8 @@
+2019-12-17 11:44:07 - ----------------------------------------------------------
+2019-12-17 11:44:07 - paylineSDK::__construct(550146*******9, c****************76A, , , , , PROD)
+2019-12-17 11:44:08 - Request : WebPaymentAPI.doWebPayment(order.ref = BERNARD CHASTAGNOL-Flo-5DF8B177AB)
+2019-12-17 11:44:08 - Response : code = 00000 - token = 1lIrJwpKh0FZtK6879991576579448136
+2019-12-17 11:45:30 - ----------------------------------------------------------
+2019-12-17 11:45:30 - paylineSDK::__construct(550146*******9, c****************76A, , , , , PROD)
+2019-12-17 11:45:31 - Request : WebPaymentAPI.doWebPayment(order.ref = BERNARD-CHASTAGNOL-Flo-5DF8B1CA86)
+2019-12-17 11:45:31 - Response : code = 00000 - token = 1PYpzQrHj46Zmg2041341576579530927

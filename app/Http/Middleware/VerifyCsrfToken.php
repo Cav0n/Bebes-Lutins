@@ -19,14 +19,6 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'produits/*',
-        'categories/*',
-        'commandes/*',
-        'panier/ajout_message*',
-        'dashboard/produits/recherche',
-        'dashboard/clients/recherche',
-        'dashboard/commandes/recherche',
-        'dashboard/analyses/calculate_turnover',
-        '/dashboard/analyses/calculate_all',
+        //
     ];
 }

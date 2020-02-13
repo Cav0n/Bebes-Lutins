@@ -1,42 +1,9 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-/vendor/
-node_modules/
-npm-debug.log
-yarn-error.log
-
-# Laravel 4 specific
-bootstrap/compiled.php
-app/storage/
-
-# Laravel 5 & Lumen specific
-public/storage
-public/hot
-
-# Laravel 5 & Lumen specific with changed public path
-public_html/storage
-public_html/hot
-
-storage/*.key
-.env
-Homestead.yaml
-Homestead.json
-/.vagrant
-.phpunit.result.cache
-=======
-composer.phar
-/vendor/
-.vscode
-.htaccess
-
-# Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
-# You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
-# composer.lock
->>>>>>> 34edcb51750937895aeb8c4d62c0c1de313d893b
-=======
 /node_modules
 /public/hot
 /public/storage
+/public/css
+/public/js
+/public/images
 /storage/*.key
 /vendor
 .env
@@ -46,9 +13,3 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-/public/images/categories/*
-/public/images/products/*
-/public/images/tmp/*
-/public/ckfinder/*
-*.DS_Store
->>>>>>> 2019e5694553027f40b694a8f477be2d802c877c

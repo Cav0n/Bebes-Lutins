@@ -17,6 +17,23 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace = 'App\Http\Controllers';
 
     /**
+     * The path to the "home" route for your application.
+     *
+     * @var string
+     */
+    public const HOME = '/';
+
+    /**
+     * The path to the "customer area" route
+     */
+    public const CUSTOMER_AREA = '/espace-client';
+
+    /**
+     * The path to the "admin" route
+     */
+    public const ADMIN = '/admin';
+
+    /**
      * Define your route model bindings, pattern filters, etc.
      *
      * @return void

@@ -1,7 +1,5 @@
 <?php
 
-setlocale(LC_TIME, 'fr_FR');
-
 /**
  * Laravel - A PHP Framework For Web Artisans
  *

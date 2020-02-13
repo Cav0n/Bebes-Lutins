@@ -8,9 +8,6 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    protected $primaryKey = 'id';
-    public $incrementing = false;
-
     use Notifiable;
 
     /**
@@ -19,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'email', 'phone', 'password', 'wantNewsletter'
+        'firstname', 'lastname', 'phone', 'email', 'password', 'isAdmin'
     ];
 
     /**
@@ -28,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'isAdmin', 'privileges'
+        'password', 'remember_token',
     ];
 
     /**
@@ -41,56 +38,10 @@ class User extends Authenticatable
     ];
 
     /**
-     * The attributes that should be mutated to dates.
-     *
-     * @var array
+     * Carts that belong to the user.
      */
-    protected $dates = ['birthdate'];
-
-    public function shopping_carts()
+    public function carts()
     {
-        return $this->hasMany('App\ShoppingCart');
-    }
-
-    public function hasActiveShoppingCarts()
-    {
-        return $this->hasMany('App\ShoppingCart')->where('isActive', 1)->exists();
-    }
-
-    public function active_shopping_cart()
-    {
-        return $this->hasMany('App\ShoppingCart')->where('isActive', 1)->take(1);
-    }
-
-    /**
-     * The categories that belongs to the product.
-     */
-    public function orders()
-    {
-        return $this->hasMany('App\Order');
-    }
-
-    /**
-     * The categories that belongs to the product.
-     */
-    public function addresses()
-    {
-        return $this->hasMany('App\Address')->where('isDeleted', 0)->orderBy('street', 'asc');
-    }
-
-    /**
-     * The categories that belongs to the product.
-     */
-    public function reviews()
-    {
-        return $this->hasMany('App\Review');
-    }
-
-    /**
-     * Get the phone record associated with the user.
-     */
-    public function wishlist()
-    {
-        return $this->hasOne('App\WishList');
+        return $this->hasMany('App\Cart');
     }
 }

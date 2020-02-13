@@ -2,16 +2,19 @@
 
 namespace App;
 
-use App\Category;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    /**
+     * FOR STRING PRIMARY KEY
+     */
     protected $primaryKey = 'id';
     public $incrementing = false;
-    
+    protected $keyType = 'string';
+
     /**
-     * The categories that belongs to the product.
+     * Categories that belong to the product.
      */
     public function categories()
     {
@@ -19,7 +22,7 @@ class Product extends Model
     }
 
     /**
-     * The categories that belongs to the product.
+     * Images that belong to the product.
      */
     public function images()
     {
@@ -27,69 +30,10 @@ class Product extends Model
     }
 
     /**
-     * The products that belongs to the category.
+     * CartItems that belong to the product.
      */
-    public function tags()
+    public function items()
     {
-        return $this->belongsToMany('App\Tag');
-    }
-
-    /**
-     * 
-     */
-    public function reviews()
-    {
-        return $this->hasMany('App\Review');
-    }
-
-    /**
-     * 
-     */
-    public function wishListItem()
-    {
-        return $this->hasMany('App\WishList');
-    }
-
-    /**
-     * 
-     */
-    public function shoppingCartItems()
-    {
-        return $this->hasMany('App\ShoppingCartItem');
-    }
-
-    /**
-     * The categories that belongs to the product.
-     */
-    public function orderItems()
-    {
-        return $this->hasMany('App\OrderItem');
-    }
-
-    public function characteristics()
-    {
-        return $this->hasMany('App\ProductCharacteristic');
-    }
-
-    public function mainImageExists()
-    {
-        if(file_exists(public_path('/images/products/') . $this->mainImage)){
-            return true; 
-        } else return false;
-    }
-
-    public function thumbnailsExists()
-    {
-        $allExists = true;
-        foreach($this->images as $image){
-            if($image->name != $this->mainImage){
-                if(! file_exists(public_path('/images/products/thumbnails/') . $image->name)){
-                    $allExists = false;
-                    break;
-                }
-            }
-        }
-
-        return $allExists;
+        return $this->belongsToMany('App\CartItem');
     }
 }

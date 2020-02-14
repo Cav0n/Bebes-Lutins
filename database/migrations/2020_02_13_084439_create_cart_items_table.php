@@ -16,15 +16,15 @@ class CreateCartItemsTable extends Migration
         Schema::create('cart_items', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('quantity');
-            $table->bigInteger('cart_id');
+            $table->bigInteger('cart_id')->unsigned();
             $table->string('product_id');
 
             $table->foreign('cart_id')
-                    ->references('id')->on('cart')
+                    ->references('id')->on('carts')
                     ->onDelete('cascade');
 
             $table->foreign('product_id')
-                    ->references('id')->on('product')
+                    ->references('id')->on('products')
                     ->onDelete('cascade');
 
             $table->timestamps();

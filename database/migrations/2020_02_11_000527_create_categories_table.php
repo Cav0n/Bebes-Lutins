@@ -22,11 +22,13 @@ class CreateCategoriesTable extends Migration
             $table->boolean('isDeleted')->default(0);
             $table->string('parentId')->nullable();
 
+            $table->timestamps();
+        });
+
+        Schema::table('categories', function (Blueprint $table) {
             $table->foreign('parentId')
                     ->references('id')->on('categories')
                     ->onDelete('cascade');
-
-            $table->timestamps();
         });
     }
 

@@ -5,6 +5,9 @@
         @endforeach
     </div>
     <div class="col">
-        <h1>{{$categories->first()->name}}</h1>
+        @foreach ($categories as $category)
+            <h1 id='h1-{{$category->id}}' @if($category->id !== $categories->first()->id) style='display:none' @endif>
+                {{$category->name}}</h1>
+        @endforeach
     </div>
 </div>

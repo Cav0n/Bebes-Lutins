@@ -32,7 +32,7 @@
                             <a href="{{route('login')}}">Se connecter</a>
                             <a href="{{route('registration')}}">Créer mon compte</a>
                             @endguest
-                            
+
                          </div>
                          <div class="cart-container d-flex flex-column py-2" style="width: 12rem;">
                             <a href="#" class="h3 font-weight-bold" style="text-transform: uppercase;">Mon panier</a>
@@ -64,7 +64,8 @@
                     <a class="nav-link dropdown-toggle text-dark" href="#" id="categories-dropdown-mobile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nos produits</a>
                     <div class="dropdown-menu" aria-labelledby="categories-dropdown-mobile">
                         @foreach ($categories as $category)
-                            <a class="dropdown-item" href="#">{{$category->name}}</a>
+                            <a class="dropdown-item" href="{{route('category', ['category' => $category->id])}}">
+                                {{$category->name}}</a>
                         @endforeach
                     </div>
                 </li>
@@ -86,14 +87,14 @@
     </nav>
 
     <script>
-    
+
     $('#categories-dropdown-desktop').on('click', function (event) {
         $('.dropdown-menu').toggleClass('show')
     });
 
     $('body').on('click', function (e) {
-        if (!$('.dropdown-menu').is(e.target) 
-            && $('.dropdown-menu').has(e.target).length === 0 
+        if (!$('.dropdown-menu').is(e.target)
+            && $('.dropdown-menu').has(e.target).length === 0
             && $('#categories-dropdown-desktop').has(e.target).length === 0
             && !$('#categories-dropdown-desktop').is(e.target)
         ) {
@@ -101,6 +102,6 @@
             $('.dropdown-menu').removeClass('show');
         }
     });
-    
+
     </script>
 </header>

@@ -51,9 +51,9 @@ class CartController extends Controller
      * @param  \App\Cart  $cart
      * @return \Illuminate\Http\Response
      */
-    public function show(Cart $cart)
+    public function show(Cart $cart = null)
     {
-        //
+        return view('pages.shopping_cart.index');
     }
 
     /**

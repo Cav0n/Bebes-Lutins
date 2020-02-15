@@ -55,4 +55,11 @@ class Cart extends Model
 
         return $shippingCosts;
     }
+
+    public function getPriceLeftBeforeFreeShippingAttribute()
+    {
+        $freeShippingFrom = env('FREE_SHIPPING_FROM', 70.00);
+
+        return $freeShippingFrom - $this->totalPrice;
+    }
 }

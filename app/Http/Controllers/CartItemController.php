@@ -32,7 +32,9 @@ class CartItemController extends Controller
         $cartItem->product_id = $product->id;
         $cartItem->save();
 
-        return view('index');
+        session()->put('shopping_cart', $cart);
+
+        return redirect()->back();
     }
 
     /**

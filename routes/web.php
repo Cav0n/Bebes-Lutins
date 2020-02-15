@@ -57,3 +57,12 @@ Route::get('/categories/{category}', 'CategoryController@show')->name('category'
  */
 Route::get('/produits/{product}', 'ProductController@show')->name('product');
 /** ============ */
+
+/**
+ * ============
+ * SHOPPING CART
+ * ============
+ */
+Route::get('/panier', 'CartController@show')->name('cart');
+Route::get('/panier/ajout/{product}/{cart}', 'CartItemController@create')->name('cart.addItem');
+/** ============ */

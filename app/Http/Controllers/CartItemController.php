@@ -22,9 +22,17 @@ class CartItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request, \App\Product $product, \App\Cart $cart)
     {
-        //
+        $quantity = $request->input('quantity', 1);
+
+        $cartItem = new CartItem();
+        $cartItem->quantity = $quantity;
+        $cartItem->cart_id = $cart->id;
+        $cartItem->product_id = $product->id;
+        $cartItem->save();
+
+        return view('index');
     }
 
     /**

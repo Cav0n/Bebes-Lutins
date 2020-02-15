@@ -1,6 +1,15 @@
 @php
     $categories = App\Category::all();
+    $cartQuantity = 0;
+    $cartPrice = 0.0;
 @endphp
+
+@foreach (Session::get('shopping_cart.items') as $item)
+    @php
+        $cartQuantity += $item->quantity;
+        $cartPrice += $item->product->price;
+    @endphp
+@endforeach
 
 <header class="fixed-top p-0 container-fluid border-bottom">
     <img id="logo" src="{{asset('images/logo.png')}}" class="fixed-top transition-fast d-none d-lg-flex" style="top: -2rem;left: calc(50vw - 7rem);cursor: pointer;height:14rem;">
@@ -18,12 +27,14 @@
                 <div class="top-navbar d-flex justify-content-between">
                     <div class="left">
                         <div class="contact-container py-2 h-100" style="width: 18rem;">
-                            <a href="#" class="h3 font-weight-bold" style="text-transform: uppercase;">Contactez-nous</a>
+                            <a href="#" class="h3 font-weight-bold" style="text-transform: uppercase;">
+                                Contactez-nous</a>
                         </div>
                     </div>
                     <div class="right d-flex">
                          <div class="customer-container d-flex flex-column py-2 border-right" style="width: 12rem;">
-                            <a href="{{route('customer.area')}}" class="h3 font-weight-bold" style="text-transform: uppercase;">Mon compte</a>
+                            <a href="{{route('customer.area')}}" class="h3 font-weight-bold" style="text-transform: uppercase;">
+                                Mon compte</a>
                             @auth
                             <a href="{{route('customer.area')}}">{{Auth::user()->firstname}} {{Auth::user()->lastname}}</a>
                             <a href="{{route('logout')}}">Se déconnecter</a>
@@ -35,9 +46,10 @@
 
                          </div>
                          <div class="cart-container d-flex flex-column py-2" style="width: 12rem;">
-                            <a href="#" class="h3 font-weight-bold" style="text-transform: uppercase;">Mon panier</a>
-                            <a href="#">0.00€</a>
-                            <a href="#">0 articles</a>
+                            <a href="{{route('cart')}}" class="h3 font-weight-bold" style="text-transform: uppercase;">
+                                Mon panier</a>
+                            <a href="#">{{\App\NumberConvertor::doubleToPrice($cartPrice)}}</a>
+                            <a href="#">{{$cartQuantity}} articles</a>
                          </div>
                     </div>
                 </div>

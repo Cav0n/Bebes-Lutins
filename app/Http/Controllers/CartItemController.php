@@ -90,6 +90,8 @@ class CartItemController extends Controller
      */
     public function destroy(CartItem $cartItem)
     {
-        //
+        $cartItem->delete();
+        session()->put('shopping_cart', $cartItem->cart);
+        return redirect()->back();
     }
 }

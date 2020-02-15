@@ -64,5 +64,6 @@ Route::get('/produits/{product}', 'ProductController@show')->name('product');
  * ============
  */
 Route::get('/panier', 'CartController@show')->name('cart');
-Route::get('/panier/ajout/{product}/{cart}', 'CartItemController@create')->name('cart.addItem');
+Route::get('/panier/ajout/{product}/{cart}', 'CartItemController@create')->name('cart.item.add');
+Route::get('/panier/{cartItem}/supprimer', 'CartItemController@destroy')->name('cart.item.delete');
 /** ============ */

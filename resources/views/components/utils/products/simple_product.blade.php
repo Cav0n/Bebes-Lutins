@@ -7,7 +7,7 @@
                 {{$product->name}}</a></p>
             <p class="card-text mb-0 product-price border-top py-2 px-3 text-center font-weight-bold">
                 {{App\NumberConvertor::doubleToPrice($product->price)}}</p>
-            <a href='{{route('cart.addItem', ['product' => $product->id, 'cart' => Session::get('shopping_cart')])}}' class="btn btn-primary add-to-cart-button w-100 rounded-0">
+            <a href='{{route('cart.item.add', ['product' => $product->id, 'cart' => Session::get('shopping_cart')])}}' class="btn btn-primary add-to-cart-button w-100 rounded-0">
                 Ajouter au panier</a>
         </div>
     </div>

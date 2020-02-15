@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 $factory->define(Image::class, function (Faker $faker) {
     return [
-        'url' => $faker->imageUrl($width = 640, $height = 480),
+        'url' => 'images/utils/question-mark.png',
         'name' => Str::random(10),
         'size' => $faker->numberBetween(100000, 500000)
     ];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Session;
 use App\Cart;
 use Illuminate\Http\Request;
 
@@ -22,9 +23,13 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(\App\User $user = null, string $sessionId = null)
     {
-        //
+        $cart = new Cart();
+        $cart->isActive = true;
+        $cart->sessionId = $sessionId;
+        $cart->user_id = $user;
+        $cart->save();
     }
 
     /**

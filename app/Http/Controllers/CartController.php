@@ -30,6 +30,8 @@ class CartController extends Controller
         $cart->sessionId = $sessionId;
         $cart->user_id = $user;
         $cart->save();
+
+        session()->put('shopping_cart', $cart);
     }
 
     /**

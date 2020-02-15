@@ -56,6 +56,16 @@ class CartController extends Controller
         return view('pages.shopping_cart.index');
     }
 
+    public function showDelivery()
+    {
+        return view('pages.shopping_cart.delivery');
+    }
+
+    public function addAddresses(Request $request)
+    {
+        dd($request->input());
+    }
+
     /**
      * Show the form for editing the specified resource.
      *

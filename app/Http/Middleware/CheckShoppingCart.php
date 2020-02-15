@@ -18,16 +18,15 @@ class CheckShoppingCart
      */
     public function handle(Request $request, Closure $next)
     {
-        $request->session()->get('shopping_cart', function(){
+        // session()->flush(); // Used in dev to test shopping cart
+        session()->get('shopping_cart', function(){
+
             $user = null;
 
             if(Auth::check()) $user = Auth::user();
 
-            $cart = (new \App\Http\Controllers\CartController)->create($user, session()->getId());
-
-            session(['shopping_cart' => $cart]);
+            (new \App\Http\Controllers\CartController)->create($user, session()->getId());
         });
-
 
         return $next($request);
     }

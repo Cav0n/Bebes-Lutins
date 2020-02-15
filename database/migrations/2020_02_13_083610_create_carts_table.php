@@ -16,8 +16,9 @@ class CreateCartsTable extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->boolean('isActive');
-            $table->bigInteger('user_id')->unsigned();
-            $table->string('voucher_id');
+            $table->string('sessionId')->unique();
+            $table->bigInteger('user_id')->unsigned()->nullable();
+            $table->string('voucher_id')->nullable();
 
             $table->foreign('user_id')
                     ->references('id')->on('users')

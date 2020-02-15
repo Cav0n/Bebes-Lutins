@@ -5,18 +5,11 @@
 @section('content')
 
 @php
-    $cartQuantity = 0;
-    $cartPrice = 0.00;
-    $shippingCosts = 0.00;
-@endphp
-@foreach (Session::get('shopping_cart.items') as $item)
-    @php
-        $cartQuantity += $item->quantity;
-        $cartPrice += $item->product->price;
-    @endphp
-@endforeach
-@php
-    $shippingCosts = \App\NumberConvertor::calculateShippingCosts($cartPrice);
+    $cart = Session::get('shopping_cart');
+
+    $cartQuantity = $cart->totalQuantity;
+    $cartPrice = $cart->totalPrice;
+    $shippingCosts = $cart->shippingCosts;
 @endphp
 
 <div class="container-fluid my-5">
@@ -27,7 +20,7 @@
 
                 {{-- ITEMS LIST --}}
                 <div class="col-lg-8">
-                    @foreach (Session::get('shopping_cart.items') as $item)
+                    @foreach ($cart->items as $item)
                     <div class="cart-product-container row border bg-white my-2">
                         <div class="col-lg-3">
                             <img src='{{asset($item->product->images->first()->url)}}' class="w-100">

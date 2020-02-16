@@ -22,6 +22,22 @@ class Cart extends Model
         return $this->hasMany('App\CartItem');
     }
 
+    /**
+     * ShippingAddress of the cart.
+     */
+    public function shippingAddress()
+    {
+        return $this->belongsTo('App\Address');
+    }
+
+    /**
+     * BillingAddress of the cart.
+     */
+    public function billingAddress()
+    {
+        return $this->belongsTo('App\Address');
+    }
+
     public function getTotalQuantityAttribute()
     {
         $totalQuantity = 0;

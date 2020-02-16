@@ -15,6 +15,11 @@
 <div class="container-fluid my-5">
     <div class="row justify-content-center">
         <div class="col-lg-8">
+
+            @if($cart->items->isEmpty())
+                <p>Votre panier est vide.</p>
+            @else
+
             <h1 class="font-weight-bold">Mon panier - {{$cartQuantity}} produits</h1>
             <div class="row m-0">
 
@@ -58,6 +63,8 @@
                 </div>
 
             </div>
+
+            @endif
         </div>
     </div>
 </div>

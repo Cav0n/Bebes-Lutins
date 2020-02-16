@@ -70,3 +70,11 @@ Route::get('/panier/paiement', 'CartController@showPayment')->name('cart.payment
 Route::get('/panier/ajout/{product}/{cart}', 'CartItemController@create')->name('cart.item.add');
 Route::get('/panier/{cartItem}/supprimer', 'CartItemController@destroy')->name('cart.item.delete');
 /** ============ */
+
+/**
+ * ============
+ * ORDERS
+ * ============
+ */
+Route::get('/commande/validation/{cart}', 'OrderController@createFromCart')->name('order.createFromCart');
+/** ============ */

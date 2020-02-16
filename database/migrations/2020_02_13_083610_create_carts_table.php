@@ -26,6 +26,14 @@ class CreateCartsTable extends Migration
                     ->references('id')->on('users')
                     ->onDelete('cascade');
 
+            $table->foreign('billing_address_id')
+                    ->references('id')->on('addresses')
+                    ->onDelete('cascade');
+
+            $table->foreign('shipping_address_id')
+                    ->references('id')->on('addresses')
+                    ->onDelete('cascade');
+
             $table->timestamps();
         });
     }

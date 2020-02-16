@@ -79,7 +79,12 @@ class CartController extends Controller
 
         session()->put('shopping_cart', $cart);
 
-        dd($cart);
+        return redirect(route('cart.payment'));
+    }
+
+    public function showPayment()
+    {
+        return view('pages.shopping_cart.payment');
     }
 
     /**

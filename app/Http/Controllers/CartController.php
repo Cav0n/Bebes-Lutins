@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Session;
+use Auth;
 use App\Cart;
 use Illuminate\Http\Request;
 
@@ -63,7 +64,22 @@ class CartController extends Controller
 
     public function addAddresses(Request $request)
     {
-        dd($request->input());
+        $addressController = new AddressController();
+        $billingAddressId = $addressController->storeArray($request->input('billing'), Auth::user());
+
+        $shippingAddressId = null;
+        if($request->input('sameAddress')){
+            $shippingAddressId = $addressController->storeArray($request->input('shipping'), Auth::user());
+        }
+
+        $cart = session()->get('shopping_cart');
+        $cart->billing_address_id = $billingAddressId;
+        $cart->shipping_address_id = $shippingAddressId;
+        $cart->save();
+
+        session()->put('shopping_cart', $cart);
+
+        dd($cart);
     }
 
     /**

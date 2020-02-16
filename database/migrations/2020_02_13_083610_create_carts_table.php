@@ -19,6 +19,8 @@ class CreateCartsTable extends Migration
             $table->string('sessionId')->unique();
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->string('voucher_id')->nullable();
+            $table->bigInteger('billing_address_id')->unsigned()->nullable();
+            $table->bigInteger('shipping_address_id')->unsigned()->nullable();
 
             $table->foreign('user_id')
                     ->references('id')->on('users')

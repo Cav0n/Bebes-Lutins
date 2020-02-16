@@ -46,7 +46,7 @@
                         <p class="mb-0">{{ $cart->totalQuantity }} produits : {{ \App\NumberConvertor::doubleToPrice($cart->totalPrice) }}</p>
                         <p class="mb-0">Frais de ports : {{ \App\NumberConvertor::doubleToPrice($cart->shippingCosts) }}</p>
                         <p class="mb-0">TOTAL T.T.C. : {{ \App\NumberConvertor::doubleToPrice($cart->totalPrice + $cart->shippingCosts) }}</p>
-                        <a class="btn btn-primary" href="/panier/livraison" role="button">Valider mon panier</a>
+                        <a class="btn btn-primary w-100 rounded-0 mt-2" href="/panier/livraison" role="button">Valider mon panier</a>
                     </div>
 
                     @if($cart->priceLeftBeforeFreeShipping > 0)

@@ -135,7 +135,7 @@
                         <p class="mb-0">{{ $cart->totalQuantity }} produits : {{ \App\NumberConvertor::doubleToPrice($cart->totalPrice) }}</p>
                         <p class="mb-0">Frais de ports : {{ \App\NumberConvertor::doubleToPrice($cart->shippingCosts) }}</p>
                         <p class="mb-0">TOTAL T.T.C. : {{ \App\NumberConvertor::doubleToPrice($cart->totalPrice + $cart->shippingCosts) }}</p>
-                        <button class="btn btn-primary" role="submit" form="new-address-form">Passer au paiement</button>
+                        <button class="btn btn-primary w-100 rounded-0 mt-2" role="submit" form="new-address-form">Passer au paiement</button>
                     </div>
 
                     @if($cart->priceLeftBeforeFreeShipping > 0)

@@ -20,4 +20,32 @@ class Category extends Model
     {
         return $this->belongsToMany('App\Product');
     }
+
+    public function parent()
+    {
+        return $this->belongsTo('App\Category', 'parentId');
+    }
+
+    public function child()
+    {
+        return $this->hasMany('App\Category', 'parentId');
+    }
+
+    public function getBreadcrumbAttribute()
+    {
+        $breadcrumb = $this->name;
+
+        $parent = $this->parent;
+
+        while ($parent != null){
+            $route = route('category', ['category' => $parent]);
+            $breadcrumb = "<a href='$route'>" . $parent->name . '</a> / ' . $breadcrumb;
+
+            $parent = $parent->parent;
+        }
+
+        $breadcrumb = "<a href='/'>Accueil</a> / " . $breadcrumb;
+
+        return $breadcrumb;
+    }
 }

@@ -29,7 +29,7 @@ class CartController extends Controller
         $cart = new Cart();
         $cart->isActive = true;
         $cart->sessionId = $sessionId;
-        $cart->user_id = $user;
+        if ($user) $cart->user_id = $user->id;
         $cart->save();
 
         session()->put('shopping_cart', $cart);

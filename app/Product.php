@@ -36,4 +36,17 @@ class Product extends Model
     {
         return $this->hasMany('App\CartItem');
     }
+
+    public function getBreadcrumbAttribute()
+    {
+        $route = route('product', ['product' => $this]);
+
+        $breadcrumb = $this->name;
+
+        $category = $this->categories->first();
+
+        $breadcrumb =  $category->breadcrumb . " / <a href='$route'>" .$breadcrumb . '</a>';
+
+        return $breadcrumb;
+    }
 }

@@ -33,7 +33,8 @@ class Category extends Model
 
     public function getBreadcrumbAttribute()
     {
-        $breadcrumb = $this->name;
+        $route = route('category', ['category' => $this]);
+        $breadcrumb = "<a href='$route'>" . $this->name . "</a>";
 
         $parent = $this->parent;
 

@@ -57,3 +57,25 @@ Route::get('/categories/{category}', 'CategoryController@show')->name('category'
  */
 Route::get('/produits/{product}', 'ProductController@show')->name('product');
 /** ============ */
+
+/**
+ * ============
+ * SHOPPING CART
+ * ============
+ */
+Route::get('/panier', 'CartController@show')->name('cart');
+Route::get('/panier/livraison', 'CartController@showDelivery')->name('cart.delivery');
+Route::post('/panier/livraison/valider', 'CartController@addAddresses')->name('cart.delivery.validation');
+Route::get('/panier/paiement', 'CartController@showPayment')->name('cart.payment');
+Route::get('/panier/ajout/{product}/{cart}', 'CartItemController@create')->name('cart.item.add');
+Route::get('/panier/{cartItem}/supprimer', 'CartItemController@destroy')->name('cart.item.delete');
+/** ============ */
+
+/**
+ * ============
+ * ORDERS
+ * ============
+ */
+Route::get('/commande/validation/{cart}', 'OrderController@createFromCart')->name('order.createFromCart');
+Route::get('/thanks', 'MainController@thanks')->name('thanks');
+/** ============ */

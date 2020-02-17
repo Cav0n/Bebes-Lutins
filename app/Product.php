@@ -34,6 +34,6 @@ class Product extends Model
      */
     public function items()
     {
-        return $this->belongsToMany('App\CartItem');
+        return $this->hasMany('App\CartItem');
     }
 }

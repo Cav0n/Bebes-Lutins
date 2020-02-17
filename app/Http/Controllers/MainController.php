@@ -8,4 +8,9 @@ class MainController extends Controller
     {
         return view('index');
     }
+
+    public function thanks()
+    {
+        return view('pages.shopping_cart.thanks');
+    }
 }

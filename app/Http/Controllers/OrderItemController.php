@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\CartItem;
+use App\OrderItem;
 use Illuminate\Http\Request;
 
-class CartItemController extends Controller
+class OrderItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,19 +22,9 @@ class CartItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request, \App\Product $product, \App\Cart $cart)
+    public function create()
     {
-        $quantity = $request->input('quantity', 1);
-
-        $cartItem = new CartItem();
-        $cartItem->quantity = $quantity;
-        $cartItem->cart_id = $cart->id;
-        $cartItem->product_id = $product->id;
-        $cartItem->save();
-
-        session()->put('shopping_cart', $cart);
-
-        return redirect()->back();
+        //
     }
 
     /**
@@ -51,10 +41,10 @@ class CartItemController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\CartItem  $cartItem
+     * @param  \App\OrderItem  $orderItem
      * @return \Illuminate\Http\Response
      */
-    public function show(CartItem $cartItem)
+    public function show(OrderItem $orderItem)
     {
         //
     }
@@ -62,10 +52,10 @@ class CartItemController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\CartItem  $cartItem
+     * @param  \App\OrderItem  $orderItem
      * @return \Illuminate\Http\Response
      */
-    public function edit(CartItem $cartItem)
+    public function edit(OrderItem $orderItem)
     {
         //
     }
@@ -74,10 +64,10 @@ class CartItemController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\CartItem  $cartItem
+     * @param  \App\OrderItem  $orderItem
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CartItem $cartItem)
+    public function update(Request $request, OrderItem $orderItem)
     {
         //
     }
@@ -85,13 +75,11 @@ class CartItemController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\CartItem  $cartItem
+     * @param  \App\OrderItem  $orderItem
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CartItem $cartItem)
+    public function destroy(OrderItem $orderItem)
     {
-        $cartItem->delete();
-        session()->put('shopping_cart', $cartItem->cart);
-        return redirect()->back();
+        //
     }
 }

@@ -1,7 +1,7 @@
 @extends('templates.default')
 
 @section('title', "Créer mon compte - Bébés Lutins")
-    
+
 @section('content')
 
 <div class="container-fluid my-5">
@@ -64,7 +64,7 @@
                     </label>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Se connecter</button>
+                <button type="submit" class="btn btn-primary">Créer mon compte</button>
 
             </form>
         </div>

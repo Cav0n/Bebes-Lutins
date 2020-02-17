@@ -4,18 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CartItem extends Model
+class OrderItem extends Model
 {
     /**
-     * Cart that has the item.
+     * Order of the item.
      */
-    public function cart()
+    public function order()
     {
-        return $this->belongsTo('App\Cart');
+        return $this->belongsTo('App\Order');
     }
 
     /**
-     * Product that has the item.
+     * Product of the item.
      */
     public function product()
     {

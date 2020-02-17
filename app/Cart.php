@@ -21,4 +21,61 @@ class Cart extends Model
     {
         return $this->hasMany('App\CartItem');
     }
+
+    /**
+     * ShippingAddress of the cart.
+     */
+    public function shippingAddress()
+    {
+        return $this->belongsTo('App\Address');
+    }
+
+    /**
+     * BillingAddress of the cart.
+     */
+    public function billingAddress()
+    {
+        return $this->belongsTo('App\Address');
+    }
+
+    public function getTotalQuantityAttribute()
+    {
+        $totalQuantity = 0;
+
+        foreach($this->items as $item){
+            $totalQuantity += $item->quantity;
+        }
+
+        return $totalQuantity;
+    }
+
+    public function getTotalPriceAttribute()
+    {
+        $totalPrice = 0.0;
+
+        foreach($this->items as $item){
+            $totalPrice += $item->product->price * $item->quantity;
+        }
+
+        return $totalPrice;
+    }
+
+    public function getShippingCostsAttribute()
+    {
+        $shippingCosts = 0.00;
+        $freeShippingFrom = env('FREE_SHIPPING_FROM', 70.00);
+
+        if($this->totalPrice < $freeShippingFrom) {
+            $shippingCosts = env('SHIPPING_COSTS', 5.90);
+        }
+
+        return $shippingCosts;
+    }
+
+    public function getPriceLeftBeforeFreeShippingAttribute()
+    {
+        $freeShippingFrom = env('FREE_SHIPPING_FROM', 70.00);
+
+        return $freeShippingFrom - $this->totalPrice;
+    }
 }

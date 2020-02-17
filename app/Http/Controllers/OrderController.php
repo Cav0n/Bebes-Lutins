@@ -58,6 +58,21 @@ class OrderController extends Controller
         $order->voucher_id = $cart->voucher_id;
 
         $order->save();
+
+        foreach($cart->items as $item){
+            $orderItem = new \App\OrderItem();
+            $orderItem->quantity = $item->quantity;
+            $orderItem->unitPrice = $item->product->price;
+            $orderItem->product_id = $item->product->id;
+            $orderItem->order_id = $order->id;
+
+            $orderItem->save();
+        }
+
+        session()->forget('shopping_cart');
+        session()->regenerate();
+
+        return redirect(route('thanks'));
     }
 
     /**

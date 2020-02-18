@@ -82,4 +82,9 @@ class ProductController extends Controller
     {
         //
     }
+
+    public function apiGet(Product $product)
+    {
+        return new \App\Http\Resources\Product($product->id);
+    }
 }

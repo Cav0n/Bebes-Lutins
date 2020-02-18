@@ -68,7 +68,7 @@ class CartController extends Controller
         $billingAddressId = $addressController->storeArray($request->input('billing'), Auth::user());
 
         $shippingAddressId = null;
-        if($request->input('sameAddress')){
+        if(null === $request->input('sameAddress') || !$request->input('sameAddress')){
             $shippingAddressId = $addressController->storeArray($request->input('shipping'), Auth::user());
         }
 

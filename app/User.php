@@ -52,4 +52,12 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Order');
     }
+
+    /**
+     * Addresses of the user.
+     */
+    public function addresses()
+    {
+        return $this->hasMany('App\Address');
+    }
 }

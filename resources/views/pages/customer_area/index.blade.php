@@ -6,7 +6,7 @@
 
 <div class="container-fluid my-5">
     <div class="row justify-content-center">
-        <div class="col-lg-6 card p-0">
+        <div class="col-11 col-md-9 col-lg-8 col-xl-7 col-xxl-6 col-xxxl-5 card p-0">
 
             @include('components.customer_area.title')
 

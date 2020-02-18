@@ -15,6 +15,7 @@ class Product extends JsonResource
     public function toArray($request)
     {
         $product = \App\Product::find($this->resource);
+        $product->images;
         return $product;
     }
 }

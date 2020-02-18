@@ -34,10 +34,18 @@
                 <div class="row py-3 border-top">
                     <div class="col-lg-10">
                         <h3 class="h4 font-weight-bold">Newsletter</h3>
-                        <p class="mb-0">Vous avez indiqué vouloir recevoir les actualités Bébés Lutins.</p>
+                        @if (Auth::user()->wantNewsletter)
+                            <p class="mb-0">Vous avez indiqué vouloir recevoir les actualités Bébés Lutins.</p>
+                        @else
+                            <p class="mb-0">Vous avez indiqué ne pas vouloir recevoir les actualités Bébés Lutins.</p>
+                        @endif
                     </div>
                     <div class="col-lg-2">
-                        <button type="button" class="btn btn-outline-secondary rounded-0 w-100">Activé</button>
+                        @if (Auth::user()->wantNewsletter)
+                            <a class="btn btn-outline-success rounded-0 w-100" href='{{ route('user.newsletters.toggle', ['user' => Auth::user()]) }}'>Activé</a>
+                        @else
+                            <a class="btn btn-outline-danger rounded-0 w-100" href='{{ route('user.newsletters.toggle', ['user' => Auth::user()]) }}'>Désactivé</a>
+                        @endif
                     </div>
                 </div>
             </div>

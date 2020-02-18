@@ -38,10 +38,18 @@ class User extends Authenticatable
     ];
 
     /**
-     * Carts that belong to the user.
+     * Carts of the user.
      */
     public function carts()
     {
         return $this->hasMany('App\Cart');
+    }
+
+    /**
+     * Orders of the user.
+     */
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
     }
 }

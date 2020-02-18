@@ -44,6 +44,7 @@ class AddressController extends Controller
         $address->city = $request->input('city');
         $address->complements = $request->input('complements');
         $address->company = $request->input('company');
+        if($user) $address->user_id = $user->id;
 
         $address->save();
     }
@@ -59,6 +60,7 @@ class AddressController extends Controller
         $address->city = $input['city'];
         $address->complements = $input['complements'];
         $address->company = $input['company'];
+        if($user) $address->user_id = $user->id;
 
         $address->save();
 

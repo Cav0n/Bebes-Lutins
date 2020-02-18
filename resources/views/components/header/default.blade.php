@@ -11,7 +11,7 @@
     @endphp
 @endforeach
 
-<header class="fixed-top p-0 container-fluid border-bottom">
+<header class="sticky-top p-0 container-fluid border-bottom">
     <img id="logo" src="{{asset('images/logo.png')}}" class="fixed-top transition-fast d-none d-lg-flex" style="top: -2rem;left: calc(50vw - 7rem);cursor: pointer;height:14rem;">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-white p-3 p-lg-0">

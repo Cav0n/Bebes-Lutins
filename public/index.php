@@ -49,6 +49,10 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 |
 */
 
+
+use Carbon\Carbon;
+Carbon::setLocale('fr');
+
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 
 $response = $kernel->handle(

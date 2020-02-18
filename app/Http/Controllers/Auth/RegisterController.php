@@ -67,13 +67,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $newsletter = 0;
+        if($data['newsletter']) $newsletter = 1;
+
         return User::create([
             'firstname' => $data['firstname'],
             'lastname' => $data['lastname'],
             'phone' => $data['phone'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'wantNewsletter' => $data['newsletter'],
+            'wantNewsletter' => $newsletter,
         ]);
     }
 

@@ -1,6 +1,6 @@
 @extends('templates.default')
 
-@section('title', "Espace client - Bébés Lutins")
+@section('title', "Mes commandes | Espace client - Bébés Lutins")
 
 @section('content')
 
@@ -13,7 +13,7 @@
                 <nav class="nav nav-tabs border-bottom-0 mt-3">
                     <a class="nav-link" href="{{ route('customer.area') }}">Mes informations</a>
                     <a class="nav-link active" href="{{ route('customer.area.orders') }}">Mes commandes</a>
-                    <a class="nav-link" href="#">Mes adresses</a>
+                    <a class="nav-link" href="{{ route('customer.area.addresses') }}">Mes adresses</a>
                 </nav>
             </div>
             <div class="body p-3">

@@ -13,10 +13,10 @@
                 <nav class="nav nav-tabs border-bottom-0 mt-3">
                     <a class="nav-link active" href="{{ route('customer.area') }}">Mes informations</a>
                     <a class="nav-link" href="{{ route('customer.area.orders') }}">Mes commandes</a>
-                    <a class="nav-link" href="#">Mes adresses</a>
+                    <a class="nav-link" href="{{ route('customer.area.addresses') }}">Mes adresses</a>
                 </nav>
             </div>
-            <div class="body p-3">
+            <div class="body px-3">
                 <div class="row py-3">
                     <div class="col-lg-10">
                         <h3 class="h4 font-weight-bold">Mes informations personnelles</h3>
@@ -25,16 +25,7 @@
                         <p class="mb-0">{{Auth::user()->phone}}</p>
                     </div>
                     <div class="col-lg-2">
-                        <button type="button" class="btn btn-primary">Modifier</button>
-                    </div>
-                </div>
-                <div class="row py-3 border-top">
-                    <div class="col-lg-10">
-                        <h3 class="h4 font-weight-bold">Newsletter</h3>
-                        <p class="mb-0">Vous avez indiqué vouloir recevoir les actualités Bébés Lutins.</p>
-                    </div>
-                    <div class="col-lg-2">
-                        <button type="button" class="btn btn-primary">Activé</button>
+                        <button type="button" class="btn btn-outline-secondary rounded-0 w-100">Modifier</button>
                     </div>
                 </div>
                 <div class="row py-3 border-top">
@@ -43,7 +34,16 @@
                         <p class="mb-0">Vous pouvez changer votre mot de passe quand vous le souhaitez.</p>
                     </div>
                     <div class="col-lg-2">
-                        <button type="button" class="btn btn-primary">Modifier</button>
+                        <button type="button" class="btn btn-outline-secondary rounded-0 w-100">Modifier</button>
+                    </div>
+                </div>
+                <div class="row py-3 border-top">
+                    <div class="col-lg-10">
+                        <h3 class="h4 font-weight-bold">Newsletter</h3>
+                        <p class="mb-0">Vous avez indiqué vouloir recevoir les actualités Bébés Lutins.</p>
+                    </div>
+                    <div class="col-lg-2">
+                        <button type="button" class="btn btn-outline-secondary rounded-0 w-100">Activé</button>
                     </div>
                 </div>
             </div>

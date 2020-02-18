@@ -41,6 +41,7 @@ Route::any('/logout', 'Auth\LoginController@logout')->name('logout');
  */
 Route::get('/espace-client', 'CustomerArea\MainController@index')->name('customer.area');
 Route::get('/espace-client/mes-commandes', 'CustomerArea\MainController@orders')->name('customer.area.orders');
+Route::get('/espace-client/mes-adresses', 'CustomerArea\MainController@addresses')->name('customer.area.addresses');
 /** ============ */
 
 /**

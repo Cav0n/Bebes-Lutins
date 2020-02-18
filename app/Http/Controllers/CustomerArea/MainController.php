@@ -33,4 +33,12 @@ class MainController extends Controller
     {
         return view('pages.customer_area.orders');
     }
+
+    /**
+     * Redirect to customer area addresses page.
+     */
+    public function addresses(Request $request)
+    {
+        return view('pages.customer_area.addresses');
+    }
 }

@@ -7,7 +7,8 @@
                 {{ $product->name }}</a></p>
             <p class="card-text mb-0 product-price border-top py-2 px-3 text-center font-weight-bold">
                 {{ App\NumberConvertor::doubleToPrice($product->price) }}</p>
-                <button type="button" class="btn btn-primary add-to-cart" data-id="{{ $product->id }}" data-toggle="modal" data-target="#product-added-modal">Ajouter au panier</button>
+                <button type="button" class="btn btn-primary add-to-cart" data-id="{{ $product->id }}" data-toggle="modal" data-quantity="1" data-cart_id="{{ session()->get('shopping_cart')->id }}" data-target="#product-added-modal">
+                    Ajouter au panier</button>
         </div>
     </div>
 </div>

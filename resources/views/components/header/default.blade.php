@@ -48,8 +48,8 @@
                          <div class="cart-container d-flex flex-column py-2" style="width: 12rem;">
                             <a href="{{route('cart')}}" class="h3 font-weight-bold" style="text-transform: uppercase;">
                                 Mon panier</a>
-                            <a href="#">{{\App\NumberConvertor::doubleToPrice($cartPrice)}}</a>
-                            <a href="#">{{$cartQuantity}} articles</a>
+                            <a href="#" id="cart-total-price">{{\App\NumberConvertor::doubleToPrice($cartPrice)}}</a>
+                            <a href="#" id="cart-total-quantity">{{$cartQuantity}} articles</a>
                          </div>
                     </div>
                 </div>
@@ -99,6 +99,8 @@
     </nav>
 
     <script>
+    cartPrice = {{ $cartPrice }};
+    cartQuantity = {{ $cartQuantity }};
 
     $('#categories-dropdown-desktop').on('click', function (event) {
         $('.dropdown-menu').toggleClass('show')
@@ -113,6 +115,16 @@
             console.log (  )
             $('.dropdown-menu').removeClass('show');
         }
+    });
+
+    $("body").on("productAddedToCart", function(e, price, quantity) {
+        cartQuantity = cartQuantity + quantity;
+        cartPrice = cartPrice + (price * quantity);
+
+        cartPriceFormatted = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cartPrice);
+
+        $('#cart-total-price').text(cartPriceFormatted)
+        $("#cart-total-quantity").text(cartQuantity + ' articles');
     });
 
     </script>

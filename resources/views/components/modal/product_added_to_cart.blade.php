@@ -28,16 +28,27 @@
 <script>
     $(document).on("click", ".add-to-cart", function () {
         var productId = $(this).data('id');
+        var cartId = $(this).data('cart_id');
+        var quantity = $(this).data('quantity');
+
+        var price = 0;
 
         let result = ''
+
         fetch('/api/product/' + productId)
-        .then(res => res.json()) // on récupère le corps au format text.
+        .then(res => res.json())
         .then(text => {
-            price = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(text.data.price)
+            price = text.data.price;
+            priceFormatted = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(text.data.price);
 
             $("#product-added-modal .modal-product-name").text(text.data.name);
             $("#product-added-modal .modal-product-image").attr('src', text.data.images[0].url);
-            $("#product-added-modal .modal-product-price").text(price);
-        })
+            $("#product-added-modal .modal-product-price").text(priceFormatted + ' x ' + quantity);
+        }).then(function(){
+            fetch('/panier/ajout/' + productId + '/' + cartId)
+            .then(function() {
+                $("body").trigger("productAddedToCart", [price, quantity]);
+            });
+        });
     });
 </script>

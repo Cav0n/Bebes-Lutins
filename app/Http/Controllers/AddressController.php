@@ -47,6 +47,8 @@ class AddressController extends Controller
         if($user) $address->user_id = $user->id;
 
         $address->save();
+
+        return back();
     }
 
     public function storeArray(array $input, \App\User $user = null)

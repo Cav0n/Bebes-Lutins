@@ -22,8 +22,6 @@
 
     @include('components.modal.product_added_to_cart')
 
-    <script>
-        @yield('scripts')
-    </script>
+    @yield('scripts')
 </body>
 </html>

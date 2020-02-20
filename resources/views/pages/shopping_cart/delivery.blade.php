@@ -159,6 +159,7 @@
 @endsection
 
 @section('scripts')
+<script>
     $(document).ready(function(){
         $('#delivery-choice').hide();
 
@@ -166,4 +167,5 @@
             $('#delivery-choice').toggle()
         });
     });
+</script>>
 @endsection

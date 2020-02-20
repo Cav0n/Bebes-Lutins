@@ -99,34 +99,39 @@
         </div>
     </nav>
 
+    {{-- LOGO --}}
     <script>
-    cartPrice = {{ $cartPrice }};
-    cartQuantity = {{ $cartQuantity }};
+        $('#logo').on('click', function() { window.location.href = '/' } );
+    </script>
 
-    $('#categories-dropdown-desktop').on('click', function (event) {
-        $('.dropdown-menu').toggleClass('show')
-    });
+    {{-- CART --}}
+    <script>
+        cartPrice = {{ $cartPrice }};
+        cartQuantity = {{ $cartQuantity }};
 
-    $('body').on('click', function (e) {
-        if (!$('.dropdown-menu').is(e.target)
-            && $('.dropdown-menu').has(e.target).length === 0
-            && $('#categories-dropdown-desktop').has(e.target).length === 0
-            && !$('#categories-dropdown-desktop').is(e.target)
-        ) {
-            console.log (  )
-            $('.dropdown-menu').removeClass('show');
-        }
-    });
+        $('#categories-dropdown-desktop').on('click', function (event) {
+            $('.dropdown-menu').toggleClass('show')
+        });
 
-    $("body").on("productAddedToCart", function(e, price, quantity) {
-        cartQuantity = cartQuantity + quantity;
-        cartPrice = cartPrice + (price * quantity);
+        $('body').on('click', function (e) {
+            if (!$('.dropdown-menu').is(e.target)
+                && $('.dropdown-menu').has(e.target).length === 0
+                && $('#categories-dropdown-desktop').has(e.target).length === 0
+                && !$('#categories-dropdown-desktop').is(e.target)
+            ) {
+                console.log (  )
+                $('.dropdown-menu').removeClass('show');
+            }
+        });
 
-        cartPriceFormatted = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cartPrice);
+        $("body").on("productAddedToCart", function(e, price, quantity) {
+            cartQuantity = cartQuantity + quantity;
+            cartPrice = cartPrice + (price * quantity);
 
-        $('#cart-total-price').text(cartPriceFormatted)
-        $("#cart-total-quantity").text(cartQuantity + ' articles');
-    });
+            cartPriceFormatted = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cartPrice);
 
+            $('#cart-total-price').text(cartPriceFormatted)
+            $("#cart-total-quantity").text(cartQuantity + ' articles');
+        });
     </script>
 </header>

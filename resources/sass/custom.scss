@@ -1,0 +1,15 @@
+header #logo {
+    top: -2rem;
+    left: calc(50vw - 7rem);
+    cursor: pointer;
+    height: 14rem;
+}
+
+@include media-breakpoint-down(md) {
+    header #logo {
+        top: -3rem;
+        left: calc(31vw - 7rem);
+        cursor: pointer;
+        height: 11rem;
+    }
+}

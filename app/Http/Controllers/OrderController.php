@@ -69,6 +69,9 @@ class OrderController extends Controller
             $orderItem->save();
         }
 
+        $cart = session()->get('shopping_cart');
+        $cart->isActive = 0;
+        $cart->save();
         session()->forget('shopping_cart');
         session()->regenerate();
 

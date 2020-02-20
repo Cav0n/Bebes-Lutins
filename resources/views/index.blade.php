@@ -23,7 +23,6 @@
             </p>
 
             @include('components.utils.products.highlighted_products')
-            @include('components.modal.product_added_to_cart')
 
             @include('components.utils.certifications.default')
         </div>

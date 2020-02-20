@@ -11,12 +11,12 @@
     @endphp
 @endforeach
 
-<header class="fixed-top p-0 container-fluid border-bottom">
-    <img id="logo" src="{{asset('images/logo.png')}}" class="fixed-top transition-fast d-none d-lg-flex" style="top: -2rem;left: calc(50vw - 7rem);cursor: pointer;height:14rem;">
+<header class="sticky-top p-0 container-fluid border-bottom">
+    <img id="logo" src="{{ asset('images/logo.png') }}" class="fixed-top transition-fast">
 
     <nav class="navbar navbar-expand-lg navbar-light bg-white p-3 p-lg-0">
-        <a class="navbar-brand d-flex d-lg-none" href="#">Bébés Lutins</a>
-        <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        <a class="navbar-brand d-none" href="#">Bébés Lutins</a>
+        <button class="navbar-toggler d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -33,23 +33,23 @@
                     </div>
                     <div class="right d-flex">
                          <div class="customer-container d-flex flex-column py-2 border-right" style="width: 12rem;">
-                            <a href="{{route('customer.area')}}" class="h3 font-weight-bold" style="text-transform: uppercase;">
+                            <a href="{{ route('customer.area') }}" class="h3 font-weight-bold" style="text-transform: uppercase;">
                                 Mon compte</a>
                             @auth
-                            <a href="{{route('customer.area')}}">{{Auth::user()->firstname}} {{Auth::user()->lastname}}</a>
-                            <a href="{{route('logout')}}">Se déconnecter</a>
+                            <a href="{{ route('customer.area') }}">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</a>
+                            <a href="{{ route('logout') }}">Se déconnecter</a>
                             @endauth
                             @guest
-                            <a href="{{route('login')}}">Se connecter</a>
-                            <a href="{{route('registration')}}">Créer mon compte</a>
+                            <a href="{{ route('login') }}">Se connecter</a>
+                            <a href="{{ route('registration') }}">Créer mon compte</a>
                             @endguest
 
                          </div>
                          <div class="cart-container d-flex flex-column py-2" style="width: 12rem;">
-                            <a href="{{route('cart')}}" class="h3 font-weight-bold" style="text-transform: uppercase;">
+                            <a href="{{ route('cart') }}" class="h3 font-weight-bold" style="text-transform: uppercase;">
                                 Mon panier</a>
-                            <a href="#">{{\App\NumberConvertor::doubleToPrice($cartPrice)}}</a>
-                            <a href="#">{{$cartQuantity}} articles</a>
+                            <a href="#" id="cart-total-price">{{ \App\NumberConvertor::doubleToPrice($cartPrice) }}</a>
+                            <a href="#" id="cart-total-quantity">{{ $cartQuantity }} articles</a>
                          </div>
                     </div>
                 </div>
@@ -71,21 +71,22 @@
 
 
             {{-- MOBILE NAVBAR --}}
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0 d-flex d-lg-none">
+            <ul class="navbar-nav mr-auto mt-5 mt-lg-0 d-flex d-lg-none">
+                <div class="separator mt-3"></div>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-dark" href="#" id="categories-dropdown-mobile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nos produits</a>
                     <div class="dropdown-menu" aria-labelledby="categories-dropdown-mobile">
                         @foreach ($categories as $category)
-                            <a class="dropdown-item" href="{{route('category', ['category' => $category->id])}}">
-                                {{$category->name}}</a>
+                            <a class="dropdown-item" href="{{ route('category', ['category' => $category->id]) }}">
+                                {{ $category->name }}</a>
                         @endforeach
                     </div>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Mon panier</a>
+                    <a class="nav-link" href="{{ route('cart') }}">Mon panier</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{route('login')}}">Se connecter</a>
+                    <a class="nav-link" href="{{ route('login') }}">Se connecter</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Guides et conseils</a>
@@ -98,22 +99,39 @@
         </div>
     </nav>
 
+    {{-- LOGO --}}
     <script>
+        $('#logo').on('click', function() { window.location.href = '/' } );
+    </script>
 
-    $('#categories-dropdown-desktop').on('click', function (event) {
-        $('.dropdown-menu').toggleClass('show')
-    });
+    {{-- CART --}}
+    <script>
+        cartPrice = {{ $cartPrice }};
+        cartQuantity = {{ $cartQuantity }};
 
-    $('body').on('click', function (e) {
-        if (!$('.dropdown-menu').is(e.target)
-            && $('.dropdown-menu').has(e.target).length === 0
-            && $('#categories-dropdown-desktop').has(e.target).length === 0
-            && !$('#categories-dropdown-desktop').is(e.target)
-        ) {
-            console.log (  )
-            $('.dropdown-menu').removeClass('show');
-        }
-    });
+        $('#categories-dropdown-desktop').on('click', function (event) {
+            $('.dropdown-menu').toggleClass('show')
+        });
 
+        $('body').on('click', function (e) {
+            if (!$('.dropdown-menu').is(e.target)
+                && $('.dropdown-menu').has(e.target).length === 0
+                && $('#categories-dropdown-desktop').has(e.target).length === 0
+                && !$('#categories-dropdown-desktop').is(e.target)
+            ) {
+                console.log (  )
+                $('.dropdown-menu').removeClass('show');
+            }
+        });
+
+        $("body").on("productAddedToCart", function(e, price, quantity) {
+            cartQuantity = cartQuantity + quantity;
+            cartPrice = cartPrice + (price * quantity);
+
+            cartPriceFormatted = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cartPrice);
+
+            $('#cart-total-price').text(cartPriceFormatted)
+            $("#cart-total-quantity").text(cartQuantity + ' articles');
+        });
     </script>
 </header>

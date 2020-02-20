@@ -1,0 +1,33 @@
+header #logo {
+    top: -2rem;
+    left: calc(50vw - 7rem);
+    cursor: pointer;
+    height: 14rem;
+}
+
+@include media-breakpoint-only(xs) {
+    header #logo {
+        top: -3rem;
+        left: 20px;
+        cursor: pointer;
+        height: 11rem;
+    }
+}
+
+@include media-breakpoint-only(sm) {
+    header #logo {
+        top: -4rem;
+        left: calc(19vw - 7rem);
+        cursor: pointer;
+        height: 13rem;
+    }
+}
+
+@include media-breakpoint-only(md) {
+    header #logo {
+        top: -4rem;
+        left: calc(19vw - 7rem);
+        cursor: pointer;
+        height: 13rem;
+    }
+}

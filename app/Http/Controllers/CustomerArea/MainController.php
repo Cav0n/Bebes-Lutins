@@ -19,10 +19,26 @@ class MainController extends Controller
     }
 
     /**
-     * Redirect to customer area home page
+     * Redirect to customer area home page.
      */
     public function index(Request $request)
     {
         return view('pages.customer_area.index');
+    }
+
+    /**
+     * Redirect to customer area orders page.
+     */
+    public function orders(Request $request)
+    {
+        return view('pages.customer_area.orders');
+    }
+
+    /**
+     * Redirect to customer area addresses page.
+     */
+    public function addresses(Request $request)
+    {
+        return view('pages.customer_area.addresses');
     }
 }

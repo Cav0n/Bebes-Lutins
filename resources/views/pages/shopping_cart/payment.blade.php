@@ -81,6 +81,7 @@
 @endsection
 
 @section('scripts')
+<script>
     $(document).ready(function(){
         $('#cheque-infos-container').hide();
 
@@ -88,4 +89,5 @@
             $('#cheque-infos-container').toggle();
         });
     });
+</script>
 @endsection

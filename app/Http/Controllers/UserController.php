@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
+use App\User;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class UserController extends Controller
 {
+    public function toggleNewsletters(Request $request, User $user){
+        $user->wantNewsletter = !$user->wantNewsletter;
+        $user->save();
+
+        return back();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,21 +48,21 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\User  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show(User $product)
     {
-        return view('pages.product.index')->withProduct($product);
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Product  $product
+     * @param  \App\User  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(User $product)
     {
         //
     }
@@ -64,10 +71,10 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
+     * @param  \App\User  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, User $product)
     {
         //
     }
@@ -75,16 +82,11 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Product  $product
+     * @param  \App\User  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy(User $product)
     {
         //
-    }
-
-    public function apiGet(Product $product)
-    {
-        return new \App\Http\Resources\Product($product->id);
     }
 }

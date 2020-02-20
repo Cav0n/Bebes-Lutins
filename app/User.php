@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'firstname', 'lastname', 'phone', 'email', 'password', 'isAdmin'
+        'firstname', 'lastname', 'phone', 'email', 'password', 'wantNewsletter'
     ];
 
     /**
@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'isAdmin',
     ];
 
     /**
@@ -38,10 +38,26 @@ class User extends Authenticatable
     ];
 
     /**
-     * Carts that belong to the user.
+     * Carts of the user.
      */
     public function carts()
     {
         return $this->hasMany('App\Cart');
+    }
+
+    /**
+     * Orders of the user.
+     */
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
+
+    /**
+     * Addresses of the user.
+     */
+    public function addresses()
+    {
+        return $this->hasMany('App\Address');
     }
 }

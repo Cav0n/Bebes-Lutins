@@ -1,12 +1,13 @@
 @extends('templates.default')
 
 @section('title', "Connexion - Bébés Lutins")
-    
+
 @section('content')
 
 <div class="container-fluid my-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-6">
+    <div class="row justify-content-center py-xl-5">
+        <div class="col-11 col-md-10 col-lg-6 col-xl-5 col-xxl-4 col-xxxl-3 py-3 border bg-white">
+            <h1>Connexion</h1>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -16,12 +17,6 @@
                     </ul>
                 </div>
             @endif
-        </div>
-    </div>
-
-    <div class="row justify-content-center">
-        <div class="col-lg-6">
-            <h1>Connexion</h1>
             <form action="{{route('login')}}" method="POST">
                 @csrf
                 <div class="form-group">

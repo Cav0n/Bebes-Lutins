@@ -21,12 +21,12 @@
             @else
 
             <h1 class="font-weight-bold">Mon panier - {{$cartQuantity}} produits</h1>
-            <div class="row m-0">
+            <div class="row">
 
                 {{-- ITEMS LIST --}}
                 <div class="col-lg-8">
                     @foreach ($cart->items as $item)
-                    <div class="cart-product-container row border bg-white my-2">
+                    <div class="cart-product-container border bg-white row my-2 mx-0">
                         <div class="col-lg-3">
                             <img src='{{asset($item->product->images->first()->url)}}' class="w-100">
                         </div>

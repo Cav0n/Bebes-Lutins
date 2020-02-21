@@ -21,9 +21,7 @@
                                 <a href="{{ route('category', ['category' => $child->id]) }}" class="card-text">{{$child->name}}</a>
                             </div>
                         </div>
-                    </div>²²²²²²²²²²²²²²²²²²²²²²²
-
-                    ++++++++++
+                    </div>
                     @endforeach
                 </div>
             </div>

@@ -81,6 +81,7 @@
                                 <h2>Facturation</h2>
                                 <div id="new-billing-address">
                                     @include("components.utils.addresses.creation", ['deliveryPrefix' => 'billing'])
+                                    <input id="is-new-billing-address" type="hidden" name="is-new-billing-address" value="1">
                                 </div>
 
                                 <div class="form-check form-check-inline">
@@ -93,6 +94,7 @@
                                 <div id="new-shipping-address">
                                     <h2>Livraison</h2>
                                     @include("components.utils.addresses.creation", ['deliveryPrefix' => 'shipping'])
+                                    <input id="is-new-shipping-address" type="hidden" name="is-new-shipping-address" value="1">
                                 </div>
                             @endif
                         @endauth
@@ -102,6 +104,7 @@
                             <h2>Facturation</h2>
                             <div id="new-billing-address">
                                 @include("components.utils.addresses.creation", ['deliveryPrefix' => 'billing'])
+                                <input id="is-new-billing-address" type="hidden" name="is-new-billing-address" value="1">
                             </div>
 
                             <div class="form-check form-check-inline">
@@ -114,6 +117,7 @@
                             <div id="new-shipping-address">
                                 <h2>Livraison</h2>
                                 @include("components.utils.addresses.creation", ['deliveryPrefix' => 'shipping'])
+                                <input id="is-new-shipping-address" type="hidden" name="is-new-shipping-address" value="1">
                             </div>
                         @endguest
                         </form>

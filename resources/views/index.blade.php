@@ -17,9 +17,9 @@
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
                     <!-- Slides -->
-                    <div class="swiper-slide">Slide 1</div>
-                    <div class="swiper-slide">Slide 2</div>
-                    <div class="swiper-slide">Slide 3</div>
+                    <div class="swiper-slide"><img src="{{ asset('images/caroussel/1.jpg') }}" alt="Caroussel"></div>
+                    <div class="swiper-slide"><img src="{{ asset('images/caroussel/2.jpg') }}" alt="Caroussel"></div>
+                    <div class="swiper-slide"><img src="{{ asset('images/caroussel/3.jpg') }}" alt="Caroussel"></div>
                     ...
                 </div>
                 <!-- If we need pagination -->
@@ -54,14 +54,21 @@
 @endsection
 
 @section('scripts')
+<script src='{{asset('js/swiper.js')}}'></script>
 <script>
-  $(document).ready(function () {
-  //initialize swiper when document ready
-  var mySwiper = new Swiper ('.swiper-container', {
-    // Optional parameters
-    direction: 'vertical',
-    loop: true
-  })
-});
+    $(document).ready(function () {
+        //initialize swiper when document ready
+        var mySwiper = new Swiper.default('.swiper-container', {
+            // Optional parameters
+            direction: 'horizontal',
+            loop: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            observer: true,
+            observeParents: true
+        })
+    });
 </script>
 @endsection

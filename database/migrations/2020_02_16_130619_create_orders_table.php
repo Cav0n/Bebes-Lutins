@@ -18,6 +18,8 @@ class CreateOrdersTable extends Migration
             $table->string('status')->default('WAIT_PAYMENT');
             $table->string('paymentMethod');
             $table->double('shippingCosts')->default(0.0);
+            $table->string('email');
+            $table->string('phone')->nullable();
             $table->bigInteger('billing_address_id')->unsigned();
             $table->bigInteger('shipping_address_id')->unsigned()->nullable();
             $table->bigInteger('user_id')->unsigned()->nullable();

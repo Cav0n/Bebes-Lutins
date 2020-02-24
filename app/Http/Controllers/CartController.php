@@ -83,6 +83,10 @@ class CartController extends Controller
         }
 
         $cart = session()->get('shopping_cart');
+
+        $cart->email = $request->input('email');
+        $cart->phone = $request->input('phone');
+
         $cart->billing_address_id = $billingAddressId;
         $cart->shipping_address_id = $shippingAddressId;
         $cart->save();

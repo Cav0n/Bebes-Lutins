@@ -21,6 +21,20 @@
                 <div class="col-md-8 pl-0 pr-0 pr-md-2 my-2">
                     <form id="address-selection" class="border bg-white p-3" action="{{ route("cart.delivery.validation") }}" method="POST">
                         @csrf
+
+                        <div id="delivery-contact-container" class="row">
+                            <div class="form-group col-lg-8">
+                                <label for="email">Email de contact</label>
+                                <input type="email" class="form-control" name="email" id="email" aria-describedby="helpEmail">
+                                <small id="helpEmail" class="form-text text-muted">Vous pouvez indiquer un email avec lequel nous pourrions vous contacter.</small>
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="phone">Téléphone</label>
+                                <input type="text" class="form-control" name="phone" id="phone" aria-describedby="helpPhone" maxlength="10">
+                                <small id="helpPhone" class="form-text text-muted">Vous pouvez indiquer un numéro de téléphone avec lequel nous pourrions vous contacter.</small>
+                            </div>
+                        </div>
+
                         @auth
                             @if (0 < Auth::user()->addresses->count())
                             {{-- AUTH HAS AT LEAST 1 ADDRESS --}}

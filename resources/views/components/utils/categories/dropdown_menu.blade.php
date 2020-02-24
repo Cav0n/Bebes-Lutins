@@ -13,7 +13,7 @@
                     {{$category->name}}</a>
 
                 <div class="sub-categories row m-0">
-                    @foreach ($category->child as $child)
+                    @foreach ($category->childs as $child)
                     <div class="col-xl-3">
                         <div class="card sub-category">
                             <img src="{{ asset('images/utils/question-mark.png') }}" alt="" class="card-img-top">

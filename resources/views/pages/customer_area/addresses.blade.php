@@ -16,7 +16,11 @@
                         <h3 class="h4 font-weight-bold">Mes adresses</h3>
                         <button type="button" class="btn btn-outline-primary" id="add-address-btn">Ajouter une adresse</button>
 
-                        @include('components.utils.addresses.creation', ['billing' => false, 'submitBtn' => true, 'action' => route('user.addresses.create')])
+                        {{--//@todo: Create method for form --}}
+                        <form id="address-creation" action="" method="POST">
+                            @csrf
+                            @include('components.utils.addresses.creation', ['billing' => false, 'submitBtn' => true, 'action' => route('user.addresses.create')])
+                        </form>
 
                         @foreach (Auth::user()->addresses as $address)
                             <p class="company">{{ $address->company }}</p>
@@ -40,7 +44,7 @@
 @section('scripts')
 <script>
     addAddressBtn = $('#add-address-btn');
-    addressCreationForm = $('#new-address-form');
+    addressCreationForm = $('#address-creation');
 
     addressCreationForm.hide();
 

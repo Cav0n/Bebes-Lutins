@@ -10,9 +10,8 @@ $colors: ('white': #ffffff, 'black': #000000) !default;
 
 @import "./components/core/core";
 //SWIPER CUSTOM
-.swiper-container,
-.swiper-wrapper {
-    height: 15rem;
+.swiper-container {
+    margin-bottom: 1rem;
 }
 
 .swiper-wrapper .swiper-slide img {

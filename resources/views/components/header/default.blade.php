@@ -26,7 +26,7 @@
             <ul class="navbar-nav w-100 mr-auto mt-2 mt-lg-0 d-none d-lg-flex flex-column text-center">
                 <div class="top-navbar d-flex justify-content-between">
                     <div class="left">
-                        <div class="contact-container py-2 h-100" style="width: 18rem;">
+                        <div class="contact-container py-2 h-100" style="width: 24rem;">
                             <a href="#" class="h3 font-weight-bold" style="text-transform: uppercase;">
                                 Contactez-nous</a>
                         </div>
@@ -56,8 +56,8 @@
 
                 <div class="bottom-navbar d-flex justify-content-between border-top">
                     <div class="left d-flex">
-                        <a href="/" style="width:9rem;" class="h5 py-2 m-0 border-right">Accueil</a>
-                        <a href="#" style="width:9rem;" class="h5 py-2 m-0 border-right dropdown-toggle" id="categories-dropdown-desktop" aria-haspopup="true" aria-expanded="false">Nos produits</a>
+                        <a href="/" style="width:12rem;" class="h5 py-2 m-0 border-right">Accueil</a>
+                        <a href="#" style="width:12rem;" class="h5 py-2 m-0 border-right dropdown-toggle" id="categories-dropdown-desktop" aria-haspopup="true" aria-expanded="false">Nos produits</a>
                         <div id="categories-dropdown-desktop-container" class="dropdown-menu w-100" aria-labelledby="categories-dropdown-desktop">
                             @include('components.utils.categories.dropdown_menu', ['categories' => $categories])
                         </div>

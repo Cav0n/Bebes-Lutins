@@ -12,6 +12,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-8 col-xl-7 col-xxl-6 col-xxxl-5">
 
+            <!-- @TODO STOP USING SWIPER AND USE BOOTSTRAP CAROUSEL -->
             <!-- Slider main container -->
             <div class="swiper-container d-none d-lg-flex">
                 <!-- Additional required wrapper -->

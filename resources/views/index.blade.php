@@ -12,25 +12,37 @@
     <div class="row justify-content-center">
         <div class="col-lg-8 col-xl-7 col-xxl-6 col-xxxl-5">
 
-            <!-- @TODO STOP USING SWIPER AND USE BOOTSTRAP CAROUSEL -->
-            <!-- Slider main container -->
-            <div class="swiper-container d-none d-lg-flex">
-                <!-- Additional required wrapper -->
-                <div class="swiper-wrapper">
-                    <!-- Slides -->
-                    <div class="swiper-slide"><img src="{{ asset('images/caroussel/1.jpg') }}" alt="Caroussel"></div>
-                    <div class="swiper-slide"><img src="{{ asset('images/caroussel/2.jpg') }}" alt="Caroussel"></div>
-                    <div class="swiper-slide"><img src="{{ asset('images/caroussel/3.jpg') }}" alt="Caroussel"></div>
+            <div id="mainCarousel" class="carousel slide text-dark" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    @php
+                        $index = 0;
+                    @endphp
+                    @foreach (\App\CarouselItem::all() as $item)
+                    <div class="carousel-item @if(0==$index) active @endif">
+                        <img src="{{$item->image->url}}" alt="{{$item->image->name}}">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5 class="text-dark">{{$item->title}}</h5>
+                            <p class="text-dark">{{$item->description}}</p>
+                        </div>
+                    </div>
+                    @php
+                        $index++;
+                    @endphp
+                    @endforeach
                 </div>
-                <!-- If we need pagination -->
-                <div class="swiper-pagination"></div>
-
-                <!-- If we need navigation buttons -->
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-
-                <!-- If we need scrollbar -->
-                <div class="swiper-scrollbar"></div>
+                <a class="carousel-control-prev" href="#mainCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#mainCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
             </div>
 
             <h1 class="h1 font-weight-bold">
@@ -57,18 +69,7 @@
 <script src='{{asset('js/swiper.js')}}'></script>
 <script>
     $(document).ready(function () {
-        //initialize swiper when document ready
-        var mySwiper = new Swiper.default('.swiper-container', {
-            // Optional parameters
-            direction: 'horizontal',
-            loop: true,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            observer: true,
-            observeParents: true
-        })
+        $('.carousel').carousel();
     });
 </script>
 @endsection

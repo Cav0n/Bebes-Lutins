@@ -14,9 +14,9 @@
 
             <div id="mainCarousel" class="carousel slide text-dark" data-ride="carousel">
                 <ol class="carousel-indicators">
-                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    <li data-target="#mainCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#mainCarousel" data-slide-to="1"></li>
+                    <li data-target="#mainCarousel" data-slide-to="2"></li>
                 </ol>
                 <div class="carousel-inner">
                     @php
@@ -24,7 +24,7 @@
                     @endphp
                     @foreach (\App\CarouselItem::all() as $item)
                     <div class="carousel-item @if(0==$index) active @endif">
-                        <img src="{{$item->image->url}}" alt="{{$item->image->name}}">
+                        <img src="{{$item->image->url}}" alt="{{$item->image->name}}" style="width:100%">
                         <div class="carousel-caption d-none d-md-block">
                             <h5 class="text-dark">{{$item->title}}</h5>
                             <p class="text-dark">{{$item->description}}</p>

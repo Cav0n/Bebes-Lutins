@@ -65,14 +65,28 @@ class CartController extends Controller
     public function addAddresses(Request $request)
     {
         $addressController = new AddressController();
-        $billingAddressId = $addressController->storeArray($request->input('billing'), Auth::user());
 
-        $shippingAddressId = null;
-        if(null === $request->input('sameAddresses') || !$request->input('sameAddresses')){
-            $shippingAddressId = $addressController->storeArray($request->input('shipping'), Auth::user());
+        if ($request->input('is-new-billing-address')){
+            $billingAddressId = $addressController->storeArray($request->input('billing'));
+        } else {
+            $billingAddressId = $request->input('billing-address-id');
+        }
+
+        if (null !== $request->input('sameAddresses') && $request->input('sameAddresses')) {
+            $shippingAddressId = $billingAddressId;
+        } else {
+            if ($request->input('is-new-shipping-address')){
+                $shippingAddressId = $addressController->storeArray($request->input('shipping'));
+            } else {
+                $shippingAddressId = $request->input('shipping-address-id');
+            }
         }
 
         $cart = session()->get('shopping_cart');
+
+        $cart->email = $request->input('email');
+        $cart->phone = $request->input('phone');
+
         $cart->billing_address_id = $billingAddressId;
         $cart->shipping_address_id = $shippingAddressId;
         $cart->save();

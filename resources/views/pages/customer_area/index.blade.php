@@ -14,21 +14,68 @@
                 <div class="row py-3">
                     <div class="col-lg-10">
                         <h3 class="h4 font-weight-bold">Mes informations personnelles</h3>
-                        <p class="mb-0">{{Auth::user()->firstname}} {{Auth::user()->lastname}}</p>
-                        <p class="mb-0">{{Auth::user()->email}}</p>
-                        <p class="mb-0">{{Auth::user()->phone}}</p>
+                        <div class="personal-informations">
+                            <p class="mb-0">{{Auth::user()->firstname}} {{Auth::user()->lastname}}</p>
+                            <p class="mb-0">{{Auth::user()->email}}</p>
+                            <p class="mb-0">{{Auth::user()->phone}}</p>
+                        </div>
+                        {{--//@todo: Create method for form --}}
+                        <form class="personal-informations" action="" method="POST">
+                            <div class="form-group">
+                                <label for="firstname">Prénom</label>
+                                <input type="text" class="form-control" name="firstname" id="firstname" aria-describedby="helpFirstname">
+                                <small id="helpFirstname" class="form-text text-muted">Votre prénom</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname">Nom de famille</label>
+                                <input type="text" class="form-control" name="lastname" id="lastname" aria-describedby="helpLastname">
+                                <small id="helpLastname" class="form-text text-muted">Votre nom de famille</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control" name="email" id="email" aria-describedby="helpEmail">
+                                <small id="helpEmail" class="form-text text-muted">Votre email (il vous sert à vous connecter)</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Téléphone</label>
+                                <input type="text" class="form-control" name="phone" id="phone" aria-describedby="helpPhone">
+                                <small id="helpPhone" class="form-text text-muted">Votre numéro de téléphone (nous l'utiliserons pour vous contacter à propos de vos commandes)</small>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                        </form>
                     </div>
                     <div class="col-lg-2">
-                        <button type="button" class="btn btn-outline-secondary rounded-0 w-100">Modifier</button>
+                        <button id="personal-informations-btn" type="button" class="btn btn-outline-secondary rounded-0 w-100">Modifier</button>
                     </div>
                 </div>
                 <div class="row py-3 border-top">
                     <div class="col-lg-10">
                         <h3 class="h4 font-weight-bold">Mot de passe</h3>
-                        <p class="mb-0">Vous pouvez changer votre mot de passe quand vous le souhaitez.</p>
+                        <div class="password">
+                            <p class="mb-0">Vous pouvez changer votre mot de passe quand vous le souhaitez.</p>
+                        </div>
+                        {{--//@todo: Create method for form --}}
+                        <form class="password" action="" method="POST">
+                            <div class="form-group">
+                                <label for="password">Mot de passe actuel</label>
+                                <input type="text" class="form-control" name="password" id="password" aria-describedby="helpPassword">
+                                <small id="helpPassword" class="form-text text-muted">Votre mot de passe actuel</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">Nouveau mot de passe</label>
+                                <input type="text" class="form-control" name="new-password" id="new-password" aria-describedby="helpNewPassword" placeholder="">
+                                <small id="helpNewPassword" class="form-text text-muted">Le nouveau mot de passe que vous souhaitez</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password-confirm">Confirmation du nouveau mot de passe</label>
+                                <input type="text" class="form-control" name="new-password-confirm" id="new-password-confirm" aria-describedby="helpNewPasswordConfirm">
+                                <small id="helpNewPasswordConfirm" class="form-text text-muted">Retapez votre nouveau mot de passe pour être sûr d'avoir écrit le bon.</small>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
+                        </form>
                     </div>
                     <div class="col-lg-2">
-                        <button type="button" class="btn btn-outline-secondary rounded-0 w-100">Modifier</button>
+                        <button id="password-btn" type="button" class="btn btn-outline-secondary rounded-0 w-100">Modifier</button>
                     </div>
                 </div>
                 <div class="row py-3 border-top">
@@ -56,4 +103,21 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script>
+    $('form.personal-informations').hide();
+    $('form.password').hide();
+
+    $('#personal-informations-btn').on('click', function(){
+        $('form.personal-informations').toggle();
+        $('div.personal-informations').toggle();
+    });
+
+    $('#password-btn').on('click', function(){
+        $('form.password').toggle();
+        $('div.password').toggle();
+    });
+</script>
 @endsection

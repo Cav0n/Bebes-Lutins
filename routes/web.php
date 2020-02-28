@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route; // Fix for VS Code
 |
 */
 
-Route::get('/', 'MainController@index');
+Route::get('/', 'MainController@index')->name('homepage');
 
 
 /**
@@ -85,3 +85,11 @@ Route::get('/panier/{cartItem}/supprimer', 'CartItemController@destroy')->name('
 Route::get('/commande/validation/{cart}', 'OrderController@createFromCart')->name('order.createFromCart');
 Route::get('/thanks', 'MainController@thanks')->name('thanks');
 /** ============ */
+
+/**
+ * ============
+ * ORDERS
+ * ============
+ */
+Route::get('/admin', 'Admin\AdminController@index')->name('admin.homepage');
+ /** ============ */

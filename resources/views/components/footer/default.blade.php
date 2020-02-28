@@ -1,11 +1,11 @@
-<footer class="container-fluid border-top">
-    <div class="row">
+<footer class="container-fluid border-top row justify-content-center">
+    <div class="row col-12 col-xxl-10 col-xxxl-8">
         <div class="col-12 text-center">
             <p class="mb-0 py-4 h5">© Bébés Lutins 2020</p>
         </div>
     </div>
-    <div class="row p-3">
-        <div class="col-lg-3">
+    <div class="row p-3 col-12 col-xxl-10 col-xxxl-8">
+        <div class="col-md-6 col-lg-3">
             <p class='h4 font-weight-bold'>Infos pratiques</p>
             <ul class="list-unstyled">
                 <li>Livraison et frais de port</li>
@@ -15,7 +15,7 @@
                 <li>Conditions de ventes</li>
             </ul>
         </div>
-        <div class="col-lg-3">
+        <div class="col-md-6 col-lg-3">
             <p class='h4 font-weight-bold'>Nous contacter</p>
             <ul class="list-unstyled">
                 <li><a href="tel:+33641569165">06 41 56 91 64</a></li>
@@ -25,14 +25,14 @@
                 <li>Katia répondra avec plaisir à vos questions.</li>
             </ul>
         </div>
-        <div class="col-lg-3">
+        <div class="col-md-6 col-lg-3">
             <p class='h4 font-weight-bold'>Nous suivre</p>
             <ul class="list-unstyled">
                 <li>Instagram</li>
                 <li>FaceBook</li>
             </ul>
         </div>
-        <div class="col-lg-3">
+        <div class="col-md-6 col-lg-3">
             <p class='h4 font-weight-bold'>En savoir plus</p>
             <ul class="list-unstyled">
                 <li>Qui sommes nous ?</li>

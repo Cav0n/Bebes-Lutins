@@ -60,4 +60,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Address');
     }
+
+    public function getFirstnameAttribute($value)
+    {
+        return ucfirst($value);
+    }
+
+    public function getLastnameAttribute($value)
+    {
+        return mb_strtoupper($value);
+    }
 }

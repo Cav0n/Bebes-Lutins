@@ -38,6 +38,8 @@ class OrderController extends Controller
         $order = new Order();
         $order->status = 'WAIT_PAYMENT';
         $order->shippingCosts = $request['shippingCosts'];
+        $order->email = $request['email'];
+        $order->phone = $request['phone'];
         $order->billing_address_id = $request['billing_address_id'];
         $order->shipping_address_id = $request['shipping_address_id'];
         $order->user_id = $request['user_id'];
@@ -52,6 +54,9 @@ class OrderController extends Controller
         $order->status = 'WAIT_PAYMENT';
         $order->shippingCosts = $cart->shippingCosts;
         $order->paymentMethod = $request['paymentMethod'];
+        $order->email = $cart->email;
+        $order->phone = $cart->phone;
+
         $order->billing_address_id = $cart->billingAddress->id;
         if ($cart->shippingAddress) $order->shipping_address_id = $cart->shippingAddress->id;
         if ($cart->user) $order->user_id = $cart->user->id;

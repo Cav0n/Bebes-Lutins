@@ -27,6 +27,7 @@
         "fibers": "^4.0.2",
         "jquery": "^3.4.1",
         "node-sass": "^4.13.1",
-        "popper.js": "^1.16.1"
+        "popper.js": "^1.16.1",
+        "swiper": "^5.3.1"
     }
 }

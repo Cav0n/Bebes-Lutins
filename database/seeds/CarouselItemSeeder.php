@@ -11,8 +11,12 @@ class CarouselItemSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 1; $i <= 3; $i++) {
-            $image = factory(App\Image::class)->create(['url' => 'images/carousel/'.$i.'.jpg']);
+        $indir = array_filter(scandir(public_path('images/carousel/')), function($item) {
+            return !is_dir('../pages/' . $item) && $item != '.' && $item != '..';
+        });
+
+        foreach ($indir as $item) {
+            $image = factory(App\Image::class)->create(['url' => 'images/carousel/'.$item]);
             factory(App\CarouselItem::class, 1)->create(['image_id' => $image->id]);
         }
     }

@@ -24,7 +24,7 @@
 
         @else
 
-        <div class="col-lg-8">
+        <div class="col-lg-9 col-xl-8 col-xxl-6 col-xxxl-5">
             <h1 class="font-weight-bold">Mon panier - {{$cartQuantity}} produits</h1>
             <div class="row">
 

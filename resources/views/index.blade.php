@@ -36,7 +36,6 @@
 @endsection
 
 @section('scripts')
-<script src='{{asset('js/swiper.js')}}'></script>
 <script>
     $(document).ready(function () {
         $('.carousel').carousel();

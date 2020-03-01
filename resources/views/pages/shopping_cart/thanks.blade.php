@@ -11,8 +11,12 @@
                 Merci pour votre commande !
             </h1>
             <p class="h5">
-                Vous pouvez retrouvez les informations de votre commande dans votre espace client, rubrique "mes commandes".<BR>
-                Vous recevrez toutes les informations de votre commande par email ainsi que le suivi de celle ci.
+                @auth
+                Vous pouvez retrouvez les informations de votre commande dans votre espace client, rubrique <a href='{{ route('customer.area.orders') }}'>mes commandes</a>.<BR>
+                @endauth
+
+                Vous devriez recevoir une confirmation de votre commande par email avec le numéro de suivi de celle-ci.<br>
+                Si vous le souhaitez, vous pouvez suivre l'avancement de votre commande <a href='{{ route('order.tracking') }}'>ici</a> (votre numéro de suivi est {{ $order->trackingNumber }}).
             </p>
         </div>
     </div>

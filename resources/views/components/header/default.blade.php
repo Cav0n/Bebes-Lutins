@@ -1,15 +1,6 @@
 @php
     $categories = App\Category::all();
-    $cartQuantity = 0;
-    $cartPrice = 0.0;
 @endphp
-
-@foreach (Session::get('shopping_cart.items') as $item)
-    @php
-        $cartQuantity += $item->quantity;
-        $cartPrice += $item->product->price;
-    @endphp
-@endforeach
 
 <header class="sticky-top p-0 container-fluid border-bottom row m-0 bg-white justify-content-center">
     <img id="logo" src="{{ asset('images/logo.png') }}" class="fixed-top transition-fast">
@@ -48,8 +39,8 @@
                          <div class="cart-container d-flex flex-column py-2" style="width: 12rem;">
                             <a href="{{ route('cart') }}" class="h3 font-weight-bold" style="text-transform: uppercase;">
                                 Mon panier</a>
-                            <a href="#" id="cart-total-price">{{ \App\NumberConvertor::doubleToPrice($cartPrice) }}</a>
-                            <a href="#" id="cart-total-quantity">{{ $cartQuantity }} articles</a>
+                            <a href="#" id="cart-total-price">{{ \App\NumberConvertor::doubleToPrice($cart->totalPrice) }}</a>
+                            <a href="#" id="cart-total-quantity">{{ $cart->totalQuantity }} articles</a>
                          </div>
                     </div>
                 </div>
@@ -106,8 +97,8 @@
 
     {{-- CART --}}
     <script>
-        cartPrice = {{ $cartPrice }};
-        cartQuantity = {{ $cartQuantity }};
+        cartPrice = {{ $cart->totalPrice }};
+        cartQuantity = {{ $cart->totalQuantity }};
 
         $('#categories-dropdown-desktop').on('click', function (event) {
             $('.dropdown-menu').toggleClass('show')
@@ -125,7 +116,9 @@
         });
 
         $("body").on("productAddedToCart", function(e, price, quantity) {
-            cartQuantity = cartQuantity + quantity;
+            console.log(cartQuantity + ' - ' + quantity);
+
+            cartQuantity = parseInt(cartQuantity) + parseInt(quantity);
             cartPrice = cartPrice + (price * quantity);
 
             cartPriceFormatted = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cartPrice);

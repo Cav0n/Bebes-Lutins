@@ -24,7 +24,7 @@ class CartItemController extends Controller
      */
     public function create(Request $request, \App\Product $product, \App\Cart $cart)
     {
-        $quantity = $request->input('quantity', 1);
+        $quantity = $request->get('quantity', 1);
 
         $cartItem = new CartItem();
         $cartItem->quantity = $quantity;

@@ -45,7 +45,15 @@
             $("#product-added-modal .modal-product-image").attr('src', text.data.images[0].url);
             $("#product-added-modal .modal-product-price").text(priceFormatted + ' x ' + quantity);
         }).then(function(){
-            fetch('/panier/ajout/' + productId + '/' + cartId)
+            fetch('/panier/ajout/' + productId + '/' + cartId, {
+                method: 'post',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                body: JSON.stringify({quantity: quantity})
+            })
             .then(function() {
                 $("body").trigger("productAddedToCart", [price, quantity]);
             });

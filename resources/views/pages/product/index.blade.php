@@ -13,6 +13,8 @@
             <div class="col-6">
                 <p>{!! $product->breadcrumb !!}</p>
                 <h1>{{$product->name}}</h1>
+                <button type="button" class="btn btn-primary add-to-cart w-100 rounded-0" data-id="{{ $product->id }}" data-toggle="modal" data-quantity="1" data-cart_id="{{ session()->get('shopping_cart')->id }}" data-target="#product-added-modal">
+                    Ajouter au panier</button>
                 <p>{{$product->description}}</p>
             </div>
         </div>

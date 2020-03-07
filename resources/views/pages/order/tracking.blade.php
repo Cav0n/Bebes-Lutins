@@ -16,7 +16,7 @@
               <div class="input-group mb-3">
                 <input type="text" id="search" name="search" class="form-control">
                 <div class="input-group-append">
-                  <button class="input-group-text btn" onclick="console.log('yes')">Chercher</button>
+                  <button class="input-group-text btn">Chercher</button>
                 </div>
               </div>
             </div>

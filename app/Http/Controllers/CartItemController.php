@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CartItem;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CartItemController extends Controller
@@ -34,7 +35,7 @@ class CartItemController extends Controller
 
         session()->put('shopping_cart', $cart);
 
-        return redirect()->back();
+        return new JsonResponse($cartItem->id);
     }
 
     /**
@@ -79,7 +80,10 @@ class CartItemController extends Controller
      */
     public function update(Request $request, CartItem $cartItem)
     {
-        //
+        $cartItem->quantity = $request->get('quantity');
+        $cartItem->save();
+
+        return new JsonResponse(['message' => "success"], 200);
     }
 
     /**

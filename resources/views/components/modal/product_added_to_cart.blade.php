@@ -13,7 +13,9 @@
                     <img class="modal-product-image w-100">
                 </div>
                 <div class="col-8">
-                    <p class="modal-product-name font-weight-bold"></p>
+                    <p class="modal-product-name font-weight-bold mb-0"></p>
+                    <label for="quantity">Quantité dans votre panier : </label>
+                    <input type="number" class="form-control input-spinner modal-product-quantity" name="quantity" id="quantity" aria-describedby="helpQuantity">
                     <p class="modal-product-price"></p>
                 </div>
             </div>
@@ -32,8 +34,27 @@
         var quantity = $(this).data('quantity');
 
         var price = 0;
-
         let result = ''
+        var itemId = '';
+
+        var modalQuantitySpinner = $('.modal-product-quantity');
+        modalQuantitySpinner.on("change", function(event) {
+            quantity = $(this).val();
+
+            fetch('/panier/modifier-quantite/' + itemId, {
+                method: 'post',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                body: JSON.stringify({quantity: quantity})
+            })
+            .then(res => res.json())
+            .then(response => {
+                console.log('Quantité modifiée.');
+            });
+        })
 
         fetch('/api/product/' + productId)
         .then(res => res.json())
@@ -43,7 +64,8 @@
 
             $("#product-added-modal .modal-product-name").text(text.data.name);
             $("#product-added-modal .modal-product-image").attr('src', text.data.images[0].url);
-            $("#product-added-modal .modal-product-price").text(priceFormatted + ' x ' + quantity);
+            $("#product-added-modal .modal-product-price").text(priceFormatted);
+            $("#product-added-modal .modal-product-quantity").val(quantity);
         }).then(function(){
             fetch('/panier/ajout/' + productId + '/' + cartId, {
                 method: 'post',
@@ -54,7 +76,9 @@
                 },
                 body: JSON.stringify({quantity: quantity})
             })
-            .then(function() {
+            .then(res => res.json())
+            .then(response => {
+                itemId = response;
                 $("body").trigger("productAddedToCart", [price, quantity]);
             });
         });

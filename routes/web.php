@@ -74,6 +74,7 @@ Route::get('/panier/livraison', 'CartController@showDelivery')->name('cart.deliv
 Route::post('/panier/livraison/valider', 'CartController@addAddresses')->name('cart.delivery.validation');
 Route::get('/panier/paiement', 'CartController@showPayment')->name('cart.payment');
 Route::post('/panier/ajout/{product}/{cart}', 'CartItemController@create')->name('cart.item.add');
+Route::post('/panier/modifier-quantite/{cartItem}', 'CartItemController@update')->name('cart.item.updateQuantity');
 Route::get('/panier/{cartItem}/supprimer', 'CartItemController@destroy')->name('cart.item.delete');
 /** ============ */
 

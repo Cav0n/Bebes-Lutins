@@ -110,14 +110,11 @@
                 && $('#categories-dropdown-desktop').has(e.target).length === 0
                 && !$('#categories-dropdown-desktop').is(e.target)
             ) {
-                console.log (  )
                 $('.dropdown-menu').removeClass('show');
             }
         });
 
         $("body").on("productAddedToCart", function(e, price, quantity) {
-            console.log(cartQuantity + ' - ' + quantity);
-
             cartQuantity = parseInt(cartQuantity) + parseInt(quantity);
             cartPrice = cartPrice + (price * quantity);
 

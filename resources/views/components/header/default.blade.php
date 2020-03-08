@@ -123,5 +123,15 @@
             $('#cart-total-price').text(cartPriceFormatted)
             $("#cart-total-quantity").text(cartQuantity + ' articles');
         });
+
+        $("body").on("cartItemQuantityChanged", function(e, price, quantity) {
+            cartQuantity = parseInt(cartQuantity) + parseInt(quantity);
+            cartPrice = cartPrice + (price * quantity);
+
+            cartPriceFormatted = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(cartPrice);
+
+            $('#cart-total-price').text(cartPriceFormatted)
+            $("#cart-total-quantity").text(cartQuantity + ' articles');
+        });
     </script>
 </header>

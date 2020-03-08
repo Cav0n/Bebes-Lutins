@@ -39,6 +39,7 @@
 
         var modalQuantitySpinner = $('.modal-product-quantity');
         modalQuantitySpinner.on("change", function(event) {
+            difference = $(this).val() - quantity;
             quantity = $(this).val();
 
             fetch('/panier/modifier-quantite/' + itemId, {
@@ -52,7 +53,7 @@
             })
             .then(res => res.json())
             .then(response => {
-                console.log('Quantité modifiée.');
+                $("body").trigger("productAddedToCart", [price, difference]);
             });
         })
 

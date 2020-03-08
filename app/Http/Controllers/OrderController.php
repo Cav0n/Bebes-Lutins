@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use View;
 use App\Order;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -10,6 +12,16 @@ class OrderController extends Controller
     public function showTrackingPage()
     {
         return view('pages.order.tracking');
+    }
+
+    public function tracking(Request $request, string $trackingNumber)
+    {
+        if (null !== $order = Order::where('trackingNumber', $trackingNumber)->first()){
+            return new JsonResponse(['order' => View::make('components.utils.orders.order', ['order' => $order])
+                                                    ->render()]);
+        }
+
+        return new JsonResponse(null);
     }
 
     /**
@@ -67,6 +79,8 @@ class OrderController extends Controller
         if ($cart->user) $order->user_id = $cart->user->id;
         $order->voucher_id = $cart->voucher_id;
 
+        $order->trackingNumber = uniqid();
+
         $order->save();
 
         foreach($cart->items as $item){
@@ -82,6 +96,7 @@ class OrderController extends Controller
         $cart = session()->get('shopping_cart');
         $cart->isActive = 0;
         $cart->save();
+
         session()->forget('shopping_cart');
         session()->regenerate();
 

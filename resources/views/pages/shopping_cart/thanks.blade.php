@@ -16,7 +16,7 @@
                 @endauth
 
                 Vous devriez recevoir une confirmation de votre commande par email avec le numéro de suivi de celle-ci.<br>
-                Si vous le souhaitez, vous pouvez suivre l'avancement de votre commande <a href='{{ route('order.tracking') }}'>ici</a> (votre numéro de suivi est {{ $order->trackingNumber }}).
+                Si vous le souhaitez, vous pouvez suivre l'avancement de votre commande <a href='{{ route('order.tracking.show') }}'>ici</a> (votre numéro de suivi est {{ $order->trackingNumber }}).
             </p>
         </div>
     </div>

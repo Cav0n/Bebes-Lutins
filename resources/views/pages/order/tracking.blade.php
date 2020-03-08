@@ -16,9 +16,13 @@
               <div class="input-group mb-3">
                 <input type="text" id="search" name="search" class="form-control">
                 <div class="input-group-append">
-                  <button class="input-group-text btn">Chercher</button>
+                    <button id='track-btn' class="input-group-text btn">Chercher</button>
                 </div>
               </div>
+            </div>
+
+            <div class="tracking-result">
+
             </div>
         </div>
     </div>
@@ -28,5 +32,22 @@
 @endsection
 
 @section('scripts')
+    <script>
+        var trackingNumber = "";
 
+        $('#track-btn').on('click', function(){
+            trackingNumber = $('#search').val();
+
+            fetch('/api/order/tracking/' + trackingNumber)
+            .then(res => res.json())
+            .then(response => {
+                if (response.order) {
+                    $('.tracking-result').html(response.order);
+                    return;
+                }
+
+                $('.tracking-result').text("Aucune commande trouvée avec ce numéro.");
+            });
+        });
+    </script>
 @endsection

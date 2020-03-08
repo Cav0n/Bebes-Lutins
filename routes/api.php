@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route; // Fix for VS Code
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +13,5 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::get('/product/{product}', 'ProductController@apiGet')->name('api.product');
+Route::get('/order/tracking/{trackingNumber}', 'OrderController@tracking')->name('api.order.tracking');

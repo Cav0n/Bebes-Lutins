@@ -25,6 +25,15 @@ class CartItemController extends Controller
      */
     public function create(Request $request, \App\Product $product, \App\Cart $cart)
     {
+        if ($cartItem = CartItem::where(['cart_id' => $cart->id, 'product_id' => $product->id])->first()){
+            $cartItem->quantity += $request->get('quantity');
+            $cartItem->save();
+
+            session()->put('shopping_cart', $cart);
+
+            return new JsonResponse(['cartItemID' => $cartItem->id, 'quantity' => $cartItem->quantity], 200);
+        }
+
         $quantity = $request->get('quantity', 1);
 
         $cartItem = new CartItem();
@@ -35,7 +44,7 @@ class CartItemController extends Controller
 
         session()->put('shopping_cart', $cart);
 
-        return new JsonResponse($cartItem->id);
+        return new JsonResponse(['cartItemID' => $cartItem->id, 'quantity' => $cartItem->quantity], 200);
     }
 
     /**
@@ -83,7 +92,9 @@ class CartItemController extends Controller
         $cartItem->quantity = $request->get('quantity');
         $cartItem->save();
 
-        return new JsonResponse(['message' => "success"], 200);
+        session()->put('shopping_cart', $cartItem->cart);
+
+        return new JsonResponse($cartItem->id, 200);
     }
 
     /**

@@ -66,7 +66,6 @@
             $("#product-added-modal .modal-product-name").text(text.data.name);
             $("#product-added-modal .modal-product-image").attr('src', text.data.images[0].url);
             $("#product-added-modal .modal-product-price").text(priceFormatted);
-            $("#product-added-modal .modal-product-quantity").val(quantity);
         }).then(function(){
             fetch('/panier/ajout/' + productId + '/' + cartId, {
                 method: 'post',
@@ -79,8 +78,13 @@
             })
             .then(res => res.json())
             .then(response => {
-                itemId = response;
+                itemId = response.cartItemID;
+                inputQuantity = response.quantity;
+
+                $("#product-added-modal .modal-product-quantity").val(inputQuantity);
                 $("body").trigger("productAddedToCart", [price, quantity]);
+
+                quantity = inputQuantity;
             });
         });
     });

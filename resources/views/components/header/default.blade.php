@@ -18,7 +18,7 @@
                 <div class="top-navbar d-flex justify-content-between">
                     <div class="left">
                         <div class="contact-container py-2 h-100" style="width: 24rem;">
-                            <a href="#" class="h3 font-weight-bold" style="text-transform: uppercase;">
+                            <a href="/contact" class="h3 font-weight-bold" style="text-transform: uppercase;">
                                 Contactez-nous</a>
                         </div>
                     </div>

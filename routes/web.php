@@ -95,3 +95,14 @@ Route::get('/commande/suivi', 'OrderController@showTrackingPage')->name('order.t
  */
 Route::get('/admin', 'Admin\AdminController@index')->name('admin.homepage');
  /** ============ */
+
+/**
+ * ============
+ * STATIC
+ * ============
+ */
+Route::get('/contact', function(){
+    return view('pages.static.contact');
+});
+Route::post('/contact', 'MainController@contact');
+  /** ============ */

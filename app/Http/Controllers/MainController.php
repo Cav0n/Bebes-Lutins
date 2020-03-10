@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class MainController extends Controller
 {
@@ -26,6 +28,8 @@ class MainController extends Controller
 
         ]);
 
-        dd('Message pres a etre envoye');
+        Mail::to($request->get('email'))->send(new Contact($request->get('firstname'), $request->get('lastname'), $request->get('email'), $request->get('message')));
+
+        return redirect()->back()->with('success_message', 'Votre message a bien été envoyé.');
     }
 }

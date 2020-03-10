@@ -8,6 +8,6 @@
 </head>
 <body>
     <p>Nouveau message de {{ $firstname }} {{ $lastname }} ({{ $email }}) : </p>
-    <p>{{ $text }}</p>
+    <p>{!! $text !!}</p>
 </body>
 </html>

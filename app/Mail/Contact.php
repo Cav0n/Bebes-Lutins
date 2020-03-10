@@ -49,7 +49,7 @@ class Contact extends Mailable
         $this->firstname = $firstname;
         $this->lastname = $lastname;
         $this->email = $email;
-        $this->text = $message;
+        $this->text = nl2br($message);
 
         $this->subject('Nouveau message !');
     }

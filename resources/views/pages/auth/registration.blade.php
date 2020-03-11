@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="container-fluid my-5">
+<div class="container-fluid py-5">
     <div class="row justify-content-center py-xl-5">
         <div class="col-11 col-md-10 col-lg-6 col-xl-5 col-xxl-4 col-xxxl-3 py-3 border bg-white">
             <h1>Je crée mon compte</h1>

@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="container-fluid my-5">
+<div class="container-fluid py-5">
     <div class="row justify-content-center">
         <div class="col-11 col-md-9 col-lg-8 col-xl-7 col-xxl-6 col-xxxl-5 card p-0">
 

@@ -22,7 +22,10 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-window.Swiper = require('swiper');
+
+// || Input Spinner ||
+// Used with quantity to add "+" and "-"
+window.inputSpinner = require('bootstrap-input-spinner');
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

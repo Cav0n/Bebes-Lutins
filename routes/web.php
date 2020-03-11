@@ -73,7 +73,8 @@ Route::get('/panier', 'CartController@show')->name('cart');
 Route::get('/panier/livraison', 'CartController@showDelivery')->name('cart.delivery');
 Route::post('/panier/livraison/valider', 'CartController@addAddresses')->name('cart.delivery.validation');
 Route::get('/panier/paiement', 'CartController@showPayment')->name('cart.payment');
-Route::get('/panier/ajout/{product}/{cart}', 'CartItemController@create')->name('cart.item.add');
+Route::post('/panier/ajout/{product}/{cart}', 'CartItemController@create')->name('cart.item.add');
+Route::post('/panier/modifier-quantite/{cartItem}', 'CartItemController@update')->name('cart.item.updateQuantity');
 Route::get('/panier/{cartItem}/supprimer', 'CartItemController@destroy')->name('cart.item.delete');
 /** ============ */
 
@@ -84,6 +85,7 @@ Route::get('/panier/{cartItem}/supprimer', 'CartItemController@destroy')->name('
  */
 Route::get('/commande/validation/{cart}', 'OrderController@createFromCart')->name('order.createFromCart');
 Route::get('/thanks', 'MainController@thanks')->name('thanks');
+Route::get('/commande/suivi', 'OrderController@showTrackingPage')->name('order.tracking.show');
 /** ============ */
 
 /**
@@ -93,3 +95,14 @@ Route::get('/thanks', 'MainController@thanks')->name('thanks');
  */
 Route::get('/admin', 'Admin\AdminController@index')->name('admin.homepage');
  /** ============ */
+
+/**
+ * ============
+ * STATIC
+ * ============
+ */
+Route::get('/contact', function(){
+    return view('pages.static.contact');
+})->name('contact');
+Route::post('/contact', 'MainController@contact');
+  /** ============ */

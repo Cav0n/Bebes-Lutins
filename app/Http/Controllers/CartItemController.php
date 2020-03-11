@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CartItem;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class CartItemController extends Controller
@@ -24,7 +25,16 @@ class CartItemController extends Controller
      */
     public function create(Request $request, \App\Product $product, \App\Cart $cart)
     {
-        $quantity = $request->input('quantity', 1);
+        if ($cartItem = CartItem::where(['cart_id' => $cart->id, 'product_id' => $product->id])->first()){
+            $cartItem->quantity += $request->get('quantity');
+            $cartItem->save();
+
+            session()->put('shopping_cart', $cart);
+
+            return new JsonResponse(['cartItemID' => $cartItem->id, 'quantity' => $cartItem->quantity], 200);
+        }
+
+        $quantity = $request->get('quantity', 1);
 
         $cartItem = new CartItem();
         $cartItem->quantity = $quantity;
@@ -34,7 +44,7 @@ class CartItemController extends Controller
 
         session()->put('shopping_cart', $cart);
 
-        return redirect()->back();
+        return new JsonResponse(['cartItemID' => $cartItem->id, 'quantity' => $cartItem->quantity], 200);
     }
 
     /**
@@ -79,7 +89,12 @@ class CartItemController extends Controller
      */
     public function update(Request $request, CartItem $cartItem)
     {
-        //
+        $cartItem->quantity = $request->get('quantity');
+        $cartItem->save();
+
+        session()->put('shopping_cart', $cartItem->cart);
+
+        return new JsonResponse($cartItem->id, 200);
     }
 
     /**

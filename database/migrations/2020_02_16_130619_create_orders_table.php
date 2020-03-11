@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->double('shippingCosts')->default(0.0);
             $table->string('email');
             $table->string('phone')->nullable();
+            $table->string('trackingNumber')->unique();
             $table->bigInteger('billing_address_id')->unsigned();
             $table->bigInteger('shipping_address_id')->unsigned()->nullable();
             $table->bigInteger('user_id')->unsigned()->nullable();

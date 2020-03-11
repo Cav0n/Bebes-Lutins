@@ -14,12 +14,12 @@
 
     <title>@yield('title', 'Bébés Lutins')</title>
 </head>
-<body>
+<body class="bg-white">
     <script src="{{asset('js/app.js')}}"></script>
 
     @include('components.header.default')
 
-    <div class="content-container">
+    <div class="content-container bg-light">
         @yield('content')
     </div>
 

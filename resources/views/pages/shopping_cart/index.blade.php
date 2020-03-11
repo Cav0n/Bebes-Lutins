@@ -12,7 +12,7 @@
     $shippingCosts = $cart->shippingCosts;
 @endphp
 
-<div class="container-fluid my-5">
+<div class="container-fluid py-5">
     <div class="row justify-content-center">
 
         @if($cart->items->isEmpty())

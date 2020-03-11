@@ -103,6 +103,6 @@ Route::get('/admin', 'Admin\AdminController@index')->name('admin.homepage');
  */
 Route::get('/contact', function(){
     return view('pages.static.contact');
-});
+})->name('contact');
 Route::post('/contact', 'MainController@contact');
   /** ============ */

@@ -16,6 +16,7 @@
     <div class="row justify-content-center">
         <div class="col-lg-9 col-xl-8 col-xxl-6 col-xxxl-5 row">
             <h1 class="font-weight-bold">Livraison</h1>
+
             <div class="row m-0">
 
                 <div class="col-md-8 pl-0 pr-0 pr-md-2 my-2">
@@ -62,8 +63,8 @@
 
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="sameAddresses" id="sameAddresses" checked="checked" onclick="$('#shipping').toggle()">
-                                            Adresse de livraison identique
+                                    <input class="form-check-input" type="checkbox" name="sameAddresses" id="sameAddresses" @if(old('sameAddresses')) checked="checked" @endif onclick="$('#shipping').toggle()">
+                                        Adresse de livraison identique
                                     </label>
                                 </div>
 
@@ -113,7 +114,7 @@
                             @endif
                         @endauth
 
-                        {{-- GUEST ADD ADDRESS --}}
+                        {{-- GUEST --}}
                         @guest
                             <h2>Facturation</h2>
                             <div id="new-billing-address">
@@ -170,7 +171,12 @@
 @section('scripts')
 <script>
     $(document).ready(function(){
-        $('#shipping').hide();
+        $('#shipping').show();
+
+        if ($('#sameAddresses').attr('checked')) {
+            $('#shipping').hide();
+        }
+
         @auth
         @if (0 < Auth::user()->addresses->count())
             $('#new-billing-address').hide();

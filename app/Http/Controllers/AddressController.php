@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Address;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class AddressController extends Controller
 {
@@ -33,26 +35,31 @@ class AddressController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $nestedKey = null)
     {
         $address = new Address();
-        $address->civility = $request->input('civility');
-        $address->firstname = $request->input('firstname');
-        $address->lastname = $request->input('lastname');
-        $address->street = $request->input('street');
-        $address->zipCode = $request->input('zipCode');
-        $address->city = $request->input('city');
-        $address->complements = $request->input('complements');
-        $address->company = $request->input('company');
-        $address->user_id = $request->input('user_id');
+
+        $this->validator($request->all())->validate();
+
+        $address->civility = $request->input($nestedKey . '.civility');
+        $address->firstname = $request->input($nestedKey . '.firstname');
+        $address->lastname = $request->input($nestedKey . '.lastname');
+        $address->street = $request->input($nestedKey . '.street');
+        $address->zipCode = $request->input($nestedKey . '.zipCode');
+        $address->city = $request->input($nestedKey . '.city');
+        $address->complements = $request->input($nestedKey . '.complements');
+        $address->company = $request->input($nestedKey . '.company');
+        $address->user_id = $request->input($nestedKey . '.user_id');
 
         $address->save();
 
-        return back();
+        return $address->id;
     }
 
     public function storeArray(array $input)
     {
+        $this->validator($input)->validate();
+
         $address = new Address();
         $address->civility = $input['civility'];
         $address->firstname = $input['firstname'];
@@ -112,5 +119,38 @@ class AddressController extends Controller
     public function destroy(Address $address)
     {
         //
+    }
+
+    protected function validator(array $data)
+    {
+        $rules = [];
+
+        if ($data['is-new-billing-address']) {
+            $rules += [
+                'billing.civility' => ['required', 'string', Rule::in(['Madame', 'Monsieur', 'Non précisé'])],
+                'billing.firstname' => ['required', 'string', 'min:2', 'max:255'],
+                'billing.lastname' => ['required', 'string', 'min:2', 'max:255'],
+                'billing.street' => ['required', 'string'],
+                'billing.zipCode' => ['required', 'string', 'size:5'],
+                'billing.city' => ['required', 'string'],
+                'billing.complements' => ['string', 'nullable'],
+                'billing.company' => ['string', 'nullable'],
+            ];
+        }
+
+        if ($data['is-new-shipping-address'] && !$data['sameAddresses']) {
+            $rules += [
+                'shipping.civility' => ['required', 'string', Rule::in(['Madame', 'Monsieur', 'Non précisé'])],
+                'shipping.firstname' => ['required', 'string', 'min:2', 'max:255'],
+                'shipping.lastname' => ['required', 'string', 'min:2', 'max:255'],
+                'shipping.street' => ['required', 'string'],
+                'shipping.zipCode' => ['required', 'string', 'size:5'],
+                'shipping.city' => ['required', 'string'],
+                'shipping.complements' => ['string', 'nullable'],
+                'shipping.company' => ['string', 'nullable'],
+            ];
+        }
+
+        return Validator::make($data, $rules);
     }
 }

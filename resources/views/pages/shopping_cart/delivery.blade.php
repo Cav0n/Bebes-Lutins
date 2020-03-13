@@ -16,29 +16,33 @@
     <div class="row justify-content-center">
         <div class="col-lg-9 col-xl-8 col-xxl-6 col-xxxl-5 row">
             <h1 class="font-weight-bold">Livraison</h1>
+
             <div class="row m-0">
 
                 <div class="col-md-8 pl-0 pr-0 pr-md-2 my-2">
-                    <form id="address-selection" class="border bg-white p-3" action="{{ route("cart.delivery.validation") }}" method="POST">
+                    <form id="address-selection" action="{{ route("cart.delivery.validation") }}" method="POST">
                         @csrf
 
-                        <div id="delivery-contact-container" class="row">
-                            <div class="form-group col-lg-8">
-                                <label for="email">Email de contact</label>
-                                <input type="email" class="form-control" name="email" id="email" aria-describedby="helpEmail">
-                                <small id="helpEmail" class="form-text text-muted">Vous pouvez indiquer un email avec lequel nous pourrions vous contacter.</small>
-                            </div>
-                            <div class="form-group col-lg-4">
-                                <label for="phone">Téléphone</label>
-                                <input type="text" class="form-control" name="phone" id="phone" aria-describedby="helpPhone" maxlength="10">
-                                <small id="helpPhone" class="form-text text-muted">Vous pouvez indiquer un numéro de téléphone avec lequel nous pourrions vous contacter.</small>
+                        <div class="bg-white border p-3">
+                            <div id="delivery-contact-container" class="row">
+                                <div class="form-group col-lg-8">
+                                    <label for="email">Email de contact</label>
+                                    <input type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email" id="email" aria-describedby="helpEmail" @auth value="{{ old('email', Auth::user()->email) }}" @endauth>
+                                    {!! $errors->has('email') ? "<div class='invalid-feedback'>" . ucfirst($errors->first('email')) . "</div>" : '' !!}
+                                    <small id="helpEmail" class="form-text text-muted">Vous pouvez indiquer un email avec lequel nous pourrions vous contacter.</small>
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label for="phone">Téléphone</label>
+                                    <input type="text" class="form-control" name="phone" id="phone" aria-describedby="helpPhone" maxlength="10" @auth value="{{ Auth::user()->phone }}" @endauth>
+                                    <small id="helpPhone" class="form-text text-muted">Vous pouvez indiquer un numéro de téléphone avec lequel nous pourrions vous contacter.</small>
+                                </div>
                             </div>
                         </div>
 
                         @auth
                             @if (0 < Auth::user()->addresses->count())
                             {{-- AUTH HAS AT LEAST 1 ADDRESS --}}
-                                <div id="billing">
+                                <div id="billing" class="bg-white border p-3 mt-3">
                                     <h2>Facturation</h2>
                                     <div id="billing-address-select" class="form-group">
                                         <label for="billing-address-select">Choisissez une de vos adresses</label>
@@ -58,16 +62,17 @@
                                     <div id="new-billing-address">
                                         @include("components.utils.addresses.creation", ['deliveryPrefix' => 'billing'])
                                     </div>
-                                </div>
 
-                                <div class="form-check form-check-inline">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="sameAddresses" id="sameAddresses" checked="checked" onclick="$('#shipping').toggle()">
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                        <input class="form-check-input" type="checkbox" name="sameAddresses" id="sameAddresses" @if(old('sameAddresses')) checked="checked" @endif onclick="$('#shipping').toggle()">
                                             Adresse de livraison identique
-                                    </label>
+                                        </label>
+                                    </div>
                                 </div>
 
-                                <div id="shipping">
+
+                                <div id="shipping" class="bg-white border p-3 mt-3">
                                     <h2>Livraison</h2>
                                     <div id="shipping-address-select" class="form-group">
                                         <label for="shipping-address-select">Choisissez une de vos adresses</label>
@@ -90,8 +95,33 @@
                                 </div>
 
                             @else
-
                             {{-- AUTH HAS NO ADDRESS --}}
+                                <div id="billing" class="bg-white border p-3 mt-3">
+                                    <h2>Facturation</h2>
+                                    <div id="new-billing-address">
+                                        @include("components.utils.addresses.creation", ['deliveryPrefix' => 'billing'])
+                                        <input id="is-new-billing-address" type="hidden" name="is-new-billing-address" value="1">
+                                    </div>
+
+                                    <div class="form-check form-check-inline">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" type="checkbox" name="sameAddresses" id="sameAddresses" @if(old('sameAddresses')) checked="checked" @endif onclick="$('#new-shipping-address').toggle()">
+                                                Adresse de livraison identique
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div id="new-shipping-address" class="bg-white border p-3 mt-3">
+                                    <h2>Livraison</h2>
+                                    @include("components.utils.addresses.creation", ['deliveryPrefix' => 'shipping'])
+                                    <input id="is-new-shipping-address" type="hidden" name="is-new-shipping-address" value="1">
+                                </div>
+                            @endif
+                        @endauth
+
+                        {{-- GUEST --}}
+                        @guest
+                            <div id="billing" class="bg-white border p-3 mt-3">
                                 <h2>Facturation</h2>
                                 <div id="new-billing-address">
                                     @include("components.utils.addresses.creation", ['deliveryPrefix' => 'billing'])
@@ -100,35 +130,13 @@
 
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="sameAddresses" id="sameAddresses" checked="checked" onclick="$('#new-shipping-address').toggle()">
+                                        <input class="form-check-input" type="checkbox" name="sameAddresses" id="sameAddresses" @if(old('sameAddresses')) checked="checked" @endif onclick="$('#new-shipping-address').toggle()">
                                             Adresse de livraison identique
                                     </label>
                                 </div>
-
-                                <div id="new-shipping-address">
-                                    <h2>Livraison</h2>
-                                    @include("components.utils.addresses.creation", ['deliveryPrefix' => 'shipping'])
-                                    <input id="is-new-shipping-address" type="hidden" name="is-new-shipping-address" value="1">
-                                </div>
-                            @endif
-                        @endauth
-
-                        {{-- GUEST ADD ADDRESS --}}
-                        @guest
-                            <h2>Facturation</h2>
-                            <div id="new-billing-address">
-                                @include("components.utils.addresses.creation", ['deliveryPrefix' => 'billing'])
-                                <input id="is-new-billing-address" type="hidden" name="is-new-billing-address" value="1">
                             </div>
 
-                            <div class="form-check form-check-inline">
-                                <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="sameAddresses" id="sameAddresses" checked="checked" onclick="$('#new-shipping-address').toggle()">
-                                        Adresse de livraison identique
-                                </label>
-                            </div>
-
-                            <div id="new-shipping-address">
+                            <div id="new-shipping-address" class="bg-white border p-3 mt-3">
                                 <h2>Livraison</h2>
                                 @include("components.utils.addresses.creation", ['deliveryPrefix' => 'shipping'])
                                 <input id="is-new-shipping-address" type="hidden" name="is-new-shipping-address" value="1">
@@ -170,7 +178,13 @@
 @section('scripts')
 <script>
     $(document).ready(function(){
-        $('#shipping').hide();
+        $('#new-shipping-address').show();
+
+        if ($('#sameAddresses').attr('checked')) {
+            $('#new-shipping-address').hide();
+            $('#shipping').hide();
+        }
+
         @auth
         @if (0 < Auth::user()->addresses->count())
             $('#new-billing-address').hide();
@@ -204,11 +218,11 @@
             if ( newShippingAddressBtn.hasClass('activated') ){
                 newShippingAddressBtn.text('Ou créez en une nouvelle');
                 newShippingAddressBtn.removeClass('activated')
-                $('#is-new-billing-address').val('0');
+                $('#is-new-shipping-address').val('0');
             } else {
                 newShippingAddressBtn.text('Selectionner une de vos adresses');
                 newShippingAddressBtn.addClass('activated')
-                $('#is-new-billing-address').val('1');
+                $('#is-new-shipping-address').val('1');
             }
         });
     });

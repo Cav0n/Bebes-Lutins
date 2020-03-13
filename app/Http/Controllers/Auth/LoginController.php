@@ -46,23 +46,37 @@ class LoginController extends Controller
     }
 
     /**
-     * Send the response after the user was authenticated.
+     * Handle a login request to the application.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Http\JsonResponse
+     *
+     * @throws \Illuminate\Validation\ValidationException
      */
-    protected function sendLoginResponse(Request $request)
+    public function login(Request $request)
     {
-        $request->session()->regenerate();
+        $this->validateLogin($request);
 
-        $cart = session()->get('shopping_cart');
-        $cart->user_id = Auth::user()->id;
-        $cart->save();
+        // If the class is using the ThrottlesLogins trait, we can automatically throttle
+        // the login attempts for this application. We'll key this by the username and
+        // the IP address of the client making these requests into this application.
+        if (method_exists($this, 'hasTooManyLoginAttempts') &&
+            $this->hasTooManyLoginAttempts($request)) {
+            $this->fireLockoutEvent($request);
 
-        $this->clearLoginAttempts($request);
+            return $this->sendLockoutResponse($request);
+        }
 
-        return $this->authenticated($request, $this->guard()->user())
-                ?: redirect()->intended($this->redirectPath());
+        if ($this->attemptLogin($request)) {
+            return $this->sendLoginResponse($request);
+        }
+
+        // If the login attempt was unsuccessful we will increment the number of attempts
+        // to login and redirect the user back to the login form. Of course, when this
+        // user surpasses their maximum number of attempts they will get locked out.
+        $this->incrementLoginAttempts($request);
+
+        return $this->sendFailedLoginResponse($request);
     }
 
     /**
@@ -84,5 +98,25 @@ class LoginController extends Controller
         session()->regenerateToken();
 
         return $this->loggedOut($request) ?: redirect('/');
+    }
+
+    /**
+     * Send the response after the user was authenticated.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    protected function sendLoginResponse(Request $request)
+    {
+        $request->session()->regenerate();
+
+        $cart = session()->get('shopping_cart');
+        $cart->user_id = Auth::user()->id;
+        $cart->save();
+
+        $this->clearLoginAttempts($request);
+
+        return $this->authenticated($request, $this->guard()->user())
+                ?: redirect()->intended($this->redirectPath());
     }
 }

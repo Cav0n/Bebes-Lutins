@@ -100,7 +100,7 @@ class OrderController extends Controller
         session()->forget('shopping_cart');
         session()->regenerate();
 
-        return redirect(route('thanks'));
+        return redirect(route('thanks', ['order' => $order]));
     }
 
     /**

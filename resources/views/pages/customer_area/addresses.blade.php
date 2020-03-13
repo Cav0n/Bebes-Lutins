@@ -11,15 +11,16 @@
             @include('components.customer_area.title')
 
             <div class="body p-3">
-                <div class="row py-3">
+                <div class="row">
                     <div class="col-lg-12">
                         <h3 class="h4 font-weight-bold">Mes adresses</h3>
                         <button type="button" class="btn btn-outline-primary" id="add-address-btn">Ajouter une adresse</button>
 
-                        {{--//@todo: Create method for form --}}
-                        <form id="address-creation" action="" method="POST">
+                        <form id="address-creation" action="{{ route('user.addresses.create') }}" method="POST">
                             @csrf
-                            @include('components.utils.addresses.creation', ['billing' => false, 'submitBtn' => true, 'action' => route('user.addresses.create')])
+                            @include("components.utils.addresses.creation")
+                            <input type="hidden" name="back" value="1">
+                            <button type="submit" class="btn btn-primary">Enregistrer</button>
                         </form>
 
                         @foreach (Auth::user()->addresses as $address)
@@ -60,5 +61,11 @@
             addAddressBtn.text('Annuler');
         }
     })
+
+    @if($errors->any())
+        addressCreationForm.show();
+        addAddressBtn.addClass('toggled');
+        addAddressBtn.text('Annuler');
+    @endif
 </script>
 @endsection

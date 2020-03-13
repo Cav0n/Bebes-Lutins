@@ -66,17 +66,23 @@ class CartController extends Controller
     {
         $addressController = new AddressController();
 
+        $request->validate([
+            'email' => ['required', 'email:filter'],
+        ]);
+
+        // Billing address creation
         if ($request->input('is-new-billing-address')){
-            $billingAddressId = $addressController->storeArray($request->input('billing'));
+            $billingAddressId = $addressController->store($request, 'billing');
         } else {
             $billingAddressId = $request->input('billing-address-id');
         }
 
+        // Shipping address creation
         if (null !== $request->input('sameAddresses') && $request->input('sameAddresses')) {
             $shippingAddressId = $billingAddressId;
         } else {
             if ($request->input('is-new-shipping-address')){
-                $shippingAddressId = $addressController->storeArray($request->input('shipping'));
+                $shippingAddressId = $addressController->store($request, 'shipping');
             } else {
                 $shippingAddressId = $request->input('shipping-address-id');
             }

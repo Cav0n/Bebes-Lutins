@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'password.failed' => 'Password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed' => 'Ces informations ne sont liés à aucun compte Bébés Lutins.',
+    'password.failed' => 'Le mot de passe est incorrect.',
+    'throttle' => 'Vous avez effectué trop de tentative de connexion. Merci de réessayer dans :seconds secondes.',
 
 ];

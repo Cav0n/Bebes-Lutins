@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\Contact;
+use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -13,9 +14,9 @@ class MainController extends Controller
         return view('index');
     }
 
-    public function thanks()
+    public function thanks(Request $request, Order $order)
     {
-        return view('pages.shopping_cart.thanks');
+        return view('pages.shopping_cart.thanks')->with('order', $order);
     }
 
     public function contact(Request $request)

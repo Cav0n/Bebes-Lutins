@@ -14,7 +14,7 @@
                 <p class="px-3 pt-3">{!! $product->breadcrumb !!}</p>
                 <div class="bg-white p-3">
                     <h1 class="mb-0"><b>{{ $product->name }}</b></h1>
-                    <h2 class="h4"><b>{{ $product->priceFormatted }} €</b></h2>
+                    <h2 class="h4"><b>{{ \App\NumberConvertor::doubleToPrice($product->price) }}</b></h2>
                     <div class="d-flex my-2">
                         <input type="number" class="form-control input-spinner quantity-spinner" name="quantity" id="quantity" aria-describedby="helpQuantity" min="1" max="{{ $product->stock }}" value="1">
                         <button type="button" class="btn btn-primary add-to-cart rounded-0" data-id="{{ $product->id }}" data-toggle="modal" data-quantity="1" data-cart_id="{{ session()->get('shopping_cart')->id }}" data-target="#product-added-modal">

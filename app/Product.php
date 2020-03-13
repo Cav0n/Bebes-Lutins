@@ -37,11 +37,6 @@ class Product extends Model
         return $this->hasMany('App\CartItem');
     }
 
-    public function getPriceFormattedAttribute()
-    {
-        return number_format($this->price, 2, ',', ' ');
-    }
-
     public function getBreadcrumbAttribute()
     {
         $route = route('product', ['product' => $this]);

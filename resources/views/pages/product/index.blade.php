@@ -7,11 +7,11 @@
 <div class="container-fluid py-5">
     <div class="row justify-content-center">
         <div class="col-lg-9 col-xl-8 col-xxl-6 col-xxxl-5 row">
-            <div class="col-12 col-sm-5 col-lg-6 col-xl-5 col-xxl-4 col-xxxl-3">
+            <div id="product-image-container" class="col-12 col-sm-5 col-xxl-4 col-xxxl-3">
                 @include('components.utils.carousel.product')
             </div>
-            <div class="col-12 col-sm-7 col-lg-6 col-xl-7 col-xxl-8 col-xxxl-9 p-0">
-                <p class="px-3 pt-3">{!! $product->breadcrumb !!}</p>
+            <div class="col-12 col-sm-7 col-xxl-8 col-xxxl-9 p-0">
+                <p id="product-breadcrumb" class="px-3 pt-3">{!! $product->breadcrumb !!}</p>
                 <div class="bg-white p-3">
                     <h1 class="mb-0"><b>{{ $product->name }}</b></h1>
                     <h2 class="h4"><b>{{ \App\NumberConvertor::doubleToPrice($product->price) }}</b></h2>

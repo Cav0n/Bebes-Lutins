@@ -1,4 +1,4 @@
-<div class='product-container col-sm-6 col-md-4 col-lg-3 my-2'>
+<div class='product-container col-6 col-md-4 col-lg-3 my-2'>
     <div class="product card rounded-0">
         <img class="card-img-top rounded-0" src="{{ asset($product->images->first()->url) }}" alt="{{ $product->images->first()->name }}">
         <div class="card-body p-0">

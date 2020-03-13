@@ -152,6 +152,32 @@ return [
         'email' => 'l\'email',
         'password' => 'le mot de passe',
         'phone' => 'le numéro de téléphone',
+        'civility' => 'la civilité',
+        'street' => 'la ville',
+        'zip code' => 'le code postal',
+        'city' => 'la ville',
+        'complements' => 'les compléments',
+        'company' => 'le nom d\'entreprise',
+        'billing' => [
+            'firstname' => 'le prénom',
+            'lastname' => 'le nom de famille',
+            'civility' => 'la civilité',
+            'street' => 'la ville',
+            'zipCode' => 'le code postal',
+            'city' => 'la ville',
+            'complements' => 'les compléments',
+            'company' => 'le nom d\'entreprise',
+            ],
+        'shipping' => [
+            'firstname' => 'le prénom',
+            'lastname' => 'le nom de famille',
+            'civility' => 'la civilité',
+            'street' => 'la ville',
+            'zipCode' => 'le code postal',
+            'city' => 'la ville',
+            'complements' => 'les compléments',
+            'company' => 'le nom d\'entreprise',
+        ]
     ],
 
 ];

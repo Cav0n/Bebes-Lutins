@@ -11,7 +11,7 @@
             @include('components.customer_area.title')
 
             <div class="body p-3">
-                <div class="row py-3">
+                <div class="row">
                     <div class="col-lg-12">
                         <h3 class="h4 font-weight-bold">Mes commandes</h3>
                         @foreach (Auth::user()->orders as $order)

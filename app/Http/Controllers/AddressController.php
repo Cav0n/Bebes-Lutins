@@ -41,17 +41,25 @@ class AddressController extends Controller
 
         $this->validator($request->all())->validate();
 
-        $address->civility = $request->input($nestedKey . '.civility');
-        $address->firstname = $request->input($nestedKey . '.firstname');
-        $address->lastname = $request->input($nestedKey . '.lastname');
-        $address->street = $request->input($nestedKey . '.street');
-        $address->zipCode = $request->input($nestedKey . '.zipCode');
-        $address->city = $request->input($nestedKey . '.city');
-        $address->complements = $request->input($nestedKey . '.complements');
-        $address->company = $request->input($nestedKey . '.company');
-        $address->user_id = $request->input($nestedKey . '.user_id');
+        if (null != $nestedKey) {
+            $nestedKey .= '.';
+        }
+
+        $address->civility = $request->input($nestedKey . 'civility');
+        $address->firstname = $request->input($nestedKey . 'firstname');
+        $address->lastname = $request->input($nestedKey . 'lastname');
+        $address->street = $request->input($nestedKey . 'street');
+        $address->zipCode = $request->input($nestedKey . 'zipCode');
+        $address->city = $request->input($nestedKey . 'city');
+        $address->complements = $request->input($nestedKey . 'complements');
+        $address->company = $request->input($nestedKey . 'company');
+        $address->user_id = $request->input($nestedKey . 'user_id');
 
         $address->save();
+
+        if ($request->input('back')) {
+            return back();
+        }
 
         return $address->id;
     }
@@ -125,7 +133,7 @@ class AddressController extends Controller
     {
         $rules = [];
 
-        if ($data['is-new-billing-address']) {
+        if (isset($data['is-new-billing-address'])) {
             $rules += [
                 'billing.civility' => ['required', 'string', Rule::in(['Madame', 'Monsieur', 'Non précisé'])],
                 'billing.firstname' => ['required', 'string', 'min:2', 'max:255'],
@@ -138,7 +146,7 @@ class AddressController extends Controller
             ];
         }
 
-        if ($data['is-new-shipping-address'] && !$data['sameAddresses']) {
+        if (isset($data['is-new-shipping-address']) && (!isset($data['sameAddresses']))) {
             $rules += [
                 'shipping.civility' => ['required', 'string', Rule::in(['Madame', 'Monsieur', 'Non précisé'])],
                 'shipping.firstname' => ['required', 'string', 'min:2', 'max:255'],
@@ -148,6 +156,19 @@ class AddressController extends Controller
                 'shipping.city' => ['required', 'string'],
                 'shipping.complements' => ['string', 'nullable'],
                 'shipping.company' => ['string', 'nullable'],
+            ];
+        }
+
+        if (empty($rules)) {
+            $rules += [
+                'civility' => ['required', 'string', Rule::in(['Madame', 'Monsieur', 'Non précisé'])],
+                'firstname' => ['required', 'string', 'min:2', 'max:255'],
+                'lastname' => ['required', 'string', 'min:2', 'max:255'],
+                'street' => ['required', 'string'],
+                'zipCode' => ['required', 'string', 'size:5'],
+                'city' => ['required', 'string'],
+                'complements' => ['string', 'nullable'],
+                'company' => ['string', 'nullable'],
             ];
         }
 

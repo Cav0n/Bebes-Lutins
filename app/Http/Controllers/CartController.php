@@ -66,6 +66,10 @@ class CartController extends Controller
     {
         $addressController = new AddressController();
 
+        $request->validate([
+            'email' => ['required', 'email:filter'],
+        ]);
+
         // Billing address creation
         if ($request->input('is-new-billing-address')){
             $billingAddressId = $addressController->store($request, 'billing');

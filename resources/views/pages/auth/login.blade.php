@@ -20,7 +20,7 @@
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email" id="email" aria-describedby="helpEmail" value="{{ old('email') }}">
-                        {!! $errors->has('email') ? "<div class='invalid-feedback'>" . $errors->first('email') . "</div>" : '' !!}
+                        {!! $errors->has('email') ? "<div class='invalid-feedback'>" . ucfirst($errors->first('email')) . "</div>" : '' !!}
                         <small id="helpEmail" class="form-text text-muted">
                            <a href="{{route('registration')}}">Vous n'avez pas encore de compte ?</a>
                         </small>
@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <label for="password">Mot de passe</label>
                         <input type="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" name="password" id="password" aria-describedby="helpPassword">
-                        {!! $errors->has('password') ? "<div class='invalid-feedback'>" . $errors->first('password') . "</div>" : '' !!}
+                        {!! $errors->has('password') ? "<div class='invalid-feedback'>" . ucfirst($errors->first('password')) . "</div>" : '' !!}
                         <small id="helpPassword" class="form-text text-muted">Vous avez perdu votre mot de passe ?</small>
                     </div>
                     <button type="submit" class="btn btn-primary">Se connecter</button>

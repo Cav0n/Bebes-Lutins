@@ -47,25 +47,25 @@
                                 <div class="form-group col-md-6 col-lg-12 col-xxxl-6">
                                     <label for="firstname">Votre prénom</label>
                                     <input type="text" class="form-control {{ $errors->has('firstname') ? 'is-invalid' : '' }}" name="firstname" id="firstname" value="{{ old('firstname') }}">
-                                    {!! $errors->has('firstname') ? "<div class='invalid-feedback'>" . $errors->first('firstname') . "</div>" : '' !!}
+                                    {!! $errors->has('firstname') ? "<div class='invalid-feedback'>" . ucfirst($errors->first('firstname')) . "</div>" : '' !!}
                                 </div>
                                 <div class="form-group col-md-6 col-lg-12 col-xxxl-6">
                                     <label for="lastname">Votre nom de famille</label>
                                     <input type="text" class="form-control {{ $errors->has('lastname') ? 'is-invalid' : '' }}" name="lastname" id="lastname" value="{{ old('lastname') }}">
-                                    {!! $errors->has('lastname') ? "<div class='invalid-feedback'>" . $errors->first('lastname') . "</div>" : '' !!}
+                                    {!! $errors->has('lastname') ? "<div class='invalid-feedback'>" . ucfirst($errors->first('lastname')) . "</div>" : '' !!}
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="email">Votre email</label>
                                 <input type="text" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email" id="email" aria-describedby="helpEmail" placeholder="" value="{{ old('email') }}">
+                                {!! $errors->has('email') ? "<div class='invalid-feedback'>" . ucfirst($errors->first('email')) . "</div>" : '' !!}
                                 <small id="helpEmail" class="form-text text-muted">Nous avons besoin de connaitre votre email pour vous répondre.</small>
-                                {!! $errors->has('email') ? "<div class='invalid-feedback'>" . $errors->first('email') . "</div>" : '' !!}
                             </div>
                             <div class="form-group">
                                 <label for="message">Votre message</label>
                                 <textarea class="form-control {{ $errors->has('message') ? 'is-invalid' : '' }}" name="message" id="message" rows="5">{{ old('message') }}</textarea>
-                                {!! $errors->has('message') ? "<div class='invalid-feedback'>" . $errors->first('message') . "</div>" : '' !!}
+                                {!! $errors->has('message') ? "<div class='invalid-feedback'>" . ucfirst($errors->first('message')) . "</div>" : '' !!}
                             </div>
                             <button type="submit" class="btn btn-primary">Envoyer mon message</button>
                         </form>

@@ -1,4 +1,4 @@
-<div id="mainCarousel" class="carousel slide text-dark mb-3 d-none d-lg-flex" data-ride="carousel">
+<div id="mainCarousel" class="carousel slide text-dark mb-3 d-flex" data-ride="carousel">
     <div class="carousel-inner">
         @php $index = 0; @endphp
         @foreach ($product->images as $image)

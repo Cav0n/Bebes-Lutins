@@ -32,6 +32,10 @@ Route::post('/enregistrement', 'Auth\RegisterController@register');
 
 // Logout
 Route::any('/logout', 'Auth\LoginController@logout')->name('logout');
+
+// Password lost
+Route::get('/mot-de-passe-perdu', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.lost.form');
+Route::post('/mot-de-passe-perdu', 'Auth\ForgotPasswordController@passwordReset')->name('password.lost.reset');
 /** =========== */
 
 /**

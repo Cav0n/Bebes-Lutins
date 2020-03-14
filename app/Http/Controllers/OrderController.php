@@ -17,11 +17,11 @@ class OrderController extends Controller
     public function tracking(Request $request, string $trackingNumber)
     {
         if (null !== $order = Order::where('trackingNumber', $trackingNumber)->first()){
-            return new JsonResponse(['order' => View::make('components.utils.orders.order', ['order' => $order])
+            return JsonResponse::create(['order' => View::make('components.utils.orders.order', ['order' => $order])
                                                     ->render()]);
         }
 
-        return new JsonResponse(null);
+        return JsonResponse::create(['error' => ['message' => trans('messages.There is no order with this tracking number.')] ]);
     }
 
     /**

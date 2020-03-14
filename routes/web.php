@@ -36,6 +36,8 @@ Route::any('/logout', 'Auth\LoginController@logout')->name('logout');
 // Password lost
 Route::get('/mot-de-passe-perdu', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.lost.form');
 Route::post('/mot-de-passe-perdu', 'Auth\ForgotPasswordController@passwordReset')->name('password.lost.reset');
+Route::post('/mot-de-passe-perdu/verification-code', 'Auth\ResetPasswordController@verifyResetCode')->name('password.reset.verify_code');
+Route::post('/mot-de-passe/reinitialisation', 'Auth\ResetPasswordController@resetPassword')->name('password.reset');
 /** =========== */
 
 /**

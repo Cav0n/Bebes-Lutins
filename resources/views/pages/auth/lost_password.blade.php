@@ -31,9 +31,20 @@
 
 @section('scripts')
 <script>
+    errorFeedbackHtml = "<div class='invalid-feedback'>__error__</div>"
+    var userId = null;
+
+    $('#lost-password-container').on('show_reset_password_modal', function (event, param) {
+        userId = param.userId;
+        $('#lost-password-container').append(param.template);
+        $('#reset-password-modal').modal('show');
+    });
 
     $('#lost-password-container #submit-btn').on('click', function() {
         email = $('#lost-password-container #email');
+
+        $('.invalid-feedback').remove();
+        email.removeClass('is-invalid');
 
         fetch("{{ route('password.lost.reset') }}", {
             method: 'POST',
@@ -50,11 +61,10 @@
                 throw response.error;
             }
 
-            console.log('OK :' + response);
+            $('#lost-password-container').trigger('show_reset_password_modal', [response]);
         }).catch((error) => {
             email.addClass('is-invalid');
-
-            console.log('ERREUR : ' + error.message);
+            $('#lost-password-container .form-group').append(errorFeedbackHtml.replace('__error__', error.message));
         });
     });
 </script>

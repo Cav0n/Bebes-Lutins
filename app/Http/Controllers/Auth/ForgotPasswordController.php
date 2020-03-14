@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ForgotPasswordController extends Controller
 {
@@ -35,7 +36,18 @@ class ForgotPasswordController extends Controller
     public function passwordReset(Request $request)
     {
         if (\App\User::where('email', $request->input('email'))->exists()){
-            $response = ['message' => 'ok'];
+            $passwordResetToken = rand(10000000, 99999999);
+
+            $user = \App\User::where('email', $request->input('email'))->first();
+            $user->passwordResetToken = $passwordResetToken;
+            $user->save();
+
+            Mail::to($user->email)->send(new \App\Mail\PasswordResetToken($passwordResetToken));
+
+            $response = [
+                'userId' => $user->id,
+                'template' => view('components.modal.password_reset')->render()
+            ];
         } else {
             $response = [
                 'error' => [

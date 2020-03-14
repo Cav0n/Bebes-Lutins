@@ -58,6 +58,7 @@ class ResetPasswordController extends Controller
         $user->password = Hash::make($request['password']);
         $user->save();
 
+        $request->session()->flash('passwordReseted', true);
         $response = ['message' => 'ok'];
 
         return JsonResponse::create($response, 200);

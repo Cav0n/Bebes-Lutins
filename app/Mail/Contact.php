@@ -56,6 +56,6 @@ class Contact extends Mailable
      */
     public function build()
     {
-        return $this->from('florian@coinks.fr')->view('mails.contact.message');
+        return $this->from('cav0n@hotmail.fr')->view('mails.contact.message');
     }
 }

@@ -3,7 +3,7 @@
     <p class="mb-0">Votre espace client</p>
     <ul class="nav nav-tabs border-bottom-0 mt-3">
         <li class="nav-item dropdown d-flex d-sm-none">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Naviguer</a>
+            <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Naviguer</a>
             <div class="dropdown-menu">
                 <a class="dropdown-item @if(request()->path() == 'espace-client') active @endif" href="{{ route('customer.area') }}">Mes informations</a>
                 <a class="dropdown-item @if(request()->path() == 'espace-client/mes-commandes') active @endif" href="{{ route('customer.area.orders') }}">Mes commandes</a>

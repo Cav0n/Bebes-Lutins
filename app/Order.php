@@ -70,6 +70,10 @@ class Order extends Model
                 return '#60eb4b';
             break;
 
+            case 'REGISTERED_PARTICIPATION':
+                return '#60eb4b';
+            break;
+
             case 'CANCELED':
                 return '#ff2929';
             break;

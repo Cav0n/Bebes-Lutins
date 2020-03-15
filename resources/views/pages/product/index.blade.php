@@ -2,6 +2,8 @@
 
 @section('title', $product->name . " - Bébés Lutins")
 
+@section('description', $product->description)
+
 @section('content')
 
 <div class="container-fluid py-5">

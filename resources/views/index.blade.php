@@ -5,7 +5,7 @@
 
 @extends('templates.default')
 
-@section('title', "Accueil - Bébés Lutins")
+@section('title', "Bébés Lutins | Couches lavables fabriquées en France")
 
 @section('content')
 

@@ -20,6 +20,17 @@
                         <div class="contact-container py-2 h-100" style="width: 24rem;">
                             <a href="/contact" class="h3 font-weight-bold" style="text-transform: uppercase;">
                                 Contactez-nous</a>
+                            <div class="row justify-content-center mt-2">
+                                <div class="col-1 px-1">
+                                    <img class="w-100" src="{{ asset('images/icons/telephone-color.svg') }}" alt="telephone">
+                                </div>
+                                <div class="col-1 px-1">
+                                    <img class="w-100" src="{{ asset('images/icons/email-color.svg') }}" alt="telephone">
+                                </div>
+                                <div class="col-1 px-1">
+                                    <img class="w-100" src="{{ asset('images/icons/location-color.svg') }}" alt="telephone">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="right d-flex">

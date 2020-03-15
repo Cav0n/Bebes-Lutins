@@ -20,6 +20,7 @@
             </div>
             <div class="col-6 px-1 px-lg-3 col-lg-5 d-flex flex-column justify-content-center border-right">
                 <a class='mb-0' href="{{ route('product', ['product' => $item->product->id]) }}">{{ $item->product->name }}</a>
+                <p class="mb-0 d-flex d-lg-none">Quantité : {{ $item->quantity }}</p>
             </div>
             <div class="col-4 col-lg-2 d-flex flex-column justify-content-center border-right">
                 <p class="mb-0 text-center">{{ \App\NumberConvertor::doubleToPrice($item->unitPrice) }}</p>

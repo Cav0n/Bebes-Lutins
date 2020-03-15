@@ -18,6 +18,11 @@ class Address extends Model
 
     public function getIdentityAttribute()
     {
-        return $this->civility . ' ' . $this->firstname . ' ' . $this->lastname;
+        return ucfirst($this->getCivilityI18nAttribute()) . ' ' . ucfirst($this->firstname) . ' ' . mb_strtoupper($this->lastname);
+    }
+
+    public function getCivilityI18nAttribute($language = 'FR_fr'): string
+    {
+        return trans('address.civility.' . $this->civility);
     }
 }

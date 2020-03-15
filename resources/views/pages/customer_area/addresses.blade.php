@@ -24,11 +24,7 @@
                         </form>
 
                         @foreach (Auth::user()->addresses as $address)
-                            <p class="company">{{ $address->company }}</p>
-                            <p class="identity">{{ $address->identity }}</p>
-                            <p class="street">{{ $address->street }}</p>
-                            <p class="complements">{{ $address->complements }}</p>
-                            <p class="zipCode-city">{{ $address->zipCode }}, {{ $address->city }}</p>
+                            @include('components.utils.addresses.address', ['address' => $address])
                         @endforeach
                     </div>
                 </div>

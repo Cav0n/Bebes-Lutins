@@ -68,7 +68,7 @@ class OrderController extends Controller
     public function createFromCart(Request $request, \App\Cart $cart)
     {
         $order = new Order();
-        $order->status = 'WAIT_PAYMENT';
+        $order->status = 'WAITING_PAYMENT';
         $order->shippingCosts = $cart->shippingCosts;
         $order->paymentMethod = $request['paymentMethod'];
         $order->email = $cart->email;

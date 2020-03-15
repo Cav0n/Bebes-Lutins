@@ -75,12 +75,12 @@ Route::get('/produits/{product}', 'ProductController@show')->name('product');
  * SHOPPING CART
  * ============
  */
-Route::get('/panier', 'CartController@show')->name('cart');
+Route::get('/panier', 'CartController@show')->name('cart')->middleware('\App\Http\Middleware\SessionCartUpdate');
 Route::get('/panier/livraison', 'CartController@showDelivery')->name('cart.delivery');
 Route::post('/panier/livraison/valider', 'CartController@addAddresses')->name('cart.delivery.validation');
 Route::get('/panier/paiement', 'CartController@showPayment')->name('cart.payment');
 Route::post('/panier/ajout/{product}/{cart}', 'CartItemController@create')->name('cart.item.add');
-Route::post('/panier/modifier-quantite/{cartItem}', 'CartItemController@update')->name('cart.item.updateQuantity');
+Route::post('/panier/modifier-quantite/{cartItem}', 'CartItemController@update');
 Route::get('/panier/{cartItem}/supprimer', 'CartItemController@destroy')->name('cart.item.delete');
 /** ============ */
 

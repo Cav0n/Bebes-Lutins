@@ -8,12 +8,24 @@
             <p class="mb-0">Prix unitaire : {{ \App\NumberConvertor::doubleToPrice($item->product->price) }}</p>
         </div>
 
-        <input type="number" class="form-control input-spinner modal-product-quantity" name="quantity" id="quantity" aria-describedby="helpQuantity" value="{{ $item->quantity }}">
+        <div class='spinner-container ld-over' data-itemId='{{ $item->id }}' data-oldquantity='{{ $item->quantity }}' data-price='{{$item->product->price}}' style="width:fit-content">
+            <input
+            type="number"
+            class="form-control input-spinner cart-item-quantity"
+            name="quantity"
+            id="quantity"
+            aria-describedby="helpQuantity"
+            value="{{ $item->quantity }}"
+            max="20"
+            min="0">
+            <div class="ld ld-ring ld-spin"></div>
+        </div>
+
 
         <a class="btn btn-danger p-0 px-2 mt-2" href="{{ route('cart.item.delete', ['cartItem'=>$item->id]) }}" role="button" style="width: fit-content">
             Supprimer</a>
     </div>
     <div class="col-3 col-sm-2 col-xxl-1 d-flex flex-column justify-content-center border-left my-2 px-1">
-        <p class="mb-0 text-center">{{ \App\NumberConvertor::doubleToPrice($item->product->price * $item->quantity) }}</p>
+        <p class="mb-0 text-center item-total-price">{{ \App\NumberConvertor::doubleToPrice($item->product->price * $item->quantity) }}</p>
     </div>
 </div>

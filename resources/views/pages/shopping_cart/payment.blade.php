@@ -53,11 +53,25 @@
                 </div>
 
                 {{-- CART RECAP --}}
-                <div class="col-lg-4 my-2">
+                <div class="col-md-4 pr-0 pl-0 pl-md-2 my-2">
                     <div id="price-recap" class="border bg-white p-3">
                         <p class="mb-0">{{ $cart->totalQuantity }} produits : {{ \App\NumberConvertor::doubleToPrice($cart->totalPrice) }}</p>
                         <p class="mb-0">Frais de ports : {{ \App\NumberConvertor::doubleToPrice($cart->shippingCosts) }}</p>
                         <p class="mb-0">TOTAL T.T.C. : {{ \App\NumberConvertor::doubleToPrice($cart->totalPrice + $cart->shippingCosts) }}</p>
+                    </div>
+
+                    <div id='items-recap' class="border bg-white mt-2 p-3">
+                        @foreach ($cart->items as $item)
+                        @include('components.utils.cart.item_mini')
+                        @endforeach
+                    </div>
+
+                    <div id='delivery-recap' class="border bg-white mt-2 p-3">
+                        <p class="mb-0"><b>Livré à :</b></p>
+                        @include('components.utils.addresses.address', ['address' => $cart->shippingAddress])
+
+                        <p class='mb-0 mt-2'><b>Facturé à :</b></p>
+                        @include('components.utils.addresses.address', ['address' => $cart->billingAddress])
                     </div>
 
                     @if($cart->priceLeftBeforeFreeShipping > 0)

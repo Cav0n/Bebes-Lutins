@@ -11,12 +11,14 @@
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,500,600,700,800&display=swap" rel="stylesheet">
 
     {{-- App CSS --}}
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/loadingio/ldbutton@v1.0.1/dist/ldbtn.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loadingio/loading.css@v2.0.0/dist/loading.min.css"/>
 
     <title>@yield('title', 'Bébés Lutins')</title>
 </head>
 <body class="bg-white">
-    <script src="{{asset('js/app.js')}}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
     @include('components.header.default')
 
@@ -29,10 +31,14 @@
     @include('components.modal.product_added_to_cart')
 
     <script>
+        const FREE_SHIPPING_FROM = {{ env('FREE_SHIPPING_FROM', 70.00) }}
+
+        const SHIPPING_COSTS = {{ env('SHIPPING_COSTS', 5.90) }}
+
         const SPINNER_CONFIG = {
             decrementButton: "<strong>-</strong>", // button text
             incrementButton: "<strong>+</strong>", // ..
-            groupClass: "quantity-selector mr-3", // css class of the resulting input-group
+            groupClass: "quantity-selector", // css class of the resulting input-group
             buttonsClass: "btn-outline-dark rounded-0",
             buttonsWidth: "2.5rem",
             textAlign: "center",

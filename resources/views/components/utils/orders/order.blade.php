@@ -1,12 +1,12 @@
-<div class='order p-3 my-3 border bg-light shadow-sm'>
+<div class='order p-3 my-3 border shadow-sm @if(isset($bgColor)) {{ $bgColor }} @else bg-light @endif'>
     <p>{{ $order->created_at->format('\L\e d/m/Y \à H:i') }} | <span class="badge badge-pill" style="background-color:{{ $order->statusColor }}">{{ ucfirst($order->statusI18n) }}</span></p>
 
     <div class="row mb-3">
-        <div class="col-6">
+        <div class="col-12 col-sm-6">
             <p class="h5">Livré à :</p>
             @include('components.utils.addresses.address', ['address' => $order->shippingAddress])
         </div>
-        <div class="col-6">
+        <div class="col-12 mt-2 mt-sm-0 col-sm-6">
             <p class="h5">Facturé à :</p>
             @include('components.utils.addresses.address', ['address' => $order->billingAddress])
         </div>

@@ -31,17 +31,7 @@
                 {{-- ITEMS LIST --}}
                 <div class="col-lg-8">
                     @foreach ($cart->items as $item)
-                    <div class="cart-product-container border bg-white row my-2 mx-0">
-                        <div class="col-lg-3">
-                            <img src='{{asset($item->product->images->first()->url)}}' class="w-100">
-                        </div>
-                        <div class="col-lg-9 p-3">
-                            <a class="mb-0 font-weight-bold" href={{ route('product', ['product' => $item->product->id]) }}>{{ $item->product->name }}</a>
-                            <p class="mb-0">Prix unitaire : {{ \App\NumberConvertor::doubleToPrice($item->product->price) }}</p>
-                            <p class="mb-0">Quantité : {{ $item->quantity }}</p>
-                            <a class="btn btn-primary" href="{{ route('cart.item.delete', ['cartItem'=>$item->id]) }}" role="button">Supprimer</a>
-                        </div>
-                    </div>
+                    @include('components.utils.cart.item')
                     @endforeach
                 </div>
 

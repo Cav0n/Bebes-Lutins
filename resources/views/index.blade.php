@@ -15,7 +15,7 @@
 
             @include('components.utils.carousel.main')
 
-            <h1 class="h1 font-weight-bold">
+            <h1 class="h1 font-weight-bolder">
                 Bébés Lutins, le spécialiste de la couche lavable écologique et écocitoyenne pour bébé.
             </h1>
             <p class="h5 text-justify">

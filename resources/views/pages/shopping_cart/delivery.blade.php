@@ -27,13 +27,13 @@
                             <div id="delivery-contact-container" class="row">
                                 <div class="form-group col-lg-8">
                                     <label for="email">Email de contact</label>
-                                    <input type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email" id="email" aria-describedby="helpEmail" @auth value="{{ old('email', Auth::user()->email) }}" @endauth>
+                                    <input type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email" id="email" aria-describedby="helpEmail" @auth value="{{ old('email', Auth::user()->email) }}" @endauth @guest value="{{ old('email') }}" @endguest>
                                     {!! $errors->has('email') ? "<div class='invalid-feedback'>" . ucfirst($errors->first('email')) . "</div>" : '' !!}
                                     <small id="helpEmail" class="form-text text-muted">Vous pouvez indiquer un email avec lequel nous pourrions vous contacter.</small>
                                 </div>
                                 <div class="form-group col-lg-4">
                                     <label for="phone">Téléphone</label>
-                                    <input type="text" class="form-control" name="phone" id="phone" aria-describedby="helpPhone" maxlength="10" @auth value="{{ Auth::user()->phone }}" @endauth>
+                                    <input type="text" class="form-control" name="phone" id="phone" aria-describedby="helpPhone" maxlength="10" @auth value="{{ Auth::user()->phone }}" @endauth @guest value="{{ old('phone') }}" @endguest>
                                     <small id="helpPhone" class="form-text text-muted">Vous pouvez indiquer un numéro de téléphone avec lequel nous pourrions vous contacter.</small>
                                 </div>
                             </div>
@@ -65,8 +65,9 @@
 
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="sameAddresses" id="sameAddresses" @if(old('sameAddresses')) checked="checked" @endif onclick="$('#shipping').toggle()">
-                                            Adresse de livraison identique
+                                            <input class="form-check-input" type="checkbox" name="sameAddresses" id="sameAddresses" onclick="$('#shipping').toggle()"
+                                            @if(old('sameAddresses') || (!old('shipping.civility') && !old('shipping.firstname') && !old('shipping.lastname') && !old('shipping.street') && !old('shipping.zipCode') && !old('shipping.city'))) checked="checked" @endif >
+                                                Adresse de livraison identique
                                         </label>
                                     </div>
                                 </div>
@@ -105,7 +106,8 @@
 
                                     <div class="form-check form-check-inline">
                                         <label class="form-check-label">
-                                            <input class="form-check-input" type="checkbox" name="sameAddresses" id="sameAddresses" @if(old('sameAddresses')) checked="checked" @endif onclick="$('#new-shipping-address').toggle()">
+                                            <input class="form-check-input" type="checkbox" name="sameAddresses" id="sameAddresses" onclick="$('#new-shipping-address').toggle()"
+                                            @if(old('sameAddresses') || (!old('shipping.civility') && !old('shipping.firstname') && !old('shipping.lastname') && !old('shipping.street') && !old('shipping.zipCode') && !old('shipping.city'))) checked="checked" @endif >
                                                 Adresse de livraison identique
                                         </label>
                                     </div>
@@ -130,7 +132,8 @@
 
                                 <div class="form-check form-check-inline">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" name="sameAddresses" id="sameAddresses" @if(old('sameAddresses')) checked="checked" @endif onclick="$('#new-shipping-address').toggle()">
+                                        <input class="form-check-input" type="checkbox" name="sameAddresses" id="sameAddresses" onclick="$('#new-shipping-address').toggle()"
+                                        @if(old('sameAddresses') || (!old('shipping.civility') && !old('shipping.firstname') && !old('shipping.lastname') && !old('shipping.street') && !old('shipping.zipCode') && !old('shipping.city'))) checked="checked" @endif >
                                             Adresse de livraison identique
                                     </label>
                                 </div>
@@ -183,6 +186,9 @@
         if ($('#sameAddresses').attr('checked')) {
             $('#new-shipping-address').hide();
             $('#shipping').hide();
+        } else {
+            $('#new-shipping-address').show();
+            $('#shipping').show();
         }
 
         @auth
@@ -190,7 +196,6 @@
             $('#new-billing-address').hide();
         @endif
         @endauth
-        $('#new-shipping-address').hide();
 
         newBillingAddressBtn = $('#new-billing-address-btn');
 

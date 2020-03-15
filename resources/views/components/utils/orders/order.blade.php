@@ -3,16 +3,16 @@
 
     <div class="row mb-3">
         <div class="col-6">
-            <p class="h5"><b>Livré à :</b></p>
+            <p class="h5">Livré à :</p>
             @include('components.utils.addresses.address', ['address' => $order->shippingAddress])
         </div>
         <div class="col-6">
-            <p class="h5"><b>Facturé à :</b></p>
+            <p class="h5">Facturé à :</p>
             @include('components.utils.addresses.address', ['address' => $order->billingAddress])
         </div>
     </div>
 
-    <p class="h5"><b>Articles :</b></p>
+    <p class="h5">Articles :</p>
     @foreach ($order->items as $item)
         <div class="row my-2">
             <div class="col-2 px-1 px-lg-3 col-lg-2">
@@ -37,12 +37,12 @@
         <div class="col-8 col-lg-3 offset-lg-7 text-right">
             <p class="mb-0">Prix total :</p>
             <p class="mb-0">Frais de ports :</p>
-            <p class=""><b>Prix total T.T.C. :</b></p>
+            <p class="">Prix total T.T.C. :</p>
         </div>
         <div class="col-4 col-lg-2 text-center">
             <p class="mb-0">{{ number_format($order->totalPrice, 2) }} €</p>
             <p class="mb-0">{{ number_format($order->shippingCosts, 2) }} €</p>
-            <p class=""><b>{{ number_format($order->totalPrice + $order->shippingCosts, 2) }} €</b></p>
+            <p class="">{{ number_format($order->totalPrice + $order->shippingCosts, 2) }} €</p>
         </div>
     </div>
 

@@ -6,11 +6,11 @@
     @if (isset($deliveryPrefix))
         <select id="civility" class="form-control {{ $errors->has($deliveryPrefix . '.civility') ? 'is-invalid' : '' }}" name="{{ $deliveryPrefix }}[civility]">
             <option>Choisissez une civilité</option>
-            <option value='MISS' @if('MISS' == old('civility')) selected @endif>
+            <option value='MISS' @if('MISS' == old($deliveryPrefix.'.civility')) selected @endif>
                 Madame</option>
-            <option value='MISTER' @if('MISTER' == old('civility')) selected @endif>
+            <option value='MISTER' @if('MISTER' == old($deliveryPrefix.'.civility')) selected @endif>
                 Monsieur</option>
-            <option value='NOT DEFINED' @if('NOT DEFINED' == old('civility')) selected @endif>
+            <option value='NOT DEFINED' @if('NOT DEFINED' == old($deliveryPrefix.'.civility')) selected @endif>
                 Non précisé</option>
         </select>
         {!! $errors->has($deliveryPrefix . '.civility') ? "<div class='invalid-feedback'>" . ucfirst($errors->first($deliveryPrefix . '.civility')) . "</div>" : '' !!}
@@ -43,7 +43,7 @@
     <div class="form-group col-lg-6">
         <label for="lastname">Nom de famille</label>
         @if (isset($deliveryPrefix))
-            <input type="text" class="form-control {{ $errors->has($deliveryPrefix . '.lastname') ? 'is-invalid' : '' }}" name="{{ $deliveryPrefix }}[lastname]" id="lastname" aria-describedby="helpLastname" value="{{ old($deliveryPrefix.'.latname') }}">
+            <input type="text" class="form-control {{ $errors->has($deliveryPrefix . '.lastname') ? 'is-invalid' : '' }}" name="{{ $deliveryPrefix }}[lastname]" id="lastname" aria-describedby="helpLastname" value="{{ old($deliveryPrefix.'.lastname') }}">
             {!! $errors->has($deliveryPrefix . '.lastname') ? "<div class='invalid-feedback'>" . ucfirst($errors->first($deliveryPrefix . '.lastname')) . "</div>" : '' !!}
         @else
             <input type="text" class="form-control {{ $errors->has('lastname') ? 'is-invalid' : '' }}" name="lastname" id="lastname" aria-describedby="helpLastname"  value="{{ old('lastname') }}">

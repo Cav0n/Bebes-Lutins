@@ -45,7 +45,7 @@
                         </form>
                     </div>
                     <div class="col-lg-2">
-                        <button id="personal-informations-btn" type="button" class="btn btn-outline-secondary rounded-0 w-100">Modifier</button>
+                        <button id="personal-informations-btn" type="button" class="btn btn-dark w-100">Modifier</button>
                     </div>
                 </div>
                 <div class="row py-3 border-top">
@@ -75,7 +75,7 @@
                         </form>
                     </div>
                     <div class="col-lg-2">
-                        <button id="password-btn" type="button" class="btn btn-outline-secondary rounded-0 w-100">Modifier</button>
+                        <button id="password-btn" type="button" class="btn btn-dark w-100">Modifier</button>
                     </div>
                 </div>
                 <div class="row py-3 border-top">
@@ -89,9 +89,9 @@
                     </div>
                     <div class="col-lg-2">
                         @if (Auth::user()->wantNewsletter)
-                            <a class="btn btn-outline-success rounded-0 w-100" href='{{ route('user.newsletters.toggle', ['user' => Auth::user()]) }}'>Activé</a>
+                            <a class="btn btn-success w-100" href='{{ route('user.newsletters.toggle', ['user' => Auth::user()]) }}'>Activé</a>
                         @else
-                            <a class="btn btn-outline-danger rounded-0 w-100" href='{{ route('user.newsletters.toggle', ['user' => Auth::user()]) }}'>Désactivé</a>
+                            <a class="btn btn-danger w-100" href='{{ route('user.newsletters.toggle', ['user' => Auth::user()]) }}'>Désactivé</a>
                         @endif
                     </div>
                 </div>

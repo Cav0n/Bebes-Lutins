@@ -14,7 +14,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h3 class="h4 font-weight-bold">Mes adresses</h3>
-                        <button type="button" class="btn btn-outline-primary" id="add-address-btn">Ajouter une adresse</button>
+                        <button type="button" class="btn btn-dark" id="add-address-btn">Ajouter une adresse</button>
 
                         <form id="address-creation" action="{{ route('user.addresses.create') }}" method="POST">
                             @csrf
@@ -23,9 +23,22 @@
                             <button type="submit" class="btn btn-primary">Enregistrer</button>
                         </form>
 
-                        @foreach (Auth::user()->addresses as $address)
-                            @include('components.utils.addresses.address', ['address' => $address])
-                        @endforeach
+                        <div class="row">
+                            @foreach (Auth::user()->addresses as $address)
+                            <div class="col-12 col-sm-6 col-xl-4 col-xxl-3 my-2">
+                                <div class="address border shadow-sm bg-light p-3">
+                                    @include('components.utils.addresses.address', ['address' => $address])
+                                    <div class="d-flex flex-wrap">
+                                        <button type="button" class="btn btn-primary edit-address-btn py-0 px-2 mr-2" data-address_id="{{ $address->id }}">
+                                            Éditer</button>
+                                        <button type="button" class="btn btn-danger delete-address-btn py-0 px-2" data-address_id="{{ $address->id }}">
+                                            Supprimer</button>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+
                     </div>
                 </div>
             </div>

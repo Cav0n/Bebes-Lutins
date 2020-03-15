@@ -2,6 +2,11 @@
 
 @section('title', "Mon panier - Bébés Lutins")
 
+@section('optional_css')
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/loadingio/ldbutton@v1.0.1/dist/ldbtn.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loadingio/loading.css@v2.0.0/dist/loading.min.css"/>
+@endsection
+
 @section('content')
 
 @php

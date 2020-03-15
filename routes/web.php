@@ -96,7 +96,7 @@ Route::get('/commande/suivi', 'OrderController@showTrackingPage')->name('order.t
 
 /**
  * ============
- * ORDERS
+ * ADMIN
  * ============
  */
 Route::get('/admin', 'Admin\AdminController@index')->name('admin.homepage');

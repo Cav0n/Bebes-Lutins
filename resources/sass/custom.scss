@@ -5,6 +5,14 @@ header #logo {
     height: 14rem;
 }
 
+header a {
+    color: $dark;
+}
+
+footer a {
+    color: $dark;
+}
+
 @include media-breakpoint-only(xs) {
     header #logo {
         top: -3rem;

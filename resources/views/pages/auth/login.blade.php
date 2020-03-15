@@ -7,10 +7,10 @@
 <div class="container-fluid py-5">
     <div class="row justify-content-center py-xl-5">
         <div class="col-11 col-md-10 col-lg-6 col-xl-5 col-xxl-4 col-xxxl-3 p-0">
-            @if ($errors->has('throttle'))
-                <div class="alert alert-danger">
-                    <p class="mb-0">{{ $errors->first('throttle') }}</p>
-                </div>
+            @if(Session::get('passwordReseted'))
+            <div class="alert alert-success" role="alert">
+                Votre mot de passe a bien été modifié.
+            </div>
             @endif
             <div class="p-3 border bg-white">
                 <h1>Connexion</h1>
@@ -29,7 +29,9 @@
                         <label for="password">Mot de passe</label>
                         <input type="password" class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}" name="password" id="password" aria-describedby="helpPassword">
                         {!! $errors->has('password') ? "<div class='invalid-feedback'>" . ucfirst($errors->first('password')) . "</div>" : '' !!}
-                        <small id="helpPassword" class="form-text text-muted">Vous avez perdu votre mot de passe ?</small>
+                        <small id="helpPassword" class="form-text text-muted">
+                            <a href="{{ route('password.lost.form') }}">Vous avez perdu votre mot de passe ?</a>
+                        </small>
                     </div>
                     <button type="submit" class="btn btn-primary">Se connecter</button>
                 </form>

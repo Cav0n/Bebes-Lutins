@@ -6,22 +6,22 @@
     @if (isset($deliveryPrefix))
         <select id="civility" class="form-control {{ $errors->has($deliveryPrefix . '.civility') ? 'is-invalid' : '' }}" name="{{ $deliveryPrefix }}[civility]">
             <option>Choisissez une civilité</option>
-            <option @if('Madame' == old('civility')) selected @endif>
+            <option value='MISS' @if('MISS' == old('civility')) selected @endif>
                 Madame</option>
-            <option @if('Monsieur' == old('civility')) selected @endif>
+            <option value='MISTER' @if('MISTER' == old('civility')) selected @endif>
                 Monsieur</option>
-            <option @if('Non précisé' == old('civility')) selected @endif>
+            <option value='NOT DEFINED' @if('NOT DEFINED' == old('civility')) selected @endif>
                 Non précisé</option>
         </select>
         {!! $errors->has($deliveryPrefix . '.civility') ? "<div class='invalid-feedback'>" . ucfirst($errors->first($deliveryPrefix . '.civility')) . "</div>" : '' !!}
     @else
         <select id="civility" class="form-control {{ $errors->has('civility') ? 'is-invalid' : '' }}" name="civility">
             <option>Choisissez une civilité</option>
-            <option @if('Madame' == old('civility')) selected @endif>
+            <option value='MISS' @if('MISS' == old('civility')) selected @endif>
                 Madame</option>
-            <option @if('Monsieur' == old('civility')) selected @endif>
+            <option value='MISTER' @if('MISTER' == old('civility')) selected @endif>
                 Monsieur</option>
-            <option @if('Non précisé' == old('civility')) selected @endif>
+            <option value='NOT DEFINED' @if('NOT DEFINED' == old('civility')) selected @endif>
                 Non précisé</option>
         </select>
         {!! $errors->has('civility') ? "<div class='invalid-feedback'>" . ucfirst($errors->first('civility')) . "</div>" : '' !!}

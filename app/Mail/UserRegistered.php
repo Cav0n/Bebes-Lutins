@@ -2,15 +2,10 @@
 
 namespace App\Mail;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
-use Illuminate\Queue\SerializesModels;
 
 class UserRegistered extends Mailable
 {
-    use Queueable, SerializesModels;
-
     /**
      * Create a new message instance.
      *
@@ -28,6 +23,6 @@ class UserRegistered extends Mailable
      */
     public function build()
     {
-        return $this->from('florian@coinks.fr')->view('mails.user.registered');
+        return $this->from('cav0n@hotmail.fr')->view('mails.user.registered');
     }
 }

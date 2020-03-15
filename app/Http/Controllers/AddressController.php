@@ -135,7 +135,7 @@ class AddressController extends Controller
 
         if (isset($data['is-new-billing-address'])) {
             $rules += [
-                'billing.civility' => ['required', 'string', Rule::in(['Madame', 'Monsieur', 'Non précisé'])],
+                'billing.civility' => ['required', 'string', Rule::in(['MISS', 'MISTER', 'NOT DEFINED'])],
                 'billing.firstname' => ['required', 'string', 'min:2', 'max:255'],
                 'billing.lastname' => ['required', 'string', 'min:2', 'max:255'],
                 'billing.street' => ['required', 'string'],
@@ -148,7 +148,7 @@ class AddressController extends Controller
 
         if (isset($data['is-new-shipping-address']) && (!isset($data['sameAddresses']))) {
             $rules += [
-                'shipping.civility' => ['required', 'string', Rule::in(['Madame', 'Monsieur', 'Non précisé'])],
+                'shipping.civility' => ['required', 'string', Rule::in(['MISS', 'MISTER', 'NOT DEFINED'])],
                 'shipping.firstname' => ['required', 'string', 'min:2', 'max:255'],
                 'shipping.lastname' => ['required', 'string', 'min:2', 'max:255'],
                 'shipping.street' => ['required', 'string'],
@@ -161,7 +161,7 @@ class AddressController extends Controller
 
         if (empty($rules)) {
             $rules += [
-                'civility' => ['required', 'string', Rule::in(['Madame', 'Monsieur', 'Non précisé'])],
+                'civility' => ['required', 'string', Rule::in(['MISS', 'MISTER', 'NOT DEFINEDs'])],
                 'firstname' => ['required', 'string', 'min:2', 'max:255'],
                 'lastname' => ['required', 'string', 'min:2', 'max:255'],
                 'street' => ['required', 'string'],

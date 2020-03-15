@@ -19,6 +19,8 @@ $cyan: #6cb2eb;
 // Theme Color
 $primary: #7dc93f;
 $secondary: #9561e2;
+// Options
+$enable-shadows: true;
 // Breakpoints
 $container-max-widths: ( sm: 540px, md: 720px, lg: 960px, xl: 1140px, xxl: 1400px, xxxl: 1800px) !default;
 $grid-breakpoints: ( xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px, xxl: 1500px, xxxl: 1910px) !default;

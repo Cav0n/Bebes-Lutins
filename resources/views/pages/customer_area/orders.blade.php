@@ -15,18 +15,7 @@
                     <div class="col-lg-12">
                         <h3 class="h4 font-weight-bold">Mes commandes</h3>
                         @foreach (Auth::user()->orders as $order)
-                            <p>Commande passée {{ Carbon\Carbon::parse($order->created_at)->locale('fr')->calendar() }}</p>
-                            <p>
-                                Montant total de la commande : {{ \App\NumberConvertor::doubleToPrice($order->totalPrice + $order->shippingCosts) }}<br>
-                                Frais de livraison : {{ \App\NumberConvertor::doubleToPrice($order->shippingCosts) }}<br>
-                                Payé par {{ $order->paymentMethod }}
-                            </p>
-                            <p>Status : {{ $order->status }}</p>
-                            <div class="order-items-container">
-                                @foreach ($order->items as $item)
-                                <p>{{ $item->product->name }} - {{ \App\NumberConvertor::doubleToPrice($item->product->price) }}</p>
-                                @endforeach
-                            </div>
+                            @include('components.utils.orders.order', ['order' => $order])
                         @endforeach
                     </div>
                 </div>

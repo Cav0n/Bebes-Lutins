@@ -23,6 +23,22 @@ class Order extends Model
         return $this->hasMany('App\OrderItem');
     }
 
+    /**
+     * Shipping address of the order.
+     */
+    public function shippingAddress()
+    {
+        return $this->belongsTo('App\Address');
+    }
+
+    /**
+     * Billing address of the order.
+     */
+    public function billingAddress()
+    {
+        return $this->belongsTo('App\Address');
+    }
+
     public function getTotalPriceAttribute()
     {
         $totalPrice = 0.0;
@@ -36,26 +52,43 @@ class Order extends Model
 
     public function getStatusI18nAttribute($language = 'FR_fr'): string
     {
-        switch($this->status){
-            case 'WAIT_PAYMENT':
-                return 'En attente de paiement';
+        return trans('order.status.' . $this->status);
+    }
+
+    public function getStatusColorAttribute(): string
+    {
+        switch($this->status) {
+            case 'WAITING_PAYMENT':
+                return '#ffff17';
+            break;
+
+            case 'DELIVERED':
+                return '#60eb4b';
+            break;
+
+            case 'WITHDRAWAL':
+                return '#60eb4b';
+            break;
+
+            case 'REGISTERED_PARTICIPATION':
+                return '#60eb4b';
+            break;
+
+            case 'CANCELED':
+                return '#ff2929';
+            break;
+
+            case 'REFUSED_PAYMENT':
+                return '#ff2929';
+            break;
 
             default:
-                return 'impossible de trouver le status';
+                return 'white';
         }
     }
 
     public function getPaymentMethodI18nAttribute($language = 'FR_fr'): string
-   {
-        switch($this->paymentMethod){
-            case 'CHEQUE':
-                return 'chèque';
-
-            case 'CARD':
-                return 'carte bancaire';
-
-            default:
-                return 'impossible de trouver le moyen de paiement';
-        }
-   }
+    {
+        return trans('order.payment_method.' . $this->paymentMethod);
+    }
 }

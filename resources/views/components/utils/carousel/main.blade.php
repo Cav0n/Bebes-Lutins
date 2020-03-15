@@ -10,7 +10,7 @@
         @php $index = 0; @endphp
         @foreach ($carouselItems as $item)
         <div class="carousel-item @if (0 == $index) active @endif">
-            <img src="{{$item->image->url}}" alt="{{$item->image->name}}" style="width:100%;height: 16rem;">
+            <img src="{{$item->image->url}}" alt="{{$item->image->name}}" style="width:100%;height: 16rem;object-fit:cover;">
             <div class="carousel-caption d-none d-md-block">
                 <h5 class="text-dark">{{$item->title}}</h5>
                 <p class="text-dark">{{$item->description}}</p>

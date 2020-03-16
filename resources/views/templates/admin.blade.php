@@ -16,9 +16,26 @@
 <body>
     <script src="{{ asset('js/app.js') }}"></script>
 
-    <div class="content-container">
-        @yield('content')
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-lg-3 col-xl-2 p-0">
+                <div class="sidenav py-3">
+                    <h1 class="h2 text-center text-secondary"><b>Bébés Lutins</b></h1>
+
+                    <div class="p-3 d-flex flex-column">
+                        <a href='{{ route('admin') }}' class='h5 mb-0'>Commandes</a>
+                        <a href='{{ route('admin') }}' class='mb-0'>En cours</a>
+                        <a href='{{ route('admin') }}' class='mb-0'>Terminées</a>
+                        <a href='{{ route('admin') }}' class='mb-0'>Refusées</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-10 py-3">
+                @yield('content')
+            </div>
+        </div>
     </div>
+
 
     @yield('scripts')
 </body>

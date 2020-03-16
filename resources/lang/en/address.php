@@ -13,6 +13,12 @@ return [
     */
 
     'civility' => [
+        'min' => [
+            'MISTER' => 'Mr',
+            'MISS' => 'Ms',
+            'NOT DEFINED' => '',
+        ],
+
         'MISTER' => 'mister',
         'MISS' => 'miss',
         'NOT DEFINED' => '',

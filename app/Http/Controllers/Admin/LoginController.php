@@ -27,7 +27,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('notAdmin');
+        $this->middleware('notAdmin', ['except' => 'logout']);
     }
 
     public function showLoginPage()
@@ -60,5 +60,15 @@ class LoginController extends Controller
 
         return back()->withInput(['email' => $request['email']])
                      ->withErrors(['email' => 'L\'email ou le mot de passe est incorrect.', ]);
+    }
+
+    public function logout()
+    {
+        session()->forget('shopping_cart');
+        session()->regenerate();
+        session()->invalidate();
+        session()->regenerateToken();
+
+        return redirect('/');
     }
 }

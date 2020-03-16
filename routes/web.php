@@ -102,6 +102,10 @@ Route::get('/commande/suivi', 'OrderController@showTrackingPage')->name('order.t
 Route::get('/admin', 'Admin\AdminController@index')->name('admin');
 Route::get('/admin/connexion', 'Admin\LoginController@showLoginPage')->name('admin.login');
 Route::post('/admin/connexion', 'Admin\LoginController@login')->name('admin.login');
+Route::any('/admin/logout', 'Admin\LoginController@logout')->name('admin.logout');
+
+Route::get('/admin/search/order', 'Admin\SearchController@order')->name('admin.search.order');
+Route::get('/admin/order/{order}', 'OrderController@show')->name('admin.order.show');
  /** ============ */
 
 /**

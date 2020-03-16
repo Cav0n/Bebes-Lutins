@@ -19,6 +19,8 @@ class AdminController extends Controller
 
     public function index()
     {
-        return view('pages.admin.index');
+        $orders = \App\Order::orderBy('created_at', 'desc')->get();
+
+        return view('pages.admin.index')->withOrders($orders);
     }
 }

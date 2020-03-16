@@ -4,10 +4,15 @@
     <div class="row mb-3">
         <div class="col-12 col-sm-6">
             <p class="h5">Livré à :</p>
+            @if ($order->shippingAddress)
             @include('components.utils.addresses.address', ['address' => $order->shippingAddress])
+            @else
+            @include('components.utils.addresses.address', ['address' => $order->billingAddress])
+            @endif
         </div>
         <div class="col-12 mt-2 mt-sm-0 col-sm-6">
             <p class="h5">Facturé à :</p>
+
             @include('components.utils.addresses.address', ['address' => $order->billingAddress])
         </div>
     </div>

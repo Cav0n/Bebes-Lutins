@@ -17,7 +17,8 @@ class CreateFooterElementsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
 
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

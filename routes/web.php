@@ -107,9 +107,7 @@ Route::get('/admin', 'Admin\AdminController@index')->name('admin.homepage');
  * STATIC
  * ============
  */
-Route::get('/contact', function(){
-    return view('pages.static.contact');
-})->name('contact');
+Route::get('/contact', 'MainController@showContact')->name('contact');
 Route::post('/contact', 'MainController@contact');
 
 Route::get('/contenu/{content}', 'ContentController@show')->name('content.show');

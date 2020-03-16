@@ -19,6 +19,11 @@ class MainController extends Controller
         return view('pages.shopping_cart.thanks')->with('order', $order);
     }
 
+    public function showContact(Request $request)
+    {
+        return view('pages.static.contact');
+    }
+
     public function contact(Request $request)
     {
         $request->validate([

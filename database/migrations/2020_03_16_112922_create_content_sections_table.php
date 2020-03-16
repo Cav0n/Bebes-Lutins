@@ -23,7 +23,8 @@ class CreateContentSectionsTable extends Migration
                     ->references('id')->on('contents')
                     ->onDelete('cascade');
 
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

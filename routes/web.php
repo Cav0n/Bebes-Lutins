@@ -99,7 +99,8 @@ Route::get('/commande/suivi', 'OrderController@showTrackingPage')->name('order.t
  * ADMIN
  * ============
  */
-Route::get('/admin', 'Admin\AdminController@index')->name('admin.homepage');
+Route::get('/admin/connexion', 'Admin\LoginController@showLoginPage')->name('admin.login');
+Route::post('/admin/connexion', 'Admin\LoginController@login')->name('admin.login');
  /** ============ */
 
 /**

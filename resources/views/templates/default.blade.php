@@ -22,6 +22,7 @@
 <body class="bg-white">
     {{-- App JS --}}
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/admin.js') }}"></script>
 
     @include('components.header.default')
 

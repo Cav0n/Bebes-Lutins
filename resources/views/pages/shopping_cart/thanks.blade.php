@@ -10,7 +10,7 @@
             <h1 class="h1 font-weight-bold">
                 Merci pour votre commande !
             </h1>
-            <p class="h5">
+            <p class="mb-0">
                 @auth
                 Vous pouvez retrouvez les informations de votre commande dans votre espace client, rubrique <a href='{{ route('customer.area.orders') }}'>mes commandes</a>.<BR>
                 @endauth

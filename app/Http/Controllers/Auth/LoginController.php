@@ -87,15 +87,15 @@ class LoginController extends Controller
      */
     public function logout(Request $request)
     {
+        $admin = session('admin');
         $this->guard()->logout();
 
         session()->forget('shopping_cart');
-
         session()->regenerate();
-
         session()->invalidate();
-
         session()->regenerateToken();
+
+        session()->put('admin', $admin);
 
         return $this->loggedOut($request) ?: redirect('/');
     }

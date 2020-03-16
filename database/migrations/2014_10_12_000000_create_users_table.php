@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('wantNewsletter')->default(0);
-            $table->boolean('isAdmin')->default(0);
             $table->string('passwordResetToken')->nullable();
             $table->rememberToken();
             $table->timestamp('created_at')->useCurrent();

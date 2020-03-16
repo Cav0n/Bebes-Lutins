@@ -27,7 +27,7 @@ class SearchController extends Controller
         $this->middleware('admin');
     }
 
-    public function order(Request $request)
+    public function orders(Request $request)
     {
         if (!$request['search']) {
             return redirect()->route('admin')->withErrors(['search' => 'La recherche ne peut pas être vide.']);
@@ -36,5 +36,16 @@ class SearchController extends Controller
         $orders = \App\Order::where('trackingNumber', 'like', '%' . $request['search'] . '%')->get();
 
         return view('pages.admin.index')->withOrders($orders)->withInSearch(true);
+    }
+
+    public function products(Request $request)
+    {
+        if (!$request['search']) {
+            return redirect()->route('admin')->withErrors(['search' => 'La recherche ne peut pas être vide.']);
+        }
+
+        $products = \App\Product::where('name', 'like', '%' . $request['search'] . '%')->get();
+
+        return view('pages.admin.products')->withProducts($products)->withInSearch(true);
     }
 }

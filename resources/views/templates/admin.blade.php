@@ -27,6 +27,12 @@
                         <a href='{{ route('admin') }}' class='mb-0'>En cours</a>
                         <a href='{{ route('admin') }}' class='mb-0'>Terminées</a>
                         <a href='{{ route('admin') }}' class='mb-0'>Refusées</a>
+                        <a href='{{ route('admin.products') }}' class='h5 mt-3 mb-0'>Produits</a>
+                        <a href='{{ route('admin.products') }}' class='mb-0'>Tous les produits</a>
+                        <a href='{{ route('admin.products') }}' class='mb-0'>Toutes les catégories</a>
+                        <a href='{{ route('admin.products') }}' class='mb-0'>Mis en avant</a>
+                        <a href='{{ route('admin.products') }}' class='mb-0'>Stock</a>
+
                     </div>
                 </div>
             </div>

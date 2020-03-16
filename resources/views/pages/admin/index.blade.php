@@ -7,7 +7,7 @@
         <h2 class="h4 mb-0">Commandes</h2>
     </div>
     <div class="card-body">
-        <form action="{{ route('admin.search.order') }}" class="input-group" method="GET">
+        <form action="{{ route('admin.search.orders') }}" class="input-group" method="GET">
             <input class="form-control {{ $errors->has('search') ? 'is-invalid' : '' }}" type="text" name="search" placeholder="Rechercher une commande" value="{{ old('search') }}">
             <div class="input-group-append">
                 <button class="input-group-text" id="my-addon">Rechercher</button>
@@ -62,7 +62,9 @@
                     <td>
                         <span class="badge" style='background-color: {{ $order->statusColor }}'>{{ ucfirst($order->statusI18n) }}</span>
                     </td>
-                    <th><a class="btn btn-outline-dark" href="{{ route('admin.order.show', ['order' => $order]) }}" role="button">Voir</a></th>
+                    <th class='text-right'>
+                        <a class="btn btn-outline-dark" href="{{ route('admin.order.show', ['order' => $order]) }}" role="button">Voir</a>
+                    </th>
                 </tr>
                 @endforeach
             </tbody>

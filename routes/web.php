@@ -104,8 +104,12 @@ Route::get('/admin/connexion', 'Admin\LoginController@showLoginPage')->name('adm
 Route::post('/admin/connexion', 'Admin\LoginController@login')->name('admin.login');
 Route::any('/admin/logout', 'Admin\LoginController@logout')->name('admin.logout');
 
-Route::get('/admin/search/order', 'Admin\SearchController@order')->name('admin.search.order');
+Route::get('/admin/search/orders', 'Admin\SearchController@orders')->name('admin.search.orders');
 Route::get('/admin/order/{order}', 'OrderController@show')->name('admin.order.show');
+
+Route::get('/admin/search/products', 'Admin\SearchController@products')->name('admin.search.products');
+Route::get('/admin/products', 'ProductController@index')->name('admin.products');
+Route::get('/admin/products/{product}', 'ProductController@edit')->name('admin.product.edit');
  /** ============ */
 
 /**

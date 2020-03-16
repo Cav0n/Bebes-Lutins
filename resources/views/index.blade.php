@@ -5,6 +5,13 @@
 
 @extends('templates.default')
 
+@section('optional_og')
+<meta property="og:title" content="Bébés Lutins" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ URL::to('/') }}" />
+<meta property="og:image" content="{{ asset('images/logo-mini.svg') }}" />
+@endsection
+
 @section('title', "Bébés Lutins | Couches lavables fabriquées en France")
 
 @section('content')

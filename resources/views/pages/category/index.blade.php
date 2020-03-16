@@ -1,5 +1,14 @@
 @extends('templates.default')
 
+@section('optional_og')
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{ $category->name }}" />
+<meta property="og:description" content="{{ $category->description }}" />
+<meta property="og:image" content="{{ asset('images/utils/categories_cover.jpg') }}" />
+<meta property="og:url" content="{{ route('category', ['category' => $category]) }}" />
+<meta property="og:site_name" content="Bébés Lutins" />
+@endsection
+
 @section('title', $category->name . " - Bébés Lutins")
 
 @section('content')

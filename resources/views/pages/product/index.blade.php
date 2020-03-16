@@ -1,5 +1,16 @@
 @extends('templates.default')
 
+@section('optional_og')
+<meta property="og:type" content="og:product" />
+<meta property="og:title" content="{{ $product->name }}" />
+<meta property="og:description" content="{{ $product->description }}" />
+<meta property="og:image" content="{{ asset($product->images->first()->url) }}" />
+<meta property="og:url" content="{{ route('product', ['product' => $product]) }}" />
+<meta property="og:site_name" content="Bébés Lutins" />
+<meta property="product:price:amount" content="{{ $product->price }}" />
+<meta property="product:price:currency" content="EUR" />
+@endsection
+
 @section('title', $product->name . " - Bébés Lutins")
 
 @section('description', $product->description)

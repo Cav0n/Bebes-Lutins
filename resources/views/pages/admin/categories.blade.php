@@ -29,14 +29,18 @@
             <thead class="thead-light">
                 <tr>
                     <th>Nom</th>
-                    <th>Position</th>
+                    <th class='text-center' style='width:2rem;'>Position</th>
+                    <th class='text-right' style='width:4rem;'></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($categories as $category)
                 <tr>
                     <td> {{ $category->name }} </td>
-                    <td> {{ $category->rank }} </td>
+                    <td class='text-center' style='width:2rem;'> {{ $category->rank }} </td>
+                    <td class='text-right' style='width:4rem;'>
+                        <a class="btn btn-outline-dark" href="{{ route('admin.category.edit', ['category' => $category]) }}">Voir</a>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

@@ -81,9 +81,9 @@
                             </select>
                         </div>
                     </td>
-                    <th class='text-right'>
+                    <td class='text-right'>
                         <a class="btn btn-outline-dark" href="{{ route('admin.order.show', ['order' => $order]) }}" role="button">Voir</a>
-                    </th>
+                    </td>
                 </tr>
                 @endforeach
             </tbody>

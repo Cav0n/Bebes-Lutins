@@ -20,23 +20,29 @@
         <div class="row">
             <div class="col-md-4 col-lg-3 col-xl-2 p-0">
                 <div class="sidenav py-3">
-                    <h1 class="h2 text-center text-secondary"><b>Bébés Lutins</b></h1>
+                    <div class="top-sidenav">
+                        <h1 class="h2 text-center text-secondary"><b>Bébés Lutins</b></h1>
 
-                    <div class="p-3 d-flex flex-column">
-                        <a href='{{ route('admin') }}' class='h5 mb-0'>Commandes</a>
-                        <a href='{{ route('admin') }}' class='mb-0'>En cours</a>
-                        <a href='{{ route('admin') }}' class='mb-0'>Terminées</a>
-                        <a href='{{ route('admin') }}' class='mb-0'>Refusées</a>
+                        <div class="p-3 d-flex flex-column">
+                            <a href='{{ route('admin') }}' class='h5 mb-0'>Commandes</a>
+                            <a href='{{ route('admin') }}' class='mb-0'>En cours</a>
+                            <a href='{{ route('admin') }}' class='mb-0'>Terminées</a>
+                            <a href='{{ route('admin') }}' class='mb-0'>Refusées</a>
 
-                        <a href='{{ route('admin.products') }}' class='h5 mt-3 mb-0'>Produits</a>
-                        <a href='{{ route('admin.products') }}' class='mb-0'>Tous les produits</a>
-                        <a href='{{ route('admin.categories') }}' class='mb-0'>Toutes les catégories</a>
-                        <a href='{{ route('admin.products') }}' class='mb-0'>Mis en avant</a>
+                            <a href='{{ route('admin.products') }}' class='h5 mt-3 mb-0'>Produits</a>
+                            <a href='{{ route('admin.products') }}' class='mb-0'>Tous les produits</a>
+                            <a href='{{ route('admin.categories') }}' class='mb-0'>Toutes les catégories</a>
+                            <a href='{{ route('admin.products') }}' class='mb-0'>Mis en avant</a>
 
-                        <a href='{{ route('admin.customers') }}' class='h5 mt-3 mb-0'>Clients</a>
-                        <a href='{{ route('admin.customers') }}' class='mb-0'>Tous les clients</a>
-                        <a href='{{ route('admin.customers') }}' class='mb-0'>Avis clients</a>
-                        <a href='{{ route('admin.customers') }}' class='mb-0'>Messages</a>
+                            <a href='{{ route('admin.customers') }}' class='h5 mt-3 mb-0'>Clients</a>
+                            <a href='{{ route('admin.customers') }}' class='mb-0'>Tous les clients</a>
+                            <a href='{{ route('admin.customers') }}' class='mb-0'>Avis clients</a>
+                            <a href='{{ route('admin.customers') }}' class='mb-0'>Messages</a>
+                        </div>
+                    </div>
+
+                    <div class="bottom-sidenav text-center">
+                        <p style="color:grey">Version 6.0.0</p>
                     </div>
                 </div>
             </div>

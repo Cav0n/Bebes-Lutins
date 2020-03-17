@@ -28,22 +28,22 @@
         <table class="table table-light mt-2 mb-0">
             <thead class="thead-light">
                 <tr>
-                    <th style="max-width: 1rem;"></th>
+                    <th class="d-none d-lg-table-cell" style="max-width: 1rem;"></th>
                     <th style="width: 2rem;">Référence</th>
                     <th>Nom</th>
-                    <th style="max-width: 3rem;">Prix</th>
-                    <th style="width: 1.5rem;">Stock</th>
+                    <th class="d-none d-md-table-cell" style="max-width: 3rem;">Prix</th>
+                    <th class="d-none d-md-table-cell" style="width: 1.5rem;">Stock</th>
                     <th style="max-width: 3rem;"></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($products as $product)
                 <tr>
-                    <td style="max-width: 1rem;"><img src='{{ $product->images()->first()->url }}' class="w-100"></td>
+                    <td class="d-none d-lg-table-cell" style="max-width: 1rem;"><img src='{{ $product->images()->first()->url }}' class="w-100"></td>
                     <td style="width: 2rem;"> #{{ $product->reference }} </td>
                     <td> {{ $product->name }} </td>
-                    <td style="max-width: 3rem;"> {{ \App\NumberConvertor::doubleToPrice($product->price) }} </td>
-                    <td style="width: 1.5rem;"> {{ $product->stock }} </td>
+                    <td class="d-none d-md-table-cell" style="max-width: 3rem;"> {{ \App\NumberConvertor::doubleToPrice($product->price) }} </td>
+                    <td class="d-none d-md-table-cell" style="width: 1.5rem;"> {{ $product->stock }} </td>
                     <td style="max-width: 3rem;" class='text-right'>
                         <a class="btn btn-outline-dark" href="{{ route('admin.product.edit', ['product' => $product]) }}" role="button">Éditer</a>
                     </td>

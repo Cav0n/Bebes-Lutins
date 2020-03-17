@@ -71,7 +71,7 @@
                             {!! $errors->has('price') ? "<div class='invalid-feedback'>" . ucfirst($errors->first('price')) . "</div>" : '' !!}
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="isInPromo" id="isInPromo"> Ce produit est en promotion
+                                    <input class="form-check-input" type="checkbox" name="isInPromo" id="isInPromo" @if($product->promoPrice) checked @endif> Ce produit est en promotion
                                 </label>
                             </div>
                         </div>
@@ -105,7 +105,7 @@
                 <div class="form-group">
                     <div class="form-check form-check-inline">
                         <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="visible" id="visible" checked> Ce produit est visible sur le site
+                            <input class="form-check-input" type="checkbox" name="visible" id="visible" @if(!$product->isHidden) checked @endif> Ce produit est visible sur le site
                         </label>
                     </div>
                 </div>
@@ -141,16 +141,20 @@
         let promoPriceContainer = $('#promoPriceContainer');
         let isInPromoCheckbox = $('#isInPromo');
 
-        promoPriceContainer.hide();
+        togglePromoPriceInput();
 
         isInPromoCheckbox.on('click', function(){
-            if (this.checked) {
+            togglePromoPriceInput();
+        })
+
+        function togglePromoPriceInput() {
+            if (isInPromoCheckbox.prop('checked')) {
                 promoPriceContainer.show();
                 return;
             }
 
             promoPriceContainer.hide();
-        })
+        }
     </script>
 
     {{-- TAGIFY (categories selector) --}}

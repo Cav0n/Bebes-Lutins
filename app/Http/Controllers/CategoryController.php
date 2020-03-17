@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
+use Exception;
 
 class CategoryController extends Controller
 {
@@ -59,7 +60,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('pages.admin.category', ['category' => $category]);
     }
 
     /**
@@ -71,7 +72,34 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        try {
+            $request['parent'] = json_decode($request['parent']);
+            $request['parent'] = $request['parent'][0]->value;
+        } catch (Exception $e) {
+            return back()->withErrors('parent', 'La catégorie parente n\'est pas valide.');
+        }
+
+        $request->validate([
+            'name' => 'required|min:5|unique:categories,name,'.$category->id,
+            'description' => 'required|min:10',
+            'rank' => 'required|integer|min:0',
+            'parent' => 'nullable',
+        ]);
+
+        if (null === $request['visible']) {
+            $request['visible'] = false;
+        } else $request['visible'] = true;
+
+        $category->name = $request['name'];
+        $category->description = $request['description'];
+        $category->rank = $request['rank'];
+        $category->parentId = Category::where('name', $request['parent'])->first()->id;
+        $category->isHidden = !$request['visible'];
+
+        $category->save();
+
+        return redirect()->route('admin.category.edit', ['category' => $category])
+                         ->with('successMessage', 'Catégorie éditée avec succés !');
     }
 
     /**

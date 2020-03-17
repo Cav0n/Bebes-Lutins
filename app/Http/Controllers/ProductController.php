@@ -110,7 +110,7 @@ class ProductController extends Controller
         $product->save();
 
         return redirect()->route('admin.product.edit', ['product' => $product])
-                         ->with('successMessage', 'Produit édité avec succés !');
+                          ->with('successMessage', 'Produit édité avec succés !');
     }
 
     /**

@@ -125,6 +125,7 @@ Route::get('/admin/order/{order}', 'OrderController@show')->name('admin.order.sh
 Route::get('/admin/product/{product}', 'ProductController@edit')->name('admin.product.edit');
 Route::post('/admin/product/{product}', 'ProductController@update')->name('admin.product.edit');
 Route::get('/admin/category/{category}', 'CategoryController@edit')->name('admin.category.edit');
+Route::post('/admin/category/{category}', 'CategoryController@update')->name('admin.category.edit');
 Route::get('/admin/customer/{user}', 'UserController@edit')->name('admin.customer.edit');
 // Search
 Route::get('/admin/search/orders', 'Admin\SearchController@orders')->name('admin.search.orders');

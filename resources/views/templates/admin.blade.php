@@ -17,10 +17,35 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/admin.js') }}"></script>
 
+    <header class="d-flex d-lg-none fixex-top">
+        <nav class="navbar navbar-expand-sm navbar-light bg-light w-100">
+            <a class="h2 font-weight-bold mb-0 text-secondary" href="#">Bébés Lutins</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item @if(request()->url() == route('admin.orders')) active @endif">
+                    <a class="nav-link" href='{{ route('admin.orders') }}'>
+                        Commandes</a>
+                </li>
+                <li class="nav-item @if(request()->url() == route('admin.products')) active @endif">
+                    <a class="nav-link" href='{{ route('admin.products') }}'>
+                        Produits</a>
+                </li>
+                <li class="nav-item @if(request()->url() == route('admin.customers')) active @endif">
+                    <a class="nav-link" href='{{ route('admin.customers') }}'>
+                        Clients</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+    </header>
+
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-4 col-lg-3 col-xl-2 p-0">
-                <div class="sidenav py-3">
+            <div class="d-none d-lg-flex col-lg-2 p-0">
+                <div class="sidenav py-3 w-100">
                     <div class="top-sidenav">
                         <h1 class="h2 text-center text-secondary"><b>Bébés Lutins</b></h1>
 
@@ -47,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-10 py-3">
+            <div class="col-12 col-lg-10 py-3">
                 @yield('content')
             </div>
         </div>

@@ -110,6 +110,8 @@ Route::get('/admin/order/{order}', 'OrderController@show')->name('admin.order.sh
 Route::get('/admin/search/products', 'Admin\SearchController@products')->name('admin.search.products');
 Route::get('/admin/products', 'ProductController@index')->name('admin.products');
 Route::get('/admin/products/{product}', 'ProductController@edit')->name('admin.product.edit');
+Route::get('/admin/categories', 'CategoryController@index')->name('admin.categories');
+Route::get('/admin/search/categories', 'Admin\SearchController@categories')->name('admin.search.categories');
  /** ============ */
 
 /**

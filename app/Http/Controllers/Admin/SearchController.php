@@ -48,4 +48,15 @@ class SearchController extends Controller
 
         return view('pages.admin.products')->withProducts($products)->withInSearch(true);
     }
+
+    public function categories(Request $request)
+    {
+        if (!$request['search']) {
+            return redirect()->route('admin')->withErrors(['search' => 'La recherche ne peut pas être vide.']);
+        }
+
+        $categories = \App\Category::where('name', 'like', '%' . $request['search'] . '%')->get();
+
+        return view('pages.admin.categories')->withCategories($categories)->withInSearch(true);
+    }
 }

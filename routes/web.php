@@ -96,6 +96,17 @@ Route::get('/commande/suivi', 'OrderController@showTrackingPage')->name('order.t
 
 /**
  * ============
+ * STATIC
+ * ============
+ */
+Route::get('/contact', 'MainController@showContact')->name('contact');
+Route::post('/contact', 'MainController@contact');
+
+Route::get('/contenu/{content}', 'ContentController@show')->name('content.show');
+ /** ============ */
+
+/**
+ * ============
  * ADMIN
  * ============
  */
@@ -104,23 +115,16 @@ Route::get('/admin/connexion', 'Admin\LoginController@showLoginPage')->name('adm
 Route::post('/admin/connexion', 'Admin\LoginController@login')->name('admin.login');
 Route::any('/admin/logout', 'Admin\LoginController@logout')->name('admin.logout');
 
-Route::get('/admin/search/orders', 'Admin\SearchController@orders')->name('admin.search.orders');
+// Models indexes
 Route::get('/admin/order/{order}', 'OrderController@show')->name('admin.order.show');
-
-Route::get('/admin/search/products', 'Admin\SearchController@products')->name('admin.search.products');
 Route::get('/admin/products', 'ProductController@index')->name('admin.products');
-Route::get('/admin/products/{product}', 'ProductController@edit')->name('admin.product.edit');
 Route::get('/admin/categories', 'CategoryController@index')->name('admin.categories');
+Route::get('/admin/customers', 'UserController@index')->name('admin.customers');
+// Models edition
+Route::get('/admin/products/{product}', 'ProductController@edit')->name('admin.product.edit');
+// Search
+Route::get('/admin/search/orders', 'Admin\SearchController@orders')->name('admin.search.orders');
+Route::get('/admin/search/products', 'Admin\SearchController@products')->name('admin.search.products');
 Route::get('/admin/search/categories', 'Admin\SearchController@categories')->name('admin.search.categories');
- /** ============ */
-
-/**
- * ============
- * STATIC
- * ============
- */
-Route::get('/contact', 'MainController@showContact')->name('contact');
-Route::post('/contact', 'MainController@contact');
-
-Route::get('/contenu/{content}', 'ContentController@show')->name('content.show');
+Route::get('/admin/search/customers', 'Admin\SearchController@customers')->name('admin.search.customers');
  /** ============ */

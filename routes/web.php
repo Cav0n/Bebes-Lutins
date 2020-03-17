@@ -116,14 +116,16 @@ Route::post('/admin/connexion', 'Admin\LoginController@login')->name('admin.logi
 Route::any('/admin/logout', 'Admin\LoginController@logout')->name('admin.logout');
 
 // Models indexes
-Route::get('/admin/order/{order}', 'OrderController@show')->name('admin.order.show');
+Route::get('/admin/orders', 'OrderController@index')->name('admin.orders');
 Route::get('/admin/products', 'ProductController@index')->name('admin.products');
 Route::get('/admin/categories', 'CategoryController@index')->name('admin.categories');
 Route::get('/admin/customers', 'UserController@index')->name('admin.customers');
 // Models edition
-Route::get('/admin/products/{product}', 'ProductController@edit')->name('admin.product.edit');
+Route::get('/admin/order/{order}', 'OrderController@show')->name('admin.order.show');
+Route::get('/admin/product/{product}', 'ProductController@edit')->name('admin.product.edit');
+Route::post('/admin/product/{product}', 'ProductController@update')->name('admin.product.edit');
 Route::get('/admin/category/{category}', 'CategoryController@edit')->name('admin.category.edit');
-Route::get('/admin/customers/{user}', 'UserController@edit')->name('admin.customer.edit');
+Route::get('/admin/customer/{user}', 'UserController@edit')->name('admin.customer.edit');
 // Search
 Route::get('/admin/search/orders', 'Admin\SearchController@orders')->name('admin.search.orders');
 Route::get('/admin/search/products', 'Admin\SearchController@products')->name('admin.search.products');

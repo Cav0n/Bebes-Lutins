@@ -31,7 +31,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = \App\Order::orderBy('created_at', 'desc')->get();
+
+        return view('pages.admin.index')->withOrders($orders);
     }
 
     /**

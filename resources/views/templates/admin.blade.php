@@ -37,8 +37,6 @@
                         <a href='{{ route('admin.customers') }}' class='mb-0'>Tous les clients</a>
                         <a href='{{ route('admin.customers') }}' class='mb-0'>Avis clients</a>
                         <a href='{{ route('admin.customers') }}' class='mb-0'>Messages</a>
-
-
                     </div>
                 </div>
             </div>

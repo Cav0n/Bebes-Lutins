@@ -16,3 +16,4 @@ use Illuminate\Support\Facades\Route; // Fix for VS Code
 Route::get('/product/{product}', 'ProductController@apiGet')->name('api.product');
 Route::get('/order/tracking/{trackingNumber}', 'OrderController@tracking')->name('api.order.tracking');
 Route::post('/cart_item/{cartItem}/quantity/update', 'CartItemController@update')->name('api.cart_item.quantity.update');
+Route::post('/order/{order}/status/update', 'OrderController@update')->name('api.order.status.update');

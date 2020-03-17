@@ -134,7 +134,13 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        if (null !== $status = $request['status']) {
+            $order->status = $status;
+        }
+
+        $order->save();
+
+        return new JsonResponse(['message' => 'ok', 'color' => $order->statusColor], 200);
     }
 
     /**

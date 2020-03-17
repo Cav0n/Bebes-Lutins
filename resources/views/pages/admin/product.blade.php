@@ -159,7 +159,8 @@
 
         var input = document.querySelector('input[name=categories]'),
         tagify = new Tagify(input, {
-            whitelist: categories
+            whitelist: categories,
+            enforceWhitelist: true
         });
     </script>
 @endsection

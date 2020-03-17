@@ -59,4 +59,15 @@ class SearchController extends Controller
 
         return view('pages.admin.categories')->withCategories($categories)->withInSearch(true);
     }
+
+    public function customers(Request $request)
+    {
+        if (!$request['search']) {
+            return redirect()->route('admin')->withErrors(['search' => 'La recherche ne peut pas être vide.']);
+        }
+
+        $customers = \App\User::where('firstname', 'like', '%' . $request['search'] . '%')->get();
+
+        return view('pages.admin.customers')->withCustomers($customers)->withInSearch(true);
+    }
 }

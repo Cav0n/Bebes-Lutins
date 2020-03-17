@@ -122,6 +122,7 @@ Route::get('/admin/categories', 'CategoryController@index')->name('admin.categor
 Route::get('/admin/customers', 'UserController@index')->name('admin.customers');
 // Models edition
 Route::get('/admin/products/{product}', 'ProductController@edit')->name('admin.product.edit');
+Route::get('/admin/customers/{user}', 'UserController@edit')->name('admin.customer.edit');
 // Search
 Route::get('/admin/search/orders', 'Admin\SearchController@orders')->name('admin.search.orders');
 Route::get('/admin/search/products', 'Admin\SearchController@products')->name('admin.search.products');

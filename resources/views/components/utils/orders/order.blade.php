@@ -1,5 +1,32 @@
 <div class='order p-3 my-3 border shadow-sm @if(isset($bgColor)) {{ $bgColor }} @else bg-light @endif'>
-    <p>{{ $order->created_at->format('\L\e d/m/Y \à H:i') }} | <span class="badge badge-pill" style="background-color:{{ $order->statusColor }}">{{ ucfirst($order->statusI18n) }}</span></p>
+    <div class="d-flex">
+        <p>{{ $order->created_at->format('\L\e d/m/Y \à H:i') }} |
+
+        @if(session('admin'))
+        <div class="form-group mb-0 ml-3">
+            <select class="custom-select status-select" name="status" data-orderid="{{ $order->id }}" style='background-color: {{ $order->statusColor }}'>
+                <option value='WAITING_PAYMENT' @if('WAITING_PAYMENT' === $order->status) selected @endif>
+                    En attente de paiement</option>
+                <option value='PROCESSING' @if('PROCESSING' === $order->status) selected @endif>
+                    En cours de traitement</option>
+                <option value='DELIVERING' @if('DELIVERING' === $order->status) selected @endif>
+                    En cours de livraison</option>
+                <option value='WITHDRAWAL' @if('WITHDRAWAL' === $order->status) selected @endif>
+                    À retirer à l'atelier</option>
+                <option value='REGISTERED_PARTICIPATION' @if('REGISTERED_PARTICIPATION' === $order->status) selected @endif>
+                    Participation enregistrée</option>
+                <option value='DELIVERED' @if('DELIVERED' === $order->status) selected @endif>
+                    Livrée</option>
+                <option value='CANCELED' @if('CANCELED' === $order->status) selected @endif>
+                    Annulée</option>
+                <option value='REFUSED_PAYMENT' @if('REFUSED_PAYMENT' === $order->status) selected @endif>
+                    Paiement refusé</option>
+            </select>
+        </div>
+        @else
+        <span class="badge badge-pill" style="background-color:{{ $order->statusColor }}">{{ ucfirst($order->statusI18n) }}</span></p>
+        @endif
+    </div>
 
     <div class="row mb-3">
         <div class="col-12 col-sm-6">
@@ -58,3 +85,41 @@
         </div>
     </div>
 </div>
+
+
+@section('scripts')
+<script>
+    errorFeedbackHtml = "<div class='invalid-feedback'>__error__</div>"
+
+    $('.status-select').change(function(){
+        orderId = $(this).data('orderid');
+        status = $(this).children('option:selected').val();
+
+        fetch("/api/order/" + orderId + "/status/update", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                body: JSON.stringify({
+                    order: orderId,
+                    status: status
+                })
+            })
+            .then(response => response.json())
+            .then(response => {
+                if (undefined !== response.errors){
+                    throw response.errors;
+                }
+
+                $(this).css('background-color', response.color);
+            }).catch((errors) => {
+                select.addClass('is-invalid');
+                errors.status.forEach(message => {
+                    select.after(errorFeedbackHtml.replace('__error__', message));
+                });
+            });
+    });
+</script>
+@endsection

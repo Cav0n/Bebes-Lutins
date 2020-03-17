@@ -38,6 +38,6 @@ class ContentFooterElement extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('content_footer_elements');
+        Schema::dropIfExists('content_footer_element');
     }
 }

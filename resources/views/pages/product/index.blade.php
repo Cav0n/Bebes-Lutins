@@ -4,7 +4,7 @@
 <meta property="og:type" content="og:product" />
 <meta property="og:title" content="{{ $product->name }}" />
 <meta property="og:description" content="{{ $product->description }}" />
-<meta property="og:image" content="{{ asset($product->images->first()->url) }}" />
+<meta property="og:image" content="{{ $product->images()->count() ? $product->images()->first()->url : null }}" />
 <meta property="og:url" content="{{ route('product', ['product' => $product]) }}" />
 <meta property="og:site_name" content="Bébés Lutins" />
 <meta property="product:price:amount" content="{{ $product->price }}" />

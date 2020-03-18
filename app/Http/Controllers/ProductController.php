@@ -28,7 +28,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.product')->withProduct(null);
     }
 
     /**
@@ -39,7 +39,49 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $request['categories'] = json_decode($request['categories']);
+        } catch (Exception $e) {
+            return back()->withErrors('categories', 'Veuillez ajouter au moins une catégorie au produit.');
+        }
+
+        $request->validate([
+            'name' => 'required|min:5|unique:products,name',
+            'description' => 'required|min:10',
+            'price' => 'required|numeric|min:0.01',
+            'promoPrice' => 'required_with:isInPromo|nullable|numeric|min:0.01',
+            'stock' => 'required|numeric|min:0',
+        ]);
+
+        if (null === $request['isInPromo']) {
+            $request['promoPrice'] = null;
+        }
+
+        if (null === $request['visible']) {
+            $request['visible'] = false;
+        } else $request['visible'] = true;
+
+        $product = new Product();
+
+        $product->id = preg_replace("/[^a-zA-Z]+/", "", $request['name']);
+        $product->name = $request['name'];
+        $product->reference = $request['reference'];
+        $product->description = $request['description'];
+        $product->price = $request['price'];
+        $product->promoPrice = $request['promoPrice'];
+        $product->stock = $request['stock'];
+        $product->isHidden = !$request['visible'];
+
+        $product->save();
+
+        if(null != $request['categories']) {
+            foreach ($request['categories'] as $category) {
+                $product->categories()->attach(\App\Category::where('name', $category->value)->first());
+            }
+        }
+
+        return redirect()->route('admin.product.edit', ['product' => $product])
+                          ->with('successMessage', 'Produit édité avec succés !');
     }
 
     /**
@@ -101,6 +143,7 @@ class ProductController extends Controller
         }
 
         $product->name = $request['name'];
+        $product->reference = $request['reference'];
         $product->description = $request['description'];
         $product->price = $request['price'];
         $product->promoPrice = $request['promoPrice'];

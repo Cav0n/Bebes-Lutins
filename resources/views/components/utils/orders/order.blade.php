@@ -48,7 +48,7 @@
     @foreach ($order->items as $item)
         <div class="row my-2">
             <div class="col-2 px-1 px-lg-3 col-lg-2">
-                <img class="w-100" src='{{ asset($item->product->images->first()->url) }}' style="object-fit:cover">
+                <img class="w-100" src="{{ $item->product->images()->count() ? $item->product->images()->first()->url : null }}" style="object-fit:cover">
             </div>
             <div class="col-6 px-1 px-lg-3 col-lg-5 d-flex flex-column justify-content-center border-right">
                 <a class='mb-0' href="{{ route('product', ['product' => $item->product->id]) }}">{{ $item->product->name }}</a>

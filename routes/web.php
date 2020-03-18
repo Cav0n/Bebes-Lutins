@@ -120,6 +120,9 @@ Route::get('/admin/orders', 'OrderController@index')->name('admin.orders');
 Route::get('/admin/products', 'ProductController@index')->name('admin.products');
 Route::get('/admin/categories', 'CategoryController@index')->name('admin.categories');
 Route::get('/admin/customers', 'UserController@index')->name('admin.customers');
+// Models creation
+Route::get('/admin/product/create', 'ProductController@create')->name('admin.product.create');
+Route::post('/admin/product/create', 'ProductController@store')->name('admin.product.store');
 // Models edition
 Route::get('/admin/order/{order}', 'OrderController@show')->name('admin.order.show');
 Route::get('/admin/product/{product}', 'ProductController@edit')->name('admin.product.edit');

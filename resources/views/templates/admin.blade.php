@@ -19,7 +19,7 @@
 
     <header class="d-flex d-lg-none fixex-top">
         <nav class="navbar navbar-expand-sm navbar-light bg-light w-100">
-            <a class="h2 font-weight-bold mb-0 text-secondary" href="#">Bébés Lutins</a>
+            <a class="h2 font-weight-bold mb-0 text-secondary" href="/">Bébés Lutins</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -47,7 +47,8 @@
             <div class="d-none d-lg-flex col-lg-2 p-0">
                 <div class="sidenav py-3 w-100">
                     <div class="top-sidenav">
-                        <h1 class="h2 text-center text-secondary"><b>Bébés Lutins</b></h1>
+                        <h1 class="h2 text-center">
+                            <a class="text-secondary" href='/'><b>Bébés Lutins</b></a></h1>
 
                         <div class="p-3 d-flex flex-column">
                             <a href='{{ route('admin') }}' class='h5 mb-0'>Commandes</a>

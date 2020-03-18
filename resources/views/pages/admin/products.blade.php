@@ -3,8 +3,9 @@
 @section('content')
 
 <div class="card rounded-0 border shadow-sm">
-    <div class="card-header">
-        <h2 class="h4 mb-0">Produits</h2>
+    <div class="card-header d-flex justify-content-between">
+        <h2 class="h4 mb-0 d-flex flex-column justify-content-center">Produits</h2>
+        <a class="btn btn-dark" href="{{ route('admin.product.create') }}" role="button">Nouveau</a>
     </div>
     <div class="card-body">
         <form action="{{ route('admin.search.products') }}" class="input-group" method="GET">
@@ -38,10 +39,10 @@
             </thead>
             <tbody>
                 @foreach ($products as $product)
-                <tr>
-                    <td class="d-none d-lg-table-cell" style="max-width: 1rem;"><img src='{{ $product->images()->first()->url }}' class="w-100"></td>
-                    <td style="width: 2rem;"> #{{ $product->reference }} </td>
-                    <td> {{ $product->name }} </td>
+                <tr @if($product->isHidden) style="opacity:0.5" @endif>
+                    <td class="d-none d-lg-table-cell" style="max-width: 1rem;"><img src='{{ $product->images()->count() ? $product->images()->first()->url : null }}' class="w-100"></td>
+                    <td style="width: 2rem;"> {{ $product->reference ? '#' . $product->reference : null }} </td>
+                    <td> {{ $product->name }} @if($product->isHidden) <span class="badge badge-pill badge-dark">Caché</span> @endif </td>
                     <td class="d-none d-md-table-cell" style="max-width: 3rem;"> {{ \App\NumberConvertor::doubleToPrice($product->price) }} </td>
                     <td class="d-none d-md-table-cell" style="width: 1.5rem;"> {{ $product->stock }} </td>
                     <td style="max-width: 3rem;" class='text-right'>

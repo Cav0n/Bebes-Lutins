@@ -64,7 +64,9 @@
             priceFormatted = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' }).format(text.data.price);
 
             $("#product-added-modal .modal-product-name").text(text.data.name);
-            $("#product-added-modal .modal-product-image").attr('src', text.data.images[0].url);
+            if(null !== text.data.images) { 
+                $("#product-added-modal .modal-product-image").attr('src', text.data.images[0].url);
+            }
             $("#product-added-modal .modal-product-price").text(priceFormatted);
         }).then(function(){
             fetch('/panier/ajout/' + productId + '/' + cartId, {

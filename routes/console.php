@@ -16,3 +16,15 @@ use Illuminate\Foundation\Inspiring;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
+
+Artisan::command('import:all', function() {
+    $productController = new \App\Http\Controllers\ProductController();
+    $productController->importFromJSON();
+
+    $categoryController = new \App\Http\Controllers\CategoryController();
+    $categoryController->importFromJSON();
+    $categoryController->importRelationsFromJSON();
+
+    $userController = new \App\Http\Controllers\UserController();
+    $userController->importFromJSON();
+})->describe('Import all data from previous version');

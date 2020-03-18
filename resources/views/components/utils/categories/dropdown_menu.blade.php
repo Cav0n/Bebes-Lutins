@@ -13,8 +13,7 @@
                     {{$category->name}}</a>
 
                 <div class="sub-categories row m-0">
-                    @foreach ($category->childs as $child)
-                    @if(!$child->isHidden)
+                    @foreach ($category->childs()->where('isDeleted', 0)->where('isHidden', 0)->get() as $child)
                     <div class="col-xl-3">
                         <div class="card sub-category">
                             <img src="{{ asset('images/utils/question-mark.png') }}" alt="" class="card-img-top">
@@ -23,7 +22,6 @@
                             </div>
                         </div>
                     </div>
-                    @endif
                     @endforeach
                 </div>
             </div>

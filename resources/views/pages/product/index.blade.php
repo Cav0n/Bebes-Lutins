@@ -34,7 +34,7 @@
                             Ajouter au panier</button>
                     </div>
 
-                    <p>{{$product->description}}</p>
+                    <p>{!! $product->description !!}</p>
                 </div>
             </div>
         </div>

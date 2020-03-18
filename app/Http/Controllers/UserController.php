@@ -4,9 +4,35 @@ namespace App\Http\Controllers;
 
 use App\User;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 
 class UserController extends Controller
 {
+    public function importFromJSON()
+    {
+        $client = new Client();
+        $res = $client->get('https://bebes-lutins.fr/api/customers');
+        $result = json_decode($res->getBody());
+
+        foreach($result as $r) {
+            if (User::where('email', $r->email)->exists()) {
+                continue;
+            }
+            $user = new User();
+            $user->firstname = $r->firstname;
+            $user->lastname = $r->lastname;
+            $user->phone = $r->phone;
+            $user->email = $r->email;
+            $user->password = $r->password;
+            $user->wantNewsletter = $r->wantNewsletter;
+            $user->created_at = $r->created_at;
+            $user->updated_at = $r->updated_at;
+            $user->save();
+        }
+
+        echo 'Users imported !' . "\n";
+    }
+
     public function toggleNewsletters(Request $request, User $user){
         $user->wantNewsletter = !$user->wantNewsletter;
         $user->save();

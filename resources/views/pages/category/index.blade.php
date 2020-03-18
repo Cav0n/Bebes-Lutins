@@ -26,7 +26,7 @@
             <div id="category-inner-container" class="px-3">
                 @if($category->products->count())
                     <div id="product-container" class="row mb-3">
-                        @foreach ($category->products as $product)
+                        @foreach ($category->products()->where('isDeleted', 0)->where('isHidden', 0)->get() as $product)
                             @include('components.utils.products.simple_product')
                         @endforeach
                     </div>
@@ -35,7 +35,7 @@
                 @if($category->childs->count())
                     <h2>Sous catégories</h2>
                     <div id="child-container" class="row">
-                        @foreach ($category->childs as $child)
+                        @foreach ($category->childs()->where('isDeleted', 0)->where('isHidden', 0)->get() as $child)
                         <div class="col-6 col-md-4 col-lg-3">
                             <div class="card sub-category">
                                 <img src="{{ asset('images/utils/question-mark.png') }}" alt="" class="card-img-top">

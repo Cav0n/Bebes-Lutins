@@ -5,10 +5,37 @@ namespace App\Http\Controllers;
 use App\Product;
 use Exception;
 use Illuminate\Validation\Rule;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class ProductController extends Controller
 {
+    public function importFromJSON()
+    {
+        $client = new Client();
+        $res = $client->get('https://bebes-lutins.fr/api/products');
+        $result = json_decode($res->getBody());
+
+        foreach($result as $r) {
+            $product = new Product();
+            $product->id = $r->id;
+            $product->name = $r->name;
+            $product->reference = $r->reference;
+            $product->description = $r->description;
+            $product->stock = $r->stock;
+            $product->price = $r->price;
+            $product->isHighlighted = $r->isHighlighted;
+            $product->isHidden = $r->isHidden;
+            $product->isDeleted = $r->isDeleted;
+            $product->created_at = $r->created_at;
+            $product->updated_at = $r->updated_at;
+            $product->save();
+        }
+
+        echo 'Products imported !' . "\n";
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +43,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::orderBy('name', 'asc')->get();
+        $products = Product::where('isDeleted', 0)->orderBy('name', 'asc')->get();
 
         return view('pages.admin.products')->withProducts($products);
     }

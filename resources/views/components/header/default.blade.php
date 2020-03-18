@@ -1,5 +1,5 @@
 @php
-    $categories = App\Category::all();
+    $categories = App\Category::where('isDeleted', 0)->where('isHidden', 0)->get();
 @endphp
 
 <header class="sticky-top p-0 container-fluid border-bottom row m-0 bg-white justify-content-center">

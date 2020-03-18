@@ -14,10 +14,10 @@ class ProductController extends Controller
     public function importFromJSON()
     {
         $client = new Client();
-        $res = $client->get('https://bebes-lutins.fr/api/products');
+        $res = $client->get('https://bebes-lutins.fr/api/products/images');
         $result = json_decode($res->getBody());
 
-        foreach($result as $r) {
+        foreach ($result as $r) {
             $product = new Product();
             $product->id = $r->id;
             $product->name = $r->name;
@@ -31,6 +31,22 @@ class ProductController extends Controller
             $product->created_at = $r->created_at;
             $product->updated_at = $r->updated_at;
             $product->save();
+
+            if (isset($r->images)) {
+                foreach ($r->images as $r) {
+                    if (!\App\Image::where('id', $r->id)->exists()) {
+                        $image = new \App\Image();
+                        $image->id = $r->id;
+                        $image->name = $r->name;
+                        $image->url = 'images/products/' . $r->name;
+                        $image->size = $r->size;
+                        $image->created_at = $r->created_at;
+                        $image->updated_at = $r->updated_at;
+                        $image->save();
+                    }
+                    $product->images()->attach($r->id);
+                }
+            }
         }
 
         echo 'Products imported !' . "\n";

@@ -31,6 +31,11 @@ class Category extends Model
         return $this->hasMany('App\Category', 'parentId');
     }
 
+    public function images()
+    {
+        return $this->belongsToMany('App\Image');
+    }
+
     public function getBreadcrumbAttribute()
     {
         $route = route('category', ['category' => $this]);

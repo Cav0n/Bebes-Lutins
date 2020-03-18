@@ -17,6 +17,9 @@ Route::get('/product/{product}', 'ProductController@apiGet')->name('api.product'
 Route::get('/order/tracking/{trackingNumber}', 'OrderController@tracking')->name('api.order.tracking');
 Route::post('/cart_item/{cartItem}/quantity/update', 'CartItemController@update')->name('api.cart_item.quantity.update');
 Route::post('/order/{order}/status/update', 'OrderController@update')->name('api.order.status.update');
+
+// IMPORTS
+Route::get('/images/import', 'ImageController@importFromJSON')->name('api.images.import');
 Route::get('/products/import', 'ProductController@importFromJSON')->name('api.products.import');
 Route::get('/categories/import', 'CategoryController@importFromJSON')->name('api.categories.import');
 Route::get('/categories/import/relations', 'CategoryController@importRelationsFromJSON')->name('api.categories.import.relations');

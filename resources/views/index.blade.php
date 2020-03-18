@@ -1,5 +1,5 @@
 @php
-    $products = App\Product::all();
+    $products = App\Product::where('isDeleted', 0)->where('isHidden', 0)->get();
     $carouselItems = \App\CarouselItem::all();
 @endphp
 

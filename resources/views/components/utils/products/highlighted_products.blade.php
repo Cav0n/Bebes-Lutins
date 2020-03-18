@@ -1,5 +1,5 @@
 <div id="highlighted-products-container" class="row my-3">
-    @foreach ($products as $product)
+    @foreach ($products->where('isHighlighted', 1)->get() as $product)
         @if (!$product->isHidden)
             @include('components.utils.products.simple_product')
         @endif

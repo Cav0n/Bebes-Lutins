@@ -24,6 +24,6 @@ return [
         'REGISTERED_PARTICIPATION' => 'participation enregistrée',
         'DELIVERED' => 'livrée',
         'CANCELED' => 'annulée',
-        'REFUSED_PAYMENT' => 'paiement refusée'
+        'REFUSED_PAYMENT' => 'paiement refusé'
     ]
 ];

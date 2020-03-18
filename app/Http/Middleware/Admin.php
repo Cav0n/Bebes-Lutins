@@ -18,10 +18,10 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->isAdmin){
+        if (\App\Admin::check()){
             return $next($request);
         }
 
-        return abort(401, "Vous n'êtes pas authorisé à voir cela.");
+        return redirect(route('admin.login'));
     }
 }

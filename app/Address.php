@@ -25,4 +25,9 @@ class Address extends Model
     {
         return trans('address.civility.' . $this->civility);
     }
+
+    public function getMinCivilityI18nAttribute($language = 'FR_fr'): string
+    {
+        return trans('address.civility.min.' . $this->civility);
+    }
 }

@@ -1,5 +1,14 @@
 @extends('templates.default')
 
+@section('optional_og')
+<meta property="og:type" content="website" />
+<meta property="og:title" content="{{ $category->name }}" />
+<meta property="og:description" content="{{ $category->description }}" />
+<meta property="og:image" content="{{ asset('images/utils/categories_cover.jpg') }}" />
+<meta property="og:url" content="{{ route('category', ['category' => $category]) }}" />
+<meta property="og:site_name" content="Bébés Lutins" />
+@endsection
+
 @section('title', $category->name . " - Bébés Lutins")
 
 @section('content')
@@ -24,7 +33,7 @@
                 @endif
 
                 @if($category->childs->count())
-                    <h2><b>Sous catégories</b></h2>
+                    <h2>Sous catégories</h2>
                     <div id="child-container" class="row">
                         @foreach ($category->childs as $child)
                         <div class="col-6 col-md-4 col-lg-3">

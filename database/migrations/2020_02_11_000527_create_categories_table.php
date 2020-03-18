@@ -22,7 +22,8 @@ class CreateCategoriesTable extends Migration
             $table->boolean('isDeleted')->default(0);
             $table->string('parentId')->nullable();
 
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
 
         Schema::table('categories', function (Blueprint $table) {

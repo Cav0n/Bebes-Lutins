@@ -24,7 +24,8 @@ class CreateProductsTable extends Migration
             $table->boolean('isHighlighted')->default(0);
             $table->boolean('isHidden')->default(0);
             $table->boolean('isDeleted')->default(0);
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

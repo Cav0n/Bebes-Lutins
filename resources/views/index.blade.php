@@ -5,7 +5,14 @@
 
 @extends('templates.default')
 
-@section('title', "Accueil - Bébés Lutins")
+@section('optional_og')
+<meta property="og:title" content="Bébés Lutins" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ URL::to('/') }}" />
+<meta property="og:image" content="{{ asset('images/logo-mini.svg') }}" />
+@endsection
+
+@section('title', "Bébés Lutins | Couches lavables fabriquées en France")
 
 @section('content')
 
@@ -15,7 +22,7 @@
 
             @include('components.utils.carousel.main')
 
-            <h1 class="h1 font-weight-bold">
+            <h1 class="h1 font-weight-bolder">
                 Bébés Lutins, le spécialiste de la couche lavable écologique et écocitoyenne pour bébé.
             </h1>
             <p class="h5 text-justify">

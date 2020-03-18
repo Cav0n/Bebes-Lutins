@@ -1,6 +1,19 @@
 @extends('templates.default')
 
+@section('optional_og')
+<meta property="og:type" content="og:product" />
+<meta property="og:title" content="{{ $product->name }}" />
+<meta property="og:description" content="{{ $product->description }}" />
+<meta property="og:image" content="{{ asset($product->images->first()->url) }}" />
+<meta property="og:url" content="{{ route('product', ['product' => $product]) }}" />
+<meta property="og:site_name" content="Bébés Lutins" />
+<meta property="product:price:amount" content="{{ $product->price }}" />
+<meta property="product:price:currency" content="EUR" />
+@endsection
+
 @section('title', $product->name . " - Bébés Lutins")
+
+@section('description', $product->description)
 
 @section('content')
 
@@ -13,11 +26,11 @@
             <div class="col-12 col-sm-7 col-xxl-8 col-xxxl-9 p-0">
                 <p id="product-breadcrumb" class="px-3 pt-3">{!! $product->breadcrumb !!}</p>
                 <div class="bg-white p-3">
-                    <h1 class="mb-0"><b>{{ $product->name }}</b></h1>
-                    <h2 class="h4"><b>{{ \App\NumberConvertor::doubleToPrice($product->price) }}</b></h2>
+                    <h1 class="mb-0">{{ $product->name }}</h1>
+                    <h2 class="h4">{{ \App\NumberConvertor::doubleToPrice($product->price) }}</h2>
                     <div class="d-flex my-2">
                         <input type="number" class="form-control input-spinner quantity-spinner" name="quantity" id="quantity" aria-describedby="helpQuantity" min="1" max="{{ $product->stock }}" value="1">
-                        <button type="button" class="btn btn-primary add-to-cart rounded-0" data-id="{{ $product->id }}" data-toggle="modal" data-quantity="1" data-cart_id="{{ session()->get('shopping_cart')->id }}" data-target="#product-added-modal">
+                        <button type="button" class="btn btn-primary add-to-cart rounded-0 ml-3" data-id="{{ $product->id }}" data-toggle="modal" data-quantity="1" data-cart_id="{{ session()->get('shopping_cart')->id }}" data-target="#product-added-modal">
                             Ajouter au panier</button>
                     </div>
 

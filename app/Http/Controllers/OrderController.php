@@ -17,7 +17,7 @@ class OrderController extends Controller
     public function tracking(Request $request, string $trackingNumber)
     {
         if (null !== $order = Order::where('trackingNumber', $trackingNumber)->first()){
-            return JsonResponse::create(['order' => View::make('components.utils.orders.order', ['order' => $order])
+            return JsonResponse::create(['order' => View::make('components.utils.orders.order', ['order' => $order, 'bgColor' => 'bg-white'])
                                                     ->render()]);
         }
 
@@ -31,7 +31,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = \App\Order::orderBy('created_at', 'desc')->get();
+
+        return view('pages.admin.index')->withOrders($orders);
     }
 
     /**
@@ -111,7 +113,7 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        return view('pages.admin.order')->withOrder($order);
     }
 
     /**
@@ -134,7 +136,13 @@ class OrderController extends Controller
      */
     public function update(Request $request, Order $order)
     {
-        //
+        if (null !== $status = $request['status']) {
+            $order->status = $status;
+        }
+
+        $order->save();
+
+        return new JsonResponse(['message' => 'ok', 'color' => $order->statusColor], 200);
     }
 
     /**

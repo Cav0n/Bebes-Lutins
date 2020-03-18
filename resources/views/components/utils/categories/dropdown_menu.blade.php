@@ -1,7 +1,7 @@
 <div class="row mx-0">
     <div class="border-right px-3 d-flex flex-column" style="width: 18rem;">
         @foreach ($categories as $category)
-            @if (null == $category->parentId)
+            @if (null == $category->parentId && !$category->isHidden)
                 <a class="mb-0 category-selector btn btn-outline-primary mt-2" href='#' id="{{ $category->id }}">{{ $category->name }}</a>
             @endif
         @endforeach
@@ -14,6 +14,7 @@
 
                 <div class="sub-categories row m-0">
                     @foreach ($category->childs as $child)
+                    @if(!$child->isHidden)
                     <div class="col-xl-3">
                         <div class="card sub-category">
                             <img src="{{ asset('images/utils/question-mark.png') }}" alt="" class="card-img-top">
@@ -22,6 +23,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     @endforeach
                 </div>
             </div>

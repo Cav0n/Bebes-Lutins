@@ -75,12 +75,12 @@ Route::get('/produits/{product}', 'ProductController@show')->name('product');
  * SHOPPING CART
  * ============
  */
-Route::get('/panier', 'CartController@show')->name('cart');
+Route::get('/panier', 'CartController@show')->name('cart')->middleware('\App\Http\Middleware\SessionCartUpdate');
 Route::get('/panier/livraison', 'CartController@showDelivery')->name('cart.delivery');
 Route::post('/panier/livraison/valider', 'CartController@addAddresses')->name('cart.delivery.validation');
 Route::get('/panier/paiement', 'CartController@showPayment')->name('cart.payment');
 Route::post('/panier/ajout/{product}/{cart}', 'CartItemController@create')->name('cart.item.add');
-Route::post('/panier/modifier-quantite/{cartItem}', 'CartItemController@update')->name('cart.item.updateQuantity');
+Route::post('/panier/modifier-quantite/{cartItem}', 'CartItemController@update');
 Route::get('/panier/{cartItem}/supprimer', 'CartItemController@destroy')->name('cart.item.delete');
 /** ============ */
 
@@ -96,19 +96,40 @@ Route::get('/commande/suivi', 'OrderController@showTrackingPage')->name('order.t
 
 /**
  * ============
- * ADMIN
+ * STATIC
  * ============
  */
-Route::get('/admin', 'Admin\AdminController@index')->name('admin.homepage');
+Route::get('/contact', 'MainController@showContact')->name('contact');
+Route::post('/contact', 'MainController@contact');
+
+Route::get('/contenu/{content}', 'ContentController@show')->name('content.show');
  /** ============ */
 
 /**
  * ============
- * STATIC
+ * ADMIN
  * ============
  */
-Route::get('/contact', function(){
-    return view('pages.static.contact');
-})->name('contact');
-Route::post('/contact', 'MainController@contact');
-  /** ============ */
+Route::get('/admin', 'Admin\AdminController@index')->name('admin');
+Route::get('/admin/connexion', 'Admin\LoginController@showLoginPage')->name('admin.login');
+Route::post('/admin/connexion', 'Admin\LoginController@login')->name('admin.login');
+Route::any('/admin/logout', 'Admin\LoginController@logout')->name('admin.logout');
+
+// Models indexes
+Route::get('/admin/orders', 'OrderController@index')->name('admin.orders');
+Route::get('/admin/products', 'ProductController@index')->name('admin.products');
+Route::get('/admin/categories', 'CategoryController@index')->name('admin.categories');
+Route::get('/admin/customers', 'UserController@index')->name('admin.customers');
+// Models edition
+Route::get('/admin/order/{order}', 'OrderController@show')->name('admin.order.show');
+Route::get('/admin/product/{product}', 'ProductController@edit')->name('admin.product.edit');
+Route::post('/admin/product/{product}', 'ProductController@update')->name('admin.product.edit');
+Route::get('/admin/category/{category}', 'CategoryController@edit')->name('admin.category.edit');
+Route::post('/admin/category/{category}', 'CategoryController@update')->name('admin.category.edit');
+Route::get('/admin/customer/{user}', 'UserController@edit')->name('admin.customer.edit');
+// Search
+Route::get('/admin/search/orders', 'Admin\SearchController@orders')->name('admin.search.orders');
+Route::get('/admin/search/products', 'Admin\SearchController@products')->name('admin.search.products');
+Route::get('/admin/search/categories', 'Admin\SearchController@categories')->name('admin.search.categories');
+Route::get('/admin/search/customers', 'Admin\SearchController@customers')->name('admin.search.customers');
+ /** ============ */

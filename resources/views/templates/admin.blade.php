@@ -65,6 +65,10 @@
                             <a href='{{ route('admin.customers') }}' class='mb-0'>Tous les clients</a>
                             <a href='{{ route('admin.customers') }}' class='mb-0'>Avis clients</a>
                             <a href='{{ route('admin.customers') }}' class='mb-0'>Messages</a>
+
+                            <a href='{{ route('admin.contents') }}' class='h5 mt-3 mb-0'>Contenus</a>
+                            <a href='{{ route('admin.contents') }}' class='mb-0'>Bas de page</a>
+                            <a href='{{ route('admin.contents') }}' class='mb-0'>Divers</a>
                         </div>
                     </div>
 

@@ -14,7 +14,10 @@ class ContentController extends Controller
      */
     public function index()
     {
-        //
+        $contents = Content::orderBy('title')->get();
+        $title = 'Contenus';
+
+        return view('pages.admin.contents')->withContents($contents)->withCardTitle($title);
     }
 
     /**

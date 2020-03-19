@@ -12,9 +12,12 @@ class ContentSectionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, \App\Content $content)
     {
-        //
+        $sections = $content->sections;
+        $title = 'Sections de contenu';
+
+        return view('pages.admin.sections')->withSections($sections)->withContent($content)->withCardTitle($title);
     }
 
     /**

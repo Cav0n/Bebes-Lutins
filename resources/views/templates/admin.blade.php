@@ -59,7 +59,7 @@
                             <a href='{{ route('admin.products') }}' class='h5 mt-3 mb-0'>Produits</a>
                             <a href='{{ route('admin.products') }}' class='mb-0'>Tous les produits</a>
                             <a href='{{ route('admin.categories') }}' class='mb-0'>Toutes les catégories</a>
-                            <a href='{{ route('admin.products') }}' class='mb-0'>Mis en avant</a>
+                            <a href='{{ route('admin.products', ['isHighlighted' => 1]) }}' class='mb-0'>Mis en avant</a>
 
                             <a href='{{ route('admin.customers') }}' class='h5 mt-3 mb-0'>Clients</a>
                             <a href='{{ route('admin.customers') }}' class='mb-0'>Tous les clients</a>

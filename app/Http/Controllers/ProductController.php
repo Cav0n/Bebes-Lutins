@@ -57,11 +57,15 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::where('isDeleted', 0)->orderBy('name', 'asc')->get();
+        $products = Product::where('isDeleted', 0)->orderBy('name', 'asc');
 
-        return view('pages.admin.products')->withProducts($products);
+        if (null !== $request['isHighlighted']) {
+            $products = $products->where('isHighlighted', 1);
+        }
+
+        return view('pages.admin.products')->withProducts($products->get());
     }
 
     /**

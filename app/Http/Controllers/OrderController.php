@@ -29,9 +29,13 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = \App\Order::orderBy('created_at', 'desc')->get();
+        if (null !== $request['status']) {
+            $orders = \App\Order::whereIn('status', $request['status'])->orderBy('created_at', 'desc')->get();
+        } else {
+            $orders = \App\Order::orderBy('created_at', 'desc')->get();
+        }
 
         return view('pages.admin.index')->withOrders($orders);
     }

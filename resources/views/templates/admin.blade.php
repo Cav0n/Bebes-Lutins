@@ -51,10 +51,10 @@
                             <a class="text-secondary" href='/'><b>Bébés Lutins</b></a></h1>
 
                         <div class="p-3 d-flex flex-column">
-                            <a href='{{ route('admin') }}' class='h5 mb-0'>Commandes</a>
-                            <a href='{{ route('admin') }}' class='mb-0'>En cours</a>
-                            <a href='{{ route('admin') }}' class='mb-0'>Terminées</a>
-                            <a href='{{ route('admin') }}' class='mb-0'>Refusées</a>
+                            <a href='{{ route('admin.orders') }}' class='h5 mb-0'>Commandes</a>
+                            <a href='{{ route('admin.orders', ['status' => ['WAITING_PAYMENT', 'PROCESSING', 'DELIVERING']]) }}' class='mb-0'>En cours</a>
+                            <a href='{{ route('admin.orders', ['status' => ['DELIVERED', 'WITHDRAWAL', 'REGISTERED_PARTICIPATION']]) }}' class='mb-0'>Terminées</a>
+                            <a href='{{ route('admin.orders', ['status' => ['REFUSED_PAYMENT', 'CANCELED']]) }}) }}' class='mb-0'>Refusées</a>
 
                             <a href='{{ route('admin.products') }}' class='h5 mt-3 mb-0'>Produits</a>
                             <a href='{{ route('admin.products') }}' class='mb-0'>Tous les produits</a>

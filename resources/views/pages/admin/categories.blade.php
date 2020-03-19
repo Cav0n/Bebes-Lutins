@@ -45,6 +45,10 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="pagination-container d-flex justify-content-center">
+            {{-- TODO: Create custom pagination view --}}
+            {{ $categories->links() }}
+        </div>
         @endif
     </div>
 </div>

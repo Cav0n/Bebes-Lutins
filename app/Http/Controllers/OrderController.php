@@ -31,13 +31,18 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
+        $title = 'Commandes';
+
         if (null !== $request['status']) {
-            $orders = \App\Order::whereIn('status', $request['status'])->orderBy('created_at', 'desc')->get();
+            $orders = \App\Order::whereIn('status', $request['status'])->orderBy('created_at', 'desc');
+            foreach ($request['status'] as $status) {
+                $title .= ' <span class="badge badge-pill badge-dark small" style="font-size:12px;">' . trans('order.status.' . $status) . '</span>';
+            }
         } else {
-            $orders = \App\Order::orderBy('created_at', 'desc')->get();
+            $orders = \App\Order::orderBy('created_at', 'desc');
         }
 
-        return view('pages.admin.index')->withOrders($orders);
+        return view('pages.admin.orders')->withOrders($orders->paginate(15))->withCardTitle($title);
     }
 
     /**

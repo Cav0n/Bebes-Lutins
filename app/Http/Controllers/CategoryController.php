@@ -74,7 +74,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::where('isDeleted', 0)->orderBy('rank', 'asc')->get();
+        $categories = Category::where('isDeleted', 0)->orderBy('rank', 'asc')->paginate(15);
 
         return view('pages.admin.categories', ['categories' => $categories]);
     }

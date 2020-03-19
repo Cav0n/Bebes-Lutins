@@ -60,12 +60,14 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $products = Product::where('isDeleted', 0)->orderBy('name', 'asc');
+        $title = "Produits";
 
         if (null !== $request['isHighlighted']) {
             $products = $products->where('isHighlighted', 1);
+            $title = "Produits mis en avant";
         }
 
-        return view('pages.admin.products')->withProducts($products->get());
+        return view('pages.admin.products')->withProducts($products->paginate(15))->withCardTitle($title);
     }
 
     /**

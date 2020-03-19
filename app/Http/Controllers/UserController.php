@@ -47,7 +47,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $customers = User::orderBy('created_at', 'desc')->get();
+        $customers = User::orderBy('created_at', 'desc')->paginate(15);
 
         return view('pages.admin.customers', ['customers' => $customers]);
     }

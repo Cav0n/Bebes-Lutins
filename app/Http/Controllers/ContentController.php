@@ -60,7 +60,7 @@ class ContentController extends Controller
      */
     public function edit(Content $content)
     {
-        //
+        return view('pages.admin.content')->with('content', $content);
     }
 
     /**

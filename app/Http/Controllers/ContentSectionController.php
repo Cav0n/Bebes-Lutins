@@ -14,10 +14,7 @@ class ContentSectionController extends Controller
      */
     public function index(Request $request, \App\Content $content)
     {
-        $sections = $content->sections;
-        $title = 'Sections de contenu';
-
-        return view('pages.admin.sections')->withSections($sections)->withContent($content)->withCardTitle($title);
+        //
     }
 
     /**

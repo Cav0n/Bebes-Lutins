@@ -121,14 +121,11 @@ Route::get('/admin/products', 'ProductController@index')->name('admin.products')
 Route::get('/admin/categories', 'CategoryController@index')->name('admin.categories');
 Route::get('/admin/customers', 'UserController@index')->name('admin.customers');
 Route::get('/admin/contents', 'ContentController@index')->name('admin.contents');
-Route::get('/admin/content/{content}/sections', 'ContentSectionController@index')->name('admin.content.sections');
 // Models creation
 Route::get('/admin/product/create', 'ProductController@create')->name('admin.product.create');
 Route::post('/admin/product/create', 'ProductController@store')->name('admin.product.store');
 Route::get('/admin/content/create', 'ContentController@create')->name('admin.content.create');
 Route::post('/admin/content/create', 'ContentController@store')->name('admin.content.store');
-Route::get('/admin/content/{content}/section/create', 'ContentSectionController@create')->name('admin.content.section.create');
-Route::post('/admin/content/{content}/section/create', 'ContentSectionController@store')->name('admin.content.section.store');
 // Models edition
 Route::get('/admin/order/{order}', 'OrderController@show')->name('admin.order.show');
 Route::get('/admin/product/{product}', 'ProductController@edit')->name('admin.product.edit');
@@ -138,13 +135,10 @@ Route::post('/admin/category/{category}', 'CategoryController@update')->name('ad
 Route::get('/admin/customer/{user}', 'UserController@edit')->name('admin.customer.edit');
 Route::get('/admin/content/{content}/edit', 'ContentController@edit')->name('admin.content.edit');
 Route::post('/admin/content/{content}/edit', 'ContentController@update')->name('admin.content.edit');
-Route::get('/admin/content/{content}/section/edit', 'ContentSectionController@edit')->name('admin.content.section.edit');
-Route::post('/admin/content/{content}/section/edit', 'ContentSectionController@update')->name('admin.content.section.edit');
 // Search
 Route::get('/admin/search/orders', 'Admin\SearchController@orders')->name('admin.search.orders');
 Route::get('/admin/search/products', 'Admin\SearchController@products')->name('admin.search.products');
 Route::get('/admin/search/categories', 'Admin\SearchController@categories')->name('admin.search.categories');
 Route::get('/admin/search/customers', 'Admin\SearchController@customers')->name('admin.search.customers');
 Route::get('/admin/search/contents', 'Admin\SearchController@contents')->name('admin.search.contents');
-Route::get('/admin/search/content/sections', 'Admin\SearchController@contentSections')->name('admin.search.content.sections');
  /** ============ */

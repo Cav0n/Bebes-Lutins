@@ -37,7 +37,7 @@
             <tbody>
                 @foreach ($contents as $content)
                 <tr>
-                    <td><a href=" {{ route('admin.content.sections', ['content' => $content]) }} ">{{ $content->title }}</a></td>
+                    <td>{{ $content->title }}</td>
                     <td>{{ $content->url }}</td>
                     <td style="width: 3rem;" class='text-right'>
                         <a class="btn btn-outline-dark" href="{{ route('admin.content.edit', ['content' => $content]) }}" role="button">Éditer</a>

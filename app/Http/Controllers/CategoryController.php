@@ -39,7 +39,7 @@ class CategoryController extends Controller
                         $image = new \App\Image();
                         $image->id = $r->id;
                         $image->name = $r->name;
-                        $image->url = 'images/categories/' . $r->name;
+                        $image->url = '/images/categories/' . $r->name;
                         $image->size = $r->size;
                         $image->created_at = $r->created_at;
                         $image->updated_at = $r->updated_at;

@@ -40,7 +40,7 @@
             <tbody>
                 @foreach ($products as $product)
                 <tr @if($product->isHidden) style="opacity:0.5" @endif>
-                    <td class="d-none d-lg-table-cell" style="width: 1rem;"><img src='{{ $product->images()->count() ? $product->images()->first()->url : null }}' class="w-100"></td>
+                    <td class="d-none d-lg-table-cell p-0" style="width: 1rem;"><img src='{{ $product->images()->count() ? $product->images()->first()->url : null }}' class="w-100"></td>
                     <td style="width: 2rem;"> {{ $product->reference ? '#' . $product->reference : null }} </td>
                     <td> {{ $product->name }} @if($product->isHidden) <span class="badge badge-pill badge-dark">Caché</span> @endif </td>
                     <td class="d-none d-md-table-cell" style="width: 5rem;"> {{ \App\NumberConvertor::doubleToPrice($product->price) }} </td>

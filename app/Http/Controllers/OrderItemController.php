@@ -4,9 +4,33 @@ namespace App\Http\Controllers;
 
 use App\OrderItem;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 
 class OrderItemController extends Controller
 {
+    public function importFromJSON()
+    {
+        $client = new Client();
+        $res = $client->get('https://bebes-lutins.fr/api/orders/items');
+        $result = json_decode($res->getBody());
+
+        OrderItem::destroy(OrderItem::all());
+
+        $count = 0;
+        foreach ($result as $r) {
+            $orderItem = new OrderItem();
+            $orderItem->quantity = $r->quantity;
+            $orderItem->unitPrice = $r->unitPrice;
+            $orderItem->order_id = \App\Order::where('email', $r->order->user->email)->where('created_at', $r->order->created_at)->first()->id; // PAS FACILE
+            $orderItem->product_id = $r->product_id;
+            $orderItem->created_at = $r->created_at;
+            $orderItem->updated_at = $r->updated_at;
+            $orderItem->save();
+            $count++;
+        }
+        echo $count . ' orders items imported !' . "\n";
+    }
+
     /**
      * Display a listing of the resource.
      *

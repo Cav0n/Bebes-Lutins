@@ -29,4 +29,15 @@ Artisan::command('import:all', function() {
 
     $userController = new \App\Http\Controllers\UserController();
     $userController->importFromJSON();
+
+    $addressController = new \App\Http\Controllers\AddressController();
+    $addressController->importFromJSON();
+
+    $orderController = new \App\Http\Controllers\OrderController();
+    $orderController->importFromJSON();
+
+    $orderItemController = new \App\Http\Controllers\OrderItemController();
+    $orderItemController->importFromJSON();
+
+    echo 'Everything imported, enjoy 🤟';
 })->describe('Import all data from previous version');

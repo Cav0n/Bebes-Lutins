@@ -26,3 +26,6 @@ Route::get('/categories/import', 'CategoryController@importFromJSON')->name('api
 Route::get('/categories/import/images', 'CategoryController@importImagesFromJSON')->name('api.categories.import.images');
 Route::get('/categories/import/relations', 'CategoryController@importRelationsFromJSON')->name('api.categories.import.relations');
 Route::get('/users/import', 'UserController@importFromJSON')->name('api.users.import');
+Route::get('/addresses/import', 'AddressController@importFromJSON')->name('api.addresses.import');
+Route::get('/orders/import', 'OrderController@importFromJSON')->name('api.orders.import');
+Route::get('/orders/import/items', 'OrderItemController@importFromJSON')->name('api.orders.import.items');

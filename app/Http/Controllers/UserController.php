@@ -14,6 +14,9 @@ class UserController extends Controller
         $res = $client->get('https://bebes-lutins.fr/api/customers');
         $result = json_decode($res->getBody());
 
+        User::destroy(User::all());
+
+        $count = 0;
         foreach($result as $r) {
             if (User::where('email', $r->email)->exists()) {
                 continue;
@@ -28,9 +31,10 @@ class UserController extends Controller
             $user->created_at = $r->created_at;
             $user->updated_at = $r->updated_at;
             $user->save();
+            $count++;
         }
 
-        echo 'Users imported !' . "\n";
+        echo $count . ' users imported !' . "\n";
     }
 
     public function toggleNewsletters(Request $request, User $user){

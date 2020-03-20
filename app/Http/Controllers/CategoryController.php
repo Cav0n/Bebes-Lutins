@@ -17,6 +17,7 @@ class CategoryController extends Controller
 
         Category::destroy(Category::all());
 
+        $count = 0;
         foreach($result as $r) {
             if (null === $r->id || '' === $r->id) {
                 continue;
@@ -32,9 +33,10 @@ class CategoryController extends Controller
             $category->updated_at = $r->updated_at;
             $category->parentId = $r->parent_id;
             $category->save();
+            $count++;
         }
 
-        echo 'Categories imported !' . "\n";
+        echo $count . ' categories imported !' . "\n";
     }
 
     public function importImagesFromJSON()
@@ -43,6 +45,7 @@ class CategoryController extends Controller
         $res = $client->get('https://bebes-lutins.fr/api/categories/images');
         $result = json_decode($res->getBody());
 
+        $count = 0;
         foreach ($result as $r) {
             $image = new \App\Image();
             $image->name = $r->name;
@@ -55,9 +58,10 @@ class CategoryController extends Controller
             if (null !== $category = \App\Category::find($r->categoryId)) {
                 $category->images()->attach($image);
             }
+            $count++;
         }
 
-        echo 'Category images imported !' . "\n";
+        echo $count . ' category images imported !' . "\n";
     }
 
     public function importRelationsFromJSON()
@@ -66,12 +70,14 @@ class CategoryController extends Controller
         $res = $client->get('https://bebes-lutins.fr/api/categories/relations');
         $result = json_decode($res->getBody());
 
+        $count = 0;
         foreach($result as $r) {
             Category::find($r->category_id)->products()->detach($r->product_id);
             Category::find($r->category_id)->products()->attach($r->product_id);
+            $count++;
         }
 
-        echo 'Categories products relations imported !' . "\n";
+        echo $count . ' categories products relations imported !' . "\n";
     }
 
     /**

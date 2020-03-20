@@ -6,9 +6,59 @@ use App\Address;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+use GuzzleHttp\Client;
 
 class AddressController extends Controller
 {
+    public function importFromJSON()
+    {
+        $client = new Client();
+        $res = $client->get('https://bebes-lutins.fr/api/addresses');
+        $result = json_decode($res->getBody());
+
+        Address::destroy(Address::all());
+
+        $count = 0;
+        foreach($result as $r) {
+            if (null === $r->id || '' === $r->id) {
+                continue;
+            }
+            $address = new Address();
+            $address->firstname = $r->firstname;
+            $address->lastname = $r->lastname;
+            $address->civility = $this->integerCivilityToStringCivility($r->civility);
+            $address->street = $r->street;
+            $address->zipCode = $r->zipCode;
+            $address->city = $r->city;
+            $address->complements = $r->complement;
+            $address->company = $r->company;
+            $address->user_id = $r->isDeleted && $r->user_id ? null : \App\User::where('email', $r->user_mail)->first()->id;
+            $address->created_at = $r->created_at;
+            $address->updated_at = $r->updated_at;
+
+            $address->save();
+            $count++;
+        }
+
+        echo $count . ' addresses imported !' . "\n";
+    }
+
+    public function integerCivilityToStringCivility($civility) {
+        switch ($civility) {
+            case 0:
+                return 'MISS';
+            break;
+            case 1:
+                return 'MISTER';
+            break;
+            case 2:
+                return 'MISS';
+            break;
+            default:
+            return 'NOT_DEFINED';
+        }
+    }
+
     /**
      * Display a listing of the resource.
      *

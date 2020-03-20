@@ -17,6 +17,7 @@ class ProductController extends Controller
         $res = $client->get('https://bebes-lutins.fr/api/products');
         $result = json_decode($res->getBody());
 
+        $count = 0;
         foreach ($result as $r) {
             $product = new Product();
             $product->id = $r->id;
@@ -31,9 +32,10 @@ class ProductController extends Controller
             $product->created_at = $r->created_at;
             $product->updated_at = $r->updated_at;
             $product->save();
+            $count++;
         }
 
-        echo 'Products imported !' . "\n";
+        echo $count . ' products imported !' . "\n";
     }
 
     public function importImagesFromJSON()
@@ -42,6 +44,7 @@ class ProductController extends Controller
         $res = $client->get('https://bebes-lutins.fr/api/products/images');
         $result = json_decode($res->getBody());
 
+        $count = 0;
         foreach ($result as $r) {
             $image = new \App\Image();
             $image->name = $r->name;
@@ -54,9 +57,10 @@ class ProductController extends Controller
             if (null !== $product = \App\Product::find($r->productId)) {
                 $product->images()->attach($image);
             }
+            $count++;
         }
 
-        echo 'Product images imported !' . "\n";
+        echo $count . ' product images imported !' . "\n";
     }
 
     /**

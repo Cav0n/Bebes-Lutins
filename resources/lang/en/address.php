@@ -16,11 +16,11 @@ return [
         'min' => [
             'MISTER' => 'Mr',
             'MISS' => 'Ms',
-            'NOT DEFINED' => '',
+            'NOT_DEFINED' => '',
         ],
 
         'MISTER' => 'mister',
         'MISS' => 'miss',
-        'NOT DEFINED' => '',
+        'NOT_DEFINED' => '',
     ],
 ];

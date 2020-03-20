@@ -68,17 +68,11 @@ footer a {
 }
 
 #category-cover {
-    height: 26rem;
     background-image: url("../../public/images/utils/categories_cover.jpg");
     background-position: right bottom, left top;
     background-repeat: no-repeat;
     background-size: cover;
-}
-
-@include media-breakpoint-only(xs) {
-    #category-cover {
-        height: 35rem;
-    }
+    padding-bottom: 9rem !important;
 }
 
 #category-inner-container {
@@ -87,7 +81,7 @@ footer a {
 
 @include media-breakpoint-only(xs) {
     #category-inner-container {
-        margin-top: -15rem;
+        margin-top: -9rem;
     }
 }
 

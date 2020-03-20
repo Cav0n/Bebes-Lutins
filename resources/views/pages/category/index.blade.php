@@ -33,7 +33,6 @@
                 @endif
 
                 @if($category->childs->count())
-                    <h2>Sous catégories</h2>
                     <div id="child-container" class="row">
                         @foreach ($category->childs()->where('isDeleted', 0)->where('isHidden', 0)->get() as $child)
                         <div class="col-6 col-md-4 col-lg-3">

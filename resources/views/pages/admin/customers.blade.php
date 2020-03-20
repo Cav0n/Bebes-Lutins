@@ -25,7 +25,7 @@
         @endif
 
         @if(count($customers))
-        <table class="table table-light mt-2 mb-0">
+        <table class="table table-light mt-2 mb-0 table-striped">
             <thead class="thead-light">
                 <tr>
                     <th>Identité</th>
@@ -37,10 +37,10 @@
             <tbody>
                 @foreach ($customers as $customer)
                 <tr>
-                    <td>{{ $customer->firstname }} {{ $customer->lastname  }}</td>
-                    <td>{{ $customer->email}}</td>
-                    <td>{{ $customer->phone}}</td>
-                    <td class='text-right'><a class="btn btn-outline-dark" href="{{ route('admin.customer.edit', ['user' => $customer]) }}" role="button">Voir</a></td>
+                    <td class='align-middle'><b>{{ $customer->firstname }} {{ $customer->lastname  }}</b></td>
+                    <td class='align-middle'>{{ $customer->email}}</td>
+                    <td class='align-middle'>{{ $customer->phone}}</td>
+                    <td class='text-right align-middle'><a class="btn btn-outline-dark" href="{{ route('admin.customer.edit', ['user' => $customer]) }}" role="button">Voir</a></td>
                 </tr>
                 @endforeach
             </tbody>

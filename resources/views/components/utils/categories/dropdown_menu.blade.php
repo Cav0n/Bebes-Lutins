@@ -16,7 +16,7 @@
                     @foreach ($category->childs()->where('isDeleted', 0)->where('isHidden', 0)->get() as $child)
                     <div class="col-xl-3">
                         <div class="card sub-category">
-                            <img src="{{ asset('images/utils/question-mark.png') }}" alt="" class="card-img-top">
+                            <img src="{{ asset($child->images->first ? $child->images->first->url : null) }}" alt="" class="card-img-top">
                             <div class="card-body">
                                 <a href="{{ route('category', ['category' => $child->id]) }}" class="card-text">{{$child->name}}</a>
                             </div>

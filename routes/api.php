@@ -21,6 +21,8 @@ Route::post('/order/{order}/status/update', 'OrderController@update')->name('api
 // IMPORTS
 Route::get('/images/import', 'ImageController@importFromJSON')->name('api.images.import');
 Route::get('/products/import', 'ProductController@importFromJSON')->name('api.products.import');
+Route::get('/products/import/images', 'ProductController@importImagesFromJSON')->name('api.products.import.images');
 Route::get('/categories/import', 'CategoryController@importFromJSON')->name('api.categories.import');
+Route::get('/categories/import/images', 'CategoryController@importImagesFromJSON')->name('api.categories.import.images');
 Route::get('/categories/import/relations', 'CategoryController@importRelationsFromJSON')->name('api.categories.import.relations');
 Route::get('/users/import', 'UserController@importFromJSON')->name('api.users.import');

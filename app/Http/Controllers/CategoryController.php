@@ -12,7 +12,7 @@ class CategoryController extends Controller
     public function importFromJSON()
     {
         $client = new Client();
-        $res = $client->get('https://bebes-lutins.fr/api/categories/images');
+        $res = $client->get('https://bebes-lutins.fr/api/categories');
         $result = json_decode($res->getBody());
 
         Category::destroy(Category::all());
@@ -32,25 +32,32 @@ class CategoryController extends Controller
             $category->updated_at = $r->updated_at;
             $category->parentId = $r->parent_id;
             $category->save();
-
-            if (isset($r->images)) {
-                foreach ($r->images as $r) {
-                    if (!\App\Image::where('id', $r->id)->exists()) {
-                        $image = new \App\Image();
-                        $image->id = $r->id;
-                        $image->name = $r->name;
-                        $image->url = '/images/categories/' . $r->name;
-                        $image->size = $r->size;
-                        $image->created_at = $r->created_at;
-                        $image->updated_at = $r->updated_at;
-                        $image->save();
-                    }
-                    $category->images()->attach($r->id);
-                }
-            }
         }
 
         echo 'Categories imported !' . "\n";
+    }
+
+    public function importImagesFromJSON()
+    {
+        $client = new Client();
+        $res = $client->get('https://bebes-lutins.fr/api/categories/images');
+        $result = json_decode($res->getBody());
+
+        foreach ($result as $r) {
+            $image = new \App\Image();
+            $image->name = $r->name;
+            $image->url = '/images/categories/' . $r->name;
+            $image->size = isset($r->size) ? $r->size : 0;
+            $image->created_at = $r->created_at;
+            $image->updated_at = $r->updated_at;
+            $image->save();
+
+            if (null !== $category = \App\Category::find($r->categoryId)) {
+                $category->images()->attach($image);
+            }
+        }
+
+        echo 'Category images imported !' . "\n";
     }
 
     public function importRelationsFromJSON()

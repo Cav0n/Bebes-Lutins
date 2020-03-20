@@ -20,9 +20,11 @@ Artisan::command('inspire', function () {
 Artisan::command('import:all', function() {
     $productController = new \App\Http\Controllers\ProductController();
     $productController->importFromJSON();
+    $productController->importImagesFromJSON();
 
     $categoryController = new \App\Http\Controllers\CategoryController();
     $categoryController->importFromJSON();
+    $categoryController->importImagesFromJSON();
     $categoryController->importRelationsFromJSON();
 
     $userController = new \App\Http\Controllers\UserController();

@@ -14,7 +14,7 @@ class ProductController extends Controller
     public function importFromJSON()
     {
         $client = new Client();
-        $res = $client->get('https://bebes-lutins.fr/api/products/images');
+        $res = $client->get('https://bebes-lutins.fr/api/products');
         $result = json_decode($res->getBody());
 
         foreach ($result as $r) {
@@ -31,25 +31,32 @@ class ProductController extends Controller
             $product->created_at = $r->created_at;
             $product->updated_at = $r->updated_at;
             $product->save();
-
-            if (isset($r->images)) {
-                foreach ($r->images as $r) {
-                    if (!\App\Image::where('id', $r->id)->exists()) {
-                        $image = new \App\Image();
-                        $image->id = $r->id;
-                        $image->name = $r->name;
-                        $image->url = '/images/products/' . $r->name;
-                        $image->size = $r->size;
-                        $image->created_at = $r->created_at;
-                        $image->updated_at = $r->updated_at;
-                        $image->save();
-                    }
-                    $product->images()->attach($r->id);
-                }
-            }
         }
 
         echo 'Products imported !' . "\n";
+    }
+
+    public function importImagesFromJSON()
+    {
+        $client = new Client();
+        $res = $client->get('https://bebes-lutins.fr/api/products/images');
+        $result = json_decode($res->getBody());
+
+        foreach ($result as $r) {
+            $image = new \App\Image();
+            $image->name = $r->name;
+            $image->url = '/images/products/' . $r->name;
+            $image->size = isset($r->size) ? $r->size : 0;
+            $image->created_at = $r->created_at;
+            $image->updated_at = $r->updated_at;
+            $image->save();
+
+            if (null !== $product = \App\Product::find($r->productId)) {
+                $product->images()->attach($image);
+            }
+        }
+
+        echo 'Product images imported !' . "\n";
     }
 
     /**

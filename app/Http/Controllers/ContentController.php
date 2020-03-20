@@ -72,7 +72,19 @@ class ContentController extends Controller
      */
     public function update(Request $request, Content $content)
     {
-        //
+        foreach ($request['section'] as $r){
+            if (\App\ContentSection::where('title', $r['title'])->exists()) {
+                $section = \App\ContentSection::where('title', $r['title'])->first();
+            } else {
+                $section = new \App\ContentSection();
+            }
+
+            $section->title = $r['title'];
+            $section->text = $r['text'];
+            $section->save();
+        }
+
+        return back()->with('successMessage', "Contenu sauvegardé avec succés !");
     }
 
     /**

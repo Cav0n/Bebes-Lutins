@@ -17,19 +17,21 @@
             <form method="post" action="{{ isset($content) ? route('admin.content.edit', ['content' => $content]) : route('admin.content.create') }}" >
                 @csrf
 
+                @php $index = 0; @endphp
                 @foreach ($content->sections as $section)
                 <div class="row">
                     <div class="form-group col-lg-6">
                         <label for="title">Titre</label>
-                        <input type="text" class="form-control" name="title" id="title" aria-describedby="helpTitle" value='{{ $section->title }}'>
+                        <input type="text" class="form-control" name="section[{{ $index }}][title]" id="title" aria-describedby="helpTitle" value='{{ $section->title }}'>
                         <small id="helpTitle" class="form-text text-muted">Le titre de la section</small>
                     </div>
                     <div class="form-group col-lg-6">
                         <label for="text">Texte</label>
-                        <textarea class="form-control" name="text" id="text" aria-describedby="helpText" rows='10'>{{ $section->text }}</textarea>
+                        <textarea class="form-control tiny-mce" name="section[{{ $index }}][text]" id="text" aria-describedby="helpText" rows='15'>{{ $section->text }}</textarea>
                         <small id="helpText" class="form-text text-muted">Le texte de la section</small>
                     </div>
                 </div>
+                @php $index++; @endphp
                 @endforeach
 
                 <button type="submit" class="btn btn-primary">Enregistrer</button>
@@ -37,4 +39,13 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    <script>
+    tinymce.init({
+      selector: '.tiny-mce',
+      plugins: "image"
+    });
+  </script>
 @endsection

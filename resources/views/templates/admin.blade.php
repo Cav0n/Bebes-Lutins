@@ -16,6 +16,7 @@
 <body>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/admin.js') }}"></script>
+    <script src="https://cdn.tiny.cloud/1/o3xxn1egstud8k4clezmtiocupaj5kof1ox4k1ywocrgml58/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
     <header class="d-flex d-lg-none fixex-top">
         <nav class="navbar navbar-expand-sm navbar-light bg-light w-100">
@@ -46,29 +47,52 @@
         <div class="row">
             <div class="d-none d-lg-flex col-lg-2 p-0">
                 <div class="sidenav py-3 w-100">
-                    <div class="top-sidenav">
-                        <h1 class="h2 text-center">
-                            <a class="text-secondary" href='/'><b>Bébés Lutins</b></a></h1>
+                    <div class="top-sidenav ml-3">
+                        <h1 class="h2"><a class="text-secondary" href='/'><b>Bébés Lutins</b></a></h1>
 
-                        <div class="p-3 d-flex flex-column">
-                            <a href='{{ route('admin.orders') }}' class='h5 mb-0'>Commandes</a>
-                            <a href='{{ route('admin.orders', ['status' => ['WAITING_PAYMENT', 'PROCESSING', 'DELIVERING']]) }}' class='mb-0'>En cours</a>
-                            <a href='{{ route('admin.orders', ['status' => ['DELIVERED', 'WITHDRAWAL', 'REGISTERED_PARTICIPATION']]) }}' class='mb-0'>Terminées</a>
-                            <a href='{{ route('admin.orders', ['status' => ['REFUSED_PAYMENT', 'CANCELED']]) }}' class='mb-0'>Refusées</a>
+                        <div class="row m-0 mt-3">
+                            <div class="col-2 p-0">
+                                <img class="w-100" src="{{ asset('images/icons/telephone-color.svg') }}" alt="telephone">
+                            </div>
+                            <div class="col-10 d-flex flex-column">
+                                <a href='{{ route('admin.orders') }}' class='h5 mb-0 text-dark'>Commandes</a>
+                                <a href='{{ route('admin.orders', ['status' => ['WAITING_PAYMENT', 'PROCESSING', 'DELIVERING']]) }}' class='mb-0'>En cours</a>
+                                <a href='{{ route('admin.orders', ['status' => ['DELIVERED', 'WITHDRAWAL', 'REGISTERED_PARTICIPATION']]) }}' class='mb-0'>Terminées</a>
+                                <a href='{{ route('admin.orders', ['status' => ['REFUSED_PAYMENT', 'CANCELED']]) }}' class='mb-0'>Refusées</a>
+                            </div>
+                        </div>
 
-                            <a href='{{ route('admin.products') }}' class='h5 mt-3 mb-0'>Produits</a>
-                            <a href='{{ route('admin.products') }}' class='mb-0'>Tous les produits</a>
-                            <a href='{{ route('admin.categories') }}' class='mb-0'>Toutes les catégories</a>
-                            <a href='{{ route('admin.products', ['isHighlighted' => 1]) }}' class='mb-0'>Mis en avant</a>
+                        <div class="row m-0 mt-3">
+                            <div class="col-2 p-0">
+                                <img class="w-100" src="{{ asset('images/icons/email-color.svg') }}" alt="telephone">
+                            </div>
+                            <div class="col-10 d-flex flex-column">
+                                <a href='{{ route('admin.products') }}' class='h5 mb-0'>Produits</a>
+                                <a href='{{ route('admin.products') }}' class='mb-0'>Tous les produits</a>
+                                <a href='{{ route('admin.categories') }}' class='mb-0'>Toutes les catégories</a>
+                                <a href='{{ route('admin.products', ['isHighlighted' => 1]) }}' class='mb-0'>Mis en avant</a>
+                            </div>
+                        </div>
 
-                            <a href='{{ route('admin.customers') }}' class='h5 mt-3 mb-0'>Clients</a>
-                            <a href='{{ route('admin.customers') }}' class='mb-0'>Tous les clients</a>
-                            <a href='{{ route('admin.customers') }}' class='mb-0'>Avis clients</a>
-                            <a href='{{ route('admin.customers') }}' class='mb-0'>Messages</a>
+                        <div class="row m-0 mt-3">
+                            <div class="col-2 p-0">
+                                <img class="w-100" src="{{ asset('images/icons/location-color.svg') }}" alt="telephone">
+                            </div>
+                            <div class="col-10 d-flex flex-column">
+                                <a href='{{ route('admin.customers') }}' class='h5 mb-0'>Clients</a>
+                                <a href='{{ route('admin.customers') }}' class='mb-0'>Tous les clients</a>
+                                <a href='{{ route('admin.customers') }}' class='mb-0'>Avis clients</a>
+                            </div>
+                        </div>
 
-                            <a href='{{ route('admin.contents') }}' class='h5 mt-3 mb-0'>Contenus</a>
-                            <a href='{{ route('admin.contents') }}' class='mb-0'>Bas de page</a>
-                            <a href='{{ route('admin.contents') }}' class='mb-0'>Divers</a>
+                        <div class="row m-0 mt-3">
+                            <div class="col-2 p-0">
+                                <img class="w-100" src="{{ asset('images/icons/telephone-color.svg') }}" alt="telephone">
+                            </div>
+                            <div class="col-10 d-flex flex-column">
+                                <a href='{{ route('admin.contents') }}' class='h5 mb-0'>Contenus</a>
+                                <a href='{{ route('admin.contents') }}' class='mb-0'>Bas de page</a>
+                            </div>
                         </div>
                     </div>
 

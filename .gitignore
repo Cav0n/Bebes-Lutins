@@ -11,8 +11,6 @@
 /.idea
 
 /public/mix-manifest.json
-/app/Providers/TelescopeServiceProvider.php
-/config/telescope.php
 
 Homestead.json
 Homestead.yaml

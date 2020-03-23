@@ -12,6 +12,7 @@
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "~6.0",
         "laravel/framework": "^6.2",
+        "laravel/telescope": "^3.2",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^1.1",
         "symfony/translation-contracts": "^1.1.6"

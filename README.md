@@ -11,3 +11,5 @@ mod_rewrite has to be enabled :
 - composer install
 - npm install
 - npm run dev
+- php artisan telescope:install
+- php artisan migrate

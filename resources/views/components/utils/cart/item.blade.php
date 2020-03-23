@@ -1,6 +1,6 @@
 <div class="cart-product-container border bg-white row my-2 mx-0">
     <div class="col-3 col-md-2 col-lg-3 p-0">
-        <img src='{{asset($item->product->images->first()->url)}}' class="w-100 h-100" style="object-fit:cover">
+        <img src="{{ $item->product->images()->count() ? $item->product->images()->first()->url : null }}" class="w-100 h-100" style="object-fit:cover">
     </div>
     <div class="col-6 col-sm-7 col-md-8 col-lg-7 col-xxl-9 d-flex flex-column justify-content-between my-2 px-2">
         <div>

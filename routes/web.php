@@ -120,6 +120,12 @@ Route::get('/admin/orders', 'OrderController@index')->name('admin.orders');
 Route::get('/admin/products', 'ProductController@index')->name('admin.products');
 Route::get('/admin/categories', 'CategoryController@index')->name('admin.categories');
 Route::get('/admin/customers', 'UserController@index')->name('admin.customers');
+Route::get('/admin/contents', 'ContentController@index')->name('admin.contents');
+// Models creation
+Route::get('/admin/product/create', 'ProductController@create')->name('admin.product.create');
+Route::post('/admin/product/create', 'ProductController@store')->name('admin.product.store');
+Route::get('/admin/content/create', 'ContentController@create')->name('admin.content.create');
+Route::post('/admin/content/create', 'ContentController@store')->name('admin.content.store');
 // Models edition
 Route::get('/admin/order/{order}', 'OrderController@show')->name('admin.order.show');
 Route::get('/admin/product/{product}', 'ProductController@edit')->name('admin.product.edit');
@@ -127,9 +133,12 @@ Route::post('/admin/product/{product}', 'ProductController@update')->name('admin
 Route::get('/admin/category/{category}', 'CategoryController@edit')->name('admin.category.edit');
 Route::post('/admin/category/{category}', 'CategoryController@update')->name('admin.category.edit');
 Route::get('/admin/customer/{user}', 'UserController@edit')->name('admin.customer.edit');
+Route::get('/admin/content/{content}/edit', 'ContentController@edit')->name('admin.content.edit');
+Route::post('/admin/content/{content}/edit', 'ContentController@update')->name('admin.content.edit');
 // Search
 Route::get('/admin/search/orders', 'Admin\SearchController@orders')->name('admin.search.orders');
 Route::get('/admin/search/products', 'Admin\SearchController@products')->name('admin.search.products');
 Route::get('/admin/search/categories', 'Admin\SearchController@categories')->name('admin.search.categories');
 Route::get('/admin/search/customers', 'Admin\SearchController@customers')->name('admin.search.customers');
+Route::get('/admin/search/contents', 'Admin\SearchController@contents')->name('admin.search.contents');
  /** ============ */

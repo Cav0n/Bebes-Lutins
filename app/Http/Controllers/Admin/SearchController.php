@@ -33,9 +33,10 @@ class SearchController extends Controller
             return redirect()->route('admin')->withErrors(['search' => 'La recherche ne peut pas être vide.']);
         }
 
-        $orders = \App\Order::where('trackingNumber', 'like', '%' . $request['search'] . '%')->get();
+        $orders = \App\Order::where('trackingNumber', 'like', '%' . $request['search'] . '%')->paginate(15);
+        $title = 'Commandes';
 
-        return view('pages.admin.index')->withOrders($orders)->withInSearch(true);
+        return view('pages.admin.index')->withOrders($orders)->withInSearch(true)->withCardTitle($title);
     }
 
     public function products(Request $request)
@@ -44,9 +45,10 @@ class SearchController extends Controller
             return redirect()->route('admin')->withErrors(['search' => 'La recherche ne peut pas être vide.']);
         }
 
-        $products = \App\Product::where('name', 'like', '%' . $request['search'] . '%')->get();
+        $products = \App\Product::where('name', 'like', '%' . $request['search'] . '%')->paginate(15);
+        $title = 'Produits';
 
-        return view('pages.admin.products')->withProducts($products)->withInSearch(true);
+        return view('pages.admin.products')->withProducts($products)->withInSearch(true)->withCardTitle($title);
     }
 
     public function categories(Request $request)
@@ -55,9 +57,10 @@ class SearchController extends Controller
             return redirect()->route('admin')->withErrors(['search' => 'La recherche ne peut pas être vide.']);
         }
 
-        $categories = \App\Category::where('name', 'like', '%' . $request['search'] . '%')->get();
+        $categories = \App\Category::where('name', 'like', '%' . $request['search'] . '%')->paginate(15);
+        $title = 'Catégories';
 
-        return view('pages.admin.categories')->withCategories($categories)->withInSearch(true);
+        return view('pages.admin.categories')->withCategories($categories)->withInSearch(true)->withCardTitle($title);
     }
 
     public function customers(Request $request)
@@ -66,8 +69,9 @@ class SearchController extends Controller
             return redirect()->route('admin')->withErrors(['search' => 'La recherche ne peut pas être vide.']);
         }
 
-        $customers = \App\User::where('firstname', 'like', '%' . $request['search'] . '%')->get();
+        $customers = \App\User::where('firstname', 'like', '%' . $request['search'] . '%')->paginate(15);
+        $title = 'Clients';
 
-        return view('pages.admin.customers')->withCustomers($customers)->withInSearch(true);
+        return view('pages.admin.customers')->withCustomers($customers)->withInSearch(true)->withCardTitle($title);
     }
 }

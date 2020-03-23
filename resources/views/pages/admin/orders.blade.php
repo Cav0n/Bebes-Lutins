@@ -4,7 +4,7 @@
 
     <div class="card rounded-0 border shadow-sm">
         <div class="card-header">
-            <h2 class="h4 mb-0">Commandes</h2>
+            <h2 class="h4 mb-0">{!! $cardTitle !!}</h2>
         </div>
         <div class="card-body">
             <form action="{{ route('admin.search.orders') }}" class="input-group" method="GET">
@@ -25,7 +25,7 @@
             @endif
 
             @if(count($orders))
-                <table class="table table-light mt-2 mb-0 border">
+                <table class="table table-striped table-light mt-2 mb-0">
                     <thead class="thead-light">
                     <tr>
                         <th class="d-none d-md-table-cell">ID</th>
@@ -88,6 +88,10 @@
                     @endforeach
                     </tbody>
                 </table>
+                <div class="pagination-container d-flex justify-content-center">
+                    {{-- TODO: Create custom pagination view --}}
+                    {{ $orders->links() }}
+                </div>
             @endif
         </div>
     </div>

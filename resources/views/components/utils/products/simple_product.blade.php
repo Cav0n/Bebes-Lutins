@@ -1,6 +1,6 @@
 <div class='product-container col-6 col-md-4 col-lg-3 my-2'>
     <div class="product card rounded-0">
-        <img class="card-img-top rounded-0" src="{{ asset($product->images->first()->url) }}" alt="{{ $product->images->first()->name }}">
+        <img class="card-img-top rounded-0" src="{{ $product->images()->count() ? $product->images()->first()->url : null }}" alt="{{ $product->images()->count() ? $product->images()->first()->name : null  }}">
         <div class="card-body p-0">
             <p class="card-text mb-0 product-name p-3">
                 <a href="{{ route('product', ['product' => $product->id]) }}">

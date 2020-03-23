@@ -13,4 +13,9 @@ class Image extends Model
     {
         return $this->belongsToMany('App\Product');
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany('App\Category');
+    }
 }

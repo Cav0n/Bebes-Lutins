@@ -14,7 +14,10 @@ class ContentController extends Controller
      */
     public function index()
     {
-        //
+        $contents = Content::orderBy('title')->get();
+        $title = 'Contenus';
+
+        return view('pages.admin.contents')->withContents($contents)->withCardTitle($title);
     }
 
     /**
@@ -57,7 +60,7 @@ class ContentController extends Controller
      */
     public function edit(Content $content)
     {
-        //
+        return view('pages.admin.content')->with('content', $content);
     }
 
     /**
@@ -69,7 +72,19 @@ class ContentController extends Controller
      */
     public function update(Request $request, Content $content)
     {
-        //
+        foreach ($request['section'] as $r){
+            if (\App\ContentSection::where('title', $r['title'])->exists()) {
+                $section = \App\ContentSection::where('title', $r['title'])->first();
+            } else {
+                $section = new \App\ContentSection();
+            }
+
+            $section->title = $r['title'];
+            $section->text = $r['text'];
+            $section->save();
+        }
+
+        return back()->with('successMessage', "Contenu sauvegardé avec succés !");
     }
 
     /**

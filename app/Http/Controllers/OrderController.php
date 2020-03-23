@@ -4,11 +4,91 @@ namespace App\Http\Controllers;
 
 use View;
 use App\Order;
+use GuzzleHttp\Client;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    public function importFromJSON()
+    {
+        $client = new Client();
+        $res = $client->get('https://bebes-lutins.fr/api/orders');
+        $result = json_decode($res->getBody());
+
+        Order::destroy(Order::all());
+
+        $count = 0;
+        foreach ($result as $r) {
+            $order = new Order();
+            $order->status = $this->integerStatusToStringStatus($r->status);
+            $order->paymentMethod = $this->integerPaymentMethodToStringPaymentMethod($r->paymentMethod);
+            $order->shippingCosts = $r->shippingPrice;
+            $order->email = $r->user->email;
+            $order->phone = $r->user->phone;
+            $order->trackingNumber = $r->id;
+            $order->billing_address_id = \App\Address::where('street', $r->billing_address->street)->where('lastname', $r->billing_address->lastname)->first()->id;
+            $order->shipping_address_id = $r->shipping_address ? \App\Address::where('street', $r->shipping_address->street)->where('lastname', $r->shipping_address->lastname)->first()->id : null;
+            $order->user_id = $r->user ? \App\User::where('email', $r->user->email)->exists() ? \App\User::where('email', $r->user->email)->first()->id  : null : null;
+            $order->created_at = $r->created_at;
+            $order->updated_at = $r->updated_at;
+            $order->save();
+            $count++;
+        }
+        echo $count . ' orders imported !' . "\n";
+    }
+
+    public function integerStatusToStringStatus(int $status)
+    {
+        switch ($status) {
+            case 0:
+                return 'WAITING_PAYMENT';
+            break;
+            case 1:
+                return 'PROCESSING';
+            break;
+            case 2:
+                return 'DELIVERING';
+            break;
+            case 22:
+                return 'WITHDRAWAL';
+            break;
+            case 3:
+                return 'DELIVERED';
+            break;
+            case 33:
+                return 'REGISTERED_PARTICIPATION';
+            break;
+            case -1:
+                return 'CANCELED';
+            break;
+            case -2:
+                return 'REFUSED_PAYMENT';
+            break;
+            case -3:
+                return 'REFUSED_PAYMENT';
+            break;
+            default:
+                return 'STATUS_ERROR';
+            break;
+        }
+    }
+
+    public function integerPaymentMethodToStringPaymentMethod(int $paymentMethod)
+    {
+        switch ($paymentMethod) {
+            case 1:
+                return 'CARD';
+            break;
+            case 2:
+                return 'CHEQUE';
+            break;
+            default:
+                return 'PAYMENT_METHOD_ERROR';
+            break;
+        }
+    }
+
     public function showTrackingPage()
     {
         return view('pages.order.tracking');
@@ -29,11 +109,20 @@ class OrderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = \App\Order::orderBy('created_at', 'desc')->get();
+        $title = 'Commandes';
 
-        return view('pages.admin.index')->withOrders($orders);
+        if (null !== $request['status']) {
+            $orders = \App\Order::whereIn('status', $request['status'])->orderBy('created_at', 'desc');
+            foreach ($request['status'] as $status) {
+                $title .= ' <span class="badge badge-pill badge-dark small" style="font-size:12px;">' . trans('order.status.' . $status) . '</span>';
+            }
+        } else {
+            $orders = \App\Order::orderBy('created_at', 'desc');
+        }
+
+        return view('pages.admin.orders')->withOrders($orders->paginate(15))->withCardTitle($title);
     }
 
     /**

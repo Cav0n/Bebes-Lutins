@@ -25,7 +25,7 @@
         @endif
 
         @if(count($categories))
-        <table class="table table-light mt-2 mb-0">
+        <table class="table table-light mt-2 mb-0 table-striped">
             <thead class="thead-light">
                 <tr>
                     <th class='text-center' style='width:2rem;'>Position</th>
@@ -35,16 +35,20 @@
             </thead>
             <tbody>
                 @foreach ($categories as $category)
-                <tr>
-                    <td class='text-center' style='width:2rem;'> {{ $category->rank }} </td>
-                    <td> {{ $category->name }} </td>
-                    <td class='text-right' style='width:4rem;'>
+                <tr @if($category->isHidden) style="opacity:0.5" @endif>
+                    <td class='text-center align-middle' style='width:2rem;'> {{ $category->rank }} </td>
+                    <td class='align-middle'> {{ $category->name }} @if($category->isHidden) <span class="badge badge-pill badge-dark">Caché</span> @endif </td>
+                    <td class='text-right align-middle' style='width:4rem;'>
                         <a class="btn btn-outline-dark" href="{{ route('admin.category.edit', ['category' => $category]) }}">Voir</a>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
+        <div class="pagination-container d-flex justify-content-center">
+            {{-- TODO: Create custom pagination view --}}
+            {{ $categories->links() }}
+        </div>
         @endif
     </div>
 </div>

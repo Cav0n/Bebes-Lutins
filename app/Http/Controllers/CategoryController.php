@@ -3,11 +3,83 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Exception;
 
 class CategoryController extends Controller
 {
+    public function importFromJSON()
+    {
+        $client = new Client();
+        $res = $client->get('https://bebes-lutins.fr/api/categories');
+        $result = json_decode($res->getBody());
+
+        Category::destroy(Category::all());
+
+        $count = 0;
+        foreach($result as $r) {
+            if (null === $r->id || '' === $r->id) {
+                continue;
+            }
+            $category = new Category();
+            $category->id = $r->id;
+            $category->name = $r->name;
+            $category->description = $r->description;
+            $category->rank = $r->rank;
+            $category->isHidden = $r->isHidden;
+            $category->isDeleted = $r->isDeleted;
+            $category->created_at = $r->created_at;
+            $category->updated_at = $r->updated_at;
+            $category->parentId = $r->parent_id;
+            $category->save();
+            $count++;
+        }
+
+        echo $count . ' categories imported !' . "\n";
+    }
+
+    public function importImagesFromJSON()
+    {
+        $client = new Client();
+        $res = $client->get('https://bebes-lutins.fr/api/categories/images');
+        $result = json_decode($res->getBody());
+
+        $count = 0;
+        foreach ($result as $r) {
+            $image = new \App\Image();
+            $image->name = $r->name;
+            $image->url = '/images/categories/' . $r->name;
+            $image->size = isset($r->size) ? $r->size : 0;
+            $image->created_at = $r->created_at;
+            $image->updated_at = $r->updated_at;
+            $image->save();
+
+            if (null !== $category = \App\Category::find($r->categoryId)) {
+                $category->images()->attach($image);
+            }
+            $count++;
+        }
+
+        echo $count . ' category images imported !' . "\n";
+    }
+
+    public function importRelationsFromJSON()
+    {
+        $client = new Client();
+        $res = $client->get('https://bebes-lutins.fr/api/categories/relations');
+        $result = json_decode($res->getBody());
+
+        $count = 0;
+        foreach($result as $r) {
+            Category::find($r->category_id)->products()->detach($r->product_id);
+            Category::find($r->category_id)->products()->attach($r->product_id);
+            $count++;
+        }
+
+        echo $count . ' categories products relations imported !' . "\n";
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +87,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('name', 'asc')->get();
+        $categories = Category::where('isDeleted', 0)->orderBy('rank', 'asc')->paginate(15);
 
         return view('pages.admin.categories', ['categories' => $categories]);
     }

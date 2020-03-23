@@ -4,12 +4,15 @@
 /public/css
 /public/js
 /public/images
+/public/vendor
 /storage/framework
 /storage/*.key
 /vendor
 /.idea
 
 /public/mix-manifest.json
+/app/Providers/TelescopeServiceProvider.php
+/config/telescope.php
 
 Homestead.json
 Homestead.yaml

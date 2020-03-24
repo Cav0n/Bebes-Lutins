@@ -6,13 +6,12 @@
 
     <div class="container-fluid py-5">
         <div class="row justify-content-center">
-            <div class="col-11 col-md-9 col-lg-8 col-xl-7 col-xxl-6 col-xxxl-5 card p-0">
+            <div class="col-11 col-md-9 col-lg-8 col-xl-7 col-xxl-6 col-xxxl-5 card p-0 rounded-0 border-0 shadow-sm">
                 <div class="card-header bg-white">
-                    <h1 class="mb-0"><b>Contactez-nous</b></h1>
+                    <h1 class="mb-0">Contactez-nous</h1>
                 </div>
                 <div class="card-body row">
                     <div class="col-lg-6 col-xxxl-5 order-1 order-lg-0 mt-3 mt-lg-0">
-                        <h2 class="card-title">Moyens de contact</h2>
                         <ul class="list-unstyled">
                             <li class="mb-3">
                                 <h3 class="h4 mb-0">Mail</h3>
@@ -40,7 +39,6 @@
                                 {{ session()->get('success_message') }}
                             </div>
                         @endif
-                        <h2 class="card-title">Formulaire de contact</h2>
                         <form action="/contact" method="POST">
                             @csrf
                             <div class="row">
@@ -71,7 +69,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="card-footer text-muted">
+                <div class="card-footer bg-white">
                     <a href="/">Retour à la boutique</a>
                 </div>
             </div>

@@ -11,5 +11,18 @@ mod_rewrite has to be enabled :
 - composer install
 - npm install
 - npm run dev
+
+## Telescope (debugger)
+- composer require laravel/telescope
 - php artisan telescope:install
 - php artisan migrate
+- uncomment this in app/Providers/AppServiceProvider.php - register(): 
+```
+if ($this->app->isLocal()) {
+	$this->app->register(TelescopeServiceProvider::class);
+}
+```
+- uncomment this in config/app.php : 
+```
+App\Providers\TelescopeServiceProvider::class,
+```

@@ -75,10 +75,12 @@
                 <div class="separator mt-3"></div>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-dark" href="#" id="categories-dropdown-mobile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nos produits</a>
-                    <div class="dropdown-menu" aria-labelledby="categories-dropdown-mobile">
+                    <div class="dropdown-menu shadow-none" aria-labelledby="categories-dropdown-mobile">
                         @foreach ($categories as $category)
+                            @if (null == $category->parentId && !$category->isHidden)
                             <a class="dropdown-item" href="{{ route('category', ['category' => $category->id]) }}">
                                 {{ $category->name }}</a>
+                            @endif
                         @endforeach
                     </div>
                 </li>

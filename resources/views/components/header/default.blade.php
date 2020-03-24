@@ -60,9 +60,7 @@
                     <div class="left d-flex">
                         <a href="/" style="width:12rem;" class="h5 py-2 m-0 border-right">Accueil</a>
                         <a href="#" style="width:12rem;" class="h5 py-2 m-0 border-right dropdown-toggle" id="categories-dropdown-desktop" aria-haspopup="true" aria-expanded="false">Nos produits</a>
-                        <div id="categories-dropdown-desktop-container" class="dropdown-menu w-100" aria-labelledby="categories-dropdown-desktop">
                             @include('components.utils.categories.dropdown_menu', ['categories' => $categories])
-                        </div>
                     </div>
                     <div class="right d-flex">
                         <a href="#" style="width: 12rem;" class="h5 py-2 m-0 border-right border-left">Qui sommes nous ?</a>

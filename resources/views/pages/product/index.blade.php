@@ -34,7 +34,9 @@
                             Ajouter au panier</button>
                     </div>
 
-                    <p>{!! $product->description !!}</p>
+                    <div class="text-justify mt-3">
+                        {!! $product->description !!}
+                    </div>
                 </div>
             </div>
         </div>

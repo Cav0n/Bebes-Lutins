@@ -18,7 +18,7 @@
         <div class="col-lg-9 col-xl-8 col-xxl-6 col-xxxl-5">
 
             <div id="category-cover" class="w-100 p-3 text-white">
-                <p class="col-md-6 mb-0 pt-5 pt-lg-0">{!! $category->breadcrumb !!}</p>
+                <p id="category-breadcrumb" class="col-12 mb-0">{!! $category->breadcrumb !!}</p>
                 <h1 class="col-md-6">{{$category->name}}</h1>
                 <p class="col-md-6 text-justify">{{$category->description}}</p>
             </div>

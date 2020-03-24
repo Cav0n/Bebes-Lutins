@@ -17,3 +17,15 @@
         <span class="sr-only">Next</span>
     </a>
 </div>
+
+<div id="thumbnails" class="row px-3">
+    @php $index = 0; @endphp
+    @foreach ($product->images as $image)
+    <div class="col-3 px-1 pb-2">
+        <a class="thumbnail-link" data-target="#mainCarousel" data-slide-to="{{ $index }}" style="cursor: pointer;">
+            <img src="{{ asset($image->url) }}" alt="{{ $image->name }}" class="w-100">
+        </a>
+    </div>
+    @php $index++; @endphp
+    @endforeach
+</div>

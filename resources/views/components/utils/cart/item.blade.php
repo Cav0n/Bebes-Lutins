@@ -1,4 +1,4 @@
-<div class="cart-product-container border bg-white row my-2 mx-0">
+<div class="cart-product-container shadow-sm bg-white row my-2 mx-0">
     <div class="col-3 col-md-2 col-lg-3 p-0">
         <img src="{{ $item->product->images()->count() ? $item->product->images()->first()->url : null }}" class="w-100 h-100" style="object-fit:cover">
     </div>

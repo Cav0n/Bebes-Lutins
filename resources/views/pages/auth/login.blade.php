@@ -12,7 +12,7 @@
                 Votre mot de passe a bien été modifié.
             </div>
             @endif
-            <div class="p-3 border bg-white">
+            <div class="p-3 shadow-sm bg-white">
                 <h1>Connexion</h1>
 
                 <form action="{{route('login')}}" method="POST">

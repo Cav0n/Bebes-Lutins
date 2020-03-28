@@ -1,1 +1,17 @@
+// Variables
+@import 'variables';
+// Tagify (for custom tags inputs)
 @import '~@yaireo/tagify/src/tagify';
+
+#admin-sidenav.sidenav a{
+    color: $dark;
+}
+
+#admin-sidenav.sidenav a.active{
+    color: $secondary;
+    font-weight: bold;
+}
+
+#admin-sidenav.sidenav svg.active{
+    fill: $secondary;
+}

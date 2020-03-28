@@ -71,7 +71,7 @@
 
 
             {{-- MOBILE NAVBAR --}}
-            <ul class="navbar-nav mr-auto mt-5 mt-lg-0 d-flex d-lg-none">
+            <ul class="mobile navbar-nav mr-auto mt-5 mt-lg-0 d-flex d-lg-none">
                 <div class="separator mt-3"></div>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-dark" href="#" id="categories-dropdown-mobile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nos produits</a>

@@ -52,14 +52,14 @@
             </div>
             <div class="col-10 d-flex flex-column">
                 <a href='{{ route('admin.customers') }}' class='h5 mb-0
-                    @if(url()->current() == route('admin.customers')) active @endif'>
+                    @if(url()->current() == route('admin.customers') && url()->current() == route('admin.reviews')) active @endif'>
                     Clients</a>
 
                 <a href='{{ route('admin.customers') }}' class='mb-0
                     @if(url()->current() == route('admin.customers')) active @endif'>
                     Tous les clients</a>
-                <a href='{{ route('admin.customers') }}' class='mb-0
-                    @if(url()->current() == route('admin.customers')) active @endif'>
+                <a href='{{ route('admin.reviews') }}' class='mb-0
+                    @if(url()->current() == route('admin.reviews')) active @endif'>
                     Avis clients</a>
             </div>
         </div>

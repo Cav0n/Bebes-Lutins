@@ -20,14 +20,19 @@
 <div class="container-fluid py-5">
     <div class="row justify-content-center">
         <div class="col-lg-9 col-xl-8 col-xxl-6 col-xxxl-5 row">
+            <p id="product-breadcrumb" class="px-3 pt-3">{!! $product->breadcrumb !!}</p>
             <div id="product-image-container" class="col-12 col-sm-5 col-xxl-4 col-xxxl-3">
                 @include('components.utils.carousel.product')
             </div>
             <div class="col-12 col-sm-7 col-xxl-8 col-xxxl-9 p-0">
-                <p id="product-breadcrumb" class="px-3 pt-3">{!! $product->breadcrumb !!}</p>
-                <div class="bg-white p-3">
+                <div class="bg-white p-3 shadow-sm">
                     <h1 class="mb-0">{{ $product->name }}</h1>
-                    <h2 class="h4">{{ \App\NumberConvertor::doubleToPrice($product->price) }}</h2>
+                    <div class="d-flex">
+                        <h2 class="h4 mb-0 d-flex flex-column justify-content-center">{{ \App\NumberConvertor::doubleToPrice($product->price) }}</h2>
+                        @admin
+                        <a class="btn btn-outline-dark py-0 ml-3" href="{{ route('admin.product.edit', ['product' => $product]) }}" role="button">Editer</a>
+                        @endadmin
+                    </div>
                     <div class="d-flex my-2">
                         <input type="number" class="form-control input-spinner quantity-spinner" name="quantity" id="quantity" aria-describedby="helpQuantity" min="1" max="{{ $product->stock }}" value="1">
                         <button type="button" class="btn btn-primary add-to-cart rounded-0 ml-3" data-id="{{ $product->id }}" data-toggle="modal" data-quantity="1" data-cart_id="{{ session()->get('shopping_cart')->id }}" data-target="#product-added-modal">

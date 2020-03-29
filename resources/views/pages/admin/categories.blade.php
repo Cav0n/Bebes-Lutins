@@ -25,7 +25,7 @@
         @endif
 
         @if(count($categories))
-        <table class="table table-light mt-2 mb-0 table-striped">
+        <table class="table table-light mt-2 mb-0 table-striped border">
             <thead class="thead-light">
                 <tr>
                     <th class='text-center' style='width:2rem;'>Position</th>

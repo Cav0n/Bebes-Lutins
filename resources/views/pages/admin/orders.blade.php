@@ -25,7 +25,7 @@
             @endif
 
             @if(count($orders))
-                <table class="table table-striped table-light mt-2 mb-0">
+                <table class="table table-striped table-light border mt-2 mb-0">
                     <thead class="thead-light">
                     <tr>
                         <th class="d-none d-md-table-cell">ID</th>

@@ -26,7 +26,7 @@
         @endif
 
         @if(count($products))
-        <table class="table table-light mt-2 mb-0 table-striped">
+        <table class="table table-light mt-2 mb-0 table-striped border">
             <thead class="thead-light">
                 <tr>
                     <th class="d-none d-lg-table-cell" style="width: 1rem;"></th>
@@ -40,7 +40,7 @@
             <tbody>
                 @foreach ($products as $product)
                 <tr @if($product->isHidden) style="opacity:0.5" @endif>
-                    <td class="d-none d-lg-table-cell px-0" style="width: 3rem;"><img src='{{ $product->images()->count() ? $product->images()->first()->url : null }}' class="w-100"></td>
+                    <td class="d-none d-lg-table-cell px-0 pl-2" style="width: 3rem;"><img src='{{ $product->images()->count() ? $product->images()->first()->url : null }}' class="w-100"></td>
                     <td class="align-middle" style="width: 2rem;"> {{ $product->reference ? '#' . $product->reference : null }} </td>
                     <td class="align-middle">
                         {{ $product->name }}

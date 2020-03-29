@@ -108,18 +108,8 @@ header .navbar-collapse .dropdown-item {
     }
 }
 
-#product-image-container {
-    margin-top: 3.5rem;
-}
-
-@include media-breakpoint-only(xs) {
-    #product-image-container {
-        margin-top: 0;
-    }
-}
-
 #product-breadcrumb a {
-    color: $dark;
+    color: #616161;
 }
 
 #category-breadcrumb a {

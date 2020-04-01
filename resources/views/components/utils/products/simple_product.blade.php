@@ -5,10 +5,18 @@
             <p class="card-text mb-0 product-name p-3">
                 <a href="{{ route('product', ['product' => $product->id]) }}">
                 {{ $product->name }}</a></p>
-            <p class="card-text mb-0 product-price border-top py-2 px-3 text-center font-weight-bold">
-                {{ App\NumberConvertor::doubleToPrice($product->price) }}</p>
-                <button type="button" class="btn btn-primary add-to-cart w-100 rounded-0" data-id="{{ $product->id }}" data-toggle="modal" data-quantity="1" data-cart_id="{{ session()->get('shopping_cart')->id }}" data-target="#product-added-modal">
-                    Ajouter au panier</button>
+
+            <div class="card-text mb-0 product-price border-top px-3 py-1 text-center">
+                @if($product->globalMark > 0)
+                <div class="mb-0 product-mark d-flex justify-content-center">
+                    <span class="fixed-rating mr-2" data-mark='{{ $product->globalMark }}'></span>
+                    <p class="mb-0 d-none d-sm-flex">{{ round($product->globalMark, 1) }} / 5</p></div>
+                @endif
+                <p class="text-center mb-0 font-weight-bold">
+                    {{ App\NumberConvertor::doubleToPrice($product->price) }} @if ($product->isInPromo)<del class="font-weight-normal">{{ App\NumberConvertor::doubleToPrice($product->priceWithoutPromo) }}</del>@endif </p>
+            </div>
+            <button type="button" class="btn btn-primary add-to-cart w-100 rounded-0" data-id="{{ $product->id }}" data-toggle="modal" data-quantity="1" data-cart_id="{{ session()->get('shopping_cart')->id }}" data-target="#product-added-modal">
+                Ajouter au panier</button>
         </div>
     </div>
 </div>

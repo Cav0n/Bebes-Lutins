@@ -47,8 +47,11 @@
                         @if($product->isHidden) <span class="badge badge-pill badge-dark">Caché</span> @endif
                         @if($product->isHighlighted) <span class="badge badge-pill badge-secondary">Mis en avant</span> @endif
                         @if(0 >= $product->stock) <span class="badge badge-pill badge-warning">PLUS DE STOCK</span> @endif
+                        @if($product->isInPromo) <span class="badge badge-pill badge-primary">En promo</span> @endif
                     </td>
-                    <td class="d-none d-md-table-cell px-0 text-right align-middle" style="width: 5rem;"> {{ \App\NumberConvertor::doubleToPrice($product->price) }} </td>
+                    <td class="d-none d-md-table-cell px-0 text-right align-middle" style="width: 5rem;">
+                        {{ \App\NumberConvertor::doubleToPrice($product->price) }}
+                        @if($product->isInPromo) <p class="mb-0"><del>{{ \App\NumberConvertor::doubleToPrice($product->priceWithoutPromo) }}</del></p> @endif</td>
                     <td class="d-none d-md-table-cell text-center align-middle" style="width: 1.5rem;"> {{ $product->stock }} </td>
                     <td style="width: 3rem;" class='text-right align-middle'>
                         <a class="btn btn-outline-dark" href="{{ route('admin.product.edit', ['product' => $product]) }}" role="button">Éditer</a>

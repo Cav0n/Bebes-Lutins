@@ -68,6 +68,7 @@ Route::get('/categories/{category}', 'CategoryController@show')->name('category'
  * ============
  */
 Route::get('/produits/{product}', 'ProductController@show')->name('product');
+Route::post('/produits/{product}/ajout-commentaire', 'ReviewController@store')->name('product.reviews.add');
 /** ============ */
 
 /**

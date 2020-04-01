@@ -44,7 +44,7 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="price">Prix</label>
-                            <input type="number" class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" name="price" id="price" value='{{ isset($product) ? old('price', $product->price) : old('price') }}' min='0' step='0.01'>
+                            <input type="number" class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" name="price" id="price" value='{{ isset($product) ? old('price', $product->priceWithoutPromo) : old('price') }}' min='0' step='0.01'>
                             {!! $errors->has('price') ? "<div class='invalid-feedback'>" . ucfirst($errors->first('price')) . "</div>" : '' !!}
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label">

@@ -177,7 +177,9 @@ return [
             'city' => 'la ville',
             'complements' => 'les compléments',
             'company' => 'le nom d\'entreprise',
-        ]
+        ],
+        'text' => 'le texte',
+        'title' => 'le titre',
     ],
 
 ];

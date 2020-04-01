@@ -109,7 +109,7 @@ class ProductController extends Controller
             'name' => 'required|min:5|unique:products,name',
             'description' => 'required|min:10',
             'price' => 'required|numeric|min:0.01',
-            'promoPrice' => 'required_with:isInPromo|nullable|numeric|min:0.01',
+            'promoPrice' => 'required_with:isInPromo|nullable|numeric|min:0.01|lt:price',
             'stock' => 'required|numeric|min:0',
         ]);
 
@@ -211,7 +211,7 @@ class ProductController extends Controller
             'name' => 'required|min:5|unique:products,name,'.$product->id,
             'description' => 'required|min:10',
             'price' => 'required|numeric|min:0.01',
-            'promoPrice' => 'required_with:isInPromo|nullable|numeric|min:0.01',
+            'promoPrice' => 'required_with:isInPromo|nullable|numeric|min:0.01|lt:price',
             'stock' => 'required|numeric|min:0',
         ]);
 

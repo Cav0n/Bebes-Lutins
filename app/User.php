@@ -61,6 +61,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Address');
     }
 
+    public function reviews()
+    {
+        return $this->belongsToMany('App\Review');
+    }
+
     public function getFirstnameAttribute($value)
     {
         return ucfirst($value);

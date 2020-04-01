@@ -26,7 +26,7 @@
         @endif
 
         @if(count($contents))
-        <table class="table table-light mt-2 mb-0">
+        <table class="table table-striped table-light mt-2 mb-0 border">
             <thead class="thead-light">
                 <tr>
                     <th>Titre</th>
@@ -37,8 +37,8 @@
             <tbody>
                 @foreach ($contents as $content)
                 <tr>
-                    <td>{{ $content->title }}</td>
-                    <td>{{ $content->url }}</td>
+                    <td class="align-middle">{{ $content->title }}</td>
+                    <td class="align-middle">{{ $content->url }}</td>
                     <td style="width: 3rem;" class='text-right'>
                         <a class="btn btn-outline-dark" href="{{ route('admin.content.edit', ['content' => $content]) }}" role="button">Éditer</a>
                     </td>

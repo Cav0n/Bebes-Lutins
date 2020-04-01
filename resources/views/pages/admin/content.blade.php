@@ -40,12 +40,3 @@
     </div>
 
 @endsection
-
-@section('scripts')
-    <script>
-    tinymce.init({
-      selector: '.tiny-mce',
-      plugins: "image"
-    });
-  </script>
-@endsection

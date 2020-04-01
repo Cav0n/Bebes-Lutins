@@ -26,7 +26,7 @@
         @endif
 
         @if(count($products))
-        <table class="table table-light mt-2 mb-0 table-striped">
+        <table class="table table-light mt-2 mb-0 table-striped border">
             <thead class="thead-light">
                 <tr>
                     <th class="d-none d-lg-table-cell" style="width: 1rem;"></th>
@@ -40,15 +40,18 @@
             <tbody>
                 @foreach ($products as $product)
                 <tr @if($product->isHidden) style="opacity:0.5" @endif>
-                    <td class="d-none d-lg-table-cell px-0" style="width: 3rem;"><img src='{{ $product->images()->count() ? $product->images()->first()->url : null }}' class="w-100"></td>
+                    <td class="d-none d-lg-table-cell px-0 pl-2" style="width: 3rem;"><img src='{{ $product->images()->count() ? $product->images()->first()->url : null }}' class="w-100"></td>
                     <td class="align-middle" style="width: 2rem;"> {{ $product->reference ? '#' . $product->reference : null }} </td>
                     <td class="align-middle">
                         {{ $product->name }}
                         @if($product->isHidden) <span class="badge badge-pill badge-dark">Caché</span> @endif
                         @if($product->isHighlighted) <span class="badge badge-pill badge-secondary">Mis en avant</span> @endif
                         @if(0 >= $product->stock) <span class="badge badge-pill badge-warning">PLUS DE STOCK</span> @endif
+                        @if($product->isInPromo) <span class="badge badge-pill badge-primary">En promo</span> @endif
                     </td>
-                    <td class="d-none d-md-table-cell px-0 text-right align-middle" style="width: 5rem;"> {{ \App\NumberConvertor::doubleToPrice($product->price) }} </td>
+                    <td class="d-none d-md-table-cell px-0 text-right align-middle" style="width: 5rem;">
+                        {{ \App\NumberConvertor::doubleToPrice($product->price) }}
+                        @if($product->isInPromo) <p class="mb-0"><del>{{ \App\NumberConvertor::doubleToPrice($product->priceWithoutPromo) }}</del></p> @endif</td>
                     <td class="d-none d-md-table-cell text-center align-middle" style="width: 1.5rem;"> {{ $product->stock }} </td>
                     <td style="width: 3rem;" class='text-right align-middle'>
                         <a class="btn btn-outline-dark" href="{{ route('admin.product.edit', ['product' => $product]) }}" role="button">Éditer</a>

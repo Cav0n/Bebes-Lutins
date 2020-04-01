@@ -1,29 +1,3 @@
-@php
-    $categories = \App\Category::orderBy('name', 'asc')->get();
-
-    $whitelistCategories = '';
-    $first = true;
-    foreach ($categories as $category) {
-        if (!$first) {
-            $whitelistCategories .= ",";
-        }
-        $whitelistCategories .= "'" . $category->name . "'";
-        $first = false;
-    }
-
-    if(isset($product)) {
-        $productCategories = "";
-        $first = true;
-        foreach ($product->categories as $category) {
-            if (!$first) {
-                $productCategories .= ',';
-            }
-            $productCategories .= $category->name;
-            $first = false;
-        }
-    }
-@endphp
-
 @extends('templates.admin')
 
 @section('content')
@@ -35,8 +9,9 @@
     @endif
 
     <div class="card rounded-0 border shadow-sm">
-        <div class="card-header">
-            <h2 class="h4 mb-0">{{ isset($product) ? $product->name : 'Création d\'un produit' }}</h2>
+        <div class="card-header d-flex justify-content-between">
+            <h2 class="h4 mb-0 d-flex flex-column justify-content-center">{{ isset($product) ? $product->name : 'Création d\'un produit' }}</h2>
+            @if(isset($product)) <a class="btn btn-outline-secondary" href="{{ route('product', ['product' => $product]) }}" role="button">Voir le produit</a> @endif
         </div>
         <div class="card-body">
             <a href='{{ route('admin.products') }}' class='text-dark'>< Produits</a>
@@ -69,11 +44,11 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label for="price">Prix</label>
-                            <input type="number" class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" name="price" id="price" value='{{ isset($product) ? old('price', $product->price) : old('price') }}' min='0' step='0.01'>
+                            <input type="number" class="form-control {{ $errors->has('price') ? 'is-invalid' : '' }}" name="price" id="price" value='{{ isset($product) ? old('price', $product->priceWithoutPromo) : old('price') }}' min='0' step='0.01'>
                             {!! $errors->has('price') ? "<div class='invalid-feedback'>" . ucfirst($errors->first('price')) . "</div>" : '' !!}
                             <div class="form-check form-check-inline">
                                 <label class="form-check-label">
-                                    <input class="form-check-input" type="checkbox" name="isInPromo" id="isInPromo" @if(isset($product) ? old('promoPrice', $product->promoPrice) : old('promoPrice')) checked @endif> 
+                                    <input class="form-check-input" type="checkbox" name="isInPromo" id="isInPromo" @if(isset($product) ? old('promoPrice', $product->promoPrice) : old('promoPrice')) checked @endif>
                                     Ce produit est en promotion
                                 </label>
                             </div>
@@ -99,7 +74,7 @@
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description" aria-describedby="helpDescription" placeholder="">{{ isset($product) ? old('description', $product->description) : old('description') }}</textarea>
+                    <textarea class="form-control tiny-mce {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description" aria-describedby="helpDescription" placeholder="">{{ isset($product) ? old('description', $product->description) : old('description') }}</textarea>
                     {!! $errors->has('description') ? "<div class='invalid-feedback'>" . ucfirst($errors->first('description')) . "</div>" : '' !!}
 
                     <small id="helpDescription" class="form-text text-muted">Soyez le plus explicite possible</small>
@@ -162,7 +137,7 @@
 
     {{-- TAGIFY (categories selector) --}}
     <script>
-        let categories = [ {!! $whitelistCategories !!} ]
+        let categories = [ {!! $categoriesForTagify !!} ]
 
         var input = document.querySelector('input[name=categories]'),
         tagify = new Tagify(input, {

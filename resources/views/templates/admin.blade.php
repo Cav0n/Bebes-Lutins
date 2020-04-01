@@ -71,6 +71,14 @@
     });
     </script>
 
+    {{-- Tiny MCE --}}
+    <script>
+    tinymce.init({
+      selector: '.tiny-mce',
+      plugins: "image"
+    });
+    </script>
+
     @yield('scripts')
 </body>
 </html>

@@ -12,7 +12,7 @@
                     <p class="mb-0">{{ $errors->first('throttle') }}</p>
                 </div>
             @endif
-            <div id="lost-password-container" class="p-3 border bg-white">
+            <div id="lost-password-container" class="p-3 shadow-sm bg-white">
                 <h1>J'ai perdu mon mot de passe</h1>
                 <p>Nous allons vous envoyer un email pour que vous puissiez reinitialiser votre mot de passe facilement.</p>
                 <div class="form-group">

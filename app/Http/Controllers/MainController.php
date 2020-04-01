@@ -38,4 +38,9 @@ class MainController extends Controller
 
         return redirect()->back()->with('success_message', 'Votre message a bien été envoyé.');
     }
+
+    public function page404()
+    {
+        return abort(404);
+    }
 }

@@ -6,7 +6,7 @@
 
 <div class="container-fluid py-5">
     <div class="row justify-content-center">
-        <div class="col-11 col-md-9 col-lg-8 col-xl-7 col-xxl-6 col-xxxl-5 card p-0">
+        <div class="col-11 col-md-9 col-lg-8 col-xl-7 col-xxl-6 col-xxxl-5 card p-0 border-0 rounded-0 shadow-sm">
 
             @include('components.customer_area.title')
 
@@ -42,7 +42,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer border-bottom p-3">
+            <div class="card-footer rounded-0 bg-white p-3">
                 <a href="{{route('logout')}}" class="mb-0 text-dark">Se déconnecter</a>
             </div>
         </div>

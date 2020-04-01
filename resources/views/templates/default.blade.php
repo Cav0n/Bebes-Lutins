@@ -22,7 +22,7 @@
 <body class="bg-white">
     {{-- App JS --}}
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/admin.js') }}"></script>
+    <script src="{{ asset('js/rater.js') }}"></script>
 
     @include('components.header.default')
 
@@ -53,6 +53,23 @@
         }
 
         $(".input-spinner").inputSpinner(SPINNER_CONFIG);
+    </script>
+
+    <script>
+         $(document).ready(function() {
+            $(".fixed-rating").each(function(){
+                tempOptions = {
+                    max_value: 5,
+                    step_size: 0.5,
+                    initial_value: $(this).data('mark'),
+                    selected_symbol_type: 'utf8_star', // Must be a key from symbols
+                    cursor: 'default',
+                    readonly: true,
+                }
+
+                $(this).rate(tempOptions);
+            });
+        });
     </script>
 
     @yield('scripts')

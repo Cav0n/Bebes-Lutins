@@ -180,6 +180,7 @@ return [
         ],
         'text' => 'le texte',
         'title' => 'le titre',
+        'promoPrice' => 'le prix en promotion',
     ],
 
 ];

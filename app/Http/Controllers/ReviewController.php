@@ -15,7 +15,9 @@ class ReviewController extends Controller
      */
     public function index()
     {
-        //
+        $reviews = \App\Review::paginate('15');
+
+        return view('pages.admin.reviews')->with('reviews', $reviews);
     }
 
     /**

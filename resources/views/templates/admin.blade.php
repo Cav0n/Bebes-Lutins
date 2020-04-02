@@ -16,6 +16,7 @@
 <body>
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/admin.js') }}"></script>
+    <script src="{{ asset('js/rater.js') }}"></script>
     <script src="https://cdn.tiny.cloud/1/o3xxn1egstud8k4clezmtiocupaj5kof1ox4k1ywocrgml58/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
     <header class="d-flex d-lg-none fixex-top">
@@ -78,6 +79,23 @@
       plugins: "image"
     });
     </script>
+
+<script>
+    $(document).ready(function() {
+       $(".fixed-rating").each(function(){
+           tempOptions = {
+               max_value: 5,
+               step_size: 0.5,
+               initial_value: $(this).data('mark'),
+               selected_symbol_type: 'utf8_star', // Must be a key from symbols
+               cursor: 'default',
+               readonly: true,
+           }
+
+           $(this).rate(tempOptions);
+       });
+   });
+</script>
 
     @yield('scripts')
 </body>

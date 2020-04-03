@@ -29,7 +29,7 @@
                     <thead class="thead-light">
                     <tr>
                         <th class="d-none d-md-table-cell">ID</th>
-                        <th class='text-center'>Date</th>
+                        <th class='d-none d-sm-table-cell text-center'>Date</th>
                         <th>Client</th>
                         <th>Prix</th>
                         <th class="d-none d-lg-table-cell">Numéro de suivi</th>
@@ -41,7 +41,7 @@
                     @foreach ($orders as $order)
                         <tr>
                             <td class="d-none d-md-table-cell"> {{ $order->id }} </td>
-                            <td class='text-center'>
+                            <td class='d-none d-sm-table-cell text-center'>
                                 {{ $order->created_at->format('d/m/Y') }}
                                 <br> {{ $order->created_at->format('H:i') }}
                             </td>

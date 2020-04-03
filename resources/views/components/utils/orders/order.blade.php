@@ -46,21 +46,22 @@
 
     <p class="h5">Articles :</p>
     @foreach ($order->items as $item)
-        <div class="row my-2">
-            <div class="col-2 px-1 px-lg-3 col-lg-2">
+        <div class="row my-2 mx-0 bg-white p-2 border">
+            <div class="col-2 col-lg-1 px-0">
                 <img class="w-100" src="{{ $item->product->images()->count() ? $item->product->images()->first()->url : null }}" style="object-fit:cover">
             </div>
-            <div class="col-6 px-1 px-lg-3 col-lg-5 d-flex flex-column justify-content-center border-right">
+            <div class="col-10 px-1 px-lg-3 col-lg-6 d-flex flex-column justify-content-center ">
                 <a class='mb-0' href="{{ route('product', ['product' => $item->product->id]) }}">{{ $item->product->name }}</a>
                 <p class="mb-0 d-flex d-lg-none">Quantité : {{ $item->quantity }}</p>
+                <p class="mb-0 d-flex d-lg-none">Prix unitaire : {{ \App\NumberConvertor::doubleToPrice($item->unitPrice) }}</p>
             </div>
-            <div class="col-4 col-lg-2 d-flex flex-column justify-content-center border-right">
+            <div class="col-4 col-lg-2 d-none d-lg-flex flex-column justify-content-center border-left">
                 <p class="mb-0 text-center">{{ \App\NumberConvertor::doubleToPrice($item->unitPrice) }}</p>
             </div>
-            <div class="col-0 col-lg-1 d-none d-lg-flex flex-lg-column justify-content-center border-right">
+            <div class="col-0 col-lg-1 d-none d-lg-flex flex-lg-column justify-content-center border-left">
                 <p class="mb-0 text-center">x{{ $item->quantity }}</p>
             </div>
-            <div class="col-0 col-lg-2 d-none d-lg-flex flex-lg-column justify-content-center">
+            <div class="col-0 col-lg-2 d-none d-lg-flex flex-lg-column justify-content-center border-left">
                 <p class="mb-0 text-center">{{ \App\NumberConvertor::doubleToPrice($item->unitPrice * $item->quantity) }}</p>
             </div>
         </div>

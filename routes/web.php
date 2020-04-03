@@ -123,6 +123,7 @@ Route::get('/admin/categories', 'CategoryController@index')->name('admin.categor
 Route::get('/admin/customers', 'UserController@index')->name('admin.customers');
 Route::get('/admin/contents', 'ContentController@index')->name('admin.contents');
 Route::get('/admin/reviews', 'ReviewController@index')->name('admin.reviews');
+Route::get('/admin/settings', 'SettingController@index')->name('admin.settings');
 // Models creation
 Route::get('/admin/product/create', 'ProductController@create')->name('admin.product.create');
 Route::post('/admin/product/create', 'ProductController@store')->name('admin.product.store');

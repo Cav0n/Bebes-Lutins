@@ -207,6 +207,10 @@ class ProductController extends Controller
             return back()->withErrors('categories', 'Veuillez ajouter au moins une catégorie au produit.');
         }
 
+        if (null === $request['isInPromo']) {
+            $request['promoPrice'] = null;
+        }
+
         $request->validate([
             'name' => 'required|min:5|unique:products,name,'.$product->id,
             'description' => 'required|min:10',

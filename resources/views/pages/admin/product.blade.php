@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="form-group col-lg-12">
                         <label for="categories">Catégories</label>
-                        <input class="form-control {{ $errors->has('categories') ? 'is-invalid' : '' }}" name="categories" id="categorie" aria-describedby="helpCategories" value='{!! isset($productCategories) ? $productCategories : null !!}'>
+                        <textarea class="form-control {{ $errors->has('categories') ? 'is-invalid' : '' }}" name="categories" id="categorie" aria-describedby="helpCategories">{!! isset($productCategories) ? $productCategories : null !!}</textarea>
                         <small id="helpCategories" class="form-text text-muted"><a href="#" onclick="($('#categories-modal').modal('show'))">Cliquez ici pour voir la liste des catégories</a></small>
                     </div>
                 </div>
@@ -139,7 +139,7 @@
     <script>
         let categories = [ {!! $categoriesForTagify !!} ]
 
-        var input = document.querySelector('input[name=categories]'),
+        var input = document.querySelector('textarea[name=categories]'),
         tagify = new Tagify(input, {
             whitelist: categories,
             enforceWhitelist: true

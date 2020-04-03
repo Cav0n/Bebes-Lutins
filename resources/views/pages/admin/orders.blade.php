@@ -90,7 +90,7 @@
                 </table>
                 <div class="pagination-container d-flex justify-content-center">
                     {{-- TODO: Create custom pagination view --}}
-                    {{ $orders->links() }}
+                    {{ $orders->appends(['status' => \Request::get('status')])->links() }}
                 </div>
             @endif
         </div>

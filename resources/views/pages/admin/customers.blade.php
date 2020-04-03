@@ -8,7 +8,7 @@
     </div>
     <div class="card-body">
         <form action="{{ route('admin.search.customers') }}" class="input-group" method="GET">
-            <input class="form-control {{ $errors->has('search') ? 'is-invalid' : '' }}" type="text" name="search" placeholder="Rechercher un client" value="{{ old('search') }}">
+            <input class="form-control {{ $errors->has('search') ? 'is-invalid' : '' }}" type="text" name="search" placeholder="Rechercher un client" value="{{ \Request::get('search') }}">
             <div class="input-group-append">
                 <button class="input-group-text" id="my-addon">Rechercher</button>
             </div>
@@ -47,7 +47,7 @@
         </table>
         <div class="pagination-container d-flex justify-content-center">
             {{-- TODO: Create custom pagination view --}}
-            {{ $customers->links() }}
+            {{ $customers->appends(['search' => \Request::get('search')])->links() }}
         </div>
         @endif
     </div>

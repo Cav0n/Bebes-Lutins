@@ -8,11 +8,14 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * A custom login controller for admin backoffice.
+ */
 class LoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Login Controller
+    | [ADMIN] - Login Controller
     |--------------------------------------------------------------------------
     |
     | This controller handles authenticating users for the application and
@@ -30,11 +33,17 @@ class LoginController extends Controller
         $this->middleware('notAdmin', ['except' => 'logout']);
     }
 
+    /**
+     * Show admin login page
+     */
     public function showLoginPage()
     {
         return view('pages.admin.auth.login');
     }
 
+    /**
+     * Admin custom login
+     */
     public function login(Request $request)
     {
         // Define error message and rules
@@ -62,6 +71,9 @@ class LoginController extends Controller
                      ->withErrors(['email' => 'L\'email ou le mot de passe est incorrect.', ]);
     }
 
+    /**
+     * Admin custom logout
+     */
     public function logout()
     {
         session()->forget('shopping_cart');

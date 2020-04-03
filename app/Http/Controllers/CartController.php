@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Session;
-use Auth;
 use App\Cart;
 use Illuminate\Http\Request;
 
+/**
+ * Cart Model controller.
+ * Handle cart creation, and different steps (addresses addition, payment selection).
+ */
 class CartController extends Controller
 {
     /**

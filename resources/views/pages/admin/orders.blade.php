@@ -31,7 +31,7 @@
                         <th class="d-none d-md-table-cell">ID</th>
                         <th class='d-none d-sm-table-cell text-center'>Date</th>
                         <th>Client</th>
-                        <th>Prix</th>
+                        <th class="d-none d-sm-table-cell">Prix</th>
                         <th class="d-none d-lg-table-cell">Numéro de suivi</th>
                         <th class='text-center d-none d-xl-table-cell'>Status</th>
                         <th></th>
@@ -50,7 +50,7 @@
                         $order->billingAddress->firstname . ' ' .
                         $order->billingAddress->lastname }}</b>
                             </td>
-                            <td>
+                            <td class="d-none d-sm-table-cell">
                                 {{ \App\NumberConvertor::doubleToPrice($order->totalPrice) }}
                                 @if(0 < $order->shippingCosts)
                                     <br> <small>Dont {{ \App\NumberConvertor::doubleToPrice($order->shippingCosts) }} de fdp</small>

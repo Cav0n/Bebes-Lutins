@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
+/**
+ * Handle some page redirection in admin backoffice.
+ */
 class AdminController extends Controller
 {
     /**

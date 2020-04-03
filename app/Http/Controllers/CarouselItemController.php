@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\CarouselItem;
 use Illuminate\Http\Request;
 
+/**
+ * Carousel Item Model Controller.
+ * Carousel items are shown on frontoffice homepage.
+ */
 class CarouselItemController extends Controller
 {
     /**

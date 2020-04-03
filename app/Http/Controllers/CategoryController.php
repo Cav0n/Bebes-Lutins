@@ -7,6 +7,10 @@ use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Exception;
 
+/**
+ * Category Model controller.
+ * Handle category importation, creation, update, and deletion.
+ */
 class CategoryController extends Controller
 {
     public function importFromJSON()

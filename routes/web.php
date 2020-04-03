@@ -143,5 +143,6 @@ Route::get('/admin/search/orders', 'Admin\SearchController@orders')->name('admin
 Route::get('/admin/search/products', 'Admin\SearchController@products')->name('admin.search.products');
 Route::get('/admin/search/categories', 'Admin\SearchController@categories')->name('admin.search.categories');
 Route::get('/admin/search/customers', 'Admin\SearchController@customers')->name('admin.search.customers');
+Route::get('/admin/search/reviews', 'Admin\SearchController@reviews')->name('admin.search.reviews');
 Route::get('/admin/search/contents', 'Admin\SearchController@contents')->name('admin.search.contents');
  /** ============ */

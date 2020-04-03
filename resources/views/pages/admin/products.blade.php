@@ -30,7 +30,7 @@
             <thead class="thead-light">
                 <tr>
                     <th class="d-none d-lg-table-cell" style="width: 1rem;"></th>
-                    <th style="width: 2rem;">Référence</th>
+                    <th style="width: 2rem;" class="d-none d-sm-table-cell">Référence</th>
                     <th>Nom</th>
                     <th class="d-none d-md-table-cell text-right" style="width: 5rem;">Prix</th>
                     <th class="d-none d-md-table-cell text-center" style="width: 1.5rem;">Stock</th>
@@ -41,7 +41,7 @@
                 @foreach ($products as $product)
                 <tr @if($product->isHidden) style="opacity:0.5" @endif>
                     <td class="d-none d-lg-table-cell px-0 pl-2" style="width: 3rem;"><img src='{{ $product->images()->count() ? $product->images()->first()->url : null }}' class="w-100"></td>
-                    <td class="align-middle" style="width: 2rem;"> {{ $product->reference ? '#' . $product->reference : null }} </td>
+                    <td class="align-middle d-none d-sm-table-cell" style="width: 2rem;"> {{ $product->reference ? '#' . $product->reference : null }} </td>
                     <td class="align-middle">
                         {{ $product->name }}
                         @if($product->isHidden) <span class="badge badge-pill badge-dark">Caché</span> @endif

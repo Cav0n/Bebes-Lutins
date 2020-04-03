@@ -2,15 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\JsonResponse;
+use \App\Http\Controllers\AbstractSearchController;
 use Illuminate\Http\Request;
 
-class SearchController extends Controller
+/**
+ * A search controller used in admin backoffice.
+ */
+class SearchController extends AbstractSearchController
 {
     /*
     |--------------------------------------------------------------------------
-    | Search Controller
+    | [ADMIN] - Search Controller
     |--------------------------------------------------------------------------
     |
     | This controller handle search in admin dashboard.
@@ -22,56 +24,127 @@ class SearchController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
         $this->middleware('admin');
+        parent::__construct($request);
     }
 
+    /**
+     * Order search
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
     public function orders(Request $request)
     {
-        if (!$request['search']) {
-            return redirect()->route('admin')->withErrors(['search' => 'La recherche ne peut pas être vide.']);
+        $orders = \App\Order::query();
+
+        foreach ($this->search as $word) {
+            $orders->where('trackingNumber', 'like', '%' . $word . '%');
         }
 
-        $orders = \App\Order::where('trackingNumber', 'like', '%' . $request['search'] . '%')->paginate(15);
+        $orders = $orders->paginate(15);
         $title = 'Commandes';
-
         return view('pages.admin.index')->withOrders($orders)->withInSearch(true)->withCardTitle($title);
     }
 
+    /**
+     * Product search
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
     public function products(Request $request)
     {
-        if (!$request['search']) {
-            return redirect()->route('admin')->withErrors(['search' => 'La recherche ne peut pas être vide.']);
+        $products = \App\Product::query();
+
+        foreach ($this->search as $word) {
+            $products->where('name', 'like', '%' . $word . '%');
         }
 
-        $products = \App\Product::where('name', 'like', '%' . $request['search'] . '%')->paginate(15);
+        $products = $products->paginate(15);
         $title = 'Produits';
-
         return view('pages.admin.products')->withProducts($products)->withInSearch(true)->withCardTitle($title);
     }
 
+    /**
+     * Category search
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
     public function categories(Request $request)
     {
-        if (!$request['search']) {
-            return redirect()->route('admin')->withErrors(['search' => 'La recherche ne peut pas être vide.']);
+        $categories = \App\Category::query();
+
+        foreach ($this->search as $word) {
+            $categories->where('name', 'like', '%' . $word . '%');
         }
 
-        $categories = \App\Category::where('name', 'like', '%' . $request['search'] . '%')->paginate(15);
+        $categories = $categories->paginate(15);
         $title = 'Catégories';
-
         return view('pages.admin.categories')->withCategories($categories)->withInSearch(true)->withCardTitle($title);
     }
 
+    /**
+     * Customer search
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
     public function customers(Request $request)
     {
-        if (!$request['search']) {
-            return redirect()->route('admin')->withErrors(['search' => 'La recherche ne peut pas être vide.']);
+        $customers = \App\User::query();
+
+        foreach ($this->search as $word) {
+            $customers->where('firstname', 'like', '%' . $word . '%');
+            $customers->orWhere('lastname', 'like', '%' . $word . '%');
+            $customers->orWhere('email', 'like', '%' . $word . '%');
+            $customers->orWhere('phone', 'like', '%' . $word . '%');
         }
 
-        $customers = \App\User::where('firstname', 'like', '%' . $request['search'] . '%')->paginate(15);
+        $customers = $customers->paginate(15);
         $title = 'Clients';
-
         return view('pages.admin.customers')->withCustomers($customers)->withInSearch(true)->withCardTitle($title);
+    }
+
+    /**
+     * Review search
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
+    public function reviews(Request $request)
+    {
+        $reviews = \App\Review::query();
+
+        foreach ($this->search as $word) {
+            $reviews->where('title', 'like', '%' . $word . '%');
+            $reviews->orWhere('text', 'like', '%' . $word . '%');
+        }
+
+        $reviews = $reviews->paginate(15);
+        $title = 'Avis clients';
+        return view('pages.admin.reviews')->withReviews($reviews)->withInSearch(true)->withCardTistle($title);
+    }
+
+    /**
+     * Content search
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
+    public function contents(Request $request)
+    {
+        $contents = \App\Content::query();
+
+        foreach ($this->search as $word) {
+            $contents->where('title', 'like', '%' . $word . '%');
+        }
+
+        $contents = $contents->paginate(15);
+        $title = 'Contenus';
+        return view('pages.admin.contents')->withContents($contents)->withInSearch(true)->withCardTitle($title);
     }
 }

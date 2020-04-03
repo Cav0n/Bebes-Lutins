@@ -7,7 +7,7 @@
         <h2 class="h4 mb-0">Avis clients</h2>
     </div>
     <div class="card-body">
-        <form action="{{ route('admin.search.customers') }}" class="input-group" method="GET">
+        <form action="{{ route('admin.search.reviews') }}" class="input-group" method="GET">
             <input class="form-control {{ $errors->has('search') ? 'is-invalid' : '' }}" type="text" name="search" placeholder="Rechercher un avis" value="{{ \Request::get('search') }}">
             <div class="input-group-append">
                 <button class="input-group-text" id="my-addon">Rechercher</button>
@@ -17,7 +17,7 @@
         <small id="helpSearch" class="form-text text-muted">Vous pouvez rechercher un nom de produit</small>
 
         @if(isset($inSearch))
-            <a class="btn btn-dark mt-2" href="{{ route('admin.customers') }}" role="button">Annuler la recherche</a>
+            <a class="btn btn-dark mt-2" href="{{ route('admin.reviews') }}" role="button">Annuler la recherche</a>
         @endif
 
         @if(!count($reviews))
@@ -29,7 +29,7 @@
             <thead class="thead-light">
                 <tr>
                     <th>Titre</th>
-                    <th>Commentaire</th>
+                    <th class="d-none d-md-table-cell">Commentaire</th>
                     <th>Produit</th>
                     <th class='text-right'></th>
                 </tr>
@@ -41,10 +41,10 @@
                         <b>{{ $review->title }}</b><br>
                         <div class="mark-container d-flex">
                             <span class="fixed-rating" data-mark='{{ $review->mark }}' style="color:{{ $review->color ?? 'green' }}"></span>
-                            <p class="mb-0 ml-2">{{ $review->mark }} / 5</p>
+                            <p class="mb-0 ml-2 d-none d-md-flex">{{ $review->mark }} / 5</p>
                         </div>
                     </td>
-                    <td class='align-middle'>{{ $review->text }}</td>
+                    <td class='align-middle d-none d-md-table-cell'>{{ $review->text }}</td>
                     <td class='align-middle'>{{ $review->product->name }}</td>
                     <td class='text-right align-middle'><a class="btn btn-outline-dark" href="{{ route('admin.customer.edit', ['user' => $review]) }}" role="button">Voir</a></td>
                 </tr>

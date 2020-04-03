@@ -17,6 +17,14 @@
             <a class="nav-link" href='{{ route('admin.customers') }}'>
                 Clients</a>
         </li>
+        <li class="nav-item @if(request()->url() == route('admin.contents')) active @endif">
+            <a class="nav-link" href='{{ route('admin.contents') }}'>
+                Contenus</a>
+        </li>
+        <li class="nav-item @if(request()->url() == route('admin.settings')) active @endif">
+            <a class="nav-link" href='{{ route('admin.settings') }}'>
+                Réglages</a>
+        </li>
         </ul>
     </div>
 </nav>

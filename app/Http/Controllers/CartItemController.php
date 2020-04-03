@@ -6,6 +6,10 @@ use App\CartItem;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
+/**
+ * Cart Item Model controller.
+ * Handle cart item creation and quantity update.
+ */
 class CartItemController extends Controller
 {
     /**

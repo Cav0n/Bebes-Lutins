@@ -8,7 +8,7 @@
     </div>
     <div class="card-body">
         <form action="{{ route('admin.search.customers') }}" class="input-group" method="GET">
-            <input class="form-control {{ $errors->has('search') ? 'is-invalid' : '' }}" type="text" name="search" placeholder="Rechercher un client" value="{{ old('search') }}">
+            <input class="form-control {{ $errors->has('search') ? 'is-invalid' : '' }}" type="text" name="search" placeholder="Rechercher un client" value="{{ \Request::get('search') }}">
             <div class="input-group-append">
                 <button class="input-group-text" id="my-addon">Rechercher</button>
             </div>
@@ -29,8 +29,8 @@
             <thead class="thead-light">
                 <tr>
                     <th>Identité</th>
-                    <th>Email</th>
-                    <th>Téléphone</th>
+                    <th class="d-none d-md-table-cell">Email</th>
+                    <th class="d-none d-md-table-cell">Téléphone</th>
                     <th class='text-right'></th>
                 </tr>
             </thead>
@@ -38,8 +38,8 @@
                 @foreach ($customers as $customer)
                 <tr>
                     <td class='align-middle'><b>{{ $customer->firstname }} {{ $customer->lastname  }}</b></td>
-                    <td class='align-middle'>{{ $customer->email}}</td>
-                    <td class='align-middle'>{{ $customer->phone}}</td>
+                    <td class='align-middle d-none d-md-table-cell'>{{ $customer->email}}</td>
+                    <td class='align-middle d-none d-md-table-cell'>{{ $customer->phone}}</td>
                     <td class='text-right align-middle'><a class="btn btn-outline-dark" href="{{ route('admin.customer.edit', ['user' => $customer]) }}" role="button">Voir</a></td>
                 </tr>
                 @endforeach
@@ -47,7 +47,7 @@
         </table>
         <div class="pagination-container d-flex justify-content-center">
             {{-- TODO: Create custom pagination view --}}
-            {{ $customers->links() }}
+            {{ $customers->appends(['search' => \Request::get('search')])->links() }}
         </div>
         @endif
     </div>

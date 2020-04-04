@@ -115,6 +115,8 @@ Route::get('/admin', 'Admin\AdminController@index')->name('admin');
 Route::get('/admin/connexion', 'Admin\LoginController@showLoginPage')->name('admin.login');
 Route::post('/admin/connexion', 'Admin\LoginController@login')->name('admin.login');
 Route::any('/admin/logout', 'Admin\LoginController@logout')->name('admin.logout');
+Route::get('/admin/homepage', 'Admin\AdminController@homepage')->name('admin.homepage');
+Route::get('/admin/changelog', 'Admin\AdminController@changelog')->name('admin.changelog');
 
 // Models indexes
 Route::get('/admin/orders', 'OrderController@index')->name('admin.orders');
@@ -123,6 +125,7 @@ Route::get('/admin/categories', 'CategoryController@index')->name('admin.categor
 Route::get('/admin/customers', 'UserController@index')->name('admin.customers');
 Route::get('/admin/contents', 'ContentController@index')->name('admin.contents');
 Route::get('/admin/reviews', 'ReviewController@index')->name('admin.reviews');
+Route::get('/admin/settings', 'SettingController@index')->name('admin.settings');
 // Models creation
 Route::get('/admin/product/create', 'ProductController@create')->name('admin.product.create');
 Route::post('/admin/product/create', 'ProductController@store')->name('admin.product.store');
@@ -142,5 +145,6 @@ Route::get('/admin/search/orders', 'Admin\SearchController@orders')->name('admin
 Route::get('/admin/search/products', 'Admin\SearchController@products')->name('admin.search.products');
 Route::get('/admin/search/categories', 'Admin\SearchController@categories')->name('admin.search.categories');
 Route::get('/admin/search/customers', 'Admin\SearchController@customers')->name('admin.search.customers');
+Route::get('/admin/search/reviews', 'Admin\SearchController@reviews')->name('admin.search.reviews');
 Route::get('/admin/search/contents', 'Admin\SearchController@contents')->name('admin.search.contents');
  /** ============ */

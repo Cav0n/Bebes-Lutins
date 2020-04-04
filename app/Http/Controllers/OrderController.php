@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin')->only(['index', 'create', 'edit']);
+    }
+
     public function importFromJSON()
     {
         $client = new Client();

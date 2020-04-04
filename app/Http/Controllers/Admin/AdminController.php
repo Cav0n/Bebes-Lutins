@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
+/**
+ * Handle some page redirection in admin backoffice.
+ */
 class AdminController extends Controller
 {
     /**
@@ -19,6 +21,16 @@ class AdminController extends Controller
 
     public function index()
     {
-        return redirect()->route('admin.orders');
+        return redirect(route('admin.homepage'));
+    }
+
+    public function changelog()
+    {
+        return view('pages.admin.changelog');
+    }
+
+    public function homepage()
+    {
+        return view('pages.admin.homepage');
     }
 }

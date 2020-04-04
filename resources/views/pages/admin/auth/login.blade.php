@@ -5,6 +5,9 @@
 <div class="container-fluid d-flex flex-column justify-content-center" style="min-height:100vh;">
     <div class="row justify-content-center">
         <div class="col-lg-4">
+            <div class="logo-container d-flex justify-content-center">
+                <img id="auth-logo" class="svg w-50 h-100" src="{{ asset('images/logo-mini.svg') }}" alt="Logo Bébés lutins">
+            </div>
             @if(!empty($errors->any()))
             <div class="alert alert-danger" role="alert">
                 @foreach ($errors->all() as $error)

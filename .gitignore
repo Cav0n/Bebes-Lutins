@@ -3,7 +3,8 @@
 /public/storage
 /public/css
 /public/js
-/public/images
+/public/images/categories
+/public/images/products
 /public/vendor
 /storage/framework
 /storage/*.key

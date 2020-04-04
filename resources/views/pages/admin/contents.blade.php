@@ -9,7 +9,7 @@
     </div>
     <div class="card-body">
         <form action="{{ route('admin.search.contents') }}" class="input-group" method="GET">
-            <input class="form-control {{ $errors->has('search') ? 'is-invalid' : '' }}" type="text" name="search" placeholder="Rechercher un produit" value="{{ old('search') }}">
+            <input class="form-control {{ $errors->has('search') ? 'is-invalid' : '' }}" type="text" name="search" placeholder="Rechercher un contenu" value="{{ \Request::get('search') }}">
             <div class="input-group-append">
                 <button class="input-group-text" id="my-addon">Rechercher</button>
             </div>
@@ -18,7 +18,7 @@
         <small id="helpSearch" class="form-text text-muted">Vous pouvez rechercher un titre de contenu</small>
 
         @if(isset($inSearch))
-            <a class="btn btn-dark mt-2" href="{{ route('admin.products') }}" role="button">Annuler la recherche</a>
+            <a class="btn btn-dark mt-2" href="{{ route('admin.contents') }}" role="button">Annuler la recherche</a>
         @endif
 
         @if(!count($contents))

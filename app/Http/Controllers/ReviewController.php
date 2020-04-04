@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin')->only(['index']);
+    }
+
     /**
      * Display a listing of the resource.
      *

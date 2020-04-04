@@ -11,6 +11,11 @@ use Illuminate\Http\JsonResponse;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin')->only(['index', 'create', 'store', 'edit', 'update']);
+    }
+
     public function importFromJSON()
     {
         $client = new Client();
@@ -205,6 +210,10 @@ class ProductController extends Controller
             $request['categories'] = json_decode($request['categories']);
         } catch (Exception $e) {
             return back()->withErrors('categories', 'Veuillez ajouter au moins une catégorie au produit.');
+        }
+
+        if (null === $request['isInPromo']) {
+            $request['promoPrice'] = null;
         }
 
         $request->validate([

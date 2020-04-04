@@ -29,9 +29,9 @@
                     <thead class="thead-light">
                     <tr>
                         <th class="d-none d-md-table-cell">ID</th>
-                        <th class='text-center'>Date</th>
+                        <th class='d-none d-sm-table-cell text-center'>Date</th>
                         <th>Client</th>
-                        <th>Prix</th>
+                        <th class="d-none d-sm-table-cell">Prix</th>
                         <th class="d-none d-lg-table-cell">Numéro de suivi</th>
                         <th class='text-center d-none d-xl-table-cell'>Status</th>
                         <th></th>
@@ -41,7 +41,7 @@
                     @foreach ($orders as $order)
                         <tr>
                             <td class="d-none d-md-table-cell"> {{ $order->id }} </td>
-                            <td class='text-center'>
+                            <td class='d-none d-sm-table-cell text-center'>
                                 {{ $order->created_at->format('d/m/Y') }}
                                 <br> {{ $order->created_at->format('H:i') }}
                             </td>
@@ -50,7 +50,7 @@
                         $order->billingAddress->firstname . ' ' .
                         $order->billingAddress->lastname }}</b>
                             </td>
-                            <td>
+                            <td class="d-none d-sm-table-cell">
                                 {{ \App\NumberConvertor::doubleToPrice($order->totalPrice) }}
                                 @if(0 < $order->shippingCosts)
                                     <br> <small>Dont {{ \App\NumberConvertor::doubleToPrice($order->shippingCosts) }} de fdp</small>
@@ -90,7 +90,7 @@
                 </table>
                 <div class="pagination-container d-flex justify-content-center">
                     {{-- TODO: Create custom pagination view --}}
-                    {{ $orders->links() }}
+                    {{ $orders->appends(['status' => \Request::get('status')])->links() }}
                 </div>
             @endif
         </div>

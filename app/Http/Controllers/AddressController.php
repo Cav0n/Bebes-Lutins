@@ -10,55 +10,6 @@ use GuzzleHttp\Client;
 
 class AddressController extends Controller
 {
-    public function importFromJSON()
-    {
-        $client = new Client();
-        $res = $client->get('https://bebes-lutins.fr/api/addresses');
-        $result = json_decode($res->getBody());
-
-        Address::destroy(Address::all());
-
-        $count = 0;
-        foreach($result as $r) {
-            if (null === $r->id || '' === $r->id) {
-                continue;
-            }
-            $address = new Address();
-            $address->firstname = $r->firstname;
-            $address->lastname = $r->lastname;
-            $address->civility = $this->integerCivilityToStringCivility($r->civility);
-            $address->street = $r->street;
-            $address->zipCode = $r->zipCode;
-            $address->city = $r->city;
-            $address->complements = $r->complement;
-            $address->company = $r->company;
-            $address->user_id = $r->isDeleted && $r->user_id ? null : \App\User::where('email', $r->user_mail)->first()->id;
-            $address->created_at = $r->created_at;
-            $address->updated_at = $r->updated_at;
-
-            $address->save();
-            $count++;
-        }
-
-        echo $count . ' addresses imported !' . "\n";
-    }
-
-    public function integerCivilityToStringCivility($civility) {
-        switch ($civility) {
-            case 0:
-                return 'MISS';
-            break;
-            case 1:
-                return 'MISTER';
-            break;
-            case 2:
-                return 'MISS';
-            break;
-            default:
-            return 'NOT_DEFINED';
-        }
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -82,8 +33,9 @@ class AddressController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     * @param string $nestedKey an additional key (billing for example)
+     * @return string the address id
      */
     public function store(Request $request, $nestedKey = null)
     {
@@ -114,6 +66,12 @@ class AddressController extends Controller
         return $address->id;
     }
 
+    /**
+     * Store address from array.
+     *
+     * @param array $input
+     * @return string the address id
+     */
     public function storeArray(array $input)
     {
         $this->validator($input)->validate();
@@ -179,6 +137,12 @@ class AddressController extends Controller
         //
     }
 
+    /**
+     * Address validator
+     *
+     * @param array $data
+     * @return Validator
+     */
     protected function validator(array $data)
     {
         $rules = [];
@@ -223,5 +187,64 @@ class AddressController extends Controller
         }
 
         return Validator::make($data, $rules);
+    }
+
+    /**
+     * Import every addresses from current production website to local database.
+     * This is used for import:all command.
+     */
+    public function importFromJSON()
+    {
+        $client = new Client();
+        $res = $client->get('https://bebes-lutins.fr/api/addresses');
+        $result = json_decode($res->getBody());
+
+        Address::destroy(Address::all());
+
+        $count = 0;
+        foreach($result as $r) {
+            if (null === $r->id || '' === $r->id) {
+                continue;
+            }
+            $address = new Address();
+            $address->firstname = $r->firstname;
+            $address->lastname = $r->lastname;
+            $address->civility = $this->integerCivilityToStringCivility($r->civility);
+            $address->street = $r->street;
+            $address->zipCode = $r->zipCode;
+            $address->city = $r->city;
+            $address->complements = $r->complement;
+            $address->company = $r->company;
+            $address->user_id = $r->isDeleted && $r->user_id ? null : \App\User::where('email', $r->user_mail)->first()->id;
+            $address->created_at = $r->created_at;
+            $address->updated_at = $r->updated_at;
+
+            $address->save();
+            $count++;
+        }
+
+        echo $count . ' addresses imported !' . "\n";
+    }
+
+    /**
+     * Convert old integer civility to new string civility.
+     *
+     * @param int $civility The civility in int format.
+     * @return string The civility in string format.
+     */
+    protected function integerCivilityToStringCivility(int $civility) {
+        switch ($civility) {
+            case 0:
+                return 'MISS';
+            break;
+            case 1:
+                return 'MISTER';
+            break;
+            case 2:
+                return 'MISS';
+            break;
+            default:
+            return 'NOT_DEFINED';
+        }
     }
 }

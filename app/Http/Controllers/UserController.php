@@ -8,6 +8,11 @@ use GuzzleHttp\Client;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin')->only(['index']);
+    }
+
     public function importFromJSON()
     {
         $client = new Client();

@@ -29,3 +29,7 @@ Route::get('/users/import', 'UserController@importFromJSON')->name('api.users.im
 Route::get('/addresses/import', 'AddressController@importFromJSON')->name('api.addresses.import');
 Route::get('/orders/import', 'OrderController@importFromJSON')->name('api.orders.import');
 Route::get('/orders/import/items', 'OrderItemController@importFromJSON')->name('api.orders.import.items');
+
+// ANALYTICS
+Route::get('/analytics/count', 'Admin\AnalyticsController@analyticCount')->name('api.analytics.count');
+Route::get('/analytics/sales', 'Admin\AnalyticsController@sales')->name('api.analytics.sales');

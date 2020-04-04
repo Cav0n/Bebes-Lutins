@@ -2,6 +2,24 @@
     <div class="top-sidenav ml-3">
         <h1 class="h2"><a class="text-secondary" href='/'><b>Bébés Lutins</b></a></h1>
 
+        {{-- HOMEPAGE --}}
+        <div class="row m-0 mt-3">
+            <div class="col-2 p-0">
+                <img class="w-100 svg @if(url()->current() == route('admin.homepage')) active @endif"
+                    src="{{ asset('images/icons/dashboard-bw.svg') }}" height="2rem" alt="commandes">
+            </div>
+            <div class="col-10 d-flex flex-column">
+                <a href='{{ route('admin.homepage') }}' class='h5 mb-0
+                    @if(url()->current() == route('admin.homepage')) active @endif'>
+                    Accueil</a>
+
+                <a href='{{ route('admin.homepage') }}' class='mb-0
+                    @if(url()->current() == route('admin.homepage')) active @endif'>
+                    Page d'accueil</a>
+            </div>
+        </div>
+
+        {{-- ORDERS --}}
         <div class="row m-0 mt-3">
             <div class="col-2 p-0">
                 <img class="w-100 svg @if(url()->current() == route('admin.orders')) active @endif"
@@ -23,6 +41,7 @@
             </div>
         </div>
 
+        {{-- PRODUCTS --}}
         <div class="row m-0 mt-3">
             <div class="col-2 p-0">
                 <img class="w-100 svg @if(url()->current() == route('admin.products') || url()->current() == route('admin.categories')) active @endif"
@@ -45,14 +64,15 @@
             </div>
         </div>
 
+        {{-- CUSTOMERS --}}
         <div class="row m-0 mt-3">
             <div class="col-2 p-0">
-                <img class="w-100 svg @if(url()->current() == route('admin.customers')) active @endif"
+                <img class="w-100 svg @if(url()->current() == route('admin.customers') || url()->current() == route('admin.reviews')) active @endif"
                     src="{{ asset('images/icons/customer-bw.svg') }}" alt="clients">
             </div>
             <div class="col-10 d-flex flex-column">
                 <a href='{{ route('admin.customers') }}' class='h5 mb-0
-                    @if(url()->current() == route('admin.customers') && url()->current() == route('admin.reviews')) active @endif'>
+                    @if(url()->current() == route('admin.customers') || url()->current() == route('admin.reviews')) active @endif'>
                     Clients</a>
 
                 <a href='{{ route('admin.customers') }}' class='mb-0
@@ -64,6 +84,7 @@
             </div>
         </div>
 
+        {{-- CONTENTS --}}
         <div class="row m-0 mt-3">
             <div class="col-2 p-0">
                 <img class="w-100 svg  @if(url()->current() == route('admin.contents')) active @endif"
@@ -77,6 +98,23 @@
                 <a href='{{ route('admin.contents') }}' class='mb-0
                     @if(url()->current() == route('admin.contents'))active @endif'>
                     Bas de page</a>
+            </div>
+        </div>
+
+        {{-- SETTINGS --}}
+        <div class="row m-0 mt-3">
+            <div class="col-2 p-0">
+                <img class="w-100 svg  @if(url()->current() == route('admin.settings')) active @endif"
+                    src="{{ asset('images/icons/settings-bw.svg') }}" alt="paramètres">
+            </div>
+            <div class="col-10 d-flex flex-column">
+                <a href='{{ route('admin.settings') }}' class='h5 mb-0
+                    @if(url()->current() == route('admin.settings')) active @endif'>
+                    Paramètres</a>
+
+                <a href='{{ route('admin.settings') }}' class='mb-0
+                    @if(url()->current() == route('admin.settings'))active @endif'>
+                    Tous les paramètres</a>
             </div>
         </div>
     </div>

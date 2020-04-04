@@ -116,6 +116,7 @@ Route::get('/admin/connexion', 'Admin\LoginController@showLoginPage')->name('adm
 Route::post('/admin/connexion', 'Admin\LoginController@login')->name('admin.login');
 Route::any('/admin/logout', 'Admin\LoginController@logout')->name('admin.logout');
 Route::get('/admin/homepage', 'Admin\AdminController@homepage')->name('admin.homepage');
+Route::get('/admin/changelog', 'Admin\AdminController@changelog')->name('admin.changelog');
 
 // Models indexes
 Route::get('/admin/orders', 'OrderController@index')->name('admin.orders');

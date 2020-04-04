@@ -2,6 +2,8 @@
 @import 'variables';
 // Tagify (for custom tags inputs)
 @import '~@yaireo/tagify/src/tagify';
+// Chart
+@import '~chart.js/dist/Chart';
 
 #admin-sidenav.sidenav a{
     color: $dark;

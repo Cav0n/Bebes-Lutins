@@ -1,5 +1,9 @@
 @extends('templates.admin')
 
+@section('optional_js')
+<script src="https://cdn.tiny.cloud/1/o3xxn1egstud8k4clezmtiocupaj5kof1ox4k1ywocrgml58/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+@endsection
+
 @section('content')
 
     @if(session('successMessage'))
@@ -39,4 +43,14 @@
         </div>
     </div>
 
+@endsection
+
+@section('scripts')
+    {{-- Tiny MCE --}}
+    <script>
+        tinymce.init({
+          selector: '.tiny-mce',
+          plugins: "image"
+        });
+    </script>
 @endsection

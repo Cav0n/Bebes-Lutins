@@ -2,6 +2,23 @@
     <div class="top-sidenav ml-3">
         <h1 class="h2"><a class="text-secondary" href='/'><b>Bébés Lutins</b></a></h1>
 
+        {{-- HOMEPAGE --}}
+        <div class="row m-0 mt-3">
+            <div class="col-2 p-0">
+                <img class="w-100 svg @if(url()->current() == route('admin.homepage')) active @endif"
+                    src="{{ asset('images/icons/dashboard-bw.svg') }}" height="2rem" alt="commandes">
+            </div>
+            <div class="col-10 d-flex flex-column">
+                <a href='{{ route('admin.homepage') }}' class='h5 mb-0
+                    @if(url()->current() == route('admin.homepage')) active @endif'>
+                    Accueil</a>
+
+                <a href='{{ route('admin.homepage') }}' class='mb-0
+                    @if(url()->current() == route('admin.homepage')) active @endif'>
+                    Page d'accueil</a>
+            </div>
+        </div>
+
         {{-- ORDERS --}}
         <div class="row m-0 mt-3">
             <div class="col-2 p-0">

@@ -17,7 +17,7 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/admin.js') }}"></script>
     <script src="{{ asset('js/rater.js') }}"></script>
-    <script src="https://cdn.tiny.cloud/1/o3xxn1egstud8k4clezmtiocupaj5kof1ox4k1ywocrgml58/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    @yield('optional_js')
 
     <header class="d-flex d-lg-none fixex-top">
         @include('components.header.admin')
@@ -69,14 +69,6 @@
 
         }, 'xml');
 
-    });
-    </script>
-
-    {{-- Tiny MCE --}}
-    <script>
-    tinymce.init({
-      selector: '.tiny-mce',
-      plugins: "image"
     });
     </script>
 

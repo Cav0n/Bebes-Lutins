@@ -26,6 +26,7 @@
         "@yaireo/tagify": "^3.6.3",
         "bootstrap": "^4.4.1",
         "bootstrap-input-spinner": "^1.13.3",
+        "chart.js": "^2.9.3",
         "fibers": "^4.0.2",
         "jquery": "^3.4.1",
         "node-sass": "^4.13.1",

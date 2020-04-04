@@ -11,6 +11,11 @@ use Illuminate\Http\JsonResponse;
 
 class ProductController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin')->only(['index', 'create', 'store', 'edit', 'update']);
+    }
+
     public function importFromJSON()
     {
         $client = new Client();

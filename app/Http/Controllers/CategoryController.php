@@ -13,6 +13,11 @@ use Exception;
  */
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin')->only(['index', 'create', 'store', 'edit', 'update']);
+    }
+
     public function importFromJSON()
     {
         $client = new Client();

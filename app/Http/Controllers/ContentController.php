@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class ContentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('admin')->only(['index', 'create', 'store', 'edit', 'update']);
+    }
+
     /**
      * Display a listing of the resource.
      *

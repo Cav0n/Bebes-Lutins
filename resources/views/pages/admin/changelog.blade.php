@@ -14,6 +14,7 @@
             <ul>
                 <li>Ajout d'outils d'analyses avec différents graphiques (disponible sur la <a href="{{ route('admin.homepage') }}">page d'accueil</a>).</li>
                 <li>Optimisation des avis clients.</li>
+                <li>Ajout d'un bouton permettant le signalement de bug dans la page de notes de mises à jour.</li>
             </ul>
         </div>
         <div class='update-infos-container py-2'>

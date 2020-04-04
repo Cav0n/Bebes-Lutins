@@ -57,7 +57,7 @@ class SearchController extends AbstractSearchController
      */
     public function products(Request $request)
     {
-        $products = \App\Product::query();
+        $products = \App\Product::query()->where('isDeleted', 0);
 
         foreach ($this->search as $word) {
             $products->where('name', 'like', '%' . $word . '%');
@@ -76,7 +76,7 @@ class SearchController extends AbstractSearchController
      */
     public function categories(Request $request)
     {
-        $categories = \App\Category::query();
+        $categories = \App\Category::query()->where('isDeleted', 0);
 
         foreach ($this->search as $word) {
             $categories->where('name', 'like', '%' . $word . '%');

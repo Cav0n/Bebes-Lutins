@@ -20,6 +20,6 @@ class NotAdmin
             return $next($request);
         }
 
-        return redirect(route('admin'));
+        return redirect(route('admin.homepage'));
     }
 }

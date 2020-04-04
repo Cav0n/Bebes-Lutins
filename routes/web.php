@@ -111,7 +111,7 @@ Route::get('/contenu/{content}', 'ContentController@show')->name('content.show')
  * ADMIN
  * ============
  */
-Route::get('/admin', 'Admin\AdminController@homepage')->name('admin');
+Route::get('/admin', 'Admin\AdminController@index')->name('admin');
 Route::get('/admin/connexion', 'Admin\LoginController@showLoginPage')->name('admin.login');
 Route::post('/admin/connexion', 'Admin\LoginController@login')->name('admin.login');
 Route::any('/admin/logout', 'Admin\LoginController@logout')->name('admin.logout');

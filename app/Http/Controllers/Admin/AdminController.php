@@ -19,6 +19,11 @@ class AdminController extends Controller
         $this->middleware('admin');
     }
 
+    public function index()
+    {
+        return redirect(route('admin.homepage'));
+    }
+
     public function homepage()
     {
         $analytics = [];

@@ -11,7 +11,10 @@ class MainController extends Controller
 {
     public function index()
     {
-        return view('index');
+        return view('index')->with([
+            'homepageTitle' => \App\Setting::getValue('HOMEPAGE_TITLE'),
+            'homepageDescription' => \App\Setting::getValue('HOMEPAGE_DESCRIPTION'),
+        ]);
     }
 
     public function thanks(Request $request, Order $order)

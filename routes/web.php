@@ -140,6 +140,7 @@ Route::post('/admin/category/{category}', 'CategoryController@update')->name('ad
 Route::get('/admin/customer/{user}', 'UserController@edit')->name('admin.customer.edit');
 Route::get('/admin/content/{content}/edit', 'ContentController@edit')->name('admin.content.edit');
 Route::post('/admin/content/{content}/edit', 'ContentController@update')->name('admin.content.edit');
+Route::post('/admin/settings/save', 'SettingController@saveAll')->name('admin.settings.save');
 // Search
 Route::get('/admin/search/orders', 'Admin\SearchController@orders')->name('admin.search.orders');
 Route::get('/admin/search/products', 'Admin\SearchController@products')->name('admin.search.products');

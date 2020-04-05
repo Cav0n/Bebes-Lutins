@@ -9,7 +9,7 @@ class SettingController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('admin')->only(['index', 'create', 'store', 'edit', 'update']);
+        $this->middleware('admin')->only(['index', 'create', 'store', 'edit', 'update', 'saveAll']);
     }
 
     /**
@@ -20,6 +20,19 @@ class SettingController extends Controller
     public function index()
     {
         return view('pages.admin.settings')->with('settings', \App\Setting::all());
+    }
+
+    public function saveAll(Request $request)
+    {
+        foreach ($request->all() as $key => $value) {
+            if (\App\Setting::where('key', $key)->exists()) {
+                $setting = \App\Setting::where('key', $key)->first();
+                $setting->value = $value;
+                $setting->save();
+            }
+        }
+
+        return back()->with('successMessage', 'Paramètres sauvegardés avec succés !');
     }
 
     /**
@@ -74,7 +87,7 @@ class SettingController extends Controller
      */
     public function update(Request $request, Setting $setting)
     {
-        //
+        dd($request->all());
     }
 
     /**

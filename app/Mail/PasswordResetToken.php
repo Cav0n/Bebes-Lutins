@@ -32,6 +32,6 @@ class PasswordResetToken extends Mailable
      */
     public function build()
     {
-        return $this->from(env('MAIL_FROM_ADDRESS'))->view('mails.user.password.token');
+        return $this->from(\App\Setting::getValue('MAIL_FROM_ADDRESS', 'no-reply@bebes-lutins.fr'))->view('mails.user.password.token');
     }
 }

@@ -17,7 +17,7 @@ class CreateContentsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('url')->nullable()->unique();
-            $table->string('link')->default('LINK');
+            $table->string('type')->default('LINK');
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

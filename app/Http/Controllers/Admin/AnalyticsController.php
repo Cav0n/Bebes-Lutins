@@ -64,6 +64,8 @@ class AnalyticsController extends Controller
     {
         $data = [];
         $data['total'] = 0;
+        $data['max'] = 0;
+        $data['period'] = $this->period;
 
         $index = 0;
         foreach ($this->period as $date) {
@@ -72,9 +74,10 @@ class AnalyticsController extends Controller
             $data[$index]['value'] = $modelCount;
             $data['total'] += $modelCount;
 
+            $data['max'] < $modelCount ? $data['max'] = $modelCount : null;
+
             $index++;
         }
-        $data['period'] = $this->period;
 
         return JsonResponse::create($data, 200);
     }
@@ -83,6 +86,8 @@ class AnalyticsController extends Controller
     {
         $data = [];
         $data['total'] = 0;
+        $data['max'] = 0;
+        $data['period'] = $this->period;
         $orderIds = [];
 
         $index = 0;
@@ -100,6 +105,8 @@ class AnalyticsController extends Controller
                     }
                 }
             }
+
+            $data['max'] < $data[$index]['value'] ? $data['max'] = $data[$index]['value'] : null;
 
             $index++;
         }

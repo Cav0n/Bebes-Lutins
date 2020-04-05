@@ -34,7 +34,7 @@
     $(document).ready(function(){
         generateChart("{{ route('api.analytics.count') }}", 'order', 'orderCount', 'Nombre de commandes', firstDate, lastDate);
         generateChart("{{ route('api.analytics.count') }}", 'user', 'newCustomersCount', 'Nombre de nouveaux clients', firstDate, lastDate);
-        generateChart("{{ route('api.analytics.sales') }}", 'order', 'sales', 'Total de ventes', firstDate, lastDate, '1 day', null, ' €');
+        generateChart("{{ route('api.analytics.sales') }}", 'order', 'sales', 'Total de ventes', firstDate, lastDate, '1 day', ' €');
     });
 </script>
 

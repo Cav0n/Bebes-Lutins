@@ -6,7 +6,7 @@
 
     <div class="container-fluid py-5">
         <div class="row justify-content-center">
-            <div class="col-11 col-md-9 col-lg-8 col-xl-7 col-xxl-6 col-xxxl-5 p-0">
+            <div class="col-11 col-md-9 col-lg-8 col-xl-7 col-xxl-6 col-xxxl-5 bg-white shadow-sm p-3">
                 <h1>{{ $content->title }}</h1>
 
                 @foreach ($content->sections as $section)

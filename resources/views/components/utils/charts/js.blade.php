@@ -19,7 +19,6 @@
             dataType : 'json',
             data: { class: modelClass, firstDate: firstDate, lastDate: lastDate, stepDate: stepDate },
             success : function(data){
-                console.log(data);
                 values = [];
                 dates = [];
                 data.max ? stepSize = Math.round(data.max / 5) : stepSize = null;
@@ -55,7 +54,7 @@
                 data: values,
                 fill: fill,
                 borderColor: color,
-                backgroundColor: fill ? color : null
+                backgroundColor: color
             }]
         },
         options: {

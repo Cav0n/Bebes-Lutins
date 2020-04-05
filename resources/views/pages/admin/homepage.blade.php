@@ -17,7 +17,7 @@
         <div class="bg-white shadow-sm p-3">
             <p class="mb-0">
                 Bienvenue dans le nouveau Dashboard, {{ Session::get('admin')->firstname }} {{ Session::get('admin')->lastname }} ! <br>
-                Vous pouvez retrouvez la liste des nouveautés <a href="#">ici</a>.
+                Vous pouvez retrouvez la liste des nouveautés <a href="{{ route('admin.changelog') }}">ici</a>.
             </p>
         </div>
     </div>

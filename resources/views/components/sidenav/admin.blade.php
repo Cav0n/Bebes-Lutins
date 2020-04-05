@@ -26,7 +26,7 @@
                     src="{{ asset('images/icons/order-bw.svg') }}" height="2rem" alt="commandes">
             </div>
             <div class="col-10 d-flex flex-column">
-                <a href='{{ route('admin.orders') }}' class='h5 mb-0 @if(url()->current() == route('admin.orders')) active @endif'>
+                <a href='{{ route('admin.orders', ['status' => ['WAITING_PAYMENT', 'PROCESSING', 'DELIVERING']]) }}' class='h5 mb-0 @if(url()->current() == route('admin.orders')) active @endif'>
                     Commandes</a>
 
                 <a href='{{ route('admin.orders', ['status' => ['WAITING_PAYMENT', 'PROCESSING', 'DELIVERING']]) }}' class='mb-0
@@ -87,16 +87,16 @@
         {{-- CONTENTS --}}
         <div class="row m-0 mt-3">
             <div class="col-2 p-0">
-                <img class="w-100 svg  @if(url()->current() == route('admin.contents')) active @endif"
+                <img class="w-100 svg  @if( Str::contains(url()->current(), route('admin.footer_elements')) ) active @endif"
                     src="{{ asset('images/icons/content-bw.svg') }}" alt="contenus">
             </div>
             <div class="col-10 d-flex flex-column">
-                <a href='{{ route('admin.contents') }}' class='h5 mb-0
-                    @if(url()->current() == route('admin.contents')) active @endif'>
+                <a href='{{ route('admin.footer_elements') }}' class='h5 mb-0
+                    @if ( Str::contains(url()->current(), route('admin.footer_elements')) ) active @endif'>
                     Contenus</a>
 
-                <a href='{{ route('admin.contents') }}' class='mb-0
-                    @if(url()->current() == route('admin.contents'))active @endif'>
+                <a href='{{ route('admin.footer_elements') }}' class='mb-0
+                    @if( Str::contains(url()->current(), route('admin.footer_elements'))) active @endif'>
                     Bas de page</a>
             </div>
         </div>
@@ -120,6 +120,6 @@
     </div>
 
     <div class="bottom-sidenav text-center">
-        <p style="color:grey">Version 6.0.0</p>
+        <a style="color:grey" href='{{ route('admin.changelog') }}'>Version 6.1.0</a>
     </div>
 </div>

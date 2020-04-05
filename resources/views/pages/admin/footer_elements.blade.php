@@ -18,31 +18,27 @@
         <small id="helpSearch" class="form-text text-muted">Vous pouvez rechercher un titre de contenu</small>
 
         @if(isset($inSearch))
-            <a class="btn btn-dark mt-2" href="{{ route('admin.contents') }}" role="button">Annuler la recherche</a>
+            <a class="btn btn-dark mt-2" href="{{ route('admin.footer_elements') }}" role="button">Annuler la recherche</a>
         @endif
 
-        @if(!count($contents))
+        @if(!count($footerElements))
             <p class="mb-0 mt-3">Aucun résultat ne correpond.</p>
         @endif
 
-        @if(count($contents))
+        @if(count($footerElements))
         <table class="table table-striped table-light mt-2 mb-0 border">
             <thead class="thead-light">
                 <tr>
                     <th>Titre</th>
-                    <th>Type</th>
-                    <th class="d-none d-sm-table-cell">URL</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($contents as $content)
+                @foreach ($footerElements as $footerElement)
                 <tr>
-                    <td class="align-middle">{{ $content->title }}</td>
-                    <td class="align-middle">{{ ucfirst($content->typeI18n) }}</td>
-                    <td class="align-middle d-none d-sm-table-cell">{{ $content->url }}</td>
+                    <td class="align-middle">{{ $footerElement->title }}</td>
                     <td style="width: 3rem;" class='text-right'>
-                        <a class="btn btn-outline-dark" href="{{ route('admin.content.edit', ['content' => $content]) }}" role="button">Éditer</a>
+                        <a class="btn btn-outline-dark" href="{{ route('admin.contents', ['footer_element_id' => $footerElement]) }}" role="button">Afficher</a>
                     </td>
                 </tr>
                 @endforeach

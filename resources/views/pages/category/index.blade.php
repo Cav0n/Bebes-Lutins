@@ -20,7 +20,6 @@
             <div id="category-cover" class="w-100 p-3 text-white">
                 <p id="category-breadcrumb" class="col-12 mb-0">{!! $category->breadcrumb !!}</p>
                 <h1 class="col-md-6">{{$category->name}}</h1>
-                <p class="col-md-6 text-justify">{{$category->description}}</p>
             </div>
 
             <div id="category-inner-container" class="px-3">
@@ -46,6 +45,9 @@
                         @endforeach
                     </div>
                 @endif
+            </div>
+            <div class="bg-white shadow-sm p-3 mt-3">
+                <p class="text-justify m-0">{{$category->description}}</p>
             </div>
         </div>
     </div>

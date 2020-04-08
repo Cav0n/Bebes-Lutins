@@ -3,7 +3,7 @@
 @section('content')
 
 
-<div class="row">
+<div class="row px-lg-3">
     <div class="col-12 col-sm-6 col-lg-4 px-3 px-lg-1 mb-2 order-2 order-lg-1">
         @include('components.utils.charts.canva', ['chartName' => 'sales'])
     </div>

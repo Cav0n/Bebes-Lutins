@@ -16,6 +16,7 @@ class CreateFooterElementsTable extends Migration
         Schema::create('footer_elements', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
+            $table->integer('position')->default('0');
 
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

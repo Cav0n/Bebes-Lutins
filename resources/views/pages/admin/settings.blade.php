@@ -2,16 +2,23 @@
 
 @section('content')
 
+@if(Session::get('successMessage'))
+    <div class="alert alert-success" role="alert">
+        {{ Session::get('successMessage') }}
+    </div>
+@endisset
+
 <div class="card rounded-0 border shadow-sm">
     <div class="card-header">
         <h2 class="h4 mb-0">Paramètres</h2>
     </div>
-    <div class="card-body">
+    <form class="card-body" method="POST" action="{{ route('admin.settings.save') }}">
+        @csrf
         @foreach ($settings as $setting)
-            <p>
-                {{ $setting->key }} : {{ $setting->value }}
-            </p>
+            @include('components.utils.settings.setting')
         @endforeach
+
+        <button type="submit" class="btn btn-outline-dark">Sauvegarder</button>
     </div>
 </div>
 

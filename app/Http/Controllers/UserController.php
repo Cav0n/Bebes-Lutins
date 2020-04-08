@@ -85,10 +85,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\User  $product
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $product)
+    public function show(User $user)
     {
         //
     }
@@ -96,22 +96,22 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\User  $product
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $product)
+    public function edit(User $user)
     {
-        //
+        return view('pages.admin.customer')->withCustomer($user);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\User  $product
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $product)
+    public function update(Request $request, User $user)
     {
         //
     }
@@ -119,10 +119,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\User  $product
+     * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $product)
+    public function destroy(User $user)
     {
         //
     }

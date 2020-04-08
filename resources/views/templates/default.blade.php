@@ -35,9 +35,9 @@
     @include('components.modal.product_added_to_cart')
 
     <script>
-        const FREE_SHIPPING_FROM = {{ env('FREE_SHIPPING_FROM', 70.00) }}
+        const FREE_SHIPPING_FROM = {{ \App\Setting::getValue('FREE_SHIPPING_FROM', 70.00) }};
 
-        const SHIPPING_COSTS = {{ env('SHIPPING_COSTS', 5.90) }}
+        const SHIPPING_COSTS = {{ \App\Setting::getValue('SHIPPING_COSTS', 5.90) }};
 
         const SPINNER_CONFIG = {
             decrementButton: "<strong>-</strong>", // button text

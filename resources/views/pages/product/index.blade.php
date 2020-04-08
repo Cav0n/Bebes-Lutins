@@ -20,7 +20,6 @@
 <div class="container-fluid py-5">
     <div class="row justify-content-center">
         <div class="col-lg-9 col-xl-8 col-xxl-6 col-xxxl-5 row">
-            <p id="product-breadcrumb" class="px-3 pt-3">{!! $product->breadcrumb !!}</p>
             <div id="product-image-container" class="col-12 col-sm-5 col-xxl-4 col-xxxl-3">
                 @include('components.utils.carousel.product')
                 <div class="rating-container d-none d-sm-flex flex-column">
@@ -28,6 +27,7 @@
                 </div>
             </div>
             <div class="col-12 col-sm-7 col-xxl-8 col-xxxl-9 p-0">
+                <p id="product-breadcrumb" class="px-3 pt-2">{!! $product->breadcrumb !!}</p>
                 <div class="bg-white p-3 shadow-sm">
                     <h1 class="mb-0 h2 d-none d-sm-flex">{{ $product->name }}</h1>
                     <p class="mb-0 h4 d-flex d-sm-none">{{ $product->name }}</h1>

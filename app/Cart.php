@@ -64,11 +64,11 @@ class Cart extends Model
     {
         $shippingCosts = 0.00;
         /** @Todo: Replace "env" usage by database parameters */
-        $freeShippingFrom = env('FREE_SHIPPING_FROM', 70.00);
+        $freeShippingFrom = \App\Setting::getValue('FREE_SHIPPING_FROM', 70.00);
 
         if($this->totalPrice < $freeShippingFrom) {
             /** @Todo: Replace "env" usage by database parameters */
-            $shippingCosts = env('SHIPPING_COSTS', 5.90);
+            $shippingCosts = \App\Setting::getValue('SHIPPING_COSTS', 5.90);
         }
 
         return $shippingCosts;
@@ -77,7 +77,7 @@ class Cart extends Model
     public function getPriceLeftBeforeFreeShippingAttribute()
     {
         /** @Todo: Replace "env" usage by database parameters */
-        $freeShippingFrom = env('FREE_SHIPPING_FROM', 70.00);
+        $freeShippingFrom = \App\Setting::getValue('FREE_SHIPPING_FROM', 70.00);
 
         return $freeShippingFrom - $this->totalPrice;
     }

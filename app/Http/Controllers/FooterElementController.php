@@ -19,9 +19,11 @@ class FooterElementController extends Controller
      */
     public function index()
     {
-        //
-    }
+        $footerElements = FooterElement::orderBy('position')->get();
+        $title = 'Bas de page';
 
+        return view('pages.admin.footer_elements')->withFooterElements($footerElements)->withCardTitle($title);
+    }
     /**
      * Show the form for creating a new resource.
      *

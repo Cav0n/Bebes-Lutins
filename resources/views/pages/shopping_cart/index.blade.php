@@ -17,7 +17,7 @@
     $shippingCosts = $cart->shippingCosts;
 @endphp
 
-<div class="container-fluid py-5">
+<div id="cart" class="container-fluid py-5">
     <div class="row justify-content-center">
 
         @if($cart->items->isEmpty())
@@ -30,6 +30,8 @@
         @else
 
         <div class="col-lg-9 col-xl-8 col-xxl-6 col-xxxl-5">
+            @include('components.utils.cart.steps')
+
             <h1 class="font-weight-bold">Mon panier - {{$cartQuantity}} produits</h1>
             <div class="row">
 

@@ -115,3 +115,16 @@ header .navbar-collapse .dropdown-item {
 #category-breadcrumb a {
     color: $light;
 }
+
+#cart .steps-container .step.active{
+    font-weight: 600;
+}
+
+#cart .steps-container .step-number{
+    width: 4rem;
+    height: 4rem;
+}
+
+#cart .steps-container .step-separator{
+    margin-top: 1.3rem;
+}

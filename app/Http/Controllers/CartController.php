@@ -56,12 +56,12 @@ class CartController extends Controller
      */
     public function show(Cart $cart = null)
     {
-        return view('pages.shopping_cart.index');
+        return view('pages.shopping_cart.index')->withCartStep(1);
     }
 
     public function showDelivery()
     {
-        return view('pages.shopping_cart.delivery');
+        return view('pages.shopping_cart.delivery')->withCartStep(2);
     }
 
     public function addAddresses(Request $request)
@@ -106,7 +106,7 @@ class CartController extends Controller
 
     public function showPayment()
     {
-        return view('pages.shopping_cart.payment');
+        return view('pages.shopping_cart.payment')->withCartStep(3);
     }
 
     /**

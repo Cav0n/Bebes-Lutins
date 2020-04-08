@@ -7,7 +7,7 @@
                 @endif
             @endforeach
         </div>
-        <div class="col pt-3 pr-4">
+        <div class="col pr-4">
             @foreach ($categories as $category)
                 <div id='cc-{{ $category->id }}' class="category-container">
                     <a id='h1-{{$category->id}}' class="h1" href="{{ route('category', ['category' => $category->id]) }}">

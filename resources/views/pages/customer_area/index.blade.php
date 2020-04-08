@@ -20,7 +20,7 @@
                             <p class="mb-0">{{Auth::user()->phone}}</p>
                         </div>
                         {{--//@todo: Create method for form --}}
-                        <form class="personal-informations" action="" method="POST">
+                        <form class="personal-informations mb-3" action="" method="POST">
                             <div class="form-group">
                                 <label for="firstname">Prénom</label>
                                 <input type="text" class="form-control" name="firstname" id="firstname" aria-describedby="helpFirstname">
@@ -55,7 +55,7 @@
                             <p class="mb-0">Vous pouvez changer votre mot de passe quand vous le souhaitez.</p>
                         </div>
                         {{--//@todo: Create method for form --}}
-                        <form class="password" action="" method="POST">
+                        <form class="password mb-3" action="" method="POST">
                             <div class="form-group">
                                 <label for="password">Mot de passe actuel</label>
                                 <input type="text" class="form-control" name="password" id="password" aria-describedby="helpPassword">

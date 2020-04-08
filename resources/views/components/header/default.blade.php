@@ -72,9 +72,9 @@
 
             {{-- MOBILE NAVBAR --}}
             <ul class="mobile navbar-nav mr-auto mt-5 mt-lg-0 d-flex d-lg-none">
-                <div class="separator mt-3"></div>
+                <div class="separator mt-3 mt-sm-5"></div>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-dark" href="#" id="categories-dropdown-mobile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nos produits</a>
+                    <a class="nav-link dropdown-toggle text-muted" href="#" id="categories-dropdown-mobile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Nos produits</a>
                     <div class="dropdown-menu shadow-none" aria-labelledby="categories-dropdown-mobile">
                         @foreach ($categories as $category)
                             @if (null == $category->parentId && !$category->isHidden)
@@ -84,18 +84,32 @@
                         @endforeach
                     </div>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item @if( Str::contains(url()->current(), route('cart'))) active @endif">
                     <a class="nav-link" href="{{ route('cart') }}">Mon panier</a>
                 </li>
-                <li class="nav-item active">
+                @guest
+                <li class="nav-item @if( Str::contains(url()->current(), route('login'))) active @endif">
                     <a class="nav-link" href="{{ route('login') }}">Se connecter</a>
                 </li>
-                <li class="nav-item active">
+                @endguest
+                @auth
+                <li class="nav-item @if( Str::contains(url()->current(), route('customer.area'))) active @endif">
+                    <a class="nav-link" href="{{ route('customer.area') }}">Mon compte</a>
+                </li>
+                @endauth
+
+                <li class="nav-item">
                     <a class="nav-link" href="#">Guides et conseils</a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="#">Qui sommes nous ?</a>
                 </li>
+                @auth
+                <div class="dropdown-divider"></div>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('logout') }}">Se déconnecter</a>
+                </li>
+                @endauth
             </ul>
 
         </div>

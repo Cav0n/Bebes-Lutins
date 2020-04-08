@@ -1,74 +1,27 @@
-@extends('templates.default')
+@extends('templates.cart')
 
-@section('title', "Mon panier - Bébés Lutins")
+@section('cart.title', 'Mon panier')
 
-@section('optional_css')
-<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/loadingio/ldbutton@v1.0.1/dist/ldbtn.min.css"/>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/loadingio/loading.css@v2.0.0/dist/loading.min.css"/>
-@endsection
+@section('cart.content')
+{{-- ITEMS LIST --}}
+<div class="@if (0 < $cartStep) col-12 col-md-8 my-0 @else col-12 my-2 @endif pl-0 pr-2">
 
-@section('content')
+    @if($cart->items->isEmpty())
 
-@php
-    $cart = Session::get('shopping_cart');
-
-    $cartQuantity = $cart->totalQuantity;
-    $cartPrice = $cart->totalPrice;
-    $shippingCosts = $cart->shippingCosts;
-@endphp
-
-<div class="container-fluid py-5">
-    <div class="row justify-content-center">
-
-        @if($cart->items->isEmpty())
-
-            <div class="empty-cart-container px-3 border bg-white text-center py-5">
-                <h1 class="font-weight-bold">Votre panier semble bien vide 😪</h1>
-                <a name="add-some-products" id="add-some-products" class="btn btn-outline-primary rounded-0" href="/" role="button">Ajoutez quelques produits !</a>
-            </div>
-
-        @else
-
-        <div class="col-lg-9 col-xl-8 col-xxl-6 col-xxxl-5">
-            <h1 class="font-weight-bold">Mon panier - {{$cartQuantity}} produits</h1>
-            <div class="row">
-
-                {{-- ITEMS LIST --}}
-                <div class="col-lg-8">
-                    @foreach ($cart->items as $item)
-                    @include('components.utils.cart.item')
-                    @endforeach
-                </div>
-
-                {{-- CART RECAP --}}
-                <div class="col-md-4 pr-0 pl-0 pl-md-2 my-2">
-                    <div id="price-recap" class="border bg-white p-3">
-                        <p class="mb-0 total-quantity">{{ $cart->totalQuantity }} produits : {{ \App\NumberConvertor::doubleToPrice($cart->totalPrice) }}</p>
-                        <p class="mb-0 total-shipping-costs">Frais de ports : {{ \App\NumberConvertor::doubleToPrice($cart->shippingCosts) }}</p>
-                        <p class="mb-0 total">TOTAL T.T.C. : {{ \App\NumberConvertor::doubleToPrice($cart->totalPrice + $cart->shippingCosts) }}</p>
-                        <a class="btn btn-primary w-100 rounded-0 mt-2" href="/panier/livraison" role="button">Valider mon panier</a>
-                    </div>
-
-                    @if($cart->priceLeftBeforeFreeShipping > 0)
-                    <div id="price-left" class="border mt-2 bg-white p-3">
-                        <p class="mb-0">Plus que {{ \App\NumberConvertor::doubleToPrice($cart->priceLeftBeforeFreeShipping) }} pour profiter de
-                            la livraison gratuite.</p>
-                    </div>
-                    @endif
-
-                    <div id="sharing-container" class="border mt-2 bg-white p-3">
-                        <p>Vous pouvez partager votre panier avec ce lien : </p>
-                        <p class='mb-0 font-weight-bold'>https://bebes-lutins.fr/panier/{{$cart->id}}</p>
-                    </div>
-                </div>
-            </div>
+        <div class="empty-cart-container px-3 border bg-white text-center py-5">
+            <h1 class="font-weight-bold">Votre panier semble bien vide 😪</h1>
+            <a name="add-some-products" id="add-some-products" class="btn btn-outline-primary rounded-0" href="/" role="button">Ajoutez quelques produits !</a>
         </div>
 
-        @endif
+    @else
 
-    </div>
+        @foreach ($cart->items as $item)
+        @include('components.utils.cart.item')
+        @endforeach
+
+    @endif
+
 </div>
-
 @endsection
 
 @section('scripts')

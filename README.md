@@ -1,3 +1,6 @@
+![Laravel](https://github.com/Cav0n/Bebes-Lutins/workflows/Laravel/badge.svg?branch=develop)
+[![Build Status](https://travis-ci.com/Cav0n/Bebes-Lutins.svg?branch=develop)](https://travis-ci.com/Cav0n/Bebes-Lutins)
+
 # Bebes Lutins
 This is a Laravel based website for the company Actypoles/Bébés Lutins
 

@@ -1,4 +1,4 @@
-<div class="certifications-container row m-0 text-center py-lg-5 py-3 border bg-primary text-light">
+<div class="certifications-container row m-0 text-center py-3 px-3 border bg-primary text-light">
     <div class="col-md-4 py-3 d-flex flex-column justify-content-center">
         <p class="h4 mb-0 font-weight-bold text-uppercase">Contactez-nous</p>
         <p class="mb-0">(Par mail, téléphone et nous avons même un formulaire de contact !)</p>

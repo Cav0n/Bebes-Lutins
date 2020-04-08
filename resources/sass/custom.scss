@@ -1,5 +1,5 @@
 header #logo {
-    top: -2rem;
+    top: -3.5rem;
     left: calc(50vw - 7rem);
     cursor: pointer;
     height: 14rem;
@@ -7,6 +7,11 @@ header #logo {
 
 header a {
     color: $dark;
+}
+
+header .svg {
+    height:2rem;
+    width:2rem;
 }
 
 footer a {
@@ -114,4 +119,17 @@ header .navbar-collapse .dropdown-item {
 
 #category-breadcrumb a {
     color: $light;
+}
+
+#cart .steps-container .step.active{
+    font-weight: 600;
+}
+
+#cart .steps-container .step-number{
+    width: 4rem;
+    height: 4rem;
+}
+
+#cart .steps-container .step-separator{
+    margin-top: 1.3rem;
 }

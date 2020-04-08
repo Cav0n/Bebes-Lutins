@@ -21,11 +21,13 @@
                 min="0">
                 <div class="ld ld-ring ld-spin"></div>
             </div>
-            <a class="d-flex flex-column justify-content-center ml-2" href="{{ route('cart.item.delete', ['cartItem'=>$item->id]) }}" role="button" style="width: fit-content">
+            <a class="d-none d-md-flex flex-column justify-content-center ml-2" href="{{ route('cart.item.delete', ['cartItem'=>$item->id]) }}" role="button" style="width: fit-content">
                 <img style="width: 1.4rem;height:1.4rem;" src="{{ asset('images/icons/trash.svg') }}" alt="Supprimer"></a>
         </div>
     </div>
     <div class="col-3 col-sm-2 col-xxl-2 d-flex flex-column justify-content-center border-left my-2 px-1">
-        <p class="mb-0 text-center item-total-price">{{ \App\NumberConvertor::doubleToPrice($item->product->price * $item->quantity) }}</p>
+        <p class="d-flex flex-column justify-content-center mb-0 text-center item-total-price h-100">{{ \App\NumberConvertor::doubleToPrice($item->product->price * $item->quantity) }}</p>
+        <a class="d-flex d-md-none justify-content-center mb-2 w-100" href="{{ route('cart.item.delete', ['cartItem'=>$item->id]) }}" role="button" style="width: fit-content">
+            <img style="width: 1.4rem;height:1.4rem;" src="{{ asset('images/icons/trash.svg') }}" alt="Supprimer"></a>
     </div>
 </div>

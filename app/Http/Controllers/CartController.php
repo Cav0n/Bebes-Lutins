@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 /**
  * Cart Model controller.
@@ -56,12 +57,26 @@ class CartController extends Controller
      */
     public function show(Cart $cart = null)
     {
-        return view('pages.shopping_cart.index')->withCartStep(1);
+        $cart = Session::get('shopping_cart');
+        $step = 1;
+
+        if ($cart->items->isEmpty()) {
+            $step = 0;
+        }
+
+        return view('pages.shopping_cart.index')
+                ->withCartStep($step)
+                ->withCart($cart);
     }
 
     public function showDelivery()
     {
-        return view('pages.shopping_cart.delivery')->withCartStep(2);
+        $cart = Session::get('shopping_cart');
+        $step = 2;
+
+        return view('pages.shopping_cart.delivery')
+                ->withCartStep($step)
+                ->withCart($cart);
     }
 
     public function addAddresses(Request $request)
@@ -106,7 +121,12 @@ class CartController extends Controller
 
     public function showPayment()
     {
-        return view('pages.shopping_cart.payment')->withCartStep(3);
+        $cart = Session::get('shopping_cart');
+        $step = 3;
+
+        return view('pages.shopping_cart.payment')
+                ->withCartStep($step)
+                ->withCart($cart);
     }
 
     /**

@@ -44,6 +44,10 @@
         </div>
     </div>
 
+    @if (null !== $order->comment)
+        <p><u>Message du client :</u> {{ $order->comment }}</p>
+    @endif
+
     <p class="h5">Articles :</p>
     @foreach ($order->items as $item)
         <div class="row my-2 mx-0 bg-white p-2 border">

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use View;
 use App\Order;
 use GuzzleHttp\Client;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class OrderController extends Controller
 {
@@ -32,6 +32,7 @@ class OrderController extends Controller
             $order->email = $r->user->email;
             $order->phone = $r->user->phone;
             $order->trackingNumber = $r->id;
+            $order->comment = $r->customerMessage;
             $order->billing_address_id = \App\Address::where('street', $r->billing_address->street)->where('lastname', $r->billing_address->lastname)->first()->id;
             $order->shipping_address_id = $r->shipping_address ? \App\Address::where('street', $r->shipping_address->street)->where('lastname', $r->shipping_address->lastname)->first()->id : null;
             $order->user_id = $r->user ? \App\User::where('email', $r->user->email)->exists() ? \App\User::where('email', $r->user->email)->first()->id  : null : null;

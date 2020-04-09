@@ -26,7 +26,10 @@
                         <label for="password">Mot de passe</label>
                         <input type="password" class="form-control" name="password" id="password">
                     </div>
-                    <button type="submit" class="btn btn-primary">Connexion</button>
+                    <div class="d-flex justify-content-between">
+                        <a class="mb-0 mt-auto" href="{{ route('homepage') }}">Retour à la boutique</a>
+                        <button type="submit" class="btn btn-primary">Connexion</button>
+                    </div>
                 </form>
             </div>
         </div>

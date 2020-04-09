@@ -4,16 +4,22 @@
 
 @section('cart.content')
     {{-- PAYMENT SELECTION --}}
-    <div class="col-lg-8 my-2 p-0">
+    <div class="col-12 p-0">
         <div id="payment-form" class="border bg-white p-3 d-flex flex-column">
-            <a name="credit-card-payment-btn" id="credit-card-payment-btn" class="btn btn-primary rounded-0" href="#" role="button">
-                Payer par carte bancaire</a>
+            <div class="next-button-container ld-over">
+                <a name="credit-card-payment-btn" id="credit-card-payment-btn" class="btn btn-primary rounded-0 w-100" href="#" role="button">
+                    Payer par carte bancaire</a>
+                <div class="ld ld-ring ld-spin"></div>
+            </div>
 
             <div class="separator my-3 border-top border-bottom">
 
             </div>
-            <button id="cheque-infos-display-btn" type="button" class="btn btn-primary rounded-0">
-                Payer par chèque bancaire</button>
+            <div class="next-button-container ld-over">
+                <button id="cheque-infos-display-btn" type="button" class="btn btn-primary rounded-0 w-100">
+                    Payer par chèque bancaire</button>
+                <div class="ld ld-ring ld-spin"></div>
+            </div>
 
             <div id='cheque-infos-container' class='p-3 border my-2'>
                 <p class="mb-0">Merci d'établir votre chèque à l'ordre de : <b>ACTYPOLES</b>.<BR>
@@ -29,24 +35,15 @@
 
                 <div class="separator my-3 border-top border-bottom"></div>
 
-                <a name="cheque-payment-btn" id="cheque-payment-btn" class="btn btn-primary w-100 rounded-0" href="{{ route('order.createFromCart', ['cart' => $cart]) . '?paymentMethod=CHEQUE' }}" role="button">
-                    Valider ma commande</a>
+                <div class="next-button-container ld-over">
+                    <a name="cheque-payment-btn" id="cheque-payment-btn" class="btn btn-primary w-100 rounded-0" href="{{ route('order.createFromCart', ['cart' => $cart]) . '?paymentMethod=CHEQUE' }}" role="button">
+                        Valider ma commande</a>
+                    <div class="ld ld-ring ld-spin"></div>
+                </div>
             </div>
 
             <small class="mt-2">En cliquant sur les boutons ci-dessus vous acceptez sans réserve les conditions générales de vente.</small>
         </div>
     </div>
 
-@endsection
-
-@section('scripts')
-<script>
-    $(document).ready(function(){
-        $('#cheque-infos-container').hide();
-
-        $('#cheque-infos-display-btn').on('click', function(){
-            $('#cheque-infos-container').toggle();
-        });
-    });
-</script>
 @endsection

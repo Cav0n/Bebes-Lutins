@@ -3,7 +3,7 @@
 @section('cart.title', 'Livraison')
 
 @section('cart.content')
-<div class="col-md-8 pl-0 pr-0 pr-md-2 my-2">
+<div class="col-12 p-0">
     <form id="address-selection" action="{{ route("cart.delivery.validation") }}" method="POST">
         @csrf
 
@@ -131,60 +131,4 @@
         @endguest
     </form>
 </div>
-@endsection
-
-@section('scripts')
-<script>
-    $(document).ready(function(){
-        $('#new-shipping-address').show();
-
-        if ($('#sameAddresses').attr('checked')) {
-            $('#new-shipping-address').hide();
-            $('#shipping').hide();
-        } else {
-            $('#new-shipping-address').show();
-            $('#shipping').show();
-        }
-
-        @auth
-        @if (0 < Auth::user()->addresses->count())
-            $('#new-billing-address').hide();
-        @endif
-        @endauth
-
-        newBillingAddressBtn = $('#new-billing-address-btn');
-
-        newBillingAddressBtn.on('click', function(){
-            $('#billing-address-select').toggle();
-            $('#new-billing-address').toggle();
-
-            if ( newBillingAddressBtn.hasClass('activated') ){
-                newBillingAddressBtn.text('Ou créez en une nouvelle');
-                newBillingAddressBtn.removeClass('activated')
-                $('#is-new-billing-address').val('0');
-            } else {
-                newBillingAddressBtn.text('Selectionner une de vos adresses');
-                newBillingAddressBtn.addClass('activated')
-                $('#is-new-billing-address').val('1');
-            }
-        });
-
-        newShippingAddressBtn = $('#new-shipping-address-btn');
-
-        newShippingAddressBtn.on('click', function(){
-            $('#shipping-address-select').toggle();
-            $('#new-shipping-address').toggle();
-
-            if ( newShippingAddressBtn.hasClass('activated') ){
-                newShippingAddressBtn.text('Ou créez en une nouvelle');
-                newShippingAddressBtn.removeClass('activated')
-                $('#is-new-shipping-address').val('0');
-            } else {
-                newShippingAddressBtn.text('Selectionner une de vos adresses');
-                newShippingAddressBtn.addClass('activated')
-                $('#is-new-shipping-address').val('1');
-            }
-        });
-    });
-</script>>
 @endsection

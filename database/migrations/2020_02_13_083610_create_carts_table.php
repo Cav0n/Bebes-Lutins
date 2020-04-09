@@ -18,6 +18,7 @@ class CreateCartsTable extends Migration
             $table->boolean('isActive');
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->text('comment')->nullable();
             $table->string('sessionId')->unique();
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->string('voucher_id')->nullable();

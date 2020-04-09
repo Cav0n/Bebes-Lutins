@@ -67,22 +67,22 @@
         </div>
     @endforeach
 
-    <div class="row">
-        <div class="col-8 col-lg-3 offset-lg-7 text-right">
+    <div class="row m-0 px-2">
+        <div class="col-8 col-lg-3 offset-lg-7 text-right pr-0">
             <p class="mb-0">Prix total :</p>
             <p class="mb-0">Frais de ports :</p>
-            <p class="">Prix total T.T.C. :</p>
+            <p class="mb-0">Prix total T.T.C. :</p>
         </div>
         <div class="col-4 col-lg-2 text-center">
             <p class="mb-0">{{ number_format($order->totalPrice, 2) }} €</p>
             <p class="mb-0">{{ number_format($order->shippingCosts, 2) }} €</p>
-            <p class="">{{ number_format($order->totalPrice + $order->shippingCosts, 2) }} €</p>
+            <p class="mb-0">{{ number_format($order->totalPrice + $order->shippingCosts, 2) }} €</p>
         </div>
     </div>
 
-    <div class="row">
+    <div class="row m-0 px-2">
         <div class="col-12 text-right">
-            <p class="mb-0">Commande payée par {{ $order->paymentMethodI18n }}.</p>
+            <small class="mb-0">Commande payée par {{ $order->paymentMethodI18n }}.</small>
         </div>
     </div>
 </div>

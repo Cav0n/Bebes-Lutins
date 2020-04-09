@@ -174,6 +174,7 @@ class OrderController extends Controller
         if ($cart->shippingAddress) $order->shipping_address_id = $cart->shippingAddress->id;
         if ($cart->user) $order->user_id = $cart->user->id;
         $order->voucher_id = $cart->voucher_id;
+        $order->comment = $cart->comment;
 
         $order->trackingNumber = uniqid();
 
@@ -208,6 +209,14 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         return view('pages.admin.order')->withOrder($order);
+    }
+
+
+    public function showThanks(Request $request, \App\Order $order)
+    {
+        $step = 4;
+
+        return view('pages.shopping_cart.thanks')->withOrder($order)->withCartStep($step);
     }
 
     /**

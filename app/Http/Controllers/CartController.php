@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Session;
 
 /**
@@ -57,7 +58,7 @@ class CartController extends Controller
      */
     public function show(Cart $cart = null)
     {
-        $cart = Session::get('shopping_cart');
+        $cart = Cart::where('id', Session::get('shopping_cart')->id)->first();
         $step = 1;
 
         if ($cart->items->isEmpty()) {
@@ -71,7 +72,7 @@ class CartController extends Controller
 
     public function showDelivery()
     {
-        $cart = Session::get('shopping_cart');
+        $cart = Cart::where('id', Session::get('shopping_cart')->id)->first();
         $step = 2;
 
         return view('pages.shopping_cart.delivery')
@@ -121,13 +122,23 @@ class CartController extends Controller
 
     public function showPayment()
     {
-        $cart = Session::get('shopping_cart');
+        $cart = Cart::where('id', Session::get('shopping_cart')->id)->first();
         $step = 3;
 
         return view('pages.shopping_cart.payment')
                 ->withCartStep($step)
                 ->withCart($cart);
     }
+
+    public function addComment(Request $request)
+    {
+        $cart = Cart::where('id', $request['cartId'])->first();
+        $cart->comment = $request['comment'];
+        $cart->save();
+
+        return JsonResponse::create(['message' => 'Commentaire ajouté avec succés'], 200);
+    }
+
 
     /**
      * Show the form for editing the specified resource.

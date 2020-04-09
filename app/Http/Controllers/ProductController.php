@@ -197,6 +197,37 @@ class ProductController extends Controller
                                           ->withCategoriesForTagify($categoriesForTagify);
     }
 
+    public function editImages(Request $request, Product $product)
+    {
+        $categories = \App\Category::where('isDeleted', 0)->orderBy('name', 'asc')->get();
+
+        $categoriesForTagify = '';
+        $productCategories = '';
+
+        $first = true;
+        foreach ($categories as $category) {
+            if (!$first) {
+                $categoriesForTagify .= ",";
+            }
+            $categoriesForTagify .= "'" . $category->name . "'";
+            $first = false;
+        }
+
+        $first = true;
+        foreach ($product->categories as $category) {
+            if (!$first) {
+                $productCategories .= ',';
+            }
+            $productCategories .= $category->name;
+            $first = false;
+        }
+
+        return view('pages.admin.product_images')->withProduct($product)
+                                          ->withProductCategories($productCategories)
+                                          ->withCategories($categories)
+                                          ->withCategoriesForTagify($categoriesForTagify);
+    }
+
     /**
      * Update the specified resource in storage.
      *

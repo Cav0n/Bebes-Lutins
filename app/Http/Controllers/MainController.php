@@ -17,11 +17,6 @@ class MainController extends Controller
         ]);
     }
 
-    public function thanks(Request $request, Order $order)
-    {
-        return view('pages.shopping_cart.thanks')->with('order', $order);
-    }
-
     public function showContact(Request $request)
     {
         return view('pages.static.contact');

@@ -24,6 +24,32 @@
             </div>
             @endif
 
+            @if(!empty($unavailableItems))
+            <div class="alert alert-danger" role="alert">
+                <p>Certains produit de votre panier ne sont plus disponibles : </p>
+                <ul class="mb-0">
+                    @foreach ($unavailableItems as $item)
+                        <li><a href="{{ route('product', ['product' => $item->product]) }}" class="alert-danger">
+                            {{ ucfirst($item->product->name) }}
+                        </a></li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
+            @if(!empty($stockDecreasedItems))
+            <div class="alert alert-danger" role="alert">
+                <p>Le stock de certains produits ont diminué : </p>
+                <ul class="mb-0">
+                    @foreach ($stockDecreasedItems as $item)
+                        <li><a href="{{ route('product', ['product' => $item->product]) }}" class="alert-danger">
+                            {{ ucfirst($item->product->name) }}
+                        </a></li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
             <div class="row m-0">
                 {{-- CART CONTENT --}}
                 <div class="col-12 @if (0 < $cartStep && 4 > $cartStep) col-md-8 @endif pr-0 pl-0 pr-md-2 my-2">

@@ -43,10 +43,10 @@
                         <a class="btn btn-outline-dark py-0 ml-3" href="{{ route('admin.product.edit', ['product' => $product]) }}" role="button">Editer</a>
                         @endadmin
                     </div>
-                    <div class="d-flex my-2">
-                        <input type="number" class="form-control input-spinner quantity-spinner" name="quantity" id="quantity" aria-describedby="helpQuantity" min="1" max="{{ $product->stock }}" value="1">
-                        <button type="button" class="btn btn-primary add-to-cart rounded-0 ml-3" data-id="{{ $product->id }}" data-toggle="modal" data-quantity="1" data-cart_id="{{ session()->get('shopping_cart')->id }}" data-target="#product-added-modal">
-                            Ajouter au panier</button>
+                    <div class="d-flex my-2 {{ $product->stock <= 0 ? 'no-stock' : null }}">
+                        <input type="number" class="form-control input-spinner quantity-spinner" name="quantity" id="quantity" aria-describedby="helpQuantity" min="1" max="{{ $product->stock }}" value="1" {{ $product->stock <= 0 ? 'disabled' : null }}>
+                        <button type="button" class="btn btn-primary {{ $product->stock > 0 ? 'add-to-cart' : null }} rounded-0 ml-3" data-id="{{ $product->id }}" {!! $product->stock > 0 ? 'data-toggle="modal"' : null !!} data-quantity="1" data-cart_id="{{ session()->get('shopping_cart')->id }}" data-target="#product-added-modal">
+                            {{ $product->stock > 0 ? 'Ajouter au panier' : 'Rupture de stock' }}</button>
                     </div>
 
                     <div class="text-justify mt-3">

@@ -110,6 +110,11 @@ class OrderController extends Controller
         return JsonResponse::create(['error' => ['message' => trans('messages.There is no order with this tracking number.')] ]);
     }
 
+    public function showBill(Request $request, Order $order)
+    {
+        return view('components.utils.orders.bill')->with(['order' => $order]);
+    }
+
     /**
      * Display a listing of the resource.
      *

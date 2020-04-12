@@ -94,6 +94,7 @@ Route::get('/panier/{cartItem}/supprimer', 'CartItemController@destroy')->name('
 Route::get('/commande/validation/{cart}', 'OrderController@createFromCart')->name('order.createFromCart');
 Route::get('/merci/{order}', 'OrderController@showThanks')->name('thanks');
 Route::get('/commande/suivi', 'OrderController@showTrackingPage')->name('order.tracking.show');
+Route::get('/commande/{order}/facture', 'OrderController@showBill')->name('order.bill');
 /** ============ */
 
 /**

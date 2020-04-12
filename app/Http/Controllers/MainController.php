@@ -14,6 +14,8 @@ class MainController extends Controller
         return view('index')->with([
             'homepageTitle' => \App\Setting::getValue('HOMEPAGE_TITLE'),
             'homepageDescription' => \App\Setting::getValue('HOMEPAGE_DESCRIPTION'),
+            'products' => \App\Product::where('isDeleted', 0)->where('isHidden', 0),
+            'carouselItems' => \App\CarouselItem::all()
         ]);
     }
 

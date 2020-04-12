@@ -67,6 +67,7 @@ Route::get('/categories/{category}', 'CategoryController@show')->name('category'
  * PRODUCT
  * ============
  */
+Route::get('/produits/tous', 'ProductController@publicIndex')->name('products.all');
 Route::get('/produits/{product}', 'ProductController@show')->name('product');
 Route::post('/produits/{product}/ajout-commentaire', 'ReviewController@store')->name('product.reviews.add');
 /** ============ */

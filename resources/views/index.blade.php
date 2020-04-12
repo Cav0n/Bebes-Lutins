@@ -1,15 +1,10 @@
-@php
-    $products = App\Product::where('isDeleted', 0)->where('isHidden', 0);
-    $carouselItems = \App\CarouselItem::all();
-@endphp
-
 @extends('templates.default')
 
 @section('optional_og')
 <meta property="og:title" content="Bébés Lutins" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="{{ URL::to('/') }}" />
-<meta property="og:image" content="{{ asset('images/logo-mini.svg') }}" />
+<meta property="og:image" content="{{ asset('images/logo.png') }}" />
 @endsection
 
 @section('title', "Bébés Lutins | Couches lavables fabriquées en France")
@@ -30,6 +25,12 @@
             </p>
 
             @include('components.utils.products.highlighted_products')
+
+            <div class="row mb-3">
+                <div class="col-12 d-flex justify-content-center">
+                    <a class="btn btn-primary" href="{{ route('products.all') }}" role="button">Voir tout nos produits</a>
+                </div>
+            </div>
 
             @include('components.utils.certifications.default')
         </div>

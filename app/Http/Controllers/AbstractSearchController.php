@@ -42,7 +42,7 @@ class AbstractSearchController extends Controller
     protected function prepareSearch(Request $request)
     {
         if (!$request['search']) {
-            return redirect()->route('admin')->withErrors(['search' => 'La recherche ne peut pas être vide.']);
+            return back()->withErrors(['search' => 'La recherche ne peut pas être vide.']);
         }
 
         $this->search = explode(' ', trim($request['search']));

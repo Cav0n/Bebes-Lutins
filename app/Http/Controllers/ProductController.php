@@ -11,6 +11,11 @@ use Illuminate\Http\JsonResponse;
 
 class ProductController extends Controller
 {
+    const ORDER_BY_NAME_ASC = 1;
+    const ORDER_BY_NAME_DESC = 2;
+    const ORDER_BY_PRICE_ASC = 3;
+    const ORDER_BY_PRICE_DESC = 4;
+
     public function __construct()
     {
         $this->middleware('admin')->only(['index', 'create', 'store', 'edit', 'update']);
@@ -84,6 +89,40 @@ class ProductController extends Controller
         }
 
         return view('pages.admin.products')->withProducts($products->paginate(15))->withCardTitle($title);
+    }
+
+    public function publicIndex(Request $request)
+    {
+        $products = Product::where('isDeleted', 0)->where('isHidden', 0);
+
+        switch ($request['sorting']) {
+            case self::ORDER_BY_NAME_ASC:
+                $products->orderBy('name', 'asc');
+            break;
+
+            case self::ORDER_BY_NAME_DESC:
+                $products->orderBy('name', 'desc');
+            break;
+
+            case self::ORDER_BY_PRICE_ASC:
+                $products->orderBy('price', 'asc');
+            break;
+
+            case self::ORDER_BY_PRICE_DESC:
+                $products->orderBy('price', 'desc');
+            break;
+
+            default:
+                $products->orderBy('name', 'asc');
+            break;
+        }
+
+        if (isset($request['search'])) {
+            $products = (new SearchController($request))->products($request, $products);
+        }
+
+        return view('pages.product.all')->withProducts($products->paginate(12))
+                                        ->withSorting($request['sorting']);
     }
 
     /**
@@ -296,5 +335,11 @@ class ProductController extends Controller
     public function apiGet(Product $product)
     {
         return new \App\Http\Resources\Product($product->id);
+    }
+
+    public function apiIndex(Request $request)
+    {
+        $products = Product::where('isDeleted', 0)->where('isHidden', 0)->orderBy('name', 'asc');
+        return $products->paginate(12);
     }
 }

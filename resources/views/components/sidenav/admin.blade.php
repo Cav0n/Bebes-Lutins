@@ -117,6 +117,19 @@
                     Tous les paramètres</a>
             </div>
         </div>
+
+        {{-- LOGOUT --}}
+        <div class="row m-0 mt-3">
+            <div class="col-2 p-0">
+                <img class="w-100 svg  @if(url()->current() == route('admin.logout')) active @endif"
+                    src="{{ asset('images/icons/logout-bw.svg') }}" alt="Déconnexion">
+            </div>
+            <div class="col-10 d-flex flex-column justify-content-center">
+                <a href='{{ route('admin.logout') }}' class='mb-0
+                    @if(url()->current() == route('admin.logout'))active @endif'>
+                    Se déconnecter</a>
+            </div>
+        </div>
     </div>
 
     <div class="bottom-sidenav text-center">

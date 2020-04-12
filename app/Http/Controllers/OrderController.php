@@ -6,6 +6,7 @@ use App\Order;
 use GuzzleHttp\Client;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
 class OrderController extends Controller
@@ -112,7 +113,10 @@ class OrderController extends Controller
 
     public function showBill(Request $request, Order $order)
     {
-        return view('components.utils.orders.bill')->with(['order' => $order]);
+        if (\App\Admin::check() || (Auth::check() && $order->user_id == Auth::user()->id)){
+            return view('components.utils.orders.bill')->with(['order' => $order]);
+        }
+        return abort(404);
     }
 
     /**

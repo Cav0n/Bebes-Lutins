@@ -117,7 +117,7 @@ class ProductController extends Controller
             break;
         }
 
-        if (isset($request['search'])) {
+        if (isset($request['search']) && !empty($request['search'])) {
             $products = (new SearchController($request))->products($request, $products);
         }
 

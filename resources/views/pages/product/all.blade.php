@@ -102,7 +102,7 @@
         $('#search').change(function(e) {
             let url = window.location.href;
             let search = $(this).val();
-            const regex = /search=([a-zA-Z]+(%20)?)*[^&?]/gi;
+            const regex = /search=([a-zA-Z]*(%20)?)*[^&?]/gi;
 
             console.log(url);
 

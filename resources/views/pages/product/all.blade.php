@@ -49,6 +49,12 @@
             </div>
 
             <div class="row my-3">
+                @if (count($products) <= 0)
+                <div class="col-12 d-flex justify-content-center">
+                    <p class='text-muted mb-0'>Aucun produit ne correspond à votre recherche.</p>
+                </div>
+                @endif
+
                 @foreach ($products as $product)
                     @include('components.utils.products.simple_product')
                 @endforeach
@@ -96,12 +102,14 @@
         $('#search').change(function(e) {
             let url = window.location.href;
             let search = $(this).val();
-            const regex = /search=[a-zA-Z]+/gi;
+            const regex = /search=([a-zA-Z]+(%20)?)*[^&?]/gi;
 
             console.log(url);
 
             if (url.indexOf('?') > -1) {
-                if (url.indexOf('&search') > -1) {
+                if (url.indexOf('?search') > -1) {
+                    url = url.replace(regex, 'search=' + search);
+                } else if (url.indexOf('&search') > -1) {
                     url = url.replace(regex, 'search=' + search);
                 } else {
                     url += '&search=' + search;

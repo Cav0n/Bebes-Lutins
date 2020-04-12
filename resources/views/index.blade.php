@@ -28,7 +28,7 @@
 
             <div class="row mb-3">
                 <div class="col-12 d-flex justify-content-center">
-                    <a class="btn btn-primary" href="{{ route('products.all') }}" role="button">Voir tout nos produits</a>
+                    <a class="btn btn-primary" href="{{ route('products.all') }}" role="button">Voir tous nos produits</a>
                 </div>
             </div>
 

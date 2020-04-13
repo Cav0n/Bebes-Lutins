@@ -20,7 +20,7 @@
             <h1 class="h1 font-weight-bolder">
                 {{ $homepageTitle }}
             </h1>
-            <p class="h5 text-justify">
+            <p class="h5 font-weight-normal text-justify">
                 {{ $homepageDescription }}
             </p>
 

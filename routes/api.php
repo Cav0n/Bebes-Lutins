@@ -35,3 +35,4 @@ Route::get('/orders/import/items', 'OrderItemController@importFromJSON')->name('
 // ANALYTICS
 Route::get('/analytics/count', 'Admin\AnalyticsController@analyticCount')->name('api.analytics.count');
 Route::get('/analytics/sales', 'Admin\AnalyticsController@sales')->name('api.analytics.sales');
+Route::get('/analytics/visits', 'Admin\AnalyticsController@visits')->name('api.analytics.visits');

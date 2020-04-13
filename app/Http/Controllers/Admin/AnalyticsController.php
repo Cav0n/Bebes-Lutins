@@ -113,4 +113,30 @@ class AnalyticsController extends Controller
 
         return JsonResponse::create($data, 200);
     }
+
+    public function visits()
+    {
+        $data = [];
+        $data['total'] = 0;
+        $data['max'] = 0;
+        $data['period'] = $this->period;
+
+        $index = 0;
+        foreach ($this->period as $date) {
+            $visitors = \App\VisitorLog::whereDate('created_at', $date)->get();
+            $data[$index]['date'] = $date->format('m/d/Y H:i'); // Todo: create a constante FORMAT_WITH_STEP for step like 1 hour.
+            $data[$index]['value'] = 0;
+
+            foreach ($visitors as $visitor) {
+                $data[$index]['value'] += $visitor->visits;
+                $data['total'] += $visitor->visits;
+            }
+
+            $data['max'] < $data[$index]['value'] ? $data['max'] = $data[$index]['value'] : null;
+
+            $index++;
+        }
+
+        return JsonResponse::create($data, 200);
+    }
 }

@@ -8,6 +8,9 @@ use Illuminate\Validation\Rule;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
@@ -121,7 +124,7 @@ class ProductController extends Controller
             $products = (new SearchController($request))->products($request, $products);
         }
 
-        return view('pages.product.all')->withProducts($products->paginate(12))
+        return view('pages.product.all')->withProducts($products->paginate(16))
                                         ->withSorting($request['sorting']);
     }
 
@@ -265,6 +268,21 @@ class ProductController extends Controller
                                           ->withProductCategories($productCategories)
                                           ->withCategories($categories)
                                           ->withCategoriesForTagify($categoriesForTagify);
+    }
+
+    public function addImages(Request $request, Product $product)
+    {
+        $request->validate([
+            'image' => 'image',
+        ]);
+
+        $originalName = $request->image->getClientOriginalName();
+
+        $path = $request->image->storeAs(
+            'public/images/products', $originalName
+        );
+
+        return JsonResponse::create(['image' => asset('images/products/' . $originalName)]);
     }
 
     /**

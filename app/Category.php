@@ -50,7 +50,7 @@ class Category extends Model
             $parent = $parent->parent;
         }
 
-        $breadcrumb = "<a href='/'>Accueil</a> / " . $breadcrumb;
+        $breadcrumb = "/ <a href='/'>Accueil</a> / " . $breadcrumb;
 
         return $breadcrumb;
     }

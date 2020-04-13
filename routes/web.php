@@ -139,6 +139,7 @@ Route::get('/admin/order/{order}', 'OrderController@show')->name('admin.order.sh
 Route::get('/admin/product/{product}', 'ProductController@edit')->name('admin.product.edit');
 Route::post('/admin/product/{product}', 'ProductController@update')->name('admin.product.edit');
 Route::get('/admin/product/{product}/images', 'ProductController@editImages')->name('admin.product.images.edit');
+Route::post('/admin/product/{product}/images/add', 'ProductController@addImages')->name('admin.product.images.add');
 Route::get('/admin/category/{category}', 'CategoryController@edit')->name('admin.category.edit');
 Route::post('/admin/category/{category}', 'CategoryController@update')->name('admin.category.edit');
 Route::get('/admin/customer/{user}', 'UserController@edit')->name('admin.customer.edit');

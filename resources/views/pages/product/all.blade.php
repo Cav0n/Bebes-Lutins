@@ -27,7 +27,7 @@
             </h1>
 
             <div class="row" id="filters-container">
-                <div class="form-group col-6 col-md-4 col-lg-3">
+                <div class="form-group col-12 col-sm-5 col-md-4 col-lg-3">
                     <label for="sorting">Trier par</label>
                     <select id="sorting" class="custom-select" name="sorting">
                         <option value="1" {{ $sorting == '1' || !isset($sorting) ? 'selected' : null }}>
@@ -40,11 +40,10 @@
                             Du + cher au - cher</option>
                     </select>
                 </div>
-                <div class="col-6 col-md-8 col-lg-9">
-                    <div class="form-group">
-                        <label for="search">Rechercher</label>
-                        <input type="text" class="form-control" name="search" id="search" value="{{ Request::get('search') }}">
-                    </div>
+                <div class="col-12 col-sm-7 col-md-8 col-lg-9 form-group mb-0">
+                    <label for="search">Rechercher</label>
+                    <input type="text" class="form-control" name="search" id="search" value="{{ Request::get('search') }}">
+                    <small>La recherche ce lancera automatiquement en appuyant sur Entrée.</small>
                 </div>
             </div>
 
@@ -82,44 +81,52 @@
         $('#sorting').change(function(e){
             let url = window.location.href;
             let sorting = $(this).val();
-            const regex = /sorting=[\d]*/gi;
 
-            console.log(url);
-
-            if (url.indexOf('?') > -1){
-                if (url.indexOf('?sorting') > -1) {
-                    url = url.replace(regex, 'sorting=' + sorting);
-                } else {
-                    url += '&sorting=' + sorting;
-                }
-            }else{
-                url += '?sorting=' + sorting;
-            }
-
-            window.location.href = url;
+            window.location.href = updateQueryString(url, 'sorting', sorting);
         });
 
         $('#search').change(function(e) {
             let url = window.location.href;
             let search = $(this).val();
-            const regex = /search=([a-zA-Z]*(%20)?)*[^&?]/gi;
 
-            console.log(url);
+            console.log(search);
 
-            if (url.indexOf('?') > -1) {
-                if (url.indexOf('?search') > -1) {
-                    url = url.replace(regex, 'search=' + search);
-                } else if (url.indexOf('&search') > -1) {
-                    url = url.replace(regex, 'search=' + search);
-                } else {
-                    url += '&search=' + search;
-                }
-            } else {
-                url += '?search=' + search;
-            }
-
-            window.location.href = url;
+            window.location.href = updateQueryString(url, 'search', search);
         });
+
+        function updateQueryString(url, key, value) {
+            if (!url) url = window.location.href;
+            var re = new RegExp("([?&])" + key + "=.*?(&|#|$)(.*)", "gi"),
+                hash;
+
+            if (re.test(url)) {
+                if (typeof value !== 'undefined' && value !== null) {
+                    return url.replace(re, '$1' + key + "=" + value + '$2$3');
+                }
+                else {
+                    hash = url.split('#');
+                    url = hash[0].replace(re, '$1$3').replace(/(&|\?)$/, '');
+                    if (typeof hash[1] !== 'undefined' && hash[1] !== null) {
+                        url += '#' + hash[1];
+                    }
+                    return url;
+                }
+            }
+            else {
+                if (typeof value !== 'undefined' && value !== null) {
+                    var separator = url.indexOf('?') !== -1 ? '&' : '?';
+                    hash = url.split('#');
+                    url = hash[0] + separator + key + '=' + value;
+                    if (typeof hash[1] !== 'undefined' && hash[1] !== null) {
+                        url += '#' + hash[1];
+                    }
+                    return url;
+                }
+                else {
+                    return url;
+                }
+            }
+        }
     });
 </script>
 @endsection

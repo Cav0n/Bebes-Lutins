@@ -8,18 +8,23 @@
         <div class="col-5 border border-dark p-2">
             <h1 class="h2 mb-0"><b>Adresse de livraison</b></h1>
             <div>
-                <p class="mb-0">
-                    {{ $order->shippingAddress->minCivilityI18n }}
-                    {{ $order->shippingAddress->firstname }}
-                    {{ $order->shippingAddress->lastname }}
-                </p>
-                <p class="mb-0">
-                    {{ $order->shippingAddress->street }}
-                </p>
-                <p class="mb-0">
-                    {{ $order->shippingAddress->zipCode }},
-                    {{ $order->shippingAddress->city }}
-                </p>
+                @if(null !== $order->shippingAddress)
+                    <p class="mb-0">
+                        {{ $order->shippingAddress->minCivilityI18n }}
+                        {{ $order->shippingAddress->firstname }}
+                        {{ $order->shippingAddress->lastname }}
+                    </p>
+                    <p class="mb-0">
+                        {{ $order->shippingAddress->street }}
+                    </p>
+                    <p class="mb-0">
+                        {{ $order->shippingAddress->zipCode }},
+                        {{ $order->shippingAddress->city }}
+                    </p>
+                @else
+                    <p>Retrait à l'atelier</p>
+                @endif
+
             </div>
             <div>
                 <p class="mb-0">

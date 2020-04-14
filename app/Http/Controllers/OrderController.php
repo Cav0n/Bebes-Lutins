@@ -198,6 +198,9 @@ class OrderController extends Controller
             $orderItem->order_id = $order->id;
 
             $orderItem->save();
+
+            $orderItem->product->stock -= $item->quantity;
+            $orderItem->product->save();
         }
 
         $cart = session()->get('shopping_cart');

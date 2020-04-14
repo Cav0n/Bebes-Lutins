@@ -44,7 +44,7 @@ class Order extends Model
         $totalPrice = 0.0;
 
         foreach($this->items as $item){
-            $totalPrice += $item->product->price * $item->quantity;
+            $totalPrice += $item->unitPrice * $item->quantity;
         }
 
         return $totalPrice;

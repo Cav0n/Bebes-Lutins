@@ -50,7 +50,7 @@ Route::get('/espace-client/mes-commandes', 'CustomerArea\MainController@orders')
 Route::get('/espace-client/mes-adresses', 'CustomerArea\MainController@addresses')->name('customer.area.addresses');
 
 Route::get('/espace-client/newsletters/toggle/{user}', 'UserController@toggleNewsletters')->name('user.newsletters.toggle');
-
+Route::post('/espace-client/mise-a-jour', 'UserController@update')->name('user.update');
 Route::post('/espace-client/adresses/ajouter', 'AddressController@store')->name('user.addresses.create');
 /** ============ */
 

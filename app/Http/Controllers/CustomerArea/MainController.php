@@ -32,7 +32,10 @@ class MainController extends Controller
      */
     public function orders(Request $request)
     {
-        return view('pages.customer_area.orders')->with(['orders' => Auth::user()->orders()->paginate(15)]);
+        return view('pages.customer_area.orders')
+            ->with([
+                'orders' => Auth::user()->orders()->orderBy('created_at', 'desc')->paginate(15)
+            ]);
     }
 
     /**

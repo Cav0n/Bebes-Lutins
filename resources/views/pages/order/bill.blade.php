@@ -51,13 +51,13 @@
 
     <div class="row">
         <div class="col-12">
-            <h1 class="h2 mb-0">
+            <h1 class="h4 mb-0">
                 <b>Commande passée le {{ $order->created_at->format('d / m / Y à H:i') }}</b>
             </h1>
+            <p class="mb-0">Payée par {{ $order->paymentMethodI18n }}.</p>
             @if ($order->comment)
                 <p class="mb-0"><u>Message du client</u> : {{ $order->comment }}</p>
             @endif
-            <p class="mb-0">Payée par {{ $order->paymentMethodI18n }}.</p>
         </div>
     </div>
 

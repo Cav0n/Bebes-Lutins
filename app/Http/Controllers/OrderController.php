@@ -114,7 +114,7 @@ class OrderController extends Controller
     public function showBill(Request $request, Order $order)
     {
         if (\App\Admin::check() || (Auth::check() && $order->user_id == Auth::user()->id)){
-            return view('components.utils.orders.bill')->with(['order' => $order]);
+            return view('pages.order.bill')->with(['order' => $order]);
         }
         return abort(404);
     }

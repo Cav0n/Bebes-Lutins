@@ -22,36 +22,6 @@ class AdminController extends Controller
     |
     */
 
-    public function importFromJSON()
-    {
-        $client = new Client();
-        $res = $client->get('https://bebes-lutins.fr/api/admins');
-        $result = json_decode($res->getBody());
-
-        Admin::destroy(Admin::all());
-
-        $count = 0;
-        foreach($result as $r) {
-            if (Admin::where('email', $r->email)->exists()) {
-                continue;
-            }
-
-            $admin = new Admin();
-            $admin->uuid = Str::orderedUuid();
-            $admin->firstname = $r->firstname;
-            $admin->lastname = $r->lastname;
-            $admin->email = $r->email;
-            $admin->password = $r->password;
-            $admin->role = 'ADMIN';
-            $admin->created_at = $r->created_at;
-            $admin->updated_at = Carbon::now()->toDateTimeString();
-            $admin->save();
-            $count++;
-        }
-
-        echo $count . ' admins 👨‍✈️ imported !' . "\n";
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -126,5 +96,39 @@ class AdminController extends Controller
     public function destroy(Admin $admin)
     {
         //
+    }
+
+    /**
+     * Import every addresses from current production website to local database.
+     * This is used for import:all command.
+     */
+    public function importFromJSON()
+    {
+        $client = new Client();
+        $res = $client->get('https://bebes-lutins.fr/api/admins');
+        $result = json_decode($res->getBody());
+
+        Admin::destroy(Admin::all());
+
+        $count = 0;
+        foreach($result as $r) {
+            if (Admin::where('email', $r->email)->exists()) {
+                continue;
+            }
+
+            $admin = new Admin();
+            $admin->uuid = Str::orderedUuid();
+            $admin->firstname = $r->firstname;
+            $admin->lastname = $r->lastname;
+            $admin->email = $r->email;
+            $admin->password = $r->password;
+            $admin->role = 'ADMIN';
+            $admin->created_at = $r->created_at;
+            $admin->updated_at = Carbon::now()->toDateTimeString();
+            $admin->save();
+            $count++;
+        }
+
+        echo $count . ' admins 👨‍✈️ imported !' . "\n";
     }
 }

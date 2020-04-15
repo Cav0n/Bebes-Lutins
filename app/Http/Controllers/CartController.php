@@ -8,11 +8,19 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Session;
 
 /**
- * Cart Model controller.
- * Handle cart creation, and different steps (addresses addition, payment selection).
+ * @author Florian Bernard <fbernard@openstudio.fr>
  */
 class CartController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | CartController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle Cart model.
+    |
+    */
+
     /**
      * Display a listing of the resource.
      *

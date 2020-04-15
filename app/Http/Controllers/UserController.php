@@ -6,8 +6,20 @@ use App\User;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class UserController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | UserController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle User model.
+    |
+    */
+
     public function __construct()
     {
         $this->middleware('admin')->only(['index']);

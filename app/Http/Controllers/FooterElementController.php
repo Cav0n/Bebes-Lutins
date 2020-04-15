@@ -5,8 +5,20 @@ namespace App\Http\Controllers;
 use App\FooterElement;
 use Illuminate\Http\Request;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class FooterElementController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | FooterElementController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle FooterElement model.
+    |
+    */
+
     public function __construct()
     {
         $this->middleware('admin')->only(['index', 'create', 'store', 'edit', 'update']);

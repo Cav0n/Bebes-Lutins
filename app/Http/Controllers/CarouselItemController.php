@@ -6,11 +6,19 @@ use App\CarouselItem;
 use Illuminate\Http\Request;
 
 /**
- * Carousel Item Model Controller.
- * Carousel items are shown on frontoffice homepage.
+ * @author Florian Bernard <fbernard@openstudio.fr>
  */
 class CarouselItemController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | CarouselItemController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle CarouselItem model.
+    |
+    */
+
     /**
      * Display a listing of the resource.
      *

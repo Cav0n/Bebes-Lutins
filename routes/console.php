@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Inspiring;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,9 @@ Artisan::command('import:all', function() {
     $categoryController->importImagesFromJSON();
     $categoryController->importRelationsFromJSON();
 
+    $adminController = new \App\Http\Controllers\AdminController();
+    $adminController->importFromJSON();
+
     $userController = new \App\Http\Controllers\UserController();
     $userController->importFromJSON();
 
@@ -39,5 +43,5 @@ Artisan::command('import:all', function() {
     $orderItemController = new \App\Http\Controllers\OrderItemController();
     $orderItemController->importFromJSON();
 
-    echo 'Everything imported, enjoy 🤟';
+    echo 'Everything imported, enjoy 👨‍💻 \n';
 })->describe('Import all data from previous version');

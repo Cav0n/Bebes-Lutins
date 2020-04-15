@@ -6,13 +6,13 @@ use \App\Http\Controllers\AbstractSearchController;
 use Illuminate\Http\Request;
 
 /**
- * A search controller used in admin backoffice.
+ * @author Florian Bernard <fbernard@openstudio.fr>
  */
 class SearchController extends AbstractSearchController
 {
     /*
     |--------------------------------------------------------------------------
-    | [ADMIN] - Search Controller
+    | [ADMIN] - SearchController
     |--------------------------------------------------------------------------
     |
     | This controller handle search in admin dashboard.

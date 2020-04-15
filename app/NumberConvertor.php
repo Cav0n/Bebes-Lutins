@@ -2,7 +2,9 @@
 
 namespace App;
 
-
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class NumberConvertor
 {
     /**

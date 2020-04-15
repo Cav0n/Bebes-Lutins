@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class Review extends Model
 {
     public function product()

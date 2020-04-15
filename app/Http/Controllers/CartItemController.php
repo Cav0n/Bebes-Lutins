@@ -7,11 +7,19 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
- * Cart Item Model controller.
- * Handle cart item creation and quantity update.
+ * @author Florian Bernard <fbernard@openstudio.fr>
  */
 class CartItemController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | CartItemController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle CartItem model.
+    |
+    */
+
     /**
      * Display a listing of the resource.
      *

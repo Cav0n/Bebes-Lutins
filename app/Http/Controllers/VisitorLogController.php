@@ -5,8 +5,20 @@ namespace App\Http\Controllers;
 use App\VisitorLog;
 use Illuminate\Http\Request;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class VisitorLogController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | VisitorLogController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle VisitorLog model.
+    |
+    */
+
     /**
      * Display a listing of the resource.
      *

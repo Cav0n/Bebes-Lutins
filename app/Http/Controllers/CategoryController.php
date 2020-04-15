@@ -8,11 +8,19 @@ use Illuminate\Http\Request;
 use Exception;
 
 /**
- * Category Model controller.
- * Handle category importation, creation, update, and deletion.
+ * @author Florian Bernard <fbernard@openstudio.fr>
  */
 class CategoryController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | CategoryController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle Category model.
+    |
+    */
+
     public function __construct()
     {
         $this->middleware('admin')->only(['index', 'create', 'store', 'edit', 'update']);

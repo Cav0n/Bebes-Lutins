@@ -9,8 +9,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class OrderController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | OrderController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle Order model.
+    |
+    */
+
     public function __construct()
     {
         $this->middleware('admin')->only(['index', 'create', 'edit']);

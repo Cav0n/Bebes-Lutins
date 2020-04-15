@@ -7,8 +7,20 @@ use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class MainController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | MainController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle main navigation.
+    |
+    */
+
     public function index()
     {
         return view('index')->with([

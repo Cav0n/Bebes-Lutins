@@ -5,6 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Request;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class VisitorLog extends Model
 {
     public static function log()

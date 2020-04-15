@@ -5,8 +5,20 @@ namespace App\Http\Controllers;
 use App\Setting;
 use Illuminate\Http\Request;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class SettingController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | SettingController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle Setting model.
+    |
+    */
+
     public function __construct()
     {
         $this->middleware('admin')->only(['index', 'create', 'store', 'edit', 'update', 'saveAll']);

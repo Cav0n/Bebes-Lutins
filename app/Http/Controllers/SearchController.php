@@ -6,13 +6,13 @@ use \App\Http\Controllers\AbstractSearchController;
 use Illuminate\Http\Request;
 
 /**
- * A search controller used in frontoffice.
+ * @author Florian Bernard <fbernard@openstudio.fr>
  */
 class SearchController extends AbstractSearchController
 {
     /*
     |--------------------------------------------------------------------------
-    | Search Controller
+    | SearchController
     |--------------------------------------------------------------------------
     |
     | This controller handle search in frontoffice.

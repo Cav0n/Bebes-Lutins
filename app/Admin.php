@@ -3,8 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Session;
+use Illuminate\Support\Facades\Session;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class Admin extends Model
 {
     public static function check()

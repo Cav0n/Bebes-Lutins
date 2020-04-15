@@ -8,8 +8,20 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use GuzzleHttp\Client;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class AddressController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | AddressController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle Address model.
+    |
+    */
+
     /**
      * Display a listing of the resource.
      *
@@ -215,7 +227,7 @@ class AddressController extends Controller
             $address->city = $r->city;
             $address->complements = $r->complement;
             $address->company = $r->company;
-            $address->user_id = $r->isDeleted && $r->user_id ? null : \App\User::where('email', $r->user_mail)->first()->id;
+            $address->user_id = $r->isDeleted && $r->user_id ? null : (\App\User::where('email', $r->user_mail)->exists() ? \App\User::where('email', $r->user_mail)->first()->id : null);
             $address->created_at = $r->created_at;
             $address->updated_at = $r->updated_at;
 

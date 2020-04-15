@@ -12,8 +12,19 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class ProductController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | ProductController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle Product model.
+    |
+    */
     const ORDER_BY_NAME_ASC = 1;
     const ORDER_BY_NAME_DESC = 2;
     const ORDER_BY_PRICE_ASC = 3;

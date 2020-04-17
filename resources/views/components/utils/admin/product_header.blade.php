@@ -3,6 +3,7 @@
     @if(isset($product)) <a class="btn btn-outline-secondary" href="{{ route('product', ['product' => $product]) }}" role="button">Voir le produit</a> @endif
 </div>
 
+@if (isset($product))
 <ul class="nav nav-tabs border-bottom-0 mt-3">
     <li class="nav-item dropdown d-flex d-sm-none">
         <a class="nav-link dropdown-toggle active" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Naviguer</a>
@@ -23,3 +24,4 @@
         Images</a>
     </li>
 </ul>
+@endif

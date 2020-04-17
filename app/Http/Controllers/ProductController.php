@@ -146,7 +146,22 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.product')->withProduct(null);
+        $categoriesForTagify = '';
+        $categories = \App\Category::where('isDeleted', 0)->orderBy('name', 'asc')->get();
+
+        $first = true;
+        foreach ($categories as $category) {
+            if (!$first) {
+                $categoriesForTagify .= ",";
+            }
+            $categoriesForTagify .= "'" . $category->name . "'";
+            $first = false;
+        }
+
+        return view('pages.admin.product')
+                    ->withProduct(null)
+                    ->withCategories($categories)
+                    ->withCategoriesForTagify($categoriesForTagify);
     }
 
     /**
@@ -171,6 +186,10 @@ class ProductController extends Controller
             'stock' => 'required|numeric|min:0',
         ]);
 
+        $id = preg_replace("/[^a-zA-Z\d]+/", "",
+                                preg_replace("/[\s]/", "-", trim($request['name']))
+                            );
+
         if (null === $request['isInPromo']) {
             $request['promoPrice'] = null;
         }
@@ -181,7 +200,7 @@ class ProductController extends Controller
 
         $product = new Product();
 
-        $product->id = preg_replace("/[^a-zA-Z]+/", "", $request['name']);
+        $product->id = $id;
         $product->name = $request['name'];
         $product->reference = $request['reference'];
         $product->description = $request['description'];

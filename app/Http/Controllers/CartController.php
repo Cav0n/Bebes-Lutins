@@ -21,6 +21,14 @@ class CartController extends Controller
     |
     */
 
+    /** @var string */
+    protected $alertMessage;
+
+    public function __construct()
+    {
+        $this->alertMessage = \App\Setting::getValue('ALERT_MESSAGE_ACTIVATED') ? \App\Setting::getValue('ALERT_MESSAGE') : null;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -78,7 +86,8 @@ class CartController extends Controller
                 ->withCartStep($step)
                 ->withCart($cart)
                 ->withUnavailableItems($notAvailableItems)
-                ->withstockDecreasedItems($stockDecreasedItems);
+                ->withstockDecreasedItems($stockDecreasedItems)
+                ->withAlertMessage($this->alertMessage);
     }
 
     public function verifyItemsAvailability(Cart $cart)
@@ -120,7 +129,8 @@ class CartController extends Controller
                 ->withCartStep($step)
                 ->withCart($cart)
                 ->withUnavailableItems($notAvailableItems)
-                ->withstockDecreasedItems($stockDecreasedItems);
+                ->withstockDecreasedItems($stockDecreasedItems)
+                ->withAlertMessage($this->alertMessage);
     }
 
     public function addAddresses(Request $request)
@@ -173,7 +183,8 @@ class CartController extends Controller
                 ->withCartStep($step)
                 ->withCart($cart)
                 ->withUnavailableItems($notAvailableItems)
-                ->withstockDecreasedItems($stockDecreasedItems);
+                ->withstockDecreasedItems($stockDecreasedItems)
+                ->withAlertMessage($this->alertMessage);
     }
 
     public function addComment(Request $request)

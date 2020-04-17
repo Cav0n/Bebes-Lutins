@@ -17,6 +17,12 @@
 
             @include('components.utils.carousel.main')
 
+            @isset($alertMessage)
+                <div class="alert alert-danger" role="alert">
+                    {{ $alertMessage }}
+                </div>
+            @endisset
+
             <h1 class="h1 font-weight-bolder">
                 {{ $homepageTitle }}
             </h1>
@@ -28,7 +34,8 @@
 
             <div class="row mb-3">
                 <div class="col-12 d-flex justify-content-center">
-                    <a class="btn btn-primary" href="{{ route('products.all') }}" role="button">Voir tous nos produits</a>
+                    <a class="btn btn-primary" href="{{ route('products.all') }}" role="button" rel="nofollow">
+                        Voir tous nos produits</a>
                 </div>
             </div>
 

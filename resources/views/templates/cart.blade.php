@@ -16,6 +16,12 @@
 
             <h1 class="font-weight-bold">@yield('cart.title', 'Mon panier')</h1>
 
+            @isset($alertMessage)
+                <div class="alert alert-danger" role="alert">
+                    {{ $alertMessage }}
+                </div>
+            @endisset
+
             @if(!empty($errors->any()))
             <div class="alert alert-danger" role="alert">
                 @foreach ($errors->all() as $error)

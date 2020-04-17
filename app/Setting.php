@@ -47,6 +47,14 @@ class Setting extends Model
                     </div>
                 </div>';
             break;
+            case 'checkbox':
+                $checked = ("0" !== $this->value) ? 'checked="checked"' : null;
+                return '<div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="'.$this->key.'" name="'.$this->key.'" '.$checked.'>
+                            <label class="form-check-label" for="'.$this->key.'">
+                                '.$this->i18n->title.'
+                            </label>
+                        </div>';
         }
     }
 }

@@ -6,6 +6,7 @@
 /public/images/categories
 /public/images/products
 /public/vendor
+/public/sitemap.xml
 /storage/framework
 /storage/*.key
 /vendor

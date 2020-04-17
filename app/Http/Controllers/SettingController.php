@@ -36,12 +36,15 @@ class SettingController extends Controller
 
     public function saveAll(Request $request)
     {
-        foreach ($request->all() as $key => $value) {
-            if (\App\Setting::where('key', $key)->exists()) {
-                $setting = \App\Setting::where('key', $key)->first();
-                $setting->value = $value;
-                $setting->save();
+
+        foreach (Setting::all() as $setting) {
+            if (isset($request[$setting->key])) {
+                $setting->value = $request[$setting->key];
+            } else {
+                $setting->value = 0;
             }
+
+            $setting->save();
         }
 
         return back()->with('successMessage', 'Paramètres sauvegardés avec succés !');

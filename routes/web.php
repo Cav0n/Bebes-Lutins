@@ -119,6 +119,7 @@ Route::post('/admin/connexion', 'Admin\LoginController@login')->name('admin.logi
 Route::any('/admin/logout', 'Admin\LoginController@logout')->name('admin.logout');
 Route::get('/admin/homepage', 'Admin\AdminController@homepage')->name('admin.homepage');
 Route::get('/admin/changelog', 'Admin\AdminController@changelog')->name('admin.changelog');
+Route::get('/admin/sitemap/reload', 'Admin\AdminController@reloadSitemap')->name('admin.sitemap.reload');
 
 // Models indexes
 Route::get('/admin/orders', 'OrderController@index')->name('admin.orders');

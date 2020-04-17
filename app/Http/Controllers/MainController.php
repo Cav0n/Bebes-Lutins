@@ -27,7 +27,8 @@ class MainController extends Controller
             'homepageTitle' => \App\Setting::getValue('HOMEPAGE_TITLE'),
             'homepageDescription' => \App\Setting::getValue('HOMEPAGE_DESCRIPTION'),
             'products' => \App\Product::where('isDeleted', 0)->where('isHidden', 0),
-            'carouselItems' => \App\CarouselItem::all()
+            'carouselItems' => \App\CarouselItem::all(),
+            'alertMessage' => \App\Setting::getValue('ALERT_MESSAGE_ACTIVATED') ? \App\Setting::getValue('ALERT_MESSAGE') : null
         ]);
     }
 

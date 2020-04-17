@@ -18,6 +18,8 @@
             @include('components.utils.settings.setting')
         @endforeach
 
+        <a class="btn btn-danger" href="{{ route('admin.sitemap.reload') }}" role="button">Regenérer sitemap.xml</a>
+
         <button type="submit" class="btn btn-outline-dark">Sauvegarder</button>
     </div>
 </div>

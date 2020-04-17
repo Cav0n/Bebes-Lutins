@@ -106,6 +106,10 @@
             orderId = $(this).data('orderid');
             status = $(this).children('option:selected').val();
 
+            updateOrder($(this), orderId, status);
+        });
+
+        function updateOrder(select, orderId, status) {
             fetch("/api/order/" + orderId + "/status/update", {
                 method: 'POST',
                 headers: {
@@ -124,13 +128,13 @@
                         throw response.errors;
                     }
 
-                    $(this).css('background-color', response.color);
+                    select.css('background-color', response.color);
                 }).catch((errors) => {
                 select.addClass('is-invalid');
                 errors.status.forEach(message => {
                     select.after(errorFeedbackHtml.replace('__error__', message));
                 });
             });
-        });
+        }
     </script>
 @endsection

@@ -3,6 +3,9 @@
         Options -MultiViews -Indexes
     </IfModule>
 
+    RewriteCond %{HTTP_HOST} ^bebes-lutins.fr$ [NC]
+    RewriteRule (.*) https://www.bebes-lutins.fr/$1 [R=301,L]
+
     php_value upload_max_filesize 500M
     php_value post_max_size 1000M
     php_value memory_limit 128M

@@ -4,9 +4,21 @@ namespace App\Http\Controllers\CustomerArea;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class MainController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | [AUTH] - CustomerArea\MainController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle navigation in customer area.
+    |
+    */
 
     /**
      * Create a new controller instance.
@@ -19,7 +31,7 @@ class MainController extends Controller
     }
 
     /**
-     * Redirect to customer area home page.
+     * Show home page.
      */
     public function index(Request $request)
     {
@@ -27,15 +39,18 @@ class MainController extends Controller
     }
 
     /**
-     * Redirect to customer area orders page.
+     * Show orders page.
      */
     public function orders(Request $request)
     {
-        return view('pages.customer_area.orders');
+        return view('pages.customer_area.orders')
+            ->with([
+                'orders' => Auth::user()->orders()->orderBy('created_at', 'desc')->paginate(15)
+            ]);
     }
 
     /**
-     * Redirect to customer area addresses page.
+     * Show addresses page.
      */
     public function addresses(Request $request)
     {

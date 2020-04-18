@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class Category extends Model
 {
      /**
@@ -50,7 +53,7 @@ class Category extends Model
             $parent = $parent->parent;
         }
 
-        $breadcrumb = "<a href='/'>Accueil</a> / " . $breadcrumb;
+        $breadcrumb = "/ <a href='/'>Accueil</a> / " . $breadcrumb;
 
         return $breadcrumb;
     }

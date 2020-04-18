@@ -9,20 +9,20 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 /**
- * A custom login controller for admin backoffice.
+ * @author Florian Bernard <fbernard@openstudio.fr>
  */
 class LoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | [ADMIN] - Login Controller
+    | [ADMIN] - LoginController
     |--------------------------------------------------------------------------
     |
     | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
+    | redirecting them to your home screen.
     |
     */
+
     /**
      * Create a new controller instance.
      *
@@ -34,7 +34,9 @@ class LoginController extends Controller
     }
 
     /**
-     * Show admin login page
+     * Show admin login page.
+     *
+     * @return \Illuminate\View\View
      */
     public function showLoginPage()
     {
@@ -42,7 +44,9 @@ class LoginController extends Controller
     }
 
     /**
-     * Admin custom login
+     * Login an admin.
+     *
+     * @return mixed $fallback
      */
     public function login(Request $request)
     {
@@ -72,7 +76,9 @@ class LoginController extends Controller
     }
 
     /**
-     * Admin custom logout
+     * Logout an admin.
+     *
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
      */
     public function logout()
     {

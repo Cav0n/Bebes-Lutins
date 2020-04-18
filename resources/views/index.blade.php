@@ -1,15 +1,10 @@
-@php
-    $products = App\Product::where('isDeleted', 0)->where('isHidden', 0);
-    $carouselItems = \App\CarouselItem::all();
-@endphp
-
 @extends('templates.default')
 
 @section('optional_og')
 <meta property="og:title" content="Bébés Lutins" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="{{ URL::to('/') }}" />
-<meta property="og:image" content="{{ asset('images/logo-mini.svg') }}" />
+<meta property="og:image" content="{{ asset('favicons/apple-touch-icon.png') }}" />
 @endsection
 
 @section('title', "Bébés Lutins | Couches lavables fabriquées en France")
@@ -22,14 +17,27 @@
 
             @include('components.utils.carousel.main')
 
+            @isset($alertMessage)
+                <div class="alert alert-danger" role="alert">
+                    {{ $alertMessage }}
+                </div>
+            @endisset
+
             <h1 class="h1 font-weight-bolder">
                 {{ $homepageTitle }}
             </h1>
-            <p class="h5 text-justify">
+            <p class="h5 font-weight-normal text-justify">
                 {{ $homepageDescription }}
             </p>
 
             @include('components.utils.products.highlighted_products')
+
+            <div class="row mb-3">
+                <div class="col-12 d-flex justify-content-center">
+                    <a class="btn btn-primary" href="{{ route('products.all') }}" role="button" rel="nofollow">
+                        Voir tous nos produits</a>
+                </div>
+            </div>
 
             @include('components.utils.certifications.default')
         </div>

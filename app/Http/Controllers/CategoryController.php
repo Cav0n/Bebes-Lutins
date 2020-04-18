@@ -5,88 +5,26 @@ namespace App\Http\Controllers;
 use App\Category;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use Exception;
 
 /**
- * Category Model controller.
- * Handle category importation, creation, update, and deletion.
+ * @author Florian Bernard <fbernard@openstudio.fr>
  */
 class CategoryController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | CategoryController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle Category model.
+    |
+    */
+
     public function __construct()
     {
         $this->middleware('admin')->only(['index', 'create', 'store', 'edit', 'update']);
-    }
-
-    public function importFromJSON()
-    {
-        $client = new Client();
-        $res = $client->get('https://bebes-lutins.fr/api/categories');
-        $result = json_decode($res->getBody());
-
-        Category::destroy(Category::all());
-
-        $count = 0;
-        foreach($result as $r) {
-            if (null === $r->id || '' === $r->id) {
-                continue;
-            }
-            $category = new Category();
-            $category->id = $r->id;
-            $category->name = $r->name;
-            $category->description = $r->description;
-            $category->rank = $r->rank;
-            $category->isHidden = $r->isHidden;
-            $category->isDeleted = $r->isDeleted;
-            $category->created_at = $r->created_at;
-            $category->updated_at = $r->updated_at;
-            $category->parentId = $r->parent_id;
-            $category->save();
-            $count++;
-        }
-
-        echo $count . ' categories imported !' . "\n";
-    }
-
-    public function importImagesFromJSON()
-    {
-        $client = new Client();
-        $res = $client->get('https://bebes-lutins.fr/api/categories/images');
-        $result = json_decode($res->getBody());
-
-        $count = 0;
-        foreach ($result as $r) {
-            $image = new \App\Image();
-            $image->name = $r->name;
-            $image->url = '/images/categories/' . $r->name;
-            $image->size = isset($r->size) ? $r->size : 0;
-            $image->created_at = $r->created_at;
-            $image->updated_at = $r->updated_at;
-            $image->save();
-
-            if (null !== $category = \App\Category::find($r->categoryId)) {
-                $category->images()->attach($image);
-            }
-            $count++;
-        }
-
-        echo $count . ' category images imported !' . "\n";
-    }
-
-    public function importRelationsFromJSON()
-    {
-        $client = new Client();
-        $res = $client->get('https://bebes-lutins.fr/api/categories/relations');
-        $result = json_decode($res->getBody());
-
-        $count = 0;
-        foreach($result as $r) {
-            Category::find($r->category_id)->products()->detach($r->product_id);
-            Category::find($r->category_id)->products()->attach($r->product_id);
-            $count++;
-        }
-
-        echo $count . ' categories products relations imported !' . "\n";
     }
 
     /**
@@ -94,9 +32,14 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::where('isDeleted', 0)->orderBy('rank', 'asc')->paginate(15);
+        $parent = (isset($request['parent'])) ? $request['parent'] : null;
+
+        $categories = Category::where('isDeleted', 0)
+                                    ->where('parentId', $parent)
+                                    ->orderBy('rank', 'asc')
+                                    ->paginate(15);
 
         return view('pages.admin.categories', ['categories' => $categories]);
     }
@@ -183,6 +126,15 @@ class CategoryController extends Controller
                          ->with('successMessage', 'Catégorie éditée avec succés !');
     }
 
+    public function updateRank(Request $request, Category $category)
+    {
+         $category->rank = $request['rank'];
+
+         $category->save();
+
+         return new JsonResponse(['message' => 'ok'], 200);
+    }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -192,5 +144,76 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+    }
+
+    public function importFromJSON()
+    {
+        $client = new Client();
+        $res = $client->get('https://bebes-lutins.fr/api/categories');
+        $result = json_decode($res->getBody());
+
+        Category::destroy(Category::all());
+
+        $count = 0;
+        foreach($result as $r) {
+            if (null === $r->id || '' === $r->id) {
+                continue;
+            }
+            $category = new Category();
+            $category->id = $r->id;
+            $category->name = $r->name;
+            $category->description = $r->description;
+            $category->rank = $r->rank;
+            $category->isHidden = $r->isHidden;
+            $category->isDeleted = $r->isDeleted;
+            $category->created_at = $r->created_at;
+            $category->updated_at = $r->updated_at;
+            $category->parentId = $r->parent_id;
+            $category->save();
+            $count++;
+        }
+
+        echo $count . ' categories imported !' . "\n";
+    }
+
+    public function importImagesFromJSON()
+    {
+        $client = new Client();
+        $res = $client->get('https://bebes-lutins.fr/api/categories/images');
+        $result = json_decode($res->getBody());
+
+        $count = 0;
+        foreach ($result as $r) {
+            $image = new \App\Image();
+            $image->name = $r->name;
+            $image->url = '/images/categories/' . $r->name;
+            $image->size = isset($r->size) ? $r->size : 0;
+            $image->created_at = $r->created_at;
+            $image->updated_at = $r->updated_at;
+            $image->save();
+
+            if (null !== $category = \App\Category::find($r->categoryId)) {
+                $category->images()->attach($image);
+            }
+            $count++;
+        }
+
+        echo $count . ' category images imported !' . "\n";
+    }
+
+    public function importRelationsFromJSON()
+    {
+        $client = new Client();
+        $res = $client->get('https://bebes-lutins.fr/api/categories/relations');
+        $result = json_decode($res->getBody());
+
+        $count = 0;
+        foreach($result as $r) {
+            Category::find($r->category_id)->products()->detach($r->product_id);
+            Category::find($r->category_id)->products()->attach($r->product_id);
+            $count++;
+        }
+
+        echo $count . ' categories products relations imported !' . "\n";
     }
 }

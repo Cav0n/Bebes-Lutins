@@ -27,6 +27,7 @@
         "bootstrap": "^4.4.1",
         "bootstrap-input-spinner": "^1.13.4",
         "chart.js": "^2.9.3",
+        "dropzone": "^5.7.0",
         "fibers": "^4.0.2",
         "jquery": "^3.4.1",
         "moment": "^2.24.0",

@@ -14,31 +14,46 @@
                 <div class="row py-3">
                     <div class="col-lg-10">
                         <h3 class="h4 font-weight-bold">Mes informations personnelles</h3>
+                        @if(session('successMessage'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('successMessage') }}
+                        </div>
+                        @endif
+
+                        @if(!empty($errors->any()))
+                        <div class="alert alert-danger" role="alert">
+                            @foreach ($errors->all() as $error)
+                            <p class="mb-0">{{ ucfirst($error) }}</p>
+                            @endforeach
+                        </div>
+                        @endif
+
                         <div class="personal-informations">
-                            <p class="mb-0">{{Auth::user()->firstname}} {{Auth::user()->lastname}}</p>
-                            <p class="mb-0">{{Auth::user()->email}}</p>
-                            <p class="mb-0">{{Auth::user()->phone}}</p>
+                            <p class="mb-0">Identité : {{Auth::user()->firstname}} {{Auth::user()->lastname}}</p>
+                            <p class="mb-0">Adresse email : {{strtolower(Auth::user()->email)}}</p>
+                            <p class="mb-0">Numéro de téléphone : {{chunk_split(Auth::user()->phone, 2, ' ')}}</p>
                         </div>
                         {{--//@todo: Create method for form --}}
-                        <form class="personal-informations mb-3" action="" method="POST">
+                        <form class="personal-informations mb-3" action="{{ route('user.update') }}" method="POST">
+                            @csrf
                             <div class="form-group">
                                 <label for="firstname">Prénom</label>
-                                <input type="text" class="form-control" name="firstname" id="firstname" aria-describedby="helpFirstname">
+                                <input type="text" class="form-control" name="firstname" id="firstname" aria-describedby="helpFirstname" value="{{ old('firstname', Auth::user()->firstname) }}">
                                 <small id="helpFirstname" class="form-text text-muted">Votre prénom</small>
                             </div>
                             <div class="form-group">
                                 <label for="lastname">Nom de famille</label>
-                                <input type="text" class="form-control" name="lastname" id="lastname" aria-describedby="helpLastname">
+                                <input type="text" class="form-control" name="lastname" id="lastname" aria-describedby="helpLastname" value="{{ old('lastname', Auth::user()->lastname) }}">
                                 <small id="helpLastname" class="form-text text-muted">Votre nom de famille</small>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="text" class="form-control" name="email" id="email" aria-describedby="helpEmail">
+                                <input type="text" class="form-control" name="email" id="email" aria-describedby="helpEmail" value="{{ strtolower(old('email', Auth::user()->email)) }}">
                                 <small id="helpEmail" class="form-text text-muted">Votre email (il vous sert à vous connecter)</small>
                             </div>
                             <div class="form-group">
                                 <label for="phone">Téléphone</label>
-                                <input type="text" class="form-control" name="phone" id="phone" aria-describedby="helpPhone">
+                                <input type="text" class="form-control" name="phone" id="phone" aria-describedby="helpPhone" value="{{ old('phone', Auth::user()->phone) }}">
                                 <small id="helpPhone" class="form-text text-muted">Votre numéro de téléphone (nous l'utiliserons pour vous contacter à propos de vos commandes)</small>
                             </div>
                             <button type="submit" class="btn btn-primary">Enregistrer</button>

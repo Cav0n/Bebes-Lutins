@@ -6,8 +6,20 @@ use App\Content;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule as ValidationRule;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class ContentController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | ContentController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle Content model.
+    |
+    */
+
     const CONTENT_TYPE = ['CONTENT', 'LINK', 'EMAIL', 'TEL', 'TEXT'];
 
     public function __construct()
@@ -22,7 +34,6 @@ class ContentController extends Controller
      */
     public function index(Request $request)
     {
-
         $contents = Content::orderBy('title')->get();
         $title = 'Contenus';
 
@@ -117,7 +128,7 @@ class ContentController extends Controller
             break;
 
             case 'CONTENT':
-                $content->url = '/content/' . $content->id;
+                $content->url = '/contenu/' . $content->id;
             break;
 
             case 'TEXT':

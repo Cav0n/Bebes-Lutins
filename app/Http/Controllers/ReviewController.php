@@ -6,8 +6,20 @@ use App\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class ReviewController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | ReviewController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle Review model.
+    |
+    */
+
     public function __construct()
     {
         $this->middleware('admin')->only(['index']);

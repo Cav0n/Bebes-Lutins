@@ -7,13 +7,28 @@ use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class MainController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | MainController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle main navigation.
+    |
+    */
+
     public function index()
     {
         return view('index')->with([
             'homepageTitle' => \App\Setting::getValue('HOMEPAGE_TITLE'),
             'homepageDescription' => \App\Setting::getValue('HOMEPAGE_DESCRIPTION'),
+            'products' => \App\Product::where('isDeleted', 0)->where('isHidden', 0),
+            'carouselItems' => \App\CarouselItem::all(),
+            'alertMessage' => \App\Setting::getValue('ALERT_MESSAGE_ACTIVATED') ? \App\Setting::getValue('ALERT_MESSAGE') : null
         ]);
     }
 

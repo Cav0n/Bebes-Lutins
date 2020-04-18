@@ -4,6 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class Order extends Model
 {
     /**
@@ -44,7 +47,7 @@ class Order extends Model
         $totalPrice = 0.0;
 
         foreach($this->items as $item){
-            $totalPrice += $item->product->price * $item->quantity;
+            $totalPrice += $item->unitPrice * $item->quantity;
         }
 
         return $totalPrice;
@@ -85,6 +88,11 @@ class Order extends Model
             default:
                 return 'white';
         }
+    }
+
+    public function getStatusTagAttribute()
+    {
+        return '<span class="badge badge-pill" style="background-color: '.$this->statusColor .'">'.ucfirst($this->statusI18n) .'</span>';
     }
 
     public function getPaymentMethodI18nAttribute($language = 'FR_fr'): string

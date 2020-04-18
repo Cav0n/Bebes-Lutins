@@ -30,10 +30,13 @@
                     <tr>
                         <th class="d-none d-md-table-cell">ID</th>
                         <th class='d-none d-sm-table-cell text-center'>Date</th>
-                        <th>Client</th>
+                        <th class="d-none d-md-table-cell">Client</th>
                         <th class="d-none d-sm-table-cell">Prix</th>
                         <th class="d-none d-lg-table-cell">Numéro de suivi</th>
                         <th class='text-center d-none d-xl-table-cell'>Status</th>
+                        {{-- Mobile --}}
+                        <th class="d-table-cell d-sm-none">Commande</th>
+                        {{-- ------ --}}
                         <th></th>
                     </tr>
                     </thead>
@@ -45,7 +48,7 @@
                                 {{ $order->created_at->format('d/m/Y') }}
                                 <br> {{ $order->created_at->format('H:i') }}
                             </td>
-                            <td>
+                            <td class="d-none d-md-table-cell">
                                 <b>{{ ucfirst($order->billingAddress->minCivilityI18n) . ' ' .
                         $order->billingAddress->firstname . ' ' .
                         $order->billingAddress->lastname }}</b>
@@ -61,7 +64,7 @@
                             </td>
                             <td class='text-center d-none d-xl-table-cell'>
                                 <div class="form-group mb-0">
-                                    <select class="custom-select status-select" name="status" data-orderid="{{ $order->id }}" style='background-color: {{ $order->statusColor }}'>
+                                    <select id="status-select-{{ $order->id }}" class="custom-select status-select" name="status" data-orderid="{{ $order->id }}" style='background-color: {{ $order->statusColor }}'>
                                         <option value='WAITING_PAYMENT' @if('WAITING_PAYMENT' === $order->status) selected @endif>
                                             En attente de paiement</option>
                                         <option value='PROCESSING' @if('PROCESSING' === $order->status) selected @endif>
@@ -81,6 +84,19 @@
                                     </select>
                                 </div>
                             </td>
+                            {{-- Mobile --}}
+                            <td class="d-table-cell d-sm-none">
+                                {{ $order->created_at->format('d/m/Y') }} à {{ $order->created_at->format('H:i') }} <br>
+                                {!! $order->statusTag !!} <br>
+                                <b>{{ ucfirst($order->billingAddress->minCivilityI18n) . ' ' .
+                                    $order->billingAddress->firstname . ' ' .
+                                    $order->billingAddress->lastname }}</b> <br>
+                                {{ \App\NumberConvertor::doubleToPrice($order->totalPrice) }}
+                                @if(0 < $order->shippingCosts)
+                                    ( <small>Dont {{ \App\NumberConvertor::doubleToPrice($order->shippingCosts) }} de fdp</small> )
+                                @endif
+                            </th>
+                            {{-- ------ --}}
                             <td class='text-right'>
                                 <a class="btn btn-outline-dark" href="{{ route('admin.order.show', ['order' => $order]) }}" role="button">Voir</a>
                             </td>
@@ -96,6 +112,10 @@
         </div>
     </div>
 
+    <div id="modal-container">
+
+    </div>
+
 @endsection
 
 @section('scripts')
@@ -105,7 +125,16 @@
         $('.status-select').change(function(){
             orderId = $(this).data('orderid');
             status = $(this).children('option:selected').val();
+            $('#change-status-modal').remove();
 
+            getStatusChangeModal(orderId, status, $(this).attr('id'));
+
+            $('#change-status-modal').modal('show');
+
+            //updateOrder($(this), orderId, status);
+        });
+
+        function updateOrder(select, orderId, status) {
             fetch("/api/order/" + orderId + "/status/update", {
                 method: 'POST',
                 headers: {
@@ -124,13 +153,32 @@
                         throw response.errors;
                     }
 
-                    $(this).css('background-color', response.color);
+                    select.css('background-color', response.color);
                 }).catch((errors) => {
                 select.addClass('is-invalid');
                 errors.status.forEach(message => {
                     select.after(errorFeedbackHtml.replace('__error__', message));
                 });
             });
-        });
+        }
+    </script>
+
+    <script>
+        function getStatusChangeModal(orderId, newStatus, selectId) {
+            var errorFeedbackHtml = "<div class='invalid-feedback'>__error__</div>"
+
+            fetch("/api/order/" + orderId + "/status/update/modal/?newStatus=" + newStatus + "&selectId=" + selectId)
+            .then(response => response.json())
+            .then(response => {
+                if (undefined !== response.error){
+                    throw response.error;
+                }
+
+                $('#modal-container').append(response.modal);
+            }).catch((error) => {
+                console.error(error);
+            });
+        }
+
     </script>
 @endsection

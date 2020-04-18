@@ -8,7 +8,7 @@
     </div>
     <div class="card-body">
         <a href='{{ route('admin.orders') }}' class='text-dark'>< Commandes</a>
-        @include('components.utils.orders.order', ['order', $order])
+        @include('components.utils.orders.order', ['order' => $order])
     </div>
 </div>
 

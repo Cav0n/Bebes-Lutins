@@ -13,10 +13,10 @@
     @endif
 
     <div class="card rounded-0 border shadow-sm">
-        <div class="card-header d-flex justify-content-between">
-            <h2 class="h4 mb-0 d-flex flex-column justify-content-center">{{ isset($product) ? $product->name : 'Création d\'un produit' }}</h2>
-            @if(isset($product)) <a class="btn btn-outline-secondary" href="{{ route('product', ['product' => $product]) }}" role="button">Voir le produit</a> @endif
+        <div class="card-header pb-0">
+            @include('components.utils.admin.product_header')
         </div>
+
         <div class="card-body">
             <a href='{{ route('admin.products') }}' class='text-dark'>< Produits</a>
             <form method="post" action="{{ isset($product) ? route('admin.product.edit', ['product' => $product]) : route('admin.product.create') }}" >
@@ -78,7 +78,7 @@
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea class="form-control tiny-mce {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description" aria-describedby="helpDescription" placeholder="">{{ isset($product) ? old('description', $product->description) : old('description') }}</textarea>
+                    <textarea class="form-control tiny-mce {{ $errors->has('description') ? 'is-invalid' : '' }}" name="description" id="description" aria-describedby="helpDescription" rows=20>{{ isset($product) ? old('description', $product->description) : old('description') }}</textarea>
                     {!! $errors->has('description') ? "<div class='invalid-feedback'>" . ucfirst($errors->first('description')) . "</div>" : '' !!}
 
                     <small id="helpDescription" class="form-text text-muted">Soyez le plus explicite possible</small>

@@ -4,7 +4,7 @@
 
         @if(session('admin'))
         <div class="form-group mb-0 ml-3">
-            <select class="custom-select status-select" name="status" data-orderid="{{ $order->id }}" style='background-color: {{ $order->statusColor }}'>
+            <select id="status-select-{{ $order->id }}" class="custom-select status-select" name="status" data-orderid="{{ $order->id }}" style='background-color: {{ $order->statusColor }}'>
                 <option value='WAITING_PAYMENT' @if('WAITING_PAYMENT' === $order->status) selected @endif>
                     En attente de paiement</option>
                 <option value='PROCESSING' @if('PROCESSING' === $order->status) selected @endif>
@@ -24,8 +24,10 @@
             </select>
         </div>
         @else
-        <span class="badge badge-pill" style="background-color:{{ $order->statusColor }}">{{ ucfirst($order->statusI18n) }}</span></p>
+        <span class="badge badge-pill" style="background-color:{{ $order->statusColor }}">{{ ucfirst($order->statusI18n) }}</span>
         @endif
+
+        </p>
     </div>
 
     <div class="row mb-3">
@@ -91,6 +93,9 @@
     </div>
 </div>
 
+<div id="modal-container">
+
+</div>
 
 @section('scripts')
 <script>
@@ -99,32 +104,60 @@
     $('.status-select').change(function(){
         orderId = $(this).data('orderid');
         status = $(this).children('option:selected').val();
+        $('#change-status-modal').remove();
 
+        getStatusChangeModal(orderId, status, $(this).attr('id'));
+
+        $('#change-status-modal').modal('show');
+
+        //updateOrder($(this), orderId, status);
+    });
+
+    function updateOrder(select, orderId, status) {
         fetch("/api/order/" + orderId + "/status/update", {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json, text/plain, */*',
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                body: JSON.stringify({
-                    order: orderId,
-                    status: status
-                })
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            body: JSON.stringify({
+                order: orderId,
+                status: status
             })
+        })
             .then(response => response.json())
             .then(response => {
                 if (undefined !== response.errors){
                     throw response.errors;
                 }
 
-                $(this).css('background-color', response.color);
+                select.css('background-color', response.color);
             }).catch((errors) => {
-                select.addClass('is-invalid');
-                errors.status.forEach(message => {
-                    select.after(errorFeedbackHtml.replace('__error__', message));
-                });
+            select.addClass('is-invalid');
+            errors.status.forEach(message => {
+                select.after(errorFeedbackHtml.replace('__error__', message));
             });
-    });
+        });
+    }
+</script>
+
+<script>
+    function getStatusChangeModal(orderId, newStatus, selectId) {
+        var errorFeedbackHtml = "<div class='invalid-feedback'>__error__</div>"
+
+        fetch("/api/order/" + orderId + "/status/update/modal/?newStatus=" + newStatus + "&selectId=" + selectId)
+        .then(response => response.json())
+        .then(response => {
+            if (undefined !== response.error){
+                throw response.error;
+            }
+
+            $('#modal-container').append(response.modal);
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
+
 </script>
 @endsection

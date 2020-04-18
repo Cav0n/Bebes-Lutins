@@ -6,8 +6,20 @@ use App\User;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class UserController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | UserController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle User model.
+    |
+    */
+
     public function __construct()
     {
         $this->middleware('admin')->only(['index']);
@@ -113,7 +125,20 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'firstname' => 'required|min:2',
+            'lastname' => 'required|min:2',
+            'email' => 'required|email:filter|unique:users,email,'. $user->id,
+            'phone' => 'max:10'
+        ]);
+
+        $user->firstname = $request['firstname'];
+        $user->lastname = $request['lastname'];
+        $user->email = $request['email'];
+        $user->phone = $request['phone'];
+        $user->save();
+
+        return back()->with(['successMessage' => 'Vos informations ont été mis à jour.']);
     }
 
     /**

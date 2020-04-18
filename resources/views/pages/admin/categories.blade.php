@@ -30,16 +30,23 @@
                 <tr>
                     <th class='text-center' style='width:2rem;'>Position</th>
                     <th>Nom</th>
-                    <th class='text-right' style='width:4rem;'></th>
+                    <th class='text-right'></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($categories as $category)
                 <tr @if($category->isHidden) style="opacity:0.5" @endif>
-                    <td class='text-center align-middle' style='width:2rem;'> {{ $category->rank }} </td>
+                    <td class='text-center align-middle' style='width:2rem;'>
+                        <input type="number" class="form-control category-rank" name="rank" placeholder="0"
+                            id="rank-{{ $category->id }}" value="{{ $category->rank }}" data-category-id="{{ $category->id }}">
+                    </td>
                     <td class='align-middle'> {{ $category->name }} @if($category->isHidden) <span class="badge badge-pill badge-dark">Caché</span> @endif </td>
-                    <td class='text-right align-middle' style='width:4rem;'>
-                        <a class="btn btn-outline-dark" href="{{ route('admin.category.edit', ['category' => $category]) }}">Voir</a>
+                    <td class='text-right align-middle'>
+                        <a class="btn btn-outline-dark mt-2 mt-md-0" href="{{ route('admin.category.edit', ['category' => $category]) }}">Éditer</a>
+
+                        @if (count($category->childs) > 0)
+                        <a class="btn btn-outline-dark mt-2 mt-md-0" href="{{ route('admin.categories', ['parent' => $category->id]) }}">Parcourir</a>
+                        @endif
                     </td>
                 </tr>
                 @endforeach
@@ -53,4 +60,39 @@
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+    <script>
+        $('.category-rank').on('change', function() {
+            updateCategoryRank($(this).data('category-id'), $(this).val(), $(this));
+        })
+
+        function updateCategoryRank(categoryId, rank, input) {
+            fetch("/api/category/" + categoryId + "/rank/update", {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                body: JSON.stringify({
+                    rank: rank
+                })
+            })
+            .then(response => response.json())
+            .then(response => {
+                if (undefined !== response.errors){
+                    throw response.errors;
+                }
+
+                location.reload();
+            }).catch((errors) => {
+                input.addClass('is-invalid');
+                errors.status.forEach(message => {
+                    input.after(errorFeedbackHtml.replace('__error__', message));
+                });
+            });
+        }
+    </script>
 @endsection

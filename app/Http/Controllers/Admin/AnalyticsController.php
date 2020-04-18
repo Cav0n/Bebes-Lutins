@@ -9,10 +9,19 @@ use \Carbon\CarbonPeriod;
 use Illuminate\Http\JsonResponse;
 
 /**
- * Handle analytics generation.
+ * @author Florian Bernard <fbernard@openstudio.fr>
  */
 class AnalyticsController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | [ADMIN] - AnalyticsController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle analytics (showed on homepage).
+    |
+    */
+
     protected const DATE_FORMAT = 'd/m/Y';
 
     /** @var string $class */
@@ -60,6 +69,11 @@ class AnalyticsController extends Controller
                             $lastDate);
     }
 
+    /**
+     * Analytic by counting model created during period.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function analyticCount()
     {
         $data = [];
@@ -82,6 +96,11 @@ class AnalyticsController extends Controller
         return JsonResponse::create($data, 200);
     }
 
+    /**
+     * Analytic for sales done during period.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function sales()
     {
         $data = [];
@@ -104,6 +123,37 @@ class AnalyticsController extends Controller
                         $data['total'] += $item->unitPrice * $item->quantity;
                     }
                 }
+            }
+
+            $data['max'] < $data[$index]['value'] ? $data['max'] = $data[$index]['value'] : null;
+
+            $index++;
+        }
+
+        return JsonResponse::create($data, 200);
+    }
+
+    /**
+     * Analytic for visits.
+     *
+     * @return void
+     */
+    public function visits()
+    {
+        $data = [];
+        $data['total'] = 0;
+        $data['max'] = 0;
+        $data['period'] = $this->period;
+
+        $index = 0;
+        foreach ($this->period as $date) {
+            $visitors = \App\VisitorLog::whereDate('created_at', $date)->get();
+            $data[$index]['date'] = $date->format('m/d/Y H:i'); // Todo: create a constante FORMAT_WITH_STEP for step like 1 hour.
+            $data[$index]['value'] = 0;
+
+            foreach ($visitors as $visitor) {
+                $data[$index]['value'] += $visitor->visits;
+                $data['total'] += $visitor->visits;
             }
 
             $data['max'] < $data[$index]['value'] ? $data['max'] = $data[$index]['value'] : null;

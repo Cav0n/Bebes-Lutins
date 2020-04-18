@@ -5,8 +5,20 @@ namespace App\Http\Controllers;
 use App\ContentSection;
 use Illuminate\Http\Request;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class ContentSectionController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | ContentSectionController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle ContentSection model.
+    |
+    */
+
     public function __construct()
     {
         $this->middleware('admin')->only(['index', 'create', 'store', 'edit', 'update']);

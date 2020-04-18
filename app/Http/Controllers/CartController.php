@@ -8,11 +8,27 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Session;
 
 /**
- * Cart Model controller.
- * Handle cart creation, and different steps (addresses addition, payment selection).
+ * @author Florian Bernard <fbernard@openstudio.fr>
  */
 class CartController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | CartController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle Cart model.
+    |
+    */
+
+    /** @var string */
+    protected $alertMessage;
+
+    public function __construct()
+    {
+        $this->alertMessage = \App\Setting::getValue('ALERT_MESSAGE_ACTIVATED') ? \App\Setting::getValue('ALERT_MESSAGE') : null;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -59,6 +75,7 @@ class CartController extends Controller
     public function show(Cart $cart = null)
     {
         $cart = Cart::where('id', Session::get('shopping_cart')->id)->first();
+        [$cart, $notAvailableItems, $stockDecreasedItems] = self::verifyItemsAvailability($cart);
         $step = 1;
 
         if ($cart->items->isEmpty()) {
@@ -67,17 +84,53 @@ class CartController extends Controller
 
         return view('pages.shopping_cart.index')
                 ->withCartStep($step)
-                ->withCart($cart);
+                ->withCart($cart)
+                ->withUnavailableItems($notAvailableItems)
+                ->withstockDecreasedItems($stockDecreasedItems)
+                ->withAlertMessage($this->alertMessage);
+    }
+
+    public function verifyItemsAvailability(Cart $cart)
+    {
+        $notAvailableItems = [];
+        $stockDecreasedItems = [];
+
+        foreach ($cart->items as $item) {
+            // If product Unavailable
+            if (0 >= $item->product->stock) {
+                $notAvailableItems[] = $item;
+                $cart->items()->where('id', $item->id)->delete();
+            }
+
+            // If product stock descreased
+            if ($item->product->stock < $item->quantity) {
+                $stockDecreasedItems[] = $item;
+                $item->quantity = $item->quantity - ($item->quantity - $item->product->stock);
+                $item->save();
+            }
+        }
+
+        // Update database and local cart
+        if (!empty($notAvailableItems) && !empty($stockDecreasedItems)) {
+            $cart->save();
+            $cart = Cart::where('id', $cart->id)->first();
+        }
+
+        return [$cart, $notAvailableItems, $stockDecreasedItems];
     }
 
     public function showDelivery()
     {
         $cart = Cart::where('id', Session::get('shopping_cart')->id)->first();
+        [$cart, $notAvailableItems, $stockDecreasedItems] = self::verifyItemsAvailability($cart);
         $step = 2;
 
         return view('pages.shopping_cart.delivery')
                 ->withCartStep($step)
-                ->withCart($cart);
+                ->withCart($cart)
+                ->withUnavailableItems($notAvailableItems)
+                ->withstockDecreasedItems($stockDecreasedItems)
+                ->withAlertMessage($this->alertMessage);
     }
 
     public function addAddresses(Request $request)
@@ -123,11 +176,15 @@ class CartController extends Controller
     public function showPayment()
     {
         $cart = Cart::where('id', Session::get('shopping_cart')->id)->first();
+        [$cart, $notAvailableItems, $stockDecreasedItems] = self::verifyItemsAvailability($cart);
         $step = 3;
 
         return view('pages.shopping_cart.payment')
                 ->withCartStep($step)
-                ->withCart($cart);
+                ->withCart($cart)
+                ->withUnavailableItems($notAvailableItems)
+                ->withstockDecreasedItems($stockDecreasedItems)
+                ->withAlertMessage($this->alertMessage);
     }
 
     public function addComment(Request $request)

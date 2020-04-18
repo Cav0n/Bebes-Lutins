@@ -8,27 +8,19 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use GuzzleHttp\Client;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class AddressController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-
-    }
+    /*
+    |--------------------------------------------------------------------------
+    | AddressController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle Address model.
+    |
+    */
 
     /**
      * Store a newly created resource in storage.
@@ -93,40 +85,6 @@ class AddressController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Address  $address
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Address $address)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Address  $address
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Address $address)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Address  $address
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Address $address)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Address  $address
@@ -134,7 +92,7 @@ class AddressController extends Controller
      */
     public function destroy(Address $address)
     {
-        //
+        // TODO
     }
 
     /**
@@ -215,7 +173,7 @@ class AddressController extends Controller
             $address->city = $r->city;
             $address->complements = $r->complement;
             $address->company = $r->company;
-            $address->user_id = $r->isDeleted && $r->user_id ? null : \App\User::where('email', $r->user_mail)->first()->id;
+            $address->user_id = $r->isDeleted && $r->user_id ? null : (\App\User::where('email', $r->user_mail)->exists() ? \App\User::where('email', $r->user_mail)->first()->id : null);
             $address->created_at = $r->created_at;
             $address->updated_at = $r->updated_at;
 

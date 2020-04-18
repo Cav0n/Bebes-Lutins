@@ -6,8 +6,20 @@ use App\OrderItem;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class OrderItemController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | OrderItemController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle OrderItem model.
+    |
+    */
+
     public function __construct()
     {
         $this->middleware('admin')->only(['index', 'create', 'store', 'edit', 'update']);

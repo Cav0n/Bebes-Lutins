@@ -16,11 +16,43 @@
 
             <h1 class="font-weight-bold">@yield('cart.title', 'Mon panier')</h1>
 
+            @isset($alertMessage)
+                <div class="alert alert-danger" role="alert">
+                    {{ $alertMessage }}
+                </div>
+            @endisset
+
             @if(!empty($errors->any()))
             <div class="alert alert-danger" role="alert">
                 @foreach ($errors->all() as $error)
                 <p class="mb-0">{{ ucfirst($error) }}</p>
                 @endforeach
+            </div>
+            @endif
+
+            @if(!empty($unavailableItems))
+            <div class="alert alert-danger" role="alert">
+                <p>Certains produit de votre panier ne sont plus disponibles : </p>
+                <ul class="mb-0">
+                    @foreach ($unavailableItems as $item)
+                        <li><a href="{{ route('product', ['product' => $item->product]) }}" class="alert-danger">
+                            {{ ucfirst($item->product->name) }}
+                        </a></li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
+            @if(!empty($stockDecreasedItems))
+            <div class="alert alert-danger" role="alert">
+                <p>Le stock de certains produits ont diminué : </p>
+                <ul class="mb-0">
+                    @foreach ($stockDecreasedItems as $item)
+                        <li><a href="{{ route('product', ['product' => $item->product]) }}" class="alert-danger">
+                            {{ ucfirst($item->product->name) }}
+                        </a></li>
+                    @endforeach
+                </ul>
             </div>
             @endif
 

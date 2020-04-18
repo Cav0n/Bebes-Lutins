@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 /**
  * An abstract controller to handle search.
  * You must extends this controller to make custom search.
@@ -13,7 +17,7 @@ class AbstractSearchController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Abstract Search Controller
+    | AbstractSearchController
     |--------------------------------------------------------------------------
     |
     | This controller handle search.
@@ -42,7 +46,7 @@ class AbstractSearchController extends Controller
     protected function prepareSearch(Request $request)
     {
         if (!$request['search']) {
-            return redirect()->route('admin')->withErrors(['search' => 'La recherche ne peut pas être vide.']);
+            return back()->withErrors(['search' => 'La recherche ne peut pas être vide.']);
         }
 
         $this->search = explode(' ', trim($request['search']));

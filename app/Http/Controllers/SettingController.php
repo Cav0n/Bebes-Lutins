@@ -3,10 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Setting;
+use App\SettingsI18n;
 use Illuminate\Http\Request;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class SettingController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | SettingController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle Setting model.
+    |
+    */
+
     public function __construct()
     {
         $this->middleware('admin')->only(['index', 'create', 'store', 'edit', 'update', 'saveAll']);
@@ -24,12 +37,15 @@ class SettingController extends Controller
 
     public function saveAll(Request $request)
     {
-        foreach ($request->all() as $key => $value) {
-            if (\App\Setting::where('key', $key)->exists()) {
-                $setting = \App\Setting::where('key', $key)->first();
-                $setting->value = $value;
-                $setting->save();
+
+        foreach (Setting::all() as $setting) {
+            if (isset($request[$setting->key])) {
+                $setting->value = $request[$setting->key];
+            } else {
+                $setting->value = 0;
             }
+
+            $setting->save();
         }
 
         return back()->with('successMessage', 'Paramètres sauvegardés avec succés !');
@@ -99,5 +115,40 @@ class SettingController extends Controller
     public function destroy(Setting $setting)
     {
         //
+    }
+
+    /**
+     * Generate all settings from JSON in /config/settings.json
+     *
+     * @return void
+     */
+    public function generateAll()
+    {
+        $path = \base_path() . "/config/settings.json";
+
+        $json = json_decode(file_get_contents($path), true);
+
+        foreach ($json['settings'] as $value) {
+            $setting = new Setting();
+
+            $setting->type = $value['type'];
+            $setting->key = $value['key'];
+            $setting->value = $value['value'];
+
+            $setting->save();
+
+            foreach ($value['i18n'] as $valueI18n) {
+                $settingI18n = new SettingsI18n();
+
+                $settingI18n->setting_id = $setting->id;
+                $settingI18n->locale = $valueI18n['locale'];
+                $settingI18n->title = $valueI18n['title'];
+                $settingI18n->help = $valueI18n['help'];
+
+                $settingI18n->save();
+            }
+        }
+
+        echo "All settings has been imported, congrats !";
     }
 }

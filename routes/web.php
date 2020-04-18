@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Route; // Fix for VS Code
 
 Route::get('/', 'MainController@index')->name('homepage');
 
-
 /**
  * ============
  * AUTH
@@ -50,7 +49,7 @@ Route::get('/espace-client/mes-commandes', 'CustomerArea\MainController@orders')
 Route::get('/espace-client/mes-adresses', 'CustomerArea\MainController@addresses')->name('customer.area.addresses');
 
 Route::get('/espace-client/newsletters/toggle/{user}', 'UserController@toggleNewsletters')->name('user.newsletters.toggle');
-
+Route::post('/espace-client/mise-a-jour', 'UserController@update')->name('user.update');
 Route::post('/espace-client/adresses/ajouter', 'AddressController@store')->name('user.addresses.create');
 /** ============ */
 
@@ -67,6 +66,7 @@ Route::get('/categories/{category}', 'CategoryController@show')->name('category'
  * PRODUCT
  * ============
  */
+Route::get('/produits/tous', 'ProductController@publicIndex')->name('products.all');
 Route::get('/produits/{product}', 'ProductController@show')->name('product');
 Route::post('/produits/{product}/ajout-commentaire', 'ReviewController@store')->name('product.reviews.add');
 /** ============ */
@@ -93,6 +93,7 @@ Route::get('/panier/{cartItem}/supprimer', 'CartItemController@destroy')->name('
 Route::get('/commande/validation/{cart}', 'OrderController@createFromCart')->name('order.createFromCart');
 Route::get('/merci/{order}', 'OrderController@showThanks')->name('thanks');
 Route::get('/commande/suivi', 'OrderController@showTrackingPage')->name('order.tracking.show');
+Route::get('/commande/{order}/facture', 'OrderController@showBill')->name('order.bill');
 /** ============ */
 
 /**
@@ -117,6 +118,7 @@ Route::post('/admin/connexion', 'Admin\LoginController@login')->name('admin.logi
 Route::any('/admin/logout', 'Admin\LoginController@logout')->name('admin.logout');
 Route::get('/admin/homepage', 'Admin\AdminController@homepage')->name('admin.homepage');
 Route::get('/admin/changelog', 'Admin\AdminController@changelog')->name('admin.changelog');
+Route::get('/admin/sitemap/reload', 'Admin\AdminController@reloadSitemap')->name('admin.sitemap.reload');
 
 // Models indexes
 Route::get('/admin/orders', 'OrderController@index')->name('admin.orders');
@@ -136,6 +138,8 @@ Route::post('/admin/content/create', 'ContentController@store')->name('admin.con
 Route::get('/admin/order/{order}', 'OrderController@show')->name('admin.order.show');
 Route::get('/admin/product/{product}', 'ProductController@edit')->name('admin.product.edit');
 Route::post('/admin/product/{product}', 'ProductController@update')->name('admin.product.edit');
+Route::get('/admin/product/{product}/images', 'ProductController@editImages')->name('admin.product.images.edit');
+Route::post('/admin/product/{product}/images/add', 'ProductController@addImages')->name('admin.product.images.add');
 Route::get('/admin/category/{category}', 'CategoryController@edit')->name('admin.category.edit');
 Route::post('/admin/category/{category}', 'CategoryController@update')->name('admin.category.edit');
 Route::get('/admin/customer/{user}', 'UserController@edit')->name('admin.customer.edit');

@@ -8,9 +8,28 @@ use Illuminate\Validation\Rule;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class ProductController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | ProductController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle Product model.
+    |
+    */
+    const ORDER_BY_NAME_ASC = 1;
+    const ORDER_BY_NAME_DESC = 2;
+    const ORDER_BY_PRICE_ASC = 3;
+    const ORDER_BY_PRICE_DESC = 4;
+
     public function __construct()
     {
         $this->middleware('admin')->only(['index', 'create', 'store', 'edit', 'update']);
@@ -86,6 +105,40 @@ class ProductController extends Controller
         return view('pages.admin.products')->withProducts($products->paginate(15))->withCardTitle($title);
     }
 
+    public function publicIndex(Request $request)
+    {
+        $products = Product::where('isDeleted', 0)->where('isHidden', 0);
+
+        switch ($request['sorting']) {
+            case self::ORDER_BY_NAME_ASC:
+                $products->orderBy('name', 'asc');
+            break;
+
+            case self::ORDER_BY_NAME_DESC:
+                $products->orderBy('name', 'desc');
+            break;
+
+            case self::ORDER_BY_PRICE_ASC:
+                $products->orderBy('price', 'asc');
+            break;
+
+            case self::ORDER_BY_PRICE_DESC:
+                $products->orderBy('price', 'desc');
+            break;
+
+            default:
+                $products->orderBy('name', 'asc');
+            break;
+        }
+
+        if (isset($request['search']) && !empty($request['search'])) {
+            $products = (new SearchController($request))->products($request, $products);
+        }
+
+        return view('pages.product.all')->withProducts($products->paginate(16))
+                                        ->withSorting($request['sorting']);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -93,7 +146,22 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('pages.admin.product')->withProduct(null);
+        $categoriesForTagify = '';
+        $categories = \App\Category::where('isDeleted', 0)->orderBy('name', 'asc')->get();
+
+        $first = true;
+        foreach ($categories as $category) {
+            if (!$first) {
+                $categoriesForTagify .= ",";
+            }
+            $categoriesForTagify .= "'" . $category->name . "'";
+            $first = false;
+        }
+
+        return view('pages.admin.product')
+                    ->withProduct(null)
+                    ->withCategories($categories)
+                    ->withCategoriesForTagify($categoriesForTagify);
     }
 
     /**
@@ -118,6 +186,10 @@ class ProductController extends Controller
             'stock' => 'required|numeric|min:0',
         ]);
 
+        $id = preg_replace("/[^a-zA-Z\d]+/", "",
+                                preg_replace("/[\s]/", "-", trim($request['name']))
+                            );
+
         if (null === $request['isInPromo']) {
             $request['promoPrice'] = null;
         }
@@ -128,7 +200,7 @@ class ProductController extends Controller
 
         $product = new Product();
 
-        $product->id = preg_replace("/[^a-zA-Z]+/", "", $request['name']);
+        $product->id = $id;
         $product->name = $request['name'];
         $product->reference = $request['reference'];
         $product->description = $request['description'];
@@ -195,6 +267,52 @@ class ProductController extends Controller
                                           ->withProductCategories($productCategories)
                                           ->withCategories($categories)
                                           ->withCategoriesForTagify($categoriesForTagify);
+    }
+
+    public function editImages(Request $request, Product $product)
+    {
+        $categories = \App\Category::where('isDeleted', 0)->orderBy('name', 'asc')->get();
+
+        $categoriesForTagify = '';
+        $productCategories = '';
+
+        $first = true;
+        foreach ($categories as $category) {
+            if (!$first) {
+                $categoriesForTagify .= ",";
+            }
+            $categoriesForTagify .= "'" . $category->name . "'";
+            $first = false;
+        }
+
+        $first = true;
+        foreach ($product->categories as $category) {
+            if (!$first) {
+                $productCategories .= ',';
+            }
+            $productCategories .= $category->name;
+            $first = false;
+        }
+
+        return view('pages.admin.product_images')->withProduct($product)
+                                          ->withProductCategories($productCategories)
+                                          ->withCategories($categories)
+                                          ->withCategoriesForTagify($categoriesForTagify);
+    }
+
+    public function addImages(Request $request, Product $product)
+    {
+        $request->validate([
+            'image' => 'image',
+        ]);
+
+        $originalName = $request->image->getClientOriginalName();
+
+        $path = $request->image->storeAs(
+            'public/images/products', $originalName
+        );
+
+        return JsonResponse::create(['image' => asset('images/products/' . $originalName)]);
     }
 
     /**
@@ -265,5 +383,11 @@ class ProductController extends Controller
     public function apiGet(Product $product)
     {
         return new \App\Http\Resources\Product($product->id);
+    }
+
+    public function apiIndex(Request $request)
+    {
+        $products = Product::where('isDeleted', 0)->where('isHidden', 0)->orderBy('name', 'asc');
+        return $products->paginate(12);
     }
 }

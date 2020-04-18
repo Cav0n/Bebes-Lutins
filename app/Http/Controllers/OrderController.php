@@ -6,10 +6,23 @@ use App\Order;
 use GuzzleHttp\Client;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class OrderController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | OrderController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle Order model.
+    |
+    */
+
     public function __construct()
     {
         $this->middleware('admin')->only(['index', 'create', 'edit']);
@@ -110,6 +123,14 @@ class OrderController extends Controller
         return JsonResponse::create(['error' => ['message' => trans('messages.There is no order with this tracking number.')] ]);
     }
 
+    public function showBill(Request $request, Order $order)
+    {
+        if (\App\Admin::check() || (Auth::check() && $order->user_id == Auth::user()->id)){
+            return view('pages.order.bill')->with(['order' => $order]);
+        }
+        return abort(404);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -189,6 +210,9 @@ class OrderController extends Controller
             $orderItem->order_id = $order->id;
 
             $orderItem->save();
+
+            $orderItem->product->stock -= $item->quantity;
+            $orderItem->product->save();
         }
 
         $cart = session()->get('shopping_cart');
@@ -246,7 +270,29 @@ class OrderController extends Controller
 
         $order->save();
 
+        if ($request['mail']) {
+            // Send email
+        }
+
         return new JsonResponse(['message' => 'ok', 'color' => $order->statusColor], 200);
+    }
+
+    public function getUpdateModal(Request $request, Order $order)
+    {
+        if (null !== $order = Order::where('id', $order->id)->first()){
+            $newOrder = $order->replicate();
+            $newOrder->status = $request['newStatus'];
+
+            return JsonResponse::create(['modal' => View::make('components.modal.change_order_status', [
+                                                        'order' => $order,
+                                                        'newOrder' => $newOrder,
+                                                        'selectId' => $request['selectId']
+                                                    ])
+                                                    ->render(),
+                                        'modalID' => 'change-status-modal']);
+        }
+
+        return JsonResponse::create(['error' => ['message' => trans('messages.There is no order with this ID.')] ]);
     }
 
     /**

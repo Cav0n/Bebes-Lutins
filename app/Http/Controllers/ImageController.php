@@ -6,8 +6,20 @@ use App\Image;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
 
+/**
+ * @author Florian Bernard <fbernard@openstudio.fr>
+ */
 class ImageController extends Controller
 {
+    /*
+    |--------------------------------------------------------------------------
+    | ImageController
+    |--------------------------------------------------------------------------
+    |
+    | This controller handle Image model.
+    |
+    */
+
     public function __construct()
     {
         $this->middleware('admin')->only(['index', 'create', 'store', 'edit', 'update']);

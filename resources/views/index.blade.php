@@ -4,7 +4,7 @@
 <meta property="og:title" content="Bébés Lutins" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="{{ URL::to('/') }}" />
-<meta property="og:image" content="{{ asset('images/logo.png') }}" />
+<meta property="og:image" content="{{ asset('favicons/apple-touch-icon.png') }}" />
 @endsection
 
 @section('title', "Bébés Lutins | Couches lavables fabriquées en France")

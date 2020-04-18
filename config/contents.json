@@ -1,0 +1,506 @@
+[
+    {
+        "id": 1,
+        "title": "Infos pratiques",
+        "position": 1,
+        "created_at": "2020-03-16 11:41:11",
+        "updated_at": "2020-03-16 11:41:11",
+        "contents": [
+            {
+                "id": 1,
+                "title": "Livraison et frais de port",
+                "url": "\/contenu\/1",
+                "type": "CONTENT",
+                "created_at": "2020-03-16 11:42:34",
+                "updated_at": "2020-03-16 11:42:34",
+                "pivot": {
+                    "footer_element_id": 1,
+                    "content_id": 1
+                },
+                "sections": [
+                    {
+                        "id": 3,
+                        "title": "Frais de port et d'emballage",
+                        "text": "Les colis seront envoy\u00e9s en \u00ab colissimo \u00bb ou \u00ab colissimo recommand\u00e9 \u00bb par la poste. Les frais de port s\u2019\u00e9l\u00e8vent \u00e0 5,90 euros TTC et sont offerts \u00e0 partir de 70,00 euros d\u2019achat TTC (toutes taxes comprises).<br>\n<br>\nNous contacter pour des envois hors France m\u00e9tropolitaine.",
+                        "content_id": 1,
+                        "created_at": "2020-03-16 14:33:29",
+                        "updated_at": "2020-03-16 14:33:29"
+                    },
+                    {
+                        "id": 4,
+                        "title": "D\u00e9lais de livraison",
+                        "text": "D\u00e9lais de livraison de plus ou moins 1 semaine. Les livraisons sont effectu\u00e9es en France m\u00e9tropolitaine. B\u00e9b\u00e9s Lutins n\u2019est, en aucun cas tenu responsable des retards, pertes ou d\u00e9g\u00e2ts occasionn\u00e9s lors du transport.<br>\n<br>\nLes d\u00e9lais de livraison ne sont donn\u00e9s qu'\u00e0 titre indicatif.",
+                        "content_id": 1,
+                        "created_at": "2020-03-16 14:33:57",
+                        "updated_at": "2020-03-16 14:33:57"
+                    },
+                    {
+                        "id": 5,
+                        "title": "Retrait gratuit \u00e0 l'atelier",
+                        "text": "Prendre contact avec l'\u00e9quipe B\u00e9b\u00e9s Lutins pour finaliser votre commande si vous souhaitez retirer votre commande directement \u00e0 l'atelier. Vous pouvez nous contacter de diff\u00e9rentes mani\u00e8res en cliquant ici.",
+                        "content_id": 1,
+                        "created_at": "2020-03-16 14:34:22",
+                        "updated_at": "2020-03-16 14:34:22"
+                    }
+                ]
+            },
+            {
+                "id": 2,
+                "title": "Paiement",
+                "url": "\/contenu\/2",
+                "type": "CONTENT",
+                "created_at": "2020-03-16 11:42:48",
+                "updated_at": "2020-03-16 11:42:48",
+                "pivot": {
+                    "footer_element_id": 1,
+                    "content_id": 2
+                },
+                "sections": [
+                    {
+                        "id": 6,
+                        "title": "Moyens de paiements",
+                        "text": "Le paiement est exigible imm\u00e9diatement \u00e0 la commande, il peut s'effectuer par :<br>\n<br>\n<b>Carte bancaire<\/b><br>\nVotre espace de paiement pour effectuer votre transaction sur www.bebes-lutins.fr sera sous l'intitul\u00e9 CITELIS.<br>\nBEBES LUTINS vous garantit un paiement en toute s\u00e9curit\u00e9.<br>\nLes paiements sont r\u00e9alis\u00e9s par le biais du syst\u00e8me s\u00e9curis\u00e9 CITELIS qui utilise le protocole TLS de telle sorte que les informations transmises sont crypt\u00e9es par un logiciel et qu'aucun tiers ne peut en prendre connaissance au cours du transport sur le r\u00e9seau. Le compte de l'acheteur sera d\u00e9bit\u00e9 apr\u00e8s validation de la commande au tarif des produits command\u00e9s. Le Client autorise la soci\u00e9t\u00e9 ACTYPOLES \/ BEBES LUTINS \u00e0 d\u00e9biter sa carte du montant relatif au prix indiqu\u00e9, en communiquant ses informations bancaires lors de la vente. Le Client confirme qu\u2019il est bien le titulaire l\u00e9gal de la carte \u00e0 d\u00e9biter et qu\u2019il est l\u00e9galement en droit d\u2019en faire usage.<br>\n<br>\n<i>En cas d\u2019erreur, ou d\u2019impossibilit\u00e9 de d\u00e9biter la carte, la vente est annul\u00e9e ainsi que la commande.<\/i><br>\n<br>\n<b>Ch\u00e8que bancaire<\/b><br>\nLe paiement par ch\u00e8que bancaire n'est possible que pour des ch\u00e8ques en euros tir\u00e9s sur une banque domicili\u00e9e en France. Attention : en choisissant de payer par ch\u00e8que, la commande ne sera trait\u00e9e qu'apr\u00e8s encaissement de celui-ci et les d\u00e9lais ne d\u00e9buteront qu'\u00e0 partir de ce moment.<br>\nLe ch\u00e8que devra \u00eatre \u00e9tabli \u00e0 l'ordre : ACTYPOLES-THIERS<br>\nEt envoyer \u00e0 : B\u00e9b\u00e9s Lutins, Rue du 19 mars 1962, 63300 THIERS<br>\n<br>\n<i>Dans le cas o\u00f9 vous seriez en retard dans le paiement de la commande, nous serions en droit de proc\u00e9der \u00e0 l'annulation de la commande pass\u00e9 un d\u00e9lai de 15 jours apr\u00e8s la confirmation de commande envoy\u00e9e au client, sauf entente pr\u00e9alable.<\/i><br>\n<br>\n<b>PayPal et\/ou PayLib<\/b><br>\nLe Client est redirig\u00e9 sur le site de PayPal \u00e0 la fin de sa commande. Il se connecte avec ses identifiants de compte PayPal et confirme le paiement. Le paiement est alors enregistr\u00e9 dans le syst\u00e8me de PayPal, et la commande est trait\u00e9e. Lors d'un paiement par PayPal, le montant total d\u00fb sera encaiss\u00e9 juste apr\u00e8s l'ordre de commande.<br>\n<br>\nNote : <i>Dans tous les cas possible de paiement, B\u00e9b\u00e9s Lutins se r\u00e9serve le droit de refuser d'effectuer une livraison ou d'honorer une commande \u00e9manant d'un consommateur qui n'aurait pas r\u00e9gl\u00e9 totalement ou partiellement une commande pr\u00e9c\u00e9dente ou avec lequel un litige de paiement serait en cours d'administration. BEBES LUTINS se r\u00e9serve le droit d\u2019inscrire les coordonn\u00e9es associ\u00e9es au litige dans un fichier correspondant aux incidents de paiements.<\/i>",
+                        "content_id": 2,
+                        "created_at": "2020-03-16 14:36:11",
+                        "updated_at": "2020-03-16 14:36:11"
+                    },
+                    {
+                        "id": 7,
+                        "title": "Prix",
+                        "text": "Les prix sont indiqu\u00e9s en Euro (\u20ac) sur le site www.bebes-lutins.fr et s\u2019entendent T.T.C. (toutes taxes comprises, y compris la T.V.A. au taux applicable au jour de la commande). Les prix sont toujours entendus hors frais de livraison ; le client est inform\u00e9 du montant des frais de livraison lors de la passation de la commande. BEBES LUTINS se r\u00e9serve le droit de modifier ses prix \u00e0 tout moment mais les produits seront factur\u00e9s sur la base des tarifs en vigueur au moment de votre validation de commande.<br>\n<br>\n<i>Nous contacter pour une exp\u00e9dition hors France m\u00e9tropolitaine<\/i>",
+                        "content_id": 2,
+                        "created_at": "2020-03-16 14:37:56",
+                        "updated_at": "2020-03-16 14:37:56"
+                    }
+                ]
+            },
+            {
+                "id": 3,
+                "title": "Echanges et retours",
+                "url": "\/contenu\/3",
+                "type": "CONTENT",
+                "created_at": "2020-03-16 11:42:58",
+                "updated_at": "2020-03-16 11:42:58",
+                "pivot": {
+                    "footer_element_id": 1,
+                    "content_id": 3
+                },
+                "sections": [
+                    {
+                        "id": 8,
+                        "title": "Droit de r\u00e9tractation",
+                        "text": "Selon l\u2019article Article L121-21 du code de la consommation, le client dispose d'un droit de r\u00e9tractation conform\u00e9ment au code de la consommation sans avoir \u00e0 justifier de motifs ni \u00e0 payer de p\u00e9nalit\u00e9. Le d\u00e9lai de r\u00e9tractation de 14 jours d\u00e9marre le jour de la r\u00e9ception de la marchandise. Si le dernier jour de ce d\u00e9lai tombe un samedi, un dimanche ou un jour f\u00e9ri\u00e9, il est prolong\u00e9 jusqu'au jour ouvrable suivant.<br>\n<i>L'acheteur est en droit d'annuler sa commande durant ce d\u00e9lai.<\/i><br>\n<br>\nApr\u00e8s communication de la d\u00e9cision d\u2019exercer son droit de r\u00e9tractation dans ce d\u00e9lai de 14 jours, le client dispose d\u2019un autre d\u00e9lai de 14 jours pour renvoyer le ou les produits concern\u00e9s par la r\u00e9tractation.<br>\nCette annulation est effective d\u00e8s qu'il retourne la marchandise, \u00e0 ses frais, dans l'emballage d'origine, par colis postal. BEBES LUTINS dispose d'un d\u00e9lai de trente jours maximum \u00e0 compter de la r\u00e9ception de la marchandise pour rembourser le client ou faire un \u00e9change si l'acheteur en manifeste le souhait.<br>\n<br>\nLes produits doivent \u00eatre retourn\u00e9s dans leur \u00e9tat d'origine, en aucun cas lav\u00e9s ou utilis\u00e9s et complet, permettant une re-commercialisation \u00e0 l\u2019\u00e9tat neuf.<br>\nLes produits doivent \u00eatre retourn\u00e9s \u00e0 l\u2019adresse suivante : <br>\n<br>\nB\u00e9b\u00e9s Lutins<br>\nRue du 19 mars 1962<br>\n63300, THIERS.<br>\n<br>\n<i>Cliquez ici pour t\u00e9l\u00e9charger un mod\u00e8le de formulaire de r\u00e9tractation.<\/i>",
+                        "content_id": 3,
+                        "created_at": "2020-03-16 14:39:41",
+                        "updated_at": "2020-03-16 14:39:41"
+                    }
+                ]
+            },
+            {
+                "id": 4,
+                "title": "Mentions l\u00e9gales",
+                "url": "\/contenu\/4",
+                "type": "CONTENT",
+                "created_at": "2020-03-16 11:43:05",
+                "updated_at": "2020-03-16 11:43:05",
+                "pivot": {
+                    "footer_element_id": 1,
+                    "content_id": 4
+                },
+                "sections": [
+                    {
+                        "id": 10,
+                        "title": "\u00c9diteur du site",
+                        "text": "Florian BERNARD<br>\nAdresse email : <a href=\"mailto:fbernard@openstudio.fr\">fbernard@openstudio.fr<\/a><br>\nT\u00e9l\u00e9phone : <a href=\"tel:0783260601\">07 83 26 06 01<\/a>",
+                        "content_id": 4,
+                        "created_at": "2020-03-16 14:43:08",
+                        "updated_at": "2020-03-16 14:43:08"
+                    },
+                    {
+                        "id": 11,
+                        "title": "H\u00e9bergeur du site",
+                        "text": "1&1 Internet SARL<br>\n<br>\n7, place de la Gare<br>\nBP 70109<br>\n57201 Sarreguemines Cedex<br>\n<br>\n<a href=\"+33970808911\">+33(0)9 70 80 89 11 (appel non surtax\u00e9)<\/a><br>\n<a href=\"https:\/\/assistance.1and1.fr\/contact\">Formulaire de contact<\/a>",
+                        "content_id": 4,
+                        "created_at": "2020-03-16 14:44:22",
+                        "updated_at": "2020-03-16 14:44:22"
+                    },
+                    {
+                        "id": 13,
+                        "title": "Gestion des paiements",
+                        "text": "Cr\u00e9dit Mutuel Ark\u00e9a<br>\n<br>\n1, rue Louis Lichou<br>\n29480<br>\nLe Relecq-Kerhuon<br>\n<br>\nSIREN : 755 577 018 RCS Brest<br>\n<a href=\"mailto:offre.flux@arkea.com\">offre.flux@arkea.com<\/a><br>\nPlus d'informations : <a href=\"https:\/\/www.citelis.fr\/mentions-legales\">Mentions l\u00e9gales de CITELIS<\/a>",
+                        "content_id": 4,
+                        "created_at": "2020-03-16 14:45:59",
+                        "updated_at": "2020-03-16 14:45:59"
+                    },
+                    {
+                        "id": 14,
+                        "title": "Informations l\u00e9gales",
+                        "text": "B\u00e9b\u00e9s Lutins\/Actypoles<br>\nRCS : RCS Clermont-Ferrand SIREN 828 736 124<br>\nN\u00b0 SIRET : 828 736 124 00011<br>\nN\u00b0 TVA intracommunautaire : FR76828736124<br>\n<br>\nResponsable communication : Boris SURJON<br>\nResponsable de la soci\u00e9t\u00e9 : Boris SURJON<br>\n<br>\nB\u00e9b\u00e9s Lutins\/Actypoles<br>\nRue du 19 mars 1962<br>\n63300 THIERS<br>\n<br>\nTel : <a href=\"tel:0473802660\">04 73 80 26 60<\/a><br>\nAdresse mail : <a href=\"mailto:contact@bebes-lutins.fr\">contact@bebes-lutins.fr<\/a><br>\nSite web : <a href=\"https:\/\/www.bebes-lutins.fr\">www.bebes-lutins.fr<\/a><br>",
+                        "content_id": 4,
+                        "created_at": "2020-03-16 14:47:57",
+                        "updated_at": "2020-03-16 14:47:57"
+                    }
+                ]
+            },
+            {
+                "id": 5,
+                "title": "Conditions de ventes",
+                "url": "\/contenu\/5",
+                "type": "CONTENT",
+                "created_at": "2020-03-16 11:43:15",
+                "updated_at": "2020-04-15 20:21:53",
+                "pivot": {
+                    "footer_element_id": 1,
+                    "content_id": 5
+                },
+                "sections": [
+                    {
+                        "id": 16,
+                        "title": "Article 1 : Acceptation et application des conditions",
+                        "text": "<p>Les pr&eacute;sentes conditions g&eacute;n&eacute;rales de vente s&rsquo;appliquent, dans leur version en vigueur au moment de la commande (ci-apr&egrave;s CGV), &agrave; toutes les commandes pass&eacute;es par toute personne (ci-apr&egrave;s &laquo; le client &raquo;) via le site internet www.bebes-lutins.fr aupr&egrave;s de Actypoles \/ B&eacute;b&eacute;s Lutins (ci-apr&egrave;s &laquo; BEBES LUTINS &raquo;).<br \/>Vous d&eacute;clarez avoir pris connaissance et accept&eacute; les CGV ainsi que les droits et obligations en d&eacute;coulant avant la passation de votre commande.<br \/>Tout internaute peut prendre connaissance des Conditions g&eacute;n&eacute;rales de vente sur le site, en bas de la page.<br \/>Ces Conditions g&eacute;n&eacute;rales de vente pouvant faire l'objet de modifications, les conditions applicables sont celles en vigueur sur le site www.bebes-lutins.fr, &agrave; la date de passation de votre commande.<br \/><br \/><em>La validation de votre commande (apr&egrave;s avoir v&eacute;rifi&eacute; le d&eacute;tail de sa commande et son prix total) vaut donc acceptation des CGV actuelles.<\/em><\/p>",
+                        "content_id": 5,
+                        "created_at": "2020-03-16 14:49:49",
+                        "updated_at": "2020-04-05 18:57:36"
+                    },
+                    {
+                        "id": 17,
+                        "title": "Article 2 : Prix",
+                        "text": "<p>Les prix sont indiqu&eacute;s en Euro (&euro;) sur le site www.bebes-lutins.fr et s&rsquo;entendent T.T.C. (toutes taxes comprises, y compris la T.V.A. au taux applicable au jour de la commande). Les prix sont toujours entendus hors frais de livraison ; le client est inform&eacute; du montant des frais de livraison lors de la passation de la commande. BEBES LUTINS se r&eacute;serve le droit de modifier ses prix &agrave; tout moment mais les produits seront factur&eacute;s sur la base des tarifs en vigueur au moment de votre validation de commande.<br \/><br \/><em>Nous contacter pour une exp&eacute;dition hors France m&eacute;tropolitaine.<\/em><\/p>",
+                        "content_id": 5,
+                        "created_at": "2020-03-16 14:50:24",
+                        "updated_at": "2020-04-05 18:57:36"
+                    },
+                    {
+                        "id": 20,
+                        "title": "Article 3 : Paiement",
+                        "text": "<p>Le paiement est exigible imm&eacute;diatement &agrave; la commande, il peut s'effectuer par :<br \/><br \/><strong>Carte bancaire<\/strong><br \/>Votre espace de paiement pour effectuer votre transaction sur www.bebes-lutins.fr sera sous l'intitul&eacute; CITELIS.<br \/>BEBES LUTINS vous garantit un paiement en toute s&eacute;curit&eacute;.<br \/>Les paiements sont r&eacute;alis&eacute;s par le biais du syst&egrave;me s&eacute;curis&eacute; CITELIS qui utilise le protocole TLS de telle sorte que les informations transmises sont crypt&eacute;es par un logiciel et qu'aucun tiers ne peut en prendre connaissance au cours du transport sur le r&eacute;seau. Le compte de l'acheteur sera d&eacute;bit&eacute; apr&egrave;s validation de la commande au tarif des produits command&eacute;s. Le Client autorise la soci&eacute;t&eacute; ACTYPOLES \/ BEBES LUTINS &agrave; d&eacute;biter sa carte du montant relatif au prix indiqu&eacute;, en communiquant ses informations bancaires lors de la vente. Le Client confirme qu&rsquo;il est bien le titulaire l&eacute;gal de la carte &agrave; d&eacute;biter et qu&rsquo;il est l&eacute;galement en droit d&rsquo;en faire usage.<br \/><br \/><em>En cas d&rsquo;erreur, ou d&rsquo;impossibilit&eacute; de d&eacute;biter la carte, la vente est annul&eacute;e ainsi que la commande.<\/em><br \/><br \/><strong>Ch&egrave;que bancaire<\/strong><br \/>Le paiement par ch&egrave;que bancaire n'est possible que pour des ch&egrave;ques en euros tir&eacute;s sur une banque domicili&eacute;e en France. Attention : en choisissant de payer par ch&egrave;que, la commande ne sera trait&eacute;e qu'apr&egrave;s encaissement de celui-ci et les d&eacute;lais ne d&eacute;buteront qu'&agrave; partir de ce moment.<br \/>Le ch&egrave;que devra &ecirc;tre &eacute;tabli &agrave; l'ordre : ACTYPOLES-THIERS<br \/>Et envoyer &agrave; : B&eacute;b&eacute;s Lutins, Rue du 19 mars 1962, 63300 THIERS<br \/><br \/><em>Dans le cas o&ugrave; vous seriez en retard dans le paiement de la commande, nous serions en droit de proc&eacute;der &agrave; l'annulation de la commande pass&eacute; un d&eacute;lai de 15 jours apr&egrave;s la confirmation de commande envoy&eacute;e au client, sauf entente pr&eacute;alable.<\/em><br \/><br \/><strong>PayPal et\/ou PayLib<\/strong><br \/>Le Client est redirig&eacute; sur le site de PayPal &agrave; la fin de sa commande. Il se connecte avec ses identifiants de compte PayPal et confirme le paiement. Le paiement est alors enregistr&eacute; dans le syst&egrave;me de PayPal, et la commande est trait&eacute;e. Lors d'un paiement par PayPal, le montant total d&ucirc; sera encaiss&eacute; juste apr&egrave;s l'ordre de commande.<br \/><br \/>Note : <em>Dans tous les cas possible de paiement, B&eacute;b&eacute;s Lutins se r&eacute;serve le droit de refuser d'effectuer une livraison ou d'honorer une commande &eacute;manant d'un consommateur qui n'aurait pas r&eacute;gl&eacute; totalement ou partiellement une commande pr&eacute;c&eacute;dente ou avec lequel un litige de paiement serait en cours d'administration. BEBES LUTINS se r&eacute;serve le droit d&rsquo;inscrire les coordonn&eacute;es associ&eacute;es au litige dans un fichier correspondant aux incidents de paiements.<\/em><\/p>",
+                        "content_id": 5,
+                        "created_at": "2020-03-16 14:52:42",
+                        "updated_at": "2020-04-05 18:57:36"
+                    },
+                    {
+                        "id": 21,
+                        "title": "Article 4 : Commande",
+                        "text": "<p>B&eacute;b&eacute;s Lutins accepte les commandes,<\/p>\r\n<ul>\r\n<li>Sur son site de vente en ligne www.bebes-lutins.fr<\/li>\r\n<li>Par courrier &eacute;lectronique &agrave; contact@bebes-lutins.fr<\/li>\r\n<li>Par courrier postal &agrave; B&eacute;b&eacute;s Lutins, Rue du 19 mars 1962, 63300, THIERS<\/li>\r\n<li>Par t&eacute;l&eacute;phone au 04.73.80.26.60<\/li>\r\n<\/ul>\r\n<p><em>Dans tous les cas vous devez pouvoir recevoir par courrier &eacute;lectronique une confirmation de votre commande.<\/em><br \/>La commande ne sera prise en compte qu&rsquo;apr&egrave;s confirmation.<br \/><br \/><strong>Dans le cas d&rsquo;une commande en ligne :<\/strong><br \/>Au pr&eacute;alable et avant de passer une commande, le Client doit s'inscrire aupr&egrave;s de BEBES LUTINS sur le site www.bebes-lutins.fr afin de cr&eacute;er un compte client et ainsi de renseigner les informations qui lui seront demand&eacute;es.<br \/>Le client s&rsquo;engage &agrave; fournir des informations exactes, fiables et sinc&egrave;res. Le client fournira une adresse &eacute;lectronique valide afin d&rsquo;assurer le bon d&eacute;roulement de sa commande.<br \/>BEBES LUTINS ne sera en aucun cas tenu responsable, si une information &eacute;tait erron&eacute;e, notamment pour l&rsquo;acheminement de la commande.<br \/><br \/>BEBES LUTINS pourra v&eacute;rifier ces informations &agrave; tout moment et en cas de doute demander une v&eacute;rification de la partdu client. En cas d&rsquo;information paraissant douteuse, BEBES LUTINS se r&eacute;serve le droit d&rsquo;annuler la transaction avec le client.<br \/><br \/>Le client est invit&eacute; &agrave; se reporter au descriptif de chaque produit afin d&rsquo;en conna&icirc;tre les propri&eacute;t&eacute;s et les particularit&eacute;s, notamment quant aux caract&eacute;ristiques recherch&eacute;es et &agrave; la taille souhait&eacute;e. Les offres de produits s'entendent dans la limite des stocks disponibles.<br \/><br \/><strong>Processus de commande sur le Site :<\/strong><br \/>Le processus de commande sur le site www.bebes-lutins.fr comprend les &eacute;tapes suivantes :<\/p>\r\n<ul>\r\n<li>En naviguant sur le catalogue de produits de la boutique en ligne www.bebes-lutins.fr, le client s&eacute;lectionne le(s) produit(s) souhait&eacute;(s), en cliquant sur le bouton \"Ajouter au panier\", sans que cela ne constitue un engagement de sa part. Les produits sont alors stock&eacute;s temporairement dans le panier d&rsquo;achat durant la navigation. En cliquant sur le panier, le client peut voir les articles se trouvant dans son panier.<\/li>\r\n<li>Le client peut modifier les quantit&eacute;s ou supprimer un article &agrave; tout moment lors de la navigation en allant voir le panier.<br \/>Une fois dans le panier, le client lance la commande en cliquant sur &laquo; Commander &raquo;. Sur la page suivante, le client est invit&eacute; &agrave; cr&eacute;er un &laquo; Compte Utilisateur &raquo;, ou &agrave; se connecter &agrave; un compte d&eacute;j&agrave; existant.<\/li>\r\n<li>Il sera ensuite demand&eacute; au client de s&eacute;lectionner &laquo; l&rsquo;adresse de livraison &raquo;, un r&eacute;capitulatif de commande s&rsquo;affichera pour &laquo; validation &raquo;, puis le mode de &laquo; paiement souhait&eacute; &raquo;.<\/li>\r\n<li>Le client peut interrompre le processus de commande &agrave; tout moment avant de cliquer sur le bouton &laquo; Payer &raquo; en quittant simplement la page Internet et en fermant son navigateur Internet. Le panier restera dans votre compte jusqu&rsquo;&agrave; la prochaine connexion.<\/li>\r\n<li>Par l'envoi de sa commande, c'est-&agrave;-dire en cliquant sur le bouton &laquo; Payer &raquo;, le client fait une offre ferme &agrave; l'&eacute;gard des produits qu'il a s&eacute;lectionn&eacute;, et propose ainsi &agrave; ACTYPOLES \/ BEBES LUTINS de conclure un contrat de vente avec lui.<\/li>\r\n<\/ul>\r\n<p><strong>Confirmation de commande :<\/strong><br \/>Une fois la commande confirm&eacute;e, vous pouvez observer dans votre compte-client l'&eacute;volution de l'&eacute;tat de votre commande.<br \/>La commande sera d&eacute;finitivement valid&eacute;e apr&egrave;s r&eacute;ception de votre paiement, un email de validation de commande vous sera envoy&eacute;.<br \/>Apr&egrave;s validation et une fois votre commande exp&eacute;di&eacute;e, un e-mail d&rsquo;avis d&rsquo;exp&eacute;dition vous sera alors envoy&eacute;.<br \/>Si vous ne recevez pas les emails de suivi, nous vous invitons prendre contact avec notre Service Clients et le cas &eacute;ch&eacute;ant &agrave; v&eacute;rifier votre adresse &eacute;lectronique fournie lors de l&rsquo;inscription sur le site internet www.bebes-lutins.fr<br \/><br \/>Noter : <em>Dans tous les cas de processus de passation de commande, B&eacute;b&eacute;s Lutins se r&eacute;serve la possibilit&eacute; de ne pas confirmer une commande pour quelque raison que ce soit : approvisionnement des produits, commande illisible ou portant &agrave; confusion, difficult&eacute;s de livraisons, non conforme aux CGV, d&eacute;fauts de paiement lors d&rsquo;une commande pr&eacute;c&eacute;dente, soup&ccedil;on de fraudes. Dans tous les cas B&eacute;b&eacute;s Lutins en informera l'acheteur par tout moyen.<\/em><\/p>",
+                        "content_id": 5,
+                        "created_at": "2020-03-16 14:58:01",
+                        "updated_at": "2020-04-05 18:57:36"
+                    }
+                ]
+            },
+            {
+                "id": 6,
+                "title": "Suivre une commande",
+                "url": "http:\/\/bebeslutins\/commande\/suivi",
+                "type": "LINK",
+                "created_at": "2020-03-16 11:43:22",
+                "updated_at": "2020-03-16 11:43:22",
+                "pivot": {
+                    "footer_element_id": 1,
+                    "content_id": 6
+                },
+                "sections": []
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Nous contacter",
+        "position": 2,
+        "created_at": "2020-03-16 11:41:28",
+        "updated_at": "2020-03-16 11:41:28",
+        "contents": [
+            {
+                "id": 7,
+                "title": "06 41 56 91 64",
+                "url": "tel:0641569194",
+                "type": "TEL",
+                "created_at": "2020-03-16 11:44:34",
+                "updated_at": "2020-03-16 11:44:34",
+                "pivot": {
+                    "footer_element_id": 2,
+                    "content_id": 7
+                },
+                "sections": []
+            },
+            {
+                "id": 8,
+                "title": "contact@bebes-lutins.fr",
+                "url": "mailto:contact@bebes-lutins.fr",
+                "type": "EMAIL",
+                "created_at": "2020-03-16 11:44:53",
+                "updated_at": "2020-04-05 18:54:57",
+                "pivot": {
+                    "footer_element_id": 2,
+                    "content_id": 8
+                },
+                "sections": []
+            },
+            {
+                "id": 9,
+                "title": "Formulaire de contact",
+                "url": "http:\/\/bebeslutins\/contact",
+                "type": "LINK",
+                "created_at": "2020-03-16 11:45:01",
+                "updated_at": "2020-04-05 18:57:11",
+                "pivot": {
+                    "footer_element_id": 2,
+                    "content_id": 9
+                },
+                "sections": []
+            },
+            {
+                "id": 10,
+                "title": "Katia r\u00e9pondra avec plaisir \u00e0 vos questions.",
+                "url": null,
+                "type": "TEXT",
+                "created_at": "2020-03-16 11:45:15",
+                "updated_at": "2020-04-05 19:05:47",
+                "pivot": {
+                    "footer_element_id": 2,
+                    "content_id": 10
+                },
+                "sections": []
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "title": "Nous suivre",
+        "position": 3,
+        "created_at": "2020-03-16 11:41:37",
+        "updated_at": "2020-03-16 11:41:37",
+        "contents": [
+            {
+                "id": 11,
+                "title": "Instagram",
+                "url": "https:\/\/www.instagram.com\/bebeslutins\/",
+                "type": "LINK",
+                "created_at": "2020-03-16 11:45:26",
+                "updated_at": "2020-03-16 11:45:26",
+                "pivot": {
+                    "footer_element_id": 3,
+                    "content_id": 11
+                },
+                "sections": []
+            },
+            {
+                "id": 12,
+                "title": "Facebook",
+                "url": "http:\/\/fr-fr.facebook.com\/bebes.lutins\/",
+                "type": "LINK",
+                "created_at": "2020-03-16 11:45:38",
+                "updated_at": "2020-04-05 19:01:13",
+                "pivot": {
+                    "footer_element_id": 3,
+                    "content_id": 12
+                },
+                "sections": []
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "title": "En savoir plus",
+        "position": 4,
+        "created_at": "2020-03-16 11:41:56",
+        "updated_at": "2020-03-16 11:41:56",
+        "contents": [
+            {
+                "id": 13,
+                "title": "Qui sommes nous ?",
+                "url": "\/contenu\/13",
+                "type": "CONTENT",
+                "created_at": "2020-03-16 11:47:03",
+                "updated_at": "2020-03-16 11:47:03",
+                "pivot": {
+                    "footer_element_id": 4,
+                    "content_id": 13
+                },
+                "sections": [
+                    {
+                        "id": 23,
+                        "title": "Actypoles-Thiers \/ B\u00e9b\u00e9s Lutins, une entreprise \u00e0 but d\u2019emploi",
+                        "text": "Les couches lavables \u00ab B\u00e9b\u00e9s Lutins \u00bb n\u00e9es en 2006 \u00e0 Lachaux, sont d\u00e9sormais confectionn\u00e9es au sein d'Actypoles-Thiers.<br>\nActypoles-Thiers est une Soci\u00e9t\u00e9 Coop\u00e9rative d\u2019Int\u00e9r\u00eat Collectif (SCIC-SAS) issue de la loi exp\u00e9rimentale du 29 f\u00e9vrier 2016 \u00ab Territoires z\u00e9ro ch\u00f4meur de longue dur\u00e9e\u00bb initi\u00e9e par le mouvement ATD Quart Monde. Dix territoires en France exp\u00e9rimentent une autre fa\u00e7on de lutter contre le ch\u00f4mage de longue dur\u00e9e en permettant aux personnes priv\u00e9es d\u2019emploi, volontaires pour travailler d\u2019exercer leur activit\u00e9 souhait\u00e9e en CDI \u00e0 temps choisi.<br>\nC\u2019est ainsi que B\u00e9b\u00e9s Lutins a repris son chemin !<br>\n<br>\n<i>Apr\u00e8s avoir \u00e9t\u00e9 form\u00e9es par les cr\u00e9ateurs de B\u00e9b\u00e9s Lutins, ce sont aujourd\u2019hui 7 couturi\u00e8res qui confectionnent les couches lavables et accessoires B\u00e9b\u00e9s Lutins.<\/i><br>",
+                        "content_id": 13,
+                        "created_at": "2020-03-16 15:00:05",
+                        "updated_at": "2020-03-16 15:00:05"
+                    },
+                    {
+                        "id": 24,
+                        "title": "Couches lavables fran\u00e7aises",
+                        "text": "Fort de son exp\u00e9rience, B\u00e9b\u00e9s Lutins a soigneusement choisi ses tissus pour vous proposer des couches lavables \u00e9cocitoyennes, durables, efficaces et saines pour vos enfants.<br>\n<br>\nConfectionn\u00e9es dans notre atelier au c\u0153ur de l'Auvergne, nos couches lavables sont fran\u00e7aises. Tous nos produits sont propos\u00e9s aux particuliers et aux collectivit\u00e9s.<br>\nN\u2019h\u00e9sitez pas \u00e0 nous rendre visite, nous vous recevrons avec plaisir sur rendez-vous pour que vous puissiez d\u00e9couvrir les couches lavables et autres accessoires B\u00e9b\u00e9s Lutins.<br>\nB\u00e9b\u00e9s Lutins propose des couches lavables modernes et pratiques ! Elastiqu\u00e9es \u00e0 la taille et aux cuisses, fermeture \u00e0 pressions, nos couches lavables s\u2019adaptent \u00e0 la morphologie de b\u00e9b\u00e9. Si certaines couches classiques s\u2019utilisent avec une culotte de protection souple et imperm\u00e9able, d\u2019autres int\u00e9grales \u00ab tout en deux \u00bb sont compl\u00e8tes et se rapprochent de la facilit\u00e9 d\u2019utilisation de couches jetables.",
+                        "content_id": 13,
+                        "created_at": "2020-03-16 15:00:36",
+                        "updated_at": "2020-03-16 15:00:36"
+                    }
+                ]
+            },
+            {
+                "id": 14,
+                "title": "Pourquoi les couches lavables ?",
+                "url": "\/contenu\/14",
+                "type": "CONTENT",
+                "created_at": "2020-03-16 11:47:11",
+                "updated_at": "2020-03-16 11:47:11",
+                "pivot": {
+                    "footer_element_id": 4,
+                    "content_id": 14
+                },
+                "sections": [
+                    {
+                        "id": 25,
+                        "title": "",
+                        "text": "La r\u00e9duction des d\u00e9chets est devenue une priorit\u00e9 dans notre soci\u00e9t\u00e9 de consommation. Or les couches jetables repr\u00e9sentent un \u00e9norme g\u00e2chis pour l\u2019environnement ! B\u00e9b\u00e9s Lutins vous propose de r\u00e9duire les d\u00e9chets li\u00e9s aux changes de b\u00e9b\u00e9.",
+                        "content_id": 14,
+                        "created_at": "2020-03-16 15:00:53",
+                        "updated_at": "2020-03-16 15:00:53"
+                    },
+                    {
+                        "id": 26,
+                        "title": "Le saviez vous ?",
+                        "text": "Pendant les 2 ans et demi en moyenne qu\u2019il faut \u00e0 un enfant pour acqu\u00e9rir la propret\u00e9, les quelques 5000 couches jet\u00e9es aux ordures m\u00e9nag\u00e8res repr\u00e9sentent plus d\u2019une tonne de d\u00e9chets, soit un volume de 30 m3 ! (l\u2019\u00e9quivalent d\u2019une chambre de b\u00e9b\u00e9). D\u00e9chets qui seront incin\u00e9r\u00e9s ou enfouis et qui mettront plus de 300 ans pour se d\u00e9composer ! B\u00e9b\u00e9s Lutins vous propose des couches saines et confortables pour b\u00e9b\u00e9, confectionn\u00e9es dans notre atelier.<br>\n<br>\nSachez aussi qu\u2019en utilisant les couches lavables, vous r\u00e9duisez la consommation d\u2019eau, d\u2019\u00e9lectricit\u00e9, et de bois. Vous \u0153uvrez ainsi pour le respect de la biodiversit\u00e9 ! Envie de vous y mettre ? Rendez-vous dans notre rubrique \u00ab <a href=\"\/contenu\/17\">comment s\u2019\u00e9quiper<\/a> \u00bb.<br>",
+                        "content_id": 14,
+                        "created_at": "2020-03-16 15:01:41",
+                        "updated_at": "2020-03-16 15:01:41"
+                    }
+                ]
+            },
+            {
+                "id": 15,
+                "title": "Entretien des couches lavables",
+                "url": "\/contenu\/15",
+                "type": "CONTENT",
+                "created_at": "2020-03-16 11:47:24",
+                "updated_at": "2020-03-16 11:47:24",
+                "pivot": {
+                    "footer_element_id": 4,
+                    "content_id": 15
+                },
+                "sections": [
+                    {
+                        "id": 27,
+                        "title": "Avant la premi\u00e8re utilisation",
+                        "text": "Pour un entretien id\u00e9al de vos couches lavables, il est recommand\u00e9 de les laisser tremper pendant une douzaine d'heures dans de l'eau froide afin de faire gonfler les fibres, de bien les d\u00e9barrasser de l\u2019appr\u00eat de tissage et les rendre plus absorbantes. Ne vous inqui\u00e9tez pas si des traces de couleurs apparaissent, nous dessinons nos patrons avec des feutres non toxiques et lavables, d\u00e8s le premier lavage tout sera parti.<br>\n<br>\nIl faut savoir qu\u2019elles n\u2019atteindront leur absorption maximale qu\u2019apr\u00e8s une dizaine de lavages (comme c\u2019est le cas pour les serviettes de bain par exemple). Il est donc conseill\u00e9 de laver 2 fois vos couches avant leur premi\u00e8re utilisation et de changer votre enfant un peu plus fr\u00e9quemment au d\u00e9but.<br>",
+                        "content_id": 15,
+                        "created_at": "2020-03-16 15:02:49",
+                        "updated_at": "2020-03-16 15:02:49"
+                    },
+                    {
+                        "id": 28,
+                        "title": "Stockage des couches souill\u00e9es",
+                        "text": "\u00ab <strong>Stockage \u00e0 sec<\/strong> \u00bb, c'est-\u00e0-dire : Apr\u00e8s utilisation, les couches seront stock\u00e9es dans un seau, sans eau, avec un couvercle.<br>\nVous pouvez pulv\u00e9riser notre \u00ab spray N\u00e9obulle \u00bb sp\u00e9cial couches, directement dans le seau ou sur la couche, les huiles essentielles sont dilu\u00e9es et donc sans danger pour la peau. Attention \u00e0 ne pas stocker vos couches au-del\u00e0 de 3 jours au risque de les d\u00e9t\u00e9riorer.<br>\nLes huiles essentielles ont des propri\u00e9t\u00e9s d\u00e9sinfectantes et d\u00e9sodorisantes.<br>\nVous pouvez disposer un filet pour r\u00e9cup\u00e9rer ais\u00e9ment les couches souill\u00e9es avant de les mettre dans le lave-linge.",
+                        "content_id": 15,
+                        "created_at": "2020-03-16 15:03:41",
+                        "updated_at": "2020-03-16 15:03:41"
+                    },
+                    {
+                        "id": 29,
+                        "title": "Les selles",
+                        "text": "Il existe des voiles non-tiss\u00e9s sp\u00e9cifiques, permettant de \u00ab r\u00e9cup\u00e9rer \u00bb les selles.<br>\nVous en trouverez deux sortes :<br>\n<ul>\n<li>Le voile \u00e9pais (en rouleau) qui est conseill\u00e9 pour les selles molles des b\u00e9b\u00e9s allait\u00e9s.<\/li>\n<li>Le voile fin (en bo\u00eete) lorsque les selles sont plus compactes.<\/li>\n<\/ul>\nCes deux voiles papiers peuvent \u00eatre lav\u00e9s au moins 3 fois avec vos couches s\u2019ils sont juste mouill\u00e9s. Attention risque de passage dans le filtre sur certaines machines, n\u2019h\u00e9sitez pas \u00e0 les glisser dans un filet ! Sur les boites il est indiqu\u00e9 que l\u2019on peut les jeter directement dans les toilettes, surtout ne pas le faire pour les fosses septique ! <br>\n\u00c9vitez de le faire trop souvent pour le \u00ab tout \u00e0 l\u2019\u00e9gout \u00bb, notamment si les canalisations sont \u00e9troites, et pr\u00e9f\u00e9rez la poubelle s\u2019ils sont justes mouill\u00e9s.<br>\nSachez aussi que si vous utilisez des voiles \u00ab micro-polaire \u00bb qui procurent un effet \u00ab b\u00e9b\u00e9 au sec \u00bb, les selles adh\u00e8rent peu et il suffit souvent de secouer le voile au-dessus des toilettes avant de le passer au lavage-linge. Cela convient bien lorsque b\u00e9b\u00e9 \u00e0 des selles compactes.",
+                        "content_id": 15,
+                        "created_at": "2020-03-16 15:04:38",
+                        "updated_at": "2020-03-16 15:04:38"
+                    },
+                    {
+                        "id": 30,
+                        "title": "Le lavage",
+                        "text": "Vous pouvez laver les couches et culottes <b>de 40\u00b0C \u00e0 60\u00b0C<\/b> sans souci, mais pr\u00e9f\u00e9rez un lavage r\u00e9gulier <strong>\u00e0 40\u00b0C pour les culottes de protection<\/strong>. Les couches classiques, les enveloppes des \u00ab tout en un \u00bb et parties absorbantes peuvent quant \u00e0 elles passer \u00e0 60\u00b0C r\u00e9guli\u00e8rement sans souci.<br>\n<strong>Il ne faut absolument pas utiliser d\u2019adoucissant<\/strong>, il imperm\u00e9abilise les couches rapidement et cela engendre rapidement des fuites.<br>\nDe m\u00eame, <strong>\u00e9vitez les lessives grasses<\/strong> (lessives \u00e0 base de savon de Marseille qui contiennent de la glyc\u00e9rine) elles saturent les couches et les rendent inefficaces.<br>\nNous d\u00e9conseillons les huiles essentielles dans la machine \u00e0 laver, qui risquent de d\u00e9t\u00e9riorer les fibres.<br>\nIl est conseill\u00e9 d\u2019utiliser des produits d\u2019entretien doux, pour pr\u00e9server les fesses de b\u00e9b\u00e9 ainsi que vos couches (on trouve des lessives sans allerg\u00e8nes et sans phosphates).<br>\nNous conseillons vivement les lessives en poudre, ce sont celles qui se rincent le mieux tout en restant les plus efficaces pour l\u2019entretien des couches lavables.<br>\nAssurez-vous que vos couches soient toujours bien rinc\u00e9es, n\u2019h\u00e9sitez pas \u00e0 laver en cycle coton pour \u00e9liminer tous r\u00e9sidus de lessive.<br>\nLes couches classiques ainsi que les pans absorbants des TE1 peuvent passer au s\u00e8che-linge sur un cycle d\u00e9licat.<br>\nLes culottes en PUL (celles concernant le syst\u00e8me couche + culotte de protection) n\u2019ont pas besoin d\u2019\u00eatre lav\u00e9es \u00e0 chaque change. Il suffit de les a\u00e9rer, c\u2019est pourquoi il est conseill\u00e9 d\u2019en avoir au moins 3 par taille pour tourner sans souci. Vous pouvez les laver \u00e0 40\u00b0 (60\u00b0 maximum de temps en temps).<br>\n<br>\nRappel : <em>L\u2019utilisation du s\u00e8che-linge est d\u00e9conseill\u00e9e pour toutes les parties imperm\u00e9ables, utilisez le cycle d\u00e9licat si vous passez les \u00e9l\u00e9ments absorbants.<\/em>",
+                        "content_id": 15,
+                        "created_at": "2020-03-16 15:07:10",
+                        "updated_at": "2020-03-16 15:07:10"
+                    }
+                ]
+            },
+            {
+                "id": 16,
+                "title": "Mode d'emploi des couches lavables",
+                "url": "\/contenu\/16",
+                "type": "CONTENT",
+                "created_at": "2020-03-16 11:47:36",
+                "updated_at": "2020-03-16 11:47:36",
+                "pivot": {
+                    "footer_element_id": 4,
+                    "content_id": 16
+                },
+                "sections": []
+            },
+            {
+                "id": 17,
+                "title": "Comment s'\u00e9quiper ?",
+                "url": "\/contenu\/17",
+                "type": "CONTENT",
+                "created_at": "2020-03-16 11:47:47",
+                "updated_at": "2020-04-15 20:22:00",
+                "pivot": {
+                    "footer_element_id": 4,
+                    "content_id": 17
+                },
+                "sections": [
+                    {
+                        "id": 31,
+                        "title": "Les couches B\u00e9b\u00e9s Lutins",
+                        "text": "<p>B&eacute;b&eacute;s Lutins vous propose des couches lavables modernes et pratiques ! Elastiqu&eacute;es &agrave; la taille et aux cuisses, fermeture &agrave; pressions, les couches lavables B&eacute;b&eacute;s Lutins s&rsquo;adaptent &agrave; la morphologie de b&eacute;b&eacute;. Si certaines couches classiques s&rsquo;utilisent avec une culotte de protection souple et imperm&eacute;able, d&rsquo;autres int&eacute;grales &laquo; tout en un &raquo; sont compl&egrave;tes et se rapprochent de la facilit&eacute; d&rsquo;utilisation de couches jetables.<\/p>",
+                        "content_id": 17,
+                        "created_at": "2020-03-16 15:07:59",
+                        "updated_at": "2020-04-05 19:06:30"
+                    },
+                    {
+                        "id": 32,
+                        "title": "Combien de couches lavables ?",
+                        "text": "<p>B&eacute;b&eacute;s Lutins vous conseille <strong>entre 15 et 20 couches lavables<\/strong> pour un bon roulement avec des machines tous les 2-3 jours.<br \/>Si vous vous &eacute;quipez avec des couches classiques n&eacute;cessitant une culotte de protection, comptez au moins 3 culottes par taille. Celles-ci ne se lavent pas &agrave; chaque fois.<br \/><br \/><em>N&rsquo;h&eacute;sitez pas &agrave; consulter nos lots pour vous donner une id&eacute;e.<\/em><\/p>",
+                        "content_id": 17,
+                        "created_at": "2020-03-16 15:30:59",
+                        "updated_at": "2020-04-05 19:06:02"
+                    },
+                    {
+                        "id": 34,
+                        "title": "Question budget ?",
+                        "text": "<p>En plus de r&eacute;duire vos d&eacute;chets, vous r&eacute;duisez vos d&eacute;penses !<br \/>S&rsquo;&eacute;quiper pour tourner au quotidien en couches lavables vous co&ucirc;tera <strong>entre 400 et 600 &euro;<\/strong> suivant vos choix.<br \/>Pour information, les couches jetables que b&eacute;b&eacute; utilisera jusqu&rsquo;&agrave; sa propret&eacute; vous co&ucirc;teront en moyenne 1500 &euro; !<br \/>Alors m&ecirc;me en comptant 300 &euro; d&rsquo;entretien, lessive, eau, &eacute;lectricit&eacute;, voiles de protection, vous r&eacute;duisez tout de m&ecirc;me d&rsquo;un tiers voir de moiti&eacute; votre budget ! Et bien entendu, pour un deuxi&egrave;me b&eacute;b&eacute; vous &eacute;conomisez encore plus !<br \/><br \/><em>Pensez aussi &laquo; lingettes lavables &raquo; ! Pratiques, douces et souples elles se lavent facilement avec le reste de votre linge.<\/em><\/p>",
+                        "content_id": 17,
+                        "created_at": "2020-03-16 15:33:49",
+                        "updated_at": "2020-04-05 19:06:02"
+                    }
+                ]
+            },
+            {
+                "id": 18,
+                "title": "Nos revendeurs",
+                "url": "\/contenu\/18",
+                "type": "CONTENT",
+                "created_at": "2020-03-16 11:47:57",
+                "updated_at": "2020-03-16 11:47:57",
+                "pivot": {
+                    "footer_element_id": 4,
+                    "content_id": 18
+                },
+                "sections": [
+                    {
+                        "id": 35,
+                        "title": "Rebelle de Nature",
+                        "text": "Hotel d'entreprise<br>\nPlace Michel Paulus - \u00c9cosite du Val de Dr\u00f4me<br>\n26400 Eurre<br>\n<a class=\"btn btn-outline-dark py-1 my-1\" href=\"https:\/\/www.rebelledenature.com\/\">Site web<\/a>",
+                        "content_id": 18,
+                        "created_at": "2020-03-16 15:37:36",
+                        "updated_at": "2020-03-16 15:37:36"
+                    },
+                    {
+                        "id": 36,
+                        "title": "Lieu'topie",
+                        "text": "21 Rue Kessler<br>\n63000 Clermont-Ferrand<br>\n<em>Achats r\u00e9serv\u00e9s aux \u00e9tudiants.<\/em><br>\n<a class=\"btn btn-outline-dark py-1 my-1\" href=\"https:\/\/www.lieutopie-clermont.org\/\">Site web<\/a>",
+                        "content_id": 18,
+                        "created_at": "2020-03-16 15:38:02",
+                        "updated_at": "2020-03-16 15:38:02"
+                    },
+                    {
+                        "id": 37,
+                        "title": "L'Ingr\u00e9dient",
+                        "text": "8 rue Burnol<br>\n03200 Vichy<br>\n<a class=\"btn btn-outline-dark py-1 my-1\" href=\"https:\/\/www.facebook.com\/lingredient03\/\">Page facebook<\/a>",
+                        "content_id": 18,
+                        "created_at": "2020-03-16 15:38:21",
+                        "updated_at": "2020-03-16 15:38:21"
+                    }
+                ]
+            }
+        ]
+    }
+]

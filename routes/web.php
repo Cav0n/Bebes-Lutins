@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Route; // Fix for VS Code
 
 Route::get('/', 'MainController@index')->name('homepage');
 
-
 /**
  * ============
  * AUTH

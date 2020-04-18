@@ -1,5 +1,7 @@
 <?php
 
+use App\FooterElement;
+use App\Http\Controllers\FooterElementController;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -77,3 +79,7 @@ Artisan::command('bebes-lutins:install', function() {
     shell_exec('composer install --optimize-autoloader --no-dev');
 
 })->describe('Install the website');
+
+Artisan::command('content:generate', function() {
+    FooterElementController::createFromLocalJSON();
+})->describe('Generate all contents');

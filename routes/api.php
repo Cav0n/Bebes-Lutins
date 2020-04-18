@@ -20,6 +20,7 @@ Route::post('/cart_item/{cartItem}/quantity/update', 'CartItemController@update'
 Route::get('/order/{order}/status/update/modal', 'OrderController@getUpdateModal')->name('api.order.status.update.modal');
 Route::post('/order/{order}/status/update', 'OrderController@update')->name('api.order.status.update');
 Route::post('/cart/comment/add', 'CartController@addComment')->name('api.cart.comment.add');
+Route::post('/category/{category}/rank/update', 'CategoryController@updateRank')->name('api.category.rank.update');
 
 // IMPORTS
 Route::get('/images/import', 'ImageController@importFromJSON')->name('api.images.import');

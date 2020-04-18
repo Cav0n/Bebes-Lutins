@@ -64,7 +64,7 @@
                             </td>
                             <td class='text-center d-none d-xl-table-cell'>
                                 <div class="form-group mb-0">
-                                    <select class="custom-select status-select" name="status" data-orderid="{{ $order->id }}" style='background-color: {{ $order->statusColor }}'>
+                                    <select id="status-select-{{ $order->id }}" class="custom-select status-select" name="status" data-orderid="{{ $order->id }}" style='background-color: {{ $order->statusColor }}'>
                                         <option value='WAITING_PAYMENT' @if('WAITING_PAYMENT' === $order->status) selected @endif>
                                             En attente de paiement</option>
                                         <option value='PROCESSING' @if('PROCESSING' === $order->status) selected @endif>
@@ -112,6 +112,10 @@
         </div>
     </div>
 
+    <div id="modal-container">
+
+    </div>
+
 @endsection
 
 @section('scripts')
@@ -121,8 +125,13 @@
         $('.status-select').change(function(){
             orderId = $(this).data('orderid');
             status = $(this).children('option:selected').val();
+            $('#change-status-modal').remove();
 
-            updateOrder($(this), orderId, status);
+            getStatusChangeModal(orderId, status, $(this).attr('id'));
+
+            $('#change-status-modal').modal('show');
+
+            //updateOrder($(this), orderId, status);
         });
 
         function updateOrder(select, orderId, status) {
@@ -152,5 +161,24 @@
                 });
             });
         }
+    </script>
+
+    <script>
+        function getStatusChangeModal(orderId, newStatus, selectId) {
+            var errorFeedbackHtml = "<div class='invalid-feedback'>__error__</div>"
+
+            fetch("/api/order/" + orderId + "/status/update/modal/?newStatus=" + newStatus + "&selectId=" + selectId)
+            .then(response => response.json())
+            .then(response => {
+                if (undefined !== response.error){
+                    throw response.error;
+                }
+
+                $('#modal-container').append(response.modal);
+            }).catch((error) => {
+                console.error(error);
+            });
+        }
+
     </script>
 @endsection

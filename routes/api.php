@@ -17,6 +17,7 @@ Route::get('/products', 'ProductController@apiIndex')->name('api.products');
 Route::get('/product/{product}', 'ProductController@apiGet')->name('api.product');
 Route::get('/order/tracking/{trackingNumber}', 'OrderController@tracking')->name('api.order.tracking');
 Route::post('/cart_item/{cartItem}/quantity/update', 'CartItemController@update')->name('api.cart_item.quantity.update');
+Route::get('/order/{order}/status/update/modal', 'OrderController@getUpdateModal')->name('api.order.status.update.modal');
 Route::post('/order/{order}/status/update', 'OrderController@update')->name('api.order.status.update');
 Route::post('/cart/comment/add', 'CartController@addComment')->name('api.cart.comment.add');
 

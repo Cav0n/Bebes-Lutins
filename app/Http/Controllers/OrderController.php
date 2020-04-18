@@ -270,7 +270,29 @@ class OrderController extends Controller
 
         $order->save();
 
+        if ($request['mail']) {
+            // Send email
+        }
+
         return new JsonResponse(['message' => 'ok', 'color' => $order->statusColor], 200);
+    }
+
+    public function getUpdateModal(Request $request, Order $order)
+    {
+        if (null !== $order = Order::where('id', $order->id)->first()){
+            $newOrder = $order->replicate();
+            $newOrder->status = $request['newStatus'];
+
+            return JsonResponse::create(['modal' => View::make('components.modal.change_order_status', [
+                                                        'order' => $order,
+                                                        'newOrder' => $newOrder,
+                                                        'selectId' => $request['selectId']
+                                                    ])
+                                                    ->render(),
+                                        'modalID' => 'change-status-modal']);
+        }
+
+        return JsonResponse::create(['error' => ['message' => trans('messages.There is no order with this ID.')] ]);
     }
 
     /**

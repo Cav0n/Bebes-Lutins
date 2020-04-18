@@ -63,3 +63,17 @@ Artisan::command('carts:reset', function() {
 
     echo 'Carts reseted!';
 })->describe('Reset all shopping carts');
+
+Artisan::command('bebes-lutins:install', function() {
+    shell_exec('composer install');
+    shell_exec('php artisan migrate:fresh');
+    shell_exec('php artisan import:all');
+    shell_exec('php artisan import:settings');
+    shell_exec('php artisan db:seed --class=CarouselItemSeeder');
+    shell_exec('php artisan carts:reset');
+    shell_exec('php artisan config:cache');
+    shell_exec('php artisan route:cache');
+    shell_exec('php artisan view:cache');
+    shell_exec('composer install --optimize-autoloader --no-dev');
+
+})->describe('Install the website');

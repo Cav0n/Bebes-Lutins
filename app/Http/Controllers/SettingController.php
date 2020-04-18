@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Setting;
+use App\SettingsI18n;
 use Illuminate\Http\Request;
 
 /**
@@ -114,5 +115,40 @@ class SettingController extends Controller
     public function destroy(Setting $setting)
     {
         //
+    }
+
+    /**
+     * Generate all settings from JSON in /config/settings.json
+     *
+     * @return void
+     */
+    public function generateAll()
+    {
+        $path = \base_path() . "/config/settings.json";
+
+        $json = json_decode(file_get_contents($path), true);
+
+        foreach ($json['settings'] as $value) {
+            $setting = new Setting();
+
+            $setting->type = $value['type'];
+            $setting->key = $value['key'];
+            $setting->value = $value['value'];
+
+            $setting->save();
+
+            foreach ($value['i18n'] as $valueI18n) {
+                $settingI18n = new SettingsI18n();
+
+                $settingI18n->setting_id = $setting->id;
+                $settingI18n->locale = $valueI18n['locale'];
+                $settingI18n->title = $valueI18n['title'];
+                $settingI18n->help = $valueI18n['help'];
+
+                $settingI18n->save();
+            }
+        }
+
+        echo "All settings has been imported, congrats !";
     }
 }

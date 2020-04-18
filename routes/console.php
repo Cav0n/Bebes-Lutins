@@ -18,7 +18,7 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
 
-Artisan::command('import:all', function() {
+Artisan::command('import:all', function () {
     $productController = new \App\Http\Controllers\ProductController();
     $productController->importFromJSON();
     $productController->importImagesFromJSON();
@@ -45,3 +45,8 @@ Artisan::command('import:all', function() {
 
     echo 'Everything imported, enjoy 👨‍💻 \n';
 })->describe('Import all data from previous version');
+
+Artisan::command('import:settings', function () {
+    $settingController = new \App\Http\Controllers\SettingController;
+    $settingController->generateAll();
+})->describe('Import all settings from /config/settings.json');

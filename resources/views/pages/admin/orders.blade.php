@@ -30,10 +30,13 @@
                     <tr>
                         <th class="d-none d-md-table-cell">ID</th>
                         <th class='d-none d-sm-table-cell text-center'>Date</th>
-                        <th>Client</th>
+                        <th class="d-none d-md-table-cell">Client</th>
                         <th class="d-none d-sm-table-cell">Prix</th>
                         <th class="d-none d-lg-table-cell">Numéro de suivi</th>
                         <th class='text-center d-none d-xl-table-cell'>Status</th>
+                        {{-- Mobile --}}
+                        <th class="d-table-cell d-sm-none">Commande</th>
+                        {{-- ------ --}}
                         <th></th>
                     </tr>
                     </thead>
@@ -45,7 +48,7 @@
                                 {{ $order->created_at->format('d/m/Y') }}
                                 <br> {{ $order->created_at->format('H:i') }}
                             </td>
-                            <td>
+                            <td class="d-none d-md-table-cell">
                                 <b>{{ ucfirst($order->billingAddress->minCivilityI18n) . ' ' .
                         $order->billingAddress->firstname . ' ' .
                         $order->billingAddress->lastname }}</b>
@@ -81,6 +84,19 @@
                                     </select>
                                 </div>
                             </td>
+                            {{-- Mobile --}}
+                            <td class="d-table-cell d-sm-none">
+                                {{ $order->created_at->format('d/m/Y') }} à {{ $order->created_at->format('H:i') }} <br>
+                                {!! $order->statusTag !!} <br>
+                                <b>{{ ucfirst($order->billingAddress->minCivilityI18n) . ' ' .
+                                    $order->billingAddress->firstname . ' ' .
+                                    $order->billingAddress->lastname }}</b> <br>
+                                {{ \App\NumberConvertor::doubleToPrice($order->totalPrice) }}
+                                @if(0 < $order->shippingCosts)
+                                    ( <small>Dont {{ \App\NumberConvertor::doubleToPrice($order->shippingCosts) }} de fdp</small> )
+                                @endif
+                            </th>
+                            {{-- ------ --}}
                             <td class='text-right'>
                                 <a class="btn btn-outline-dark" href="{{ route('admin.order.show', ['order' => $order]) }}" role="button">Voir</a>
                             </td>

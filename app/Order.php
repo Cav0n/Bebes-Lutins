@@ -90,6 +90,11 @@ class Order extends Model
         }
     }
 
+    public function getStatusTagAttribute()
+    {
+        return '<span class="badge badge-pill" style="background-color: '.$this->statusColor .'">'.ucfirst($this->statusI18n) .'</span>';
+    }
+
     public function getPaymentMethodI18nAttribute($language = 'FR_fr'): string
     {
         return trans('order.payment_method.' . $this->paymentMethod);

@@ -24,8 +24,10 @@
             </select>
         </div>
         @else
-        <span class="badge badge-pill" style="background-color:{{ $order->statusColor }}">{{ ucfirst($order->statusI18n) }}</span></p>
+        <span class="badge badge-pill" style="background-color:{{ $order->statusColor }}">{{ ucfirst($order->statusI18n) }}</span>
         @endif
+
+        </p>
     </div>
 
     <div class="row mb-3">

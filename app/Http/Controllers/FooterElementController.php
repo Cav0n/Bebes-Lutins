@@ -75,7 +75,7 @@ class FooterElementController extends Controller
             }
         }
 
-        echo "All settings has been imported, congrats !";
+        echo "All contents has been created !";
     }
 
     /**

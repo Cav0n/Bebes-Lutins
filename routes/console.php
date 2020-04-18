@@ -2,6 +2,9 @@
 
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +53,13 @@ Artisan::command('import:settings', function () {
     $settingController = new \App\Http\Controllers\SettingController;
     $settingController->generateAll();
 })->describe('Import all settings from /config/settings.json');
+
+Artisan::command('carts:reset', function() {
+    exec('rm -rf ' . storage_path('framework/sessions/*'));
+    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+    DB::table('cart_items')->truncate();
+    DB::table('carts')->truncate();
+    DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+    echo 'Carts reseted!';
+})->describe('Reset all shopping carts');

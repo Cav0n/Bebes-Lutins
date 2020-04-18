@@ -18,7 +18,6 @@ class CheckShoppingCart
      */
     public function handle(Request $request, Closure $next)
     {
-        // session()->flush(); // Used in dev to test shopping cart
         session()->get('shopping_cart', function(){
 
             $user = null;

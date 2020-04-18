@@ -12,14 +12,19 @@ mod_rewrite has to be enabled :
 - sudo service apache2 restart
 
 ## Installation
-- composer install
-- npm install
-- npm run dev
+- `composer install`
+- `npm install`
+- `npm run dev`
+- `php artisan migrate:fresh`
+- `php artisan db:seed --class=CarouselItemSeeder`
+- `php artisan import:all`
+- `php artisan import:settings`
+- `php artisan content:generate`
 
 ## Telescope (debugger)
-- composer require laravel/telescope
-- php artisan telescope:install
-- php artisan migrate
+- `composer require laravel/telescope`
+- `php artisan telescope:install`
+- `php artisan migrate`
 - uncomment this in app/Providers/AppServiceProvider.php - register(): 
 ```
 if ($this->app->isLocal()) {
@@ -30,3 +35,9 @@ if ($this->app->isLocal()) {
 ```
 App\Providers\TelescopeServiceProvider::class,
 ```
+
+## Production
+- `composer install --optimize-autoloader --no-dev`
+- `composer install --optimize-autoloader --no-dev`
+- `composer install --optimize-autoloader --no-dev`
+- `composer install --optimize-autoloader --no-dev`

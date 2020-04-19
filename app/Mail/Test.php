@@ -11,17 +11,16 @@ class Test extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $headerImage = [];
+    protected $title = '';
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($title = '')
     {
-        $this->headerImage['url'] = 'images/utils/emails/email-header.jpg';
-        $this->headerImage['alt'] = 'Un peu de fraicheur chez Bébés Lutins';
+        $this->title = $title;
     }
 
     /**
@@ -31,6 +30,6 @@ class Test extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.tests.test', ['headerImage' => $this->headerImage]);
+        return $this->view('mails.tests.first', ['title' => $this->title]);
     }
 }

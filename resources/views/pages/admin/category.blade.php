@@ -27,12 +27,18 @@
     </div>
     @endif
 
+    <div class="row justify-content-between mx-0">
+        <a class="btn btn-dark mb-3" href="{{ route('admin.categories') }}" role="button">
+            < Catégories</a>
+
+        @if(isset($category)) <a class="btn btn-outline-secondary" href="{{ route('category', ['category' => $category]) }}" role="button">Voir la catégorie</a> @endif
+    </div>
+
     <div class="card rounded-0 border shadow-sm">
         <div class="card-header">
             <h2 class="h4 mb-0">{{ $category->name }}</h2>
         </div>
         <div class="card-body">
-            <a href='{{ route('admin.categories') }}' class='text-dark'>< Catégories</a>
             <form action="{{ route('admin.category.edit', ['category' => $category]) }}" method="post">
                 @csrf
 

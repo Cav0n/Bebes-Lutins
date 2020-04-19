@@ -12,6 +12,14 @@
     </div>
     @endif
 
+    <div class="row justify-content-between mx-0">
+        <a class="btn btn-dark mb-3" href="{{ route('admin.contents') }}" role="button">
+            < Contenus</a>
+
+        @if(isset($content) && "CONTENT" === $content->type) <a class="btn btn-outline-secondary" href="{{ route('content.show', ['content' => $content]) }}" role="button">
+            Voir le contenu</a> @endif
+    </div>
+
     @if(!empty($errors->any()))
         <div class="alert alert-danger" role="alert">
             @foreach ($errors->all() as $error)
@@ -25,7 +33,6 @@
             <h2 class="h4 mb-0">{{ isset($content) ? $content->title : 'Création d\'un produit' }}</h2>
         </div>
         <div class="card-body">
-            <a href='{{ route('admin.contents') }}' class='text-dark'>< Contenus</a>
             <form method="post" action="{{ isset($content) ? route('admin.content.edit', ['content' => $content]) : route('admin.content.create') }}" >
                 @csrf
 

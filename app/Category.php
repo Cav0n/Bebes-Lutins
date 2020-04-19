@@ -13,8 +13,8 @@ class Category extends Model
      * FOR STRING PRIMARY KEY
      */
     protected $primaryKey = 'id';
-    public $incrementing = false;
     protected $keyType = 'string';
+    public $incrementing = false;
 
     /**
      * Products that belong to the category.
@@ -54,6 +54,26 @@ class Category extends Model
         }
 
         $breadcrumb = "/ <a href='/'>Accueil</a> / " . $breadcrumb;
+
+        return $breadcrumb;
+    }
+
+    public function getAdminBreadcrumbAttribute()
+    {
+        $route = route('admin.category.edit', ['category' => $this->id]);
+        $breadcrumb = "<a href='$route'>".$this->name."</a>";
+
+        $parent = $this->parent;
+
+        while ($parent != null) {
+            $route = route('admin.categories', ['parent' => $parent]);
+            $breadcrumb = "<a href='$route'>" . $parent->name . '</a> / ' . $breadcrumb;
+
+            $parent = $parent->parent;
+        }
+
+        $route = route('admin.categories');
+        $breadcrumb = "/ <a href='$route'>Catégories</a> / " . $breadcrumb;
 
         return $breadcrumb;
     }

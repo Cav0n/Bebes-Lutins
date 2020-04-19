@@ -29,7 +29,7 @@ class Product extends Model
      */
     public function images()
     {
-        return $this->belongsToMany('App\Image');
+        return $this->belongsToMany('App\Image')->withPivot('rank');
     }
 
     /**

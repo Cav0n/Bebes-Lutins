@@ -2,9 +2,11 @@
 
 @section('content')
 
+{!! isset($parent) ? "<p>".$parent->adminBreadcrumb."</p>" : null !!}
+
 <div class="card rounded-0 border shadow-sm">
     <div class="card-header">
-        <h2 class="h4 mb-0">Catégories</h2>
+        <h2 class="h4 mb-0">{{ isset($parent) ? $parent->name : 'Catégories' }}</h2>
     </div>
     <div class="card-body">
         <form action="{{ route('admin.search.categories') }}" class="input-group" method="GET">

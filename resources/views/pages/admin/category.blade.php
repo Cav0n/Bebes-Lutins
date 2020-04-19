@@ -27,6 +27,8 @@
     </div>
     @endif
 
+    <p>{!! $category->adminBreadcrumb !!}</p>
+
     <div class="row justify-content-between mx-0">
         <a class="btn btn-dark mb-3" href="{{ route('admin.categories') }}" role="button">
             < Catégories</a>

@@ -30,6 +30,28 @@
                 id="images-upload" enctype="multipart/form-data" method="POST">
             @csrf
             </form>
+
+            <div class="images-container row">
+                @foreach ($product->images as $image)
+                    <div class="col-1 mt-3">
+                        <img class="w-100" src="{{ asset($image->url) }}" alt="{{ $image->name }}">
+                    </div>
+                    <div class="col-5 mt-3">
+                        <div class="row">
+                            <div class="col-3">
+                                <input type="number" class="form-control" name="image[{{ $image->id }}]['rank']" id="image[{{ $image->id }}]['rank']" value="{{ $image->pivot->rank }}">
+                            </div>
+                            <div class="col-9">
+                                <input type="text" class="form-control" name="image[{{ $image->id }}]['name']" id="image[{{ $image->id }}]['name']" value="{{ $image->name }}">
+                            </div>
+                        </div>
+
+                        <div class="row mx-0">
+                            <a class="btn btn-danger mt-2 py-0 px-2 ml-auto" href="#" role="button">Supprimer</a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
 

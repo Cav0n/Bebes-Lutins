@@ -41,7 +41,9 @@ class CategoryController extends Controller
                                     ->orderBy('rank', 'asc')
                                     ->paginate(15);
 
-        return view('pages.admin.categories', ['categories' => $categories]);
+        $parent = isset($parent) ? Category::where('id', $parent)->first() : null;
+
+        return view('pages.admin.categories', ['categories' => $categories, 'parent' => $parent]);
     }
 
     /**

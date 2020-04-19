@@ -56,4 +56,9 @@ class MainController extends Controller
     {
         return abort(404);
     }
+
+    public function testMail()
+    {
+        return new \App\Mail\Test();
+    }
 }

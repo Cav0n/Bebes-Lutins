@@ -39,3 +39,6 @@ Route::get('/footer_elements/all', 'FooterElementController@indexJSON')->name('a
 Route::get('/analytics/count', 'Admin\AnalyticsController@analyticCount')->name('api.analytics.count');
 Route::get('/analytics/sales', 'Admin\AnalyticsController@sales')->name('api.analytics.sales');
 Route::get('/analytics/visits', 'Admin\AnalyticsController@visits')->name('api.analytics.visits');
+
+// TESTS
+Route::get('/mails/test', 'MainController@testMail')->name('api.mails.test');

@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1">
 <title>@yield('title', 'Bébés Lutins')</title>
 </head>
 <body style="font-family:Gotham, 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color:#f0f2ea; margin:0; padding:0; color:#333333;">
@@ -11,7 +12,7 @@
         <tr>
             <td style="padding:15px 0;">
                 <!-- begin main block -->
-                <table cellpadding="0" cellspacing="0" width="608" border="0" align="center">
+                <table cellpadding="0" cellspacing="0" border="0" align="center">
                     <tbody>
                         <tr>
                             <td>
@@ -22,13 +23,15 @@
                                     Couches lavables écologiques fabriquées en France.
                                 </p>
                                 <!-- begin wrapper -->
-                                <table cellpadding="0" cellspacing="0" border="0" width="100%">
+                                <table cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#FFFFFF" style="max-width: 600px;">
                                     <tbody>
                                         <tr>
                                             <td colspan="3" rowspan="3" bgcolor="#FFFFFF" style="padding:0 0 30px;">
                                                 <!-- begin content -->
-                                                <img src="{{ asset('images/utils/emails/email-header.jpg') }}" width="600" height="400" alt="Un peu de fraicheur chez Bébés Lutins" style="display:block; border:0; margin:0 0 15px; background:#eeeeee;object-fit:cover;">
-                                                <p style="margin:0 30px 15px;; text-align:center; text-transform:uppercase; font-size:24px; line-height:30px; font-weight:bold; color:#484a42;">
+                                                @if(isset($headerImage) && is_array($headerImage))
+                                                <img src="{{ asset($headerImage['url']) }}" width="600" height="400" alt="{{ $headerImage['alt'] }}" style="display:block; border:0; margin:0 0 15px; background:#eeeeee;object-fit:cover;">
+                                                @endif
+                                                <p style="margin:15px 30px; text-align:center; text-transform:uppercase; font-size:24px; line-height:30px; font-weight:bold; color:#484a42;">
                                                     @yield('mail-title', 'Notification Bébés Lutins')
                                                 </p>
 

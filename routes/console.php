@@ -24,6 +24,12 @@ Artisan::command('inspire', function () {
 })->describe('Display an inspiring quote');
 
 Artisan::command('import:all', function () {
+    $importController = new \App\Http\Controllers\ImportController();
+    if (! $importController->testApi()) {
+        echo 'Importation API is not accessible (maybe desactivated) !';
+        return;
+    }
+
     $productController = new \App\Http\Controllers\ProductController();
     $productController->importFromJSON();
     $productController->importImagesFromJSON();

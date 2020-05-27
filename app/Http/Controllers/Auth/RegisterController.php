@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use Exception;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class RegisterController extends Controller
 {
@@ -71,7 +73,11 @@ class RegisterController extends Controller
         $newsletter = 0;
         if($data['newsletter']) $newsletter = 1;
 
-        Mail::to($data['email'])->send(new \App\Mail\UserRegistered());
+        try {
+            Mail::to($data['email'])->send(new \App\Mail\UserRegistered());
+        } catch (Exception $e) {
+            Log::error('MAIL ERROR : ' . $e->getMessage());
+        }
 
         return User::create([
             'firstname' => $data['firstname'],

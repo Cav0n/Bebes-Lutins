@@ -21,7 +21,11 @@
             success : function(data){
                 values = [];
                 dates = [];
-                data.max ? stepSize = Math.round(data.max / 5) : stepSize = null;
+                data.max ? stepSize = Math.round(data.max / 5) : stepSize = 1;
+
+                if (1 > stepSize) {
+                    stepSize = 1;
+                }
 
                 $.each(data, function(index, value){
                     if (undefined !== value.value && undefined !== value.date) {

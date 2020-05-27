@@ -44,6 +44,7 @@ class Install extends Command
         $this->info('Installing Bebes Lutins website, this might take a while.');
 
         $this->call('migrate:fresh');
+        $this->call('key:generate');
         $this->call('bebeslutins:import:old');
         $this->call('bebeslutins:settings:generate');
         $this->call('bebeslutins:contents:generate');

@@ -70,8 +70,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $newsletter = 0;
-        if($data['newsletter']) $newsletter = 1;
+        $newsletter = isset($data['newsletter']) ? 1 : 0;
 
         try {
             Mail::to($data['email'])->send(new \App\Mail\UserRegistered());

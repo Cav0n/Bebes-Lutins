@@ -28,13 +28,13 @@
     <form class="card-body" action="{{ isset($promoCode) ? route('admin.promoCode.update', ['promoCode' => $promoCode]) : route('admin.promoCode.store') }}" method="POST">
         @csrf
         <div class="row">
-            <div class="form-group col-8">
+            <div class="form-group col-md-8">
                 <label for="code">Code</label>
                 <input type="text" class="form-control" name="code" id="code" aria-describedby="helpCode" value="{{ old('code', isset($promoCode) ? $promoCode->code : null) }}">
                 <small id="helpCode" class="form-text text-muted">Le code que devra taper le client.</small>
             </div>
 
-            <div class="form-group col-4">
+            <div class="form-group col-md-4">
                 <label for="discountValue">Remise</label>
                 <div class="input-group">
                     <input type="number" class="form-control" name="discountValue" id="discountValue" min="0.01" step="0.01" value="{{ old('discountValue', isset($promoCode) ? $promoCode->discountValue : null) }}">
@@ -48,13 +48,13 @@
                 </div>
             </div>
 
-            <div class="form-group col-3">
+            <div class="form-group col-md-3">
                 <label for="maxUsage">Utilisation max par client</label>
                 <input type="number" min="0" step="1" class="form-control" name="maxUsage" id="maxUsage" aria-describedby="helpMaxUsage" value="{{ old('maxUsage', isset($promoCode) ? $promoCode->maxUsage : null) }}">
                 <small id="helpMaxUsage" class="form-text text-muted">Le nombre maximum d'utilisation par client.</small>
             </div>
 
-            <div class="form-group col-3">
+            <div class="form-group col-md-3">
                 <label for="minCartPrice">Prix minimum du panier</label>
                 <div class="input-group">
                     <input type="number" min="0" step="0.01" class="form-control" name="minCartPrice" id="minCartPrice" aria-describedby="helpMinCartPrice" value="{{ old('minCartPrice', isset($promoCode) ? $promoCode->minCartPrice : null) }}">
@@ -67,13 +67,13 @@
         </div>
 
         <div class="row">
-            <div class="form-group col-4">
+            <div class="form-group col-md-4">
                 <label for="minValidDate">Début de validité</label>
                 <input type="datetime-local" class="form-control" name="minValidDate" id="minValidDate" aria-describedby="helpMinValidDate" value="{{ old('minValidDate', isset($promoCode) ? $promoCode->minValidDate->format('Y-m-d\TH:i') : null) }}">
                 <small id="helpMinValidDate" class="form-text text-muted">Le code promo sera valide à partir de cette date.</small>
             </div>
 
-            <div class="form-group col-4">
+            <div class="form-group col-md-4">
                 <label for="maxValidDate">Fin de validité</label>
                 <input type="datetime-local" class="form-control" name="maxValidDate" id="maxValidDate" aria-describedby="helpMaxValidDate" value="{{ old('maxValidDate', isset($promoCode) ? $promoCode->maxValidDate->format('Y-m-d\TH:i') : null) }}">
                 <small id="helpMaxValidDate" class="form-text text-muted">Le code promo sera périmé à partir de cette date.</small>

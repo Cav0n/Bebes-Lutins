@@ -14,16 +14,23 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h3 class="h4 font-weight-bold">Mes commandes</h3>
+                        @if (count($orders) <= 0)
+
+                        <p class="mb-0">Vous n'avez passé aucune commande sur le site.</p>
+
+                        @else
+
                         @foreach ($orders as $order)
                             @include('components.utils.orders.mini', ['order' => $order])
                         @endforeach
 
-
-                        <div class="row mb-3">
+                        <div class="row">
                             <div class="col-12 d-flex justify-content-center">
                                 {{ $orders->links() }}
                             </div>
                         </div>
+
+                        @endif
                     </div>
                 </div>
             </div>

@@ -12,13 +12,20 @@
     </div>
     @endif
 
+    <div class="row justify-content-between mx-0">
+        <a class="btn btn-dark mb-3" href="{{ route('admin.products') }}" role="button">
+            < Produits</a>
+
+        @if(isset($product)) <a class="btn btn-outline-secondary" href="{{ route('product', ['product' => $product]) }}" role="button">Voir le produit</a> @endif
+    </div>
+
+
     <div class="card rounded-0 border shadow-sm">
         <div class="card-header pb-0">
             @include('components.utils.admin.product_header')
         </div>
 
         <div class="card-body">
-            <a href='{{ route('admin.products') }}' class='text-dark'>< Produits</a>
             <form method="post" action="{{ isset($product) ? route('admin.product.edit', ['product' => $product]) : route('admin.product.create') }}" >
                 @csrf
 

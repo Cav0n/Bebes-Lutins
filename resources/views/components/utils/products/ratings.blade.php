@@ -21,7 +21,7 @@
 
             <label class="mb-0" for="rating">Note</label>
             <div class="rating mb-2"></div>
-            <input id="mark" type="hidden" name="mark" value="{{ old('mark', 5) }}">
+            <input id="mark" class="review_mark" type="hidden" name="mark" value="{{ old('mark', 5) }}">
 
             <div class="form-group">
                 <label for="title">Titre du commentaire</label>
@@ -72,6 +72,6 @@
     $(".rating").rate(options);
 
     $(".rating").on("change", function(ev, data){
-        $('#mark').val(data.to);
+        $('.review_mark').val(data.to);
     });
 </script>

@@ -1,6 +1,5 @@
 <div class="d-flex justify-content-between">
     <h2 class="h4 mb-0 d-flex flex-column justify-content-center">{{ isset($product) ? $product->name : 'Création d\'un produit' }}</h2>
-    @if(isset($product)) <a class="btn btn-outline-secondary" href="{{ route('product', ['product' => $product]) }}" role="button">Voir le produit</a> @endif
 </div>
 
 @if (isset($product))

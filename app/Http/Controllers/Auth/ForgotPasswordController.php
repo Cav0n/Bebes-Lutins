@@ -7,6 +7,8 @@ use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
+use Exception;
 
 class ForgotPasswordController extends Controller
 {
@@ -42,7 +44,12 @@ class ForgotPasswordController extends Controller
             $user->passwordResetToken = $passwordResetToken;
             $user->save();
 
-            Mail::to($user->email)->send(new \App\Mail\PasswordResetToken($passwordResetToken));
+            try {
+                Mail::to($user->email)->send(new \App\Mail\PasswordResetToken($passwordResetToken));
+            } catch (Exception $e) {
+                Log::error('MAIL ERROR : ' . $e->getMessage());
+            }
+
 
             $response = [
                 'userId' => $user->id,

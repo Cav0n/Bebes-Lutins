@@ -57,56 +57,9 @@ class OrderController extends Controller
         echo $count . ' orders imported !' . "\n";
     }
 
-    public function integerStatusToStringStatus(int $status)
-    {
-        switch ($status) {
-            case 0:
-                return 'WAITING_PAYMENT';
-            break;
-            case 1:
-                return 'PROCESSING';
-            break;
-            case 2:
-                return 'DELIVERING';
-            break;
-            case 22:
-                return 'WITHDRAWAL';
-            break;
-            case 3:
-                return 'DELIVERED';
-            break;
-            case 33:
-                return 'REGISTERED_PARTICIPATION';
-            break;
-            case -1:
-                return 'CANCELED';
-            break;
-            case -2:
-                return 'REFUSED_PAYMENT';
-            break;
-            case -3:
-                return 'REFUSED_PAYMENT';
-            break;
-            default:
-                return 'STATUS_ERROR';
-            break;
-        }
-    }
 
-    public function integerPaymentMethodToStringPaymentMethod(int $paymentMethod)
-    {
-        switch ($paymentMethod) {
-            case 1:
-                return 'CARD';
-            break;
-            case 2:
-                return 'CHEQUE';
-            break;
-            default:
-                return 'PAYMENT_METHOD_ERROR';
-            break;
-        }
-    }
+
+
 
     public function showTrackingPage()
     {

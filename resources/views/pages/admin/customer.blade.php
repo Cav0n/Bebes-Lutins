@@ -2,13 +2,16 @@
 
 @section('content')
 
+<div class="row justify-content-between mx-0">
+    <a class="btn btn-dark mb-3" href="{{ route('admin.customers') }}" role="button">
+        < Clients</a>
+</div>
+
 <div class="card rounded-0 border shadow-sm">
     <div class="card-header">
         <h2 class="h4 mb-0">{{ $customer->firstname }} {{ $customer->lastname }}</h2>
     </div>
     <form class="card-body">
-        <a href='{{ route('admin.customers') }}' class='text-dark'>< Clients</a>
-
         <div class="row">
             <div class="col-12 col-md-6">
                 <div class="form-group">

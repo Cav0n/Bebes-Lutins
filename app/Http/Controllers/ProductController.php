@@ -79,7 +79,7 @@ class ProductController extends Controller
             $image->save();
 
             if (null !== $product = \App\Product::find($r->productId)) {
-                $product->images()->attach($image);
+                $product->images()->attach([$image->id => ['rank' => $count]]);
             }
             $count++;
         }

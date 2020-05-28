@@ -131,7 +131,7 @@ class OrderController extends Controller
         $order->billing_address_id = $request['billing_address_id'];
         $order->shipping_address_id = $request['shipping_address_id'];
         $order->user_id = $request['user_id'];
-        $order->voucher_id = $request['voucher_id'];
+        $order->promo_code_id = $request['promo_code_id'];
 
         $order->save();
     }
@@ -148,7 +148,7 @@ class OrderController extends Controller
         $order->billing_address_id = $cart->billingAddress->id;
         if ($cart->shippingAddress) $order->shipping_address_id = $cart->shippingAddress->id;
         if ($cart->user) $order->user_id = $cart->user->id;
-        $order->voucher_id = $cart->voucher_id;
+        $order->promo_code_id = $cart->promo_code_id;
         $order->comment = $cart->comment;
 
         $order->trackingNumber = uniqid();

@@ -42,6 +42,14 @@ class Order extends Model
         return $this->belongsTo('App\Address');
     }
 
+    /**
+     * PromoCode of the order
+     */
+    public function promoCode()
+    {
+        return $this->belongsTo('App\PromoCode');
+    }
+
     public function getTotalPriceAttribute()
     {
         $totalPrice = 0.0;

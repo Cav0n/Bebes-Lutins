@@ -25,7 +25,7 @@ class CreateOrdersTable extends Migration
             $table->bigInteger('billing_address_id')->unsigned();
             $table->bigInteger('shipping_address_id')->unsigned()->nullable();
             $table->bigInteger('user_id')->unsigned()->nullable();
-            $table->bigInteger('promo_code_id')->unsingned()->nullable();
+            $table->bigInteger('promo_code_id')->unsigned()->nullable();
 
             $table->foreign('user_id')
                     ->references('id')->on('users')

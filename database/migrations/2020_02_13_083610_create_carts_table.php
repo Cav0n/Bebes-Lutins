@@ -23,7 +23,7 @@ class CreateCartsTable extends Migration
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->bigInteger('billing_address_id')->unsigned()->nullable();
             $table->bigInteger('shipping_address_id')->unsigned()->nullable();
-            $table->string('promo_code_id')->nullable();
+            $table->bigInteger('promo_code_id')->unsingned()->nullable();
 
             $table->foreign('user_id')
                     ->references('id')->on('users')

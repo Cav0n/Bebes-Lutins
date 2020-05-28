@@ -29,6 +29,17 @@ class CartController extends Controller
         $this->alertMessage = \App\Setting::getValue('ALERT_MESSAGE_ACTIVATED') ? \App\Setting::getValue('ALERT_MESSAGE') : null;
     }
 
+    public function removePromoCode()
+    {
+        $cart = \App\Cart::where('id', Session::get('shopping_cart')->id)->first();
+
+        $cart->promo_code_id = null;
+        $cart->save();
+        session()->put('shopping_cart', $cart);
+
+        return back()->withInput()->with(['promoCodeSuccessMessage' => 'Le code a été retiré avec succés !']);
+    }
+
     /**
      * Display a listing of the resource.
      *

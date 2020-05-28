@@ -61,6 +61,9 @@
                 <a href='{{ route('admin.products', ['isHighlighted' => 1]) }}' class='mb-0
                     @if(url()->current() == route('admin.products') && request('isHighlighted') == 1) active @endif'>
                     Mis en avant</a>
+                <a href='{{ route('admin.promoCodes') }}' class='mb-0
+                    @if(url()->current() == route('admin.promoCodes')) active @endif'>
+                    Codes promo</a>
             </div>
         </div>
 

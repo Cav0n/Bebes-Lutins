@@ -41,6 +41,14 @@ class Cart extends Model
         return $this->belongsTo('App\Address');
     }
 
+    /**
+     * PromoCode of the cart
+     */
+    public function promoCode()
+    {
+        return $this->belongsTo('App\PromoCode');
+    }
+
     public function getTotalQuantityAttribute()
     {
         $totalQuantity = 0;

@@ -88,6 +88,25 @@ class SearchController extends AbstractSearchController
     }
 
     /**
+     * Promo code search
+     *
+     * @param Request $request
+     * @return \Illuminate\View\View
+     */
+    public function promoCodes(Request $request)
+    {
+        $promoCodes = \App\PromoCode::query();
+
+        foreach ($this->search as $word) {
+            $promoCodes->where('code', 'like', '%' . $word . '%');
+        }
+
+        $promoCodes = $promoCodes->paginate(15);
+        $title = 'Code promos';
+        return view('pages.admin.promo_codes')->withPromoCodes($promoCodes)->withInSearch(true)->withCardTitle($title);
+    }
+
+    /**
      * Customer search
      *
      * @param Request $request

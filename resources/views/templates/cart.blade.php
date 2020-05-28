@@ -78,9 +78,28 @@
                 {{-- CART RECAP --}}
                 @if (0 < $cartStep && 4 > $cartStep)
                 <div class="col-md-4 pr-0 pl-0 pl-md-2 my-2">
+                    @if(session()->has('promoCodeSuccessMessage'))
+                    <div class="alert alert-success" role="alert">
+                        <p class="mb-0">{{ session()->get('promoCodeSuccessMessage') }}</p>
+                    </div>
+                    @endif
+
+                    {{-- Promocode --}}
+                    <form id="promo-code-container" class="border bg-white p-3" action="{{ null !== $cart->promoCode ? route('cart.promoCode.remove') : route('cart.promoCode.checkEligibility') }}" method="POST">
+                        @csrf
+                        <div class="form-group mb-0">
+                            <label for="promo-code">Code promo</label>
+                            <input type="text" class="form-control @error('promo-code') is-invalid @enderror" name="promo-code" id="promo-code" aria-describedby="helpPromoCode" @if(null !== $cart->promoCode) value='{{ $cart->promoCode->code }}' disabled @endif>
+                            @if(null !== $cart->promoCode)
+                                <button type="submit" class="btn btn-outline-danger mt-2 w-100 rounded-0">Supprimer</button>
+                            @else
+                                <button type="submit" class="btn btn-outline-primary mt-2 w-100 rounded-0">Valider</button>
+                            @endif
+                        </div>
+                    </form>
 
                     {{-- Price recap --}}
-                    <div id="price-recap" class="border bg-white p-3">
+                    <div id="price-recap" class="border bg-white p-3 mt-2">
                         <p class="mb-0 total-quantity">{{ $cart->totalQuantity }} produits : {{ \App\NumberConvertor::doubleToPrice($cart->totalPrice) }}</p>
                         <p class="mb-0 total-shipping-costs">Frais de ports : {{ \App\NumberConvertor::doubleToPrice($cart->shippingCosts) }}</p>
                         <p class="mb-0 total">TOTAL T.T.C. : {{ \App\NumberConvertor::doubleToPrice($cart->totalPrice + $cart->shippingCosts) }}</p>

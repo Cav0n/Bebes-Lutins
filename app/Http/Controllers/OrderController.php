@@ -140,7 +140,7 @@ class OrderController extends Controller
     {
         $order = new Order();
         $order->status = 'WAITING_PAYMENT';
-        $order->shippingCosts = $cart->shippingCosts;
+        $order->shippingCosts = $cart->shippingCostsWithPromo;
         $order->paymentMethod = $request['paymentMethod'];
         $order->email = $cart->email;
         $order->phone = $cart->phone;

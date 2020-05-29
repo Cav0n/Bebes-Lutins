@@ -89,20 +89,29 @@
                         @csrf
                         <div class="form-group mb-0">
                             <label for="promo-code">Code promo</label>
-                            <input type="text" class="form-control @error('promo-code') is-invalid @enderror" name="promo-code" id="promo-code" aria-describedby="helpPromoCode" @if(null !== $cart->promoCode) value='{{ $cart->promoCode->code }}' disabled @endif>
+                            <input type="text" class="form-control @error('promo-code') is-invalid @enderror" name="promo-code" id="promo-code" aria-describedby="helpPromoCode"
+                                @if(null !== $cart->promoCode || $cartStep >= 2) value='{{ $cart->promoCode ? $cart->promoCode->code : null }}' disabled @endif>
                             @if(null !== $cart->promoCode)
-                                <button type="submit" class="btn btn-outline-danger mt-2 w-100 rounded-0">Supprimer</button>
+                                <button type="submit" class="btn btn-outline-danger mt-2 w-100 rounded-0">
+                                    Supprimer</button>
                             @else
-                                <button type="submit" class="btn btn-outline-primary mt-2 w-100 rounded-0">Valider</button>
+                                <button type="submit" class="btn btn-outline-primary mt-2 w-100 rounded-0" @if($cartStep >= 2) disabled @endif>
+                                    Valider</button>
                             @endif
                         </div>
                     </form>
 
                     {{-- Price recap --}}
                     <div id="price-recap" class="border bg-white p-3 mt-2">
+                        {{-- TODO: IF PROMO CODE -> RECAP SPECIAL --}}
+
+                        @if (null === $cart->promoCode)
                         <p class="mb-0 total-quantity">{{ $cart->totalQuantity }} produits : {{ \App\NumberConvertor::doubleToPrice($cart->totalPrice) }}</p>
                         <p class="mb-0 total-shipping-costs">Frais de ports : {{ \App\NumberConvertor::doubleToPrice($cart->shippingCosts) }}</p>
                         <p class="mb-0 total">TOTAL T.T.C. : {{ \App\NumberConvertor::doubleToPrice($cart->totalPrice + $cart->shippingCosts) }}</p>
+                        @else
+                        @include('components.utils.cart.price_recap_promo_code', ['cart' => $cart])
+                        @endif
                         @if (1 == $cartStep || 2 == $cartStep)
                         <div class="next-button-container ld-over mt-2">
                             @if (1 == $cartStep)

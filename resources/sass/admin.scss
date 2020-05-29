@@ -10,6 +10,10 @@
     color: $dark;
 }
 
+#admin-sidenav.sidenav .svg{
+    max-height: 3rem;
+}
+
 #admin-sidenav.sidenav a.active{
     color: $secondary;
     font-weight: bold;

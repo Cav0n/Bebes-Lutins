@@ -30,6 +30,7 @@
         "dropzone": "^5.7.0",
         "fibers": "^4.0.2",
         "jquery": "^3.5.0",
+        "minimist": "^1.2.5",
         "moment": "^2.24.0",
         "node-sass": "^4.13.1",
         "popper.js": "^1.16.1"

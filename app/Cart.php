@@ -71,18 +71,44 @@ class Cart extends Model
         return $totalPrice;
     }
 
+    public function getTotalPriceWithPromoAttribute()
+    {
+        if (null !== $this->promoCode) {
+            switch ($this->promoCode->discountType) {
+                case 'PERCENT':
+                    return $this->totalPrice - ($this->totalPrice * ($this->promoCode->discountValue / 100));
+                break;
+
+                case 'PRICE':
+                    return $this->totalPrice - $this->promoCode->discountValue;
+
+                default:
+                    return $this->totalPrice;
+            }
+        }
+
+        return $this->totalPrice;
+    }
+
     public function getShippingCostsAttribute()
     {
         $shippingCosts = 0.00;
-        /** @Todo: Replace "env" usage by database parameters */
         $freeShippingFrom = \App\Setting::getValue('FREE_SHIPPING_FROM', 70.00);
 
         if($this->totalPrice < $freeShippingFrom) {
-            /** @Todo: Replace "env" usage by database parameters */
             $shippingCosts = \App\Setting::getValue('SHIPPING_COSTS', 5.90);
         }
 
         return $shippingCosts;
+    }
+
+    public function getShippingCostsWithPromoAttribute()
+    {
+        if ($this->promoCode->discountType = 'FREE_SHIPPING_COSTS') {
+            return 0;
+        }
+
+        return $this->shippingCosts;
     }
 
     public function getPriceLeftBeforeFreeShippingAttribute()
@@ -91,5 +117,10 @@ class Cart extends Model
         $freeShippingFrom = \App\Setting::getValue('FREE_SHIPPING_FROM', 70.00);
 
         return $freeShippingFrom - $this->totalPrice;
+    }
+
+    public function getTotalPriceTTCWithPromoAttribute()
+    {
+        return $this->totalPriceWithPromo + $this->shippingCostsWithPromo;
     }
 }

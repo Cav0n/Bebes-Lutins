@@ -39,6 +39,8 @@
                         Tous les catégories</a>
                     <a class="dropdown-item @if(url()->current() == route('admin.products') && request('isHighlighted') == 1) active @endif" href="{{ route('admin.products', ['isHighlighted' => 1]) }}">
                         Mis en avant</a>
+                    <a class="dropdown-item @if(url()->current() == route('admin.promoCodes')) active @endif" href="{{ route('admin.promoCodes') }}">
+                        Code promos</a>
                 </div>
             </li>
 

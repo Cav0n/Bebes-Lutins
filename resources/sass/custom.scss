@@ -10,8 +10,8 @@ header a {
 }
 
 header .svg {
-    height:2rem;
-    width:2rem;
+    height: 2rem;
+    width: 2rem;
 }
 
 footer a {
@@ -121,19 +121,31 @@ header .navbar-collapse .dropdown-item {
     color: $light;
 }
 
-#cart .steps-container .step.active{
+#cart .steps-container .step.active {
     font-weight: 600;
 }
 
-#cart .steps-container .step-number{
+#cart .steps-container .step-number {
     width: 4rem;
     height: 4rem;
 }
 
-#cart .steps-container .step-separator{
+#cart .steps-container .step-separator {
     margin-top: 1.3rem;
 }
 
 .no-stock {
     opacity: 0.6;
+}
+
+.big-error-code {
+    font-size: 10rem;
+    font-weight: 800;
+    margin: 0
+}
+
+@include media-breakpoint-only(xs) {
+    .big-error-code {
+        font-size: 8rem;
+    }
 }

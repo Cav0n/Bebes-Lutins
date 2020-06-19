@@ -50,8 +50,8 @@
                          <div class="cart-container d-flex flex-column py-2" style="width: 12rem;">
                             <a href="{{ route('cart') }}" class="h3 font-weight-bold" style="text-transform: uppercase;">
                                 Mon panier</a>
-                            <a href="#" id="cart-total-price">{{ \App\NumberConvertor::doubleToPrice($cart->totalPrice) }}</a>
-                            <a href="#" id="cart-total-quantity">{{ $cart->totalQuantity }} articles</a>
+                            <a href="#" id="cart-total-price">{{ \App\NumberConvertor::doubleToPrice($cart ? $cart->totalPrice : 0) }}</a>
+                            <a href="#" id="cart-total-quantity">{{ $cart ? $cart->totalQuantity : 0 }} articles</a>
                          </div>
                     </div>
                 </div>
@@ -122,8 +122,8 @@
 
     {{-- CART --}}
     <script>
-        cartPrice = {{ $cart->totalPrice }};
-        cartQuantity = {{ $cart->totalQuantity }};
+        cartPrice = {{ $cart ? $cart->totalPrice : 0 }};
+        cartQuantity = {{ $cart ? $cart->totalQuantity : 0 }};
 
         $('#categories-dropdown-desktop').on('click', function (event) {
             $('.dropdown-menu').toggleClass('show')

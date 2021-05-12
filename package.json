@@ -26,7 +26,7 @@
         "@yaireo/tagify": "^3.6.10",
         "bootstrap": "^4.4.1",
         "bootstrap-input-spinner": "^1.13.4",
-        "chart.js": "^2.9.3",
+        "chart.js": "^2.9.4",
         "dropzone": "^5.7.0",
         "fibers": "^4.0.2",
         "jquery": "^3.5.0",
